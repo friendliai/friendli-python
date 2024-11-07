@@ -10,35 +10,39 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage _frie
 </div>
 
 <!-- Start Summary [summary] -->
+
 ## Summary
 
 Friendli Endpoints API Reference: This is an OpenAPI reference of Friendli Endpoints API.
+
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
+
 ## Table of Contents
 
-* [SDK Installation](#sdk-installation)
-* [IDE Support](#ide-support)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Server-sent event streaming](#server-sent-event-streaming)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Custom HTTP Client](#custom-http-client)
-* [Authentication](#authentication)
-* [Debugging](#debugging)
+- [SDK Installation](#sdk-installation)
+- [IDE Support](#ide-support)
+- [SDK Example Usage](#sdk-example-usage)
+- [Available Resources and Operations](#available-resources-and-operations)
+- [Server-sent event streaming](#server-sent-event-streaming)
+- [Retries](#retries)
+- [Error Handling](#error-handling)
+- [Server Selection](#server-selection)
+- [Custom HTTP Client](#custom-http-client)
+- [Authentication](#authentication)
+- [Debugging](#debugging)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
+
 ## SDK Installation
 
-The SDK can be installed with either *pip* or *poetry* package managers.
+The SDK can be installed with either _pip_ or _poetry_ package managers.
 
 ### PIP
 
-*PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
+_PIP_ is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
 pip install friendli
@@ -46,14 +50,16 @@ pip install friendli
 
 ### Poetry
 
-*Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
+_Poetry_ is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
 poetry add friendli
 ```
+
 <!-- End SDK Installation [installation] -->
 
 <!-- Start IDE Support [idesupport] -->
+
 ## IDE Support
 
 ### PyCharm
@@ -64,6 +70,7 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 <!-- End IDE Support [idesupport] -->
 
 <!-- Start SDK Example Usage [usage] -->
+
 ## SDK Example Usage
 
 ### Example
@@ -102,6 +109,7 @@ if res is not None:
 </br>
 
 The same SDK client can also be used to make asychronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -134,30 +142,32 @@ async def main():
 
 asyncio.run(main())
 ```
+
 <!-- End SDK Example Usage [usage] -->
 
 <!-- Start Available Resources and Operations [operations] -->
+
 ## Available Resources and Operations
 
 <details open>
 <summary>Available methods</summary>
 
-
 ### [inference](docs/sdks/inference/README.md)
 
-* [chat_completion](docs/sdks/inference/README.md#chat_completion) - Chat completion
-* [completion](docs/sdks/inference/README.md#completion) - Completion
-* [tokenization](docs/sdks/inference/README.md#tokenization) - Tokenization
-* [detokenization](docs/sdks/inference/README.md#detokenization) - Detokenization
+- [chat_completion](docs/sdks/inference/README.md#chat_completion) - Chat completion
+- [completion](docs/sdks/inference/README.md#completion) - Completion
+- [tokenization](docs/sdks/inference/README.md#tokenization) - Tokenization
+- [detokenization](docs/sdks/inference/README.md#detokenization) - Detokenization
 
 ### [serverless](docs/sdks/serverless/README.md)
 
-* [tool_assisted_chat_completion](docs/sdks/serverless/README.md#tool_assisted_chat_completion) - Tool assisted chat completion
+- [tool_assisted_chat_completion](docs/sdks/serverless/README.md#tool_assisted_chat_completion) - Tool assisted chat completion
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Server-sent event streaming [eventstream] -->
+
 ## Server-sent event streaming
 
 [Server-sent events][mdn-sse] are used to stream content from certain
@@ -199,14 +209,17 @@ if res is not None:
 
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
 [generator]: https://wiki.python.org/moin/Generators
+
 <!-- End Server-sent event streaming [eventstream] -->
 
 <!-- Start Retries [retries] -->
+
 ## Retries
 
 Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
+
 ```python
 import friendli
 from friendli import Friendli
@@ -241,6 +254,7 @@ if res is not None:
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
+
 ```python
 import friendli
 from friendli import Friendli
@@ -273,9 +287,11 @@ if res is not None:
         print(event, flush=True)
 
 ```
+
 <!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
+
 ## Error Handling
 
 Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
@@ -283,17 +299,17 @@ Handling errors in this SDK should largely match your expectations. All operatio
 By default, an API error will raise a models.SDKError exception, which has the following properties:
 
 | Property        | Type             | Description           |
-|-----------------|------------------|-----------------------|
-| `.status_code`  | *int*            | The HTTP status code  |
-| `.message`      | *str*            | The error message     |
-| `.raw_response` | *httpx.Response* | The raw HTTP response |
-| `.body`         | *str*            | The response content  |
+| --------------- | ---------------- | --------------------- |
+| `.status_code`  | _int_            | The HTTP status code  |
+| `.message`      | _str_            | The error message     |
+| `.raw_response` | _httpx.Response_ | The raw HTTP response |
+| `.body`         | _str_            | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `chat_completion_async` method may raise the following exceptions:
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective _Errors_ tables in SDK docs for more details on possible exception types for each operation. For example, the `chat_completion_async` method may raise the following exceptions:
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type      | Status Code | Content Type |
+| --------------- | ----------- | ------------ |
+| models.SDKError | 4XX, 5XX    | \*/\*        |
 
 ### Example
 
@@ -332,19 +348,21 @@ except models.SDKError as e:
     # handle exception
     raise(e)
 ```
+
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
+
 ## Server Selection
 
 ### Select Server by Index
 
 You can override the default server globally by passing a server index to the `server_idx: int` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://inference.friendli.ai` | None |
-| 1 | `https://inference.friendli.ai/dedicated` | None |
+| #   | Server                                    | Variables |
+| --- | ----------------------------------------- | --------- |
+| 0   | `https://inference.friendli.ai`           | None      |
+| 1   | `https://inference.friendli.ai/dedicated` | None      |
 
 #### Example
 
@@ -380,10 +398,10 @@ if res is not None:
 
 ```
 
-
 ### Override Server URL Per-Client
 
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+
 ```python
 import friendli
 from friendli import Friendli
@@ -419,6 +437,7 @@ if res is not None:
 ### Override Server URL Per-Operation
 
 The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
+
 ```python
 import friendli
 from friendli import Friendli
@@ -457,16 +476,19 @@ if res is not None:
         print(event, flush=True)
 
 ```
+
 <!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
+
 ## Custom HTTP Client
 
-The Python SDK makes API calls using the [httpx](https://www.python-httpx.org/) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with your own HTTP client instance.
+The Python SDK makes API calls using the [httpx](https://www.python-httpx.org/) HTTP library. In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with your own HTTP client instance.
 Depending on whether you are using the sync or async version of the SDK, you can pass an instance of `HttpClient` or `AsyncHttpClient` respectively, which are Protocol's ensuring that the client has the necessary methods to make API calls.
 This allows you to wrap the client with your own custom logic, such as adding custom headers, logging, or error handling, or you can just pass an instance of `httpx.Client` or `httpx.AsyncClient` directly.
 
 For example, you could specify a header for every request that this sdk makes as follows:
+
 ```python
 from friendli import Friendli
 import httpx
@@ -476,6 +498,7 @@ s = Friendli(client=http_client)
 ```
 
 or you could wrap the client with your own custom logic:
+
 ```python
 from friendli import Friendli
 from friendli.httpclient import AsyncHttpClient
@@ -538,20 +561,23 @@ class CustomClient(AsyncHttpClient):
 
 s = Friendli(async_client=CustomClient(httpx.AsyncClient()))
 ```
+
 <!-- End Custom HTTP Client [http-client] -->
 
 <!-- Start Authentication [security] -->
+
 ## Authentication
 
 ### Per-Client Security Schemes
 
 This SDK supports the following security scheme globally:
 
-| Name                   | Type                   | Scheme                 | Environment Variable   |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `bearer_auth`          | http                   | HTTP Bearer            | `FRIENDLI_BEARER_AUTH` |
+| Name          | Type | Scheme      | Environment Variable   |
+| ------------- | ---- | ----------- | ---------------------- |
+| `bearer_auth` | http | HTTP Bearer | `FRIENDLI_BEARER_AUTH` |
 
 To authenticate with the API the `bearer_auth` parameter must be set when initializing the SDK client instance. For example:
+
 ```python
 import friendli
 from friendli import Friendli
@@ -582,14 +608,17 @@ if res is not None:
         print(event, flush=True)
 
 ```
+
 <!-- End Authentication [security] -->
 
 <!-- Start Debugging [debug] -->
+
 ## Debugging
 
 You can setup your SDK to emit debug logs for SDK requests and responses.
 
 You can pass your own logger class directly into your SDK.
+
 ```python
 from friendli import Friendli
 import logging
@@ -599,6 +628,7 @@ s = Friendli(debug_logger=logging.getLogger("friendli"))
 ```
 
 You can also enable a default debug logger by setting an environment variable `FRIENDLI_DEBUG` to true.
+
 <!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
