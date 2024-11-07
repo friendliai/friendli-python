@@ -1,0 +1,9 @@
+# ToolChoiceObject
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                           | [models.ToolAssistedCompletionBodyToolChoiceType](../models/toolassistedcompletionbodytoolchoicetype.md)         | :heavy_check_mark:                                                                                               | The type of the tool. Currently, only `function` is supported.                                                   |
+| `function`                                                                                                       | [models.ToolAssistedCompletionBodyToolChoiceFunction](../models/toolassistedcompletionbodytoolchoicefunction.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

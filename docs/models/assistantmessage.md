@@ -1,0 +1,11 @@
+# AssistantMessage
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `role`                                                                               | [models.AssistantMessageRole](../models/assistantmessagerole.md)                     | :heavy_check_mark:                                                                   | The role of the messages author.                                                     |
+| `content`                                                                            | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | The content of assistant message. Required unless `tool_calls` is specified.         |
+| `name`                                                                               | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | The name for the participant to distinguish between participants with the same role. |
+| `tool_calls`                                                                         | List[[models.ToolCalls](../models/toolcalls.md)]                                     | :heavy_minus_sign:                                                                   | N/A                                                                                  |
