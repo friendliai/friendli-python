@@ -2,18 +2,19 @@ speakeasyVersion: 1.434.0
 sources:
     Friendli-OpenAPI:
         sourceNamespace: friendli-openapi
-        sourceRevisionDigest: sha256:dd0e38cc0ae565f4754f7fdbe752c061771586d9820c5329bab44f199fd5bae6
-        sourceBlobDigest: sha256:3a7ccc60cc706b76164d05ff67e190fdbc8a91b02c2c51daa6e9557e8f0c167a
+        sourceRevisionDigest: sha256:e6f072ee17efc4b8618034865bb6339a12b3738326329a3a342afe1d9fedfa8e
+        sourceBlobDigest: sha256:5df0dde8834747719e800ff32696ecce9371b361ec137cd188c1db8dc0c5b12b
         tags:
             - latest
+            - main
 targets:
     friendli:
         source: Friendli-OpenAPI
         sourceNamespace: friendli-openapi
-        sourceRevisionDigest: sha256:dd0e38cc0ae565f4754f7fdbe752c061771586d9820c5329bab44f199fd5bae6
-        sourceBlobDigest: sha256:3a7ccc60cc706b76164d05ff67e190fdbc8a91b02c2c51daa6e9557e8f0c167a
+        sourceRevisionDigest: sha256:e6f072ee17efc4b8618034865bb6339a12b3738326329a3a342afe1d9fedfa8e
+        sourceBlobDigest: sha256:5df0dde8834747719e800ff32696ecce9371b361ec137cd188c1db8dc0c5b12b
         codeSamplesNamespace: friendli-openapi-code-samples
-        codeSamplesRevisionDigest: sha256:89dc0b8668043e42aece1b14ffa7dad8e6db0231487035238de1a3ada2323d4e
+        codeSamplesRevisionDigest: sha256:bae718660ee4cc5f0700d1356df56742e6e13994a5d9347d1e763ed7db61de2f
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -27,6 +28,9 @@ workflow:
         friendli:
             target: python
             source: Friendli-OpenAPI
+            publish:
+                pypi:
+                    token: $pypi_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-openapi-code-samples
