@@ -1,0 +1,10 @@
+# StreamedCompletionTokenComplete
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `event`                                                                                          | [models.StreamedCompletionTokenCompleteEvent](../models/streamedcompletiontokencompleteevent.md) | :heavy_check_mark:                                                                               | Type of server-sent event.                                                                       |
+| `choices`                                                                                        | List[[models.CompletionChoice](../models/completionchoice.md)]                                   | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `usage`                                                                                          | [models.Usage](../models/usage.md)                                                               | :heavy_check_mark:                                                                               | N/A                                                                                              |
