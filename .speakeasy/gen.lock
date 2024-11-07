@@ -1,0 +1,445 @@
+lockVersion: 2.0.0
+id: f3669dca-8853-4d85-914e-fb38172139b6
+management:
+  docChecksum: c362fb7cab17ad43831e34fef7e3336d
+  docVersion: v1
+  speakeasyVersion: 1.439.0
+  generationVersion: 2.457.9
+  releaseVersion: 0.3.0
+  configChecksum: 1f7371b0e5432e105c7b9fcf3c0a4afb
+  repoURL: https://github.com/friendliai/friendli-python-internal.git
+  installationURL: https://github.com/friendliai/friendli-python-internal.git
+  published: true
+features:
+  python:
+    additionalDependencies: 1.0.0
+    constsAndDefaults: 1.0.4
+    core: 5.6.5
+    defaultEnabledRetries: 0.2.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.3.2
+    examples: 3.0.0
+    flatRequests: 1.0.1
+    flattening: 3.1.0
+    globalSecurity: 3.0.2
+    globalSecurityCallbacks: 1.0.0
+    globalSecurityFlattening: 1.0.0
+    globalServerURLs: 3.0.0
+    methodArguments: 1.0.2
+    nameOverrides: 3.0.0
+    nullables: 1.0.0
+    responseFormat: 1.0.1
+    retries: 3.0.2
+    sdkHooks: 1.0.0
+    serverEvents: 1.0.4
+    serverEventsSentinels: 0.1.0
+    tests: 1.6.0
+    unions: 3.0.3
+generatedFiles:
+  - .gitattributes
+  - .python-version
+  - .vscode/settings.json
+  - USAGE.md
+  - docs/models/assistantmessage.md
+  - docs/models/assistantmessagefunction.md
+  - docs/models/assistantmessagerole.md
+  - docs/models/assistantmessagetype.md
+  - docs/models/chatchoice.md
+  - docs/models/chatchoicefunction.md
+  - docs/models/chatchoicemessage.md
+  - docs/models/chatchoicetoolcalls.md
+  - docs/models/chatchoicetype.md
+  - docs/models/chatresult.md
+  - docs/models/completionsbodywithprompt.md
+  - docs/models/completionsbodywithtokens.md
+  - docs/models/completionschoice.md
+  - docs/models/completionsresult.md
+  - docs/models/content.md
+  - docs/models/data.md
+  - docs/models/dedicatedchatcompletebody.md
+  - docs/models/dedicatedchatcompletebodylogitbias.md
+  - docs/models/dedicatedchatcompletebodystreamoptions.md
+  - docs/models/dedicatedchatcompletebodytoolchoice.md
+  - docs/models/dedicatedchatcompletebodytoolchoicefunction.md
+  - docs/models/dedicatedchatcompletebodytoolchoiceobject.md
+  - docs/models/dedicatedchatcompletebodytoolchoicetype.md
+  - docs/models/dedicatedchatcompleterequest.md
+  - docs/models/dedicatedchatstreambody.md
+  - docs/models/dedicatedchatstreambodylogitbias.md
+  - docs/models/dedicatedchatstreambodystreamoptions.md
+  - docs/models/dedicatedchatstreambodytoolchoice.md
+  - docs/models/dedicatedchatstreambodytoolchoicefunction.md
+  - docs/models/dedicatedchatstreambodytoolchoiceobject.md
+  - docs/models/dedicatedchatstreambodytoolchoicetype.md
+  - docs/models/dedicatedchatstreamrequest.md
+  - docs/models/dedicatedcompletionscompletebody.md
+  - docs/models/dedicatedcompletionscompletebodycompletionsbodywithprompt.md
+  - docs/models/dedicatedcompletionscompletebodycompletionsbodywithtokens.md
+  - docs/models/dedicatedcompletionscompleterequest.md
+  - docs/models/dedicatedcompletionsstreambody.md
+  - docs/models/dedicatedcompletionsstreambodycompletionsbodywithprompt.md
+  - docs/models/dedicatedcompletionsstreambodycompletionsbodywithtokens.md
+  - docs/models/dedicatedcompletionsstreamrequest.md
+  - docs/models/dedicateddetokenizationbody.md
+  - docs/models/dedicateddetokenizationrequest.md
+  - docs/models/dedicatedtokenizationbody.md
+  - docs/models/dedicatedtokenizationrequest.md
+  - docs/models/delta.md
+  - docs/models/detokenizationresult.md
+  - docs/models/error.md
+  - docs/models/event.md
+  - docs/models/filebuiltintool.md
+  - docs/models/filebuiltintooltype.md
+  - docs/models/files.md
+  - docs/models/function.md
+  - docs/models/functiontool.md
+  - docs/models/functiontooltype.md
+  - docs/models/logitbias.md
+  - docs/models/logprobs.md
+  - docs/models/message.md
+  - docs/models/name.md
+  - docs/models/object.md
+  - docs/models/otherbuiltintool.md
+  - docs/models/otherbuiltintooltype.md
+  - docs/models/parameters.md
+  - docs/models/responseformat.md
+  - docs/models/role.md
+  - docs/models/security.md
+  - docs/models/serverlesschatcompletebody.md
+  - docs/models/serverlesschatcompleterequest.md
+  - docs/models/serverlesschatstreambody.md
+  - docs/models/serverlesschatstreambodylogitbias.md
+  - docs/models/serverlesschatstreambodystreamoptions.md
+  - docs/models/serverlesschatstreambodytoolchoice.md
+  - docs/models/serverlesschatstreambodytoolchoicefunction.md
+  - docs/models/serverlesschatstreambodytoolchoicetype.md
+  - docs/models/serverlesschatstreamrequest.md
+  - docs/models/serverlesscompletionscompletebody.md
+  - docs/models/serverlesscompletionscompleterequest.md
+  - docs/models/serverlesscompletionsstreambody.md
+  - docs/models/serverlesscompletionsstreambodycompletionsbodywithprompt.md
+  - docs/models/serverlesscompletionsstreambodycompletionsbodywithtokens.md
+  - docs/models/serverlesscompletionsstreamrequest.md
+  - docs/models/serverlessdetokenizationbody.md
+  - docs/models/serverlessdetokenizationrequest.md
+  - docs/models/serverlesstokenizationbody.md
+  - docs/models/serverlesstokenizationrequest.md
+  - docs/models/serverlesstoolassistedchatcompletebody.md
+  - docs/models/serverlesstoolassistedchatcompletebodytoolchoice.md
+  - docs/models/serverlesstoolassistedchatcompletebodytoolchoicefunction.md
+  - docs/models/serverlesstoolassistedchatcompletebodytoolchoiceobject.md
+  - docs/models/serverlesstoolassistedchatcompletebodytoolchoicetype.md
+  - docs/models/serverlesstoolassistedchatcompleterequest.md
+  - docs/models/serverlesstoolassistedchatstreambody.md
+  - docs/models/serverlesstoolassistedchatstreambodytoolchoice.md
+  - docs/models/serverlesstoolassistedchatstreambodytoolchoicefunction.md
+  - docs/models/serverlesstoolassistedchatstreambodytoolchoiceobject.md
+  - docs/models/serverlesstoolassistedchatstreambodytoolchoicetype.md
+  - docs/models/serverlesstoolassistedchatstreamrequest.md
+  - docs/models/status.md
+  - docs/models/streamedchatchoice.md
+  - docs/models/streamedchatchoicefunction.md
+  - docs/models/streamedchatchoicetoolcalls.md
+  - docs/models/streamedchatchoicetype.md
+  - docs/models/streamedchatresult.md
+  - docs/models/streamedcompletionsresult.md
+  - docs/models/streamedcompletionsresultdata.md
+  - docs/models/streamedcompletionstokencomplete.md
+  - docs/models/streamedcompletionstokencompleteevent.md
+  - docs/models/streamedcompletionstokensampled.md
+  - docs/models/streamedtoolassistedchatresult.md
+  - docs/models/streamedtoolassistedchattoken.md
+  - docs/models/streamedtoolassistedchattokendata.md
+  - docs/models/streamedtoolassistedchattoolstatus.md
+  - docs/models/streamedtoolassistedchattoolstatusdata.md
+  - docs/models/streamedtoolassistedchattoolstatusparameters.md
+  - docs/models/streamoptions.md
+  - docs/models/systemmessage.md
+  - docs/models/tokenizationresult.md
+  - docs/models/tokensequence.md
+  - docs/models/tool.md
+  - docs/models/toolassistedchattool.md
+  - docs/models/toolcalls.md
+  - docs/models/toolchoice.md
+  - docs/models/toolchoicefunction.md
+  - docs/models/toolchoiceobject.md
+  - docs/models/toolchoicetype.md
+  - docs/models/toolmessage.md
+  - docs/models/toolmessagerole.md
+  - docs/models/tooltype.md
+  - docs/models/toplogprobs.md
+  - docs/models/type.md
+  - docs/models/usage.md
+  - docs/models/usermessage.md
+  - docs/models/usermessagerole.md
+  - docs/models/utils/retryconfig.md
+  - docs/sdks/chat/README.md
+  - docs/sdks/completions/README.md
+  - docs/sdks/dedicated/README.md
+  - docs/sdks/friendli/README.md
+  - docs/sdks/friendlichat/README.md
+  - docs/sdks/friendlicompletions/README.md
+  - docs/sdks/friendlitoken/README.md
+  - docs/sdks/serverless/README.md
+  - docs/sdks/token/README.md
+  - docs/sdks/toolassistedchat/README.md
+  - poetry.toml
+  - py.typed
+  - pylintrc
+  - pyproject.toml
+  - scripts/prepare-readme.py
+  - scripts/publish.sh
+  - src/friendli/__init__.py
+  - src/friendli/_hooks/__init__.py
+  - src/friendli/_hooks/sdkhooks.py
+  - src/friendli/_hooks/types.py
+  - src/friendli/_version.py
+  - src/friendli/basesdk.py
+  - src/friendli/chat.py
+  - src/friendli/completions.py
+  - src/friendli/dedicated.py
+  - src/friendli/friendli_chat.py
+  - src/friendli/friendli_completions.py
+  - src/friendli/friendli_token.py
+  - src/friendli/httpclient.py
+  - src/friendli/models/__init__.py
+  - src/friendli/models/assistantmessage.py
+  - src/friendli/models/chatchoice.py
+  - src/friendli/models/chatresult.py
+  - src/friendli/models/completionsbodywithprompt.py
+  - src/friendli/models/completionsbodywithtokens.py
+  - src/friendli/models/completionschoice.py
+  - src/friendli/models/completionsresult.py
+  - src/friendli/models/dedicatedchatcompletebody.py
+  - src/friendli/models/dedicatedchatcompleteop.py
+  - src/friendli/models/dedicatedchatstreambody.py
+  - src/friendli/models/dedicatedchatstreamop.py
+  - src/friendli/models/dedicatedcompletionscompletebody.py
+  - src/friendli/models/dedicatedcompletionscompleteop.py
+  - src/friendli/models/dedicatedcompletionsstreambody.py
+  - src/friendli/models/dedicatedcompletionsstreamop.py
+  - src/friendli/models/dedicateddetokenizationbody.py
+  - src/friendli/models/dedicateddetokenizationop.py
+  - src/friendli/models/dedicatedtokenizationbody.py
+  - src/friendli/models/dedicatedtokenizationop.py
+  - src/friendli/models/detokenizationresult.py
+  - src/friendli/models/filebuiltintool.py
+  - src/friendli/models/function.py
+  - src/friendli/models/functiontool.py
+  - src/friendli/models/logprobs.py
+  - src/friendli/models/message.py
+  - src/friendli/models/otherbuiltintool.py
+  - src/friendli/models/responseformat.py
+  - src/friendli/models/sdkerror.py
+  - src/friendli/models/security.py
+  - src/friendli/models/serverlesschatcompletebody.py
+  - src/friendli/models/serverlesschatcompleteop.py
+  - src/friendli/models/serverlesschatstreambody.py
+  - src/friendli/models/serverlesschatstreamop.py
+  - src/friendli/models/serverlesscompletionscompletebody.py
+  - src/friendli/models/serverlesscompletionscompleteop.py
+  - src/friendli/models/serverlesscompletionsstreambody.py
+  - src/friendli/models/serverlesscompletionsstreamop.py
+  - src/friendli/models/serverlessdetokenizationbody.py
+  - src/friendli/models/serverlessdetokenizationop.py
+  - src/friendli/models/serverlesstokenizationbody.py
+  - src/friendli/models/serverlesstokenizationop.py
+  - src/friendli/models/serverlesstoolassistedchatcompletebody.py
+  - src/friendli/models/serverlesstoolassistedchatcompleteop.py
+  - src/friendli/models/serverlesstoolassistedchatstreambody.py
+  - src/friendli/models/serverlesstoolassistedchatstreamop.py
+  - src/friendli/models/streamedchatchoice.py
+  - src/friendli/models/streamedchatresult.py
+  - src/friendli/models/streamedcompletionsresult.py
+  - src/friendli/models/streamedcompletionstokencomplete.py
+  - src/friendli/models/streamedcompletionstokensampled.py
+  - src/friendli/models/streamedtoolassistedchatresult.py
+  - src/friendli/models/streamedtoolassistedchattoken.py
+  - src/friendli/models/streamedtoolassistedchattoolstatus.py
+  - src/friendli/models/systemmessage.py
+  - src/friendli/models/tokenizationresult.py
+  - src/friendli/models/tokensequence.py
+  - src/friendli/models/tool.py
+  - src/friendli/models/toolassistedchattool.py
+  - src/friendli/models/toolmessage.py
+  - src/friendli/models/usage.py
+  - src/friendli/models/usermessage.py
+  - src/friendli/py.typed
+  - src/friendli/sdk.py
+  - src/friendli/sdkconfiguration.py
+  - src/friendli/serverless.py
+  - src/friendli/token.py
+  - src/friendli/toolassistedchat.py
+  - src/friendli/types/__init__.py
+  - src/friendli/types/basemodel.py
+  - src/friendli/utils/__init__.py
+  - src/friendli/utils/annotations.py
+  - src/friendli/utils/enums.py
+  - src/friendli/utils/eventstreaming.py
+  - src/friendli/utils/forms.py
+  - src/friendli/utils/headers.py
+  - src/friendli/utils/logger.py
+  - src/friendli/utils/metadata.py
+  - src/friendli/utils/queryparams.py
+  - src/friendli/utils/requestbodies.py
+  - src/friendli/utils/retries.py
+  - src/friendli/utils/security.py
+  - src/friendli/utils/serializers.py
+  - src/friendli/utils/url.py
+  - src/friendli/utils/values.py
+examples:
+  serverlessChatComplete:
+    "":
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}}
+  serverlessChatStream:
+    "":
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
+      responses:
+        "200":
+          text/event-stream: "data: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294383519714932}\n\ndata: [DONE]\n"
+  serverlessToolAssistedChatComplete:
+    "":
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "code:python-interpreter"}]}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 0, "message": {"role": "assistant", "content": "The result is 9."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 7, "total_tokens": 16}}
+  serverlessToolAssistedChatStream:
+    "":
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:statistics"}]}
+      responses:
+        "200":
+          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":null,\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\\\"{\\\\\\\"result\\\\\\\": \\\\\\\"150 * 1.60934=241.401000000000\\\\\\\"}\\\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
+  serverlessCompletionsComplete:
+    "":
+      requestBody:
+        application/json: {"prompt": "Say this is a test!", "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
+    Example:
+      requestBody:
+        application/json: {"tokens": [182984, 32770, 164141], "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}}
+  serverlessCompletionsStream:
+    "":
+      requestBody:
+        application/json: {"prompt": "Say this is a test!", "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
+    Example:
+      requestBody:
+        application/json: {"tokens": [74484], "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
+      responses:
+        "200":
+          text/event-stream: "data: {\"event\":\"token_sampled\",\"index\":0,\"text\":\"This\",\"token\":2028}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" is\",\"token\":374}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" a\",\"token\":264}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" test\",\"token\":1296}\n\ndata: {\"event\":\"complete\",\"choices\":[{\"index\":0,\"seed\":6410528593216713765,\"text\":\"This is a test\",\"tokens\":[2028,374,264,1296]}],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12}}\n"
+  serverlessTokenization:
+    "":
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "What is generative AI?"}
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "What is generative AI?"}
+      responses:
+        "200":
+          application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+  serverlessDetokenization:
+    "":
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+      responses:
+        "200":
+          application/json: {"text": "What is generative AI?"}
+  dedicatedChatComplete:
+    "":
+      requestBody:
+        application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}}
+  dedicatedChatStream:
+    "":
+      requestBody:
+        application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
+      responses:
+        "200":
+          text/event-stream: "data: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294383519714932}\n\ndata: [DONE]\n"
+  dedicatedCompletionsComplete:
+    "":
+      requestBody:
+        application/json: {"prompt": "Say this is a test!", "model": "(endpoint-id):(adapter-route)", "max_tokens": 200, "top_k": 1}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
+    Example:
+      requestBody:
+        application/json: {"tokens": [182984, 32770, 164141], "model": "(endpoint-id):(adapter-route)", "max_tokens": 200, "top_k": 1}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}}
+  dedicatedCompletionsStream:
+    "":
+      requestBody:
+        application/json: {"prompt": "Say this is a test!", "model": "(endpoint-id):(adapter-route)", "max_tokens": 200, "top_k": 1}
+    Example:
+      requestBody:
+        application/json: {"tokens": [74484], "model": "(endpoint-id):(adapter-route)", "max_tokens": 200, "top_k": 1}
+      responses:
+        "200":
+          text/event-stream: "data: {\"event\":\"token_sampled\",\"index\":0,\"text\":\"This\",\"token\":2028}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" is\",\"token\":374}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" a\",\"token\":264}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" test\",\"token\":1296}\n\ndata: {\"event\":\"complete\",\"choices\":[{\"index\":0,\"seed\":6410528593216713765,\"text\":\"This is a test\",\"tokens\":[2028,374,264,1296]}],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12}}\n"
+  dedicatedTokenization:
+    "":
+      requestBody:
+        application/json: {"model": "(endpoint-id):(adapter-route)", "prompt": "What is generative AI?"}
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id):(adapter-route)", "prompt": "What is generative AI?"}
+      responses:
+        "200":
+          application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+  dedicatedDetokenization:
+    "":
+      requestBody:
+        application/json: {"model": "(endpoint-id):(adapter-route)", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id):(adapter-route)", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+      responses:
+        "200":
+          application/json: {"text": "What is generative AI?"}
