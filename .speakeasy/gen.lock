@@ -1,12 +1,15 @@
 lockVersion: 2.0.0
 id: 2ab1f3f0-3683-4414-9916-f8a387d2b0b7
 management:
-  docChecksum: d26493677543744e1882b3b96b9ea73b
+  docChecksum: 3579e3e4e8b9edab91ef382d35f00937
   docVersion: v1
   speakeasyVersion: 1.434.0
   generationVersion: 2.452.0
-  releaseVersion: 0.1.2
-  configChecksum: 0947798c4b4fce5401cc526363aa26ca
+  releaseVersion: 0.1.3
+  configChecksum: 1855300efd3953638a671513cd60c91c
+  repoURL: https://github.com/friendliai/friendli-python-internal.git
+  installationURL: https://github.com/friendliai/friendli-python-internal.git
+  published: true
 features:
   python:
     acceptHeaders: 3.0.0
