@@ -14,33 +14,32 @@ Given a list of messages forming a conversation, the model generates a response.
 ### Example Usage
 
 ```python
-import friendli
 from friendli import Friendli
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.serverless.tool_assisted_chat_completion(tool_assisted_completion_request_body={
     "model": "meta-llama-3.1-8b-instruct",
     "messages": [
         {
-            "role": friendli.Role.SYSTEM,
+            "role": "system",
             "content": "You are a helpful assistant.",
         },
         {
-            "role": friendli.UserMessageRole.USER,
+            "role": "user",
             "content": "Hello!",
         },
     ],
     "max_tokens": 200,
     "tools": [
         {
-            "type": friendli.OtherBuiltInToolType.MATH_CALCULATOR,
+            "type": "math:calculator",
         },
         {
-            "type": friendli.OtherBuiltInToolType.WEB_URL,
+            "type": "web:url",
         },
     ],
 })

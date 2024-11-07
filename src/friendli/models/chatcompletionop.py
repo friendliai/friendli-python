@@ -5,13 +5,10 @@ from .chatcompletionrequestbody import (
     ChatCompletionRequestBody,
     ChatCompletionRequestBodyTypedDict,
 )
-from .chatcompletionresponse import (
-    ChatCompletionResponse,
-    ChatCompletionResponseTypedDict,
-)
-from .streamedchatcompletionresponse import (
-    StreamedChatCompletionResponse,
-    StreamedChatCompletionResponseTypedDict,
+from .chatcompletionresult import ChatCompletionResult, ChatCompletionResultTypedDict
+from .streamedchatcompletionresult import (
+    StreamedChatCompletionResult,
+    StreamedChatCompletionResultTypedDict,
 )
 from friendli.types import BaseModel
 from friendli.utils import FieldMetadata, HeaderMetadata, RequestMetadata
@@ -40,19 +37,19 @@ class ChatCompletionRequest(BaseModel):
     ] = None
 
 
-ChatCompletionResponse1TypedDict = Union[
-    ChatCompletionResponseTypedDict,
+ChatCompletionResponseTypedDict = Union[
+    ChatCompletionResultTypedDict,
     Union[
-        Generator[StreamedChatCompletionResponseTypedDict, None, None],
-        AsyncGenerator[StreamedChatCompletionResponseTypedDict, None],
+        Generator[StreamedChatCompletionResultTypedDict, None, None],
+        AsyncGenerator[StreamedChatCompletionResultTypedDict, None],
     ],
 ]
 
 
-ChatCompletionResponse1 = Union[
-    ChatCompletionResponse,
+ChatCompletionResponse = Union[
+    ChatCompletionResult,
     Union[
-        Generator[StreamedChatCompletionResponse, None, None],
-        AsyncGenerator[StreamedChatCompletionResponse, None],
+        Generator[StreamedChatCompletionResult, None, None],
+        AsyncGenerator[StreamedChatCompletionResult, None],
     ],
 ]

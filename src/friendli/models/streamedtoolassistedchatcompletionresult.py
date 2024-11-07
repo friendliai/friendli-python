@@ -5,35 +5,31 @@ from .streamedchatcompletionchoice import (
     StreamedChatCompletionChoice,
     StreamedChatCompletionChoiceTypedDict,
 )
-from .usage import Usage, UsageTypedDict
 from friendli.types import BaseModel
-from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import List
+from typing_extensions import TypedDict
 
 
-class DataTypedDict(TypedDict):
+class StreamedToolAssistedChatCompletionResultDataTypedDict(TypedDict):
     choices: List[StreamedChatCompletionChoiceTypedDict]
     created: int
     r"""The Unix timestamp (in seconds) for when the token sampled."""
-    usage: NotRequired[UsageTypedDict]
 
 
-class Data(BaseModel):
+class StreamedToolAssistedChatCompletionResultData(BaseModel):
     choices: List[StreamedChatCompletionChoice]
 
     created: int
     r"""The Unix timestamp (in seconds) for when the token sampled."""
 
-    usage: Optional[Usage] = None
 
-
-class StreamedChatCompletionResponseTypedDict(TypedDict):
+class StreamedToolAssistedChatCompletionResultTypedDict(TypedDict):
     r"""A server-sent event containing chat completion content."""
 
-    data: DataTypedDict
+    data: StreamedToolAssistedChatCompletionResultDataTypedDict
 
 
-class StreamedChatCompletionResponse(BaseModel):
+class StreamedToolAssistedChatCompletionResult(BaseModel):
     r"""A server-sent event containing chat completion content."""
 
-    data: Data
+    data: StreamedToolAssistedChatCompletionResultData

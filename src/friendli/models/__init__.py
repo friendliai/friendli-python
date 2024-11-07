@@ -24,8 +24,8 @@ from .chatcompletionchoice import (
 from .chatcompletionop import (
     ChatCompletionRequest,
     ChatCompletionRequestTypedDict,
-    ChatCompletionResponse1,
-    ChatCompletionResponse1TypedDict,
+    ChatCompletionResponse,
+    ChatCompletionResponseTypedDict,
 )
 from .chatcompletionrequestbody import (
     ChatCompletionRequestBody,
@@ -42,16 +42,13 @@ from .chatcompletionrequestbody import (
     ToolChoiceType,
     ToolChoiceTypedDict,
 )
-from .chatcompletionresponse import (
-    ChatCompletionResponse,
-    ChatCompletionResponseTypedDict,
-)
+from .chatcompletionresult import ChatCompletionResult, ChatCompletionResultTypedDict
 from .completionchoice import CompletionChoice, CompletionChoiceTypedDict
 from .completionop import (
     CompletionRequest,
     CompletionRequestTypedDict,
-    CompletionResponse1,
-    CompletionResponse1TypedDict,
+    CompletionResponse,
+    CompletionResponseTypedDict,
 )
 from .completionrequestbody import CompletionRequestBody, CompletionRequestBodyTypedDict
 from .completionrequestbodywithprompt import (
@@ -62,7 +59,7 @@ from .completionrequestbodywithtokens import (
     CompletionRequestBodyWithTokens,
     CompletionRequestBodyWithTokensTypedDict,
 )
-from .completionresponse import CompletionResponse, CompletionResponseTypedDict
+from .completionresult import CompletionResult, CompletionResultTypedDict
 from .detokenizationop import DetokenizationRequest, DetokenizationRequestTypedDict
 from .detokenizationrequestbody import (
     DetokenizationRequestBody,
@@ -106,17 +103,17 @@ from .streamedchatcompletionchoice import (
     StreamedChatCompletionChoiceType,
     StreamedChatCompletionChoiceTypedDict,
 )
-from .streamedchatcompletionresponse import (
+from .streamedchatcompletionresult import (
     Data,
     DataTypedDict,
-    StreamedChatCompletionResponse,
-    StreamedChatCompletionResponseTypedDict,
+    StreamedChatCompletionResult,
+    StreamedChatCompletionResultTypedDict,
 )
-from .streamedcompletionresponse import (
-    StreamedCompletionResponse,
-    StreamedCompletionResponseData,
-    StreamedCompletionResponseDataTypedDict,
-    StreamedCompletionResponseTypedDict,
+from .streamedcompletionresult import (
+    StreamedCompletionResult,
+    StreamedCompletionResultData,
+    StreamedCompletionResultDataTypedDict,
+    StreamedCompletionResultTypedDict,
 )
 from .streamedcompletiontokencomplete import (
     StreamedCompletionTokenComplete,
@@ -128,11 +125,11 @@ from .streamedcompletiontokensampled import (
     StreamedCompletionTokenSampled,
     StreamedCompletionTokenSampledTypedDict,
 )
-from .streamedtoolassistedchatcompletionresponse import (
-    StreamedToolAssistedChatCompletionResponse,
-    StreamedToolAssistedChatCompletionResponseData,
-    StreamedToolAssistedChatCompletionResponseDataTypedDict,
-    StreamedToolAssistedChatCompletionResponseTypedDict,
+from .streamedtoolassistedchatcompletionresult import (
+    StreamedToolAssistedChatCompletionResult,
+    StreamedToolAssistedChatCompletionResultData,
+    StreamedToolAssistedChatCompletionResultDataTypedDict,
+    StreamedToolAssistedChatCompletionResultTypedDict,
 )
 from .systemmessage import Role, SystemMessage, SystemMessageTypedDict
 from .textresponseformat import TextResponseFormat, TextResponseFormatTypedDict, Type
@@ -191,9 +188,9 @@ __all__ = [
     "ChatCompletionRequestBodyTypedDict",
     "ChatCompletionRequestTypedDict",
     "ChatCompletionResponse",
-    "ChatCompletionResponse1",
-    "ChatCompletionResponse1TypedDict",
     "ChatCompletionResponseTypedDict",
+    "ChatCompletionResult",
+    "ChatCompletionResultTypedDict",
     "CompletionChoice",
     "CompletionChoiceTypedDict",
     "CompletionRequest",
@@ -205,9 +202,9 @@ __all__ = [
     "CompletionRequestBodyWithTokensTypedDict",
     "CompletionRequestTypedDict",
     "CompletionResponse",
-    "CompletionResponse1",
-    "CompletionResponse1TypedDict",
     "CompletionResponseTypedDict",
+    "CompletionResult",
+    "CompletionResultTypedDict",
     "Content",
     "ContentTypedDict",
     "Data",
@@ -255,21 +252,21 @@ __all__ = [
     "StreamedChatCompletionChoiceToolCallsTypedDict",
     "StreamedChatCompletionChoiceType",
     "StreamedChatCompletionChoiceTypedDict",
-    "StreamedChatCompletionResponse",
-    "StreamedChatCompletionResponseTypedDict",
-    "StreamedCompletionResponse",
-    "StreamedCompletionResponseData",
-    "StreamedCompletionResponseDataTypedDict",
-    "StreamedCompletionResponseTypedDict",
+    "StreamedChatCompletionResult",
+    "StreamedChatCompletionResultTypedDict",
+    "StreamedCompletionResult",
+    "StreamedCompletionResultData",
+    "StreamedCompletionResultDataTypedDict",
+    "StreamedCompletionResultTypedDict",
     "StreamedCompletionTokenComplete",
     "StreamedCompletionTokenCompleteEvent",
     "StreamedCompletionTokenCompleteTypedDict",
     "StreamedCompletionTokenSampled",
     "StreamedCompletionTokenSampledTypedDict",
-    "StreamedToolAssistedChatCompletionResponse",
-    "StreamedToolAssistedChatCompletionResponseData",
-    "StreamedToolAssistedChatCompletionResponseDataTypedDict",
-    "StreamedToolAssistedChatCompletionResponseTypedDict",
+    "StreamedToolAssistedChatCompletionResult",
+    "StreamedToolAssistedChatCompletionResultData",
+    "StreamedToolAssistedChatCompletionResultDataTypedDict",
+    "StreamedToolAssistedChatCompletionResultTypedDict",
     "SystemMessage",
     "SystemMessageTypedDict",
     "TOOL_ASSISTED_CHAT_COMPLETION_OP_SERVERS",

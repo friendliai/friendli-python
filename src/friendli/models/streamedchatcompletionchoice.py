@@ -2,17 +2,14 @@
 
 from __future__ import annotations
 from .logprobs import Logprobs, LogprobsTypedDict
-from enum import Enum
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
+from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class StreamedChatCompletionChoiceType(str, Enum):
-    r"""The type of the tool."""
-
-    FUNCTION = "function"
+StreamedChatCompletionChoiceType = Literal["function"]
+r"""The type of the tool."""
 
 
 class StreamedChatCompletionChoiceFunctionTypedDict(TypedDict):

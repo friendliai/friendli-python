@@ -3,16 +3,13 @@
 from __future__ import annotations
 from .completionchoice import CompletionChoice, CompletionChoiceTypedDict
 from .usage import Usage, UsageTypedDict
-from enum import Enum
 from friendli.types import BaseModel
-from typing import List
+from typing import List, Literal
 from typing_extensions import TypedDict
 
 
-class StreamedCompletionTokenCompleteEvent(str, Enum):
-    r"""Type of server-sent event."""
-
-    COMPLETE = "complete"
+StreamedCompletionTokenCompleteEvent = Literal["complete"]
+r"""Type of server-sent event."""
 
 
 class StreamedCompletionTokenCompleteTypedDict(TypedDict):

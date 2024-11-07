@@ -34,7 +34,7 @@ class Inference(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         accept_header_override: Optional[ChatCompletionAcceptEnum] = None,
-    ) -> models.ChatCompletionResponse1:
+    ) -> models.ChatCompletionResponse:
         r"""Chat completion
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -109,14 +109,12 @@ class Inference(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             http_response_text = utils.stream_to_text(http_res)
-            return utils.unmarshal_json(
-                http_response_text, models.ChatCompletionResponse
-            )
+            return utils.unmarshal_json(http_response_text, models.ChatCompletionResult)
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.stream_events(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.StreamedChatCompletionResponse
+                    raw, models.StreamedChatCompletionResult
                 ),
                 sentinel="[DONE]",
             )
@@ -149,7 +147,7 @@ class Inference(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         accept_header_override: Optional[ChatCompletionAcceptEnum] = None,
-    ) -> models.ChatCompletionResponse1:
+    ) -> models.ChatCompletionResponse:
         r"""Chat completion
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -224,14 +222,12 @@ class Inference(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             http_response_text = await utils.stream_to_text_async(http_res)
-            return utils.unmarshal_json(
-                http_response_text, models.ChatCompletionResponse
-            )
+            return utils.unmarshal_json(http_response_text, models.ChatCompletionResult)
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.stream_events_async(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.StreamedChatCompletionResponse
+                    raw, models.StreamedChatCompletionResult
                 ),
                 sentinel="[DONE]",
             )
@@ -261,7 +257,7 @@ class Inference(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         accept_header_override: Optional[CompletionAcceptEnum] = None,
-    ) -> models.CompletionResponse1:
+    ) -> models.CompletionResponse:
         r"""Completion
 
         Generate text based on the given text prompt.
@@ -336,13 +332,11 @@ class Inference(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             http_response_text = utils.stream_to_text(http_res)
-            return utils.unmarshal_json(http_response_text, models.CompletionResponse)
+            return utils.unmarshal_json(http_response_text, models.CompletionResult)
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.stream_events(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.StreamedCompletionResponse
-                ),
+                lambda raw: utils.unmarshal_json(raw, models.StreamedCompletionResult),
                 sentinel="[DONE]",
             )
         if utils.match_response(http_res, ["4XX", "5XX"], "*"):
@@ -371,7 +365,7 @@ class Inference(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         accept_header_override: Optional[CompletionAcceptEnum] = None,
-    ) -> models.CompletionResponse1:
+    ) -> models.CompletionResponse:
         r"""Completion
 
         Generate text based on the given text prompt.
@@ -446,13 +440,11 @@ class Inference(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             http_response_text = await utils.stream_to_text_async(http_res)
-            return utils.unmarshal_json(http_response_text, models.CompletionResponse)
+            return utils.unmarshal_json(http_response_text, models.CompletionResult)
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.stream_events_async(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.StreamedCompletionResponse
-                ),
+                lambda raw: utils.unmarshal_json(raw, models.StreamedCompletionResult),
                 sentinel="[DONE]",
             )
         if utils.match_response(http_res, ["4XX", "5XX"], "*"):

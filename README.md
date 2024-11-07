@@ -1,6 +1,6 @@
 # friendli
 
-Developer-friendly & type-safe Python SDK specifically catered to leverage _friendli_ API.
+Developer-friendly & type-safe Python SDK specifically catered to leverage *friendli* API.
 
 <div align="left">
     <a href="https://www.speakeasy.com/?utm_source=friendli&utm_campaign=python"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
@@ -8,6 +8,11 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage _frie
         <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
     </a>
 </div>
+
+
+<br /><br />
+> [!IMPORTANT]
+> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/friendliai/friendliai). Delete this section before > publishing to a package manager.
 
 <!-- Start Summary [summary] -->
 ## Summary
@@ -41,7 +46,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install friendli
+pip install git+https://github.com/friendliai/friendli-python-internal.git
 ```
 
 ### Poetry
@@ -49,7 +54,7 @@ pip install friendli
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add friendli
+poetry add git+https://github.com/friendliai/friendli-python-internal.git
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -66,27 +71,28 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 <!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
 
-### Example
+### Chat completion
+
+Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-import friendli
 from friendli import Friendli
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.chat_completion(chat_completion_request_body={
     "model": "meta-llama-3.1-8b-instruct",
     "messages": [
         {
-            "role": friendli.Role.SYSTEM,
+            "role": "system",
             "content": "You are a helpful assistant.",
         },
         {
-            "role": friendli.UserMessageRole.USER,
+            "role": "user",
             "content": "Hello!",
         },
     ],
@@ -105,23 +111,22 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-import friendli
 from friendli import Friendli
 import os
 
 async def main():
     s = Friendli(
-        bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+        token=os.getenv("FRIENDLI_TOKEN", ""),
     )
     res = await s.inference.chat_completion_async(chat_completion_request_body={
         "model": "meta-llama-3.1-8b-instruct",
         "messages": [
             {
-                "role": friendli.Role.SYSTEM,
+                "role": "system",
                 "content": "You are a helpful assistant.",
             },
             {
-                "role": friendli.UserMessageRole.USER,
+                "role": "user",
                 "content": "Hello!",
             },
         ],
@@ -167,23 +172,22 @@ terminate when the server no longer has any events to send and closes the
 underlying connection.
 
 ```python
-import friendli
 from friendli import Friendli
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.chat_completion(chat_completion_request_body={
     "model": "meta-llama-3.1-8b-instruct",
     "messages": [
         {
-            "role": friendli.Role.SYSTEM,
+            "role": "system",
             "content": "You are a helpful assistant.",
         },
         {
-            "role": friendli.UserMessageRole.USER,
+            "role": "user",
             "content": "Hello!",
         },
     ],
@@ -208,24 +212,23 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
-import friendli
 from friendli import Friendli
 from friendli.utils import BackoffStrategy, RetryConfig
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.chat_completion(chat_completion_request_body={
     "model": "meta-llama-3.1-8b-instruct",
     "messages": [
         {
-            "role": friendli.Role.SYSTEM,
+            "role": "system",
             "content": "You are a helpful assistant.",
         },
         {
-            "role": friendli.UserMessageRole.USER,
+            "role": "user",
             "content": "Hello!",
         },
     ],
@@ -242,25 +245,24 @@ if res is not None:
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
-import friendli
 from friendli import Friendli
 from friendli.utils import BackoffStrategy, RetryConfig
 import os
 
 s = Friendli(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.chat_completion(chat_completion_request_body={
     "model": "meta-llama-3.1-8b-instruct",
     "messages": [
         {
-            "role": friendli.Role.SYSTEM,
+            "role": "system",
             "content": "You are a helpful assistant.",
         },
         {
-            "role": friendli.UserMessageRole.USER,
+            "role": "user",
             "content": "Hello!",
         },
     ],
@@ -298,12 +300,11 @@ When custom error responses are specified for an operation, the SDK may also rai
 ### Example
 
 ```python
-import friendli
 from friendli import Friendli, models
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = None
@@ -312,11 +313,11 @@ try:
         "model": "meta-llama-3.1-8b-instruct",
         "messages": [
             {
-                "role": friendli.Role.SYSTEM,
+                "role": "system",
                 "content": "You are a helpful assistant.",
             },
             {
-                "role": friendli.UserMessageRole.USER,
+                "role": "user",
                 "content": "Hello!",
             },
         ],
@@ -337,36 +338,35 @@ except models.SDKError as e:
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
+### Select Server by Name
 
-You can override the default server globally by passing a server index to the `server_idx: int` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+You can override the default server globally by passing a server name to the `server: str` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://inference.friendli.ai` | None |
-| 1 | `https://inference.friendli.ai/dedicated` | None |
+| Name | Server | Variables |
+| ----- | ------ | --------- |
+| `serverless` | `https://inference.friendli.ai` | None |
+| `dedicated` | `https://inference.friendli.ai/dedicated` | None |
 
 #### Example
 
 ```python
-import friendli
 from friendli import Friendli
 import os
 
 s = Friendli(
-    server_idx=1,
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    server="dedicated",
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.chat_completion(chat_completion_request_body={
     "model": "meta-llama-3.1-8b-instruct",
     "messages": [
         {
-            "role": friendli.Role.SYSTEM,
+            "role": "system",
             "content": "You are a helpful assistant.",
         },
         {
-            "role": friendli.UserMessageRole.USER,
+            "role": "user",
             "content": "Hello!",
         },
     ],
@@ -385,24 +385,23 @@ if res is not None:
 
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
-import friendli
 from friendli import Friendli
 import os
 
 s = Friendli(
     server_url="https://inference.friendli.ai",
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.chat_completion(chat_completion_request_body={
     "model": "meta-llama-3.1-8b-instruct",
     "messages": [
         {
-            "role": friendli.Role.SYSTEM,
+            "role": "system",
             "content": "You are a helpful assistant.",
         },
         {
-            "role": friendli.UserMessageRole.USER,
+            "role": "user",
             "content": "Hello!",
         },
     ],
@@ -420,33 +419,32 @@ if res is not None:
 
 The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
 ```python
-import friendli
 from friendli import Friendli
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.serverless.tool_assisted_chat_completion(tool_assisted_completion_request_body={
     "model": "meta-llama-3.1-8b-instruct",
     "messages": [
         {
-            "role": friendli.Role.SYSTEM,
+            "role": "system",
             "content": "You are a helpful assistant.",
         },
         {
-            "role": friendli.UserMessageRole.USER,
+            "role": "user",
             "content": "Hello!",
         },
     ],
     "max_tokens": 200,
     "tools": [
         {
-            "type": friendli.OtherBuiltInToolType.MATH_CALCULATOR,
+            "type": "math:calculator",
         },
         {
-            "type": friendli.OtherBuiltInToolType.WEB_URL,
+            "type": "web:url",
         },
     ],
 }, server_url="https://inference.friendli.ai")
@@ -547,29 +545,28 @@ s = Friendli(async_client=CustomClient(httpx.AsyncClient()))
 
 This SDK supports the following security scheme globally:
 
-| Name                   | Type                   | Scheme                 | Environment Variable   |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `bearer_auth`          | http                   | HTTP Bearer            | `FRIENDLI_BEARER_AUTH` |
+| Name                 | Type                 | Scheme               | Environment Variable |
+| -------------------- | -------------------- | -------------------- | -------------------- |
+| `token`              | http                 | HTTP Bearer          | `FRIENDLI_TOKEN`     |
 
-To authenticate with the API the `bearer_auth` parameter must be set when initializing the SDK client instance. For example:
+To authenticate with the API the `token` parameter must be set when initializing the SDK client instance. For example:
 ```python
-import friendli
 from friendli import Friendli
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.chat_completion(chat_completion_request_body={
     "model": "meta-llama-3.1-8b-instruct",
     "messages": [
         {
-            "role": friendli.Role.SYSTEM,
+            "role": "system",
             "content": "You are a helpful assistant.",
         },
         {
-            "role": friendli.UserMessageRole.USER,
+            "role": "user",
             "content": "Hello!",
         },
     ],
@@ -613,7 +610,7 @@ looking for the latest version.
 
 ## Contributions
 
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation.
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.
+While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
 
 ### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=friendli&utm_campaign=python)

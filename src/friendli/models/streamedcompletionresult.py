@@ -16,12 +16,12 @@ from typing import Union
 from typing_extensions import Annotated, TypedDict
 
 
-StreamedCompletionResponseDataTypedDict = Union[
+StreamedCompletionResultDataTypedDict = Union[
     StreamedCompletionTokenCompleteTypedDict, StreamedCompletionTokenSampledTypedDict
 ]
 
 
-StreamedCompletionResponseData = Annotated[
+StreamedCompletionResultData = Annotated[
     Union[
         Annotated[StreamedCompletionTokenSampled, Tag("token_sampled")],
         Annotated[StreamedCompletionTokenComplete, Tag("complete")],
@@ -30,9 +30,9 @@ StreamedCompletionResponseData = Annotated[
 ]
 
 
-class StreamedCompletionResponseTypedDict(TypedDict):
-    data: StreamedCompletionResponseDataTypedDict
+class StreamedCompletionResultTypedDict(TypedDict):
+    data: StreamedCompletionResultDataTypedDict
 
 
-class StreamedCompletionResponse(BaseModel):
-    data: StreamedCompletionResponseData
+class StreamedCompletionResult(BaseModel):
+    data: StreamedCompletionResultData

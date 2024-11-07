@@ -1,4 +1,4 @@
-# StreamedCompletionResponseData
+# StreamedCompletionResultData
 
 
 ## Supported Types

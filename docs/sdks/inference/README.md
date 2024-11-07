@@ -17,23 +17,22 @@ Given a list of messages forming a conversation, the model generates a response.
 ### Example Usage
 
 ```python
-import friendli
 from friendli import Friendli
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.chat_completion(chat_completion_request_body={
     "model": "meta-llama-3.1-8b-instruct",
     "messages": [
         {
-            "role": friendli.Role.SYSTEM,
+            "role": "system",
             "content": "You are a helpful assistant.",
         },
         {
-            "role": friendli.UserMessageRole.USER,
+            "role": "user",
             "content": "Hello!",
         },
     ],
@@ -57,7 +56,7 @@ if res is not None:
 
 ### Response
 
-**[models.ChatCompletionResponse1](../../models/chatcompletionresponse1.md)**
+**[models.ChatCompletionResponse](../../models/chatcompletionresponse.md)**
 
 ### Errors
 
@@ -76,7 +75,7 @@ from friendli import Friendli
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.completion(completion_request_body={
@@ -103,7 +102,7 @@ if res is not None:
 
 ### Response
 
-**[models.CompletionResponse1](../../models/completionresponse1.md)**
+**[models.CompletionResponse](../../models/completionresponse.md)**
 
 ### Errors
 
@@ -122,7 +121,7 @@ from friendli import Friendli
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.tokenization(tokenization_request_body={
@@ -165,7 +164,7 @@ from friendli import Friendli
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = s.inference.detokenization(detokenization_request_body={

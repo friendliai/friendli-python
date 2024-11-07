@@ -1,36 +1,33 @@
 speakeasyVersion: 1.434.0
 sources:
-    Friendli-OpenAPI:
-        sourceNamespace: friendli-openapi
-        sourceRevisionDigest: sha256:e6f072ee17efc4b8618034865bb6339a12b3738326329a3a342afe1d9fedfa8e
-        sourceBlobDigest: sha256:5df0dde8834747719e800ff32696ecce9371b361ec137cd188c1db8dc0c5b12b
+    Friendli-OpenAPI-Schema:
+        sourceNamespace: friendli-openapi-schema
+        sourceRevisionDigest: sha256:2afed430cbdad745d74699dab5f421df42576813f90c361a6675c4a18e3e0567
+        sourceBlobDigest: sha256:fa303fb4f2c3f8af561784b2303489f90e77831643d2c59eb0b7e229f8151cfc
         tags:
             - latest
 targets:
     friendli:
-        source: Friendli-OpenAPI
-        sourceNamespace: friendli-openapi
-        sourceRevisionDigest: sha256:e6f072ee17efc4b8618034865bb6339a12b3738326329a3a342afe1d9fedfa8e
-        sourceBlobDigest: sha256:5df0dde8834747719e800ff32696ecce9371b361ec137cd188c1db8dc0c5b12b
-        codeSamplesNamespace: friendli-openapi-code-samples
-        codeSamplesRevisionDigest: sha256:fe072119b3ddd638214c15da1390893008997a4bcd0f57812599b2c6005f3a48
+        source: Friendli-OpenAPI-Schema
+        sourceNamespace: friendli-openapi-schema
+        sourceRevisionDigest: sha256:2afed430cbdad745d74699dab5f421df42576813f90c361a6675c4a18e3e0567
+        sourceBlobDigest: sha256:fa303fb4f2c3f8af561784b2303489f90e77831643d2c59eb0b7e229f8151cfc
+        codeSamplesNamespace: friendli-openapi-schema-code-samples
+        codeSamplesRevisionDigest: sha256:9d2e989b2b116a5d44ead2ca862e5db9e4b22ccf4985cf817b633c0c9f42041b
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
-        Friendli-OpenAPI:
+        Friendli-OpenAPI-Schema:
             inputs:
-                - location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-openapi
+                - location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-openapi-schema
             registry:
-                location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-openapi
+                location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-openapi-schema
     targets:
         friendli:
             target: python
-            source: Friendli-OpenAPI
-            publish:
-                pypi:
-                    token: $pypi_token
+            source: Friendli-OpenAPI-Schema
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-openapi-code-samples
+                    location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-openapi-schema-code-samples
                 blocking: false

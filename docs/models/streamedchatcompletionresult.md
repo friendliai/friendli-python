@@ -1,4 +1,4 @@
-# StreamedChatCompletionResponse
+# StreamedChatCompletionResult
 
 A server-sent event containing chat completion content.
 

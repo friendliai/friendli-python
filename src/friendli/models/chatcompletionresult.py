@@ -8,14 +8,14 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class ChatCompletionResponseTypedDict(TypedDict):
+class ChatCompletionResultTypedDict(TypedDict):
     choices: List[ChatCompletionChoiceTypedDict]
     usage: UsageTypedDict
     created: NotRequired[int]
     r"""The Unix timestamp (in seconds) for when the generation completed."""
 
 
-class ChatCompletionResponse(BaseModel):
+class ChatCompletionResult(BaseModel):
     choices: List[ChatCompletionChoice]
 
     usage: Usage

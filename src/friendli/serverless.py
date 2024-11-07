@@ -107,14 +107,12 @@ class Serverless(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             http_response_text = utils.stream_to_text(http_res)
-            return utils.unmarshal_json(
-                http_response_text, models.ChatCompletionResponse
-            )
+            return utils.unmarshal_json(http_response_text, models.ChatCompletionResult)
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.stream_events(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.StreamedToolAssistedChatCompletionResponse
+                    raw, models.StreamedToolAssistedChatCompletionResult
                 ),
                 sentinel="[DONE]",
             )
@@ -225,14 +223,12 @@ class Serverless(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             http_response_text = await utils.stream_to_text_async(http_res)
-            return utils.unmarshal_json(
-                http_response_text, models.ChatCompletionResponse
-            )
+            return utils.unmarshal_json(http_response_text, models.ChatCompletionResult)
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.stream_events_async(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.StreamedToolAssistedChatCompletionResponse
+                    raw, models.StreamedToolAssistedChatCompletionResult
                 ),
                 sentinel="[DONE]",
             )

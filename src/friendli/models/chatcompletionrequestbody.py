@@ -4,10 +4,9 @@ from __future__ import annotations
 from .message import Message, MessageTypedDict
 from .textresponseformat import TextResponseFormat, TextResponseFormatTypedDict
 from .tool import Tool, ToolTypedDict
-from enum import Enum
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Union
+from typing import List, Literal, Union
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -77,10 +76,8 @@ class StreamOptions(BaseModel):
         return m
 
 
-class ToolChoiceType(str, Enum):
-    r"""The type of the tool. Currently, only `function` is supported."""
-
-    FUNCTION = "function"
+ToolChoiceType = Literal["function"]
+r"""The type of the tool. Currently, only `function` is supported."""
 
 
 class ToolChoiceFunctionTypedDict(TypedDict):

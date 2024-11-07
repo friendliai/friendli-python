@@ -7,17 +7,14 @@ from .toolfortoolassistedchat import (
     ToolForToolAssistedChat,
     ToolForToolAssistedChatTypedDict,
 )
-from enum import Enum
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Union
+from typing import List, Literal, Union
 from typing_extensions import NotRequired, TypedDict
 
 
-class ToolAssistedCompletionRequestBodyToolChoiceType(str, Enum):
-    r"""The type of the tool. Currently, only `function` is supported."""
-
-    FUNCTION = "function"
+ToolAssistedCompletionRequestBodyToolChoiceType = Literal["function"]
+r"""The type of the tool. Currently, only `function` is supported."""
 
 
 class ToolAssistedCompletionRequestBodyToolChoiceFunctionTypedDict(TypedDict):

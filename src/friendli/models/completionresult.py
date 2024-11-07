@@ -8,12 +8,12 @@ from typing import List
 from typing_extensions import TypedDict
 
 
-class CompletionResponseTypedDict(TypedDict):
+class CompletionResultTypedDict(TypedDict):
     choices: List[CompletionChoiceTypedDict]
     usage: UsageTypedDict
 
 
-class CompletionResponse(BaseModel):
+class CompletionResult(BaseModel):
     choices: List[CompletionChoice]
 
     usage: Usage

@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 from .completionrequestbody import CompletionRequestBody, CompletionRequestBodyTypedDict
-from .completionresponse import CompletionResponse, CompletionResponseTypedDict
-from .streamedcompletionresponse import (
-    StreamedCompletionResponse,
-    StreamedCompletionResponseTypedDict,
+from .completionresult import CompletionResult, CompletionResultTypedDict
+from .streamedcompletionresult import (
+    StreamedCompletionResult,
+    StreamedCompletionResultTypedDict,
 )
 from friendli.types import BaseModel
 from friendli.utils import FieldMetadata, HeaderMetadata, RequestMetadata
@@ -34,19 +34,19 @@ class CompletionRequest(BaseModel):
     ] = None
 
 
-CompletionResponse1TypedDict = Union[
-    CompletionResponseTypedDict,
+CompletionResponseTypedDict = Union[
+    CompletionResultTypedDict,
     Union[
-        Generator[StreamedCompletionResponseTypedDict, None, None],
-        AsyncGenerator[StreamedCompletionResponseTypedDict, None],
+        Generator[StreamedCompletionResultTypedDict, None, None],
+        AsyncGenerator[StreamedCompletionResultTypedDict, None],
     ],
 ]
 
 
-CompletionResponse1 = Union[
-    CompletionResponse,
+CompletionResponse = Union[
+    CompletionResult,
     Union[
-        Generator[StreamedCompletionResponse, None, None],
-        AsyncGenerator[StreamedCompletionResponse, None],
+        Generator[StreamedCompletionResult, None, None],
+        AsyncGenerator[StreamedCompletionResult, None],
     ],
 ]
