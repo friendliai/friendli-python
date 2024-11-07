@@ -1,0 +1,19 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Friendli-API-Schema:
+        inputs:
+            - location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-api-schema
+        transformations:
+            - cleanup: true
+targets:
+    friendli:
+        target: python
+        source: Friendli-API-Schema
+        publish:
+            pypi:
+                token: $pypi_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-api-schema-code-samples
+            blocking: false
