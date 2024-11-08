@@ -35,7 +35,7 @@ res = s.serverless.tool_assisted_chat_completion(model="meta-llama-3.1-8b-instru
         "type": "math:calculator",
     },
     {
-        "type": "web:url",
+        "type": "web:search",
     },
 ])
 
