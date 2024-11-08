@@ -10,6 +10,21 @@ from .assistantmessage import (
     ToolCalls,
     ToolCallsTypedDict,
 )
+from .chatcompletionbody import (
+    ChatCompletionBody,
+    ChatCompletionBodyTypedDict,
+    LogitBias,
+    LogitBiasTypedDict,
+    Object,
+    ObjectTypedDict,
+    StreamOptions,
+    StreamOptionsTypedDict,
+    ToolChoice,
+    ToolChoiceFunction,
+    ToolChoiceFunctionTypedDict,
+    ToolChoiceType,
+    ToolChoiceTypedDict,
+)
 from .chatcompletionchoice import (
     ChatCompletionChoice,
     ChatCompletionChoiceFunction,
@@ -24,54 +39,30 @@ from .chatcompletionchoice import (
 from .chatcompletionop import (
     ChatCompletionRequest,
     ChatCompletionRequestTypedDict,
-    ChatCompletionResponse1,
-    ChatCompletionResponse1TypedDict,
-)
-from .chatcompletionrequestbody import (
-    ChatCompletionRequestBody,
-    ChatCompletionRequestBodyTypedDict,
-    LogitBias,
-    LogitBiasTypedDict,
-    Object,
-    ObjectTypedDict,
-    StreamOptions,
-    StreamOptionsTypedDict,
-    ToolChoice,
-    ToolChoiceFunction,
-    ToolChoiceFunctionTypedDict,
-    ToolChoiceType,
-    ToolChoiceTypedDict,
-)
-from .chatcompletionresponse import (
     ChatCompletionResponse,
     ChatCompletionResponseTypedDict,
+)
+from .chatcompletionresult import ChatCompletionResult, ChatCompletionResultTypedDict
+from .completionbody import CompletionBody, CompletionBodyTypedDict
+from .completionbodywithprompt import (
+    CompletionBodyWithPrompt,
+    CompletionBodyWithPromptTypedDict,
+)
+from .completionbodywithtokens import (
+    CompletionBodyWithTokens,
+    CompletionBodyWithTokensTypedDict,
 )
 from .completionchoice import CompletionChoice, CompletionChoiceTypedDict
 from .completionop import (
     CompletionRequest,
     CompletionRequestTypedDict,
-    CompletionResponse1,
-    CompletionResponse1TypedDict,
+    CompletionResponse,
+    CompletionResponseTypedDict,
 )
-from .completionrequestbody import CompletionRequestBody, CompletionRequestBodyTypedDict
-from .completionrequestbodywithprompt import (
-    CompletionRequestBodyWithPrompt,
-    CompletionRequestBodyWithPromptTypedDict,
-)
-from .completionrequestbodywithtokens import (
-    CompletionRequestBodyWithTokens,
-    CompletionRequestBodyWithTokensTypedDict,
-)
-from .completionresponse import CompletionResponse, CompletionResponseTypedDict
+from .completionresult import CompletionResult, CompletionResultTypedDict
+from .detokenizationbody import DetokenizationBody, DetokenizationBodyTypedDict
 from .detokenizationop import DetokenizationRequest, DetokenizationRequestTypedDict
-from .detokenizationrequestbody import (
-    DetokenizationRequestBody,
-    DetokenizationRequestBodyTypedDict,
-)
-from .detokenizationresponse import (
-    DetokenizationResponse,
-    DetokenizationResponseTypedDict,
-)
+from .detokenizationresult import DetokenizationResult, DetokenizationResultTypedDict
 from .filebuiltintool import (
     FileBuiltInTool,
     FileBuiltInToolType,
@@ -106,17 +97,17 @@ from .streamedchatcompletionchoice import (
     StreamedChatCompletionChoiceType,
     StreamedChatCompletionChoiceTypedDict,
 )
-from .streamedchatcompletionresponse import (
+from .streamedchatcompletionresult import (
     Data,
     DataTypedDict,
-    StreamedChatCompletionResponse,
-    StreamedChatCompletionResponseTypedDict,
+    StreamedChatCompletionResult,
+    StreamedChatCompletionResultTypedDict,
 )
-from .streamedcompletionresponse import (
-    StreamedCompletionResponse,
-    StreamedCompletionResponseData,
-    StreamedCompletionResponseDataTypedDict,
-    StreamedCompletionResponseTypedDict,
+from .streamedcompletionresult import (
+    StreamedCompletionResult,
+    StreamedCompletionResultData,
+    StreamedCompletionResultDataTypedDict,
+    StreamedCompletionResultTypedDict,
 )
 from .streamedcompletiontokencomplete import (
     StreamedCompletionTokenComplete,
@@ -128,20 +119,17 @@ from .streamedcompletiontokensampled import (
     StreamedCompletionTokenSampled,
     StreamedCompletionTokenSampledTypedDict,
 )
-from .streamedtoolassistedchatcompletionresponse import (
-    StreamedToolAssistedChatCompletionResponse,
-    StreamedToolAssistedChatCompletionResponseData,
-    StreamedToolAssistedChatCompletionResponseDataTypedDict,
-    StreamedToolAssistedChatCompletionResponseTypedDict,
+from .streamedtoolassistedchatcompletionresult import (
+    StreamedToolAssistedChatCompletionResult,
+    StreamedToolAssistedChatCompletionResultData,
+    StreamedToolAssistedChatCompletionResultDataTypedDict,
+    StreamedToolAssistedChatCompletionResultTypedDict,
 )
 from .systemmessage import Role, SystemMessage, SystemMessageTypedDict
 from .textresponseformat import TextResponseFormat, TextResponseFormatTypedDict, Type
+from .tokenizationbody import TokenizationBody, TokenizationBodyTypedDict
 from .tokenizationop import TokenizationRequest, TokenizationRequestTypedDict
-from .tokenizationrequestbody import (
-    TokenizationRequestBody,
-    TokenizationRequestBodyTypedDict,
-)
-from .tokenizationresponse import TokenizationResponse, TokenizationResponseTypedDict
+from .tokenizationresult import TokenizationResult, TokenizationResultTypedDict
 from .tokensequence import TokenSequence, TokenSequenceTypedDict
 from .tool import Tool, ToolType, ToolTypedDict
 from .toolassistedchatcompletionop import (
@@ -151,14 +139,14 @@ from .toolassistedchatcompletionop import (
     ToolAssistedChatCompletionResponse,
     ToolAssistedChatCompletionResponseTypedDict,
 )
-from .toolassistedcompletionrequestbody import (
-    ToolAssistedCompletionRequestBody,
-    ToolAssistedCompletionRequestBodyToolChoice,
-    ToolAssistedCompletionRequestBodyToolChoiceFunction,
-    ToolAssistedCompletionRequestBodyToolChoiceFunctionTypedDict,
-    ToolAssistedCompletionRequestBodyToolChoiceType,
-    ToolAssistedCompletionRequestBodyToolChoiceTypedDict,
-    ToolAssistedCompletionRequestBodyTypedDict,
+from .toolassistedcompletionbody import (
+    ToolAssistedCompletionBody,
+    ToolAssistedCompletionBodyToolChoice,
+    ToolAssistedCompletionBodyToolChoiceFunction,
+    ToolAssistedCompletionBodyToolChoiceFunctionTypedDict,
+    ToolAssistedCompletionBodyToolChoiceType,
+    ToolAssistedCompletionBodyToolChoiceTypedDict,
+    ToolAssistedCompletionBodyTypedDict,
     ToolChoiceObject,
     ToolChoiceObjectTypedDict,
 )
@@ -177,6 +165,8 @@ __all__ = [
     "AssistantMessageRole",
     "AssistantMessageType",
     "AssistantMessageTypedDict",
+    "ChatCompletionBody",
+    "ChatCompletionBodyTypedDict",
     "ChatCompletionChoice",
     "ChatCompletionChoiceFunction",
     "ChatCompletionChoiceFunctionTypedDict",
@@ -187,39 +177,37 @@ __all__ = [
     "ChatCompletionChoiceType",
     "ChatCompletionChoiceTypedDict",
     "ChatCompletionRequest",
-    "ChatCompletionRequestBody",
-    "ChatCompletionRequestBodyTypedDict",
     "ChatCompletionRequestTypedDict",
     "ChatCompletionResponse",
-    "ChatCompletionResponse1",
-    "ChatCompletionResponse1TypedDict",
     "ChatCompletionResponseTypedDict",
+    "ChatCompletionResult",
+    "ChatCompletionResultTypedDict",
+    "CompletionBody",
+    "CompletionBodyTypedDict",
+    "CompletionBodyWithPrompt",
+    "CompletionBodyWithPromptTypedDict",
+    "CompletionBodyWithTokens",
+    "CompletionBodyWithTokensTypedDict",
     "CompletionChoice",
     "CompletionChoiceTypedDict",
     "CompletionRequest",
-    "CompletionRequestBody",
-    "CompletionRequestBodyTypedDict",
-    "CompletionRequestBodyWithPrompt",
-    "CompletionRequestBodyWithPromptTypedDict",
-    "CompletionRequestBodyWithTokens",
-    "CompletionRequestBodyWithTokensTypedDict",
     "CompletionRequestTypedDict",
     "CompletionResponse",
-    "CompletionResponse1",
-    "CompletionResponse1TypedDict",
     "CompletionResponseTypedDict",
+    "CompletionResult",
+    "CompletionResultTypedDict",
     "Content",
     "ContentTypedDict",
     "Data",
     "DataTypedDict",
     "Delta",
     "DeltaTypedDict",
+    "DetokenizationBody",
+    "DetokenizationBodyTypedDict",
     "DetokenizationRequest",
-    "DetokenizationRequestBody",
-    "DetokenizationRequestBodyTypedDict",
     "DetokenizationRequestTypedDict",
-    "DetokenizationResponse",
-    "DetokenizationResponseTypedDict",
+    "DetokenizationResult",
+    "DetokenizationResultTypedDict",
     "Event",
     "FileBuiltInTool",
     "FileBuiltInToolType",
@@ -255,21 +243,21 @@ __all__ = [
     "StreamedChatCompletionChoiceToolCallsTypedDict",
     "StreamedChatCompletionChoiceType",
     "StreamedChatCompletionChoiceTypedDict",
-    "StreamedChatCompletionResponse",
-    "StreamedChatCompletionResponseTypedDict",
-    "StreamedCompletionResponse",
-    "StreamedCompletionResponseData",
-    "StreamedCompletionResponseDataTypedDict",
-    "StreamedCompletionResponseTypedDict",
+    "StreamedChatCompletionResult",
+    "StreamedChatCompletionResultTypedDict",
+    "StreamedCompletionResult",
+    "StreamedCompletionResultData",
+    "StreamedCompletionResultDataTypedDict",
+    "StreamedCompletionResultTypedDict",
     "StreamedCompletionTokenComplete",
     "StreamedCompletionTokenCompleteEvent",
     "StreamedCompletionTokenCompleteTypedDict",
     "StreamedCompletionTokenSampled",
     "StreamedCompletionTokenSampledTypedDict",
-    "StreamedToolAssistedChatCompletionResponse",
-    "StreamedToolAssistedChatCompletionResponseData",
-    "StreamedToolAssistedChatCompletionResponseDataTypedDict",
-    "StreamedToolAssistedChatCompletionResponseTypedDict",
+    "StreamedToolAssistedChatCompletionResult",
+    "StreamedToolAssistedChatCompletionResultData",
+    "StreamedToolAssistedChatCompletionResultDataTypedDict",
+    "StreamedToolAssistedChatCompletionResultTypedDict",
     "SystemMessage",
     "SystemMessageTypedDict",
     "TOOL_ASSISTED_CHAT_COMPLETION_OP_SERVERS",
@@ -277,24 +265,24 @@ __all__ = [
     "TextResponseFormatTypedDict",
     "TokenSequence",
     "TokenSequenceTypedDict",
+    "TokenizationBody",
+    "TokenizationBodyTypedDict",
     "TokenizationRequest",
-    "TokenizationRequestBody",
-    "TokenizationRequestBodyTypedDict",
     "TokenizationRequestTypedDict",
-    "TokenizationResponse",
-    "TokenizationResponseTypedDict",
+    "TokenizationResult",
+    "TokenizationResultTypedDict",
     "Tool",
     "ToolAssistedChatCompletionRequest",
     "ToolAssistedChatCompletionRequestTypedDict",
     "ToolAssistedChatCompletionResponse",
     "ToolAssistedChatCompletionResponseTypedDict",
-    "ToolAssistedCompletionRequestBody",
-    "ToolAssistedCompletionRequestBodyToolChoice",
-    "ToolAssistedCompletionRequestBodyToolChoiceFunction",
-    "ToolAssistedCompletionRequestBodyToolChoiceFunctionTypedDict",
-    "ToolAssistedCompletionRequestBodyToolChoiceType",
-    "ToolAssistedCompletionRequestBodyToolChoiceTypedDict",
-    "ToolAssistedCompletionRequestBodyTypedDict",
+    "ToolAssistedCompletionBody",
+    "ToolAssistedCompletionBodyToolChoice",
+    "ToolAssistedCompletionBodyToolChoiceFunction",
+    "ToolAssistedCompletionBodyToolChoiceFunctionTypedDict",
+    "ToolAssistedCompletionBodyToolChoiceType",
+    "ToolAssistedCompletionBodyToolChoiceTypedDict",
+    "ToolAssistedCompletionBodyTypedDict",
     "ToolCalls",
     "ToolCallsTypedDict",
     "ToolChoice",
