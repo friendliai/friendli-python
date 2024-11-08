@@ -1,24 +1,23 @@
-# friendli
+# Friendli Python SDK
 
-Developer-friendly & type-safe Python SDK specifically catered to leverage *friendli* API.
+<p align="center">
+  <img width="10%" alt="Friendli Logo" src="https://friendli.ai/icon.svg">
+</p>
 
-<div align="left">
-    <a href="https://www.speakeasy.com/?utm_source=friendli&utm_campaign=python"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
-    <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
-    </a>
-</div>
+<h2><p align="center">Supercharge Generative AI Serving with Friendli 🚀</p></h2>
 
+## Token Setup
 
-<br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/friendliai/friendliai). Delete this section before > publishing to a package manager.
+When using Friendli Python SDK, you need to provide a Friendli Token for authentication and authorization purposes. A Friendli Token serves as an alternative method of authorization to signing in with an email and a password. You can generate a new Friendli Token through the [Friendli Suite](https://suite.friendli.ai), at your "User settings" page by following the steps below.
 
-<!-- Start Summary [summary] -->
-## Summary
+1. Go to the [Friendli Suite](https://suite.friendli.ai) and sign in with your account.
+2. Click the profile icon at the top-right corner of the page.
+3. Click "User settings" menu.
+4. Go to the "Tokens" tab on the navigation bar.
+5. Create a new Friendli Token by clicking the "Create token" button.
+6. Copy the token and save it in a safe place. You will not be able to see this token again once the page is refreshed.
 
-Friendli Endpoints API Reference: This is an OpenAPI reference of Friendli Endpoints API.
-<!-- End Summary [summary] -->
+<!-- No Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
@@ -57,16 +56,6 @@ pip install git+https://github.com/friendliai/friendli-python-internal.git
 poetry add git+https://github.com/friendliai/friendli-python-internal.git
 ```
 <!-- End SDK Installation [installation] -->
-
-<!-- Start IDE Support [idesupport] -->
-## IDE Support
-
-### PyCharm
-
-Generally, the SDK will work well with most IDEs out of the box. However, when using PyCharm, you can enjoy much better integration with Pydantic by installing an additional plugin.
-
-- [PyCharm Pydantic Plugin](https://docs.pydantic.dev/latest/integrations/pycharm/)
-<!-- End IDE Support [idesupport] -->
 
 <!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
@@ -632,19 +621,14 @@ s = Friendli(debug_logger=logging.getLogger("friendli"))
 You can also enable a default debug logger by setting an environment variable `FRIENDLI_DEBUG` to true.
 <!-- End Debugging [debug] -->
 
+<!-- Start IDE Support [idesupport] -->
+## IDE Support
+
+### PyCharm
+
+Generally, the SDK will work well with most IDEs out of the box. However, when using PyCharm, you can enjoy much better integration with Pydantic by installing an additional plugin.
+
+- [PyCharm Pydantic Plugin](https://docs.pydantic.dev/latest/integrations/pycharm/)
+<!-- End IDE Support [idesupport] -->
+
 <!-- Placeholder for Future Speakeasy SDK Sections -->
-
-# Development
-
-## Maturity
-
-This SDK is in beta, and there may be breaking changes between versions without a major version update. Therefore, we recommend pinning usage
-to a specific package version. This way, you can install the same version each time without breaking changes unless you are intentionally
-looking for the latest version.
-
-## Contributions
-
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
-
-### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=friendli&utm_campaign=python)

@@ -11,7 +11,7 @@ Type = Literal["text", "json_object", "regex"]
 r"""Type of the response format."""
 
 
-class TextResponseFormatTypedDict(TypedDict):
+class ResponseFormatTypedDict(TypedDict):
     r"""The enforced format of the model's output.
 
     Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
@@ -35,7 +35,7 @@ class TextResponseFormatTypedDict(TypedDict):
     """
 
 
-class TextResponseFormat(BaseModel):
+class ResponseFormat(BaseModel):
     r"""The enforced format of the model's output.
 
     Note that the content of the output message may be truncated if it exceeds the `max_tokens`.

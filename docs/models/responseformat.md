@@ -1,4 +1,4 @@
-# TextResponseFormat
+# ResponseFormat
 
 The enforced format of the model's output.
 

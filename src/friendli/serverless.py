@@ -30,7 +30,7 @@ class Serverless(BaseSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         response_format: OptionalNullable[
-            Union[models.TextResponseFormat, models.TextResponseFormatTypedDict]
+            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
         ] = UNSET,
         resume_generation: OptionalNullable[bool] = UNSET,
         seed: OptionalNullable[List[int]] = UNSET,
@@ -112,7 +112,7 @@ class Serverless(BaseSDK):
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
                 response_format=utils.get_pydantic_model(
-                    response_format, OptionalNullable[models.TextResponseFormat]
+                    response_format, OptionalNullable[models.ResponseFormat]
                 ),
                 resume_generation=resume_generation,
                 seed=seed,
@@ -219,7 +219,7 @@ class Serverless(BaseSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         response_format: OptionalNullable[
-            Union[models.TextResponseFormat, models.TextResponseFormatTypedDict]
+            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
         ] = UNSET,
         resume_generation: OptionalNullable[bool] = UNSET,
         seed: OptionalNullable[List[int]] = UNSET,
@@ -301,7 +301,7 @@ class Serverless(BaseSDK):
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
                 response_format=utils.get_pydantic_model(
-                    response_format, OptionalNullable[models.TextResponseFormat]
+                    response_format, OptionalNullable[models.ResponseFormat]
                 ),
                 resume_generation=resume_generation,
                 seed=seed,

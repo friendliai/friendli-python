@@ -84,6 +84,7 @@ from .otherbuiltintool import (
     OtherBuiltInToolType,
     OtherBuiltInToolTypedDict,
 )
+from .responseformat import ResponseFormat, ResponseFormatTypedDict, Type
 from .sdkerror import SDKError
 from .security import Security, SecurityTypedDict
 from .streamedchatcompletionchoice import (
@@ -126,7 +127,6 @@ from .streamedtoolassistedchatcompletionresult import (
     StreamedToolAssistedChatCompletionResultTypedDict,
 )
 from .systemmessage import Role, SystemMessage, SystemMessageTypedDict
-from .textresponseformat import TextResponseFormat, TextResponseFormatTypedDict, Type
 from .tokenizationbody import TokenizationBody, TokenizationBodyTypedDict
 from .tokenizationop import TokenizationRequest, TokenizationRequestTypedDict
 from .tokenizationresult import TokenizationResult, TokenizationResultTypedDict
@@ -230,6 +230,8 @@ __all__ = [
     "OtherBuiltInToolTypedDict",
     "Parameters",
     "ParametersTypedDict",
+    "ResponseFormat",
+    "ResponseFormatTypedDict",
     "Role",
     "SDKError",
     "Security",
@@ -261,8 +263,6 @@ __all__ = [
     "SystemMessage",
     "SystemMessageTypedDict",
     "TOOL_ASSISTED_CHAT_COMPLETION_OP_SERVERS",
-    "TextResponseFormat",
-    "TextResponseFormatTypedDict",
     "TokenSequence",
     "TokenSequenceTypedDict",
     "TokenizationBody",

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
-id: a1c5fd64-140c-4c5e-a0d3-b834f17979db
+id: 6713e9a4-76c8-4f78-8a06-79954cdb958f
 management:
-  docChecksum: 34c80811303c2686b64f35ee5ec19e9d
+  docChecksum: 0447e084a5deefe1518bcb1fda4d8b59
   docVersion: v1
   speakeasyVersion: 1.434.7
   generationVersion: 2.452.0
-  releaseVersion: 0.6.2
-  configChecksum: 47b10aeb77343389a66b04c793dee2b0
+  releaseVersion: 0.1.3
+  configChecksum: 040b5eee7037cf39b3e792fcea9ad324
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
 features:
@@ -81,6 +81,7 @@ generatedFiles:
   - docs/models/otherbuiltintool.md
   - docs/models/otherbuiltintooltype.md
   - docs/models/parameters.md
+  - docs/models/responseformat.md
   - docs/models/role.md
   - docs/models/security.md
   - docs/models/streamedchatcompletionchoice.md
@@ -97,7 +98,6 @@ generatedFiles:
   - docs/models/streamedtoolassistedchatcompletionresultdata.md
   - docs/models/streamoptions.md
   - docs/models/systemmessage.md
-  - docs/models/textresponseformat.md
   - docs/models/tokenizationbody.md
   - docs/models/tokenizationrequest.md
   - docs/models/tokenizationresult.md
@@ -162,6 +162,7 @@ generatedFiles:
   - src/friendli/models/logprobs.py
   - src/friendli/models/message.py
   - src/friendli/models/otherbuiltintool.py
+  - src/friendli/models/responseformat.py
   - src/friendli/models/sdkerror.py
   - src/friendli/models/security.py
   - src/friendli/models/streamedchatcompletionchoice.py
@@ -171,7 +172,6 @@ generatedFiles:
   - src/friendli/models/streamedcompletiontokensampled.py
   - src/friendli/models/streamedtoolassistedchatcompletionresult.py
   - src/friendli/models/systemmessage.py
-  - src/friendli/models/textresponseformat.py
   - src/friendli/models/tokenizationbody.py
   - src/friendli/models/tokenizationop.py
   - src/friendli/models/tokenizationresult.py
@@ -281,4 +281,4 @@ examples:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
-          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAh\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"None\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAh\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\\\"{\\\\\\\"result\\\\\\\": \\\\\\\"150 * 1.60934=241.401000000000\\\\\\\"}\\\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
+          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"None\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\\\"{\\\\\\\"result\\\\\\\": \\\\\\\"150 * 1.60934=241.401000000000\\\\\\\"}\\\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
