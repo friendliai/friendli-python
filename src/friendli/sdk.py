@@ -22,8 +22,8 @@ class Friendli(BaseSDK):
 
     def __init__(
         self,
-        bearer_auth: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
-        server_idx: Optional[int] = None,
+        token: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
+        server: Optional[str] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
         client: Optional[HttpClient] = None,
@@ -34,8 +34,8 @@ class Friendli(BaseSDK):
     ) -> None:
         r"""Instantiates the SDK configuring it with the provided parameters.
 
-        :param bearer_auth: The bearer_auth required for authentication
-        :param server_idx: The index of the server to use for all methods
+        :param token: The token required for authentication
+        :param server: The server by name to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
         :param client: The HTTP client to use for all synchronous methods
@@ -61,10 +61,10 @@ class Friendli(BaseSDK):
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
         security: Any = None
-        if callable(bearer_auth):
-            security = lambda: models.Security(bearer_auth=bearer_auth())  # pylint: disable=unnecessary-lambda-assignment
+        if callable(token):
+            security = lambda: models.Security(token=token())  # pylint: disable=unnecessary-lambda-assignment
         else:
-            security = models.Security(bearer_auth=bearer_auth)
+            security = models.Security(token=token)
 
         if server_url is not None:
             if url_params is not None:
@@ -77,7 +77,7 @@ class Friendli(BaseSDK):
                 async_client=async_client,
                 security=security,
                 server_url=server_url,
-                server_idx=server_idx,
+                server=server,
                 retry_config=retry_config,
                 timeout_ms=timeout_ms,
                 debug_logger=debug_logger,
