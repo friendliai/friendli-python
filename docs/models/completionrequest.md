@@ -3,7 +3,7 @@
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `x_friendli_team`                                                            | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | ID of team to run requests as (optional parameter).                          |
-| `completion_request_body`                                                    | [Optional[models.CompletionRequestBody]](../models/completionrequestbody.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| Field                                                | Type                                                 | Required                                             | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `completion_body`                                    | [models.CompletionBody](../models/completionbody.md) | :heavy_check_mark:                                   | N/A                                                  |
+| `x_friendli_team`                                    | *Optional[str]*                                      | :heavy_minus_sign:                                   | ID of team to run requests as (optional parameter).  |

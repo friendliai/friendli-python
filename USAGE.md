@@ -1,28 +1,27 @@
 <!-- Start SDK Example Usage [usage] -->
+### Chat completion
+
+Given a list of messages forming a conversation, the model generates a response.
+
 ```python
 # Synchronous Example
-import friendli
 from friendli import Friendli
 import os
 
 s = Friendli(
-    bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+    token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.inference.chat_completion(chat_completion_request_body={
-    "model": "meta-llama-3.1-8b-instruct",
-    "messages": [
-        {
-            "role": friendli.Role.SYSTEM,
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": friendli.UserMessageRole.USER,
-            "content": "Hello!",
-        },
-    ],
-    "max_tokens": 200,
-})
+res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
+    {
+        "role": "system",
+        "content": "You are a helpful assistant.",
+    },
+    {
+        "role": "user",
+        "content": "Hello!",
+    },
+], max_tokens=200)
 
 if res is not None:
     for event in res:
@@ -36,28 +35,23 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-import friendli
 from friendli import Friendli
 import os
 
 async def main():
     s = Friendli(
-        bearer_auth=os.getenv("FRIENDLI_BEARER_AUTH", ""),
+        token=os.getenv("FRIENDLI_TOKEN", ""),
     )
-    res = await s.inference.chat_completion_async(chat_completion_request_body={
-        "model": "meta-llama-3.1-8b-instruct",
-        "messages": [
-            {
-                "role": friendli.Role.SYSTEM,
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": friendli.UserMessageRole.USER,
-                "content": "Hello!",
-            },
-        ],
-        "max_tokens": 200,
-    })
+    res = await s.inference.chat_completion_async(model="meta-llama-3.1-8b-instruct", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ], max_tokens=200)
     if res is not None:
         for event in res:
             # handle event

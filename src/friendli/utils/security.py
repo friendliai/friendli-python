@@ -64,8 +64,8 @@ def get_security_from_env(security: Any, security_class: Any) -> Optional[BaseMo
 
     security_dict: Any = {}
 
-    if os.getenv("FRIENDLI_BEARER_AUTH"):
-        security_dict["bearer_auth"] = os.getenv("FRIENDLI_BEARER_AUTH")
+    if os.getenv("FRIENDLI_TOKEN"):
+        security_dict["token"] = os.getenv("FRIENDLI_TOKEN")
 
     return security_class(**security_dict) if security_dict else None
 

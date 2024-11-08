@@ -2,16 +2,13 @@
 
 from __future__ import annotations
 from .logprobs import Logprobs, LogprobsTypedDict
-from enum import Enum
 from friendli.types import BaseModel
-from typing import List, Optional
+from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class ChatCompletionChoiceType(str, Enum):
-    r"""The type of the tool."""
-
-    FUNCTION = "function"
+ChatCompletionChoiceType = Literal["function"]
+r"""The type of the tool."""
 
 
 class ChatCompletionChoiceFunctionTypedDict(TypedDict):

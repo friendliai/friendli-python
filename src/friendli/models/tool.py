@@ -2,15 +2,13 @@
 
 from __future__ import annotations
 from .function import Function, FunctionTypedDict
-from enum import Enum
 from friendli.types import BaseModel
+from typing import Literal
 from typing_extensions import TypedDict
 
 
-class ToolType(str, Enum):
-    r"""The type of the tool. Currently, only `function` is supported."""
-
-    FUNCTION = "function"
+ToolType = Literal["function"]
+r"""The type of the tool. Currently, only `function` is supported."""
 
 
 class ToolTypedDict(TypedDict):

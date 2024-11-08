@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### `models.ChatCompletionResponse`
+### `models.ChatCompletionResult`
 
 ```python
-value: models.ChatCompletionResponse = /* values here */
+value: models.ChatCompletionResult = /* values here */
 ```
 
-### `Union[Generator[models.StreamedToolAssistedChatCompletionResponse, None, None], AsyncGenerator[models.StreamedToolAssistedChatCompletionResponse, None]]`
+### `Union[Generator[models.StreamedToolAssistedChatCompletionResult, None, None], AsyncGenerator[models.StreamedToolAssistedChatCompletionResult, None]]`
 
 ```python
-value: Union[Generator[models.StreamedToolAssistedChatCompletionResponse, None, None], AsyncGenerator[models.StreamedToolAssistedChatCompletionResponse, None]] = /* values here */
+value: Union[Generator[models.StreamedToolAssistedChatCompletionResult, None, None], AsyncGenerator[models.StreamedToolAssistedChatCompletionResult, None]] = /* values here */
 ```
 
