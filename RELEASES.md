@@ -1,11 +1,9 @@
 
 
-## 2024-11-07 04:43:57
+## 2024-11-07 07:15:28
 ### Changes
 Based on:
 - OpenAPI Doc  
 - Speakeasy CLI 1.434.0 (2.452.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
-- [python v0.1.3] .
-### Releases
-- [PyPI v0.1.3] https://pypi.org/project/friendli/0.1.3 - .
+- [python v0.5.0] .

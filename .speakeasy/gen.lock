@@ -1,15 +1,14 @@
 lockVersion: 2.0.0
-id: 2ab1f3f0-3683-4414-9916-f8a387d2b0b7
+id: a1c5fd64-140c-4c5e-a0d3-b834f17979db
 management:
-  docChecksum: 3579e3e4e8b9edab91ef382d35f00937
+  docChecksum: 2c70ec12761d35ff903605a8858a9bb2
   docVersion: v1
-  speakeasyVersion: 1.434.0
+  speakeasyVersion: 1.434.7
   generationVersion: 2.452.0
-  releaseVersion: 0.1.4
-  configChecksum: fa378ee66fbbc9b0ac1661e270f06bf3
+  releaseVersion: 0.6.0
+  configChecksum: 5b594f923a7a03f579a9965704666db8
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
-  published: true
 features:
   python:
     acceptHeaders: 3.0.0
@@ -19,6 +18,8 @@ features:
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
+    examples: 3.0.0
+    flatRequests: 1.0.1
     flattening: 3.1.0
     globalSecurity: 3.0.2
     globalSecurityCallbacks: 1.0.0
@@ -32,6 +33,7 @@ features:
     sdkHooks: 1.0.0
     serverEvents: 1.0.4
     serverEventsSentinels: 0.1.0
+    serverIDs: 3.0.0
     tests: 1.6.0
     unions: 3.0.3
 generatedFiles:
@@ -44,28 +46,28 @@ generatedFiles:
   - docs/models/assistantmessagefunction.md
   - docs/models/assistantmessagerole.md
   - docs/models/assistantmessagetype.md
+  - docs/models/chatcompletionbody.md
   - docs/models/chatcompletionchoice.md
   - docs/models/chatcompletionchoicefunction.md
   - docs/models/chatcompletionchoicemessage.md
   - docs/models/chatcompletionchoicetoolcalls.md
   - docs/models/chatcompletionchoicetype.md
   - docs/models/chatcompletionrequest.md
-  - docs/models/chatcompletionrequestbody.md
   - docs/models/chatcompletionresponse.md
-  - docs/models/chatcompletionresponse1.md
+  - docs/models/chatcompletionresult.md
+  - docs/models/completionbody.md
+  - docs/models/completionbodywithprompt.md
+  - docs/models/completionbodywithtokens.md
   - docs/models/completionchoice.md
   - docs/models/completionrequest.md
-  - docs/models/completionrequestbody.md
-  - docs/models/completionrequestbodywithprompt.md
-  - docs/models/completionrequestbodywithtokens.md
   - docs/models/completionresponse.md
-  - docs/models/completionresponse1.md
+  - docs/models/completionresult.md
   - docs/models/content.md
   - docs/models/data.md
   - docs/models/delta.md
+  - docs/models/detokenizationbody.md
   - docs/models/detokenizationrequest.md
-  - docs/models/detokenizationrequestbody.md
-  - docs/models/detokenizationresponse.md
+  - docs/models/detokenizationresult.md
   - docs/models/event.md
   - docs/models/filebuiltintool.md
   - docs/models/filebuiltintooltype.md
@@ -85,28 +87,28 @@ generatedFiles:
   - docs/models/streamedchatcompletionchoicefunction.md
   - docs/models/streamedchatcompletionchoicetoolcalls.md
   - docs/models/streamedchatcompletionchoicetype.md
-  - docs/models/streamedchatcompletionresponse.md
-  - docs/models/streamedcompletionresponse.md
-  - docs/models/streamedcompletionresponsedata.md
+  - docs/models/streamedchatcompletionresult.md
+  - docs/models/streamedcompletionresult.md
+  - docs/models/streamedcompletionresultdata.md
   - docs/models/streamedcompletiontokencomplete.md
   - docs/models/streamedcompletiontokencompleteevent.md
   - docs/models/streamedcompletiontokensampled.md
-  - docs/models/streamedtoolassistedchatcompletionresponse.md
-  - docs/models/streamedtoolassistedchatcompletionresponsedata.md
+  - docs/models/streamedtoolassistedchatcompletionresult.md
+  - docs/models/streamedtoolassistedchatcompletionresultdata.md
   - docs/models/streamoptions.md
   - docs/models/systemmessage.md
   - docs/models/textresponseformat.md
+  - docs/models/tokenizationbody.md
   - docs/models/tokenizationrequest.md
-  - docs/models/tokenizationrequestbody.md
-  - docs/models/tokenizationresponse.md
+  - docs/models/tokenizationresult.md
   - docs/models/tokensequence.md
   - docs/models/tool.md
   - docs/models/toolassistedchatcompletionrequest.md
   - docs/models/toolassistedchatcompletionresponse.md
-  - docs/models/toolassistedcompletionrequestbody.md
-  - docs/models/toolassistedcompletionrequestbodytoolchoice.md
-  - docs/models/toolassistedcompletionrequestbodytoolchoicefunction.md
-  - docs/models/toolassistedcompletionrequestbodytoolchoicetype.md
+  - docs/models/toolassistedcompletionbody.md
+  - docs/models/toolassistedcompletionbodytoolchoice.md
+  - docs/models/toolassistedcompletionbodytoolchoicefunction.md
+  - docs/models/toolassistedcompletionbodytoolchoicetype.md
   - docs/models/toolcalls.md
   - docs/models/toolchoice.md
   - docs/models/toolchoicefunction.md
@@ -141,19 +143,19 @@ generatedFiles:
   - src/friendli/inference.py
   - src/friendli/models/__init__.py
   - src/friendli/models/assistantmessage.py
+  - src/friendli/models/chatcompletionbody.py
   - src/friendli/models/chatcompletionchoice.py
   - src/friendli/models/chatcompletionop.py
-  - src/friendli/models/chatcompletionrequestbody.py
-  - src/friendli/models/chatcompletionresponse.py
+  - src/friendli/models/chatcompletionresult.py
+  - src/friendli/models/completionbody.py
+  - src/friendli/models/completionbodywithprompt.py
+  - src/friendli/models/completionbodywithtokens.py
   - src/friendli/models/completionchoice.py
   - src/friendli/models/completionop.py
-  - src/friendli/models/completionrequestbody.py
-  - src/friendli/models/completionrequestbodywithprompt.py
-  - src/friendli/models/completionrequestbodywithtokens.py
-  - src/friendli/models/completionresponse.py
+  - src/friendli/models/completionresult.py
+  - src/friendli/models/detokenizationbody.py
   - src/friendli/models/detokenizationop.py
-  - src/friendli/models/detokenizationrequestbody.py
-  - src/friendli/models/detokenizationresponse.py
+  - src/friendli/models/detokenizationresult.py
   - src/friendli/models/filebuiltintool.py
   - src/friendli/models/function.py
   - src/friendli/models/functiontool.py
@@ -163,20 +165,20 @@ generatedFiles:
   - src/friendli/models/sdkerror.py
   - src/friendli/models/security.py
   - src/friendli/models/streamedchatcompletionchoice.py
-  - src/friendli/models/streamedchatcompletionresponse.py
-  - src/friendli/models/streamedcompletionresponse.py
+  - src/friendli/models/streamedchatcompletionresult.py
+  - src/friendli/models/streamedcompletionresult.py
   - src/friendli/models/streamedcompletiontokencomplete.py
   - src/friendli/models/streamedcompletiontokensampled.py
-  - src/friendli/models/streamedtoolassistedchatcompletionresponse.py
+  - src/friendli/models/streamedtoolassistedchatcompletionresult.py
   - src/friendli/models/systemmessage.py
   - src/friendli/models/textresponseformat.py
+  - src/friendli/models/tokenizationbody.py
   - src/friendli/models/tokenizationop.py
-  - src/friendli/models/tokenizationrequestbody.py
-  - src/friendli/models/tokenizationresponse.py
+  - src/friendli/models/tokenizationresult.py
   - src/friendli/models/tokensequence.py
   - src/friendli/models/tool.py
   - src/friendli/models/toolassistedchatcompletionop.py
-  - src/friendli/models/toolassistedcompletionrequestbody.py
+  - src/friendli/models/toolassistedcompletionbody.py
   - src/friendli/models/toolfortoolassistedchat.py
   - src/friendli/models/toolmessage.py
   - src/friendli/models/usage.py
