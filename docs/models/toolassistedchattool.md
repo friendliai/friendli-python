@@ -1,4 +1,4 @@
-# ToolForToolAssistedChat
+# ToolAssistedChatTool
 
 
 ## Supported Types

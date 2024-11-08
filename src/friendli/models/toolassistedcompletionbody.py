@@ -3,10 +3,7 @@
 from __future__ import annotations
 from .message import Message, MessageTypedDict
 from .responseformat import ResponseFormat, ResponseFormatTypedDict
-from .toolfortoolassistedchat import (
-    ToolForToolAssistedChat,
-    ToolForToolAssistedChatTypedDict,
-)
+from .toolassistedchattool import ToolAssistedChatTool, ToolAssistedChatToolTypedDict
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List, Literal, Union
@@ -129,7 +126,7 @@ class ToolAssistedCompletionBodyTypedDict(TypedDict):
     You can also specify a particular tool by `{\"type\": \"function\", \"function\": {\"name\": \"my_function\"}}`.
 
     """
-    tools: NotRequired[Nullable[List[ToolForToolAssistedChatTypedDict]]]
+    tools: NotRequired[Nullable[List[ToolAssistedChatToolTypedDict]]]
     r"""A list of tools the model may call.
     A maximum of 128 functions is supported.
     Use this to provide a list of functions the model may generate JSON inputs for.
@@ -231,7 +228,7 @@ class ToolAssistedCompletionBody(BaseModel):
 
     """
 
-    tools: OptionalNullable[List[ToolForToolAssistedChat]] = UNSET
+    tools: OptionalNullable[List[ToolAssistedChatTool]] = UNSET
     r"""A list of tools the model may call.
     A maximum of 128 functions is supported.
     Use this to provide a list of functions the model may generate JSON inputs for.

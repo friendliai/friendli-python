@@ -139,6 +139,7 @@ from .toolassistedchatcompletionop import (
     ToolAssistedChatCompletionResponse,
     ToolAssistedChatCompletionResponseTypedDict,
 )
+from .toolassistedchattool import ToolAssistedChatTool, ToolAssistedChatToolTypedDict
 from .toolassistedcompletionbody import (
     ToolAssistedCompletionBody,
     ToolAssistedCompletionBodyToolChoice,
@@ -149,10 +150,6 @@ from .toolassistedcompletionbody import (
     ToolAssistedCompletionBodyTypedDict,
     ToolChoiceObject,
     ToolChoiceObjectTypedDict,
-)
-from .toolfortoolassistedchat import (
-    ToolForToolAssistedChat,
-    ToolForToolAssistedChatTypedDict,
 )
 from .toolmessage import ToolMessage, ToolMessageRole, ToolMessageTypedDict
 from .usage import Usage, UsageTypedDict
@@ -276,6 +273,8 @@ __all__ = [
     "ToolAssistedChatCompletionRequestTypedDict",
     "ToolAssistedChatCompletionResponse",
     "ToolAssistedChatCompletionResponseTypedDict",
+    "ToolAssistedChatTool",
+    "ToolAssistedChatToolTypedDict",
     "ToolAssistedCompletionBody",
     "ToolAssistedCompletionBodyToolChoice",
     "ToolAssistedCompletionBodyToolChoiceFunction",
@@ -292,8 +291,6 @@ __all__ = [
     "ToolChoiceObjectTypedDict",
     "ToolChoiceType",
     "ToolChoiceTypedDict",
-    "ToolForToolAssistedChat",
-    "ToolForToolAssistedChatTypedDict",
     "ToolMessage",
     "ToolMessageRole",
     "ToolMessageTypedDict",

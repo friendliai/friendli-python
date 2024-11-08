@@ -13,7 +13,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 python:
-  version: 0.1.3
+  version: 0.2.16
   additionalDependencies:
     dev: {}
     main: {}
@@ -37,7 +37,7 @@ python:
       shared: ""
       webhooks: ""
   inputModelSuffix: input
-  maxMethodParams: 6
+  maxMethodParams: 8
   methodArguments: infer-optional-args
   outputModelSuffix: output
   packageName: friendli

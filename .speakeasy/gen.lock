@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
-id: 6713e9a4-76c8-4f78-8a06-79954cdb958f
+id: 980a2a11-4390-48fe-a741-a78ab1e9c399
 management:
-  docChecksum: 0447e084a5deefe1518bcb1fda4d8b59
+  docChecksum: 6c0b8de4f41210be1c4d3d4ba72a76c2
   docVersion: v1
   speakeasyVersion: 1.434.7
   generationVersion: 2.452.0
-  releaseVersion: 0.1.3
-  configChecksum: 040b5eee7037cf39b3e792fcea9ad324
+  releaseVersion: 0.2.16
+  configChecksum: 3cd4816adc585991a677ac8e3dea19fb
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
 features:
@@ -105,6 +105,7 @@ generatedFiles:
   - docs/models/tool.md
   - docs/models/toolassistedchatcompletionrequest.md
   - docs/models/toolassistedchatcompletionresponse.md
+  - docs/models/toolassistedchattool.md
   - docs/models/toolassistedcompletionbody.md
   - docs/models/toolassistedcompletionbodytoolchoice.md
   - docs/models/toolassistedcompletionbodytoolchoicefunction.md
@@ -114,7 +115,6 @@ generatedFiles:
   - docs/models/toolchoicefunction.md
   - docs/models/toolchoiceobject.md
   - docs/models/toolchoicetype.md
-  - docs/models/toolfortoolassistedchat.md
   - docs/models/toolmessage.md
   - docs/models/toolmessagerole.md
   - docs/models/tooltype.md
@@ -178,8 +178,8 @@ generatedFiles:
   - src/friendli/models/tokensequence.py
   - src/friendli/models/tool.py
   - src/friendli/models/toolassistedchatcompletionop.py
+  - src/friendli/models/toolassistedchattool.py
   - src/friendli/models/toolassistedcompletionbody.py
-  - src/friendli/models/toolfortoolassistedchat.py
   - src/friendli/models/toolmessage.py
   - src/friendli/models/usage.py
   - src/friendli/models/usermessage.py

@@ -46,8 +46,8 @@ class Serverless(BaseSDK):
         ] = UNSET,
         tools: OptionalNullable[
             Union[
-                List[models.ToolForToolAssistedChat],
-                List[models.ToolForToolAssistedChatTypedDict],
+                List[models.ToolAssistedChatTool],
+                List[models.ToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
         top_k: OptionalNullable[int] = 0,
@@ -125,7 +125,7 @@ class Serverless(BaseSDK):
                     OptionalNullable[models.ToolAssistedCompletionBodyToolChoice],
                 ),
                 tools=utils.get_pydantic_model(
-                    tools, OptionalNullable[List[models.ToolForToolAssistedChat]]
+                    tools, OptionalNullable[List[models.ToolAssistedChatTool]]
                 ),
                 top_k=top_k,
                 top_p=top_p,
@@ -235,8 +235,8 @@ class Serverless(BaseSDK):
         ] = UNSET,
         tools: OptionalNullable[
             Union[
-                List[models.ToolForToolAssistedChat],
-                List[models.ToolForToolAssistedChatTypedDict],
+                List[models.ToolAssistedChatTool],
+                List[models.ToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
         top_k: OptionalNullable[int] = 0,
@@ -314,7 +314,7 @@ class Serverless(BaseSDK):
                     OptionalNullable[models.ToolAssistedCompletionBodyToolChoice],
                 ),
                 tools=utils.get_pydantic_model(
-                    tools, OptionalNullable[List[models.ToolForToolAssistedChat]]
+                    tools, OptionalNullable[List[models.ToolAssistedChatTool]]
                 ),
                 top_k=top_k,
                 top_p=top_p,

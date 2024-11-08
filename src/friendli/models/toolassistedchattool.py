@@ -10,12 +10,12 @@ from typing import Union
 from typing_extensions import Annotated
 
 
-ToolForToolAssistedChatTypedDict = Union[
+ToolAssistedChatToolTypedDict = Union[
     OtherBuiltInToolTypedDict, FunctionToolTypedDict, FileBuiltInToolTypedDict
 ]
 
 
-ToolForToolAssistedChat = Annotated[
+ToolAssistedChatTool = Annotated[
     Union[
         Annotated[FunctionTool, Tag("function")],
         Annotated[FileBuiltInTool, Tag("file:text")],
