@@ -20,6 +20,11 @@ ToolAssistedChatTool = Annotated[
         Annotated[FunctionTool, Tag("function")],
         Annotated[FileBuiltInTool, Tag("file:text")],
         Annotated[OtherBuiltInTool, Tag("math:calculator")],
+        Annotated[OtherBuiltInTool, Tag("math:statistics")],
+        Annotated[OtherBuiltInTool, Tag("math:calendar")],
+        Annotated[OtherBuiltInTool, Tag("web:search")],
+        Annotated[OtherBuiltInTool, Tag("web:url")],
+        Annotated[OtherBuiltInTool, Tag("code:python-interpreter")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

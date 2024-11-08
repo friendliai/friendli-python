@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 980a2a11-4390-48fe-a741-a78ab1e9c399
 management:
-  docChecksum: 6c0b8de4f41210be1c4d3d4ba72a76c2
+  docChecksum: 1dc2872dcf53471fef231ee58429df7f
   docVersion: v1
   speakeasyVersion: 1.434.7
   generationVersion: 2.452.0
-  releaseVersion: 0.2.17
-  configChecksum: 09e153662c09d8e316bb7b2b52ddcf76
+  releaseVersion: 0.2.18
+  configChecksum: c4c7aea2190ecbe49ee97d58f1f328e5
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
   published: true
@@ -267,7 +267,7 @@ examples:
   ToolAssistedChatCompletion:
     "":
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}, {"type": "web:url"}]}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}, {"type": "web:search"}]}
       responses:
         "200":
           application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
