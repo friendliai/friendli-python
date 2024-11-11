@@ -61,7 +61,7 @@ class Serverless(BaseSDK):
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
-        :param model: Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
@@ -80,7 +80,7 @@ class Serverless(BaseSDK):
         :param temperature: Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument.
         :param timeout_microseconds: Request timeout. Gives the `HTTP 429 Too Many Requests` response status code. Default behavior is no timeout.
         :param tool_choice: Determines the tool calling behavior of the model. When set to `none`, the model will bypass tool execution and generate a response directly. In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message. Alternatively, setting `required` ensures that the model invokes at least one tool before responding to the user. You can also specify a particular tool by `{\"type\": \"function\", \"function\": {\"name\": \"my_function\"}}`.
-        :param tools: A list of tools the model may call. A maximum of 128 functions is supported. Use this to provide a list of functions the model may generate JSON inputs for. For more detailed information about each tool, please refer [here](https://docs.friendli.ai/guides/serverless_endpoints/tools/built_in_tools).  **When `tools` are specified, `min_tokens` field is unsupported.**
+        :param tools: A list of tools the model may call. A maximum of 128 functions is supported. Use this to provide a list of functions the model may generate JSON inputs for. For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tools/built_in_tools).  **When `tools` are specified, `min_tokens` field is unsupported.**
         :param top_k: The number of highest probability tokens to keep for sampling. Numbers between 0 and the vocab size of the model (both inclusive) are allowed. The default value is 0, which means that the API does not apply top-k filtering. This is similar to Hugging Face's [`top_k`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.top_k) argument.
         :param top_p: Tokens comprising the top `top_p` probability mass are kept for sampling. Numbers between 0.0 (exclusive) and 1.0 (inclusive) are allowed. Defaults to 1.0. This is similar to Hugging Face's [`top_p`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.top_p) argument.
         :param retries: Override the default retry configuration for this method
@@ -250,7 +250,7 @@ class Serverless(BaseSDK):
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
-        :param model: Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
@@ -269,7 +269,7 @@ class Serverless(BaseSDK):
         :param temperature: Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument.
         :param timeout_microseconds: Request timeout. Gives the `HTTP 429 Too Many Requests` response status code. Default behavior is no timeout.
         :param tool_choice: Determines the tool calling behavior of the model. When set to `none`, the model will bypass tool execution and generate a response directly. In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message. Alternatively, setting `required` ensures that the model invokes at least one tool before responding to the user. You can also specify a particular tool by `{\"type\": \"function\", \"function\": {\"name\": \"my_function\"}}`.
-        :param tools: A list of tools the model may call. A maximum of 128 functions is supported. Use this to provide a list of functions the model may generate JSON inputs for. For more detailed information about each tool, please refer [here](https://docs.friendli.ai/guides/serverless_endpoints/tools/built_in_tools).  **When `tools` are specified, `min_tokens` field is unsupported.**
+        :param tools: A list of tools the model may call. A maximum of 128 functions is supported. Use this to provide a list of functions the model may generate JSON inputs for. For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tools/built_in_tools).  **When `tools` are specified, `min_tokens` field is unsupported.**
         :param top_k: The number of highest probability tokens to keep for sampling. Numbers between 0 and the vocab size of the model (both inclusive) are allowed. The default value is 0, which means that the API does not apply top-k filtering. This is similar to Hugging Face's [`top_k`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.top_k) argument.
         :param top_p: Tokens comprising the top `top_p` probability mass are kept for sampling. Numbers between 0.0 (exclusive) and 1.0 (inclusive) are allowed. Defaults to 1.0. This is similar to Hugging Face's [`top_p`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.top_p) argument.
         :param retries: Override the default retry configuration for this method
