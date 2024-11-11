@@ -67,7 +67,7 @@ class Inference(BaseSDK):
 
         Given a list of messages forming a conversation, the model generates a response.
 
-        :param model: Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
@@ -264,7 +264,7 @@ class Inference(BaseSDK):
 
         Given a list of messages forming a conversation, the model generates a response.
 
-        :param model: Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
@@ -632,7 +632,7 @@ class Inference(BaseSDK):
 
         By giving a text input, generate a tokenized output of token IDs.
 
-        :param model: Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param prompt: Input text prompt to tokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
@@ -725,7 +725,7 @@ class Inference(BaseSDK):
 
         By giving a text input, generate a tokenized output of token IDs.
 
-        :param model: Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param prompt: Input text prompt to tokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
@@ -819,7 +819,7 @@ class Inference(BaseSDK):
         By giving a list of tokens, generate a detokenized output text string.
 
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param model: Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param tokens: A token sequence to detokenize.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -916,7 +916,7 @@ class Inference(BaseSDK):
         By giving a list of tokens, generate a detokenized output text string.
 
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param model: Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param tokens: A token sequence to detokenize.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

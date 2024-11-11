@@ -8,14 +8,14 @@ from typing_extensions import NotRequired, TypedDict
 
 class DetokenizationBodyTypedDict(TypedDict):
     model: NotRequired[str]
-    r"""Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models)."""
+    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
     tokens: NotRequired[List[int]]
     r"""A token sequence to detokenize."""
 
 
 class DetokenizationBody(BaseModel):
     model: Optional[str] = None
-    r"""Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models)."""
+    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
 
     tokens: Optional[List[int]] = None
     r"""A token sequence to detokenize."""

@@ -7,14 +7,14 @@ from typing_extensions import TypedDict
 
 class TokenizationBodyTypedDict(TypedDict):
     model: str
-    r"""Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models)."""
+    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
     prompt: str
     r"""Input text prompt to tokenize."""
 
 
 class TokenizationBody(BaseModel):
     model: str
-    r"""Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models)."""
+    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
 
     prompt: str
     r"""Input text prompt to tokenize."""

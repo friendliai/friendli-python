@@ -13,7 +13,7 @@ class CompletionBodyWithTokensTypedDict(TypedDict):
     tokens: List[int]
     r"""The tokenized prompt (i.e., input tokens). Either `prompt` or `tokens` field is required."""
     model: str
-    r"""Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models)."""
+    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
     bad_word_tokens: NotRequired[Nullable[List[TokenSequenceTypedDict]]]
     r"""Same as the above `bad_words` field, but receives token sequences instead of text phrases. This is similar to Hugging Face's [`bad_word_ids`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.bad_words_ids) argument."""
     bad_words: NotRequired[Nullable[List[str]]]
@@ -111,7 +111,7 @@ class CompletionBodyWithTokens(BaseModel):
     r"""The tokenized prompt (i.e., input tokens). Either `prompt` or `tokens` field is required."""
 
     model: str
-    r"""Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models)."""
+    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
 
     bad_word_tokens: OptionalNullable[List[TokenSequence]] = UNSET
     r"""Same as the above `bad_words` field, but receives token sequences instead of text phrases. This is similar to Hugging Face's [`bad_word_ids`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.bad_words_ids) argument."""

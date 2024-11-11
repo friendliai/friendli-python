@@ -19,11 +19,9 @@ When using Friendli Python SDK, you need to provide a Friendli Token for authent
 
 <!-- No Summary [summary] -->
 
-<!-- Start Table of Contents [toc] -->
 ## Table of Contents
 
 * [SDK Installation](#sdk-installation)
-* [IDE Support](#ide-support)
 * [SDK Example Usage](#sdk-example-usage)
 * [Available Resources and Operations](#available-resources-and-operations)
 * [Server-sent event streaming](#server-sent-event-streaming)
@@ -31,9 +29,9 @@ When using Friendli Python SDK, you need to provide a Friendli Token for authent
 * [Error Handling](#error-handling)
 * [Server Selection](#server-selection)
 * [Custom HTTP Client](#custom-http-client)
-* [Authentication](#authentication)
 * [Debugging](#debugging)
-<!-- End Table of Contents [toc] -->
+* [IDE Support](#ide-support)
+<!-- No Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
@@ -337,9 +335,9 @@ By default, an API error will raise a models.SDKError exception, which has the f
 
 When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `chat_completion_async` method may raise the following exceptions:
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type      | Status Code | Content Type |
+| --------------- | ----------- | ------------ |
+| models.SDKError | 4XX, 5XX    | \*/\*        |
 
 ### Example
 
@@ -382,10 +380,10 @@ except models.SDKError as e:
 
 You can override the default server globally by passing a server name to the `server: str` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name | Server | Variables |
-| ----- | ------ | --------- |
-| `serverless` | `https://inference.friendli.ai` | None |
-| `dedicated` | `https://inference.friendli.ai/dedicated` | None |
+| Name         | Server                                    |
+| ------------ | ----------------------------------------- |
+| `serverless` | `https://inference.friendli.ai`           |
+| `dedicated`  | `https://inference.friendli.ai/dedicated` |
 
 #### Example
 
@@ -415,7 +413,6 @@ if res is not None:
         print(event, flush=True)
 
 ```
-
 
 ### Override Server URL Per-Client
 
@@ -565,44 +562,7 @@ s = Friendli(async_client=CustomClient(httpx.AsyncClient()))
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
-<!-- Start Authentication [security] -->
-## Authentication
-
-### Per-Client Security Schemes
-
-This SDK supports the following security scheme globally:
-
-| Name                 | Type                 | Scheme               | Environment Variable |
-| -------------------- | -------------------- | -------------------- | -------------------- |
-| `token`              | http                 | HTTP Bearer          | `FRIENDLI_TOKEN`     |
-
-To authenticate with the API the `token` parameter must be set when initializing the SDK client instance. For example:
-```python
-from friendli import Friendli
-import os
-
-s = Friendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
-)
-
-res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "Hello!",
-    },
-], max_tokens=200)
-
-if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
-
-```
-<!-- End Authentication [security] -->
+<!-- No Authentication [security] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging

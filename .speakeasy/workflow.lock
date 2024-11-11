@@ -1,9 +1,9 @@
-speakeasyVersion: 1.434.7
+speakeasyVersion: 1.436.0
 sources:
     Friendli-API-Schema:
         sourceNamespace: friendli-api-schema
-        sourceRevisionDigest: sha256:411996103ff228d368e66ad953b4c7c45b228004a8a1d6ecb673d31c2931d215
-        sourceBlobDigest: sha256:4a49541d6dab51c4c76c1cddaa61d9c220fbd6144d5f0c958c2ea67ce7ade94d
+        sourceRevisionDigest: sha256:2335548dcd863bec07d8c82ed973bb6bb0ea3c99260bbec58b348ee9c2b5e873
+        sourceBlobDigest: sha256:9399ef5617fd6fd0823121213ccb740c4c664a723fc93f7a5f3abdcee451d730
         tags:
             - latest
             - main
@@ -11,10 +11,10 @@ targets:
     friendli:
         source: Friendli-API-Schema
         sourceNamespace: friendli-api-schema
-        sourceRevisionDigest: sha256:411996103ff228d368e66ad953b4c7c45b228004a8a1d6ecb673d31c2931d215
-        sourceBlobDigest: sha256:4a49541d6dab51c4c76c1cddaa61d9c220fbd6144d5f0c958c2ea67ce7ade94d
+        sourceRevisionDigest: sha256:2335548dcd863bec07d8c82ed973bb6bb0ea3c99260bbec58b348ee9c2b5e873
+        sourceBlobDigest: sha256:9399ef5617fd6fd0823121213ccb740c4c664a723fc93f7a5f3abdcee451d730
         codeSamplesNamespace: friendli-api-schema-code-samples
-        codeSamplesRevisionDigest: sha256:69c6ea65ab8aa5e080f79e2f368a12e2baea749d7d01baee69f8974aec6c8d16
+        codeSamplesRevisionDigest: sha256:d377cb2b0813e8587fecf2622f1e2207d5f032d0a1d482e63facf1fe786b99cc
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

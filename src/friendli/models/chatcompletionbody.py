@@ -125,7 +125,7 @@ You can also specify a particular tool by `{\"type\": \"function\", \"function\"
 
 class ChatCompletionBodyTypedDict(TypedDict):
     model: str
-    r"""Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models)."""
+    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
     messages: List[MessageTypedDict]
     r"""A list of messages comprising the conversation so far."""
     eos_token: NotRequired[Nullable[List[int]]]
@@ -205,7 +205,7 @@ class ChatCompletionBodyTypedDict(TypedDict):
 
 class ChatCompletionBody(BaseModel):
     model: str
-    r"""Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models)."""
+    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
 
     messages: List[Message]
     r"""A list of messages comprising the conversation so far."""

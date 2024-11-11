@@ -59,7 +59,7 @@ You can also specify a particular tool by `{\"type\": \"function\", \"function\"
 
 class ToolAssistedCompletionBodyTypedDict(TypedDict):
     model: str
-    r"""Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models)."""
+    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
     messages: List[MessageTypedDict]
     r"""A list of messages comprising the conversation so far."""
     eos_token: NotRequired[Nullable[List[int]]]
@@ -130,7 +130,7 @@ class ToolAssistedCompletionBodyTypedDict(TypedDict):
     r"""A list of tools the model may call.
     A maximum of 128 functions is supported.
     Use this to provide a list of functions the model may generate JSON inputs for.
-    For more detailed information about each tool, please refer [here](https://docs.friendli.ai/guides/serverless_endpoints/tools/built_in_tools).
+    For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tools/built_in_tools).
 
     **When `tools` are specified, `min_tokens` field is unsupported.**
 
@@ -143,7 +143,7 @@ class ToolAssistedCompletionBodyTypedDict(TypedDict):
 
 class ToolAssistedCompletionBody(BaseModel):
     model: str
-    r"""Code of the model to use. See [available model list](https://docs.friendli.ai/guides/serverless_endpoints/pricing#text-generation-models)."""
+    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
 
     messages: List[Message]
     r"""A list of messages comprising the conversation so far."""
@@ -232,7 +232,7 @@ class ToolAssistedCompletionBody(BaseModel):
     r"""A list of tools the model may call.
     A maximum of 128 functions is supported.
     Use this to provide a list of functions the model may generate JSON inputs for.
-    For more detailed information about each tool, please refer [here](https://docs.friendli.ai/guides/serverless_endpoints/tools/built_in_tools).
+    For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tools/built_in_tools).
 
     **When `tools` are specified, `min_tokens` field is unsupported.**
 
