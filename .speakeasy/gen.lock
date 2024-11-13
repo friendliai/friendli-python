@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: 2c2baaff4475ba04bbfb213449d3f335
+  docChecksum: 2aebc86864ba0cfb1b4613619ef07c00
   docVersion: v1
   speakeasyVersion: 1.438.1
   generationVersion: 2.457.2
-  releaseVersion: 0.2.34
-  configChecksum: 1d7ca743e4c42fc31b6da7eee6feb61e
+  releaseVersion: 0.2.35
+  configChecksum: 5800034fa33113df58b1549582b885cf
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
   published: true
