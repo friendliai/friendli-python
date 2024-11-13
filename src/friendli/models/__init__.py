@@ -273,16 +273,32 @@ from .streamedcompletionstokensampled import (
     StreamedCompletionsTokenSampledTypedDict,
 )
 from .streamedtoolassistedchatresult import (
+    One,
+    OneTypedDict,
     StreamedToolAssistedChatResult,
     StreamedToolAssistedChatResultData,
     StreamedToolAssistedChatResultDataTypedDict,
     StreamedToolAssistedChatResultTypedDict,
+    Two,
+    TwoTypedDict,
 )
 from .systemmessage import Role, SystemMessage, SystemMessageTypedDict
 from .tokenizationresult import TokenizationResult, TokenizationResultTypedDict
 from .tokensequence import TokenSequence, TokenSequenceTypedDict
 from .tool import Tool, ToolType, ToolTypedDict
 from .toolassistedchattool import ToolAssistedChatTool, ToolAssistedChatToolTypedDict
+from .toolassistedchattoolstatusevent import (
+    Error,
+    ErrorTypedDict,
+    Files,
+    FilesTypedDict,
+    Name,
+    Status,
+    ToolAssistedChatToolStatusEvent,
+    ToolAssistedChatToolStatusEventParameters,
+    ToolAssistedChatToolStatusEventParametersTypedDict,
+    ToolAssistedChatToolStatusEventTypedDict,
+)
 from .toolmessage import ToolMessage, ToolMessageRole, ToolMessageTypedDict
 from .usage import Usage, UsageTypedDict
 from .usermessage import UserMessage, UserMessageRole, UserMessageTypedDict
@@ -375,10 +391,14 @@ __all__ = [
     "DeltaTypedDict",
     "DetokenizationResult",
     "DetokenizationResultTypedDict",
+    "Error",
+    "ErrorTypedDict",
     "Event",
     "FileBuiltInTool",
     "FileBuiltInToolType",
     "FileBuiltInToolTypedDict",
+    "Files",
+    "FilesTypedDict",
     "Function",
     "FunctionTool",
     "FunctionToolType",
@@ -390,8 +410,11 @@ __all__ = [
     "LogprobsTypedDict",
     "Message",
     "MessageTypedDict",
+    "Name",
     "Object",
     "ObjectTypedDict",
+    "One",
+    "OneTypedDict",
     "OtherBuiltInTool",
     "OtherBuiltInToolType",
     "OtherBuiltInToolTypedDict",
@@ -462,6 +485,7 @@ __all__ = [
     "ServerlessToolAssistedChatStreamBodyTypedDict",
     "ServerlessToolAssistedChatStreamRequest",
     "ServerlessToolAssistedChatStreamRequestTypedDict",
+    "Status",
     "StreamOptions",
     "StreamOptionsTypedDict",
     "StreamedChatChoice",
@@ -494,6 +518,10 @@ __all__ = [
     "TokenizationResultTypedDict",
     "Tool",
     "ToolAssistedChatTool",
+    "ToolAssistedChatToolStatusEvent",
+    "ToolAssistedChatToolStatusEventParameters",
+    "ToolAssistedChatToolStatusEventParametersTypedDict",
+    "ToolAssistedChatToolStatusEventTypedDict",
     "ToolAssistedChatToolTypedDict",
     "ToolCalls",
     "ToolCallsTypedDict",
@@ -511,6 +539,8 @@ __all__ = [
     "ToolTypedDict",
     "TopLogprobs",
     "TopLogprobsTypedDict",
+    "Two",
+    "TwoTypedDict",
     "Type",
     "Usage",
     "UsageTypedDict",

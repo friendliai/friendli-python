@@ -3,8 +3,17 @@
 A server-sent event containing chat completions content.
 
 
-## Fields
+## Supported Types
 
-| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `data`                                                                                       | [models.StreamedToolAssistedChatResultData](../models/streamedtoolassistedchatresultdata.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+### `models.One`
+
+```python
+value: models.One = /* values here */
+```
+
+### `models.Two`
+
+```python
+value: models.Two = /* values here */
+```
+

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: dd967aed72d467e4ea04efdeb61c253c
+  docChecksum: 706c95d31e48d8a0717a3ed3b67253d9
   docVersion: v1
   speakeasyVersion: 1.438.1
   generationVersion: 2.457.2
-  releaseVersion: 0.2.30
-  configChecksum: 529ed5cbe412da8b239f9a2ba654e4c1
+  releaseVersion: 0.2.31
+  configChecksum: a95358d9ad3f4fa5b9b72d1eea8dcf24
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
   published: true
@@ -86,16 +86,20 @@ generatedFiles:
   - docs/models/dedicatedtokenizationrequest.md
   - docs/models/delta.md
   - docs/models/detokenizationresult.md
+  - docs/models/error.md
   - docs/models/event.md
   - docs/models/filebuiltintool.md
   - docs/models/filebuiltintooltype.md
+  - docs/models/files.md
   - docs/models/function.md
   - docs/models/functiontool.md
   - docs/models/functiontooltype.md
   - docs/models/logitbias.md
   - docs/models/logprobs.md
   - docs/models/message.md
+  - docs/models/name.md
   - docs/models/object.md
+  - docs/models/one.md
   - docs/models/otherbuiltintool.md
   - docs/models/otherbuiltintooltype.md
   - docs/models/parameters.md
@@ -133,6 +137,7 @@ generatedFiles:
   - docs/models/serverlesstoolassistedchatstreambodytoolchoiceobject.md
   - docs/models/serverlesstoolassistedchatstreambodytoolchoicetype.md
   - docs/models/serverlesstoolassistedchatstreamrequest.md
+  - docs/models/status.md
   - docs/models/streamedchatchoice.md
   - docs/models/streamedchatchoicefunction.md
   - docs/models/streamedchatchoicetoolcalls.md
@@ -151,6 +156,8 @@ generatedFiles:
   - docs/models/tokensequence.md
   - docs/models/tool.md
   - docs/models/toolassistedchattool.md
+  - docs/models/toolassistedchattoolstatusevent.md
+  - docs/models/toolassistedchattoolstatuseventparameters.md
   - docs/models/toolcalls.md
   - docs/models/toolchoice.md
   - docs/models/toolchoicefunction.md
@@ -160,6 +167,7 @@ generatedFiles:
   - docs/models/toolmessagerole.md
   - docs/models/tooltype.md
   - docs/models/toplogprobs.md
+  - docs/models/two.md
   - docs/models/type.md
   - docs/models/usage.md
   - docs/models/usermessage.md
@@ -251,6 +259,7 @@ generatedFiles:
   - src/friendli/models/tokensequence.py
   - src/friendli/models/tool.py
   - src/friendli/models/toolassistedchattool.py
+  - src/friendli/models/toolassistedchattoolstatusevent.py
   - src/friendli/models/toolmessage.py
   - src/friendli/models/usage.py
   - src/friendli/models/usermessage.py
