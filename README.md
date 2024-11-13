@@ -143,9 +143,6 @@ res = s.serverless.tool_assisted_chat.complete(model="meta-llama-3.1-8b-instruct
     {
         "type": "math:calculator",
     },
-    {
-        "type": "web:search",
-    },
 ])
 
 if res is not None:
@@ -178,9 +175,6 @@ async def main():
     ], max_tokens=200, tools=[
         {
             "type": "math:calculator",
-        },
-        {
-            "type": "web:search",
         },
     ])
     if res is not None:

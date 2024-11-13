@@ -12,8 +12,9 @@ class FriendliCompletions(BaseSDK):
     def complete(
         self,
         *,
-        completions_complete_body: Union[
-            models.CompletionsCompleteBody, models.CompletionsCompleteBodyTypedDict
+        dedicated_completions_complete_body: Union[
+            models.DedicatedCompletionsCompleteBody,
+            models.DedicatedCompletionsCompleteBodyTypedDict,
         ],
         x_friendli_team: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -24,7 +25,7 @@ class FriendliCompletions(BaseSDK):
 
         Generate text based on the given text prompt.
 
-        :param completions_complete_body:
+        :param dedicated_completions_complete_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -40,8 +41,9 @@ class FriendliCompletions(BaseSDK):
 
         request = models.DedicatedCompletionsCompleteRequest(
             x_friendli_team=x_friendli_team,
-            completions_complete_body=utils.get_pydantic_model(
-                completions_complete_body, models.CompletionsCompleteBody
+            dedicated_completions_complete_body=utils.get_pydantic_model(
+                dedicated_completions_complete_body,
+                models.DedicatedCompletionsCompleteBody,
             ),
         )
 
@@ -58,11 +60,11 @@ class FriendliCompletions(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.completions_complete_body,
+                request.dedicated_completions_complete_body,
                 False,
                 False,
                 "json",
-                models.CompletionsCompleteBody,
+                models.DedicatedCompletionsCompleteBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -108,8 +110,9 @@ class FriendliCompletions(BaseSDK):
     async def complete_async(
         self,
         *,
-        completions_complete_body: Union[
-            models.CompletionsCompleteBody, models.CompletionsCompleteBodyTypedDict
+        dedicated_completions_complete_body: Union[
+            models.DedicatedCompletionsCompleteBody,
+            models.DedicatedCompletionsCompleteBodyTypedDict,
         ],
         x_friendli_team: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -120,7 +123,7 @@ class FriendliCompletions(BaseSDK):
 
         Generate text based on the given text prompt.
 
-        :param completions_complete_body:
+        :param dedicated_completions_complete_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -136,8 +139,9 @@ class FriendliCompletions(BaseSDK):
 
         request = models.DedicatedCompletionsCompleteRequest(
             x_friendli_team=x_friendli_team,
-            completions_complete_body=utils.get_pydantic_model(
-                completions_complete_body, models.CompletionsCompleteBody
+            dedicated_completions_complete_body=utils.get_pydantic_model(
+                dedicated_completions_complete_body,
+                models.DedicatedCompletionsCompleteBody,
             ),
         )
 
@@ -154,11 +158,11 @@ class FriendliCompletions(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.completions_complete_body,
+                request.dedicated_completions_complete_body,
                 False,
                 False,
                 "json",
-                models.CompletionsCompleteBody,
+                models.DedicatedCompletionsCompleteBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -204,8 +208,9 @@ class FriendliCompletions(BaseSDK):
     def stream(
         self,
         *,
-        completions_stream_body: Union[
-            models.CompletionsStreamBody, models.CompletionsStreamBodyTypedDict
+        dedicated_completions_stream_body: Union[
+            models.DedicatedCompletionsStreamBody,
+            models.DedicatedCompletionsStreamBodyTypedDict,
         ],
         x_friendli_team: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -216,7 +221,7 @@ class FriendliCompletions(BaseSDK):
 
         Generate text based on the given text prompt.
 
-        :param completions_stream_body:
+        :param dedicated_completions_stream_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -232,8 +237,8 @@ class FriendliCompletions(BaseSDK):
 
         request = models.DedicatedCompletionsStreamRequest(
             x_friendli_team=x_friendli_team,
-            completions_stream_body=utils.get_pydantic_model(
-                completions_stream_body, models.CompletionsStreamBody
+            dedicated_completions_stream_body=utils.get_pydantic_model(
+                dedicated_completions_stream_body, models.DedicatedCompletionsStreamBody
             ),
         )
 
@@ -250,11 +255,11 @@ class FriendliCompletions(BaseSDK):
             accept_header_value="text/event-stream",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.completions_stream_body,
+                request.dedicated_completions_stream_body,
                 False,
                 False,
                 "json",
-                models.CompletionsStreamBody,
+                models.DedicatedCompletionsStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -305,8 +310,9 @@ class FriendliCompletions(BaseSDK):
     async def stream_async(
         self,
         *,
-        completions_stream_body: Union[
-            models.CompletionsStreamBody, models.CompletionsStreamBodyTypedDict
+        dedicated_completions_stream_body: Union[
+            models.DedicatedCompletionsStreamBody,
+            models.DedicatedCompletionsStreamBodyTypedDict,
         ],
         x_friendli_team: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -317,7 +323,7 @@ class FriendliCompletions(BaseSDK):
 
         Generate text based on the given text prompt.
 
-        :param completions_stream_body:
+        :param dedicated_completions_stream_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -333,8 +339,8 @@ class FriendliCompletions(BaseSDK):
 
         request = models.DedicatedCompletionsStreamRequest(
             x_friendli_team=x_friendli_team,
-            completions_stream_body=utils.get_pydantic_model(
-                completions_stream_body, models.CompletionsStreamBody
+            dedicated_completions_stream_body=utils.get_pydantic_model(
+                dedicated_completions_stream_body, models.DedicatedCompletionsStreamBody
             ),
         )
 
@@ -351,11 +357,11 @@ class FriendliCompletions(BaseSDK):
             accept_header_value="text/event-stream",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.completions_stream_body,
+                request.dedicated_completions_stream_body,
                 False,
                 False,
                 "json",
-                models.CompletionsStreamBody,
+                models.DedicatedCompletionsStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
