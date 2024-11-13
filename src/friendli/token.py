@@ -40,7 +40,7 @@ class Token(BaseSDK):
 
         request = models.ServerlessTokenizationRequest(
             x_friendli_team=x_friendli_team,
-            tokenization_body=models.TokenizationBody(
+            serverless_tokenization_body=models.ServerlessTokenizationBody(
                 model=model,
                 prompt=prompt,
             ),
@@ -59,7 +59,11 @@ class Token(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.tokenization_body, False, False, "json", models.TokenizationBody
+                request.serverless_tokenization_body,
+                False,
+                False,
+                "json",
+                models.ServerlessTokenizationBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -133,7 +137,7 @@ class Token(BaseSDK):
 
         request = models.ServerlessTokenizationRequest(
             x_friendli_team=x_friendli_team,
-            tokenization_body=models.TokenizationBody(
+            serverless_tokenization_body=models.ServerlessTokenizationBody(
                 model=model,
                 prompt=prompt,
             ),
@@ -152,7 +156,11 @@ class Token(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.tokenization_body, False, False, "json", models.TokenizationBody
+                request.serverless_tokenization_body,
+                False,
+                False,
+                "json",
+                models.ServerlessTokenizationBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -226,7 +234,7 @@ class Token(BaseSDK):
 
         request = models.ServerlessDetokenizationRequest(
             x_friendli_team=x_friendli_team,
-            detokenization_body=models.DetokenizationBody(
+            serverless_detokenization_body=models.ServerlessDetokenizationBody(
                 model=model,
                 tokens=tokens,
             ),
@@ -245,11 +253,11 @@ class Token(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.detokenization_body,
+                request.serverless_detokenization_body,
                 False,
                 False,
                 "json",
-                models.DetokenizationBody,
+                models.ServerlessDetokenizationBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -323,7 +331,7 @@ class Token(BaseSDK):
 
         request = models.ServerlessDetokenizationRequest(
             x_friendli_team=x_friendli_team,
-            detokenization_body=models.DetokenizationBody(
+            serverless_detokenization_body=models.ServerlessDetokenizationBody(
                 model=model,
                 tokens=tokens,
             ),
@@ -342,11 +350,11 @@ class Token(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.detokenization_body,
+                request.serverless_detokenization_body,
                 False,
                 False,
                 "json",
-                models.DetokenizationBody,
+                models.ServerlessDetokenizationBody,
             ),
             timeout_ms=timeout_ms,
         )

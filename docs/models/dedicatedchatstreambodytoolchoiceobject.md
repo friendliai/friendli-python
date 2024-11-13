@@ -1,0 +1,9 @@
+# DedicatedChatStreamBodyToolChoiceObject
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                     | [models.DedicatedChatStreamBodyToolChoiceType](../models/dedicatedchatstreambodytoolchoicetype.md)         | :heavy_check_mark:                                                                                         | The type of the tool. Currently, only `function` is supported.                                             |
+| `function`                                                                                                 | [models.DedicatedChatStreamBodyToolChoiceFunction](../models/dedicatedchatstreambodytoolchoicefunction.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
