@@ -29,7 +29,7 @@ res = s.serverless.tool_assisted_chat.complete(model="meta-llama-3.1-8b-instruct
     },
     {
         "role": "user",
-        "content": "Hello!",
+        "content": "What is 3 + 6?",
     },
 ], max_tokens=200, tools=[
     {
@@ -102,7 +102,7 @@ res = s.serverless.tool_assisted_chat.stream(model="meta-llama-3.1-8b-instruct",
     },
     {
         "role": "user",
-        "content": "Hello!",
+        "content": "What is 3 + 6?",
     },
 ], max_tokens=200, tools=[
     {

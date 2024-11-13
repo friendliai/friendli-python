@@ -1,5 +1,5 @@
 lockVersion: 2.0.0
-id: 980a2a11-4390-48fe-a741-a78ab1e9c399
+id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
   docChecksum: dd967aed72d467e4ea04efdeb61c253c
   docVersion: v1
@@ -39,7 +39,6 @@ generatedFiles:
   - .gitattributes
   - .python-version
   - .vscode/settings.json
-  - CONTRIBUTING.md
   - USAGE.md
   - docs/models/assistantmessage.md
   - docs/models/assistantmessagefunction.md
@@ -279,83 +278,6 @@ generatedFiles:
   - src/friendli/utils/url.py
   - src/friendli/utils/values.py
 examples:
-  ChatCompletion:
-    "":
-      requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
-      responses:
-        "200":
-          application/json: {"choices": [], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
-    Example (No Streaming):
-      requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
-      responses:
-        "200":
-          application/json: {"choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}}
-    Example (Streaming):
-      requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
-      responses:
-        "200":
-          text/event-stream: "data: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294383519714932}\n\ndata: [DONE]\n"
-  Completion:
-    "":
-      requestBody:
-        application/json: {"prompt": "Say this is a test!", "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
-      responses:
-        "200":
-          application/json: {"choices": [], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
-    Example (No Streaming):
-      requestBody:
-        application/json: {"tokens": [], "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
-      responses:
-        "200":
-          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}}
-    Example (Streaming):
-      requestBody:
-        application/json: {"tokens": [942948, 653298, 515681], "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
-      responses:
-        "200":
-          text/event-stream: "data: {\"event\":\"token_sampled\",\"index\":0,\"text\":\"This\",\"token\":2028}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" is\",\"token\":374}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" a\",\"token\":264}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" test\",\"token\":1296}\n\ndata: {\"event\":\"complete\",\"choices\":[{\"index\":0,\"seed\":6410528593216713765,\"text\":\"This is a test\",\"tokens\":[2028,374,264,1296]}],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12}}\n"
-  Tokenization:
-    "":
-      requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "What is generative AI?"}
-    Example:
-      requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "What is generative AI?"}
-      responses:
-        "200":
-          application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
-  Detokenization:
-    "":
-      requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
-    Example:
-      requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
-      responses:
-        "200":
-          application/json: {"text": "What is generative AI?"}
-  ToolAssistedChatCompletion:
-    "":
-      requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}, {"type": "web:search"}]}
-      responses:
-        "200":
-          application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
-    Example (No Streaming):
-      requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
-      responses:
-        "200":
-          application/json: {"choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}}
-    Example (Streaming):
-      requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
-      responses:
-        "200":
-          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"None\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\\\"{\\\\\\\"result\\\\\\\": \\\\\\\"150 * 1.60934=241.401000000000\\\\\\\"}\\\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
   serverlessChatComplete:
     "":
       requestBody:
@@ -382,23 +304,23 @@ examples:
   serverlessToolAssistedChatComplete:
     "":
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
       responses:
         "200":
           application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200, "tools": [{"type": "web:url"}]}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "code:python-interpreter"}]}
       responses:
         "200":
           application/json: {"choices": [{"index": 0, "message": {"role": "assistant", "content": "The result is 9."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 7, "total_tokens": 16}}
   serverlessToolAssistedChatStream:
     "":
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200, "tools": [{"type": "math:statistics"}]}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:statistics"}]}
       responses:
         "200":
           text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"None\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\\\"{\\\\\\\"result\\\\\\\": \\\\\\\"150 * 1.60934=241.401000000000\\\\\\\"}\\\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
@@ -454,7 +376,7 @@ examples:
           application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
+        application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
           application/json: {"choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}}
@@ -464,7 +386,7 @@ examples:
         application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
+        application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
           text/event-stream: "data: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294383519714932}\n\ndata: [DONE]\n"
@@ -477,7 +399,7 @@ examples:
           application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
     Example:
       requestBody:
-        application/json: {"tokens": [182984, 32770, 164141], "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
+        application/json: {"tokens": [182984, 32770, 164141], "model": "(endpoint-id):(adapter-route)", "max_tokens": 200, "top_k": 1}
       responses:
         "200":
           application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}}
@@ -487,7 +409,7 @@ examples:
         application/json: {"prompt": "Say this is a test!", "model": "(endpoint-id):(adapter-route)", "max_tokens": 200, "top_k": 1}
     Example:
       requestBody:
-        application/json: {"tokens": [74484], "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
+        application/json: {"tokens": [74484], "model": "(endpoint-id):(adapter-route)", "max_tokens": 200, "top_k": 1}
       responses:
         "200":
           text/event-stream: "data: {\"event\":\"token_sampled\",\"index\":0,\"text\":\"This\",\"token\":2028}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" is\",\"token\":374}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" a\",\"token\":264}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" test\",\"token\":1296}\n\ndata: {\"event\":\"complete\",\"choices\":[{\"index\":0,\"seed\":6410528593216713765,\"text\":\"This is a test\",\"tokens\":[2028,374,264,1296]}],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12}}\n"
@@ -497,7 +419,7 @@ examples:
         application/json: {"model": "(endpoint-id):(adapter-route)", "prompt": "What is generative AI?"}
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "What is generative AI?"}
+        application/json: {"model": "(endpoint-id):(adapter-route)", "prompt": "What is generative AI?"}
       responses:
         "200":
           application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
@@ -507,7 +429,7 @@ examples:
         application/json: {"model": "(endpoint-id):(adapter-route)", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+        application/json: {"model": "(endpoint-id):(adapter-route)", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
       responses:
         "200":
           application/json: {"text": "What is generative AI?"}
