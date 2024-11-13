@@ -2,9 +2,32 @@
 
 from __future__ import annotations
 from .streamedchatchoice import StreamedChatChoice, StreamedChatChoiceTypedDict
+from .toolassistedchattoolstatusevent import (
+    ToolAssistedChatToolStatusEvent,
+    ToolAssistedChatToolStatusEventTypedDict,
+)
 from friendli.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from friendli.utils import validate_const
+import pydantic
+from pydantic.functional_validators import AfterValidator
+from typing import List, Literal, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class TwoTypedDict(TypedDict):
+    event: Literal["tool_status"]
+    data: NotRequired[ToolAssistedChatToolStatusEventTypedDict]
+
+
+class Two(BaseModel):
+    EVENT: Annotated[
+        Annotated[
+            Literal["tool_status"], AfterValidator(validate_const("tool_status"))
+        ],
+        pydantic.Field(alias="event"),
+    ] = "tool_status"
+
+    data: Optional[ToolAssistedChatToolStatusEvent] = None
 
 
 class StreamedToolAssistedChatResultDataTypedDict(TypedDict):
@@ -20,13 +43,17 @@ class StreamedToolAssistedChatResultData(BaseModel):
     r"""The Unix timestamp (in seconds) for when the token sampled."""
 
 
-class StreamedToolAssistedChatResultTypedDict(TypedDict):
-    r"""A server-sent event containing chat completions content."""
-
+class OneTypedDict(TypedDict):
     data: StreamedToolAssistedChatResultDataTypedDict
 
 
-class StreamedToolAssistedChatResult(BaseModel):
-    r"""A server-sent event containing chat completions content."""
-
+class One(BaseModel):
     data: StreamedToolAssistedChatResultData
+
+
+StreamedToolAssistedChatResultTypedDict = Union[OneTypedDict, TwoTypedDict]
+r"""A server-sent event containing chat completions content."""
+
+
+StreamedToolAssistedChatResult = Union[One, Two]
+r"""A server-sent event containing chat completions content."""
