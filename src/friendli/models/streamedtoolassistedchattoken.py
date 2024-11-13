@@ -3,8 +3,11 @@
 from __future__ import annotations
 from .streamedchatchoice import StreamedChatChoice, StreamedChatChoiceTypedDict
 from friendli.types import BaseModel
-from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from friendli.utils import validate_const
+import pydantic
+from pydantic.functional_validators import AfterValidator
+from typing import List, Literal
+from typing_extensions import Annotated, TypedDict
 
 
 class StreamedToolAssistedChatTokenDataTypedDict(TypedDict):
@@ -21,8 +24,14 @@ class StreamedToolAssistedChatTokenData(BaseModel):
 
 
 class StreamedToolAssistedChatTokenTypedDict(TypedDict):
-    data: NotRequired[StreamedToolAssistedChatTokenDataTypedDict]
+    data: StreamedToolAssistedChatTokenDataTypedDict
+    event: Literal["message"]
 
 
 class StreamedToolAssistedChatToken(BaseModel):
-    data: Optional[StreamedToolAssistedChatTokenData] = None
+    data: StreamedToolAssistedChatTokenData
+
+    EVENT: Annotated[
+        Annotated[Literal["message"], AfterValidator(validate_const("message"))],
+        pydantic.Field(alias="event"),
+    ] = "message"
