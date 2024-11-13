@@ -12,8 +12,9 @@ class Completions(BaseSDK):
     def complete(
         self,
         *,
-        completions_complete_body: Union[
-            models.CompletionsCompleteBody, models.CompletionsCompleteBodyTypedDict
+        serverless_completions_complete_body: Union[
+            models.ServerlessCompletionsCompleteBody,
+            models.ServerlessCompletionsCompleteBodyTypedDict,
         ],
         x_friendli_team: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -24,7 +25,7 @@ class Completions(BaseSDK):
 
         Generate text based on the given text prompt.
 
-        :param completions_complete_body:
+        :param serverless_completions_complete_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -40,8 +41,9 @@ class Completions(BaseSDK):
 
         request = models.ServerlessCompletionsCompleteRequest(
             x_friendli_team=x_friendli_team,
-            completions_complete_body=utils.get_pydantic_model(
-                completions_complete_body, models.CompletionsCompleteBody
+            serverless_completions_complete_body=utils.get_pydantic_model(
+                serverless_completions_complete_body,
+                models.ServerlessCompletionsCompleteBody,
             ),
         )
 
@@ -58,11 +60,11 @@ class Completions(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.completions_complete_body,
+                request.serverless_completions_complete_body,
                 False,
                 False,
                 "json",
-                models.CompletionsCompleteBody,
+                models.ServerlessCompletionsCompleteBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -108,8 +110,9 @@ class Completions(BaseSDK):
     async def complete_async(
         self,
         *,
-        completions_complete_body: Union[
-            models.CompletionsCompleteBody, models.CompletionsCompleteBodyTypedDict
+        serverless_completions_complete_body: Union[
+            models.ServerlessCompletionsCompleteBody,
+            models.ServerlessCompletionsCompleteBodyTypedDict,
         ],
         x_friendli_team: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -120,7 +123,7 @@ class Completions(BaseSDK):
 
         Generate text based on the given text prompt.
 
-        :param completions_complete_body:
+        :param serverless_completions_complete_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -136,8 +139,9 @@ class Completions(BaseSDK):
 
         request = models.ServerlessCompletionsCompleteRequest(
             x_friendli_team=x_friendli_team,
-            completions_complete_body=utils.get_pydantic_model(
-                completions_complete_body, models.CompletionsCompleteBody
+            serverless_completions_complete_body=utils.get_pydantic_model(
+                serverless_completions_complete_body,
+                models.ServerlessCompletionsCompleteBody,
             ),
         )
 
@@ -154,11 +158,11 @@ class Completions(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.completions_complete_body,
+                request.serverless_completions_complete_body,
                 False,
                 False,
                 "json",
-                models.CompletionsCompleteBody,
+                models.ServerlessCompletionsCompleteBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -204,8 +208,9 @@ class Completions(BaseSDK):
     def stream(
         self,
         *,
-        completions_stream_body: Union[
-            models.CompletionsStreamBody, models.CompletionsStreamBodyTypedDict
+        serverless_completions_stream_body: Union[
+            models.ServerlessCompletionsStreamBody,
+            models.ServerlessCompletionsStreamBodyTypedDict,
         ],
         x_friendli_team: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -216,7 +221,7 @@ class Completions(BaseSDK):
 
         Generate text based on the given text prompt.
 
-        :param completions_stream_body:
+        :param serverless_completions_stream_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -232,8 +237,9 @@ class Completions(BaseSDK):
 
         request = models.ServerlessCompletionsStreamRequest(
             x_friendli_team=x_friendli_team,
-            completions_stream_body=utils.get_pydantic_model(
-                completions_stream_body, models.CompletionsStreamBody
+            serverless_completions_stream_body=utils.get_pydantic_model(
+                serverless_completions_stream_body,
+                models.ServerlessCompletionsStreamBody,
             ),
         )
 
@@ -250,11 +256,11 @@ class Completions(BaseSDK):
             accept_header_value="text/event-stream",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.completions_stream_body,
+                request.serverless_completions_stream_body,
                 False,
                 False,
                 "json",
-                models.CompletionsStreamBody,
+                models.ServerlessCompletionsStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -305,8 +311,9 @@ class Completions(BaseSDK):
     async def stream_async(
         self,
         *,
-        completions_stream_body: Union[
-            models.CompletionsStreamBody, models.CompletionsStreamBodyTypedDict
+        serverless_completions_stream_body: Union[
+            models.ServerlessCompletionsStreamBody,
+            models.ServerlessCompletionsStreamBodyTypedDict,
         ],
         x_friendli_team: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -317,7 +324,7 @@ class Completions(BaseSDK):
 
         Generate text based on the given text prompt.
 
-        :param completions_stream_body:
+        :param serverless_completions_stream_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -333,8 +340,9 @@ class Completions(BaseSDK):
 
         request = models.ServerlessCompletionsStreamRequest(
             x_friendli_team=x_friendli_team,
-            completions_stream_body=utils.get_pydantic_model(
-                completions_stream_body, models.CompletionsStreamBody
+            serverless_completions_stream_body=utils.get_pydantic_model(
+                serverless_completions_stream_body,
+                models.ServerlessCompletionsStreamBody,
             ),
         )
 
@@ -351,11 +359,11 @@ class Completions(BaseSDK):
             accept_header_value="text/event-stream",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.completions_stream_body,
+                request.serverless_completions_stream_body,
                 False,
                 False,
                 "json",
-                models.CompletionsStreamBody,
+                models.ServerlessCompletionsStreamBody,
             ),
             timeout_ms=timeout_ms,
         )

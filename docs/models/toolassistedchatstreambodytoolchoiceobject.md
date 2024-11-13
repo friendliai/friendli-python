@@ -1,9 +1,0 @@
-# ToolAssistedChatStreamBodyToolChoiceObject
-
-
-## Fields
-
-| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                           | [models.ToolAssistedChatStreamBodyToolChoiceType](../models/toolassistedchatstreambodytoolchoicetype.md)         | :heavy_check_mark:                                                                                               | The type of the tool. Currently, only `function` is supported.                                                   |
-| `function`                                                                                                       | [models.ToolAssistedChatStreamBodyToolChoiceFunction](../models/toolassistedchatstreambodytoolchoicefunction.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

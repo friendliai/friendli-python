@@ -23,7 +23,7 @@ class FriendliToken(BaseSDK):
 
         By giving a text input, generate a tokenized output of token IDs.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format.
         :param prompt: Input text prompt to tokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
@@ -40,7 +40,7 @@ class FriendliToken(BaseSDK):
 
         request = models.DedicatedTokenizationRequest(
             x_friendli_team=x_friendli_team,
-            tokenization_body=models.TokenizationBody(
+            dedicated_tokenization_body=models.DedicatedTokenizationBody(
                 model=model,
                 prompt=prompt,
             ),
@@ -59,7 +59,11 @@ class FriendliToken(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.tokenization_body, False, False, "json", models.TokenizationBody
+                request.dedicated_tokenization_body,
+                False,
+                False,
+                "json",
+                models.DedicatedTokenizationBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -116,7 +120,7 @@ class FriendliToken(BaseSDK):
 
         By giving a text input, generate a tokenized output of token IDs.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format.
         :param prompt: Input text prompt to tokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
@@ -133,7 +137,7 @@ class FriendliToken(BaseSDK):
 
         request = models.DedicatedTokenizationRequest(
             x_friendli_team=x_friendli_team,
-            tokenization_body=models.TokenizationBody(
+            dedicated_tokenization_body=models.DedicatedTokenizationBody(
                 model=model,
                 prompt=prompt,
             ),
@@ -152,7 +156,11 @@ class FriendliToken(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.tokenization_body, False, False, "json", models.TokenizationBody
+                request.dedicated_tokenization_body,
+                False,
+                False,
+                "json",
+                models.DedicatedTokenizationBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -198,8 +206,8 @@ class FriendliToken(BaseSDK):
     def detokenization(
         self,
         *,
+        model: str,
         x_friendli_team: Optional[str] = None,
-        model: Optional[str] = None,
         tokens: Optional[List[int]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -209,8 +217,8 @@ class FriendliToken(BaseSDK):
 
         By giving a list of tokens, generate a detokenized output text string.
 
+        :param model: ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param tokens: A token sequence to detokenize.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -226,7 +234,7 @@ class FriendliToken(BaseSDK):
 
         request = models.DedicatedDetokenizationRequest(
             x_friendli_team=x_friendli_team,
-            detokenization_body=models.DetokenizationBody(
+            dedicated_detokenization_body=models.DedicatedDetokenizationBody(
                 model=model,
                 tokens=tokens,
             ),
@@ -245,11 +253,11 @@ class FriendliToken(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.detokenization_body,
+                request.dedicated_detokenization_body,
                 False,
                 False,
                 "json",
-                models.DetokenizationBody,
+                models.DedicatedDetokenizationBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -295,8 +303,8 @@ class FriendliToken(BaseSDK):
     async def detokenization_async(
         self,
         *,
+        model: str,
         x_friendli_team: Optional[str] = None,
-        model: Optional[str] = None,
         tokens: Optional[List[int]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -306,8 +314,8 @@ class FriendliToken(BaseSDK):
 
         By giving a list of tokens, generate a detokenized output text string.
 
+        :param model: ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param tokens: A token sequence to detokenize.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -323,7 +331,7 @@ class FriendliToken(BaseSDK):
 
         request = models.DedicatedDetokenizationRequest(
             x_friendli_team=x_friendli_team,
-            detokenization_body=models.DetokenizationBody(
+            dedicated_detokenization_body=models.DedicatedDetokenizationBody(
                 model=model,
                 tokens=tokens,
             ),
@@ -342,11 +350,11 @@ class FriendliToken(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.detokenization_body,
+                request.dedicated_detokenization_body,
                 False,
                 False,
                 "json",
-                models.DetokenizationBody,
+                models.DedicatedDetokenizationBody,
             ),
             timeout_ms=timeout_ms,
         )
