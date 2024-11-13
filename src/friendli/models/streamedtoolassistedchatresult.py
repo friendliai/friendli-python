@@ -23,8 +23,8 @@ r"""A server-sent event containing chat completions content."""
 
 StreamedToolAssistedChatResult = Annotated[
     Union[
-        Annotated[StreamedToolAssistedChatToken, Tag("ping")],
-        Annotated[StreamedToolAssistedChatToolStatus, Tag("completion")],
+        Annotated[StreamedToolAssistedChatToken, Tag("token")],
+        Annotated[StreamedToolAssistedChatToolStatus, Tag("tool_status")],
     ],
     Discriminator(lambda m: get_discriminator(m, "event", "event")),
 ]
