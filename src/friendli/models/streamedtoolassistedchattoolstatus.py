@@ -114,17 +114,16 @@ class StreamedToolAssistedChatToolStatusData(BaseModel):
 
 
 class StreamedToolAssistedChatToolStatusTypedDict(TypedDict):
+    data: StreamedToolAssistedChatToolStatusDataTypedDict
     event: Literal["tool_status"]
-    data: NotRequired[StreamedToolAssistedChatToolStatusDataTypedDict]
 
 
 class StreamedToolAssistedChatToolStatus(BaseModel):
+    data: StreamedToolAssistedChatToolStatusData
+
     EVENT: Annotated[
         Annotated[
-            Optional[Literal["tool_status"]],
-            AfterValidator(validate_const("tool_status")),
+            Literal["tool_status"], AfterValidator(validate_const("tool_status"))
         ],
         pydantic.Field(alias="event"),
     ] = "tool_status"
-
-    data: Optional[StreamedToolAssistedChatToolStatusData] = None
