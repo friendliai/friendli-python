@@ -22,9 +22,9 @@ s = Friendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.dedicated.completions.complete(completions_complete_body={
+res = s.dedicated.completions.complete(dedicated_completions_complete_body={
     "prompt": "Say this is a test!",
-    "model": "meta-llama-3.1-8b-instruct",
+    "model": "(endpoint-id):(adapter-route)",
     "max_tokens": 200,
     "top_k": 1,
 })
@@ -37,11 +37,11 @@ if res is not None:
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `completions_complete_body`                                               | [models.CompletionsCompleteBody](../../models/completionscompletebody.md) | :heavy_check_mark:                                                        | N/A                                                                       |
-| `x_friendli_team`                                                         | *Optional[str]*                                                           | :heavy_minus_sign:                                                        | ID of team to run requests as (optional parameter).                       |
-| `retries`                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)          | :heavy_minus_sign:                                                        | Configuration to override the default retry behavior of the client.       |
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `dedicated_completions_complete_body`                                                       | [models.DedicatedCompletionsCompleteBody](../../models/dedicatedcompletionscompletebody.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |
+| `x_friendli_team`                                                                           | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | ID of team to run requests as (optional parameter).                                         |
+| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
 
 ### Response
 
@@ -67,9 +67,9 @@ s = Friendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.dedicated.completions.stream(completions_stream_body={
+res = s.dedicated.completions.stream(dedicated_completions_stream_body={
     "prompt": "Say this is a test!",
-    "model": "meta-llama-3.1-8b-instruct",
+    "model": "(endpoint-id):(adapter-route)",
     "max_tokens": 200,
     "top_k": 1,
 })
@@ -83,11 +83,11 @@ if res is not None:
 
 ### Parameters
 
-| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `completions_stream_body`                                             | [models.CompletionsStreamBody](../../models/completionsstreambody.md) | :heavy_check_mark:                                                    | N/A                                                                   |
-| `x_friendli_team`                                                     | *Optional[str]*                                                       | :heavy_minus_sign:                                                    | ID of team to run requests as (optional parameter).                   |
-| `retries`                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)      | :heavy_minus_sign:                                                    | Configuration to override the default retry behavior of the client.   |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `dedicated_completions_stream_body`                                                     | [models.DedicatedCompletionsStreamBody](../../models/dedicatedcompletionsstreambody.md) | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `x_friendli_team`                                                                       | *Optional[str]*                                                                         | :heavy_minus_sign:                                                                      | ID of team to run requests as (optional parameter).                                     |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
 
 ### Response
 

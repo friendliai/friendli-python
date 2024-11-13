@@ -34,8 +34,8 @@ class ToolAssistedChat(BaseSDK):
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ToolAssistedChatCompleteBodyToolChoice,
-                models.ToolAssistedChatCompleteBodyToolChoiceTypedDict,
+                models.ServerlessToolAssistedChatCompleteBodyToolChoice,
+                models.ServerlessToolAssistedChatCompleteBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -90,7 +90,7 @@ class ToolAssistedChat(BaseSDK):
 
         request = models.ServerlessToolAssistedChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            tool_assisted_chat_complete_body=models.ToolAssistedChatCompleteBody(
+            serverless_tool_assisted_chat_complete_body=models.ServerlessToolAssistedChatCompleteBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
@@ -111,7 +111,8 @@ class ToolAssistedChat(BaseSDK):
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ToolAssistedChatCompleteBodyToolChoice]
+                    tool_choice,
+                    Optional[models.ServerlessToolAssistedChatCompleteBodyToolChoice],
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.ToolAssistedChatTool]]
@@ -134,11 +135,11 @@ class ToolAssistedChat(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.tool_assisted_chat_complete_body,
+                request.serverless_tool_assisted_chat_complete_body,
                 False,
                 False,
                 "json",
-                models.ToolAssistedChatCompleteBody,
+                models.ServerlessToolAssistedChatCompleteBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -206,8 +207,8 @@ class ToolAssistedChat(BaseSDK):
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ToolAssistedChatCompleteBodyToolChoice,
-                models.ToolAssistedChatCompleteBodyToolChoiceTypedDict,
+                models.ServerlessToolAssistedChatCompleteBodyToolChoice,
+                models.ServerlessToolAssistedChatCompleteBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -262,7 +263,7 @@ class ToolAssistedChat(BaseSDK):
 
         request = models.ServerlessToolAssistedChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            tool_assisted_chat_complete_body=models.ToolAssistedChatCompleteBody(
+            serverless_tool_assisted_chat_complete_body=models.ServerlessToolAssistedChatCompleteBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
@@ -283,7 +284,8 @@ class ToolAssistedChat(BaseSDK):
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ToolAssistedChatCompleteBodyToolChoice]
+                    tool_choice,
+                    Optional[models.ServerlessToolAssistedChatCompleteBodyToolChoice],
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.ToolAssistedChatTool]]
@@ -306,11 +308,11 @@ class ToolAssistedChat(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.tool_assisted_chat_complete_body,
+                request.serverless_tool_assisted_chat_complete_body,
                 False,
                 False,
                 "json",
-                models.ToolAssistedChatCompleteBody,
+                models.ServerlessToolAssistedChatCompleteBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -378,8 +380,8 @@ class ToolAssistedChat(BaseSDK):
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ToolAssistedChatStreamBodyToolChoice,
-                models.ToolAssistedChatStreamBodyToolChoiceTypedDict,
+                models.ServerlessToolAssistedChatStreamBodyToolChoice,
+                models.ServerlessToolAssistedChatStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -434,7 +436,7 @@ class ToolAssistedChat(BaseSDK):
 
         request = models.ServerlessToolAssistedChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            tool_assisted_chat_stream_body=models.ToolAssistedChatStreamBody(
+            serverless_tool_assisted_chat_stream_body=models.ServerlessToolAssistedChatStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
@@ -455,7 +457,8 @@ class ToolAssistedChat(BaseSDK):
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ToolAssistedChatStreamBodyToolChoice]
+                    tool_choice,
+                    Optional[models.ServerlessToolAssistedChatStreamBodyToolChoice],
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.ToolAssistedChatTool]]
@@ -478,11 +481,11 @@ class ToolAssistedChat(BaseSDK):
             accept_header_value="text/event-stream",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.tool_assisted_chat_stream_body,
+                request.serverless_tool_assisted_chat_stream_body,
                 False,
                 False,
                 "json",
-                models.ToolAssistedChatStreamBody,
+                models.ServerlessToolAssistedChatStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -557,8 +560,8 @@ class ToolAssistedChat(BaseSDK):
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ToolAssistedChatStreamBodyToolChoice,
-                models.ToolAssistedChatStreamBodyToolChoiceTypedDict,
+                models.ServerlessToolAssistedChatStreamBodyToolChoice,
+                models.ServerlessToolAssistedChatStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -613,7 +616,7 @@ class ToolAssistedChat(BaseSDK):
 
         request = models.ServerlessToolAssistedChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            tool_assisted_chat_stream_body=models.ToolAssistedChatStreamBody(
+            serverless_tool_assisted_chat_stream_body=models.ServerlessToolAssistedChatStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
@@ -634,7 +637,8 @@ class ToolAssistedChat(BaseSDK):
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ToolAssistedChatStreamBodyToolChoice]
+                    tool_choice,
+                    Optional[models.ServerlessToolAssistedChatStreamBodyToolChoice],
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.ToolAssistedChatTool]]
@@ -657,11 +661,11 @@ class ToolAssistedChat(BaseSDK):
             accept_header_value="text/event-stream",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.tool_assisted_chat_stream_body,
+                request.serverless_tool_assisted_chat_stream_body,
                 False,
                 False,
                 "json",
-                models.ToolAssistedChatStreamBody,
+                models.ServerlessToolAssistedChatStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
