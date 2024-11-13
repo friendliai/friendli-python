@@ -9,10 +9,7 @@ from .streamedtoolassistedchattoolstatus import (
     StreamedToolAssistedChatToolStatus,
     StreamedToolAssistedChatToolStatusTypedDict,
 )
-from friendli.utils import get_discriminator
-from pydantic import Discriminator, Tag
 from typing import Union
-from typing_extensions import Annotated
 
 
 StreamedToolAssistedChatResultTypedDict = Union[
@@ -21,11 +18,7 @@ StreamedToolAssistedChatResultTypedDict = Union[
 r"""A server-sent event containing chat completions content."""
 
 
-StreamedToolAssistedChatResult = Annotated[
-    Union[
-        Annotated[StreamedToolAssistedChatToken, Tag("token")],
-        Annotated[StreamedToolAssistedChatToolStatus, Tag("tool_status")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "event", "event")),
+StreamedToolAssistedChatResult = Union[
+    StreamedToolAssistedChatToken, StreamedToolAssistedChatToolStatus
 ]
 r"""A server-sent event containing chat completions content."""
