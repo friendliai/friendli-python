@@ -18,7 +18,10 @@ class FriendliChat(BaseSDK):
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
-            Union[models.LogitBias, models.LogitBiasTypedDict]
+            Union[
+                models.DedicatedChatCompleteBodyLogitBias,
+                models.DedicatedChatCompleteBodyLogitBiasTypedDict,
+            ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
@@ -34,12 +37,18 @@ class FriendliChat(BaseSDK):
         stop: OptionalNullable[List[str]] = UNSET,
         stream: OptionalNullable[bool] = False,
         stream_options: OptionalNullable[
-            Union[models.StreamOptions, models.StreamOptionsTypedDict]
+            Union[
+                models.DedicatedChatCompleteBodyStreamOptions,
+                models.DedicatedChatCompleteBodyStreamOptionsTypedDict,
+            ]
         ] = UNSET,
         temperature: OptionalNullable[float] = 1,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
-            Union[models.ToolChoice, models.ToolChoiceTypedDict]
+            Union[
+                models.DedicatedChatCompleteBodyToolChoice,
+                models.DedicatedChatCompleteBodyToolChoiceTypedDict,
+            ]
         ] = None,
         tools: OptionalNullable[
             Union[List[models.Tool], List[models.ToolTypedDict]]
@@ -55,7 +64,7 @@ class FriendliChat(BaseSDK):
 
         Given a list of messages forming a conversation, the model generates a response.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format.
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
@@ -94,13 +103,14 @@ class FriendliChat(BaseSDK):
 
         request = models.DedicatedChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            chat_complete_body=models.ChatCompleteBody(
+            dedicated_chat_complete_body=models.DedicatedChatCompleteBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
-                    logit_bias, OptionalNullable[models.LogitBias]
+                    logit_bias,
+                    OptionalNullable[models.DedicatedChatCompleteBodyLogitBias],
                 ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
@@ -116,12 +126,13 @@ class FriendliChat(BaseSDK):
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options, OptionalNullable[models.StreamOptions]
+                    stream_options,
+                    OptionalNullable[models.DedicatedChatCompleteBodyStreamOptions],
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ToolChoice]
+                    tool_choice, Optional[models.DedicatedChatCompleteBodyToolChoice]
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
@@ -145,11 +156,11 @@ class FriendliChat(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.chat_complete_body,
+                request.dedicated_chat_complete_body,
                 False,
                 False,
                 "json",
-                models.ChatCompleteBody,
+                models.DedicatedChatCompleteBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -201,7 +212,10 @@ class FriendliChat(BaseSDK):
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
-            Union[models.LogitBias, models.LogitBiasTypedDict]
+            Union[
+                models.DedicatedChatCompleteBodyLogitBias,
+                models.DedicatedChatCompleteBodyLogitBiasTypedDict,
+            ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
@@ -217,12 +231,18 @@ class FriendliChat(BaseSDK):
         stop: OptionalNullable[List[str]] = UNSET,
         stream: OptionalNullable[bool] = False,
         stream_options: OptionalNullable[
-            Union[models.StreamOptions, models.StreamOptionsTypedDict]
+            Union[
+                models.DedicatedChatCompleteBodyStreamOptions,
+                models.DedicatedChatCompleteBodyStreamOptionsTypedDict,
+            ]
         ] = UNSET,
         temperature: OptionalNullable[float] = 1,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
-            Union[models.ToolChoice, models.ToolChoiceTypedDict]
+            Union[
+                models.DedicatedChatCompleteBodyToolChoice,
+                models.DedicatedChatCompleteBodyToolChoiceTypedDict,
+            ]
         ] = None,
         tools: OptionalNullable[
             Union[List[models.Tool], List[models.ToolTypedDict]]
@@ -238,7 +258,7 @@ class FriendliChat(BaseSDK):
 
         Given a list of messages forming a conversation, the model generates a response.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format.
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
@@ -277,13 +297,14 @@ class FriendliChat(BaseSDK):
 
         request = models.DedicatedChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            chat_complete_body=models.ChatCompleteBody(
+            dedicated_chat_complete_body=models.DedicatedChatCompleteBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
-                    logit_bias, OptionalNullable[models.LogitBias]
+                    logit_bias,
+                    OptionalNullable[models.DedicatedChatCompleteBodyLogitBias],
                 ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
@@ -299,12 +320,13 @@ class FriendliChat(BaseSDK):
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options, OptionalNullable[models.StreamOptions]
+                    stream_options,
+                    OptionalNullable[models.DedicatedChatCompleteBodyStreamOptions],
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ToolChoice]
+                    tool_choice, Optional[models.DedicatedChatCompleteBodyToolChoice]
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
@@ -328,11 +350,11 @@ class FriendliChat(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.chat_complete_body,
+                request.dedicated_chat_complete_body,
                 False,
                 False,
                 "json",
-                models.ChatCompleteBody,
+                models.DedicatedChatCompleteBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -385,7 +407,8 @@ class FriendliChat(BaseSDK):
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
             Union[
-                models.ChatStreamBodyLogitBias, models.ChatStreamBodyLogitBiasTypedDict
+                models.DedicatedChatStreamBodyLogitBias,
+                models.DedicatedChatStreamBodyLogitBiasTypedDict,
             ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
@@ -403,16 +426,16 @@ class FriendliChat(BaseSDK):
         stream: OptionalNullable[bool] = True,
         stream_options: OptionalNullable[
             Union[
-                models.ChatStreamBodyStreamOptions,
-                models.ChatStreamBodyStreamOptionsTypedDict,
+                models.DedicatedChatStreamBodyStreamOptions,
+                models.DedicatedChatStreamBodyStreamOptionsTypedDict,
             ]
         ] = UNSET,
         temperature: OptionalNullable[float] = 1,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ChatStreamBodyToolChoice,
-                models.ChatStreamBodyToolChoiceTypedDict,
+                models.DedicatedChatStreamBodyToolChoice,
+                models.DedicatedChatStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -429,7 +452,7 @@ class FriendliChat(BaseSDK):
 
         Given a list of messages forming a conversation, the model generates a response.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format.
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
@@ -468,13 +491,14 @@ class FriendliChat(BaseSDK):
 
         request = models.DedicatedChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            chat_stream_body=models.ChatStreamBody(
+            dedicated_chat_stream_body=models.DedicatedChatStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
-                    logit_bias, OptionalNullable[models.ChatStreamBodyLogitBias]
+                    logit_bias,
+                    OptionalNullable[models.DedicatedChatStreamBodyLogitBias],
                 ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
@@ -490,12 +514,13 @@ class FriendliChat(BaseSDK):
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options, OptionalNullable[models.ChatStreamBodyStreamOptions]
+                    stream_options,
+                    OptionalNullable[models.DedicatedChatStreamBodyStreamOptions],
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ChatStreamBodyToolChoice]
+                    tool_choice, Optional[models.DedicatedChatStreamBodyToolChoice]
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
@@ -519,7 +544,11 @@ class FriendliChat(BaseSDK):
             accept_header_value="text/event-stream",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.chat_stream_body, False, False, "json", models.ChatStreamBody
+                request.dedicated_chat_stream_body,
+                False,
+                False,
+                "json",
+                models.DedicatedChatStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -577,7 +606,8 @@ class FriendliChat(BaseSDK):
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
             Union[
-                models.ChatStreamBodyLogitBias, models.ChatStreamBodyLogitBiasTypedDict
+                models.DedicatedChatStreamBodyLogitBias,
+                models.DedicatedChatStreamBodyLogitBiasTypedDict,
             ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
@@ -595,16 +625,16 @@ class FriendliChat(BaseSDK):
         stream: OptionalNullable[bool] = True,
         stream_options: OptionalNullable[
             Union[
-                models.ChatStreamBodyStreamOptions,
-                models.ChatStreamBodyStreamOptionsTypedDict,
+                models.DedicatedChatStreamBodyStreamOptions,
+                models.DedicatedChatStreamBodyStreamOptionsTypedDict,
             ]
         ] = UNSET,
         temperature: OptionalNullable[float] = 1,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ChatStreamBodyToolChoice,
-                models.ChatStreamBodyToolChoiceTypedDict,
+                models.DedicatedChatStreamBodyToolChoice,
+                models.DedicatedChatStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -621,7 +651,7 @@ class FriendliChat(BaseSDK):
 
         Given a list of messages forming a conversation, the model generates a response.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
+        :param model: ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format.
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
@@ -660,13 +690,14 @@ class FriendliChat(BaseSDK):
 
         request = models.DedicatedChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            chat_stream_body=models.ChatStreamBody(
+            dedicated_chat_stream_body=models.DedicatedChatStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
-                    logit_bias, OptionalNullable[models.ChatStreamBodyLogitBias]
+                    logit_bias,
+                    OptionalNullable[models.DedicatedChatStreamBodyLogitBias],
                 ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
@@ -682,12 +713,13 @@ class FriendliChat(BaseSDK):
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options, OptionalNullable[models.ChatStreamBodyStreamOptions]
+                    stream_options,
+                    OptionalNullable[models.DedicatedChatStreamBodyStreamOptions],
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ChatStreamBodyToolChoice]
+                    tool_choice, Optional[models.DedicatedChatStreamBodyToolChoice]
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
@@ -711,7 +743,11 @@ class FriendliChat(BaseSDK):
             accept_header_value="text/event-stream",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.chat_stream_body, False, False, "json", models.ChatStreamBody
+                request.dedicated_chat_stream_body,
+                False,
+                False,
+                "json",
+                models.DedicatedChatStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
