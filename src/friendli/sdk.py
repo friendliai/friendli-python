@@ -7,7 +7,7 @@ from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 from friendli import models, utils
 from friendli._hooks import SDKHooks
-from friendli.inference import Inference
+from friendli.dedicated import Dedicated
 from friendli.serverless import Serverless
 from friendli.types import OptionalNullable, UNSET
 import httpx
@@ -17,13 +17,13 @@ from typing import Any, Callable, Dict, Optional, Union
 class Friendli(BaseSDK):
     r"""Friendli Endpoints API Reference: This is an OpenAPI reference of Friendli Endpoints API."""
 
-    inference: Inference
     serverless: Serverless
+    dedicated: Dedicated
 
     def __init__(
         self,
         token: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
-        server: Optional[str] = None,
+        server_idx: Optional[int] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
         client: Optional[HttpClient] = None,
@@ -35,7 +35,7 @@ class Friendli(BaseSDK):
         r"""Instantiates the SDK configuring it with the provided parameters.
 
         :param token: The token required for authentication
-        :param server: The server by name to use for all methods
+        :param server_idx: The index of the server to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
         :param client: The HTTP client to use for all synchronous methods
@@ -77,7 +77,7 @@ class Friendli(BaseSDK):
                 async_client=async_client,
                 security=security,
                 server_url=server_url,
-                server=server,
+                server_idx=server_idx,
                 retry_config=retry_config,
                 timeout_ms=timeout_ms,
                 debug_logger=debug_logger,
@@ -99,5 +99,5 @@ class Friendli(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
-        self.inference = Inference(self.sdk_configuration)
         self.serverless = Serverless(self.sdk_configuration)
+        self.dedicated = Dedicated(self.sdk_configuration)

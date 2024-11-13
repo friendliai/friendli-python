@@ -58,7 +58,7 @@ poetry add friendli
 <!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
 
-### Chat completion
+### Chat completions
 
 Given a list of messages forming a conversation, the model generates a response.
 
@@ -71,7 +71,7 @@ s = Friendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
+res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
     {
         "role": "system",
         "content": "You are a helpful assistant.",
@@ -83,9 +83,8 @@ res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
 ], max_tokens=200)
 
 if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
+    # handle response
+    pass
 ```
 
 </br>
@@ -101,7 +100,7 @@ async def main():
     s = Friendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
     )
-    res = await s.inference.chat_completion_async(model="meta-llama-3.1-8b-instruct", messages=[
+    res = await s.serverless.chat.complete_async(model="meta-llama-3.1-8b-instruct", messages=[
         {
             "role": "system",
             "content": "You are a helpful assistant.",
@@ -112,14 +111,13 @@ async def main():
         },
     ], max_tokens=200)
     if res is not None:
-        for event in res:
-            # handle event
-            print(event, flush=True)
+        # handle response
+        pass
 
 asyncio.run(main())
 ```
 
-### Tool assisted chat completion
+### Tool assisted chat completions
 
 Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
@@ -132,7 +130,7 @@ s = Friendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.tool_assisted_chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
+res = s.serverless.tool_assisted_chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
     {
         "role": "system",
         "content": "You are a helpful assistant.",
@@ -151,9 +149,8 @@ res = s.serverless.tool_assisted_chat_completion(model="meta-llama-3.1-8b-instru
 ])
 
 if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
+    # handle response
+    pass
 ```
 
 </br>
@@ -169,7 +166,7 @@ async def main():
     s = Friendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
     )
-    res = await s.serverless.tool_assisted_chat_completion_async(model="meta-llama-3.1-8b-instruct", messages=[
+    res = await s.serverless.tool_assisted_chat.complete_async(model="meta-llama-3.1-8b-instruct", messages=[
         {
             "role": "system",
             "content": "You are a helpful assistant.",
@@ -187,9 +184,8 @@ async def main():
         },
     ])
     if res is not None:
-        for event in res:
-            # handle event
-            print(event, flush=True)
+        # handle response
+        pass
 
 asyncio.run(main())
 ```
@@ -201,17 +197,47 @@ asyncio.run(main())
 <details open>
 <summary>Available methods</summary>
 
+### [dedicated](docs/sdks/dedicated/README.md)
 
-### [inference](docs/sdks/inference/README.md)
 
-* [chat_completion](docs/sdks/inference/README.md#chat_completion) - Chat completion
-* [completion](docs/sdks/inference/README.md#completion) - Completion
-* [tokenization](docs/sdks/inference/README.md#tokenization) - Tokenization
-* [detokenization](docs/sdks/inference/README.md#detokenization) - Detokenization
+#### [dedicated.chat](docs/sdks/friendlichat/README.md)
+
+* [complete](docs/sdks/friendlichat/README.md#complete) - Chat completions
+* [stream](docs/sdks/friendlichat/README.md#stream) - Stream chat completions
+
+#### [dedicated.completions](docs/sdks/friendlicompletions/README.md)
+
+* [complete](docs/sdks/friendlicompletions/README.md#complete) - Completions
+* [stream](docs/sdks/friendlicompletions/README.md#stream) - Stream completions
+
+#### [dedicated.token](docs/sdks/friendlitoken/README.md)
+
+* [tokenization](docs/sdks/friendlitoken/README.md#tokenization) - Tokenization
+* [detokenization](docs/sdks/friendlitoken/README.md#detokenization) - Detokenization
+
 
 ### [serverless](docs/sdks/serverless/README.md)
 
-* [tool_assisted_chat_completion](docs/sdks/serverless/README.md#tool_assisted_chat_completion) - Tool assisted chat completion
+
+#### [serverless.chat](docs/sdks/chat/README.md)
+
+* [complete](docs/sdks/chat/README.md#complete) - Chat completions
+* [stream](docs/sdks/chat/README.md#stream) - Stream chat completions
+
+#### [serverless.completions](docs/sdks/completions/README.md)
+
+* [complete](docs/sdks/completions/README.md#complete) - Completions
+* [stream](docs/sdks/completions/README.md#stream) - Stream completions
+
+#### [serverless.token](docs/sdks/token/README.md)
+
+* [tokenization](docs/sdks/token/README.md#tokenization) - Tokenization
+* [detokenization](docs/sdks/token/README.md#detokenization) - Detokenization
+
+#### [serverless.tool_assisted_chat](docs/sdks/toolassistedchat/README.md)
+
+* [complete](docs/sdks/toolassistedchat/README.md#complete) - Tool assisted chat completions
+* [stream](docs/sdks/toolassistedchat/README.md#stream) - Stream tool assisted chat completions
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -233,7 +259,7 @@ s = Friendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
+res = s.serverless.chat.stream(model="meta-llama-3.1-8b-instruct", messages=[
     {
         "role": "system",
         "content": "You are a helpful assistant.",
@@ -270,7 +296,7 @@ s = Friendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
+res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
     {
         "role": "system",
         "content": "You are a helpful assistant.",
@@ -283,9 +309,8 @@ res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
     RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
 if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
+    # handle response
+    pass
 
 ```
 
@@ -300,7 +325,7 @@ s = Friendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
+res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
     {
         "role": "system",
         "content": "You are a helpful assistant.",
@@ -312,9 +337,8 @@ res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
 ], max_tokens=200)
 
 if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
+    # handle response
+    pass
 
 ```
 <!-- End Retries [retries] -->
@@ -333,7 +357,7 @@ By default, an API error will raise a models.SDKError exception, which has the f
 | `.raw_response` | *httpx.Response* | The raw HTTP response |
 | `.body`         | *str*            | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `chat_completion_async` method may raise the following exceptions:
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `complete_async` method may raise the following exceptions:
 
 | Error Type      | Status Code | Content Type |
 | --------------- | ----------- | ------------ |
@@ -351,7 +375,7 @@ s = Friendli(
 
 res = None
 try:
-    res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
+    res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
         {
             "role": "system",
             "content": "You are a helpful assistant.",
@@ -363,9 +387,8 @@ try:
     ], max_tokens=200)
 
     if res is not None:
-        for event in res:
-            # handle event
-            print(event, flush=True)
+        # handle response
+        pass
 
 except models.SDKError as e:
     # handle exception
@@ -375,44 +398,6 @@ except models.SDKError as e:
 
 <!-- Start Server Selection [server] -->
 ## Server Selection
-
-### Select Server by Name
-
-You can override the default server globally by passing a server name to the `server: str` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
-
-| Name         | Server                                    |
-| ------------ | ----------------------------------------- |
-| `serverless` | `https://inference.friendli.ai`           |
-| `dedicated`  | `https://inference.friendli.ai/dedicated` |
-
-#### Example
-
-```python
-from friendli import Friendli
-import os
-
-s = Friendli(
-    server="dedicated",
-    token=os.getenv("FRIENDLI_TOKEN", ""),
-)
-
-res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "Hello!",
-    },
-], max_tokens=200)
-
-if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
-
-```
 
 ### Override Server URL Per-Client
 
@@ -426,7 +411,7 @@ s = Friendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
+res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
     {
         "role": "system",
         "content": "You are a helpful assistant.",
@@ -438,45 +423,8 @@ res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
 ], max_tokens=200)
 
 if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
-
-```
-
-### Override Server URL Per-Operation
-
-The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
-```python
-from friendli import Friendli
-import os
-
-s = Friendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
-)
-
-res = s.serverless.tool_assisted_chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "Hello!",
-    },
-], max_tokens=200, tools=[
-    {
-        "type": "math:calculator",
-    },
-    {
-        "type": "web:search",
-    },
-], server_url="https://inference.friendli.ai")
-
-if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
+    # handle response
+    pass
 
 ```
 <!-- End Server Selection [server] -->

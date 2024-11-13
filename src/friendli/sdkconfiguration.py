@@ -10,14 +10,9 @@ from pydantic import Field
 from typing import Callable, Dict, Optional, Tuple, Union
 
 
-SERVER_SERVERLESS = "serverless"
-r"""Friendli Serverless Endpoints."""
-SERVER_DEDICATED = "dedicated"
-r"""Friendli Dedicated Endpoints."""
-SERVERS = {
-    SERVER_SERVERLESS: "https://inference.friendli.ai",
-    SERVER_DEDICATED: "https://inference.friendli.ai/dedicated",
-}
+SERVERS = [
+    "https://inference.friendli.ai",
+]
 """Contains the list of servers available to the SDK"""
 
 
@@ -28,12 +23,12 @@ class SDKConfiguration:
     debug_logger: Logger
     security: Optional[Union[models.Security, Callable[[], models.Security]]] = None
     server_url: Optional[str] = ""
-    server: Optional[str] = ""
+    server_idx: Optional[int] = 0
     language: str = "python"
     openapi_doc_version: str = "v1"
-    sdk_version: str = "0.2.19"
-    gen_version: str = "2.455.2"
-    user_agent: str = "speakeasy-sdk/python 0.2.19 2.455.2 v1 friendli"
+    sdk_version: str = "0.2.25"
+    gen_version: str = "2.457.2"
+    user_agent: str = "speakeasy-sdk/python 0.2.25 2.457.2 v1 friendli"
     retry_config: OptionalNullable[RetryConfig] = Field(default_factory=lambda: UNSET)
     timeout_ms: Optional[int] = None
 
@@ -43,13 +38,10 @@ class SDKConfiguration:
     def get_server_details(self) -> Tuple[str, Dict[str, str]]:
         if self.server_url is not None and self.server_url:
             return remove_suffix(self.server_url, "/"), {}
-        if not self.server:
-            self.server = SERVER_SERVERLESS
+        if self.server_idx is None:
+            self.server_idx = 0
 
-        if self.server not in SERVERS:
-            raise ValueError(f'Invalid server "{self.server}"')
-
-        return SERVERS[self.server], {}
+        return SERVERS[self.server_idx], {}
 
     def get_hooks(self) -> SDKHooks:
         return self._hooks
