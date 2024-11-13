@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: 706c95d31e48d8a0717a3ed3b67253d9
+  docChecksum: 99d07173ccda8c20e3ddf80796f72f55
   docVersion: v1
   speakeasyVersion: 1.438.1
   generationVersion: 2.457.2
-  releaseVersion: 0.2.31
-  configChecksum: a95358d9ad3f4fa5b9b72d1eea8dcf24
+  releaseVersion: 0.2.32
+  configChecksum: 188cec8d2e6d7cff86960074c89a6e7d
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
   published: true
@@ -99,7 +99,6 @@ generatedFiles:
   - docs/models/message.md
   - docs/models/name.md
   - docs/models/object.md
-  - docs/models/one.md
   - docs/models/otherbuiltintool.md
   - docs/models/otherbuiltintooltype.md
   - docs/models/parameters.md
@@ -149,15 +148,17 @@ generatedFiles:
   - docs/models/streamedcompletionstokencompleteevent.md
   - docs/models/streamedcompletionstokensampled.md
   - docs/models/streamedtoolassistedchatresult.md
-  - docs/models/streamedtoolassistedchatresultdata.md
+  - docs/models/streamedtoolassistedchattoken.md
+  - docs/models/streamedtoolassistedchattokendata.md
+  - docs/models/streamedtoolassistedchattoolstatus.md
+  - docs/models/streamedtoolassistedchattoolstatusdata.md
+  - docs/models/streamedtoolassistedchattoolstatusparameters.md
   - docs/models/streamoptions.md
   - docs/models/systemmessage.md
   - docs/models/tokenizationresult.md
   - docs/models/tokensequence.md
   - docs/models/tool.md
   - docs/models/toolassistedchattool.md
-  - docs/models/toolassistedchattoolstatusevent.md
-  - docs/models/toolassistedchattoolstatuseventparameters.md
   - docs/models/toolcalls.md
   - docs/models/toolchoice.md
   - docs/models/toolchoicefunction.md
@@ -167,7 +168,6 @@ generatedFiles:
   - docs/models/toolmessagerole.md
   - docs/models/tooltype.md
   - docs/models/toplogprobs.md
-  - docs/models/two.md
   - docs/models/type.md
   - docs/models/usage.md
   - docs/models/usermessage.md
@@ -254,12 +254,13 @@ generatedFiles:
   - src/friendli/models/streamedcompletionstokencomplete.py
   - src/friendli/models/streamedcompletionstokensampled.py
   - src/friendli/models/streamedtoolassistedchatresult.py
+  - src/friendli/models/streamedtoolassistedchattoken.py
+  - src/friendli/models/streamedtoolassistedchattoolstatus.py
   - src/friendli/models/systemmessage.py
   - src/friendli/models/tokenizationresult.py
   - src/friendli/models/tokensequence.py
   - src/friendli/models/tool.py
   - src/friendli/models/toolassistedchattool.py
-  - src/friendli/models/toolassistedchattoolstatusevent.py
   - src/friendli/models/toolmessage.py
   - src/friendli/models/usage.py
   - src/friendli/models/usermessage.py

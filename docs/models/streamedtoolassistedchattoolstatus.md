@@ -1,0 +1,9 @@
+# StreamedToolAssistedChatToolStatus
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `event`                                                                                                        | *Optional[Literal["tool_status"]]*                                                                             | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `data`                                                                                                         | [Optional[models.StreamedToolAssistedChatToolStatusData]](../models/streamedtoolassistedchattoolstatusdata.md) | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |

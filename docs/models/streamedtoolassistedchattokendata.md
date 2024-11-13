@@ -1,4 +1,4 @@
-# StreamedToolAssistedChatResultData
+# StreamedToolAssistedChatTokenData
 
 
 ## Fields

@@ -1,4 +1,4 @@
-# ToolAssistedChatToolStatusEventParameters
+# StreamedToolAssistedChatToolStatusParameters
 
 
 ## Fields

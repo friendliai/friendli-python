@@ -5,15 +5,15 @@ A server-sent event containing chat completions content.
 
 ## Supported Types
 
-### `models.One`
+### `models.StreamedToolAssistedChatToken`
 
 ```python
-value: models.One = /* values here */
+value: models.StreamedToolAssistedChatToken = /* values here */
 ```
 
-### `models.Two`
+### `models.StreamedToolAssistedChatToolStatus`
 
 ```python
-value: models.Two = /* values here */
+value: models.StreamedToolAssistedChatToolStatus = /* values here */
 ```
 
