@@ -9,7 +9,7 @@ class UsageTypedDict(TypedDict):
     prompt_tokens: int
     r"""Number of tokens in the prompt."""
     completion_tokens: int
-    r"""Number of tokens in the generated completion."""
+    r"""Number of tokens in the generated completions."""
     total_tokens: int
     r"""Total number of tokens used in the request (`prompt_tokens` + `completion_tokens`)."""
 
@@ -19,7 +19,7 @@ class Usage(BaseModel):
     r"""Number of tokens in the prompt."""
 
     completion_tokens: int
-    r"""Number of tokens in the generated completion."""
+    r"""Number of tokens in the generated completions."""
 
     total_tokens: int
     r"""Total number of tokens used in the request (`prompt_tokens` + `completion_tokens`)."""

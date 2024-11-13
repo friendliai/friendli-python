@@ -1,5 +1,5 @@
 <!-- Start SDK Example Usage [usage] -->
-### Chat completion
+### Chat completions
 
 Given a list of messages forming a conversation, the model generates a response.
 
@@ -12,7 +12,7 @@ s = Friendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
+res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
     {
         "role": "system",
         "content": "You are a helpful assistant.",
@@ -24,9 +24,8 @@ res = s.inference.chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
 ], max_tokens=200)
 
 if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
+    # handle response
+    pass
 ```
 
 </br>
@@ -42,7 +41,7 @@ async def main():
     s = Friendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
     )
-    res = await s.inference.chat_completion_async(model="meta-llama-3.1-8b-instruct", messages=[
+    res = await s.serverless.chat.complete_async(model="meta-llama-3.1-8b-instruct", messages=[
         {
             "role": "system",
             "content": "You are a helpful assistant.",
@@ -53,14 +52,13 @@ async def main():
         },
     ], max_tokens=200)
     if res is not None:
-        for event in res:
-            # handle event
-            print(event, flush=True)
+        # handle response
+        pass
 
 asyncio.run(main())
 ```
 
-### Tool assisted chat completion
+### Tool assisted chat completions
 
 Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
@@ -73,7 +71,7 @@ s = Friendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.tool_assisted_chat_completion(model="meta-llama-3.1-8b-instruct", messages=[
+res = s.serverless.tool_assisted_chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
     {
         "role": "system",
         "content": "You are a helpful assistant.",
@@ -92,9 +90,8 @@ res = s.serverless.tool_assisted_chat_completion(model="meta-llama-3.1-8b-instru
 ])
 
 if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
+    # handle response
+    pass
 ```
 
 </br>
@@ -110,7 +107,7 @@ async def main():
     s = Friendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
     )
-    res = await s.serverless.tool_assisted_chat_completion_async(model="meta-llama-3.1-8b-instruct", messages=[
+    res = await s.serverless.tool_assisted_chat.complete_async(model="meta-llama-3.1-8b-instruct", messages=[
         {
             "role": "system",
             "content": "You are a helpful assistant.",
@@ -128,9 +125,8 @@ async def main():
         },
     ])
     if res is not None:
-        for event in res:
-            # handle event
-            print(event, flush=True)
+        # handle response
+        pass
 
 asyncio.run(main())
 ```
