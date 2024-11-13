@@ -94,7 +94,7 @@ class Chat(BaseSDK):
 
         request = models.ServerlessChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            chat_complete_body=models.ChatCompleteBody(
+            serverless_chat_complete_body=models.ServerlessChatCompleteBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
@@ -145,11 +145,11 @@ class Chat(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.chat_complete_body,
+                request.serverless_chat_complete_body,
                 False,
                 False,
                 "json",
-                models.ChatCompleteBody,
+                models.ServerlessChatCompleteBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -277,7 +277,7 @@ class Chat(BaseSDK):
 
         request = models.ServerlessChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            chat_complete_body=models.ChatCompleteBody(
+            serverless_chat_complete_body=models.ServerlessChatCompleteBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
@@ -328,11 +328,11 @@ class Chat(BaseSDK):
             accept_header_value="application/json",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.chat_complete_body,
+                request.serverless_chat_complete_body,
                 False,
                 False,
                 "json",
-                models.ChatCompleteBody,
+                models.ServerlessChatCompleteBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -385,7 +385,8 @@ class Chat(BaseSDK):
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
             Union[
-                models.ChatStreamBodyLogitBias, models.ChatStreamBodyLogitBiasTypedDict
+                models.ServerlessChatStreamBodyLogitBias,
+                models.ServerlessChatStreamBodyLogitBiasTypedDict,
             ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
@@ -403,16 +404,16 @@ class Chat(BaseSDK):
         stream: OptionalNullable[bool] = True,
         stream_options: OptionalNullable[
             Union[
-                models.ChatStreamBodyStreamOptions,
-                models.ChatStreamBodyStreamOptionsTypedDict,
+                models.ServerlessChatStreamBodyStreamOptions,
+                models.ServerlessChatStreamBodyStreamOptionsTypedDict,
             ]
         ] = UNSET,
         temperature: OptionalNullable[float] = 1,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ChatStreamBodyToolChoice,
-                models.ChatStreamBodyToolChoiceTypedDict,
+                models.ServerlessChatStreamBodyToolChoice,
+                models.ServerlessChatStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -468,13 +469,14 @@ class Chat(BaseSDK):
 
         request = models.ServerlessChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            chat_stream_body=models.ChatStreamBody(
+            serverless_chat_stream_body=models.ServerlessChatStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
-                    logit_bias, OptionalNullable[models.ChatStreamBodyLogitBias]
+                    logit_bias,
+                    OptionalNullable[models.ServerlessChatStreamBodyLogitBias],
                 ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
@@ -490,12 +492,13 @@ class Chat(BaseSDK):
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options, OptionalNullable[models.ChatStreamBodyStreamOptions]
+                    stream_options,
+                    OptionalNullable[models.ServerlessChatStreamBodyStreamOptions],
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ChatStreamBodyToolChoice]
+                    tool_choice, Optional[models.ServerlessChatStreamBodyToolChoice]
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
@@ -519,7 +522,11 @@ class Chat(BaseSDK):
             accept_header_value="text/event-stream",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.chat_stream_body, False, False, "json", models.ChatStreamBody
+                request.serverless_chat_stream_body,
+                False,
+                False,
+                "json",
+                models.ServerlessChatStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -577,7 +584,8 @@ class Chat(BaseSDK):
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
             Union[
-                models.ChatStreamBodyLogitBias, models.ChatStreamBodyLogitBiasTypedDict
+                models.ServerlessChatStreamBodyLogitBias,
+                models.ServerlessChatStreamBodyLogitBiasTypedDict,
             ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
@@ -595,16 +603,16 @@ class Chat(BaseSDK):
         stream: OptionalNullable[bool] = True,
         stream_options: OptionalNullable[
             Union[
-                models.ChatStreamBodyStreamOptions,
-                models.ChatStreamBodyStreamOptionsTypedDict,
+                models.ServerlessChatStreamBodyStreamOptions,
+                models.ServerlessChatStreamBodyStreamOptionsTypedDict,
             ]
         ] = UNSET,
         temperature: OptionalNullable[float] = 1,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ChatStreamBodyToolChoice,
-                models.ChatStreamBodyToolChoiceTypedDict,
+                models.ServerlessChatStreamBodyToolChoice,
+                models.ServerlessChatStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -660,13 +668,14 @@ class Chat(BaseSDK):
 
         request = models.ServerlessChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            chat_stream_body=models.ChatStreamBody(
+            serverless_chat_stream_body=models.ServerlessChatStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
-                    logit_bias, OptionalNullable[models.ChatStreamBodyLogitBias]
+                    logit_bias,
+                    OptionalNullable[models.ServerlessChatStreamBodyLogitBias],
                 ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
@@ -682,12 +691,13 @@ class Chat(BaseSDK):
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options, OptionalNullable[models.ChatStreamBodyStreamOptions]
+                    stream_options,
+                    OptionalNullable[models.ServerlessChatStreamBodyStreamOptions],
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ChatStreamBodyToolChoice]
+                    tool_choice, Optional[models.ServerlessChatStreamBodyToolChoice]
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
@@ -711,7 +721,11 @@ class Chat(BaseSDK):
             accept_header_value="text/event-stream",
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.chat_stream_body, False, False, "json", models.ChatStreamBody
+                request.serverless_chat_stream_body,
+                False,
+                False,
+                "json",
+                models.ServerlessChatStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
