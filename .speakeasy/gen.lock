@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: 2aebc86864ba0cfb1b4613619ef07c00
+  docChecksum: b22d691bcae87aa4189932224b5837cf
   docVersion: v1
-  speakeasyVersion: 1.438.1
-  generationVersion: 2.457.2
-  releaseVersion: 0.2.35
-  configChecksum: 5800034fa33113df58b1549582b885cf
+  speakeasyVersion: 1.439.0
+  generationVersion: 2.457.9
+  releaseVersion: 0.2.38
+  configChecksum: 4074ae8f5c2f3a2d2f1143a51f893a14
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.4
-    core: 5.6.4
+    core: 5.6.5
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -333,7 +333,7 @@ examples:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:statistics"}]}
       responses:
         "200":
-          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"None\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\\\"{\\\\\\\"result\\\\\\\": \\\\\\\"150 * 1.60934=241.401000000000\\\\\\\"}\\\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
+          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":null,\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\\\"{\\\\\\\"result\\\\\\\": \\\\\\\"150 * 1.60934=241.401000000000\\\\\\\"}\\\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
   serverlessCompletionsComplete:
     "":
       requestBody:

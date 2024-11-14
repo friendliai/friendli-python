@@ -4,6 +4,8 @@ sources:
     Friendli-API-Schema:
         inputs:
             - location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-api-schema
+        transformations:
+            - cleanup: true
 targets:
     friendli:
         target: python
