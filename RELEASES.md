@@ -59,3 +59,23 @@ Based on:
 - [python v0.2.35] .
 ### Releases
 - [PyPI v0.2.35] https://pypi.org/project/friendli/0.2.35 - .
+
+## 2024-11-13 09:33:20
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.438.1 (2.457.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v0.2.36] .
+### Releases
+- [PyPI v0.2.36] https://pypi.org/project/friendli/0.2.36 - .
+
+## 2024-11-14 01:13:35
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.439.0 (2.457.9) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v0.2.38] .
+### Releases
+- [PyPI v0.2.38] https://pypi.org/project/friendli/0.2.38 - .
