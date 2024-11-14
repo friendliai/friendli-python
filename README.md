@@ -401,7 +401,7 @@ from friendli import Friendli
 import os
 
 s = Friendli(
-    server_url="https://inference.friendli.ai",
+    server_url="https://api.friendli.ai",
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 

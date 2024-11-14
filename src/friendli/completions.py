@@ -49,7 +49,7 @@ class Completions(BaseSDK):
 
         req = self.build_request(
             method="POST",
-            path="/v1/completions",
+            path="/serverless/v1/completions",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -147,7 +147,7 @@ class Completions(BaseSDK):
 
         req = self.build_request_async(
             method="POST",
-            path="/v1/completions",
+            path="/serverless/v1/completions",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -245,7 +245,7 @@ class Completions(BaseSDK):
 
         req = self.build_request(
             method="POST",
-            path="/v1/completions#stream",
+            path="/serverless/v1/completions#stream",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -348,7 +348,7 @@ class Completions(BaseSDK):
 
         req = self.build_request_async(
             method="POST",
-            path="/v1/completions#stream",
+            path="/serverless/v1/completions#stream",
             base_url=base_url,
             url_variables=url_variables,
             request=request,

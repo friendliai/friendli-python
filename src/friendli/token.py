@@ -48,7 +48,7 @@ class Token(BaseSDK):
 
         req = self.build_request(
             method="POST",
-            path="/v1/tokenize",
+            path="/serverless/v1/tokenize",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -145,7 +145,7 @@ class Token(BaseSDK):
 
         req = self.build_request_async(
             method="POST",
-            path="/v1/tokenize",
+            path="/serverless/v1/tokenize",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -242,7 +242,7 @@ class Token(BaseSDK):
 
         req = self.build_request(
             method="POST",
-            path="/v1/detokenize",
+            path="/serverless/v1/detokenize",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -339,7 +339,7 @@ class Token(BaseSDK):
 
         req = self.build_request_async(
             method="POST",
-            path="/v1/detokenize",
+            path="/serverless/v1/detokenize",
             base_url=base_url,
             url_variables=url_variables,
             request=request,

@@ -124,7 +124,7 @@ class ToolAssistedChat(BaseSDK):
 
         req = self.build_request(
             method="POST",
-            path="/tools/v1/chat/completions",
+            path="/serverless/tools/v1/chat/completions#complete",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -297,7 +297,7 @@ class ToolAssistedChat(BaseSDK):
 
         req = self.build_request_async(
             method="POST",
-            path="/tools/v1/chat/completions",
+            path="/serverless/tools/v1/chat/completions#complete",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -470,7 +470,7 @@ class ToolAssistedChat(BaseSDK):
 
         req = self.build_request(
             method="POST",
-            path="/tools/v1/chat/completions#stream",
+            path="/serverless/tools/v1/chat/completions",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -650,7 +650,7 @@ class ToolAssistedChat(BaseSDK):
 
         req = self.build_request_async(
             method="POST",
-            path="/tools/v1/chat/completions#stream",
+            path="/serverless/tools/v1/chat/completions",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
