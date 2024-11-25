@@ -73,10 +73,6 @@ s = Friendli(
 
 res = s.serverless.tool_assisted_chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
     {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
         "role": "user",
         "content": "What is 3 + 6?",
     },
@@ -105,10 +101,6 @@ async def main():
         token=os.getenv("FRIENDLI_TOKEN", ""),
     )
     res = await s.serverless.tool_assisted_chat.complete_async(model="meta-llama-3.1-8b-instruct", messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
         {
             "role": "user",
             "content": "What is 3 + 6?",

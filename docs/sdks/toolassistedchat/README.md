@@ -24,10 +24,6 @@ s = Friendli(
 
 res = s.serverless.tool_assisted_chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
     {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
         "role": "user",
         "content": "What is 3 + 6?",
     },
@@ -96,10 +92,6 @@ s = Friendli(
 )
 
 res = s.serverless.tool_assisted_chat.stream(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
     {
         "role": "user",
         "content": "What is 3 + 6?",
