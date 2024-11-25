@@ -15,19 +15,18 @@ By giving a text input, generate a tokenized output of token IDs.
 ### Example Usage
 
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.token.tokenization(model="meta-llama-3.1-8b-instruct", prompt="What is generative AI?")
+res = s.serverless.token.tokenization(
+    model="meta-llama-3.1-8b-instruct", prompt="What is generative AI?"
+)
 
-if res is not None:
-    # handle response
-    pass
-
+print(res)
 ```
 
 ### Parameters
@@ -56,27 +55,27 @@ By giving a list of tokens, generate a detokenized output text string.
 ### Example Usage
 
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.token.detokenization(model="meta-llama-3.1-8b-instruct", tokens=[
-    128000,
-    3923,
-    374,
-    1803,
-    1413,
-    15592,
-    30,
-])
+res = s.serverless.token.detokenization(
+    model="meta-llama-3.1-8b-instruct",
+    tokens=[
+        128000,
+        3923,
+        374,
+        1803,
+        1413,
+        15592,
+        30,
+    ],
+)
 
-if res is not None:
-    # handle response
-    pass
-
+print(res)
 ```
 
 ### Parameters
