@@ -15,28 +15,30 @@ Given a list of messages forming a conversation, the model generates a response.
 ### Example Usage
 
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.tool_assisted_chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "user",
-        "content": "What is 3 + 6?",
-    },
-], max_tokens=200, tools=[
-    {
-        "type": "math:calculator",
-    },
-])
+res = s.serverless.tool_assisted_chat.complete(
+    model="meta-llama-3.1-8b-instruct",
+    messages=[
+        {
+            "role": "user",
+            "content": "What is 3 + 6?",
+        },
+    ],
+    max_tokens=200,
+    tools=[
+        {
+            "type": "math:calculator",
+        },
+    ],
+)
 
-if res is not None:
-    # handle response
-    pass
-
+print(res)
 ```
 
 ### Parameters
@@ -84,29 +86,33 @@ Given a list of messages forming a conversation, the model generates a response.
 ### Example Usage
 
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.tool_assisted_chat.stream(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "user",
-        "content": "What is 3 + 6?",
-    },
-], max_tokens=200, tools=[
-    {
-        "type": "math:calculator",
-    },
-])
+res = s.serverless.tool_assisted_chat.stream(
+    model="meta-llama-3.1-8b-instruct",
+    messages=[
+        {
+            "role": "user",
+            "content": "What is 3 + 6?",
+        },
+    ],
+    max_tokens=200,
+    tools=[
+        {
+            "type": "math:calculator",
+        },
+    ],
+)
 
 if res is not None:
     for event in res:
         # handle event
         print(event, flush=True)
-
 ```
 
 ### Parameters
