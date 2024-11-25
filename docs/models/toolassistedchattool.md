@@ -51,3 +51,9 @@ value: models.OtherBuiltInTool = /* values here */
 value: models.OtherBuiltInTool = /* values here */
 ```
 
+### `models.RagBuiltInTool`
+
+```python
+value: models.RagBuiltInTool = /* values here */
+```
+

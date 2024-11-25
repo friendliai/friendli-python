@@ -132,6 +132,7 @@ from .otherbuiltintool import (
     OtherBuiltInToolType,
     OtherBuiltInToolTypedDict,
 )
+from .ragbuiltintool import RagBuiltInTool, RagBuiltInToolType, RagBuiltInToolTypedDict
 from .responseformat import ResponseFormat, ResponseFormatTypedDict, Type
 from .sdkerror import SDKError
 from .security import Security, SecurityTypedDict
@@ -420,6 +421,9 @@ __all__ = [
     "OtherBuiltInToolTypedDict",
     "Parameters",
     "ParametersTypedDict",
+    "RagBuiltInTool",
+    "RagBuiltInToolType",
+    "RagBuiltInToolTypedDict",
     "ResponseFormat",
     "ResponseFormatTypedDict",
     "Role",

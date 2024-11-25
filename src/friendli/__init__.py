@@ -2,6 +2,7 @@
 
 from ._version import __title__, __version__
 from .sdk import *
+from .wrappedsdk import *
 from .sdkconfiguration import *
 from .models import *
 
