@@ -64,43 +64,16 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "Hello!",
-    },
-], max_tokens=200)
-
-if res is not None:
-    # handle response
-    pass
-```
-
-</br>
-
-The same SDK client can also be used to make asychronous requests by importing asyncio.
-```python
-# Asynchronous Example
-import asyncio
-from friendli import Friendli
-import os
-
-async def main():
-    s = Friendli(
-        token=os.getenv("FRIENDLI_TOKEN", ""),
-    )
-    res = await s.serverless.chat.complete_async(model="meta-llama-3.1-8b-instruct", messages=[
+res = s.serverless.chat.complete(
+    model="meta-llama-3.1-8b-instruct",
+    messages=[
         {
             "role": "system",
             "content": "You are a helpful assistant.",
@@ -109,10 +82,42 @@ async def main():
             "role": "user",
             "content": "Hello!",
         },
-    ], max_tokens=200)
-    if res is not None:
-        # handle response
-        pass
+    ],
+    max_tokens=200,
+)
+
+print(res)
+```
+
+</br>
+
+The same SDK client can also be used to make asychronous requests by importing asyncio.
+```python
+# Asynchronous Example
+import asyncio
+from friendli import AsyncFriendli
+import os
+
+
+async def main():
+    s = AsyncFriendli(
+        token=os.getenv("FRIENDLI_TOKEN", ""),
+    )
+    res = await s.serverless.chat.complete_async(
+        model="meta-llama-3.1-8b-instruct",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": "Hello!",
+            },
+        ],
+        max_tokens=200,
+    )
+    print(res)
 
 asyncio.run(main())
 ```
@@ -123,31 +128,30 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.tool_assisted_chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "What is 3 + 6?",
-    },
-], max_tokens=200, tools=[
-    {
-        "type": "math:calculator",
-    },
-])
+res = s.serverless.tool_assisted_chat.complete(
+    model="meta-llama-3.1-8b-instruct",
+    messages=[
+        {
+            "role": "user",
+            "content": "What is 3 + 6?",
+        },
+    ],
+    max_tokens=200,
+    tools=[
+        {
+            "type": "math:calculator",
+        },
+    ],
+)
 
-if res is not None:
-    # handle response
-    pass
+print(res)
 ```
 
 </br>
@@ -156,30 +160,30 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-from friendli import Friendli
+from friendli import AsyncFriendli
 import os
 
+
 async def main():
-    s = Friendli(
+    s = AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
     )
-    res = await s.serverless.tool_assisted_chat.complete_async(model="meta-llama-3.1-8b-instruct", messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "What is 3 + 6?",
-        },
-    ], max_tokens=200, tools=[
-        {
-            "type": "math:calculator",
-        },
-    ])
-    if res is not None:
-        # handle response
-        pass
+    res = await s.serverless.tool_assisted_chat.complete_async(
+        model="meta-llama-3.1-8b-instruct",
+        messages=[
+            {
+                "role": "user",
+                "content": "What is 3 + 6?",
+            },
+        ],
+        max_tokens=200,
+        tools=[
+            {
+                "type": "math:calculator",
+            },
+        ],
+    )
+    print(res)
 
 asyncio.run(main())
 ```
@@ -246,29 +250,32 @@ terminate when the server no longer has any events to send and closes the
 underlying connection.
 
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.chat.stream(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "Hello!",
-    },
-], max_tokens=200)
+res = s.serverless.chat.stream(
+    model="meta-llama-3.1-8b-instruct",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ],
+    max_tokens=200,
+)
 
 if res is not None:
     for event in res:
         # handle event
         print(event, flush=True)
-
 ```
 
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
@@ -282,58 +289,60 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 from friendli.utils import BackoffStrategy, RetryConfig
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "Hello!",
-    },
-], max_tokens=200,
-    RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
+res = s.serverless.chat.complete(
+    model="meta-llama-3.1-8b-instruct",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ],
+    max_tokens=200,
+    retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
+)
 
-if res is not None:
-    # handle response
-    pass
-
+print(res)
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 from friendli.utils import BackoffStrategy, RetryConfig
 import os
 
-s = Friendli(
+s = SyncFriendli(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "Hello!",
-    },
-], max_tokens=200)
+res = s.serverless.chat.complete(
+    model="meta-llama-3.1-8b-instruct",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ],
+    max_tokens=200,
+)
 
-if res is not None:
-    # handle response
-    pass
-
+print(res)
 ```
 <!-- End Retries [retries] -->
 
@@ -360,33 +369,35 @@ When custom error responses are specified for an operation, the SDK may also rai
 ### Example
 
 ```python
-from friendli import Friendli, models
+from friendli import SyncFriendli, models
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
 res = None
 try:
-    res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "Hello!",
-        },
-    ], max_tokens=200)
+    res = s.serverless.chat.complete(
+        model="meta-llama-3.1-8b-instruct",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": "Hello!",
+            },
+        ],
+        max_tokens=200,
+    )
 
-    if res is not None:
-        # handle response
-        pass
+    print(res)
 
 except models.SDKError as e:
     # handle exception
-    raise(e)
+    raise (e)
 ```
 <!-- End Error Handling [errors] -->
 
@@ -397,29 +408,30 @@ except models.SDKError as e:
 
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     server_url="https://api.friendli.ai",
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "Hello!",
-    },
-], max_tokens=200)
+res = s.serverless.chat.complete(
+    model="meta-llama-3.1-8b-instruct",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ],
+    max_tokens=200,
+)
 
-if res is not None:
-    # handle response
-    pass
-
+print(res)
 ```
 <!-- End Server Selection [server] -->
 
@@ -432,18 +444,20 @@ This allows you to wrap the client with your own custom logic, such as adding cu
 
 For example, you could specify a header for every request that this sdk makes as follows:
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 import httpx
 
 http_client = httpx.Client(headers={"x-custom-header": "someValue"})
-s = Friendli(client=http_client)
+s = SyncFriendli(client=http_client)
 ```
 
 or you could wrap the client with your own custom logic:
 ```python
-from friendli import Friendli
+from friendli import AsyncFriendli
 from friendli.httpclient import AsyncHttpClient
 import httpx
+from typing import Any, Optional, Union
+
 
 class CustomClient(AsyncHttpClient):
     client: AsyncHttpClient
@@ -500,7 +514,8 @@ class CustomClient(AsyncHttpClient):
             extensions=extensions,
         )
 
-s = Friendli(async_client=CustomClient(httpx.AsyncClient()))
+
+s = AsyncFriendli(async_client=CustomClient(httpx.AsyncClient()))
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
@@ -513,11 +528,11 @@ You can setup your SDK to emit debug logs for SDK requests and responses.
 
 You can pass your own logger class directly into your SDK.
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
-s = Friendli(debug_logger=logging.getLogger("friendli"))
+s = SyncFriendli(debug_logger=logging.getLogger("friendli"))
 ```
 
 You can also enable a default debug logger by setting an environment variable `FRIENDLI_DEBUG` to true.

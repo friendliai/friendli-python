@@ -14,3 +14,4 @@ The name of the built-in tool.
 | `WEB_URL`                 | web:url                   |
 | `CODE_PYTHON_INTERPRETER` | code:python-interpreter   |
 | `FILE_TEXT`               | file:text                 |
+| `RAG_KNOWLEDGE_BASE`      | rag:knowledge-base        |

@@ -3,7 +3,11 @@
 # pyright: reportReturnType = false
 from typing_extensions import Protocol, runtime_checkable
 import httpx
-from typing import Any, Optional, Union
+from typing import Any, Optional, Union, Type, TypeVar
+from types import TracebackType
+
+T = TypeVar("T", bound="HttpClient")
+U = TypeVar("U", bound="AsyncHttpClient")
 
 
 @runtime_checkable
@@ -41,6 +45,17 @@ class HttpClient(Protocol):
     ) -> httpx.Request:
         pass
 
+    def __enter__(self: T) -> T:
+        pass
+
+    def __exit__(
+        self,
+        exc_type: Union[Type[BaseException], None],
+        exc_val: Union[BaseException, None],
+        exc_tb: Union[TracebackType, None]
+    ) -> None:
+        pass
+
 
 @runtime_checkable
 class AsyncHttpClient(Protocol):
@@ -75,4 +90,15 @@ class AsyncHttpClient(Protocol):
         ] = httpx.USE_CLIENT_DEFAULT,
         extensions: Optional[httpx._types.RequestExtensions] = None,
     ) -> httpx.Request:
+        pass
+
+    async def __aenter__(self: U) -> U:
+        pass
+
+    async def __aexit__(
+        self,
+        exc_type: Union[Type[BaseException], None],
+        exc_val: Union[BaseException, None],
+        exc_tb: Union[TracebackType, None]
+    ) -> None:
         pass
