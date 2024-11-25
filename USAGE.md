@@ -5,43 +5,16 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "Hello!",
-    },
-], max_tokens=200)
-
-if res is not None:
-    # handle response
-    pass
-```
-
-</br>
-
-The same SDK client can also be used to make asychronous requests by importing asyncio.
-```python
-# Asynchronous Example
-import asyncio
-from friendli import Friendli
-import os
-
-async def main():
-    s = Friendli(
-        token=os.getenv("FRIENDLI_TOKEN", ""),
-    )
-    res = await s.serverless.chat.complete_async(model="meta-llama-3.1-8b-instruct", messages=[
+res = s.serverless.chat.complete(
+    model="meta-llama-3.1-8b-instruct",
+    messages=[
         {
             "role": "system",
             "content": "You are a helpful assistant.",
@@ -50,10 +23,42 @@ async def main():
             "role": "user",
             "content": "Hello!",
         },
-    ], max_tokens=200)
-    if res is not None:
-        # handle response
-        pass
+    ],
+    max_tokens=200,
+)
+
+print(res)
+```
+
+</br>
+
+The same SDK client can also be used to make asychronous requests by importing asyncio.
+```python
+# Asynchronous Example
+import asyncio
+from friendli import AsyncFriendli
+import os
+
+
+async def main():
+    s = AsyncFriendli(
+        token=os.getenv("FRIENDLI_TOKEN", ""),
+    )
+    res = await s.serverless.chat.complete_async(
+        model="meta-llama-3.1-8b-instruct",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": "Hello!",
+            },
+        ],
+        max_tokens=200,
+    )
+    print(res)
 
 asyncio.run(main())
 ```
@@ -64,31 +69,30 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.tool_assisted_chat.complete(model="meta-llama-3.1-8b-instruct", messages=[
-    {
-        "role": "system",
-        "content": "You are a helpful assistant.",
-    },
-    {
-        "role": "user",
-        "content": "What is 3 + 6?",
-    },
-], max_tokens=200, tools=[
-    {
-        "type": "math:calculator",
-    },
-])
+res = s.serverless.tool_assisted_chat.complete(
+    model="meta-llama-3.1-8b-instruct",
+    messages=[
+        {
+            "role": "user",
+            "content": "What is 3 + 6?",
+        },
+    ],
+    max_tokens=200,
+    tools=[
+        {
+            "type": "math:calculator",
+        },
+    ],
+)
 
-if res is not None:
-    # handle response
-    pass
+print(res)
 ```
 
 </br>
@@ -97,30 +101,30 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-from friendli import Friendli
+from friendli import AsyncFriendli
 import os
 
+
 async def main():
-    s = Friendli(
+    s = AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
     )
-    res = await s.serverless.tool_assisted_chat.complete_async(model="meta-llama-3.1-8b-instruct", messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "What is 3 + 6?",
-        },
-    ], max_tokens=200, tools=[
-        {
-            "type": "math:calculator",
-        },
-    ])
-    if res is not None:
-        # handle response
-        pass
+    res = await s.serverless.tool_assisted_chat.complete_async(
+        model="meta-llama-3.1-8b-instruct",
+        messages=[
+            {
+                "role": "user",
+                "content": "What is 3 + 6?",
+            },
+        ],
+        max_tokens=200,
+        tools=[
+            {
+                "type": "math:calculator",
+            },
+        ],
+    )
+    print(res)
 
 asyncio.run(main())
 ```

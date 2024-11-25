@@ -15,24 +15,23 @@ Generate text based on the given text prompt.
 ### Example Usage
 
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.completions.complete(serverless_completions_complete_body={
-    "prompt": "Say this is a test!",
-    "model": "meta-llama-3.1-8b-instruct",
-    "max_tokens": 200,
-    "top_k": 1,
-})
+res = s.serverless.completions.complete(
+    serverless_completions_complete_body={
+        "prompt": "Say this is a test!",
+        "model": "meta-llama-3.1-8b-instruct",
+        "max_tokens": 200,
+        "top_k": 1,
+    }
+)
 
-if res is not None:
-    # handle response
-    pass
-
+print(res)
 ```
 
 ### Parameters
@@ -60,25 +59,26 @@ Generate text based on the given text prompt.
 ### Example Usage
 
 ```python
-from friendli import Friendli
+from friendli import SyncFriendli
 import os
 
-s = Friendli(
+s = SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 )
 
-res = s.serverless.completions.stream(serverless_completions_stream_body={
-    "prompt": "Say this is a test!",
-    "model": "meta-llama-3.1-8b-instruct",
-    "max_tokens": 200,
-    "top_k": 1,
-})
+res = s.serverless.completions.stream(
+    serverless_completions_stream_body={
+        "prompt": "Say this is a test!",
+        "model": "meta-llama-3.1-8b-instruct",
+        "max_tokens": 200,
+        "top_k": 1,
+    }
+)
 
 if res is not None:
     for event in res:
         # handle event
         print(event, flush=True)
-
 ```
 
 ### Parameters

@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: c362fb7cab17ad43831e34fef7e3336d
+  docChecksum: 029c883f4dcda92779af8f3e0c2cee1a
   docVersion: v1
-  speakeasyVersion: 1.439.0
-  generationVersion: 2.457.9
-  releaseVersion: 0.3.0
-  configChecksum: 1f7371b0e5432e105c7b9fcf3c0a4afb
+  speakeasyVersion: 1.444.4
+  generationVersion: 2.461.4
+  releaseVersion: 0.3.14
+  configChecksum: 9caaae27398ff88fcb2955bc2cc511ab
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
   published: true
 features:
   python:
     additionalDependencies: 1.0.0
-    constsAndDefaults: 1.0.4
-    core: 5.6.5
+    constsAndDefaults: 1.0.5
+    core: 5.6.6
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -102,6 +102,8 @@ generatedFiles:
   - docs/models/otherbuiltintool.md
   - docs/models/otherbuiltintooltype.md
   - docs/models/parameters.md
+  - docs/models/ragbuiltintool.md
+  - docs/models/ragbuiltintooltype.md
   - docs/models/responseformat.md
   - docs/models/role.md
   - docs/models/security.md
@@ -189,7 +191,6 @@ generatedFiles:
   - pyproject.toml
   - scripts/prepare-readme.py
   - scripts/publish.sh
-  - src/friendli/__init__.py
   - src/friendli/_hooks/__init__.py
   - src/friendli/_hooks/sdkhooks.py
   - src/friendli/_hooks/types.py
@@ -201,7 +202,6 @@ generatedFiles:
   - src/friendli/friendli_chat.py
   - src/friendli/friendli_completions.py
   - src/friendli/friendli_token.py
-  - src/friendli/httpclient.py
   - src/friendli/models/__init__.py
   - src/friendli/models/assistantmessage.py
   - src/friendli/models/chatchoice.py
@@ -229,6 +229,7 @@ generatedFiles:
   - src/friendli/models/logprobs.py
   - src/friendli/models/message.py
   - src/friendli/models/otherbuiltintool.py
+  - src/friendli/models/ragbuiltintool.py
   - src/friendli/models/responseformat.py
   - src/friendli/models/sdkerror.py
   - src/friendli/models/security.py
@@ -314,7 +315,7 @@ examples:
   serverlessToolAssistedChatComplete:
     "":
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
       responses:
         "200":
           application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
@@ -327,7 +328,7 @@ examples:
   serverlessToolAssistedChatStream:
     "":
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
     Example:
       requestBody:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:statistics"}]}
