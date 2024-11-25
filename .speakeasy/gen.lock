@@ -5,8 +5,8 @@ management:
   docVersion: v1
   speakeasyVersion: 1.444.4
   generationVersion: 2.461.4
-  releaseVersion: 0.3.13
-  configChecksum: b906d4f0de8bd0aca263d401d432c7ad
+  releaseVersion: 0.3.14
+  configChecksum: 9caaae27398ff88fcb2955bc2cc511ab
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
   published: true

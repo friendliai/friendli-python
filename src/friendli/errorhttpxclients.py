@@ -1,7 +1,10 @@
 import httpx
 from .httpclient import AsyncHttpClient, HttpClient
-from typing import Any, NoReturn, Optional, Union, Type, Self
+from typing import Any, NoReturn, Optional, Union, Type, TypeVar
 from types import TracebackType
+
+T = TypeVar("T", bound="ErrorThrowingSyncClient")
+U = TypeVar("U", bound="ErrorThrowingAsyncClient")
 
 
 class MethodUsedInWrongPlaceError(Exception):
@@ -44,7 +47,7 @@ class ErrorThrowingSyncClient(HttpClient):
     ) -> httpx.Request:
         self._raise_error()
 
-    def __enter__(self: Self) -> Self:
+    def __enter__(self: T) -> T:
         return self
 
     def __exit__(
@@ -93,7 +96,7 @@ class ErrorThrowingAsyncClient(AsyncHttpClient):
     ) -> httpx.Request:
         self._raise_error()
 
-    async def __aenter__(self: Self) -> Self:
+    async def __aenter__(self: U) -> U:
         return self
 
     async def __aexit__(
