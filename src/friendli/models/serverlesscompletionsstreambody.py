@@ -6,7 +6,7 @@ from .tokensequence import TokenSequence, TokenSequenceTypedDict
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List, Union
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 class ServerlessCompletionsStreamBodyCompletionsBodyWithTokensTypedDict(TypedDict):
@@ -667,13 +667,19 @@ class ServerlessCompletionsStreamBodyCompletionsBodyWithPrompt(BaseModel):
         return m
 
 
-ServerlessCompletionsStreamBodyTypedDict = Union[
-    ServerlessCompletionsStreamBodyCompletionsBodyWithPromptTypedDict,
-    ServerlessCompletionsStreamBodyCompletionsBodyWithTokensTypedDict,
-]
+ServerlessCompletionsStreamBodyTypedDict = TypeAliasType(
+    "ServerlessCompletionsStreamBodyTypedDict",
+    Union[
+        ServerlessCompletionsStreamBodyCompletionsBodyWithPromptTypedDict,
+        ServerlessCompletionsStreamBodyCompletionsBodyWithTokensTypedDict,
+    ],
+)
 
 
-ServerlessCompletionsStreamBody = Union[
-    ServerlessCompletionsStreamBodyCompletionsBodyWithPrompt,
-    ServerlessCompletionsStreamBodyCompletionsBodyWithTokens,
-]
+ServerlessCompletionsStreamBody = TypeAliasType(
+    "ServerlessCompletionsStreamBody",
+    Union[
+        ServerlessCompletionsStreamBodyCompletionsBodyWithPrompt,
+        ServerlessCompletionsStreamBodyCompletionsBodyWithTokens,
+    ],
+)

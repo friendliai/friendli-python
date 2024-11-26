@@ -5,7 +5,7 @@ from friendli import models, utils
 from friendli._hooks import HookContext
 from friendli.types import OptionalNullable, UNSET
 from friendli.utils import eventstreaming, get_security_from_env
-from typing import AsyncGenerator, Generator, List, Optional, Union
+from typing import List, Optional, Union
 
 
 class ToolAssistedChat(BaseSDK):
@@ -395,7 +395,7 @@ class ToolAssistedChat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Generator[models.StreamedToolAssistedChatResult, None, None]:
+    ) -> eventstreaming.EventStream[models.StreamedToolAssistedChatResult]:
         r"""Stream tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
@@ -513,7 +513,7 @@ class ToolAssistedChat(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "text/event-stream"):
-            return eventstreaming.stream_events(
+            return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
                     raw, models.StreamedToolAssistedChatResult
@@ -575,7 +575,10 @@ class ToolAssistedChat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> AsyncGenerator[models.StreamedToolAssistedChatResult, None]:
+    ) -> Union[
+        eventstreaming.EventStream[models.StreamedToolAssistedChatResult],
+        eventstreaming.EventStreamAsync[models.StreamedToolAssistedChatResult],
+    ]:
         r"""Stream tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
@@ -693,7 +696,7 @@ class ToolAssistedChat(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "text/event-stream"):
-            return eventstreaming.stream_events_async(
+            return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
                     raw, models.StreamedToolAssistedChatResult
