@@ -624,10 +624,7 @@ class Chat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Union[
-        eventstreaming.EventStream[models.StreamedChatResult],
-        eventstreaming.EventStreamAsync[models.StreamedChatResult],
-    ]:
+    ) -> eventstreaming.EventStreamAsync[models.StreamedChatResult]:
         r"""Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.

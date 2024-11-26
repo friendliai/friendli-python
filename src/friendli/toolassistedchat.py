@@ -575,10 +575,7 @@ class ToolAssistedChat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Union[
-        eventstreaming.EventStream[models.StreamedToolAssistedChatResult],
-        eventstreaming.EventStreamAsync[models.StreamedToolAssistedChatResult],
-    ]:
+    ) -> eventstreaming.EventStreamAsync[models.StreamedToolAssistedChatResult]:
         r"""Stream tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
