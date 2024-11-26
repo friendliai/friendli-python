@@ -67,43 +67,10 @@ Given a list of messages forming a conversation, the model generates a response.
 from friendli import SyncFriendli
 import os
 
-s = SyncFriendli(
+with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-)
-
-res = s.serverless.chat.complete(
-    model="meta-llama-3.1-8b-instruct",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "Hello!",
-        },
-    ],
-    max_tokens=200,
-)
-
-print(res)
-```
-
-</br>
-
-The same SDK client can also be used to make asychronous requests by importing asyncio.
-```python
-# Asynchronous Example
-import asyncio
-from friendli import AsyncFriendli
-import os
-
-
-async def main():
-    s = AsyncFriendli(
-        token=os.getenv("FRIENDLI_TOKEN", ""),
-    )
-    res = await s.serverless.chat.complete_async(
+) as s:
+    res = s.serverless.chat.complete(
         model="meta-llama-3.1-8b-instruct",
         messages=[
             {
@@ -117,41 +84,8 @@ async def main():
         ],
         max_tokens=200,
     )
+
     print(res)
-
-asyncio.run(main())
-```
-
-### Tool assisted chat completions
-
-Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
-
-```python
-# Synchronous Example
-from friendli import SyncFriendli
-import os
-
-s = SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
-)
-
-res = s.serverless.tool_assisted_chat.complete(
-    model="meta-llama-3.1-8b-instruct",
-    messages=[
-        {
-            "role": "user",
-            "content": "What is 3 + 6?",
-        },
-    ],
-    max_tokens=200,
-    tools=[
-        {
-            "type": "math:calculator",
-        },
-    ],
-)
-
-print(res)
 ```
 
 </br>
@@ -165,10 +99,42 @@ import os
 
 
 async def main():
-    s = AsyncFriendli(
+    async with AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
-    )
-    res = await s.serverless.tool_assisted_chat.complete_async(
+    ) as s:
+        res = await s.serverless.chat.complete_async(
+            model="meta-llama-3.1-8b-instruct",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant.",
+                },
+                {
+                    "role": "user",
+                    "content": "Hello!",
+                },
+            ],
+            max_tokens=200,
+        )
+
+        print(res)
+
+asyncio.run(main())
+```
+
+### Tool assisted chat completions
+
+Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
+
+```python
+# Synchronous Example
+from friendli import SyncFriendli
+import os
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as s:
+    res = s.serverless.tool_assisted_chat.complete(
         model="meta-llama-3.1-8b-instruct",
         messages=[
             {
@@ -183,7 +149,41 @@ async def main():
             },
         ],
     )
+
     print(res)
+```
+
+</br>
+
+The same SDK client can also be used to make asychronous requests by importing asyncio.
+```python
+# Asynchronous Example
+import asyncio
+from friendli import AsyncFriendli
+import os
+
+
+async def main():
+    async with AsyncFriendli(
+        token=os.getenv("FRIENDLI_TOKEN", ""),
+    ) as s:
+        res = await s.serverless.tool_assisted_chat.complete_async(
+            model="meta-llama-3.1-8b-instruct",
+            messages=[
+                {
+                    "role": "user",
+                    "content": "What is 3 + 6?",
+                },
+            ],
+            max_tokens=200,
+            tools=[
+                {
+                    "type": "math:calculator",
+                },
+            ],
+        )
+
+        print(res)
 
 asyncio.run(main())
 ```
@@ -247,39 +247,43 @@ asyncio.run(main())
 operations. These operations will expose the stream as [Generator][generator] that
 can be consumed using a simple `for` loop. The loop will
 terminate when the server no longer has any events to send and closes the
-underlying connection.
+underlying connection.  
+
+The stream is also a [Context Manager][context-manager] and can be used with the `with` statement and will close the
+underlying connection when the context is exited.
 
 ```python
 from friendli import SyncFriendli
 import os
 
-s = SyncFriendli(
+with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-)
+) as s:
+    res = s.serverless.chat.stream(
+        model="meta-llama-3.1-8b-instruct",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": "Hello!",
+            },
+        ],
+        max_tokens=200,
+    )
 
-res = s.serverless.chat.stream(
-    model="meta-llama-3.1-8b-instruct",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "Hello!",
-        },
-    ],
-    max_tokens=200,
-)
-
-if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
+    if res is not None:
+        with res as event_stream:
+            for event in event_stream:
+                # handle event
+                print(event, flush=True)
 ```
 
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
-[generator]: https://wiki.python.org/moin/Generators
+[generator]: https://book.pythontips.com/en/latest/generators.html
+[context-manager]: https://book.pythontips.com/en/latest/context_managers.html
 <!-- End Server-sent event streaming [eventstream] -->
 
 <!-- Start Retries [retries] -->
@@ -293,27 +297,26 @@ from friendli import SyncFriendli
 from friendli.utils import BackoffStrategy, RetryConfig
 import os
 
-s = SyncFriendli(
+with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-)
+) as s:
+    res = s.serverless.chat.complete(
+        model="meta-llama-3.1-8b-instruct",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": "Hello!",
+            },
+        ],
+        max_tokens=200,
+        retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
+    )
 
-res = s.serverless.chat.complete(
-    model="meta-llama-3.1-8b-instruct",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "Hello!",
-        },
-    ],
-    max_tokens=200,
-    retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-)
-
-print(res)
+    print(res)
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
@@ -322,27 +325,26 @@ from friendli import SyncFriendli
 from friendli.utils import BackoffStrategy, RetryConfig
 import os
 
-s = SyncFriendli(
+with SyncFriendli(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token=os.getenv("FRIENDLI_TOKEN", ""),
-)
+) as s:
+    res = s.serverless.chat.complete(
+        model="meta-llama-3.1-8b-instruct",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": "Hello!",
+            },
+        ],
+        max_tokens=200,
+    )
 
-res = s.serverless.chat.complete(
-    model="meta-llama-3.1-8b-instruct",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "Hello!",
-        },
-    ],
-    max_tokens=200,
-)
-
-print(res)
+    print(res)
 ```
 <!-- End Retries [retries] -->
 
@@ -372,12 +374,48 @@ When custom error responses are specified for an operation, the SDK may also rai
 from friendli import SyncFriendli, models
 import os
 
-s = SyncFriendli(
+with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-)
+) as s:
+    res = None
+    try:
+        res = s.serverless.chat.complete(
+            model="meta-llama-3.1-8b-instruct",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant.",
+                },
+                {
+                    "role": "user",
+                    "content": "Hello!",
+                },
+            ],
+            max_tokens=200,
+        )
 
-res = None
-try:
+        print(res)
+
+    except models.SDKError as e:
+        # handle exception
+        raise (e)
+```
+<!-- End Error Handling [errors] -->
+
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+### Override Server URL Per-Client
+
+The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+```python
+from friendli import SyncFriendli
+import os
+
+with SyncFriendli(
+    server_url="https://api.friendli.ai",
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as s:
     res = s.serverless.chat.complete(
         model="meta-llama-3.1-8b-instruct",
         messages=[
@@ -394,44 +432,6 @@ try:
     )
 
     print(res)
-
-except models.SDKError as e:
-    # handle exception
-    raise (e)
-```
-<!-- End Error Handling [errors] -->
-
-<!-- Start Server Selection [server] -->
-## Server Selection
-
-### Override Server URL Per-Client
-
-The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
-```python
-from friendli import SyncFriendli
-import os
-
-s = SyncFriendli(
-    server_url="https://api.friendli.ai",
-    token=os.getenv("FRIENDLI_TOKEN", ""),
-)
-
-res = s.serverless.chat.complete(
-    model="meta-llama-3.1-8b-instruct",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "Hello!",
-        },
-    ],
-    max_tokens=200,
-)
-
-print(res)
 ```
 <!-- End Server Selection [server] -->
 

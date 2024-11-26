@@ -10,13 +10,16 @@ from .completionsbodywithtokens import (
     CompletionsBodyWithTokensTypedDict,
 )
 from typing import Union
+from typing_extensions import TypeAliasType
 
 
-ServerlessCompletionsCompleteBodyTypedDict = Union[
-    CompletionsBodyWithPromptTypedDict, CompletionsBodyWithTokensTypedDict
-]
+ServerlessCompletionsCompleteBodyTypedDict = TypeAliasType(
+    "ServerlessCompletionsCompleteBodyTypedDict",
+    Union[CompletionsBodyWithPromptTypedDict, CompletionsBodyWithTokensTypedDict],
+)
 
 
-ServerlessCompletionsCompleteBody = Union[
-    CompletionsBodyWithPrompt, CompletionsBodyWithTokens
-]
+ServerlessCompletionsCompleteBody = TypeAliasType(
+    "ServerlessCompletionsCompleteBody",
+    Union[CompletionsBodyWithPrompt, CompletionsBodyWithTokens],
+)

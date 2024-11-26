@@ -18,20 +18,19 @@ Generate text based on the given text prompt.
 from friendli import SyncFriendli
 import os
 
-s = SyncFriendli(
+with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-)
+) as s:
+    res = s.dedicated.completions.complete(
+        dedicated_completions_complete_body={
+            "prompt": "Say this is a test!",
+            "model": "(endpoint-id):(adapter-route)",
+            "max_tokens": 200,
+            "top_k": 1,
+        }
+    )
 
-res = s.dedicated.completions.complete(
-    dedicated_completions_complete_body={
-        "prompt": "Say this is a test!",
-        "model": "(endpoint-id):(adapter-route)",
-        "max_tokens": 200,
-        "top_k": 1,
-    }
-)
-
-print(res)
+    print(res)
 ```
 
 ### Parameters
@@ -62,23 +61,23 @@ Generate text based on the given text prompt.
 from friendli import SyncFriendli
 import os
 
-s = SyncFriendli(
+with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-)
+) as s:
+    res = s.dedicated.completions.stream(
+        dedicated_completions_stream_body={
+            "prompt": "Say this is a test!",
+            "model": "(endpoint-id):(adapter-route)",
+            "max_tokens": 200,
+            "top_k": 1,
+        }
+    )
 
-res = s.dedicated.completions.stream(
-    dedicated_completions_stream_body={
-        "prompt": "Say this is a test!",
-        "model": "(endpoint-id):(adapter-route)",
-        "max_tokens": 200,
-        "top_k": 1,
-    }
-)
-
-if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
+    if res is not None:
+        with res as event_stream:
+            for event in event_stream:
+                # handle event
+                print(event, flush=True)
 ```
 
 ### Parameters
@@ -91,7 +90,7 @@ if res is not None:
 
 ### Response
 
-**[Union[Generator[models.StreamedCompletionsResult, None, None], AsyncGenerator[models.StreamedCompletionsResult, None]]](../../models/.md)**
+**[Union[eventstreaming.EventStream[models.StreamedCompletionsResult], eventstreaming.EventStreamAsync[models.StreamedCompletionsResult]]](../../models/.md)**
 
 ### Errors
 

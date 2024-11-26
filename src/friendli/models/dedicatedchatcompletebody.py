@@ -7,7 +7,7 @@ from .tool import Tool, ToolTypedDict
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 class DedicatedChatCompleteBodyLogitBiasTypedDict(TypedDict):
@@ -103,9 +103,10 @@ class DedicatedChatCompleteBodyToolChoiceObject(BaseModel):
     function: DedicatedChatCompleteBodyToolChoiceFunction
 
 
-DedicatedChatCompleteBodyToolChoiceTypedDict = Union[
-    DedicatedChatCompleteBodyToolChoiceObjectTypedDict, str
-]
+DedicatedChatCompleteBodyToolChoiceTypedDict = TypeAliasType(
+    "DedicatedChatCompleteBodyToolChoiceTypedDict",
+    Union[DedicatedChatCompleteBodyToolChoiceObjectTypedDict, str],
+)
 r"""Determines the tool calling behavior of the model.
 When set to `none`, the model will bypass tool execution and generate a response directly.
 In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.
@@ -115,9 +116,10 @@ You can also specify a particular tool by `{\"type\": \"function\", \"function\"
 """
 
 
-DedicatedChatCompleteBodyToolChoice = Union[
-    DedicatedChatCompleteBodyToolChoiceObject, str
-]
+DedicatedChatCompleteBodyToolChoice = TypeAliasType(
+    "DedicatedChatCompleteBodyToolChoice",
+    Union[DedicatedChatCompleteBodyToolChoiceObject, str],
+)
 r"""Determines the tool calling behavior of the model.
 When set to `none`, the model will bypass tool execution and generate a response directly.
 In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.

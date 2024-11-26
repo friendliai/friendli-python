@@ -8,15 +8,18 @@ from .ragbuiltintool import RagBuiltInTool, RagBuiltInToolTypedDict
 from friendli.utils import get_discriminator
 from pydantic import Discriminator, Tag
 from typing import Union
-from typing_extensions import Annotated
+from typing_extensions import Annotated, TypeAliasType
 
 
-ToolAssistedChatToolTypedDict = Union[
-    OtherBuiltInToolTypedDict,
-    FunctionToolTypedDict,
-    FileBuiltInToolTypedDict,
-    RagBuiltInToolTypedDict,
-]
+ToolAssistedChatToolTypedDict = TypeAliasType(
+    "ToolAssistedChatToolTypedDict",
+    Union[
+        OtherBuiltInToolTypedDict,
+        FunctionToolTypedDict,
+        FileBuiltInToolTypedDict,
+        RagBuiltInToolTypedDict,
+    ],
+)
 
 
 ToolAssistedChatTool = Annotated[

@@ -25,12 +25,7 @@ def format_markdown_files():
         code = match.group(2)    # code
         suffix = match.group(3)  # ```
 
-        code = re.sub(
-            r',\s+(RetryConfig\(.*?\))',
-            r', retries=\1',
-            code
-        )
-
+        code = re.sub(r',\s+(RetryConfig\(.*?\))', r', retries=\1', code)
         code = re.sub(
             r'if res is not None:\s+# handle response\s+pass',
             r'print(res)',
@@ -43,24 +38,16 @@ def format_markdown_files():
                 'from friendli import AsyncFriendli',
                 code
             )
-
-            code = re.sub(
-                r's = Friendli\(',
-                's = AsyncFriendli(',
-                code
-            )
+            code = re.sub(r'with Friendli\(', 'with AsyncFriendli(', code)
+            code = re.sub(r's = Friendli\(', 's = AsyncFriendli(', code)
         else:
             code = re.sub(
                 'from friendli import Friendli',
                 'from friendli import SyncFriendli',
                 code
             )
-
-            code = re.sub(
-                r's = Friendli\(',
-                's = SyncFriendli(',
-                code
-            )
+            code = re.sub(r'with Friendli\(', 'with SyncFriendli(', code)
+            code = re.sub(r's = Friendli\(', 's = SyncFriendli(', code)
 
         with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as temp_file:
             temp_file.write(code)

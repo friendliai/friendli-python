@@ -5,7 +5,7 @@ from friendli import models, utils
 from friendli._hooks import HookContext
 from friendli.types import OptionalNullable, UNSET
 from friendli.utils import eventstreaming, get_security_from_env
-from typing import AsyncGenerator, Generator, Optional, Union
+from typing import Optional, Union
 
 
 class Completions(BaseSDK):
@@ -216,7 +216,7 @@ class Completions(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Generator[models.StreamedCompletionsResult, None, None]:
+    ) -> eventstreaming.EventStream[models.StreamedCompletionsResult]:
         r"""Stream completions
 
         Generate text based on the given text prompt.
@@ -288,7 +288,7 @@ class Completions(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "text/event-stream"):
-            return eventstreaming.stream_events(
+            return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(raw, models.StreamedCompletionsResult),
                 sentinel="[DONE]",
@@ -319,7 +319,10 @@ class Completions(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> AsyncGenerator[models.StreamedCompletionsResult, None]:
+    ) -> Union[
+        eventstreaming.EventStream[models.StreamedCompletionsResult],
+        eventstreaming.EventStreamAsync[models.StreamedCompletionsResult],
+    ]:
         r"""Stream completions
 
         Generate text based on the given text prompt.
@@ -391,7 +394,7 @@ class Completions(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "text/event-stream"):
-            return eventstreaming.stream_events_async(
+            return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(raw, models.StreamedCompletionsResult),
                 sentinel="[DONE]",

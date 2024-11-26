@@ -7,7 +7,7 @@ from .toolassistedchattool import ToolAssistedChatTool, ToolAssistedChatToolType
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 ServerlessToolAssistedChatCompleteBodyToolChoiceType = Literal["function"]
@@ -37,9 +37,10 @@ class ServerlessToolAssistedChatCompleteBodyToolChoiceObject(BaseModel):
     function: ServerlessToolAssistedChatCompleteBodyToolChoiceFunction
 
 
-ServerlessToolAssistedChatCompleteBodyToolChoiceTypedDict = Union[
-    ServerlessToolAssistedChatCompleteBodyToolChoiceObjectTypedDict, str
-]
+ServerlessToolAssistedChatCompleteBodyToolChoiceTypedDict = TypeAliasType(
+    "ServerlessToolAssistedChatCompleteBodyToolChoiceTypedDict",
+    Union[ServerlessToolAssistedChatCompleteBodyToolChoiceObjectTypedDict, str],
+)
 r"""Determines the tool calling behavior of the model.
 When set to `none`, the model will bypass tool execution and generate a response directly.
 In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.
@@ -49,9 +50,10 @@ You can also specify a particular tool by `{\"type\": \"function\", \"function\"
 """
 
 
-ServerlessToolAssistedChatCompleteBodyToolChoice = Union[
-    ServerlessToolAssistedChatCompleteBodyToolChoiceObject, str
-]
+ServerlessToolAssistedChatCompleteBodyToolChoice = TypeAliasType(
+    "ServerlessToolAssistedChatCompleteBodyToolChoice",
+    Union[ServerlessToolAssistedChatCompleteBodyToolChoiceObject, str],
+)
 r"""Determines the tool calling behavior of the model.
 When set to `none`, the model will bypass tool execution and generate a response directly.
 In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.

@@ -5,7 +5,7 @@ from friendli import models, utils
 from friendli._hooks import HookContext
 from friendli.types import OptionalNullable, UNSET
 from friendli.utils import eventstreaming, get_security_from_env
-from typing import AsyncGenerator, Generator, List, Optional, Union
+from typing import List, Optional, Union
 
 
 class Chat(BaseSDK):
@@ -425,7 +425,7 @@ class Chat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Generator[models.StreamedChatResult, None, None]:
+    ) -> eventstreaming.EventStream[models.StreamedChatResult]:
         r"""Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -554,7 +554,7 @@ class Chat(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "text/event-stream"):
-            return eventstreaming.stream_events(
+            return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(raw, models.StreamedChatResult),
                 sentinel="[DONE]",
@@ -624,7 +624,10 @@ class Chat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> AsyncGenerator[models.StreamedChatResult, None]:
+    ) -> Union[
+        eventstreaming.EventStream[models.StreamedChatResult],
+        eventstreaming.EventStreamAsync[models.StreamedChatResult],
+    ]:
         r"""Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -753,7 +756,7 @@ class Chat(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "text/event-stream"):
-            return eventstreaming.stream_events_async(
+            return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(raw, models.StreamedChatResult),
                 sentinel="[DONE]",
