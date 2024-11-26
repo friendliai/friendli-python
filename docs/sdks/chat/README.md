@@ -18,26 +18,25 @@ Given a list of messages forming a conversation, the model generates a response.
 from friendli import SyncFriendli
 import os
 
-s = SyncFriendli(
+with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-)
+) as s:
+    res = s.serverless.chat.complete(
+        model="meta-llama-3.1-8b-instruct",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": "Hello!",
+            },
+        ],
+        max_tokens=200,
+    )
 
-res = s.serverless.chat.complete(
-    model="meta-llama-3.1-8b-instruct",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "Hello!",
-        },
-    ],
-    max_tokens=200,
-)
-
-print(res)
+    print(res)
 ```
 
 ### Parameters
@@ -91,29 +90,29 @@ Given a list of messages forming a conversation, the model generates a response.
 from friendli import SyncFriendli
 import os
 
-s = SyncFriendli(
+with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-)
+) as s:
+    res = s.serverless.chat.stream(
+        model="meta-llama-3.1-8b-instruct",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": "Hello!",
+            },
+        ],
+        max_tokens=200,
+    )
 
-res = s.serverless.chat.stream(
-    model="meta-llama-3.1-8b-instruct",
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "Hello!",
-        },
-    ],
-    max_tokens=200,
-)
-
-if res is not None:
-    for event in res:
-        # handle event
-        print(event, flush=True)
+    if res is not None:
+        with res as event_stream:
+            for event in event_stream:
+                # handle event
+                print(event, flush=True)
 ```
 
 ### Parameters
@@ -149,7 +148,7 @@ if res is not None:
 
 ### Response
 
-**[Union[Generator[models.StreamedChatResult, None, None], AsyncGenerator[models.StreamedChatResult, None]]](../../models/.md)**
+**[Union[eventstreaming.EventStream[models.StreamedChatResult], eventstreaming.EventStreamAsync[models.StreamedChatResult]]](../../models/.md)**
 
 ### Errors
 

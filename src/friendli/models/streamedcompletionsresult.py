@@ -13,12 +13,16 @@ from friendli.types import BaseModel
 from friendli.utils import get_discriminator
 from pydantic import Discriminator, Tag
 from typing import Union
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
-StreamedCompletionsResultDataTypedDict = Union[
-    StreamedCompletionsTokenCompleteTypedDict, StreamedCompletionsTokenSampledTypedDict
-]
+StreamedCompletionsResultDataTypedDict = TypeAliasType(
+    "StreamedCompletionsResultDataTypedDict",
+    Union[
+        StreamedCompletionsTokenCompleteTypedDict,
+        StreamedCompletionsTokenSampledTypedDict,
+    ],
+)
 
 
 StreamedCompletionsResultData = Annotated[

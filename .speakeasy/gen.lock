@@ -3,10 +3,10 @@ id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
   docChecksum: 029c883f4dcda92779af8f3e0c2cee1a
   docVersion: v1
-  speakeasyVersion: 1.444.4
-  generationVersion: 2.461.4
-  releaseVersion: 0.3.14
-  configChecksum: 9caaae27398ff88fcb2955bc2cc511ab
+  speakeasyVersion: 1.446.0
+  generationVersion: 2.462.0
+  releaseVersion: 0.3.16
+  configChecksum: e84ff50b16538a0629e9fb528fac3239
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.6.6
+    core: 5.6.8
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -31,10 +31,9 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.0.0
-    serverEvents: 1.0.4
+    serverEvents: 1.0.5
     serverEventsSentinels: 0.1.0
-    tests: 1.6.0
-    unions: 3.0.3
+    unions: 3.0.4
 generatedFiles:
   - .gitattributes
   - .python-version
@@ -444,3 +443,4 @@ examples:
       responses:
         "200":
           application/json: {"text": "What is generative AI?"}
+generatedTests: {}

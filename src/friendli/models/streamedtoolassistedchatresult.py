@@ -10,15 +10,21 @@ from .streamedtoolassistedchattoolstatus import (
     StreamedToolAssistedChatToolStatusTypedDict,
 )
 from typing import Union
+from typing_extensions import TypeAliasType
 
 
-StreamedToolAssistedChatResultTypedDict = Union[
-    StreamedToolAssistedChatTokenTypedDict, StreamedToolAssistedChatToolStatusTypedDict
-]
+StreamedToolAssistedChatResultTypedDict = TypeAliasType(
+    "StreamedToolAssistedChatResultTypedDict",
+    Union[
+        StreamedToolAssistedChatTokenTypedDict,
+        StreamedToolAssistedChatToolStatusTypedDict,
+    ],
+)
 r"""A server-sent event containing chat completions content."""
 
 
-StreamedToolAssistedChatResult = Union[
-    StreamedToolAssistedChatToken, StreamedToolAssistedChatToolStatus
-]
+StreamedToolAssistedChatResult = TypeAliasType(
+    "StreamedToolAssistedChatResult",
+    Union[StreamedToolAssistedChatToken, StreamedToolAssistedChatToolStatus],
+)
 r"""A server-sent event containing chat completions content."""
