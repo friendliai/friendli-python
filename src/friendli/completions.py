@@ -319,10 +319,7 @@ class Completions(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Union[
-        eventstreaming.EventStream[models.StreamedCompletionsResult],
-        eventstreaming.EventStreamAsync[models.StreamedCompletionsResult],
-    ]:
+    ) -> eventstreaming.EventStreamAsync[models.StreamedCompletionsResult]:
         r"""Stream completions
 
         Generate text based on the given text prompt.

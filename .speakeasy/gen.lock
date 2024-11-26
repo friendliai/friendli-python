@@ -3,10 +3,10 @@ id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
   docChecksum: 029c883f4dcda92779af8f3e0c2cee1a
   docVersion: v1
-  speakeasyVersion: 1.446.0
-  generationVersion: 2.462.0
-  releaseVersion: 0.3.16
-  configChecksum: e84ff50b16538a0629e9fb528fac3239
+  speakeasyVersion: 1.446.1
+  generationVersion: 2.462.1
+  releaseVersion: 0.3.17
+  configChecksum: e52c9debb024a983547788417267dcec
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
   published: true
@@ -31,7 +31,7 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.0.0
-    serverEvents: 1.0.5
+    serverEvents: 1.0.6
     serverEventsSentinels: 0.1.0
     unions: 3.0.4
 generatedFiles:
