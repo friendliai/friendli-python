@@ -1,0 +1,10 @@
+# ServerlessKnowledgeRetrieveBody
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `query`                                                                      | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | A text string used to find relevant information within the knowledge-base.   | Chicken dinner                                                               |
+| `k`                                                                          | *Optional[int]*                                                              | :heavy_minus_sign:                                                           | Maximum number of top-ranked knowledge-base entries to return in results.    | 1                                                                            |
+| `knowledge_ids`                                                              | List[*str*]                                                                  | :heavy_minus_sign:                                                           | A List of knowledge-base IDs. For now, only one knowledge-base is supported. | [<br/>"knowledge-base-id-1"<br/>]                                            |

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: 029c883f4dcda92779af8f3e0c2cee1a
+  docChecksum: 499773ee8a3c0a5b5f7bfb4040b03cb2
   docVersion: v1
-  speakeasyVersion: 1.446.1
-  generationVersion: 2.462.1
-  releaseVersion: 0.3.17
-  configChecksum: e52c9debb024a983547788417267dcec
+  speakeasyVersion: 1.448.2
+  generationVersion: 2.467.4
+  releaseVersion: 0.3.21
+  configChecksum: a82f144b319ac6e8308a74e8e8e7094e
   repoURL: https://github.com/friendliai/friendli-python-internal.git
   installationURL: https://github.com/friendliai/friendli-python-internal.git
   published: true
@@ -93,6 +93,7 @@ generatedFiles:
   - docs/models/function.md
   - docs/models/functiontool.md
   - docs/models/functiontooltype.md
+  - docs/models/knowledgeretrieveresult.md
   - docs/models/logitbias.md
   - docs/models/logprobs.md
   - docs/models/message.md
@@ -104,6 +105,7 @@ generatedFiles:
   - docs/models/ragbuiltintool.md
   - docs/models/ragbuiltintooltype.md
   - docs/models/responseformat.md
+  - docs/models/results.md
   - docs/models/role.md
   - docs/models/security.md
   - docs/models/serverlesschatcompletebody.md
@@ -123,6 +125,8 @@ generatedFiles:
   - docs/models/serverlesscompletionsstreamrequest.md
   - docs/models/serverlessdetokenizationbody.md
   - docs/models/serverlessdetokenizationrequest.md
+  - docs/models/serverlessknowledgeretrievebody.md
+  - docs/models/serverlessknowledgeretrieverequest.md
   - docs/models/serverlesstokenizationbody.md
   - docs/models/serverlesstokenizationrequest.md
   - docs/models/serverlesstoolassistedchatcompletebody.md
@@ -181,6 +185,7 @@ generatedFiles:
   - docs/sdks/friendlichat/README.md
   - docs/sdks/friendlicompletions/README.md
   - docs/sdks/friendlitoken/README.md
+  - docs/sdks/rag/README.md
   - docs/sdks/serverless/README.md
   - docs/sdks/token/README.md
   - docs/sdks/toolassistedchat/README.md
@@ -225,6 +230,7 @@ generatedFiles:
   - src/friendli/models/filebuiltintool.py
   - src/friendli/models/function.py
   - src/friendli/models/functiontool.py
+  - src/friendli/models/knowledgeretrieveresult.py
   - src/friendli/models/logprobs.py
   - src/friendli/models/message.py
   - src/friendli/models/otherbuiltintool.py
@@ -242,6 +248,8 @@ generatedFiles:
   - src/friendli/models/serverlesscompletionsstreamop.py
   - src/friendli/models/serverlessdetokenizationbody.py
   - src/friendli/models/serverlessdetokenizationop.py
+  - src/friendli/models/serverlessknowledgeretrievebody.py
+  - src/friendli/models/serverlessknowledgeretrieveop.py
   - src/friendli/models/serverlesstokenizationbody.py
   - src/friendli/models/serverlesstokenizationop.py
   - src/friendli/models/serverlesstoolassistedchatcompletebody.py
@@ -265,6 +273,7 @@ generatedFiles:
   - src/friendli/models/usage.py
   - src/friendli/models/usermessage.py
   - src/friendli/py.typed
+  - src/friendli/rag.py
   - src/friendli/sdk.py
   - src/friendli/sdkconfiguration.py
   - src/friendli/serverless.py
@@ -443,4 +452,14 @@ examples:
       responses:
         "200":
           application/json: {"text": "What is generative AI?"}
+  serverlessKnowledgeRetrieve:
+    "":
+      requestBody:
+        application/json: {"query": "Chicken dinner", "k": 1, "knowledgeIds": ["knowledge-base-id-1"]}
+    Example:
+      requestBody:
+        application/json: {"query": "Chicken dinner", "k": 1, "knowledgeIds": ["knowledge-base-id-1"]}
+      responses:
+        "200":
+          application/json: {"results": [{"text": "One Dish Chicken Dinner  | 1 chicken...", "score": 0.671, "content_chunk_id": "content-chunk-id-1", "content_id": "content-id-1"}]}
 generatedTests: {}

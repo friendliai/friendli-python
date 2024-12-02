@@ -227,6 +227,10 @@ asyncio.run(main())
 * [complete](docs/sdks/completions/README.md#complete) - Completions
 * [stream](docs/sdks/completions/README.md#stream) - Stream completions
 
+#### [serverless.rag](docs/sdks/rag/README.md)
+
+* [knowledge_retrieve](docs/sdks/rag/README.md#knowledge_retrieve) - Knowledge retrieve
+
 #### [serverless.token](docs/sdks/token/README.md)
 
 * [tokenization](docs/sdks/token/README.md#tokenization) - Tokenization

@@ -14,7 +14,7 @@ class FileBuiltInToolTypedDict(TypedDict):
     type: FileBuiltInToolType
     r"""The type of the file parser tool. Only .txt and .pdf files are supported."""
     files: List[str]
-    r"""A List of file IDs."""
+    r"""A List of file IDs. For now, only one file is supported."""
 
 
 class FileBuiltInTool(BaseModel):
@@ -22,4 +22,4 @@ class FileBuiltInTool(BaseModel):
     r"""The type of the file parser tool. Only .txt and .pdf files are supported."""
 
     files: List[str]
-    r"""A List of file IDs."""
+    r"""A List of file IDs. For now, only one file is supported."""

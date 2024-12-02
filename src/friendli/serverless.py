@@ -4,6 +4,7 @@ from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
 from friendli.chat import Chat
 from friendli.completions import Completions
+from friendli.rag import Rag
 from friendli.token import Token
 from friendli.toolassistedchat import ToolAssistedChat
 
@@ -13,6 +14,7 @@ class Serverless(BaseSDK):
     tool_assisted_chat: ToolAssistedChat
     completions: Completions
     token: Token
+    rag: Rag
 
     def __init__(self, sdk_config: SDKConfiguration) -> None:
         BaseSDK.__init__(self, sdk_config)
@@ -24,3 +26,4 @@ class Serverless(BaseSDK):
         self.tool_assisted_chat = ToolAssistedChat(self.sdk_configuration)
         self.completions = Completions(self.sdk_configuration)
         self.token = Token(self.sdk_configuration)
+        self.rag = Rag(self.sdk_configuration)
