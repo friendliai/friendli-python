@@ -118,6 +118,12 @@ from .filebuiltintool import (
 )
 from .function import Function, FunctionTypedDict, Parameters, ParametersTypedDict
 from .functiontool import FunctionTool, FunctionToolType, FunctionToolTypedDict
+from .knowledgeretrieveresult import (
+    KnowledgeRetrieveResult,
+    KnowledgeRetrieveResultTypedDict,
+    Results,
+    ResultsTypedDict,
+)
 from .logprobs import (
     Content,
     ContentTypedDict,
@@ -201,6 +207,14 @@ from .serverlessdetokenizationbody import (
 from .serverlessdetokenizationop import (
     ServerlessDetokenizationRequest,
     ServerlessDetokenizationRequestTypedDict,
+)
+from .serverlessknowledgeretrievebody import (
+    ServerlessKnowledgeRetrieveBody,
+    ServerlessKnowledgeRetrieveBodyTypedDict,
+)
+from .serverlessknowledgeretrieveop import (
+    ServerlessKnowledgeRetrieveRequest,
+    ServerlessKnowledgeRetrieveRequestTypedDict,
 )
 from .serverlesstokenizationbody import (
     ServerlessTokenizationBody,
@@ -407,6 +421,8 @@ __all__ = [
     "FunctionToolType",
     "FunctionToolTypedDict",
     "FunctionTypedDict",
+    "KnowledgeRetrieveResult",
+    "KnowledgeRetrieveResultTypedDict",
     "LogitBias",
     "LogitBiasTypedDict",
     "Logprobs",
@@ -426,6 +442,8 @@ __all__ = [
     "RagBuiltInToolTypedDict",
     "ResponseFormat",
     "ResponseFormatTypedDict",
+    "Results",
+    "ResultsTypedDict",
     "Role",
     "SDKError",
     "Security",
@@ -463,6 +481,10 @@ __all__ = [
     "ServerlessDetokenizationBodyTypedDict",
     "ServerlessDetokenizationRequest",
     "ServerlessDetokenizationRequestTypedDict",
+    "ServerlessKnowledgeRetrieveBody",
+    "ServerlessKnowledgeRetrieveBodyTypedDict",
+    "ServerlessKnowledgeRetrieveRequest",
+    "ServerlessKnowledgeRetrieveRequestTypedDict",
     "ServerlessTokenizationBody",
     "ServerlessTokenizationBodyTypedDict",
     "ServerlessTokenizationRequest",
