@@ -26,11 +26,6 @@ def format_markdown_files():
         suffix = match.group(3)  # ```
 
         code = re.sub(r',\s+(RetryConfig\(.*?\))', r', retries=\1', code)
-        code = re.sub(
-            r'if res is not None:\s+# handle response\s+pass',
-            r'print(res)',
-            code
-        )
 
         if 'await' in code:
             code = re.sub(
@@ -99,5 +94,33 @@ def format_markdown_files():
             print(f"No changes were needed in {md_file}")
 
 
+def replace_github_repository_name():
+    target_files = [Path('./pyproject.toml'), Path('./.speakeasy/gen.lock')]
+
+    for target_file in target_files:
+        try:
+            with open(target_file, 'r', encoding='utf-8') as file:
+                content = file.read()
+        except FileNotFoundError:
+            print(f"Error: {target_file} not found.")
+            continue
+        except Exception as e:
+            print(f"Error reading {target_file}: {e}")
+            continue
+
+        updated_content = re.sub(r'friendli-python-internal', r'friendli-python', content)
+
+        if content != updated_content:
+            try:
+                with open(target_file, 'w', encoding='utf-8') as file:
+                    file.write(updated_content)
+                print(f"Successfully replaced GitHub repository name in {target_file}")
+            except Exception as e:
+                print(f"Error writing to {target_file}: {e}")
+        else:
+            print(f"No changes were needed in {target_file}")
+
+
 if __name__ == "__main__":
     format_markdown_files()
+    replace_github_repository_name()

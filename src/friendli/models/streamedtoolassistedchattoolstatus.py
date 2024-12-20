@@ -17,7 +17,6 @@ Name = Literal[
     "web:url",
     "code:python-interpreter",
     "file:text",
-    "rag:knowledge-base",
 ]
 r"""The name of the built-in tool."""
 

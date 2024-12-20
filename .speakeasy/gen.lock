@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: 499773ee8a3c0a5b5f7bfb4040b03cb2
+  docChecksum: cf77a101e3424b5d652a600cb21d5430
   docVersion: v1
-  speakeasyVersion: 1.448.2
-  generationVersion: 2.467.4
-  releaseVersion: 0.3.21
-  configChecksum: a82f144b319ac6e8308a74e8e8e7094e
-  repoURL: https://github.com/friendliai/friendli-python-internal.git
-  installationURL: https://github.com/friendliai/friendli-python-internal.git
+  speakeasyVersion: 1.456.1
+  generationVersion: 2.481.0
+  releaseVersion: 0.3.24
+  configChecksum: 6cbaae312f960375b34fe814a7c1b7d5
+  repoURL: https://github.com/friendliai/friendli-python.git
+  installationURL: https://github.com/friendliai/friendli-python.git
   published: true
 features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.6.8
+    core: 5.7.4
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -24,14 +24,14 @@ features:
     globalSecurity: 3.0.2
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
-    globalServerURLs: 3.0.0
+    globalServerURLs: 3.1.0
     methodArguments: 1.0.2
     nameOverrides: 3.0.0
     nullables: 1.0.0
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.0.0
-    serverEvents: 1.0.6
+    serverEvents: 1.0.7
     serverEventsSentinels: 0.1.0
     unions: 3.0.4
 generatedFiles:
@@ -48,11 +48,27 @@ generatedFiles:
   - docs/models/chatchoicemessage.md
   - docs/models/chatchoicetoolcalls.md
   - docs/models/chatchoicetype.md
+  - docs/models/chatlogprobs.md
+  - docs/models/chatlogprobstoplogprobs.md
   - docs/models/chatresult.md
   - docs/models/completionsbodywithprompt.md
+  - docs/models/completionsbodywithpromptdedicatedcompletionscompletebodyprompt.md
+  - docs/models/completionsbodywithpromptdedicatedcompletionscompletebodystreamoptions.md
+  - docs/models/completionsbodywithpromptdedicatedcompletionsstreambodyprompt.md
+  - docs/models/completionsbodywithpromptdedicatedcompletionsstreambodystreamoptions.md
+  - docs/models/completionsbodywithpromptprompt.md
+  - docs/models/completionsbodywithpromptserverlesscompletionsstreambodystreamoptions.md
+  - docs/models/completionsbodywithpromptstreamoptions.md
   - docs/models/completionsbodywithtokens.md
+  - docs/models/completionsbodywithtokensdedicatedcompletionscompletebodystreamoptions.md
+  - docs/models/completionsbodywithtokensdedicatedcompletionsstreambodystreamoptions.md
+  - docs/models/completionsbodywithtokensserverlesscompletionsstreambodystreamoptions.md
+  - docs/models/completionsbodywithtokensstreamoptions.md
   - docs/models/completionschoice.md
+  - docs/models/completionschoicefinishreason.md
+  - docs/models/completionslogprobs.md
   - docs/models/completionsresult.md
+  - docs/models/completionsresultobject.md
   - docs/models/content.md
   - docs/models/data.md
   - docs/models/dedicatedchatcompletebody.md
@@ -86,27 +102,34 @@ generatedFiles:
   - docs/models/delta.md
   - docs/models/detokenizationresult.md
   - docs/models/error.md
-  - docs/models/event.md
   - docs/models/filebuiltintool.md
   - docs/models/filebuiltintooltype.md
   - docs/models/files.md
+  - docs/models/finishreason.md
   - docs/models/function.md
   - docs/models/functiontool.md
   - docs/models/functiontooltype.md
+  - docs/models/jsonschema.md
   - docs/models/knowledgeretrieveresult.md
   - docs/models/logitbias.md
-  - docs/models/logprobs.md
   - docs/models/message.md
   - docs/models/name.md
   - docs/models/object.md
   - docs/models/otherbuiltintool.md
   - docs/models/otherbuiltintooltype.md
   - docs/models/parameters.md
-  - docs/models/ragbuiltintool.md
-  - docs/models/ragbuiltintooltype.md
+  - docs/models/prompt.md
   - docs/models/responseformat.md
+  - docs/models/responseformatjsonobject.md
+  - docs/models/responseformatjsonobjecttype.md
+  - docs/models/responseformatjsonschema.md
+  - docs/models/responseformatregex.md
+  - docs/models/responseformatregextype.md
+  - docs/models/responseformattext.md
+  - docs/models/responseformattexttype.md
   - docs/models/results.md
   - docs/models/role.md
+  - docs/models/schema.md
   - docs/models/security.md
   - docs/models/serverlesschatcompletebody.md
   - docs/models/serverlesschatcompleterequest.md
@@ -115,6 +138,7 @@ generatedFiles:
   - docs/models/serverlesschatstreambodystreamoptions.md
   - docs/models/serverlesschatstreambodytoolchoice.md
   - docs/models/serverlesschatstreambodytoolchoicefunction.md
+  - docs/models/serverlesschatstreambodytoolchoiceobject.md
   - docs/models/serverlesschatstreambodytoolchoicetype.md
   - docs/models/serverlesschatstreamrequest.md
   - docs/models/serverlesscompletionscompletebody.md
@@ -130,12 +154,16 @@ generatedFiles:
   - docs/models/serverlesstokenizationbody.md
   - docs/models/serverlesstokenizationrequest.md
   - docs/models/serverlesstoolassistedchatcompletebody.md
+  - docs/models/serverlesstoolassistedchatcompletebodylogitbias.md
+  - docs/models/serverlesstoolassistedchatcompletebodystreamoptions.md
   - docs/models/serverlesstoolassistedchatcompletebodytoolchoice.md
   - docs/models/serverlesstoolassistedchatcompletebodytoolchoicefunction.md
   - docs/models/serverlesstoolassistedchatcompletebodytoolchoiceobject.md
   - docs/models/serverlesstoolassistedchatcompletebodytoolchoicetype.md
   - docs/models/serverlesstoolassistedchatcompleterequest.md
   - docs/models/serverlesstoolassistedchatstreambody.md
+  - docs/models/serverlesstoolassistedchatstreambodylogitbias.md
+  - docs/models/serverlesstoolassistedchatstreambodystreamoptions.md
   - docs/models/serverlesstoolassistedchatstreambodytoolchoice.md
   - docs/models/serverlesstoolassistedchatstreambodytoolchoicefunction.md
   - docs/models/serverlesstoolassistedchatstreambodytoolchoiceobject.md
@@ -143,18 +171,21 @@ generatedFiles:
   - docs/models/serverlesstoolassistedchatstreamrequest.md
   - docs/models/status.md
   - docs/models/streamedchatchoice.md
+  - docs/models/streamedchatchoicefinishreason.md
   - docs/models/streamedchatchoicefunction.md
   - docs/models/streamedchatchoicetoolcalls.md
   - docs/models/streamedchatchoicetype.md
   - docs/models/streamedchatresult.md
+  - docs/models/streamedchatresultobject.md
+  - docs/models/streamedcompletionschoice.md
+  - docs/models/streamedcompletionschoicefinishreason.md
   - docs/models/streamedcompletionsresult.md
   - docs/models/streamedcompletionsresultdata.md
-  - docs/models/streamedcompletionstokencomplete.md
-  - docs/models/streamedcompletionstokencompleteevent.md
-  - docs/models/streamedcompletionstokensampled.md
+  - docs/models/streamedcompletionsresultobject.md
   - docs/models/streamedtoolassistedchatresult.md
   - docs/models/streamedtoolassistedchattoken.md
   - docs/models/streamedtoolassistedchattokendata.md
+  - docs/models/streamedtoolassistedchattokenobject.md
   - docs/models/streamedtoolassistedchattoolstatus.md
   - docs/models/streamedtoolassistedchattoolstatusdata.md
   - docs/models/streamedtoolassistedchattoolstatusparameters.md
@@ -193,7 +224,6 @@ generatedFiles:
   - py.typed
   - pylintrc
   - pyproject.toml
-  - scripts/prepare-readme.py
   - scripts/publish.sh
   - src/friendli/_hooks/__init__.py
   - src/friendli/_hooks/sdkhooks.py
@@ -209,10 +239,12 @@ generatedFiles:
   - src/friendli/models/__init__.py
   - src/friendli/models/assistantmessage.py
   - src/friendli/models/chatchoice.py
+  - src/friendli/models/chatlogprobs.py
   - src/friendli/models/chatresult.py
   - src/friendli/models/completionsbodywithprompt.py
   - src/friendli/models/completionsbodywithtokens.py
   - src/friendli/models/completionschoice.py
+  - src/friendli/models/completionslogprobs.py
   - src/friendli/models/completionsresult.py
   - src/friendli/models/dedicatedchatcompletebody.py
   - src/friendli/models/dedicatedchatcompleteop.py
@@ -231,11 +263,13 @@ generatedFiles:
   - src/friendli/models/function.py
   - src/friendli/models/functiontool.py
   - src/friendli/models/knowledgeretrieveresult.py
-  - src/friendli/models/logprobs.py
   - src/friendli/models/message.py
   - src/friendli/models/otherbuiltintool.py
-  - src/friendli/models/ragbuiltintool.py
   - src/friendli/models/responseformat.py
+  - src/friendli/models/responseformatjsonobject.py
+  - src/friendli/models/responseformatjsonschema.py
+  - src/friendli/models/responseformatregex.py
+  - src/friendli/models/responseformattext.py
   - src/friendli/models/sdkerror.py
   - src/friendli/models/security.py
   - src/friendli/models/serverlesschatcompletebody.py
@@ -258,9 +292,8 @@ generatedFiles:
   - src/friendli/models/serverlesstoolassistedchatstreamop.py
   - src/friendli/models/streamedchatchoice.py
   - src/friendli/models/streamedchatresult.py
+  - src/friendli/models/streamedcompletionschoice.py
   - src/friendli/models/streamedcompletionsresult.py
-  - src/friendli/models/streamedcompletionstokencomplete.py
-  - src/friendli/models/streamedcompletionstokensampled.py
   - src/friendli/models/streamedtoolassistedchatresult.py
   - src/friendli/models/streamedtoolassistedchattoken.py
   - src/friendli/models/streamedtoolassistedchattoolstatus.py
@@ -303,13 +336,13 @@ examples:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
-          application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
+          application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "tool_calls"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "tool_calls"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "tool_calls"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}, "created": 182984}
     Example:
       requestBody:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
-          application/json: {"choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}}
+          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}, "created": 1735722153}
   serverlessChatStream:
     "":
       requestBody:
@@ -319,20 +352,20 @@ examples:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
-          text/event-stream: "data: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294383519714932}\n\ndata: [DONE]\n"
+          text/event-stream: "data: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294383519714932}\n\ndata: [DONE]\n"
   serverlessToolAssistedChatComplete:
     "":
       requestBody:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:calculator"}]}
       responses:
         "200":
-          application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
+          application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "tool_calls"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "tool_calls"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "tool_calls"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}, "created": 182984}
     Example:
       requestBody:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "code:python-interpreter"}]}
       responses:
         "200":
-          application/json: {"choices": [{"index": 0, "message": {"role": "assistant", "content": "The result is 9."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 7, "total_tokens": 16}}
+          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The result is 9."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 7, "total_tokens": 16}, "created": 1735722153}
   serverlessToolAssistedChatStream:
     "":
       requestBody:
@@ -342,20 +375,20 @@ examples:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "math:statistics"}]}
       responses:
         "200":
-          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":null,\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\\\"{\\\\\\\"result\\\\\\\": \\\\\\\"150 * 1.60934=241.401000000000\\\\\\\"}\\\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
+          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":null,\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\\\"{\\\\\\\"result\\\\\\\": \\\\\\\"150 * 1.60934=241.401000000000\\\\\\\"}\\\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
   serverlessCompletionsComplete:
     "":
       requestBody:
         application/json: {"prompt": "Say this is a test!", "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
       responses:
         "200":
-          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
+          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296], "finish_reason": "length"}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296], "finish_reason": "length"}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296], "finish_reason": "length"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
     Example:
       requestBody:
         application/json: {"tokens": [182984, 32770, 164141], "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
       responses:
         "200":
-          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}}
+          application/json: {"id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296], "finish_reason": "stop"}], "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}}
   serverlessCompletionsStream:
     "":
       requestBody:
@@ -365,7 +398,7 @@ examples:
         application/json: {"tokens": [74484], "model": "meta-llama-3.1-8b-instruct", "max_tokens": 200, "top_k": 1}
       responses:
         "200":
-          text/event-stream: "data: {\"event\":\"token_sampled\",\"index\":0,\"text\":\"This\",\"token\":2028}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" is\",\"token\":374}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" a\",\"token\":264}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" test\",\"token\":1296}\n\ndata: {\"event\":\"complete\",\"choices\":[{\"index\":0,\"seed\":6410528593216713765,\"text\":\"This is a test\",\"tokens\":[2028,374,264,1296]}],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12}}\n"
+          text/event-stream: "data: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" such\",\"token\":1778,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" as\",\"token\":439,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" finance\",\"token\":17452,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[],\"usage\":{\"prompt_tokens\":5,\"completion_tokens\":10,\"total_tokens\":15},\"created\":1733382200834973735}\n\ndata: [DONE]\n"
   serverlessTokenization:
     "":
       requestBody:
@@ -392,13 +425,13 @@ examples:
         application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
-          application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "<value>"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
+          application/json: {"choices": [{"index": 0, "message": {"role": "<value>"}, "finish_reason": "tool_calls"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "tool_calls"}, {"index": 0, "message": {"role": "<value>"}, "finish_reason": "tool_calls"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}, "created": 182984}
     Example:
       requestBody:
         application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
-          application/json: {"choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}}
+          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}, "created": 1735722153}
   dedicatedChatStream:
     "":
       requestBody:
@@ -408,20 +441,20 @@ examples:
         application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
-          text/event-stream: "data: {\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294383519714932}\n\ndata: [DONE]\n"
+          text/event-stream: "data: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294383519714932}\n\ndata: [DONE]\n"
   dedicatedCompletionsComplete:
     "":
       requestBody:
         application/json: {"prompt": "Say this is a test!", "model": "(endpoint-id):(adapter-route)", "max_tokens": 200, "top_k": 1}
       responses:
         "200":
-          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
+          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296], "finish_reason": "length"}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296], "finish_reason": "length"}, {"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296], "finish_reason": "length"}], "usage": {"prompt_tokens": 5, "completion_tokens": 7, "total_tokens": 12}}
     Example:
       requestBody:
         application/json: {"tokens": [182984, 32770, 164141], "model": "(endpoint-id):(adapter-route)", "max_tokens": 200, "top_k": 1}
       responses:
         "200":
-          application/json: {"choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}}
+          application/json: {"id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "choices": [{"index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296], "finish_reason": "stop"}], "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}}
   dedicatedCompletionsStream:
     "":
       requestBody:
@@ -431,7 +464,7 @@ examples:
         application/json: {"tokens": [74484], "model": "(endpoint-id):(adapter-route)", "max_tokens": 200, "top_k": 1}
       responses:
         "200":
-          text/event-stream: "data: {\"event\":\"token_sampled\",\"index\":0,\"text\":\"This\",\"token\":2028}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" is\",\"token\":374}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" a\",\"token\":264}\n\ndata: {\"event\":\"token_sampled\",\"index\":0,\"text\":\" test\",\"token\":1296}\n\ndata: {\"event\":\"complete\",\"choices\":[{\"index\":0,\"seed\":6410528593216713765,\"text\":\"This is a test\",\"tokens\":[2028,374,264,1296]}],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12}}\n"
+          text/event-stream: "data: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" such\",\"token\":1778,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" as\",\"token\":439,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" finance\",\"token\":17452,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[],\"usage\":{\"prompt_tokens\":5,\"completion_tokens\":10,\"total_tokens\":15},\"created\":1733382200834973735}\n\ndata: [DONE]\n"
   dedicatedTokenization:
     "":
       requestBody:

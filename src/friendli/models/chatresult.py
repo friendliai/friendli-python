@@ -4,8 +4,12 @@ from __future__ import annotations
 from .chatchoice import ChatChoice, ChatChoiceTypedDict
 from .usage import Usage, UsageTypedDict
 from friendli.types import BaseModel
-from typing import List, Optional
+from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
+
+
+Object = Literal["chat.completion"]
+r"""The object type, which is always set to `chat.completion`."""
 
 
 class ChatResultTypedDict(TypedDict):
@@ -13,8 +17,12 @@ class ChatResultTypedDict(TypedDict):
 
     choices: List[ChatChoiceTypedDict]
     usage: UsageTypedDict
-    created: NotRequired[int]
+    created: int
     r"""The Unix timestamp (in seconds) for when the generation completed."""
+    id: NotRequired[str]
+    r"""A unique ID of the chat completion."""
+    object: NotRequired[Object]
+    r"""The object type, which is always set to `chat.completion`."""
 
 
 class ChatResult(BaseModel):
@@ -24,5 +32,11 @@ class ChatResult(BaseModel):
 
     usage: Usage
 
-    created: Optional[int] = None
+    created: int
     r"""The Unix timestamp (in seconds) for when the generation completed."""
+
+    id: Optional[str] = None
+    r"""A unique ID of the chat completion."""
+
+    object: Optional[Object] = None
+    r"""The object type, which is always set to `chat.completion`."""

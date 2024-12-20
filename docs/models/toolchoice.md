@@ -16,9 +16,9 @@ You can also specify a particular tool by `{"type": "function", "function": {"na
 value: str = /* values here */
 ```
 
-### `models.Object`
+### `models.ToolChoiceObject`
 
 ```python
-value: models.Object = /* values here */
+value: models.ToolChoiceObject = /* values here */
 ```
 

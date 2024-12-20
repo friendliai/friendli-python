@@ -20,11 +20,13 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.dedicated.token.tokenization(
+) as friendli:
+
+    res = friendli.dedicated.token.tokenization(
         model="(endpoint-id):(adapter-route)", prompt="What is generative AI?"
     )
 
+    # Handle response
     print(res)
 ```
 
@@ -59,8 +61,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.dedicated.token.detokenization(
+) as friendli:
+
+    res = friendli.dedicated.token.detokenization(
         model="(endpoint-id):(adapter-route)",
         tokens=[
             128000,
@@ -73,6 +76,7 @@ with SyncFriendli(
         ],
     )
 
+    # Handle response
     print(res)
 ```
 

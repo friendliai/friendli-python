@@ -6,14 +6,14 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class TopLogprobsTypedDict(TypedDict):
+class ChatLogprobsTopLogprobsTypedDict(TypedDict):
     token: NotRequired[str]
     r"""The token."""
     logprob: NotRequired[float]
     r"""The log probability of this token."""
 
 
-class TopLogprobs(BaseModel):
+class ChatLogprobsTopLogprobs(BaseModel):
     token: Optional[str] = None
     r"""The token."""
 
@@ -26,7 +26,9 @@ class ContentTypedDict(TypedDict):
     r"""The token."""
     logprob: NotRequired[float]
     r"""The log probability of this token."""
-    top_logprobs: NotRequired[List[TopLogprobsTypedDict]]
+    bytes: NotRequired[List[int]]
+    r"""A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token."""
+    top_logprobs: NotRequired[List[ChatLogprobsTopLogprobsTypedDict]]
     r"""List of the most likely tokens and their log probability, at this token position."""
 
 
@@ -37,18 +39,21 @@ class Content(BaseModel):
     logprob: Optional[float] = None
     r"""The log probability of this token."""
 
-    top_logprobs: Optional[List[TopLogprobs]] = None
+    bytes: Optional[List[int]] = None
+    r"""A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token."""
+
+    top_logprobs: Optional[List[ChatLogprobsTopLogprobs]] = None
     r"""List of the most likely tokens and their log probability, at this token position."""
 
 
-class LogprobsTypedDict(TypedDict):
+class ChatLogprobsTypedDict(TypedDict):
     r"""Log probability information for the choice."""
 
     content: NotRequired[List[ContentTypedDict]]
     r"""A list of message content tokens with log probability information."""
 
 
-class Logprobs(BaseModel):
+class ChatLogprobs(BaseModel):
     r"""Log probability information for the choice."""
 
     content: Optional[List[Content]] = None

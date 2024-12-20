@@ -20,8 +20,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.completions.complete(
+) as friendli:
+
+    res = friendli.serverless.completions.complete(
         serverless_completions_complete_body={
             "prompt": "Say this is a test!",
             "model": "meta-llama-3.1-8b-instruct",
@@ -30,6 +31,7 @@ with SyncFriendli(
         }
     )
 
+    # Handle response
     print(res)
 ```
 
@@ -63,8 +65,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.completions.stream(
+) as friendli:
+
+    res = friendli.serverless.completions.stream(
         serverless_completions_stream_body={
             "prompt": "Say this is a test!",
             "model": "meta-llama-3.1-8b-instruct",
@@ -73,11 +76,10 @@ with SyncFriendli(
         }
     )
 
-    if res is not None:
-        with res as event_stream:
-            for event in event_stream:
-                # handle event
-                print(event, flush=True)
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
 ```
 
 ### Parameters

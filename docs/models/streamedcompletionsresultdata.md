@@ -1,17 +1,12 @@
 # StreamedCompletionsResultData
 
 
-## Supported Types
+## Fields
 
-### `models.StreamedCompletionsTokenSampled`
-
-```python
-value: models.StreamedCompletionsTokenSampled = /* values here */
-```
-
-### `models.StreamedCompletionsTokenComplete`
-
-```python
-value: models.StreamedCompletionsTokenComplete = /* values here */
-```
-
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `choices`                                                                                        | List[[models.StreamedCompletionsChoice](../models/streamedcompletionschoice.md)]                 | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `created`                                                                                        | *int*                                                                                            | :heavy_check_mark:                                                                               | The Unix timestamp (in seconds) for when the token sampled.                                      |
+| `id`                                                                                             | *Optional[str]*                                                                                  | :heavy_minus_sign:                                                                               | A unique ID of the completion.                                                                   |
+| `object`                                                                                         | [Optional[models.StreamedCompletionsResultObject]](../models/streamedcompletionsresultobject.md) | :heavy_minus_sign:                                                                               | The object type, which is always set to `text_completion`.                                       |
+| `usage`                                                                                          | [Optional[models.Usage]](../models/usage.md)                                                     | :heavy_minus_sign:                                                                               | N/A                                                                                              |

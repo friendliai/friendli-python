@@ -1,4 +1,4 @@
-# Logprobs
+# ChatLogprobs
 
 Log probability information for the choice.
 

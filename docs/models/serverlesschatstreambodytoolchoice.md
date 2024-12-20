@@ -16,9 +16,9 @@ You can also specify a particular tool by `{"type": "function", "function": {"na
 value: str = /* values here */
 ```
 
-### `models.ToolChoiceObject`
+### `models.ServerlessChatStreamBodyToolChoiceObject`
 
 ```python
-value: models.ToolChoiceObject = /* values here */
+value: models.ServerlessChatStreamBodyToolChoiceObject = /* values here */
 ```
 

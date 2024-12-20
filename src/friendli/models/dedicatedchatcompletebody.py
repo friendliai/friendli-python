@@ -158,7 +158,7 @@ class DedicatedChatCompleteBodyTypedDict(TypedDict):
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."""
     repetition_penalty: NotRequired[Nullable[float]]
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
-    response_format: NotRequired[Nullable[ResponseFormatTypedDict]]
+    response_format: NotRequired[ResponseFormatTypedDict]
     r"""The enforced format of the model's output.
 
     Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
@@ -252,7 +252,7 @@ class DedicatedChatCompleteBody(BaseModel):
     repetition_penalty: OptionalNullable[float] = UNSET
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
 
-    response_format: OptionalNullable[ResponseFormat] = UNSET
+    response_format: Optional[ResponseFormat] = None
     r"""The enforced format of the model's output.
 
     Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
@@ -350,7 +350,6 @@ class DedicatedChatCompleteBody(BaseModel):
             "parallel_tool_calls",
             "presence_penalty",
             "repetition_penalty",
-            "response_format",
             "seed",
             "stop",
             "stream",
