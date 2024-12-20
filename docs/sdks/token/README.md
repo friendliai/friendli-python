@@ -20,11 +20,13 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.token.tokenization(
+) as friendli:
+
+    res = friendli.serverless.token.tokenization(
         model="meta-llama-3.1-8b-instruct", prompt="What is generative AI?"
     )
 
+    # Handle response
     print(res)
 ```
 
@@ -59,8 +61,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.token.detokenization(
+) as friendli:
+
+    res = friendli.serverless.token.detokenization(
         model="meta-llama-3.1-8b-instruct",
         tokens=[
             128000,
@@ -73,6 +76,7 @@ with SyncFriendli(
         ],
     )
 
+    # Handle response
     print(res)
 ```
 

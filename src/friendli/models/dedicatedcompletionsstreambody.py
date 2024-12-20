@@ -5,8 +5,68 @@ from .responseformat import ResponseFormat, ResponseFormatTypedDict
 from .tokensequence import TokenSequence, TokenSequenceTypedDict
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Union
+from typing import List, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+class CompletionsBodyWithTokensDedicatedCompletionsStreamBodyStreamOptionsTypedDict(
+    TypedDict
+):
+    r"""Options related to stream.
+    It can only be used when `stream: true`.
+
+    """
+
+    include_usage: NotRequired[Nullable[bool]]
+    r"""When set to `true`,
+    the number of tokens used will be included at the end of the stream result in the form of
+    `\"usage\": {\"completion_tokens\": number, \"prompt_tokens\": number, \"total_tokens\": number}`.
+
+    """
+
+
+class CompletionsBodyWithTokensDedicatedCompletionsStreamBodyStreamOptions(BaseModel):
+    r"""Options related to stream.
+    It can only be used when `stream: true`.
+
+    """
+
+    include_usage: OptionalNullable[bool] = UNSET
+    r"""When set to `true`,
+    the number of tokens used will be included at the end of the stream result in the form of
+    `\"usage\": {\"completion_tokens\": number, \"prompt_tokens\": number, \"total_tokens\": number}`.
+
+    """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["include_usage"]
+        nullable_fields = ["include_usage"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in self.model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class DedicatedCompletionsStreamBodyCompletionsBodyWithTokensTypedDict(TypedDict):
@@ -43,12 +103,10 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokensTypedDict(TypedDict
     r"""A token sequence that is enforced as a generation output. This option can be used when evaluating the model for the datasets with multi-choice problems (e.g., [HellaSwag](https://huggingface.co/datasets/hellaswag), [MMLU](https://huggingface.co/datasets/cais/mmlu)). Use this option with `include_output_logprobs` to get logprobs for the evaluation."""
     frequency_penalty: NotRequired[Nullable[float]]
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim."""
-    include_output_logits: NotRequired[Nullable[bool]]
-    r"""Whether to include the output logits to the generation output."""
-    include_output_logprobs: NotRequired[Nullable[bool]]
-    r"""Whether to include the output logprobs to the generation output."""
     length_penalty: NotRequired[Nullable[float]]
     r"""Coefficient for exponential length penalty that is used with beam search. Only allowed for beam search. Defaults to 1.0. This is similar to Hugging Face's [`length_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.length_penalty) argument."""
+    logprobs: NotRequired[Nullable[int]]
+    r"""Include the log probabilities on the logprobs most likely output tokens, as well the chosen tokens."""
     max_tokens: NotRequired[Nullable[int]]
     r"""The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument."""
     max_total_tokens: NotRequired[Nullable[int]]
@@ -67,7 +125,7 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokensTypedDict(TypedDict
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."""
     repetition_penalty: NotRequired[Nullable[float]]
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
-    response_format: NotRequired[Nullable[ResponseFormatTypedDict]]
+    response_format: NotRequired[ResponseFormatTypedDict]
     r"""The enforced format of the model's output.
 
     Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
@@ -94,6 +152,15 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokensTypedDict(TypedDict
     """
     stream: NotRequired[Nullable[bool]]
     r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."""
+    stream_options: NotRequired[
+        Nullable[
+            CompletionsBodyWithTokensDedicatedCompletionsStreamBodyStreamOptionsTypedDict
+        ]
+    ]
+    r"""Options related to stream.
+    It can only be used when `stream: true`.
+
+    """
     temperature: NotRequired[Nullable[float]]
     r"""Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument."""
     timeout_microseconds: NotRequired[Nullable[int]]
@@ -154,14 +221,11 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokens(BaseModel):
     frequency_penalty: OptionalNullable[float] = UNSET
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim."""
 
-    include_output_logits: OptionalNullable[bool] = UNSET
-    r"""Whether to include the output logits to the generation output."""
-
-    include_output_logprobs: OptionalNullable[bool] = UNSET
-    r"""Whether to include the output logprobs to the generation output."""
-
     length_penalty: OptionalNullable[float] = UNSET
     r"""Coefficient for exponential length penalty that is used with beam search. Only allowed for beam search. Defaults to 1.0. This is similar to Hugging Face's [`length_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.length_penalty) argument."""
+
+    logprobs: OptionalNullable[int] = UNSET
+    r"""Include the log probabilities on the logprobs most likely output tokens, as well the chosen tokens."""
 
     max_tokens: OptionalNullable[int] = UNSET
     r"""The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument."""
@@ -190,7 +254,7 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokens(BaseModel):
     repetition_penalty: OptionalNullable[float] = UNSET
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
 
-    response_format: OptionalNullable[ResponseFormat] = UNSET
+    response_format: Optional[ResponseFormat] = None
     r"""The enforced format of the model's output.
 
     Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
@@ -222,6 +286,14 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokens(BaseModel):
     stream: OptionalNullable[bool] = True
     r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."""
 
+    stream_options: OptionalNullable[
+        CompletionsBodyWithTokensDedicatedCompletionsStreamBodyStreamOptions
+    ] = UNSET
+    r"""Options related to stream.
+    It can only be used when `stream: true`.
+
+    """
+
     temperature: OptionalNullable[float] = 1
     r"""Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument."""
 
@@ -252,9 +324,8 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokens(BaseModel):
             "eos_token",
             "forced_output_tokens",
             "frequency_penalty",
-            "include_output_logits",
-            "include_output_logprobs",
             "length_penalty",
+            "logprobs",
             "max_tokens",
             "max_total_tokens",
             "min_tokens",
@@ -269,6 +340,7 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokens(BaseModel):
             "stop",
             "stop_tokens",
             "stream",
+            "stream_options",
             "temperature",
             "timeout_microseconds",
             "token_index_to_replace",
@@ -288,9 +360,8 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokens(BaseModel):
             "eos_token",
             "forced_output_tokens",
             "frequency_penalty",
-            "include_output_logits",
-            "include_output_logprobs",
             "length_penalty",
+            "logprobs",
             "max_tokens",
             "max_total_tokens",
             "min_tokens",
@@ -300,11 +371,11 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokens(BaseModel):
             "num_beams",
             "presence_penalty",
             "repetition_penalty",
-            "response_format",
             "seed",
             "stop",
             "stop_tokens",
             "stream",
+            "stream_options",
             "temperature",
             "timeout_microseconds",
             "token_index_to_replace",
@@ -338,8 +409,82 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithTokens(BaseModel):
         return m
 
 
+CompletionsBodyWithPromptDedicatedCompletionsStreamBodyPromptTypedDict = TypeAliasType(
+    "CompletionsBodyWithPromptDedicatedCompletionsStreamBodyPromptTypedDict",
+    Union[str, List[str]],
+)
+r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
+
+
+CompletionsBodyWithPromptDedicatedCompletionsStreamBodyPrompt = TypeAliasType(
+    "CompletionsBodyWithPromptDedicatedCompletionsStreamBodyPrompt",
+    Union[str, List[str]],
+)
+r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
+
+
+class CompletionsBodyWithPromptDedicatedCompletionsStreamBodyStreamOptionsTypedDict(
+    TypedDict
+):
+    r"""Options related to stream.
+    It can only be used when `stream: true`.
+
+    """
+
+    include_usage: NotRequired[Nullable[bool]]
+    r"""When set to `true`,
+    the number of tokens used will be included at the end of the stream result in the form of
+    `\"usage\": {\"completion_tokens\": number, \"prompt_tokens\": number, \"total_tokens\": number}`.
+
+    """
+
+
+class CompletionsBodyWithPromptDedicatedCompletionsStreamBodyStreamOptions(BaseModel):
+    r"""Options related to stream.
+    It can only be used when `stream: true`.
+
+    """
+
+    include_usage: OptionalNullable[bool] = UNSET
+    r"""When set to `true`,
+    the number of tokens used will be included at the end of the stream result in the form of
+    `\"usage\": {\"completion_tokens\": number, \"prompt_tokens\": number, \"total_tokens\": number}`.
+
+    """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["include_usage"]
+        nullable_fields = ["include_usage"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in self.model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class DedicatedCompletionsStreamBodyCompletionsBodyWithPromptTypedDict(TypedDict):
-    prompt: str
+    prompt: CompletionsBodyWithPromptDedicatedCompletionsStreamBodyPromptTypedDict
     r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
     model: str
     r"""ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format."""
@@ -372,12 +517,10 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPromptTypedDict(TypedDict
     r"""A token sequence that is enforced as a generation output. This option can be used when evaluating the model for the datasets with multi-choice problems (e.g., [HellaSwag](https://huggingface.co/datasets/hellaswag), [MMLU](https://huggingface.co/datasets/cais/mmlu)). Use this option with `include_output_logprobs` to get logprobs for the evaluation."""
     frequency_penalty: NotRequired[Nullable[float]]
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim."""
-    include_output_logits: NotRequired[Nullable[bool]]
-    r"""Whether to include the output logits to the generation output."""
-    include_output_logprobs: NotRequired[Nullable[bool]]
-    r"""Whether to include the output logprobs to the generation output."""
     length_penalty: NotRequired[Nullable[float]]
     r"""Coefficient for exponential length penalty that is used with beam search. Only allowed for beam search. Defaults to 1.0. This is similar to Hugging Face's [`length_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.length_penalty) argument."""
+    logprobs: NotRequired[Nullable[int]]
+    r"""Include the log probabilities on the logprobs most likely output tokens, as well the chosen tokens."""
     max_tokens: NotRequired[Nullable[int]]
     r"""The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument."""
     max_total_tokens: NotRequired[Nullable[int]]
@@ -396,7 +539,7 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPromptTypedDict(TypedDict
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."""
     repetition_penalty: NotRequired[Nullable[float]]
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
-    response_format: NotRequired[Nullable[ResponseFormatTypedDict]]
+    response_format: NotRequired[ResponseFormatTypedDict]
     r"""The enforced format of the model's output.
 
     Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
@@ -423,6 +566,15 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPromptTypedDict(TypedDict
     """
     stream: NotRequired[Nullable[bool]]
     r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."""
+    stream_options: NotRequired[
+        Nullable[
+            CompletionsBodyWithPromptDedicatedCompletionsStreamBodyStreamOptionsTypedDict
+        ]
+    ]
+    r"""Options related to stream.
+    It can only be used when `stream: true`.
+
+    """
     temperature: NotRequired[Nullable[float]]
     r"""Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument."""
     timeout_microseconds: NotRequired[Nullable[int]]
@@ -436,7 +588,7 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPromptTypedDict(TypedDict
 
 
 class DedicatedCompletionsStreamBodyCompletionsBodyWithPrompt(BaseModel):
-    prompt: str
+    prompt: CompletionsBodyWithPromptDedicatedCompletionsStreamBodyPrompt
     r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
     model: str
@@ -483,14 +635,11 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPrompt(BaseModel):
     frequency_penalty: OptionalNullable[float] = UNSET
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim."""
 
-    include_output_logits: OptionalNullable[bool] = UNSET
-    r"""Whether to include the output logits to the generation output."""
-
-    include_output_logprobs: OptionalNullable[bool] = UNSET
-    r"""Whether to include the output logprobs to the generation output."""
-
     length_penalty: OptionalNullable[float] = UNSET
     r"""Coefficient for exponential length penalty that is used with beam search. Only allowed for beam search. Defaults to 1.0. This is similar to Hugging Face's [`length_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.length_penalty) argument."""
+
+    logprobs: OptionalNullable[int] = UNSET
+    r"""Include the log probabilities on the logprobs most likely output tokens, as well the chosen tokens."""
 
     max_tokens: OptionalNullable[int] = UNSET
     r"""The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument."""
@@ -519,7 +668,7 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPrompt(BaseModel):
     repetition_penalty: OptionalNullable[float] = UNSET
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
 
-    response_format: OptionalNullable[ResponseFormat] = UNSET
+    response_format: Optional[ResponseFormat] = None
     r"""The enforced format of the model's output.
 
     Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
@@ -551,6 +700,14 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPrompt(BaseModel):
     stream: OptionalNullable[bool] = True
     r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."""
 
+    stream_options: OptionalNullable[
+        CompletionsBodyWithPromptDedicatedCompletionsStreamBodyStreamOptions
+    ] = UNSET
+    r"""Options related to stream.
+    It can only be used when `stream: true`.
+
+    """
+
     temperature: OptionalNullable[float] = 1
     r"""Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument."""
 
@@ -581,9 +738,8 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPrompt(BaseModel):
             "eos_token",
             "forced_output_tokens",
             "frequency_penalty",
-            "include_output_logits",
-            "include_output_logprobs",
             "length_penalty",
+            "logprobs",
             "max_tokens",
             "max_total_tokens",
             "min_tokens",
@@ -598,6 +754,7 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPrompt(BaseModel):
             "stop",
             "stop_tokens",
             "stream",
+            "stream_options",
             "temperature",
             "timeout_microseconds",
             "token_index_to_replace",
@@ -617,9 +774,8 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPrompt(BaseModel):
             "eos_token",
             "forced_output_tokens",
             "frequency_penalty",
-            "include_output_logits",
-            "include_output_logprobs",
             "length_penalty",
+            "logprobs",
             "max_tokens",
             "max_total_tokens",
             "min_tokens",
@@ -629,11 +785,11 @@ class DedicatedCompletionsStreamBodyCompletionsBodyWithPrompt(BaseModel):
             "num_beams",
             "presence_penalty",
             "repetition_penalty",
-            "response_format",
             "seed",
             "stop",
             "stop_tokens",
             "stream",
+            "stream_options",
             "temperature",
             "timeout_microseconds",
             "token_index_to_replace",

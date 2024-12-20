@@ -19,8 +19,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.rag.knowledge_retrieve(
+) as friendli:
+
+    res = friendli.serverless.rag.knowledge_retrieve(
         query="Chicken dinner",
         k=1,
         knowledge_ids=[
@@ -28,6 +29,7 @@ with SyncFriendli(
         ],
     )
 
+    # Handle response
     print(res)
 ```
 

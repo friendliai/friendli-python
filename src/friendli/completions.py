@@ -5,7 +5,7 @@ from friendli import models, utils
 from friendli._hooks import HookContext
 from friendli.types import OptionalNullable, UNSET
 from friendli.utils import eventstreaming, get_security_from_env
-from typing import Optional, Union
+from typing import Mapping, Optional, Union
 
 
 class Completions(BaseSDK):
@@ -20,6 +20,7 @@ class Completions(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CompletionsResult:
         r"""Completions
 
@@ -30,6 +31,7 @@ class Completions(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -58,6 +60,7 @@ class Completions(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.serverless_completions_complete_body,
@@ -122,6 +125,7 @@ class Completions(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CompletionsResult:
         r"""Completions
 
@@ -132,6 +136,7 @@ class Completions(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -160,6 +165,7 @@ class Completions(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.serverless_completions_complete_body,
@@ -224,6 +230,7 @@ class Completions(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStream[models.StreamedCompletionsResult]:
         r"""Stream completions
 
@@ -234,6 +241,7 @@ class Completions(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -262,6 +270,7 @@ class Completions(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="text/event-stream",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.serverless_completions_stream_body,
@@ -331,6 +340,7 @@ class Completions(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStreamAsync[models.StreamedCompletionsResult]:
         r"""Stream completions
 
@@ -341,6 +351,7 @@ class Completions(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
         url_variables = None
@@ -369,6 +380,7 @@ class Completions(BaseSDK):
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="text/event-stream",
+            http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.serverless_completions_stream_body,

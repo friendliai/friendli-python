@@ -1,0 +1,9 @@
+# ServerlessChatStreamBodyToolChoiceObject
+
+
+## Fields
+
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                       | [models.ServerlessChatStreamBodyToolChoiceType](../models/serverlesschatstreambodytoolchoicetype.md)         | :heavy_check_mark:                                                                                           | The type of the tool. Currently, only `function` is supported.                                               |
+| `function`                                                                                                   | [models.ServerlessChatStreamBodyToolChoiceFunction](../models/serverlesschatstreambodytoolchoicefunction.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |

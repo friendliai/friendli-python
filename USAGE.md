@@ -10,8 +10,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.chat.complete(
+) as friendli:
+
+    res = friendli.serverless.chat.complete(
         model="meta-llama-3.1-8b-instruct",
         messages=[
             {
@@ -26,6 +27,7 @@ with SyncFriendli(
         max_tokens=200,
     )
 
+    # Handle response
     print(res)
 ```
 
@@ -42,8 +44,9 @@ import os
 async def main():
     async with AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
-    ) as s:
-        res = await s.serverless.chat.complete_async(
+    ) as friendli:
+
+        res = await friendli.serverless.chat.complete_async(
             model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
@@ -58,6 +61,7 @@ async def main():
             max_tokens=200,
         )
 
+        # Handle response
         print(res)
 
 asyncio.run(main())
@@ -74,8 +78,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.tool_assisted_chat.complete(
+) as friendli:
+
+    res = friendli.serverless.tool_assisted_chat.complete(
         model="meta-llama-3.1-8b-instruct",
         messages=[
             {
@@ -91,6 +96,7 @@ with SyncFriendli(
         ],
     )
 
+    # Handle response
     print(res)
 ```
 
@@ -107,8 +113,9 @@ import os
 async def main():
     async with AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
-    ) as s:
-        res = await s.serverless.tool_assisted_chat.complete_async(
+    ) as friendli:
+
+        res = await friendli.serverless.tool_assisted_chat.complete_async(
             model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
@@ -124,6 +131,7 @@ async def main():
             ],
         )
 
+        # Handle response
         print(res)
 
 asyncio.run(main())
