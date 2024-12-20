@@ -2,15 +2,25 @@
 
 from __future__ import annotations
 from .streamedchatchoice import StreamedChatChoice, StreamedChatChoiceTypedDict
+from .usage import Usage, UsageTypedDict
 from friendli.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from typing import List, Literal, Optional
+from typing_extensions import NotRequired, TypedDict
+
+
+StreamedToolAssistedChatTokenObject = Literal["chat.completion.chunk"]
+r"""The object type, which is always set to `chat.completion.chunk`."""
 
 
 class StreamedToolAssistedChatTokenDataTypedDict(TypedDict):
     choices: List[StreamedChatChoiceTypedDict]
     created: int
     r"""The Unix timestamp (in seconds) for when the token sampled."""
+    id: NotRequired[str]
+    r"""A unique ID of the chat completion."""
+    object: NotRequired[StreamedToolAssistedChatTokenObject]
+    r"""The object type, which is always set to `chat.completion.chunk`."""
+    usage: NotRequired[UsageTypedDict]
 
 
 class StreamedToolAssistedChatTokenData(BaseModel):
@@ -18,6 +28,14 @@ class StreamedToolAssistedChatTokenData(BaseModel):
 
     created: int
     r"""The Unix timestamp (in seconds) for when the token sampled."""
+
+    id: Optional[str] = None
+    r"""A unique ID of the chat completion."""
+
+    object: Optional[StreamedToolAssistedChatTokenObject] = None
+    r"""The object type, which is always set to `chat.completion.chunk`."""
+
+    usage: Optional[Usage] = None
 
 
 class StreamedToolAssistedChatTokenTypedDict(TypedDict):

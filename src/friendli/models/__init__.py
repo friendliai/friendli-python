@@ -20,18 +20,47 @@ from .chatchoice import (
     ChatChoiceToolCallsTypedDict,
     ChatChoiceType,
     ChatChoiceTypedDict,
+    FinishReason,
 )
-from .chatresult import ChatResult, ChatResultTypedDict
+from .chatlogprobs import (
+    ChatLogprobs,
+    ChatLogprobsTopLogprobs,
+    ChatLogprobsTopLogprobsTypedDict,
+    ChatLogprobsTypedDict,
+    Content,
+    ContentTypedDict,
+)
+from .chatresult import ChatResult, ChatResultTypedDict, Object
 from .completionsbodywithprompt import (
     CompletionsBodyWithPrompt,
+    CompletionsBodyWithPromptStreamOptions,
+    CompletionsBodyWithPromptStreamOptionsTypedDict,
     CompletionsBodyWithPromptTypedDict,
+    Prompt,
+    PromptTypedDict,
 )
 from .completionsbodywithtokens import (
     CompletionsBodyWithTokens,
+    CompletionsBodyWithTokensStreamOptions,
+    CompletionsBodyWithTokensStreamOptionsTypedDict,
     CompletionsBodyWithTokensTypedDict,
 )
-from .completionschoice import CompletionsChoice, CompletionsChoiceTypedDict
-from .completionsresult import CompletionsResult, CompletionsResultTypedDict
+from .completionschoice import (
+    CompletionsChoice,
+    CompletionsChoiceFinishReason,
+    CompletionsChoiceTypedDict,
+)
+from .completionslogprobs import (
+    CompletionsLogprobs,
+    CompletionsLogprobsTypedDict,
+    TopLogprobs,
+    TopLogprobsTypedDict,
+)
+from .completionsresult import (
+    CompletionsResult,
+    CompletionsResultObject,
+    CompletionsResultTypedDict,
+)
 from .dedicatedchatcompletebody import (
     DedicatedChatCompleteBody,
     DedicatedChatCompleteBodyLogitBias,
@@ -71,6 +100,12 @@ from .dedicatedchatstreamop import (
     DedicatedChatStreamRequestTypedDict,
 )
 from .dedicatedcompletionscompletebody import (
+    CompletionsBodyWithPromptDedicatedCompletionsCompleteBodyPrompt,
+    CompletionsBodyWithPromptDedicatedCompletionsCompleteBodyPromptTypedDict,
+    CompletionsBodyWithPromptDedicatedCompletionsCompleteBodyStreamOptions,
+    CompletionsBodyWithPromptDedicatedCompletionsCompleteBodyStreamOptionsTypedDict,
+    CompletionsBodyWithTokensDedicatedCompletionsCompleteBodyStreamOptions,
+    CompletionsBodyWithTokensDedicatedCompletionsCompleteBodyStreamOptionsTypedDict,
     DedicatedCompletionsCompleteBody,
     DedicatedCompletionsCompleteBodyCompletionsBodyWithPrompt,
     DedicatedCompletionsCompleteBodyCompletionsBodyWithPromptTypedDict,
@@ -83,6 +118,12 @@ from .dedicatedcompletionscompleteop import (
     DedicatedCompletionsCompleteRequestTypedDict,
 )
 from .dedicatedcompletionsstreambody import (
+    CompletionsBodyWithPromptDedicatedCompletionsStreamBodyPrompt,
+    CompletionsBodyWithPromptDedicatedCompletionsStreamBodyPromptTypedDict,
+    CompletionsBodyWithPromptDedicatedCompletionsStreamBodyStreamOptions,
+    CompletionsBodyWithPromptDedicatedCompletionsStreamBodyStreamOptionsTypedDict,
+    CompletionsBodyWithTokensDedicatedCompletionsStreamBodyStreamOptions,
+    CompletionsBodyWithTokensDedicatedCompletionsStreamBodyStreamOptionsTypedDict,
     DedicatedCompletionsStreamBody,
     DedicatedCompletionsStreamBodyCompletionsBodyWithPrompt,
     DedicatedCompletionsStreamBodyCompletionsBodyWithPromptTypedDict,
@@ -124,29 +165,42 @@ from .knowledgeretrieveresult import (
     Results,
     ResultsTypedDict,
 )
-from .logprobs import (
-    Content,
-    ContentTypedDict,
-    Logprobs,
-    LogprobsTypedDict,
-    TopLogprobs,
-    TopLogprobsTypedDict,
-)
 from .message import Message, MessageTypedDict
 from .otherbuiltintool import (
     OtherBuiltInTool,
     OtherBuiltInToolType,
     OtherBuiltInToolTypedDict,
 )
-from .ragbuiltintool import RagBuiltInTool, RagBuiltInToolType, RagBuiltInToolTypedDict
-from .responseformat import ResponseFormat, ResponseFormatTypedDict, Type
+from .responseformat import ResponseFormat, ResponseFormatTypedDict
+from .responseformatjsonobject import (
+    ResponseFormatJSONObject,
+    ResponseFormatJSONObjectType,
+    ResponseFormatJSONObjectTypedDict,
+)
+from .responseformatjsonschema import (
+    JSONSchema,
+    JSONSchemaTypedDict,
+    ResponseFormatJSONSchema,
+    ResponseFormatJSONSchemaTypedDict,
+    Schema,
+    SchemaTypedDict,
+    Type,
+)
+from .responseformatregex import (
+    ResponseFormatRegex,
+    ResponseFormatRegexType,
+    ResponseFormatRegexTypedDict,
+)
+from .responseformattext import (
+    ResponseFormatText,
+    ResponseFormatTextType,
+    ResponseFormatTextTypedDict,
+)
 from .sdkerror import SDKError
 from .security import Security, SecurityTypedDict
 from .serverlesschatcompletebody import (
     LogitBias,
     LogitBiasTypedDict,
-    Object,
-    ObjectTypedDict,
     ServerlessChatCompleteBody,
     ServerlessChatCompleteBodyTypedDict,
     StreamOptions,
@@ -154,6 +208,8 @@ from .serverlesschatcompletebody import (
     ToolChoice,
     ToolChoiceFunction,
     ToolChoiceFunctionTypedDict,
+    ToolChoiceObject,
+    ToolChoiceObjectTypedDict,
     ToolChoiceType,
     ToolChoiceTypedDict,
 )
@@ -170,11 +226,11 @@ from .serverlesschatstreambody import (
     ServerlessChatStreamBodyToolChoice,
     ServerlessChatStreamBodyToolChoiceFunction,
     ServerlessChatStreamBodyToolChoiceFunctionTypedDict,
+    ServerlessChatStreamBodyToolChoiceObject,
+    ServerlessChatStreamBodyToolChoiceObjectTypedDict,
     ServerlessChatStreamBodyToolChoiceType,
     ServerlessChatStreamBodyToolChoiceTypedDict,
     ServerlessChatStreamBodyTypedDict,
-    ToolChoiceObject,
-    ToolChoiceObjectTypedDict,
 )
 from .serverlesschatstreamop import (
     ServerlessChatStreamRequest,
@@ -189,6 +245,12 @@ from .serverlesscompletionscompleteop import (
     ServerlessCompletionsCompleteRequestTypedDict,
 )
 from .serverlesscompletionsstreambody import (
+    CompletionsBodyWithPromptPrompt,
+    CompletionsBodyWithPromptPromptTypedDict,
+    CompletionsBodyWithPromptServerlessCompletionsStreamBodyStreamOptions,
+    CompletionsBodyWithPromptServerlessCompletionsStreamBodyStreamOptionsTypedDict,
+    CompletionsBodyWithTokensServerlessCompletionsStreamBodyStreamOptions,
+    CompletionsBodyWithTokensServerlessCompletionsStreamBodyStreamOptionsTypedDict,
     ServerlessCompletionsStreamBody,
     ServerlessCompletionsStreamBodyCompletionsBodyWithPrompt,
     ServerlessCompletionsStreamBodyCompletionsBodyWithPromptTypedDict,
@@ -226,6 +288,10 @@ from .serverlesstokenizationop import (
 )
 from .serverlesstoolassistedchatcompletebody import (
     ServerlessToolAssistedChatCompleteBody,
+    ServerlessToolAssistedChatCompleteBodyLogitBias,
+    ServerlessToolAssistedChatCompleteBodyLogitBiasTypedDict,
+    ServerlessToolAssistedChatCompleteBodyStreamOptions,
+    ServerlessToolAssistedChatCompleteBodyStreamOptionsTypedDict,
     ServerlessToolAssistedChatCompleteBodyToolChoice,
     ServerlessToolAssistedChatCompleteBodyToolChoiceFunction,
     ServerlessToolAssistedChatCompleteBodyToolChoiceFunctionTypedDict,
@@ -241,6 +307,10 @@ from .serverlesstoolassistedchatcompleteop import (
 )
 from .serverlesstoolassistedchatstreambody import (
     ServerlessToolAssistedChatStreamBody,
+    ServerlessToolAssistedChatStreamBodyLogitBias,
+    ServerlessToolAssistedChatStreamBodyLogitBiasTypedDict,
+    ServerlessToolAssistedChatStreamBodyStreamOptions,
+    ServerlessToolAssistedChatStreamBodyStreamOptionsTypedDict,
     ServerlessToolAssistedChatStreamBodyToolChoice,
     ServerlessToolAssistedChatStreamBodyToolChoiceFunction,
     ServerlessToolAssistedChatStreamBodyToolChoiceFunctionTypedDict,
@@ -258,6 +328,7 @@ from .streamedchatchoice import (
     Delta,
     DeltaTypedDict,
     StreamedChatChoice,
+    StreamedChatChoiceFinishReason,
     StreamedChatChoiceFunction,
     StreamedChatChoiceFunctionTypedDict,
     StreamedChatChoiceToolCalls,
@@ -269,23 +340,20 @@ from .streamedchatresult import (
     Data,
     DataTypedDict,
     StreamedChatResult,
+    StreamedChatResultObject,
     StreamedChatResultTypedDict,
+)
+from .streamedcompletionschoice import (
+    StreamedCompletionsChoice,
+    StreamedCompletionsChoiceFinishReason,
+    StreamedCompletionsChoiceTypedDict,
 )
 from .streamedcompletionsresult import (
     StreamedCompletionsResult,
     StreamedCompletionsResultData,
     StreamedCompletionsResultDataTypedDict,
+    StreamedCompletionsResultObject,
     StreamedCompletionsResultTypedDict,
-)
-from .streamedcompletionstokencomplete import (
-    StreamedCompletionsTokenComplete,
-    StreamedCompletionsTokenCompleteEvent,
-    StreamedCompletionsTokenCompleteTypedDict,
-)
-from .streamedcompletionstokensampled import (
-    Event,
-    StreamedCompletionsTokenSampled,
-    StreamedCompletionsTokenSampledTypedDict,
 )
 from .streamedtoolassistedchatresult import (
     StreamedToolAssistedChatResult,
@@ -295,6 +363,7 @@ from .streamedtoolassistedchattoken import (
     StreamedToolAssistedChatToken,
     StreamedToolAssistedChatTokenData,
     StreamedToolAssistedChatTokenDataTypedDict,
+    StreamedToolAssistedChatTokenObject,
     StreamedToolAssistedChatTokenTypedDict,
 )
 from .streamedtoolassistedchattoolstatus import (
@@ -336,15 +405,45 @@ __all__ = [
     "ChatChoiceToolCallsTypedDict",
     "ChatChoiceType",
     "ChatChoiceTypedDict",
+    "ChatLogprobs",
+    "ChatLogprobsTopLogprobs",
+    "ChatLogprobsTopLogprobsTypedDict",
+    "ChatLogprobsTypedDict",
     "ChatResult",
     "ChatResultTypedDict",
     "CompletionsBodyWithPrompt",
+    "CompletionsBodyWithPromptDedicatedCompletionsCompleteBodyPrompt",
+    "CompletionsBodyWithPromptDedicatedCompletionsCompleteBodyPromptTypedDict",
+    "CompletionsBodyWithPromptDedicatedCompletionsCompleteBodyStreamOptions",
+    "CompletionsBodyWithPromptDedicatedCompletionsCompleteBodyStreamOptionsTypedDict",
+    "CompletionsBodyWithPromptDedicatedCompletionsStreamBodyPrompt",
+    "CompletionsBodyWithPromptDedicatedCompletionsStreamBodyPromptTypedDict",
+    "CompletionsBodyWithPromptDedicatedCompletionsStreamBodyStreamOptions",
+    "CompletionsBodyWithPromptDedicatedCompletionsStreamBodyStreamOptionsTypedDict",
+    "CompletionsBodyWithPromptPrompt",
+    "CompletionsBodyWithPromptPromptTypedDict",
+    "CompletionsBodyWithPromptServerlessCompletionsStreamBodyStreamOptions",
+    "CompletionsBodyWithPromptServerlessCompletionsStreamBodyStreamOptionsTypedDict",
+    "CompletionsBodyWithPromptStreamOptions",
+    "CompletionsBodyWithPromptStreamOptionsTypedDict",
     "CompletionsBodyWithPromptTypedDict",
     "CompletionsBodyWithTokens",
+    "CompletionsBodyWithTokensDedicatedCompletionsCompleteBodyStreamOptions",
+    "CompletionsBodyWithTokensDedicatedCompletionsCompleteBodyStreamOptionsTypedDict",
+    "CompletionsBodyWithTokensDedicatedCompletionsStreamBodyStreamOptions",
+    "CompletionsBodyWithTokensDedicatedCompletionsStreamBodyStreamOptionsTypedDict",
+    "CompletionsBodyWithTokensServerlessCompletionsStreamBodyStreamOptions",
+    "CompletionsBodyWithTokensServerlessCompletionsStreamBodyStreamOptionsTypedDict",
+    "CompletionsBodyWithTokensStreamOptions",
+    "CompletionsBodyWithTokensStreamOptionsTypedDict",
     "CompletionsBodyWithTokensTypedDict",
     "CompletionsChoice",
+    "CompletionsChoiceFinishReason",
     "CompletionsChoiceTypedDict",
+    "CompletionsLogprobs",
+    "CompletionsLogprobsTypedDict",
     "CompletionsResult",
+    "CompletionsResultObject",
     "CompletionsResultTypedDict",
     "Content",
     "ContentTypedDict",
@@ -410,42 +509,53 @@ __all__ = [
     "DetokenizationResultTypedDict",
     "Error",
     "ErrorTypedDict",
-    "Event",
     "FileBuiltInTool",
     "FileBuiltInToolType",
     "FileBuiltInToolTypedDict",
     "Files",
     "FilesTypedDict",
+    "FinishReason",
     "Function",
     "FunctionTool",
     "FunctionToolType",
     "FunctionToolTypedDict",
     "FunctionTypedDict",
+    "JSONSchema",
+    "JSONSchemaTypedDict",
     "KnowledgeRetrieveResult",
     "KnowledgeRetrieveResultTypedDict",
     "LogitBias",
     "LogitBiasTypedDict",
-    "Logprobs",
-    "LogprobsTypedDict",
     "Message",
     "MessageTypedDict",
     "Name",
     "Object",
-    "ObjectTypedDict",
     "OtherBuiltInTool",
     "OtherBuiltInToolType",
     "OtherBuiltInToolTypedDict",
     "Parameters",
     "ParametersTypedDict",
-    "RagBuiltInTool",
-    "RagBuiltInToolType",
-    "RagBuiltInToolTypedDict",
+    "Prompt",
+    "PromptTypedDict",
     "ResponseFormat",
+    "ResponseFormatJSONObject",
+    "ResponseFormatJSONObjectType",
+    "ResponseFormatJSONObjectTypedDict",
+    "ResponseFormatJSONSchema",
+    "ResponseFormatJSONSchemaTypedDict",
+    "ResponseFormatRegex",
+    "ResponseFormatRegexType",
+    "ResponseFormatRegexTypedDict",
+    "ResponseFormatText",
+    "ResponseFormatTextType",
+    "ResponseFormatTextTypedDict",
     "ResponseFormatTypedDict",
     "Results",
     "ResultsTypedDict",
     "Role",
     "SDKError",
+    "Schema",
+    "SchemaTypedDict",
     "Security",
     "SecurityTypedDict",
     "ServerlessChatCompleteBody",
@@ -460,6 +570,8 @@ __all__ = [
     "ServerlessChatStreamBodyToolChoice",
     "ServerlessChatStreamBodyToolChoiceFunction",
     "ServerlessChatStreamBodyToolChoiceFunctionTypedDict",
+    "ServerlessChatStreamBodyToolChoiceObject",
+    "ServerlessChatStreamBodyToolChoiceObjectTypedDict",
     "ServerlessChatStreamBodyToolChoiceType",
     "ServerlessChatStreamBodyToolChoiceTypedDict",
     "ServerlessChatStreamBodyTypedDict",
@@ -490,6 +602,10 @@ __all__ = [
     "ServerlessTokenizationRequest",
     "ServerlessTokenizationRequestTypedDict",
     "ServerlessToolAssistedChatCompleteBody",
+    "ServerlessToolAssistedChatCompleteBodyLogitBias",
+    "ServerlessToolAssistedChatCompleteBodyLogitBiasTypedDict",
+    "ServerlessToolAssistedChatCompleteBodyStreamOptions",
+    "ServerlessToolAssistedChatCompleteBodyStreamOptionsTypedDict",
     "ServerlessToolAssistedChatCompleteBodyToolChoice",
     "ServerlessToolAssistedChatCompleteBodyToolChoiceFunction",
     "ServerlessToolAssistedChatCompleteBodyToolChoiceFunctionTypedDict",
@@ -501,6 +617,10 @@ __all__ = [
     "ServerlessToolAssistedChatCompleteRequest",
     "ServerlessToolAssistedChatCompleteRequestTypedDict",
     "ServerlessToolAssistedChatStreamBody",
+    "ServerlessToolAssistedChatStreamBodyLogitBias",
+    "ServerlessToolAssistedChatStreamBodyLogitBiasTypedDict",
+    "ServerlessToolAssistedChatStreamBodyStreamOptions",
+    "ServerlessToolAssistedChatStreamBodyStreamOptionsTypedDict",
     "ServerlessToolAssistedChatStreamBodyToolChoice",
     "ServerlessToolAssistedChatStreamBodyToolChoiceFunction",
     "ServerlessToolAssistedChatStreamBodyToolChoiceFunctionTypedDict",
@@ -515,6 +635,7 @@ __all__ = [
     "StreamOptions",
     "StreamOptionsTypedDict",
     "StreamedChatChoice",
+    "StreamedChatChoiceFinishReason",
     "StreamedChatChoiceFunction",
     "StreamedChatChoiceFunctionTypedDict",
     "StreamedChatChoiceToolCalls",
@@ -522,21 +643,22 @@ __all__ = [
     "StreamedChatChoiceType",
     "StreamedChatChoiceTypedDict",
     "StreamedChatResult",
+    "StreamedChatResultObject",
     "StreamedChatResultTypedDict",
+    "StreamedCompletionsChoice",
+    "StreamedCompletionsChoiceFinishReason",
+    "StreamedCompletionsChoiceTypedDict",
     "StreamedCompletionsResult",
     "StreamedCompletionsResultData",
     "StreamedCompletionsResultDataTypedDict",
+    "StreamedCompletionsResultObject",
     "StreamedCompletionsResultTypedDict",
-    "StreamedCompletionsTokenComplete",
-    "StreamedCompletionsTokenCompleteEvent",
-    "StreamedCompletionsTokenCompleteTypedDict",
-    "StreamedCompletionsTokenSampled",
-    "StreamedCompletionsTokenSampledTypedDict",
     "StreamedToolAssistedChatResult",
     "StreamedToolAssistedChatResultTypedDict",
     "StreamedToolAssistedChatToken",
     "StreamedToolAssistedChatTokenData",
     "StreamedToolAssistedChatTokenDataTypedDict",
+    "StreamedToolAssistedChatTokenObject",
     "StreamedToolAssistedChatTokenTypedDict",
     "StreamedToolAssistedChatToolStatus",
     "StreamedToolAssistedChatToolStatusData",

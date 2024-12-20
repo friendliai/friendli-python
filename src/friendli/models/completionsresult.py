@@ -4,8 +4,12 @@ from __future__ import annotations
 from .completionschoice import CompletionsChoice, CompletionsChoiceTypedDict
 from .usage import Usage, UsageTypedDict
 from friendli.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from typing import List, Literal, Optional
+from typing_extensions import NotRequired, TypedDict
+
+
+CompletionsResultObject = Literal["text_completion"]
+r"""The object type, which is always set to `text_completion`."""
 
 
 class CompletionsResultTypedDict(TypedDict):
@@ -13,6 +17,10 @@ class CompletionsResultTypedDict(TypedDict):
 
     choices: List[CompletionsChoiceTypedDict]
     usage: UsageTypedDict
+    id: NotRequired[str]
+    r"""A unique ID of the completion."""
+    object: NotRequired[CompletionsResultObject]
+    r"""The object type, which is always set to `text_completion`."""
 
 
 class CompletionsResult(BaseModel):
@@ -21,3 +29,9 @@ class CompletionsResult(BaseModel):
     choices: List[CompletionsChoice]
 
     usage: Usage
+
+    id: Optional[str] = None
+    r"""A unique ID of the completion."""
+
+    object: Optional[CompletionsResultObject] = None
+    r"""The object type, which is always set to `text_completion`."""

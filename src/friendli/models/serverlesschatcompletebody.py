@@ -90,20 +90,22 @@ class ToolChoiceFunction(BaseModel):
     r"""The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."""
 
 
-class ObjectTypedDict(TypedDict):
+class ToolChoiceObjectTypedDict(TypedDict):
     type: ToolChoiceType
     r"""The type of the tool. Currently, only `function` is supported."""
     function: ToolChoiceFunctionTypedDict
 
 
-class Object(BaseModel):
+class ToolChoiceObject(BaseModel):
     type: ToolChoiceType
     r"""The type of the tool. Currently, only `function` is supported."""
 
     function: ToolChoiceFunction
 
 
-ToolChoiceTypedDict = TypeAliasType("ToolChoiceTypedDict", Union[ObjectTypedDict, str])
+ToolChoiceTypedDict = TypeAliasType(
+    "ToolChoiceTypedDict", Union[ToolChoiceObjectTypedDict, str]
+)
 r"""Determines the tool calling behavior of the model.
 When set to `none`, the model will bypass tool execution and generate a response directly.
 In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.
@@ -113,7 +115,7 @@ You can also specify a particular tool by `{\"type\": \"function\", \"function\"
 """
 
 
-ToolChoice = TypeAliasType("ToolChoice", Union[Object, str])
+ToolChoice = TypeAliasType("ToolChoice", Union[ToolChoiceObject, str])
 r"""Determines the tool calling behavior of the model.
 When set to `none`, the model will bypass tool execution and generate a response directly.
 In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.
@@ -152,7 +154,7 @@ class ServerlessChatCompleteBodyTypedDict(TypedDict):
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."""
     repetition_penalty: NotRequired[Nullable[float]]
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
-    response_format: NotRequired[Nullable[ResponseFormatTypedDict]]
+    response_format: NotRequired[ResponseFormatTypedDict]
     r"""The enforced format of the model's output.
 
     Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
@@ -244,7 +246,7 @@ class ServerlessChatCompleteBody(BaseModel):
     repetition_penalty: OptionalNullable[float] = UNSET
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
 
-    response_format: OptionalNullable[ResponseFormat] = UNSET
+    response_format: Optional[ResponseFormat] = None
     r"""The enforced format of the model's output.
 
     Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
@@ -342,7 +344,6 @@ class ServerlessChatCompleteBody(BaseModel):
             "parallel_tool_calls",
             "presence_penalty",
             "repetition_penalty",
-            "response_format",
             "seed",
             "stop",
             "stream",

@@ -8,11 +8,11 @@
 
 ## Token Setup
 
-When using Friendli Python SDK, you need to provide a Friendli Token for authentication and authorization purposes. A Friendli Token serves as an alternative method of authorization to signing in with an email and a password. You can generate a new Friendli Token through the [Friendli Suite](https://suite.friendli.ai), at your "User settings" page by following the steps below.
+When using Friendli Python SDK, you need to provide a Friendli Token for authentication and authorization purposes. A Friendli Token serves as an alternative method of authorization to signing in with an email and a password. You can generate a new Friendli Token through the [Friendli Suite](https://suite.friendli.ai), at your "Personal settings" page by following the steps below.
 
 1. Go to the [Friendli Suite](https://suite.friendli.ai) and sign in with your account.
 2. Click the profile icon at the top-right corner of the page.
-3. Click "User settings" menu.
+3. Click "Personal settings" menu.
 4. Go to the "Tokens" tab on the navigation bar.
 5. Create a new Friendli Token by clicking the "Create token" button.
 6. Copy the token and save it in a safe place. You will not be able to see this token again once the page is refreshed.
@@ -69,8 +69,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.chat.complete(
+) as friendli:
+
+    res = friendli.serverless.chat.complete(
         model="meta-llama-3.1-8b-instruct",
         messages=[
             {
@@ -85,6 +86,7 @@ with SyncFriendli(
         max_tokens=200,
     )
 
+    # Handle response
     print(res)
 ```
 
@@ -101,8 +103,9 @@ import os
 async def main():
     async with AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
-    ) as s:
-        res = await s.serverless.chat.complete_async(
+    ) as friendli:
+
+        res = await friendli.serverless.chat.complete_async(
             model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
@@ -117,6 +120,7 @@ async def main():
             max_tokens=200,
         )
 
+        # Handle response
         print(res)
 
 asyncio.run(main())
@@ -133,8 +137,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.tool_assisted_chat.complete(
+) as friendli:
+
+    res = friendli.serverless.tool_assisted_chat.complete(
         model="meta-llama-3.1-8b-instruct",
         messages=[
             {
@@ -150,6 +155,7 @@ with SyncFriendli(
         ],
     )
 
+    # Handle response
     print(res)
 ```
 
@@ -166,8 +172,9 @@ import os
 async def main():
     async with AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
-    ) as s:
-        res = await s.serverless.tool_assisted_chat.complete_async(
+    ) as friendli:
+
+        res = await friendli.serverless.tool_assisted_chat.complete_async(
             model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
@@ -183,6 +190,7 @@ async def main():
             ],
         )
 
+        # Handle response
         print(res)
 
 asyncio.run(main())
@@ -262,8 +270,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.chat.stream(
+) as friendli:
+
+    res = friendli.serverless.chat.stream(
         model="meta-llama-3.1-8b-instruct",
         messages=[
             {
@@ -278,11 +287,10 @@ with SyncFriendli(
         max_tokens=200,
     )
 
-    if res is not None:
-        with res as event_stream:
-            for event in event_stream:
-                # handle event
-                print(event, flush=True)
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
 ```
 
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
@@ -303,8 +311,9 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.chat.complete(
+) as friendli:
+
+    res = friendli.serverless.chat.complete(
         model="meta-llama-3.1-8b-instruct",
         messages=[
             {
@@ -320,6 +329,7 @@ with SyncFriendli(
         retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     )
 
+    # Handle response
     print(res)
 ```
 
@@ -332,8 +342,9 @@ import os
 with SyncFriendli(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.chat.complete(
+) as friendli:
+
+    res = friendli.serverless.chat.complete(
         model="meta-llama-3.1-8b-instruct",
         messages=[
             {
@@ -348,6 +359,7 @@ with SyncFriendli(
         max_tokens=200,
     )
 
+    # Handle response
     print(res)
 ```
 <!-- End Retries [retries] -->
@@ -380,10 +392,11 @@ import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
+) as friendli:
     res = None
     try:
-        res = s.serverless.chat.complete(
+
+        res = friendli.serverless.chat.complete(
             model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
@@ -398,6 +411,7 @@ with SyncFriendli(
             max_tokens=200,
         )
 
+        # Handle response
         print(res)
 
     except models.SDKError as e:
@@ -419,8 +433,9 @@ import os
 with SyncFriendli(
     server_url="https://api.friendli.ai",
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as s:
-    res = s.serverless.chat.complete(
+) as friendli:
+
+    res = friendli.serverless.chat.complete(
         model="meta-llama-3.1-8b-instruct",
         messages=[
             {
@@ -435,6 +450,7 @@ with SyncFriendli(
         max_tokens=200,
     )
 
+    # Handle response
     print(res)
 ```
 <!-- End Server Selection [server] -->

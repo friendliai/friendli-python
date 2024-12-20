@@ -1,12 +1,10 @@
 # Type
 
-Type of the response format.
+The type of the response format: `json_schema`
 
 
 ## Values
 
 | Name          | Value         |
 | ------------- | ------------- |
-| `TEXT`        | text          |
-| `JSON_OBJECT` | json_object   |
-| `REGEX`       | regex         |
+| `JSON_SCHEMA` | json_schema   |
