@@ -36,7 +36,7 @@ class ToolAssistedChat(BaseSDK):
         resume_generation: OptionalNullable[bool] = UNSET,
         seed: OptionalNullable[List[int]] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
-        stream: OptionalNullable[bool] = True,
+        stream: OptionalNullable[bool] = False,
         stream_options: OptionalNullable[
             Union[
                 models.ServerlessToolAssistedChatCompleteBodyStreamOptions,
@@ -248,7 +248,7 @@ class ToolAssistedChat(BaseSDK):
         resume_generation: OptionalNullable[bool] = UNSET,
         seed: OptionalNullable[List[int]] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
-        stream: OptionalNullable[bool] = True,
+        stream: OptionalNullable[bool] = False,
         stream_options: OptionalNullable[
             Union[
                 models.ServerlessToolAssistedChatCompleteBodyStreamOptions,

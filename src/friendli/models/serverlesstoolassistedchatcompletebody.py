@@ -297,7 +297,7 @@ class ServerlessToolAssistedChatCompleteBody(BaseModel):
     stop: OptionalNullable[List[str]] = UNSET
     r"""When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list."""
 
-    stream: OptionalNullable[bool] = True
+    stream: OptionalNullable[bool] = False
     r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."""
 
     stream_options: OptionalNullable[
