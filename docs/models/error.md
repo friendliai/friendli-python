@@ -5,5 +5,5 @@
 
 | Field                                                      | Type                                                       | Required                                                   | Description                                                |
 | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `type`                                                     | *str*                                                      | :heavy_check_mark:                                         | The type of error encountered during the tool’s execution. |
-| `msg`                                                      | *str*                                                      | :heavy_check_mark:                                         | The message of error.                                      |
+| `type`                                                     | *Optional[str]*                                            | :heavy_minus_sign:                                         | The type of error encountered during the tool’s execution. |
+| `msg`                                                      | *Optional[str]*                                            | :heavy_minus_sign:                                         | The message of error.                                      |

@@ -342,6 +342,8 @@ from .streamedchatresult import (
     StreamedChatResult,
     StreamedChatResultObject,
     StreamedChatResultTypedDict,
+    StreamedChatResultUsage,
+    StreamedChatResultUsageTypedDict,
 )
 from .streamedcompletionschoice import (
     StreamedCompletionsChoice,
@@ -354,6 +356,8 @@ from .streamedcompletionsresult import (
     StreamedCompletionsResultDataTypedDict,
     StreamedCompletionsResultObject,
     StreamedCompletionsResultTypedDict,
+    StreamedCompletionsResultUsage,
+    StreamedCompletionsResultUsageTypedDict,
 )
 from .streamedtoolassistedchatresult import (
     StreamedToolAssistedChatResult,
@@ -365,6 +369,8 @@ from .streamedtoolassistedchattoken import (
     StreamedToolAssistedChatTokenDataTypedDict,
     StreamedToolAssistedChatTokenObject,
     StreamedToolAssistedChatTokenTypedDict,
+    StreamedToolAssistedChatTokenUsage,
+    StreamedToolAssistedChatTokenUsageTypedDict,
 )
 from .streamedtoolassistedchattoolstatus import (
     Error,
@@ -645,6 +651,8 @@ __all__ = [
     "StreamedChatResult",
     "StreamedChatResultObject",
     "StreamedChatResultTypedDict",
+    "StreamedChatResultUsage",
+    "StreamedChatResultUsageTypedDict",
     "StreamedCompletionsChoice",
     "StreamedCompletionsChoiceFinishReason",
     "StreamedCompletionsChoiceTypedDict",
@@ -653,6 +661,8 @@ __all__ = [
     "StreamedCompletionsResultDataTypedDict",
     "StreamedCompletionsResultObject",
     "StreamedCompletionsResultTypedDict",
+    "StreamedCompletionsResultUsage",
+    "StreamedCompletionsResultUsageTypedDict",
     "StreamedToolAssistedChatResult",
     "StreamedToolAssistedChatResultTypedDict",
     "StreamedToolAssistedChatToken",
@@ -660,6 +670,8 @@ __all__ = [
     "StreamedToolAssistedChatTokenDataTypedDict",
     "StreamedToolAssistedChatTokenObject",
     "StreamedToolAssistedChatTokenTypedDict",
+    "StreamedToolAssistedChatTokenUsage",
+    "StreamedToolAssistedChatTokenUsageTypedDict",
     "StreamedToolAssistedChatToolStatus",
     "StreamedToolAssistedChatToolStatusData",
     "StreamedToolAssistedChatToolStatusDataTypedDict",

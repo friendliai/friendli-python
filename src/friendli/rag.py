@@ -51,7 +51,7 @@ class Rag(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/serverless/v1/knowledge/retrieve",
             base_url=base_url,
@@ -158,7 +158,7 @@ class Rag(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/serverless/v1/knowledge/retrieve",
             base_url=base_url,
