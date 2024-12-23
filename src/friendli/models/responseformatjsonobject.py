@@ -16,8 +16,8 @@ class ResponseFormatJSONObjectTypedDict(TypedDict):
     type: ResponseFormatJSONObjectType
     r"""The type of the response format: `json_object`"""
     schema_: NotRequired[Nullable[str]]
-    r"""The schema of the output. For `{ \"type\": \"json_object\" }`, `schema` should be a serialized string of JSON schema. For `{ \"type\": \"regex\" }`, `schema` should be a regex pattern.
-    Note that recursive definitions are not supported. Optional properties are also not supported; all properties of `{ \"type\": \"object\" }` are generated regardless of whether they are listed in the `required` field.
+    r"""The serialized JSON schema string to enforce as the response format.
+    Note that recursive definitions are not supported. Optional properties are also unsupported; all properties defined under `{ \"type\": \"object\" }` will be generated, regardless of their inclusion in the required field.
 
     """
 
@@ -26,9 +26,15 @@ class ResponseFormatJSONObject(BaseModel):
     type: ResponseFormatJSONObjectType
     r"""The type of the response format: `json_object`"""
 
-    schema_: Annotated[OptionalNullable[str], pydantic.Field(alias="schema")] = UNSET
-    r"""The schema of the output. For `{ \"type\": \"json_object\" }`, `schema` should be a serialized string of JSON schema. For `{ \"type\": \"regex\" }`, `schema` should be a regex pattern.
-    Note that recursive definitions are not supported. Optional properties are also not supported; all properties of `{ \"type\": \"object\" }` are generated regardless of whether they are listed in the `required` field.
+    schema_: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="schema",
+        ),
+    ] = UNSET
+    r"""The serialized JSON schema string to enforce as the response format.
+    Note that recursive definitions are not supported. Optional properties are also unsupported; all properties defined under `{ \"type\": \"object\" }` will be generated, regardless of their inclusion in the required field.
 
     """
 
