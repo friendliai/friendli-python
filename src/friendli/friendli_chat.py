@@ -145,7 +145,7 @@ class FriendliChat(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/dedicated/v1/chat/completions",
             base_url=base_url,
@@ -346,7 +346,7 @@ class FriendliChat(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/dedicated/v1/chat/completions",
             base_url=base_url,
@@ -547,7 +547,7 @@ class FriendliChat(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/dedicated/v1/chat/completions#stream",
             base_url=base_url,
@@ -753,7 +753,7 @@ class FriendliChat(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/dedicated/v1/chat/completions#stream",
             base_url=base_url,

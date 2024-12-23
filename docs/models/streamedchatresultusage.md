@@ -1,4 +1,4 @@
-# Usage
+# StreamedChatResultUsage
 
 
 ## Fields

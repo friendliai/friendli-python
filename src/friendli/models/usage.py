@@ -2,24 +2,25 @@
 
 from __future__ import annotations
 from friendli.types import BaseModel
-from typing_extensions import TypedDict
+from typing import Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class UsageTypedDict(TypedDict):
-    prompt_tokens: int
+    prompt_tokens: NotRequired[int]
     r"""Number of tokens in the prompt."""
-    completion_tokens: int
+    completion_tokens: NotRequired[int]
     r"""Number of tokens in the generated completions."""
-    total_tokens: int
+    total_tokens: NotRequired[int]
     r"""Total number of tokens used in the request (`prompt_tokens` + `completion_tokens`)."""
 
 
 class Usage(BaseModel):
-    prompt_tokens: int
+    prompt_tokens: Optional[int] = None
     r"""Number of tokens in the prompt."""
 
-    completion_tokens: int
+    completion_tokens: Optional[int] = None
     r"""Number of tokens in the generated completions."""
 
-    total_tokens: int
+    total_tokens: Optional[int] = None
     r"""Total number of tokens used in the request (`prompt_tokens` + `completion_tokens`)."""

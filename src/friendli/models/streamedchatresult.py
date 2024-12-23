@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 from .streamedchatchoice import StreamedChatChoice, StreamedChatChoiceTypedDict
-from .usage import Usage, UsageTypedDict
-from friendli.types import BaseModel
+from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -12,39 +12,89 @@ StreamedChatResultObject = Literal["chat.completion.chunk"]
 r"""The object type, which is always set to `chat.completion.chunk`."""
 
 
+class StreamedChatResultUsageTypedDict(TypedDict):
+    prompt_tokens: NotRequired[int]
+    r"""Number of tokens in the prompt."""
+    completion_tokens: NotRequired[int]
+    r"""Number of tokens in the generated completions."""
+    total_tokens: NotRequired[int]
+    r"""Total number of tokens used in the request (`prompt_tokens` + `completion_tokens`)."""
+
+
+class StreamedChatResultUsage(BaseModel):
+    prompt_tokens: Optional[int] = None
+    r"""Number of tokens in the prompt."""
+
+    completion_tokens: Optional[int] = None
+    r"""Number of tokens in the generated completions."""
+
+    total_tokens: Optional[int] = None
+    r"""Total number of tokens used in the request (`prompt_tokens` + `completion_tokens`)."""
+
+
 class DataTypedDict(TypedDict):
-    choices: List[StreamedChatChoiceTypedDict]
-    created: int
-    r"""The Unix timestamp (in seconds) for when the token sampled."""
     id: NotRequired[str]
     r"""A unique ID of the chat completion."""
     object: NotRequired[StreamedChatResultObject]
     r"""The object type, which is always set to `chat.completion.chunk`."""
-    usage: NotRequired[UsageTypedDict]
+    choices: NotRequired[List[StreamedChatChoiceTypedDict]]
+    usage: NotRequired[Nullable[StreamedChatResultUsageTypedDict]]
+    created: NotRequired[int]
+    r"""The Unix timestamp (in seconds) for when the token sampled."""
 
 
 class Data(BaseModel):
-    choices: List[StreamedChatChoice]
-
-    created: int
-    r"""The Unix timestamp (in seconds) for when the token sampled."""
-
     id: Optional[str] = None
     r"""A unique ID of the chat completion."""
 
     object: Optional[StreamedChatResultObject] = None
     r"""The object type, which is always set to `chat.completion.chunk`."""
 
-    usage: Optional[Usage] = None
+    choices: Optional[List[StreamedChatChoice]] = None
+
+    usage: OptionalNullable[StreamedChatResultUsage] = UNSET
+
+    created: Optional[int] = None
+    r"""The Unix timestamp (in seconds) for when the token sampled."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["id", "object", "choices", "usage", "created"]
+        nullable_fields = ["usage"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in self.model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class StreamedChatResultTypedDict(TypedDict):
     r"""A server-sent event containing chat completions content."""
 
-    data: DataTypedDict
+    data: NotRequired[DataTypedDict]
 
 
 class StreamedChatResult(BaseModel):
     r"""A server-sent event containing chat completions content."""
 
-    data: Data
+    data: Optional[Data] = None

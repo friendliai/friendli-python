@@ -49,7 +49,7 @@ class FriendliCompletions(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/dedicated/v1/completions",
             base_url=base_url,
@@ -154,7 +154,7 @@ class FriendliCompletions(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/dedicated/v1/completions",
             base_url=base_url,
@@ -258,7 +258,7 @@ class FriendliCompletions(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/dedicated/v1/completions#stream",
             base_url=base_url,
@@ -367,7 +367,7 @@ class FriendliCompletions(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/dedicated/v1/completions#stream",
             base_url=base_url,

@@ -48,7 +48,7 @@ class FriendliToken(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/dedicated/v1/tokenize",
             base_url=base_url,
@@ -152,7 +152,7 @@ class FriendliToken(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/dedicated/v1/tokenize",
             base_url=base_url,
@@ -256,7 +256,7 @@ class FriendliToken(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/dedicated/v1/detokenize",
             base_url=base_url,
@@ -360,7 +360,7 @@ class FriendliToken(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/dedicated/v1/detokenize",
             base_url=base_url,

@@ -1,4 +1,4 @@
-# Usage
+# StreamedToolAssistedChatTokenUsage
 
 
 ## Fields

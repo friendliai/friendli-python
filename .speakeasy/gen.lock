@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: cf77a101e3424b5d652a600cb21d5430
+  docChecksum: 8fdee145ed6d99ca295eea0a35f81c9c
   docVersion: v1
-  speakeasyVersion: 1.456.1
-  generationVersion: 2.481.0
-  releaseVersion: 0.3.24
-  configChecksum: 6cbaae312f960375b34fe814a7c1b7d5
+  speakeasyVersion: 1.459.3
+  generationVersion: 2.483.6
+  releaseVersion: 0.3.25
+  configChecksum: b655ffa6ba5306a1c21aa44568ee563e
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
@@ -26,7 +26,7 @@ features:
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.0
     methodArguments: 1.0.2
-    nameOverrides: 3.0.0
+    nameOverrides: 3.0.1
     nullables: 1.0.0
     responseFormat: 1.0.1
     retries: 3.0.2
@@ -177,15 +177,18 @@ generatedFiles:
   - docs/models/streamedchatchoicetype.md
   - docs/models/streamedchatresult.md
   - docs/models/streamedchatresultobject.md
+  - docs/models/streamedchatresultusage.md
   - docs/models/streamedcompletionschoice.md
   - docs/models/streamedcompletionschoicefinishreason.md
   - docs/models/streamedcompletionsresult.md
   - docs/models/streamedcompletionsresultdata.md
   - docs/models/streamedcompletionsresultobject.md
+  - docs/models/streamedcompletionsresultusage.md
   - docs/models/streamedtoolassistedchatresult.md
   - docs/models/streamedtoolassistedchattoken.md
   - docs/models/streamedtoolassistedchattokendata.md
   - docs/models/streamedtoolassistedchattokenobject.md
+  - docs/models/streamedtoolassistedchattokenusage.md
   - docs/models/streamedtoolassistedchattoolstatus.md
   - docs/models/streamedtoolassistedchattoolstatusdata.md
   - docs/models/streamedtoolassistedchattoolstatusparameters.md
@@ -342,7 +345,7 @@ examples:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
-          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}, "created": 1735722153}
+          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop", "logprobs": null}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}, "created": 1735722153}
   serverlessChatStream:
     "":
       requestBody:
@@ -365,7 +368,7 @@ examples:
         application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is 3 + 6?"}], "max_tokens": 200, "tools": [{"type": "code:python-interpreter"}]}
       responses:
         "200":
-          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The result is 9."}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 7, "total_tokens": 16}, "created": 1735722153}
+          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "choices": [{"index": 0, "message": {"role": "assistant", "content": "The result is 9."}, "finish_reason": "stop", "logprobs": null}], "usage": {"prompt_tokens": 9, "completion_tokens": 7, "total_tokens": 16}, "created": 1735722153}
   serverlessToolAssistedChatStream:
     "":
       requestBody:
@@ -431,7 +434,7 @@ examples:
         application/json: {"model": "(endpoint-id):(adapter-route)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}], "max_tokens": 200}
       responses:
         "200":
-          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}, "created": 1735722153}
+          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "choices": [{"index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}, "finish_reason": "stop", "logprobs": null}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}, "created": 1735722153}
   dedicatedChatStream:
     "":
       requestBody:
