@@ -15,23 +15,23 @@ r"""The object type, which is always set to `text_completion`."""
 class CompletionsResultTypedDict(TypedDict):
     r"""Successfully generated completions."""
 
-    choices: List[CompletionsChoiceTypedDict]
-    usage: UsageTypedDict
     id: NotRequired[str]
     r"""A unique ID of the completion."""
     object: NotRequired[CompletionsResultObject]
     r"""The object type, which is always set to `text_completion`."""
+    choices: NotRequired[List[CompletionsChoiceTypedDict]]
+    usage: NotRequired[UsageTypedDict]
 
 
 class CompletionsResult(BaseModel):
     r"""Successfully generated completions."""
-
-    choices: List[CompletionsChoice]
-
-    usage: Usage
 
     id: Optional[str] = None
     r"""A unique ID of the completion."""
 
     object: Optional[CompletionsResultObject] = None
     r"""The object type, which is always set to `text_completion`."""
+
+    choices: Optional[List[CompletionsChoice]] = None
+
+    usage: Optional[Usage] = None

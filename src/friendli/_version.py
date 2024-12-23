@@ -3,7 +3,7 @@
 import importlib.metadata
 
 __title__: str = "friendli"
-__version__: str = "0.3.24"
+__version__: str = "0.3.25"
 
 try:
     if __package__ is not None:

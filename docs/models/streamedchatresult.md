@@ -5,6 +5,6 @@ A server-sent event containing chat completions content.
 
 ## Fields
 
-| Field                            | Type                             | Required                         | Description                      |
-| -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-| `data`                           | [models.Data](../models/data.md) | :heavy_check_mark:               | N/A                              |
+| Field                                      | Type                                       | Required                                   | Description                                |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| `data`                                     | [Optional[models.Data]](../models/data.md) | :heavy_minus_sign:                         | N/A                                        |
