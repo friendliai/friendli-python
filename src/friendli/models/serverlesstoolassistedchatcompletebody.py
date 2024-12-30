@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 from .message import Message, MessageTypedDict
-from .responseformat import ResponseFormat, ResponseFormatTypedDict
 from .toolassistedchattool import ToolAssistedChatTool, ToolAssistedChatToolTypedDict
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
@@ -160,17 +159,6 @@ class ServerlessToolAssistedChatCompleteBodyTypedDict(TypedDict):
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."""
     repetition_penalty: NotRequired[Nullable[float]]
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
-    response_format: NotRequired[ResponseFormatTypedDict]
-    r"""The enforced format of the model's output.
-
-    Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
-    You can check this by verifying that the `finish_reason` of the output message is `length`.
-
-    ***Important***
-    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
-    Otherwise, the model may result in an unending stream of whitespace or other characters.
-
-    """
     resume_generation: NotRequired[Nullable[bool]]
     r"""Enable to continue text generation even after an error occurs during a tool call.
 
@@ -267,18 +255,6 @@ class ServerlessToolAssistedChatCompleteBody(BaseModel):
     repetition_penalty: OptionalNullable[float] = UNSET
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
 
-    response_format: Optional[ResponseFormat] = None
-    r"""The enforced format of the model's output.
-
-    Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
-    You can check this by verifying that the `finish_reason` of the output message is `length`.
-
-    ***Important***
-    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
-    Otherwise, the model may result in an unending stream of whitespace or other characters.
-
-    """
-
     resume_generation: OptionalNullable[bool] = UNSET
     r"""Enable to continue text generation even after an error occurs during a tool call.
 
@@ -355,7 +331,6 @@ class ServerlessToolAssistedChatCompleteBody(BaseModel):
             "parallel_tool_calls",
             "presence_penalty",
             "repetition_penalty",
-            "response_format",
             "resume_generation",
             "seed",
             "stop",

@@ -30,9 +30,6 @@ class ToolAssistedChat(BaseSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: Optional[
-            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = None,
         resume_generation: OptionalNullable[bool] = UNSET,
         seed: OptionalNullable[List[int]] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
@@ -82,7 +79,6 @@ class ToolAssistedChat(BaseSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.
         :param resume_generation: Enable to continue text generation even after an error occurs during a tool call.  Note that enabling this option may use more tokens, as the system generates additional content to handle errors gracefully. However, if the system fails more than 8 times, the generation will stop regardless.  ***Tip*** This is useful in scenarios where you want to maintain text generation flow despite errors, such as when generating long-form content. The user will not be interrupted by tool call issues, ensuring a smoother experience.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
@@ -128,9 +124,6 @@ class ToolAssistedChat(BaseSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                response_format=utils.get_pydantic_model(
-                    response_format, Optional[models.ResponseFormat]
-                ),
                 resume_generation=resume_generation,
                 seed=seed,
                 stop=stop,
@@ -242,9 +235,6 @@ class ToolAssistedChat(BaseSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: Optional[
-            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = None,
         resume_generation: OptionalNullable[bool] = UNSET,
         seed: OptionalNullable[List[int]] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
@@ -294,7 +284,6 @@ class ToolAssistedChat(BaseSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.
         :param resume_generation: Enable to continue text generation even after an error occurs during a tool call.  Note that enabling this option may use more tokens, as the system generates additional content to handle errors gracefully. However, if the system fails more than 8 times, the generation will stop regardless.  ***Tip*** This is useful in scenarios where you want to maintain text generation flow despite errors, such as when generating long-form content. The user will not be interrupted by tool call issues, ensuring a smoother experience.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
@@ -340,9 +329,6 @@ class ToolAssistedChat(BaseSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                response_format=utils.get_pydantic_model(
-                    response_format, Optional[models.ResponseFormat]
-                ),
                 resume_generation=resume_generation,
                 seed=seed,
                 stop=stop,
@@ -454,9 +440,6 @@ class ToolAssistedChat(BaseSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: Optional[
-            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = None,
         resume_generation: OptionalNullable[bool] = UNSET,
         seed: OptionalNullable[List[int]] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
@@ -506,7 +489,6 @@ class ToolAssistedChat(BaseSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.
         :param resume_generation: Enable to continue text generation even after an error occurs during a tool call.  Note that enabling this option may use more tokens, as the system generates additional content to handle errors gracefully. However, if the system fails more than 8 times, the generation will stop regardless.  ***Tip*** This is useful in scenarios where you want to maintain text generation flow despite errors, such as when generating long-form content. The user will not be interrupted by tool call issues, ensuring a smoother experience.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
@@ -552,9 +534,6 @@ class ToolAssistedChat(BaseSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                response_format=utils.get_pydantic_model(
-                    response_format, Optional[models.ResponseFormat]
-                ),
                 resume_generation=resume_generation,
                 seed=seed,
                 stop=stop,
@@ -673,9 +652,6 @@ class ToolAssistedChat(BaseSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: Optional[
-            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = None,
         resume_generation: OptionalNullable[bool] = UNSET,
         seed: OptionalNullable[List[int]] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
@@ -725,7 +701,6 @@ class ToolAssistedChat(BaseSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.
         :param resume_generation: Enable to continue text generation even after an error occurs during a tool call.  Note that enabling this option may use more tokens, as the system generates additional content to handle errors gracefully. However, if the system fails more than 8 times, the generation will stop regardless.  ***Tip*** This is useful in scenarios where you want to maintain text generation flow despite errors, such as when generating long-form content. The user will not be interrupted by tool call issues, ensuring a smoother experience.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
@@ -771,9 +746,6 @@ class ToolAssistedChat(BaseSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                response_format=utils.get_pydantic_model(
-                    response_format, Optional[models.ResponseFormat]
-                ),
                 resume_generation=resume_generation,
                 seed=seed,
                 stop=stop,

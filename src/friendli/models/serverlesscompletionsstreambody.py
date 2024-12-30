@@ -135,6 +135,8 @@ class ServerlessCompletionsStreamBodyCompletionsBodyWithTokensTypedDict(TypedDic
     You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
     Otherwise, the model may result in an unending stream of whitespace or other characters.
 
+    **When `response_format` is specified, `min_tokens` field is unsupported.**
+
     """
     seed: NotRequired[Nullable[List[int]]]
     r"""Seed to control random procedure. If nothing is given, the API generate the seed randomly, use it for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
@@ -263,6 +265,8 @@ class ServerlessCompletionsStreamBodyCompletionsBodyWithTokens(BaseModel):
     ***Important***
     You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
     Otherwise, the model may result in an unending stream of whitespace or other characters.
+
+    **When `response_format` is specified, `min_tokens` field is unsupported.**
 
     """
 
@@ -547,6 +551,8 @@ class ServerlessCompletionsStreamBodyCompletionsBodyWithPromptTypedDict(TypedDic
     You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
     Otherwise, the model may result in an unending stream of whitespace or other characters.
 
+    **When `response_format` is specified, `min_tokens` field is unsupported.**
+
     """
     seed: NotRequired[Nullable[List[int]]]
     r"""Seed to control random procedure. If nothing is given, the API generate the seed randomly, use it for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
@@ -675,6 +681,8 @@ class ServerlessCompletionsStreamBodyCompletionsBodyWithPrompt(BaseModel):
     ***Important***
     You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
     Otherwise, the model may result in an unending stream of whitespace or other characters.
+
+    **When `response_format` is specified, `min_tokens` field is unsupported.**
 
     """
 
