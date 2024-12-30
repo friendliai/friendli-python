@@ -147,7 +147,7 @@ class DedicatedChatCompleteBodyTypedDict(TypedDict):
     min_tokens: NotRequired[Nullable[int]]
     r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
 
-    **This field is unsupported when `tools` are specified.**
+    **This field is unsupported when `tools` or `response_format` is specified.**
 
     """
     n: NotRequired[Nullable[int]]
@@ -159,16 +159,6 @@ class DedicatedChatCompleteBodyTypedDict(TypedDict):
     repetition_penalty: NotRequired[Nullable[float]]
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
     response_format: NotRequired[ResponseFormatTypedDict]
-    r"""The enforced format of the model's output.
-
-    Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
-    You can check this by verifying that the `finish_reason` of the output message is `length`.
-
-    ***Important***
-    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
-    Otherwise, the model may result in an unending stream of whitespace or other characters.
-
-    """
     seed: NotRequired[Nullable[List[int]]]
     r"""Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
     stop: NotRequired[Nullable[List[str]]]
@@ -200,7 +190,7 @@ class DedicatedChatCompleteBodyTypedDict(TypedDict):
     A maximum of 128 functions is supported.
     Use this to provide a list of functions the model may generate JSON inputs for.
 
-    **When `tools` are specified, `min_tokens` field is unsupported.**
+    **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
 
     """
     top_k: NotRequired[Nullable[int]]
@@ -236,7 +226,7 @@ class DedicatedChatCompleteBody(BaseModel):
     min_tokens: OptionalNullable[int] = 0
     r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
 
-    **This field is unsupported when `tools` are specified.**
+    **This field is unsupported when `tools` or `response_format` is specified.**
 
     """
 
@@ -253,16 +243,6 @@ class DedicatedChatCompleteBody(BaseModel):
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
 
     response_format: Optional[ResponseFormat] = None
-    r"""The enforced format of the model's output.
-
-    Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
-    You can check this by verifying that the `finish_reason` of the output message is `length`.
-
-    ***Important***
-    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
-    Otherwise, the model may result in an unending stream of whitespace or other characters.
-
-    """
 
     seed: OptionalNullable[List[int]] = UNSET
     r"""Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
@@ -300,7 +280,7 @@ class DedicatedChatCompleteBody(BaseModel):
     A maximum of 128 functions is supported.
     Use this to provide a list of functions the model may generate JSON inputs for.
 
-    **When `tools` are specified, `min_tokens` field is unsupported.**
+    **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
 
     """
 

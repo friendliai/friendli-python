@@ -98,7 +98,7 @@ class CompletionsBodyWithTokensTypedDict(TypedDict):
     eos_token: NotRequired[Nullable[List[int]]]
     r"""A list of endpoint sentence tokens."""
     forced_output_tokens: NotRequired[Nullable[List[int]]]
-    r"""A token sequence that is enforced as a generation output. This option can be used when evaluating the model for the datasets with multi-choice problems (e.g., [HellaSwag](https://huggingface.co/datasets/hellaswag), [MMLU](https://huggingface.co/datasets/cais/mmlu)). Use this option with `include_output_logprobs` to get logprobs for the evaluation."""
+    r"""A token sequence that is enforced as a generation output. This option can be used when evaluating the model for the datasets with multi-choice problems (e.g., [HellaSwag](https://huggingface.co/datasets/hellaswag), [MMLU](https://huggingface.co/datasets/cais/mmlu)). Use this option with `logprobs` to get logprobs for the evaluation."""
     frequency_penalty: NotRequired[Nullable[float]]
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim."""
     length_penalty: NotRequired[Nullable[float]]
@@ -110,7 +110,11 @@ class CompletionsBodyWithTokensTypedDict(TypedDict):
     max_total_tokens: NotRequired[Nullable[int]]
     r"""The maximum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `max_tokens` and `max_total_tokens` is allowed. Default value is the model's maximum length. This is similar to Hugging Face's [`max_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_length) argument."""
     min_tokens: NotRequired[Nullable[int]]
-    r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument."""
+    r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
+
+    **This field is unsupported when `response_format` is specified.**
+
+    """
     min_total_tokens: NotRequired[Nullable[int]]
     r"""The minimum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `min_tokens` and `min_total_tokens` is allowed. This is similar to Hugging Face's [`min_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.min_length) argument."""
     n: NotRequired[Nullable[int]]
@@ -132,6 +136,8 @@ class CompletionsBodyWithTokensTypedDict(TypedDict):
     ***Important***
     You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
     Otherwise, the model may result in an unending stream of whitespace or other characters.
+
+    **When `response_format` is specified, `min_tokens` field is unsupported.**
 
     """
     seed: NotRequired[Nullable[List[int]]]
@@ -212,7 +218,7 @@ class CompletionsBodyWithTokens(BaseModel):
     r"""A list of endpoint sentence tokens."""
 
     forced_output_tokens: OptionalNullable[List[int]] = UNSET
-    r"""A token sequence that is enforced as a generation output. This option can be used when evaluating the model for the datasets with multi-choice problems (e.g., [HellaSwag](https://huggingface.co/datasets/hellaswag), [MMLU](https://huggingface.co/datasets/cais/mmlu)). Use this option with `include_output_logprobs` to get logprobs for the evaluation."""
+    r"""A token sequence that is enforced as a generation output. This option can be used when evaluating the model for the datasets with multi-choice problems (e.g., [HellaSwag](https://huggingface.co/datasets/hellaswag), [MMLU](https://huggingface.co/datasets/cais/mmlu)). Use this option with `logprobs` to get logprobs for the evaluation."""
 
     frequency_penalty: OptionalNullable[float] = UNSET
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim."""
@@ -230,7 +236,11 @@ class CompletionsBodyWithTokens(BaseModel):
     r"""The maximum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `max_tokens` and `max_total_tokens` is allowed. Default value is the model's maximum length. This is similar to Hugging Face's [`max_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_length) argument."""
 
     min_tokens: OptionalNullable[int] = 0
-    r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument."""
+    r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
+
+    **This field is unsupported when `response_format` is specified.**
+
+    """
 
     min_total_tokens: OptionalNullable[int] = UNSET
     r"""The minimum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `min_tokens` and `min_total_tokens` is allowed. This is similar to Hugging Face's [`min_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.min_length) argument."""
@@ -259,6 +269,8 @@ class CompletionsBodyWithTokens(BaseModel):
     ***Important***
     You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
     Otherwise, the model may result in an unending stream of whitespace or other characters.
+
+    **When `response_format` is specified, `min_tokens` field is unsupported.**
 
     """
 

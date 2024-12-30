@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 from .message import Message, MessageTypedDict
-from .responseformat import ResponseFormat, ResponseFormatTypedDict
 from .toolassistedchattool import ToolAssistedChatTool, ToolAssistedChatToolTypedDict
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
@@ -146,12 +145,6 @@ class ServerlessToolAssistedChatStreamBodyTypedDict(TypedDict):
     r"""Whether to return log probabilities of the output tokens or not."""
     max_tokens: NotRequired[Nullable[int]]
     r"""The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument."""
-    min_tokens: NotRequired[Nullable[int]]
-    r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
-
-    **This field is unsupported when `tools` are specified.**
-
-    """
     n: NotRequired[Nullable[int]]
     r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
     parallel_tool_calls: NotRequired[Nullable[bool]]
@@ -160,17 +153,6 @@ class ServerlessToolAssistedChatStreamBodyTypedDict(TypedDict):
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."""
     repetition_penalty: NotRequired[Nullable[float]]
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
-    response_format: NotRequired[ResponseFormatTypedDict]
-    r"""The enforced format of the model's output.
-
-    Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
-    You can check this by verifying that the `finish_reason` of the output message is `length`.
-
-    ***Important***
-    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
-    Otherwise, the model may result in an unending stream of whitespace or other characters.
-
-    """
     resume_generation: NotRequired[Nullable[bool]]
     r"""Enable to continue text generation even after an error occurs during a tool call.
 
@@ -213,8 +195,6 @@ class ServerlessToolAssistedChatStreamBodyTypedDict(TypedDict):
     Use this to provide a list of functions the model may generate JSON inputs for.
     For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tool-assisted-api#built-in-tools).
 
-    **When `tools` are specified, `min_tokens` field is unsupported.**
-
     """
     top_k: NotRequired[Nullable[int]]
     r"""The number of highest probability tokens to keep for sampling. Numbers between 0 and the vocab size of the model (both inclusive) are allowed. The default value is 0, which means that the API does not apply top-k filtering. This is similar to Hugging Face's [`top_k`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.top_k) argument."""
@@ -246,13 +226,6 @@ class ServerlessToolAssistedChatStreamBody(BaseModel):
     max_tokens: OptionalNullable[int] = UNSET
     r"""The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument."""
 
-    min_tokens: OptionalNullable[int] = 0
-    r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
-
-    **This field is unsupported when `tools` are specified.**
-
-    """
-
     n: OptionalNullable[int] = 1
     r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
 
@@ -264,18 +237,6 @@ class ServerlessToolAssistedChatStreamBody(BaseModel):
 
     repetition_penalty: OptionalNullable[float] = UNSET
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
-
-    response_format: Optional[ResponseFormat] = None
-    r"""The enforced format of the model's output.
-
-    Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
-    You can check this by verifying that the `finish_reason` of the output message is `length`.
-
-    ***Important***
-    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
-    Otherwise, the model may result in an unending stream of whitespace or other characters.
-
-    """
 
     resume_generation: OptionalNullable[bool] = UNSET
     r"""Enable to continue text generation even after an error occurs during a tool call.
@@ -327,8 +288,6 @@ class ServerlessToolAssistedChatStreamBody(BaseModel):
     Use this to provide a list of functions the model may generate JSON inputs for.
     For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tool-assisted-api#built-in-tools).
 
-    **When `tools` are specified, `min_tokens` field is unsupported.**
-
     """
 
     top_k: OptionalNullable[int] = 0
@@ -348,12 +307,10 @@ class ServerlessToolAssistedChatStreamBody(BaseModel):
             "logit_bias",
             "logprobs",
             "max_tokens",
-            "min_tokens",
             "n",
             "parallel_tool_calls",
             "presence_penalty",
             "repetition_penalty",
-            "response_format",
             "resume_generation",
             "seed",
             "stop",
@@ -373,7 +330,6 @@ class ServerlessToolAssistedChatStreamBody(BaseModel):
             "logit_bias",
             "logprobs",
             "max_tokens",
-            "min_tokens",
             "n",
             "parallel_tool_calls",
             "presence_penalty",
