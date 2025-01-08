@@ -13,17 +13,17 @@ with SyncFriendli(
 ) as friendli:
 
     res = friendli.serverless.chat.complete(
-        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "role": "system",
                 "content": "You are a helpful assistant.",
+                "role": "system",
             },
             {
-                "role": "user",
                 "content": "Hello!",
+                "role": "user",
             },
         ],
+        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
     )
 
@@ -47,17 +47,17 @@ async def main():
     ) as friendli:
 
         res = await friendli.serverless.chat.complete_async(
-            model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
-                    "role": "system",
                     "content": "You are a helpful assistant.",
+                    "role": "system",
                 },
                 {
-                    "role": "user",
                     "content": "Hello!",
+                    "role": "user",
                 },
             ],
+            model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
         )
 
@@ -81,13 +81,13 @@ with SyncFriendli(
 ) as friendli:
 
     res = friendli.serverless.tool_assisted_chat.complete(
-        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "role": "user",
                 "content": "What is 3 + 6?",
+                "role": "user",
             },
         ],
+        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
         tools=[
             {
@@ -116,13 +116,13 @@ async def main():
     ) as friendli:
 
         res = await friendli.serverless.tool_assisted_chat.complete_async(
-            model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
-                    "role": "user",
                     "content": "What is 3 + 6?",
+                    "role": "user",
                 },
             ],
+            model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
             tools=[
                 {

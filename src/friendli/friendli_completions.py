@@ -12,21 +12,20 @@ class FriendliCompletions(BaseSDK):
     def complete(
         self,
         *,
-        dedicated_completions_complete_body: Union[
-            models.DedicatedCompletionsCompleteBody,
-            models.DedicatedCompletionsCompleteBodyTypedDict,
+        dedicated_completions_body: Union[
+            models.DedicatedCompletionsBody, models.DedicatedCompletionsBodyTypedDict
         ],
-        x_friendli_team: Optional[str] = None,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CompletionsResult:
+    ) -> models.DedicatedCompletionsSuccess:
         r"""Completions
 
         Generate text based on the given text prompt.
 
-        :param dedicated_completions_complete_body:
+        :param dedicated_completions_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -43,9 +42,8 @@ class FriendliCompletions(BaseSDK):
 
         request = models.DedicatedCompletionsCompleteRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_completions_complete_body=utils.get_pydantic_model(
-                dedicated_completions_complete_body,
-                models.DedicatedCompletionsCompleteBody,
+            dedicated_completions_body=utils.get_pydantic_model(
+                dedicated_completions_body, models.DedicatedCompletionsBody
             ),
         )
 
@@ -63,11 +61,11 @@ class FriendliCompletions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.dedicated_completions_complete_body,
+                request.dedicated_completions_body,
                 False,
                 False,
                 "json",
-                models.DedicatedCompletionsCompleteBody,
+                models.DedicatedCompletionsBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -93,13 +91,15 @@ class FriendliCompletions(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.CompletionsResult)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.DedicatedCompletionsSuccess
+            )
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -117,21 +117,20 @@ class FriendliCompletions(BaseSDK):
     async def complete_async(
         self,
         *,
-        dedicated_completions_complete_body: Union[
-            models.DedicatedCompletionsCompleteBody,
-            models.DedicatedCompletionsCompleteBodyTypedDict,
+        dedicated_completions_body: Union[
+            models.DedicatedCompletionsBody, models.DedicatedCompletionsBodyTypedDict
         ],
-        x_friendli_team: Optional[str] = None,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CompletionsResult:
+    ) -> models.DedicatedCompletionsSuccess:
         r"""Completions
 
         Generate text based on the given text prompt.
 
-        :param dedicated_completions_complete_body:
+        :param dedicated_completions_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -148,9 +147,8 @@ class FriendliCompletions(BaseSDK):
 
         request = models.DedicatedCompletionsCompleteRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_completions_complete_body=utils.get_pydantic_model(
-                dedicated_completions_complete_body,
-                models.DedicatedCompletionsCompleteBody,
+            dedicated_completions_body=utils.get_pydantic_model(
+                dedicated_completions_body, models.DedicatedCompletionsBody
             ),
         )
 
@@ -168,11 +166,11 @@ class FriendliCompletions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.dedicated_completions_complete_body,
+                request.dedicated_completions_body,
                 False,
                 False,
                 "json",
-                models.DedicatedCompletionsCompleteBody,
+                models.DedicatedCompletionsBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -198,13 +196,15 @@ class FriendliCompletions(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.CompletionsResult)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.DedicatedCompletionsSuccess
+            )
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -226,12 +226,12 @@ class FriendliCompletions(BaseSDK):
             models.DedicatedCompletionsStreamBody,
             models.DedicatedCompletionsStreamBodyTypedDict,
         ],
-        x_friendli_team: Optional[str] = None,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.StreamedCompletionsResult]:
+    ) -> eventstreaming.EventStream[models.DedicatedCompletionsStreamSuccess]:
         r"""Stream completions
 
         Generate text based on the given text prompt.
@@ -302,7 +302,7 @@ class FriendliCompletions(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             stream=True,
             retry_config=retry_config,
         )
@@ -310,10 +310,12 @@ class FriendliCompletions(BaseSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
-                lambda raw: utils.unmarshal_json(raw, models.StreamedCompletionsResult),
+                lambda raw: utils.unmarshal_json(
+                    raw, models.DedicatedCompletionsStreamSuccess
+                ),
                 sentinel="[DONE]",
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -335,12 +337,12 @@ class FriendliCompletions(BaseSDK):
             models.DedicatedCompletionsStreamBody,
             models.DedicatedCompletionsStreamBodyTypedDict,
         ],
-        x_friendli_team: Optional[str] = None,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.StreamedCompletionsResult]:
+    ) -> eventstreaming.EventStreamAsync[models.DedicatedCompletionsStreamSuccess]:
         r"""Stream completions
 
         Generate text based on the given text prompt.
@@ -411,7 +413,7 @@ class FriendliCompletions(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             stream=True,
             retry_config=retry_config,
         )
@@ -419,10 +421,12 @@ class FriendliCompletions(BaseSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
-                lambda raw: utils.unmarshal_json(raw, models.StreamedCompletionsResult),
+                lambda raw: utils.unmarshal_json(
+                    raw, models.DedicatedCompletionsStreamSuccess
+                ),
                 sentinel="[DONE]",
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

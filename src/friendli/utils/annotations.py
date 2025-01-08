@@ -2,8 +2,9 @@
 
 from enum import Enum
 from typing import Any, Optional
+from friendli.types import UNSET
 
-def get_discriminator(model: Any, fieldname: str, key: str) -> str:
+def get_discriminator(model: Any, fieldname: str, key: str) -> str | None:
     """
     Recursively search for the discriminator attribute in a model.
 
@@ -18,6 +19,9 @@ def get_discriminator(model: Any, fieldname: str, key: str) -> str:
     Raises:
         ValueError: If the discriminator attribute is not found.
     """
+    if model is UNSET:
+        return None
+
     upper_fieldname = fieldname.upper()
 
     def get_field_discriminator(field: Any) -> Optional[str]:

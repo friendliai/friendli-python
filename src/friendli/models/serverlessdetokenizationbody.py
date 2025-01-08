@@ -2,20 +2,20 @@
 
 from __future__ import annotations
 from friendli.types import BaseModel
-from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import List
+from typing_extensions import TypedDict
 
 
 class ServerlessDetokenizationBodyTypedDict(TypedDict):
-    model: NotRequired[str]
+    model: str
     r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
-    tokens: NotRequired[List[int]]
+    tokens: List[int]
     r"""A token sequence to detokenize."""
 
 
 class ServerlessDetokenizationBody(BaseModel):
-    model: Optional[str] = None
+    model: str
     r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
 
-    tokens: Optional[List[int]] = None
+    tokens: List[int]
     r"""A token sequence to detokenize."""

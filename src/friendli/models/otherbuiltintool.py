@@ -6,7 +6,7 @@ from typing import Literal
 from typing_extensions import TypedDict
 
 
-OtherBuiltInToolType = Literal[
+Type = Literal[
     "math:calculator",
     "math:statistics",
     "math:calendar",
@@ -18,10 +18,10 @@ r"""The type of the built-in tool."""
 
 
 class OtherBuiltInToolTypedDict(TypedDict):
-    type: OtherBuiltInToolType
+    type: Type
     r"""The type of the built-in tool."""
 
 
 class OtherBuiltInTool(BaseModel):
-    type: OtherBuiltInToolType
+    type: Type
     r"""The type of the built-in tool."""

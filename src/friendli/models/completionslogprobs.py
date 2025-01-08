@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 from friendli.types import BaseModel
-from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import List
+from typing_extensions import TypedDict
 
 
 class TopLogprobsTypedDict(TypedDict):
@@ -15,29 +15,25 @@ class TopLogprobs(BaseModel):
 
 
 class CompletionsLogprobsTypedDict(TypedDict):
-    r"""Log probability information for the choice."""
-
-    text_offset: NotRequired[List[int]]
+    text_offset: List[int]
     r"""The starting character position of each token in the generated text, useful for mapping tokens back to their exact location for detailed analysis."""
-    token_logprobs: NotRequired[List[float]]
+    token_logprobs: List[float]
     r"""The log probabilities of each generated token, indicating the model's confidence in selecting each token."""
-    tokens: NotRequired[List[str]]
+    tokens: List[str]
     r"""A list of individual tokens generated in the completion, representing segments of text such as words or pieces of words."""
-    top_logprobs: NotRequired[List[TopLogprobsTypedDict]]
+    top_logprobs: List[TopLogprobsTypedDict]
     r"""A list of dictionaries, where each dictionary represents the top alternative tokens considered by the model at a specific position in the generated text, along with their log probabilities. The number of items in each dictionary matches the value of `logprobs`."""
 
 
 class CompletionsLogprobs(BaseModel):
-    r"""Log probability information for the choice."""
-
-    text_offset: Optional[List[int]] = None
+    text_offset: List[int]
     r"""The starting character position of each token in the generated text, useful for mapping tokens back to their exact location for detailed analysis."""
 
-    token_logprobs: Optional[List[float]] = None
+    token_logprobs: List[float]
     r"""The log probabilities of each generated token, indicating the model's confidence in selecting each token."""
 
-    tokens: Optional[List[str]] = None
+    tokens: List[str]
     r"""A list of individual tokens generated in the completion, representing segments of text such as words or pieces of words."""
 
-    top_logprobs: Optional[List[TopLogprobs]] = None
+    top_logprobs: List[TopLogprobs]
     r"""A list of dictionaries, where each dictionary represents the top alternative tokens considered by the model at a specific position in the generated text, along with their log probabilities. The number of items in each dictionary matches the value of `logprobs`."""

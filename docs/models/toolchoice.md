@@ -10,15 +10,15 @@ You can also specify a particular tool by `{"type": "function", "function": {"na
 
 ## Supported Types
 
+### `models.ChatCompleteBodyToolChoice`
+
+```python
+value: models.ChatCompleteBodyToolChoice = /* values here */
+```
+
 ### `str`
 
 ```python
 value: str = /* values here */
-```
-
-### `models.ToolChoiceObject`
-
-```python
-value: models.ToolChoiceObject = /* values here */
 ```
 

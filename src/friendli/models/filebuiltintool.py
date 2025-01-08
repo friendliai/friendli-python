@@ -2,24 +2,26 @@
 
 from __future__ import annotations
 from friendli.types import BaseModel
+from friendli.utils import validate_const
+import pydantic
+from pydantic.functional_validators import AfterValidator
 from typing import List, Literal
-from typing_extensions import TypedDict
-
-
-FileBuiltInToolType = Literal["file:text"]
-r"""The type of the file parser tool. Only .txt and .pdf files are supported."""
+from typing_extensions import Annotated, TypedDict
 
 
 class FileBuiltInToolTypedDict(TypedDict):
-    type: FileBuiltInToolType
-    r"""The type of the file parser tool. Only .txt and .pdf files are supported."""
     files: List[str]
     r"""A List of file IDs. For now, only one file is supported."""
+    type: Literal["file:text"]
+    r"""The type of the file parser tool. Only .txt and .pdf files are supported."""
 
 
 class FileBuiltInTool(BaseModel):
-    type: FileBuiltInToolType
-    r"""The type of the file parser tool. Only .txt and .pdf files are supported."""
-
     files: List[str]
     r"""A List of file IDs. For now, only one file is supported."""
+
+    TYPE: Annotated[
+        Annotated[Literal["file:text"], AfterValidator(validate_const("file:text"))],
+        pydantic.Field(alias="type"),
+    ] = "file:text"
+    r"""The type of the file parser tool. Only .txt and .pdf files are supported."""

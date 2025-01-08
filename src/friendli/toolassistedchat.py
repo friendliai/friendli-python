@@ -12,39 +12,41 @@ class ToolAssistedChat(BaseSDK):
     def complete(
         self,
         *,
-        model: str,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
-        x_friendli_team: Optional[str] = None,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatCompleteBodyLogitBias,
-                models.ServerlessToolAssistedChatCompleteBodyLogitBiasTypedDict,
+                models.ServerlessToolAssistedChatCompletionBodyLogitBias,
+                models.ServerlessToolAssistedChatCompletionBodyLogitBiasTypedDict,
             ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
-        n: OptionalNullable[int] = 1,
+        n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        resume_generation: OptionalNullable[bool] = UNSET,
-        seed: OptionalNullable[List[int]] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
-        stream: OptionalNullable[bool] = False,
-        stream_options: OptionalNullable[
+        resume_generation: Optional[bool] = None,
+        seed: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatCompleteBodyStreamOptions,
-                models.ServerlessToolAssistedChatCompleteBodyStreamOptionsTypedDict,
+                models.ServerlessToolAssistedChatCompletionBodySeed,
+                models.ServerlessToolAssistedChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
+        stop: OptionalNullable[List[str]] = UNSET,
+        stream: Optional[bool] = False,
+        stream_options: OptionalNullable[
+            Union[models.StreamOptions, models.StreamOptionsTypedDict]
+        ] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ServerlessToolAssistedChatCompleteBodyToolChoice,
-                models.ServerlessToolAssistedChatCompleteBodyToolChoiceTypedDict,
+                models.ServerlessToolAssistedChatCompletionBodyToolChoice,
+                models.ServerlessToolAssistedChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -53,20 +55,20 @@ class ToolAssistedChat(BaseSDK):
                 List[models.ToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
-        top_k: OptionalNullable[int] = 0,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
-        top_p: OptionalNullable[float] = 1,
+        top_p: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ChatResult:
+    ) -> models.ServerlessToolAssistedChatCompleteSuccess:
         r"""Tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -104,15 +106,15 @@ class ToolAssistedChat(BaseSDK):
 
         request = models.ServerlessToolAssistedChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            serverless_tool_assisted_chat_complete_body=models.ServerlessToolAssistedChatCompleteBody(
-                model=model,
+            serverless_tool_assisted_chat_completion_body=models.ServerlessToolAssistedChatCompletionBody(
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
+                model=model,
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
                     logit_bias,
                     OptionalNullable[
-                        models.ServerlessToolAssistedChatCompleteBodyLogitBias
+                        models.ServerlessToolAssistedChatCompletionBodyLogitBias
                     ],
                 ),
                 logprobs=logprobs,
@@ -126,16 +128,13 @@ class ToolAssistedChat(BaseSDK):
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options,
-                    OptionalNullable[
-                        models.ServerlessToolAssistedChatCompleteBodyStreamOptions
-                    ],
+                    stream_options, OptionalNullable[models.StreamOptions]
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
-                    Optional[models.ServerlessToolAssistedChatCompleteBodyToolChoice],
+                    Optional[models.ServerlessToolAssistedChatCompletionBodyToolChoice],
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.ToolAssistedChatTool]]
@@ -160,11 +159,11 @@ class ToolAssistedChat(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_tool_assisted_chat_complete_body,
+                request.serverless_tool_assisted_chat_completion_body,
                 False,
                 False,
                 "json",
-                models.ServerlessToolAssistedChatCompleteBody,
+                models.ServerlessToolAssistedChatCompletionBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -190,13 +189,15 @@ class ToolAssistedChat(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.ChatResult)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.ServerlessToolAssistedChatCompleteSuccess
+            )
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -214,39 +215,41 @@ class ToolAssistedChat(BaseSDK):
     async def complete_async(
         self,
         *,
-        model: str,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
-        x_friendli_team: Optional[str] = None,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatCompleteBodyLogitBias,
-                models.ServerlessToolAssistedChatCompleteBodyLogitBiasTypedDict,
+                models.ServerlessToolAssistedChatCompletionBodyLogitBias,
+                models.ServerlessToolAssistedChatCompletionBodyLogitBiasTypedDict,
             ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
-        n: OptionalNullable[int] = 1,
+        n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        resume_generation: OptionalNullable[bool] = UNSET,
-        seed: OptionalNullable[List[int]] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
-        stream: OptionalNullable[bool] = False,
-        stream_options: OptionalNullable[
+        resume_generation: Optional[bool] = None,
+        seed: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatCompleteBodyStreamOptions,
-                models.ServerlessToolAssistedChatCompleteBodyStreamOptionsTypedDict,
+                models.ServerlessToolAssistedChatCompletionBodySeed,
+                models.ServerlessToolAssistedChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
+        stop: OptionalNullable[List[str]] = UNSET,
+        stream: Optional[bool] = False,
+        stream_options: OptionalNullable[
+            Union[models.StreamOptions, models.StreamOptionsTypedDict]
+        ] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ServerlessToolAssistedChatCompleteBodyToolChoice,
-                models.ServerlessToolAssistedChatCompleteBodyToolChoiceTypedDict,
+                models.ServerlessToolAssistedChatCompletionBodyToolChoice,
+                models.ServerlessToolAssistedChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -255,20 +258,20 @@ class ToolAssistedChat(BaseSDK):
                 List[models.ToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
-        top_k: OptionalNullable[int] = 0,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
-        top_p: OptionalNullable[float] = 1,
+        top_p: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ChatResult:
+    ) -> models.ServerlessToolAssistedChatCompleteSuccess:
         r"""Tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -306,15 +309,15 @@ class ToolAssistedChat(BaseSDK):
 
         request = models.ServerlessToolAssistedChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            serverless_tool_assisted_chat_complete_body=models.ServerlessToolAssistedChatCompleteBody(
-                model=model,
+            serverless_tool_assisted_chat_completion_body=models.ServerlessToolAssistedChatCompletionBody(
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
+                model=model,
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
                     logit_bias,
                     OptionalNullable[
-                        models.ServerlessToolAssistedChatCompleteBodyLogitBias
+                        models.ServerlessToolAssistedChatCompletionBodyLogitBias
                     ],
                 ),
                 logprobs=logprobs,
@@ -328,16 +331,13 @@ class ToolAssistedChat(BaseSDK):
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options,
-                    OptionalNullable[
-                        models.ServerlessToolAssistedChatCompleteBodyStreamOptions
-                    ],
+                    stream_options, OptionalNullable[models.StreamOptions]
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
-                    Optional[models.ServerlessToolAssistedChatCompleteBodyToolChoice],
+                    Optional[models.ServerlessToolAssistedChatCompletionBodyToolChoice],
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.ToolAssistedChatTool]]
@@ -362,11 +362,11 @@ class ToolAssistedChat(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_tool_assisted_chat_complete_body,
+                request.serverless_tool_assisted_chat_completion_body,
                 False,
                 False,
                 "json",
-                models.ServerlessToolAssistedChatCompleteBody,
+                models.ServerlessToolAssistedChatCompletionBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -392,13 +392,15 @@ class ToolAssistedChat(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.ChatResult)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.ServerlessToolAssistedChatCompleteSuccess
+            )
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -416,39 +418,41 @@ class ToolAssistedChat(BaseSDK):
     def stream(
         self,
         *,
-        model: str,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
-        x_friendli_team: Optional[str] = None,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatStreamBodyLogitBias,
-                models.ServerlessToolAssistedChatStreamBodyLogitBiasTypedDict,
+                models.ServerlessToolAssistedChatCompletionStreamBodyLogitBias,
+                models.ServerlessToolAssistedChatCompletionStreamBodyLogitBiasTypedDict,
             ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
-        n: OptionalNullable[int] = 1,
+        n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        resume_generation: OptionalNullable[bool] = UNSET,
-        seed: OptionalNullable[List[int]] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
-        stream: OptionalNullable[bool] = True,
-        stream_options: OptionalNullable[
+        resume_generation: Optional[bool] = None,
+        seed: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatStreamBodyStreamOptions,
-                models.ServerlessToolAssistedChatStreamBodyStreamOptionsTypedDict,
+                models.ServerlessToolAssistedChatCompletionStreamBodySeed,
+                models.ServerlessToolAssistedChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
+        stop: OptionalNullable[List[str]] = UNSET,
+        stream: Optional[bool] = True,
+        stream_options: OptionalNullable[
+            Union[models.StreamOptions, models.StreamOptionsTypedDict]
+        ] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ServerlessToolAssistedChatStreamBodyToolChoice,
-                models.ServerlessToolAssistedChatStreamBodyToolChoiceTypedDict,
+                models.ServerlessToolAssistedChatCompletionStreamBodyToolChoice,
+                models.ServerlessToolAssistedChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -457,20 +461,22 @@ class ToolAssistedChat(BaseSDK):
                 List[models.ToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
-        top_k: OptionalNullable[int] = 0,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
-        top_p: OptionalNullable[float] = 1,
+        top_p: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.StreamedToolAssistedChatResult]:
+    ) -> eventstreaming.EventStream[
+        models.ServerlessToolAssistedChatCompletionStreamSuccess
+    ]:
         r"""Stream tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -508,15 +514,15 @@ class ToolAssistedChat(BaseSDK):
 
         request = models.ServerlessToolAssistedChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            serverless_tool_assisted_chat_stream_body=models.ServerlessToolAssistedChatStreamBody(
-                model=model,
+            serverless_tool_assisted_chat_completion_stream_body=models.ServerlessToolAssistedChatCompletionStreamBody(
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
+                model=model,
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
                     logit_bias,
                     OptionalNullable[
-                        models.ServerlessToolAssistedChatStreamBodyLogitBias
+                        models.ServerlessToolAssistedChatCompletionStreamBodyLogitBias
                     ],
                 ),
                 logprobs=logprobs,
@@ -530,16 +536,15 @@ class ToolAssistedChat(BaseSDK):
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options,
-                    OptionalNullable[
-                        models.ServerlessToolAssistedChatStreamBodyStreamOptions
-                    ],
+                    stream_options, OptionalNullable[models.StreamOptions]
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
-                    Optional[models.ServerlessToolAssistedChatStreamBodyToolChoice],
+                    Optional[
+                        models.ServerlessToolAssistedChatCompletionStreamBodyToolChoice
+                    ],
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.ToolAssistedChatTool]]
@@ -564,11 +569,11 @@ class ToolAssistedChat(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_tool_assisted_chat_stream_body,
+                request.serverless_tool_assisted_chat_completion_stream_body,
                 False,
                 False,
                 "json",
-                models.ServerlessToolAssistedChatStreamBody,
+                models.ServerlessToolAssistedChatCompletionStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -594,7 +599,7 @@ class ToolAssistedChat(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             stream=True,
             retry_config=retry_config,
         )
@@ -603,11 +608,11 @@ class ToolAssistedChat(BaseSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.StreamedToolAssistedChatResult
+                    raw, models.ServerlessToolAssistedChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -625,39 +630,41 @@ class ToolAssistedChat(BaseSDK):
     async def stream_async(
         self,
         *,
-        model: str,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
-        x_friendli_team: Optional[str] = None,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatStreamBodyLogitBias,
-                models.ServerlessToolAssistedChatStreamBodyLogitBiasTypedDict,
+                models.ServerlessToolAssistedChatCompletionStreamBodyLogitBias,
+                models.ServerlessToolAssistedChatCompletionStreamBodyLogitBiasTypedDict,
             ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
-        n: OptionalNullable[int] = 1,
+        n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        resume_generation: OptionalNullable[bool] = UNSET,
-        seed: OptionalNullable[List[int]] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
-        stream: OptionalNullable[bool] = True,
-        stream_options: OptionalNullable[
+        resume_generation: Optional[bool] = None,
+        seed: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatStreamBodyStreamOptions,
-                models.ServerlessToolAssistedChatStreamBodyStreamOptionsTypedDict,
+                models.ServerlessToolAssistedChatCompletionStreamBodySeed,
+                models.ServerlessToolAssistedChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
+        stop: OptionalNullable[List[str]] = UNSET,
+        stream: Optional[bool] = True,
+        stream_options: OptionalNullable[
+            Union[models.StreamOptions, models.StreamOptionsTypedDict]
+        ] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ServerlessToolAssistedChatStreamBodyToolChoice,
-                models.ServerlessToolAssistedChatStreamBodyToolChoiceTypedDict,
+                models.ServerlessToolAssistedChatCompletionStreamBodyToolChoice,
+                models.ServerlessToolAssistedChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
@@ -666,20 +673,22 @@ class ToolAssistedChat(BaseSDK):
                 List[models.ToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
-        top_k: OptionalNullable[int] = 0,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
-        top_p: OptionalNullable[float] = 1,
+        top_p: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.StreamedToolAssistedChatResult]:
+    ) -> eventstreaming.EventStreamAsync[
+        models.ServerlessToolAssistedChatCompletionStreamSuccess
+    ]:
         r"""Stream tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -717,15 +726,15 @@ class ToolAssistedChat(BaseSDK):
 
         request = models.ServerlessToolAssistedChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            serverless_tool_assisted_chat_stream_body=models.ServerlessToolAssistedChatStreamBody(
-                model=model,
+            serverless_tool_assisted_chat_completion_stream_body=models.ServerlessToolAssistedChatCompletionStreamBody(
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
+                model=model,
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
                     logit_bias,
                     OptionalNullable[
-                        models.ServerlessToolAssistedChatStreamBodyLogitBias
+                        models.ServerlessToolAssistedChatCompletionStreamBodyLogitBias
                     ],
                 ),
                 logprobs=logprobs,
@@ -739,16 +748,15 @@ class ToolAssistedChat(BaseSDK):
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options,
-                    OptionalNullable[
-                        models.ServerlessToolAssistedChatStreamBodyStreamOptions
-                    ],
+                    stream_options, OptionalNullable[models.StreamOptions]
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
-                    Optional[models.ServerlessToolAssistedChatStreamBodyToolChoice],
+                    Optional[
+                        models.ServerlessToolAssistedChatCompletionStreamBodyToolChoice
+                    ],
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.ToolAssistedChatTool]]
@@ -773,11 +781,11 @@ class ToolAssistedChat(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_tool_assisted_chat_stream_body,
+                request.serverless_tool_assisted_chat_completion_stream_body,
                 False,
                 False,
                 "json",
-                models.ServerlessToolAssistedChatStreamBody,
+                models.ServerlessToolAssistedChatCompletionStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -803,7 +811,7 @@ class ToolAssistedChat(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             stream=True,
             retry_config=retry_config,
         )
@@ -812,11 +820,11 @@ class ToolAssistedChat(BaseSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.StreamedToolAssistedChatResult
+                    raw, models.ServerlessToolAssistedChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

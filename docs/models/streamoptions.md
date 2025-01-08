@@ -1,9 +1,5 @@
 # StreamOptions
 
-Options related to stream.
-It can only be used when `stream: true`.
-
-
 
 ## Fields
 
