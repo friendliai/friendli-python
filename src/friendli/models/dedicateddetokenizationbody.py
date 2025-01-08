@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 from friendli.types import BaseModel
-from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import List
+from typing_extensions import TypedDict
 
 
 class DedicatedDetokenizationBodyTypedDict(TypedDict):
     model: str
     r"""ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format."""
-    tokens: NotRequired[List[int]]
+    tokens: List[int]
     r"""A token sequence to detokenize."""
 
 
@@ -17,5 +17,5 @@ class DedicatedDetokenizationBody(BaseModel):
     model: str
     r"""ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format."""
 
-    tokens: Optional[List[int]] = None
+    tokens: List[int]
     r"""A token sequence to detokenize."""

@@ -72,17 +72,17 @@ with SyncFriendli(
 ) as friendli:
 
     res = friendli.serverless.chat.complete(
-        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "role": "system",
                 "content": "You are a helpful assistant.",
+                "role": "system",
             },
             {
-                "role": "user",
                 "content": "Hello!",
+                "role": "user",
             },
         ],
+        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
     )
 
@@ -106,17 +106,17 @@ async def main():
     ) as friendli:
 
         res = await friendli.serverless.chat.complete_async(
-            model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
-                    "role": "system",
                     "content": "You are a helpful assistant.",
+                    "role": "system",
                 },
                 {
-                    "role": "user",
                     "content": "Hello!",
+                    "role": "user",
                 },
             ],
+            model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
         )
 
@@ -140,13 +140,13 @@ with SyncFriendli(
 ) as friendli:
 
     res = friendli.serverless.tool_assisted_chat.complete(
-        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "role": "user",
                 "content": "What is 3 + 6?",
+                "role": "user",
             },
         ],
+        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
         tools=[
             {
@@ -175,13 +175,13 @@ async def main():
     ) as friendli:
 
         res = await friendli.serverless.tool_assisted_chat.complete_async(
-            model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
-                    "role": "user",
                     "content": "What is 3 + 6?",
+                    "role": "user",
                 },
             ],
+            model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
             tools=[
                 {
@@ -235,10 +235,6 @@ asyncio.run(main())
 * [complete](docs/sdks/completions/README.md#complete) - Completions
 * [stream](docs/sdks/completions/README.md#stream) - Stream completions
 
-#### [serverless.rag](docs/sdks/rag/README.md)
-
-* [knowledge_retrieve](docs/sdks/rag/README.md#knowledge_retrieve) - Knowledge retrieve
-
 #### [serverless.token](docs/sdks/token/README.md)
 
 * [tokenization](docs/sdks/token/README.md#tokenization) - Tokenization
@@ -273,17 +269,17 @@ with SyncFriendli(
 ) as friendli:
 
     res = friendli.serverless.chat.stream(
-        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "role": "system",
                 "content": "You are a helpful assistant.",
+                "role": "system",
             },
             {
-                "role": "user",
                 "content": "Hello!",
+                "role": "user",
             },
         ],
+        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
     )
 
@@ -314,17 +310,17 @@ with SyncFriendli(
 ) as friendli:
 
     res = friendli.serverless.chat.complete(
-        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "role": "system",
                 "content": "You are a helpful assistant.",
+                "role": "system",
             },
             {
-                "role": "user",
                 "content": "Hello!",
+                "role": "user",
             },
         ],
+        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
         retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     )
@@ -345,17 +341,17 @@ with SyncFriendli(
 ) as friendli:
 
     res = friendli.serverless.chat.complete(
-        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "role": "system",
                 "content": "You are a helpful assistant.",
+                "role": "system",
             },
             {
-                "role": "user",
                 "content": "Hello!",
+                "role": "user",
             },
         ],
+        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
     )
 
@@ -397,17 +393,17 @@ with SyncFriendli(
     try:
 
         res = friendli.serverless.chat.complete(
-            model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
-                    "role": "system",
                     "content": "You are a helpful assistant.",
+                    "role": "system",
                 },
                 {
-                    "role": "user",
                     "content": "Hello!",
+                    "role": "user",
                 },
             ],
+            model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
         )
 
@@ -436,17 +432,17 @@ with SyncFriendli(
 ) as friendli:
 
     res = friendli.serverless.chat.complete(
-        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "role": "system",
                 "content": "You are a helpful assistant.",
+                "role": "system",
             },
             {
-                "role": "user",
                 "content": "Hello!",
+                "role": "user",
             },
         ],
+        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
     )
 

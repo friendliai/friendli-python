@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 from .responseformat import ResponseFormat, ResponseFormatTypedDict
+from .streamoptions import StreamOptions, StreamOptionsTypedDict
 from .tokensequence import TokenSequence, TokenSequenceTypedDict
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional, Union
+from typing import List, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
@@ -17,69 +18,23 @@ Prompt = TypeAliasType("Prompt", Union[str, List[str]])
 r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
 
-class CompletionsBodyWithPromptStreamOptionsTypedDict(TypedDict):
-    r"""Options related to stream.
-    It can only be used when `stream: true`.
-
-    """
-
-    include_usage: NotRequired[Nullable[bool]]
-    r"""When set to `true`,
-    the number of tokens used will be included at the end of the stream result in the form of
-    `\"usage\": {\"completion_tokens\": number, \"prompt_tokens\": number, \"total_tokens\": number}`.
-
-    """
+CompletionsBodyWithPromptSeedTypedDict = TypeAliasType(
+    "CompletionsBodyWithPromptSeedTypedDict", Union[List[int], int]
+)
+r"""Seed to control random procedure. If nothing is given, the API generate the seed randomly, use it for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
 
 
-class CompletionsBodyWithPromptStreamOptions(BaseModel):
-    r"""Options related to stream.
-    It can only be used when `stream: true`.
-
-    """
-
-    include_usage: OptionalNullable[bool] = UNSET
-    r"""When set to `true`,
-    the number of tokens used will be included at the end of the stream result in the form of
-    `\"usage\": {\"completion_tokens\": number, \"prompt_tokens\": number, \"total_tokens\": number}`.
-
-    """
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = ["include_usage"]
-        nullable_fields = ["include_usage"]
-        null_default_fields = []
-
-        serialized = handler(self)
-
-        m = {}
-
-        for n, f in self.model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
-        return m
+CompletionsBodyWithPromptSeed = TypeAliasType(
+    "CompletionsBodyWithPromptSeed", Union[List[int], int]
+)
+r"""Seed to control random procedure. If nothing is given, the API generate the seed randomly, use it for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
 
 
 class CompletionsBodyWithPromptTypedDict(TypedDict):
-    prompt: PromptTypedDict
-    r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
     model: str
     r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
+    prompt: PromptTypedDict
+    r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
     bad_word_tokens: NotRequired[Nullable[List[TokenSequenceTypedDict]]]
     r"""Same as the above `bad_words` field, but receives token sequences instead of text phrases. This is similar to Hugging Face's [`bad_word_ids`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.bad_words_ids) argument."""
     bad_words: NotRequired[Nullable[List[str]]]
@@ -94,7 +49,7 @@ class CompletionsBodyWithPromptTypedDict(TypedDict):
     beam_compat_no_post_normalization: NotRequired[Nullable[bool]]
     beam_compat_pre_normalization: NotRequired[Nullable[bool]]
     beam_search_type: NotRequired[Nullable[str]]
-    r"""One of `DETERMINISTIC`, `NAIVE_SAMPLING`, and `STOCHASTIC`. Which beam search type to use. `DETERMINISTIC` means the standard, deterministic beam search, which is similar to Hugging Face's [`beam_search`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_search). Argmuents for controlling random sampling such as `top_k` and `top_p` are not allowed for this option. `NAIVE_SAMPLING` is similar to Hugging Face's [`beam_sample`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_sample). `STOCHASTIC` means stochastic beam search (more details in [Kool et al. (2019)](https://proceedings.mlr.press/v97/kool19a.html)). This option is ignored if `num_beams` is not provided. Defaults to `DETERMINISTIC`."""
+    r"""One of `DETERMINISTIC`, `NAIVE_SAMPLING`, and `STOCHASTIC`. Which beam search type to use. `DETERMINISTIC` means the standard, deterministic beam search, which is similar to Hugging Face's [`beam_search`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_search). Arguments for controlling random sampling such as `top_k` and `top_p` are not allowed for this option. `NAIVE_SAMPLING` is similar to Hugging Face's [`beam_sample`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_sample). `STOCHASTIC` means stochastic beam search (more details in [Kool et al. (2019)](https://proceedings.mlr.press/v97/kool19a.html)). This option is ignored if `num_beams` is not provided. Defaults to `DETERMINISTIC`."""
     early_stopping: NotRequired[Nullable[bool]]
     r"""Whether to stop the beam search when at least `num_beams` beams are finished with the EOS token. Only allowed for beam search. Defaults to false. This is similar to Hugging Face's [`early_stopping`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.early_stopping) argument."""
     embedding_to_replace: NotRequired[Nullable[List[float]]]
@@ -135,20 +90,8 @@ class CompletionsBodyWithPromptTypedDict(TypedDict):
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."""
     repetition_penalty: NotRequired[Nullable[float]]
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
-    response_format: NotRequired[ResponseFormatTypedDict]
-    r"""The enforced format of the model's output.
-
-    Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
-    You can check this by verifying that the `finish_reason` of the output message is `length`.
-
-    ***Important***
-    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
-    Otherwise, the model may result in an unending stream of whitespace or other characters.
-
-    **When `response_format` is specified, `min_tokens` field is unsupported.**
-
-    """
-    seed: NotRequired[Nullable[List[int]]]
+    response_format: NotRequired[Nullable[ResponseFormatTypedDict]]
+    seed: NotRequired[Nullable[CompletionsBodyWithPromptSeedTypedDict]]
     r"""Seed to control random procedure. If nothing is given, the API generate the seed randomly, use it for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
     stop: NotRequired[Nullable[List[str]]]
     r"""When one of the stop phrases appears in the generation result, the API will stop generation.
@@ -164,9 +107,7 @@ class CompletionsBodyWithPromptTypedDict(TypedDict):
     """
     stream: NotRequired[Nullable[bool]]
     r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated. Not supported when using beam search."""
-    stream_options: NotRequired[
-        Nullable[CompletionsBodyWithPromptStreamOptionsTypedDict]
-    ]
+    stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     r"""Options related to stream.
     It can only be used when `stream: true`.
 
@@ -184,11 +125,11 @@ class CompletionsBodyWithPromptTypedDict(TypedDict):
 
 
 class CompletionsBodyWithPrompt(BaseModel):
-    prompt: Prompt
-    r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
-
     model: str
     r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
+
+    prompt: Prompt
+    r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
     bad_word_tokens: OptionalNullable[List[TokenSequence]] = UNSET
     r"""Same as the above `bad_words` field, but receives token sequences instead of text phrases. This is similar to Hugging Face's [`bad_word_ids`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.bad_words_ids) argument."""
@@ -207,16 +148,16 @@ class CompletionsBodyWithPrompt(BaseModel):
 
     beam_compat_pre_normalization: OptionalNullable[bool] = UNSET
 
-    beam_search_type: OptionalNullable[str] = "DETERMINISTIC"
-    r"""One of `DETERMINISTIC`, `NAIVE_SAMPLING`, and `STOCHASTIC`. Which beam search type to use. `DETERMINISTIC` means the standard, deterministic beam search, which is similar to Hugging Face's [`beam_search`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_search). Argmuents for controlling random sampling such as `top_k` and `top_p` are not allowed for this option. `NAIVE_SAMPLING` is similar to Hugging Face's [`beam_sample`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_sample). `STOCHASTIC` means stochastic beam search (more details in [Kool et al. (2019)](https://proceedings.mlr.press/v97/kool19a.html)). This option is ignored if `num_beams` is not provided. Defaults to `DETERMINISTIC`."""
+    beam_search_type: OptionalNullable[str] = UNSET
+    r"""One of `DETERMINISTIC`, `NAIVE_SAMPLING`, and `STOCHASTIC`. Which beam search type to use. `DETERMINISTIC` means the standard, deterministic beam search, which is similar to Hugging Face's [`beam_search`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_search). Arguments for controlling random sampling such as `top_k` and `top_p` are not allowed for this option. `NAIVE_SAMPLING` is similar to Hugging Face's [`beam_sample`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_sample). `STOCHASTIC` means stochastic beam search (more details in [Kool et al. (2019)](https://proceedings.mlr.press/v97/kool19a.html)). This option is ignored if `num_beams` is not provided. Defaults to `DETERMINISTIC`."""
 
-    early_stopping: OptionalNullable[bool] = False
+    early_stopping: OptionalNullable[bool] = UNSET
     r"""Whether to stop the beam search when at least `num_beams` beams are finished with the EOS token. Only allowed for beam search. Defaults to false. This is similar to Hugging Face's [`early_stopping`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.early_stopping) argument."""
 
     embedding_to_replace: OptionalNullable[List[float]] = UNSET
     r"""A list of flattened embedding vectors used for replacing the tokens at the specified indices provided via `token_index_to_replace`."""
 
-    encoder_no_repeat_ngram: OptionalNullable[int] = 1
+    encoder_no_repeat_ngram: OptionalNullable[int] = UNSET
     r"""If this exceeds 1, every ngram of that size occurring in the input token sequence cannot appear in the generated result. 1 means that this mechanism is disabled (i.e., you cannot prevent 1-gram from being generated repeatedly). Only allowed for encoder-decoder models. Defaults to 1. This is similar to Hugging Face's [`encoder_no_repeat_ngram_size`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.encoder_no_repeat_ngram_size) argument."""
 
     encoder_repetition_penalty: OptionalNullable[float] = UNSET
@@ -243,7 +184,7 @@ class CompletionsBodyWithPrompt(BaseModel):
     max_total_tokens: OptionalNullable[int] = UNSET
     r"""The maximum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `max_tokens` and `max_total_tokens` is allowed. Default value is the model's maximum length. This is similar to Hugging Face's [`max_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_length) argument."""
 
-    min_tokens: OptionalNullable[int] = 0
+    min_tokens: OptionalNullable[int] = UNSET
     r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
 
     **This field is unsupported when `response_format` is specified.**
@@ -253,10 +194,10 @@ class CompletionsBodyWithPrompt(BaseModel):
     min_total_tokens: OptionalNullable[int] = UNSET
     r"""The minimum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `min_tokens` and `min_total_tokens` is allowed. This is similar to Hugging Face's [`min_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.min_length) argument."""
 
-    n: OptionalNullable[int] = 1
+    n: OptionalNullable[int] = UNSET
     r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
 
-    no_repeat_ngram: OptionalNullable[int] = 1
+    no_repeat_ngram: OptionalNullable[int] = UNSET
     r"""If this exceeds 1, every ngram of that size can only occur once among the generated result (plus the input tokens for decoder-only models). 1 means that this mechanism is disabled (i.e., you cannot prevent 1-gram from being generated repeatedly). Defaults to 1. This is similar to Hugging Face's [`no_repeat_ngram_size`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.no_repeat_ngram_size) argument."""
 
     num_beams: OptionalNullable[int] = UNSET
@@ -268,21 +209,9 @@ class CompletionsBodyWithPrompt(BaseModel):
     repetition_penalty: OptionalNullable[float] = UNSET
     r"""Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."""
 
-    response_format: Optional[ResponseFormat] = None
-    r"""The enforced format of the model's output.
+    response_format: OptionalNullable[ResponseFormat] = UNSET
 
-    Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
-    You can check this by verifying that the `finish_reason` of the output message is `length`.
-
-    ***Important***
-    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
-    Otherwise, the model may result in an unending stream of whitespace or other characters.
-
-    **When `response_format` is specified, `min_tokens` field is unsupported.**
-
-    """
-
-    seed: OptionalNullable[List[int]] = UNSET
+    seed: OptionalNullable[CompletionsBodyWithPromptSeed] = UNSET
     r"""Seed to control random procedure. If nothing is given, the API generate the seed randomly, use it for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
 
     stop: OptionalNullable[List[str]] = UNSET
@@ -302,13 +231,13 @@ class CompletionsBodyWithPrompt(BaseModel):
     stream: OptionalNullable[bool] = False
     r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated. Not supported when using beam search."""
 
-    stream_options: OptionalNullable[CompletionsBodyWithPromptStreamOptions] = UNSET
+    stream_options: OptionalNullable[StreamOptions] = UNSET
     r"""Options related to stream.
     It can only be used when `stream: true`.
 
     """
 
-    temperature: OptionalNullable[float] = 1
+    temperature: OptionalNullable[float] = UNSET
     r"""Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument."""
 
     timeout_microseconds: OptionalNullable[int] = UNSET
@@ -317,10 +246,10 @@ class CompletionsBodyWithPrompt(BaseModel):
     token_index_to_replace: OptionalNullable[List[int]] = UNSET
     r"""A list of token indices where to replace the embeddings of input tokens provided via either `tokens` or `prompt`."""
 
-    top_k: OptionalNullable[int] = 0
+    top_k: OptionalNullable[int] = UNSET
     r"""The number of highest probability tokens to keep for sampling. Numbers between 0 and the vocab size of the model (both inclusive) are allowed. The default value is 0, which means that the API does not apply top-k filtering. This is similar to Hugging Face's [`top_k`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.top_k) argument."""
 
-    top_p: OptionalNullable[float] = 1
+    top_p: OptionalNullable[float] = UNSET
     r"""Tokens comprising the top `top_p` probability mass are kept for sampling. Numbers between 0.0 (exclusive) and 1.0 (inclusive) are allowed. Defaults to 1.0. This is similar to Hugging Face's [`top_p`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.top_p) argument."""
 
     @model_serializer(mode="wrap")
@@ -385,6 +314,7 @@ class CompletionsBodyWithPrompt(BaseModel):
             "num_beams",
             "presence_penalty",
             "repetition_penalty",
+            "response_format",
             "seed",
             "stop",
             "stop_tokens",

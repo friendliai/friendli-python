@@ -1,9 +1,0 @@
-# DedicatedChatCompleteBodyToolChoiceObject
-
-
-## Fields
-
-| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                         | [models.DedicatedChatCompleteBodyToolChoiceType](../models/dedicatedchatcompletebodytoolchoicetype.md)         | :heavy_check_mark:                                                                                             | The type of the tool. Currently, only `function` is supported.                                                 |
-| `function`                                                                                                     | [models.DedicatedChatCompleteBodyToolChoiceFunction](../models/dedicatedchatcompletebodytoolchoicefunction.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

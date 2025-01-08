@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 from .filebuiltintool import FileBuiltInTool, FileBuiltInToolTypedDict
-from .functiontool import FunctionTool, FunctionToolTypedDict
 from .otherbuiltintool import OtherBuiltInTool, OtherBuiltInToolTypedDict
+from .tool import Tool, ToolTypedDict
 from friendli.utils import get_discriminator
 from pydantic import Discriminator, Tag
 from typing import Union
@@ -12,20 +12,20 @@ from typing_extensions import Annotated, TypeAliasType
 
 ToolAssistedChatToolTypedDict = TypeAliasType(
     "ToolAssistedChatToolTypedDict",
-    Union[OtherBuiltInToolTypedDict, FunctionToolTypedDict, FileBuiltInToolTypedDict],
+    Union[OtherBuiltInToolTypedDict, ToolTypedDict, FileBuiltInToolTypedDict],
 )
 
 
 ToolAssistedChatTool = Annotated[
     Union[
-        Annotated[FunctionTool, Tag("function")],
+        Annotated[OtherBuiltInTool, Tag("code:python-interpreter")],
         Annotated[FileBuiltInTool, Tag("file:text")],
+        Annotated[Tool, Tag("function")],
         Annotated[OtherBuiltInTool, Tag("math:calculator")],
-        Annotated[OtherBuiltInTool, Tag("math:statistics")],
         Annotated[OtherBuiltInTool, Tag("math:calendar")],
+        Annotated[OtherBuiltInTool, Tag("math:statistics")],
         Annotated[OtherBuiltInTool, Tag("web:search")],
         Annotated[OtherBuiltInTool, Tag("web:url")],
-        Annotated[OtherBuiltInTool, Tag("code:python-interpreter")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

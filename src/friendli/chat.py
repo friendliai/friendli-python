@@ -12,9 +12,9 @@ class Chat(BaseSDK):
     def complete(
         self,
         *,
-        model: str,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
-        x_friendli_team: Optional[str] = None,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
@@ -22,21 +22,21 @@ class Chat(BaseSDK):
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
-        min_tokens: OptionalNullable[int] = 0,
-        n: OptionalNullable[int] = 1,
+        min_tokens: OptionalNullable[int] = UNSET,
+        n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: Optional[
+        response_format: OptionalNullable[
             Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = None,
-        seed: OptionalNullable[List[int]] = UNSET,
+        ] = UNSET,
+        seed: OptionalNullable[Union[models.Seed, models.SeedTypedDict]] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
         stream: OptionalNullable[bool] = False,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
+        temperature: OptionalNullable[float] = UNSET,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[models.ToolChoice, models.ToolChoiceTypedDict]
@@ -44,20 +44,20 @@ class Chat(BaseSDK):
         tools: OptionalNullable[
             Union[List[models.Tool], List[models.ToolTypedDict]]
         ] = UNSET,
-        top_k: OptionalNullable[int] = 0,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
-        top_p: OptionalNullable[float] = 1,
+        top_p: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ChatResult:
+    ) -> models.ServerlessChatCompleteSuccess:
         r"""Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -69,7 +69,7 @@ class Chat(BaseSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format:
+        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
         :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
@@ -96,9 +96,9 @@ class Chat(BaseSDK):
 
         request = models.ServerlessChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            serverless_chat_complete_body=models.ServerlessChatCompleteBody(
-                model=model,
+            serverless_chat_completion_body=models.ServerlessChatCompletionBody(
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
+                model=model,
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
@@ -112,7 +112,7 @@ class Chat(BaseSDK):
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
                 response_format=utils.get_pydantic_model(
-                    response_format, Optional[models.ResponseFormat]
+                    response_format, OptionalNullable[models.ResponseFormat]
                 ),
                 seed=seed,
                 stop=stop,
@@ -148,11 +148,11 @@ class Chat(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_chat_complete_body,
+                request.serverless_chat_completion_body,
                 False,
                 False,
                 "json",
-                models.ServerlessChatCompleteBody,
+                models.ServerlessChatCompletionBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -178,13 +178,15 @@ class Chat(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.ChatResult)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.ServerlessChatCompleteSuccess
+            )
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -202,9 +204,9 @@ class Chat(BaseSDK):
     async def complete_async(
         self,
         *,
-        model: str,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
-        x_friendli_team: Optional[str] = None,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
@@ -212,21 +214,21 @@ class Chat(BaseSDK):
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
-        min_tokens: OptionalNullable[int] = 0,
-        n: OptionalNullable[int] = 1,
+        min_tokens: OptionalNullable[int] = UNSET,
+        n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: Optional[
+        response_format: OptionalNullable[
             Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = None,
-        seed: OptionalNullable[List[int]] = UNSET,
+        ] = UNSET,
+        seed: OptionalNullable[Union[models.Seed, models.SeedTypedDict]] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
         stream: OptionalNullable[bool] = False,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
+        temperature: OptionalNullable[float] = UNSET,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[models.ToolChoice, models.ToolChoiceTypedDict]
@@ -234,20 +236,20 @@ class Chat(BaseSDK):
         tools: OptionalNullable[
             Union[List[models.Tool], List[models.ToolTypedDict]]
         ] = UNSET,
-        top_k: OptionalNullable[int] = 0,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
-        top_p: OptionalNullable[float] = 1,
+        top_p: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ChatResult:
+    ) -> models.ServerlessChatCompleteSuccess:
         r"""Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -259,7 +261,7 @@ class Chat(BaseSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format:
+        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
         :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
@@ -286,9 +288,9 @@ class Chat(BaseSDK):
 
         request = models.ServerlessChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            serverless_chat_complete_body=models.ServerlessChatCompleteBody(
-                model=model,
+            serverless_chat_completion_body=models.ServerlessChatCompletionBody(
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
+                model=model,
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
@@ -302,7 +304,7 @@ class Chat(BaseSDK):
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
                 response_format=utils.get_pydantic_model(
-                    response_format, Optional[models.ResponseFormat]
+                    response_format, OptionalNullable[models.ResponseFormat]
                 ),
                 seed=seed,
                 stop=stop,
@@ -338,11 +340,11 @@ class Chat(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_chat_complete_body,
+                request.serverless_chat_completion_body,
                 False,
                 False,
                 "json",
-                models.ServerlessChatCompleteBody,
+                models.ServerlessChatCompletionBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -368,13 +370,15 @@ class Chat(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.ChatResult)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.ServerlessChatCompleteSuccess
+            )
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -392,61 +396,63 @@ class Chat(BaseSDK):
     def stream(
         self,
         *,
-        model: str,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
-        x_friendli_team: Optional[str] = None,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
             Union[
-                models.ServerlessChatStreamBodyLogitBias,
-                models.ServerlessChatStreamBodyLogitBiasTypedDict,
+                models.ServerlessChatCompletionStreamBodyLogitBias,
+                models.ServerlessChatCompletionStreamBodyLogitBiasTypedDict,
             ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
-        min_tokens: OptionalNullable[int] = 0,
-        n: OptionalNullable[int] = 1,
+        min_tokens: OptionalNullable[int] = UNSET,
+        n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: Optional[
+        response_format: OptionalNullable[
             Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = None,
-        seed: OptionalNullable[List[int]] = UNSET,
+        ] = UNSET,
+        seed: OptionalNullable[
+            Union[
+                models.ServerlessChatCompletionStreamBodySeed,
+                models.ServerlessChatCompletionStreamBodySeedTypedDict,
+            ]
+        ] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
         stream: OptionalNullable[bool] = True,
         stream_options: OptionalNullable[
-            Union[
-                models.ServerlessChatStreamBodyStreamOptions,
-                models.ServerlessChatStreamBodyStreamOptionsTypedDict,
-            ]
+            Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
+        temperature: OptionalNullable[float] = UNSET,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ServerlessChatStreamBodyToolChoice,
-                models.ServerlessChatStreamBodyToolChoiceTypedDict,
+                models.ServerlessChatCompletionStreamBodyToolChoice,
+                models.ServerlessChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
             Union[List[models.Tool], List[models.ToolTypedDict]]
         ] = UNSET,
-        top_k: OptionalNullable[int] = 0,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
-        top_p: OptionalNullable[float] = 1,
+        top_p: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.StreamedChatResult]:
+    ) -> eventstreaming.EventStream[models.ServerlessChatCompletionStreamSuccess]:
         r"""Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -458,7 +464,7 @@ class Chat(BaseSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format:
+        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
         :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
@@ -485,14 +491,16 @@ class Chat(BaseSDK):
 
         request = models.ServerlessChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            serverless_chat_stream_body=models.ServerlessChatStreamBody(
-                model=model,
+            serverless_chat_completion_stream_body=models.ServerlessChatCompletionStreamBody(
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
+                model=model,
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
                     logit_bias,
-                    OptionalNullable[models.ServerlessChatStreamBodyLogitBias],
+                    OptionalNullable[
+                        models.ServerlessChatCompletionStreamBodyLogitBias
+                    ],
                 ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
@@ -502,19 +510,19 @@ class Chat(BaseSDK):
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
                 response_format=utils.get_pydantic_model(
-                    response_format, Optional[models.ResponseFormat]
+                    response_format, OptionalNullable[models.ResponseFormat]
                 ),
                 seed=seed,
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options,
-                    OptionalNullable[models.ServerlessChatStreamBodyStreamOptions],
+                    stream_options, OptionalNullable[models.StreamOptions]
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ServerlessChatStreamBodyToolChoice]
+                    tool_choice,
+                    Optional[models.ServerlessChatCompletionStreamBodyToolChoice],
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
@@ -539,11 +547,11 @@ class Chat(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_chat_stream_body,
+                request.serverless_chat_completion_stream_body,
                 False,
                 False,
                 "json",
-                models.ServerlessChatStreamBody,
+                models.ServerlessChatCompletionStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -569,7 +577,7 @@ class Chat(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             stream=True,
             retry_config=retry_config,
         )
@@ -577,10 +585,12 @@ class Chat(BaseSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
-                lambda raw: utils.unmarshal_json(raw, models.StreamedChatResult),
+                lambda raw: utils.unmarshal_json(
+                    raw, models.ServerlessChatCompletionStreamSuccess
+                ),
                 sentinel="[DONE]",
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -598,61 +608,63 @@ class Chat(BaseSDK):
     async def stream_async(
         self,
         *,
-        model: str,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
-        x_friendli_team: Optional[str] = None,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[
             Union[
-                models.ServerlessChatStreamBodyLogitBias,
-                models.ServerlessChatStreamBodyLogitBiasTypedDict,
+                models.ServerlessChatCompletionStreamBodyLogitBias,
+                models.ServerlessChatCompletionStreamBodyLogitBiasTypedDict,
             ]
         ] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
-        min_tokens: OptionalNullable[int] = 0,
-        n: OptionalNullable[int] = 1,
+        min_tokens: OptionalNullable[int] = UNSET,
+        n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: Optional[
+        response_format: OptionalNullable[
             Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = None,
-        seed: OptionalNullable[List[int]] = UNSET,
+        ] = UNSET,
+        seed: OptionalNullable[
+            Union[
+                models.ServerlessChatCompletionStreamBodySeed,
+                models.ServerlessChatCompletionStreamBodySeedTypedDict,
+            ]
+        ] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
         stream: OptionalNullable[bool] = True,
         stream_options: OptionalNullable[
-            Union[
-                models.ServerlessChatStreamBodyStreamOptions,
-                models.ServerlessChatStreamBodyStreamOptionsTypedDict,
-            ]
+            Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
+        temperature: OptionalNullable[float] = UNSET,
         timeout_microseconds: OptionalNullable[int] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ServerlessChatStreamBodyToolChoice,
-                models.ServerlessChatStreamBodyToolChoiceTypedDict,
+                models.ServerlessChatCompletionStreamBodyToolChoice,
+                models.ServerlessChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         tools: OptionalNullable[
             Union[List[models.Tool], List[models.ToolTypedDict]]
         ] = UNSET,
-        top_k: OptionalNullable[int] = 0,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
-        top_p: OptionalNullable[float] = 1,
+        top_p: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.StreamedChatResult]:
+    ) -> eventstreaming.EventStreamAsync[models.ServerlessChatCompletionStreamSuccess]:
         r"""Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -664,7 +676,7 @@ class Chat(BaseSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be greater than or equal to 1.0 (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format:
+        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
         :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
@@ -691,14 +703,16 @@ class Chat(BaseSDK):
 
         request = models.ServerlessChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            serverless_chat_stream_body=models.ServerlessChatStreamBody(
-                model=model,
+            serverless_chat_completion_stream_body=models.ServerlessChatCompletionStreamBody(
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
+                model=model,
                 eos_token=eos_token,
                 frequency_penalty=frequency_penalty,
                 logit_bias=utils.get_pydantic_model(
                     logit_bias,
-                    OptionalNullable[models.ServerlessChatStreamBodyLogitBias],
+                    OptionalNullable[
+                        models.ServerlessChatCompletionStreamBodyLogitBias
+                    ],
                 ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
@@ -708,19 +722,19 @@ class Chat(BaseSDK):
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
                 response_format=utils.get_pydantic_model(
-                    response_format, Optional[models.ResponseFormat]
+                    response_format, OptionalNullable[models.ResponseFormat]
                 ),
                 seed=seed,
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
-                    stream_options,
-                    OptionalNullable[models.ServerlessChatStreamBodyStreamOptions],
+                    stream_options, OptionalNullable[models.StreamOptions]
                 ),
                 temperature=temperature,
                 timeout_microseconds=timeout_microseconds,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[models.ServerlessChatStreamBodyToolChoice]
+                    tool_choice,
+                    Optional[models.ServerlessChatCompletionStreamBodyToolChoice],
                 ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
@@ -745,11 +759,11 @@ class Chat(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_chat_stream_body,
+                request.serverless_chat_completion_stream_body,
                 False,
                 False,
                 "json",
-                models.ServerlessChatStreamBody,
+                models.ServerlessChatCompletionStreamBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -775,7 +789,7 @@ class Chat(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             stream=True,
             retry_config=retry_config,
         )
@@ -783,10 +797,12 @@ class Chat(BaseSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
-                lambda raw: utils.unmarshal_json(raw, models.StreamedChatResult),
+                lambda raw: utils.unmarshal_json(
+                    raw, models.ServerlessChatCompletionStreamSuccess
+                ),
                 sentinel="[DONE]",
             )
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

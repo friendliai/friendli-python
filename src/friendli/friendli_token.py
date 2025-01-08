@@ -14,12 +14,12 @@ class FriendliToken(BaseSDK):
         *,
         model: str,
         prompt: str,
-        x_friendli_team: Optional[str] = None,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TokenizationResult:
+    ) -> models.DedicatedTokenizationSuccess:
         r"""Tokenization
 
         By giving a text input, generate a tokenized output of token IDs.
@@ -92,13 +92,15 @@ class FriendliToken(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.TokenizationResult)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.DedicatedTokenizationSuccess
+            )
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -118,12 +120,12 @@ class FriendliToken(BaseSDK):
         *,
         model: str,
         prompt: str,
-        x_friendli_team: Optional[str] = None,
+        x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TokenizationResult:
+    ) -> models.DedicatedTokenizationSuccess:
         r"""Tokenization
 
         By giving a text input, generate a tokenized output of token IDs.
@@ -196,13 +198,15 @@ class FriendliToken(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.TokenizationResult)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.DedicatedTokenizationSuccess
+            )
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -221,20 +225,20 @@ class FriendliToken(BaseSDK):
         self,
         *,
         model: str,
-        x_friendli_team: Optional[str] = None,
-        tokens: Optional[List[int]] = None,
+        tokens: List[int],
+        x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DetokenizationResult:
+    ) -> models.DedicatedDetokenizationSuccess:
         r"""Detokenization
 
         By giving a list of tokens, generate a detokenized output text string.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format.
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param tokens: A token sequence to detokenize.
+        :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -300,13 +304,15 @@ class FriendliToken(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.DetokenizationResult)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.DedicatedDetokenizationSuccess
+            )
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -325,20 +331,20 @@ class FriendliToken(BaseSDK):
         self,
         *,
         model: str,
-        x_friendli_team: Optional[str] = None,
-        tokens: Optional[List[int]] = None,
+        tokens: List[int],
+        x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DetokenizationResult:
+    ) -> models.DedicatedDetokenizationSuccess:
         r"""Detokenization
 
         By giving a list of tokens, generate a detokenized output text string.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, using \"ENDPOINT_ID:ADAPTER_ROUTE\" format.
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param tokens: A token sequence to detokenize.
+        :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -404,13 +410,15 @@ class FriendliToken(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.DetokenizationResult)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.DedicatedDetokenizationSuccess
+            )
+        if utils.match_response(http_res, ["422", "4XX", "5XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
