@@ -23,9 +23,9 @@ with SyncFriendli(
 ) as friendli:
 
     res = friendli.serverless.completions.complete(
-        serverless_completions_complete_body={
-            "prompt": "Say this is a test!",
+        serverless_completions_body={
             "model": "meta-llama-3.1-8b-instruct",
+            "prompt": "Say this is a test!",
             "max_tokens": 200,
             "top_k": 1,
         }
@@ -37,15 +37,15 @@ with SyncFriendli(
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `serverless_completions_complete_body`                                                        | [models.ServerlessCompletionsCompleteBody](../../models/serverlesscompletionscompletebody.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `x_friendli_team`                                                                             | *Optional[str]*                                                                               | :heavy_minus_sign:                                                                            | ID of team to run requests as (optional parameter).                                           |
-| `retries`                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                              | :heavy_minus_sign:                                                                            | Configuration to override the default retry behavior of the client.                           |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `serverless_completions_body`                                                 | [models.ServerlessCompletionsBody](../../models/serverlesscompletionsbody.md) | :heavy_check_mark:                                                            | N/A                                                                           | {<br/>"model": "meta-llama-3.1-8b-instruct",<br/>"prompt": "Say this is a test!"<br/>} |
+| `x_friendli_team`                                                             | *OptionalNullable[str]*                                                       | :heavy_minus_sign:                                                            | ID of team to run requests as (optional parameter).                           |                                                                               |
+| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |                                                                               |
 
 ### Response
 
-**[models.CompletionsResult](../../models/completionsresult.md)**
+**[models.ServerlessCompletionsSuccess](../../models/serverlesscompletionssuccess.md)**
 
 ### Errors
 
@@ -69,8 +69,8 @@ with SyncFriendli(
 
     res = friendli.serverless.completions.stream(
         serverless_completions_stream_body={
-            "prompt": "Say this is a test!",
             "model": "meta-llama-3.1-8b-instruct",
+            "prompt": "Say this is a test!",
             "max_tokens": 200,
             "top_k": 1,
         }
@@ -84,15 +84,15 @@ with SyncFriendli(
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `serverless_completions_stream_body`                                                      | [models.ServerlessCompletionsStreamBody](../../models/serverlesscompletionsstreambody.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |
-| `x_friendli_team`                                                                         | *Optional[str]*                                                                           | :heavy_minus_sign:                                                                        | ID of team to run requests as (optional parameter).                                       |
-| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `serverless_completions_stream_body`                                                      | [models.ServerlessCompletionsStreamBody](../../models/serverlesscompletionsstreambody.md) | :heavy_check_mark:                                                                        | N/A                                                                                       | {<br/>"model": "meta-llama-3.1-8b-instruct",<br/>"prompt": "Say this is a test!"<br/>}    |
+| `x_friendli_team`                                                                         | *OptionalNullable[str]*                                                                   | :heavy_minus_sign:                                                                        | ID of team to run requests as (optional parameter).                                       |                                                                                           |
+| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |                                                                                           |
 
 ### Response
 
-**[Union[eventstreaming.EventStream[models.StreamedCompletionsResult], eventstreaming.EventStreamAsync[models.StreamedCompletionsResult]]](../../models/.md)**
+**[Union[eventstreaming.EventStream[models.ServerlessCompletionsStreamSuccess], eventstreaming.EventStreamAsync[models.ServerlessCompletionsStreamSuccess]]](../../models/.md)**
 
 ### Errors
 

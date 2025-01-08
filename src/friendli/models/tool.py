@@ -3,22 +3,24 @@
 from __future__ import annotations
 from .function import Function, FunctionTypedDict
 from friendli.types import BaseModel
+from friendli.utils import validate_const
+import pydantic
+from pydantic.functional_validators import AfterValidator
 from typing import Literal
-from typing_extensions import TypedDict
-
-
-ToolType = Literal["function"]
-r"""The type of the tool. Currently, only `function` is supported."""
+from typing_extensions import Annotated, TypedDict
 
 
 class ToolTypedDict(TypedDict):
-    type: ToolType
-    r"""The type of the tool. Currently, only `function` is supported."""
     function: FunctionTypedDict
+    type: Literal["function"]
+    r"""The type of the tool. Currently, only `function` is supported."""
 
 
 class Tool(BaseModel):
-    type: ToolType
-    r"""The type of the tool. Currently, only `function` is supported."""
-
     function: Function
+
+    TYPE: Annotated[
+        Annotated[Literal["function"], AfterValidator(validate_const("function"))],
+        pydantic.Field(alias="type"),
+    ] = "function"
+    r"""The type of the tool. Currently, only `function` is supported."""

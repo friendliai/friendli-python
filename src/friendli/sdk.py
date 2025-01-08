@@ -15,7 +15,7 @@ from typing import Any, Callable, Dict, Optional, Union
 
 
 class Friendli(BaseSDK):
-    r"""Friendli Endpoints API Reference: This is an OpenAPI reference of Friendli Endpoints API."""
+    r"""Friendli Suite API Reference: This is an OpenAPI reference of Friendli Suite API."""
 
     serverless: Serverless
     dedicated: Dedicated

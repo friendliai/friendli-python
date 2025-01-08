@@ -1,0 +1,12 @@
+# StreamedCompletionData
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `choices`                                                                        | List[[models.StreamedCompletionsChoice](../models/streamedcompletionschoice.md)] | :heavy_check_mark:                                                               | N/A                                                                              |
+| `created`                                                                        | *int*                                                                            | :heavy_check_mark:                                                               | The Unix timestamp (in seconds) for when the token sampled.                      |
+| `id`                                                                             | *str*                                                                            | :heavy_check_mark:                                                               | A unique ID of the completion.                                                   |
+| `object`                                                                         | *Literal["text_completion"]*                                                     | :heavy_check_mark:                                                               | The object type, which is always set to `text_completion`.                       |
+| `usage`                                                                          | [OptionalNullable[models.Usage]](../models/usage.md)                             | :heavy_minus_sign:                                                               | N/A                                                                              |

@@ -35,16 +35,16 @@ You can check this by verifying that the `finish_reason` of the output message i
 You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
 Otherwise, the model may result in an unending stream of whitespace or other characters.
 
-**This field is unsupported when `tools` is specified.**
 **When `response_format` is specified, `min_tokens` field is unsupported.**
+
 
 """
 
 
 ResponseFormat = Annotated[
     Union[
-        Annotated[ResponseFormatJSONSchema, Tag("json_schema")],
         Annotated[ResponseFormatJSONObject, Tag("json_object")],
+        Annotated[ResponseFormatJSONSchema, Tag("json_schema")],
         Annotated[ResponseFormatRegex, Tag("regex")],
         Annotated[ResponseFormatText, Tag("text")],
     ],
@@ -59,7 +59,7 @@ You can check this by verifying that the `finish_reason` of the output message i
 You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
 Otherwise, the model may result in an unending stream of whitespace or other characters.
 
-**This field is unsupported when `tools` is specified.**
 **When `response_format` is specified, `min_tokens` field is unsupported.**
+
 
 """

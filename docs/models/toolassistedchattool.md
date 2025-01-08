@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `models.FunctionTool`
+### `models.OtherBuiltInTool`
 
 ```python
-value: models.FunctionTool = /* values here */
+value: models.OtherBuiltInTool = /* values here */
 ```
 
 ### `models.FileBuiltInTool`
@@ -15,10 +15,10 @@ value: models.FunctionTool = /* values here */
 value: models.FileBuiltInTool = /* values here */
 ```
 
-### `models.OtherBuiltInTool`
+### `models.Tool`
 
 ```python
-value: models.OtherBuiltInTool = /* values here */
+value: models.Tool = /* values here */
 ```
 
 ### `models.OtherBuiltInTool`

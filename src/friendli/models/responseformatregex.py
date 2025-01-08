@@ -2,29 +2,30 @@
 
 from __future__ import annotations
 from friendli.types import BaseModel
+from friendli.utils import validate_const
 import pydantic
+from pydantic.functional_validators import AfterValidator
 from typing import Literal
 from typing_extensions import Annotated, TypedDict
 
 
-ResponseFormatRegexType = Literal["regex"]
-r"""The type of the response format: `regex`"""
-
-
 class ResponseFormatRegexTypedDict(TypedDict):
-    type: ResponseFormatRegexType
-    r"""The type of the response format: `regex`"""
     schema_: str
     r"""The schema of the output. Lookaheads or lookbehinds (e.g., `\a`, `\z`, `^`, `$`, `(?=)`, `(?!)`, `(?<=...)`, `(?<!...)`) are not supported. Group specials (e.g., `\w`, `\W`, `\d`, `\D`, `\s`, `\S`) do not support non-ASCII characters. Unicode escape patterns (e.g., `\N`, `\p`, `\P`) are not supported. Additionally, conditional matching (`(?(`) and back-references can cause inefficiency.
 
     """
+    type: Literal["regex"]
+    r"""The type of the response format: `regex`"""
 
 
 class ResponseFormatRegex(BaseModel):
-    type: ResponseFormatRegexType
-    r"""The type of the response format: `regex`"""
-
     schema_: Annotated[str, pydantic.Field(alias="schema")]
     r"""The schema of the output. Lookaheads or lookbehinds (e.g., `\a`, `\z`, `^`, `$`, `(?=)`, `(?!)`, `(?<=...)`, `(?<!...)`) are not supported. Group specials (e.g., `\w`, `\W`, `\d`, `\D`, `\s`, `\S`) do not support non-ASCII characters. Unicode escape patterns (e.g., `\N`, `\p`, `\P`) are not supported. Additionally, conditional matching (`(?(`) and back-references can cause inefficiency.
 
     """
+
+    TYPE: Annotated[
+        Annotated[Literal["regex"], AfterValidator(validate_const("regex"))],
+        pydantic.Field(alias="type"),
+    ] = "regex"
+    r"""The type of the response format: `regex`"""

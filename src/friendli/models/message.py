@@ -24,10 +24,10 @@ MessageTypedDict = TypeAliasType(
 
 Message = Annotated[
     Union[
-        Annotated[SystemMessage, Tag("system")],
-        Annotated[UserMessage, Tag("user")],
         Annotated[AssistantMessage, Tag("assistant")],
+        Annotated[SystemMessage, Tag("system")],
         Annotated[ToolMessage, Tag("tool")],
+        Annotated[UserMessage, Tag("user")],
     ],
     Discriminator(lambda m: get_discriminator(m, "role", "role")),
 ]

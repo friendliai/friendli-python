@@ -2,19 +2,21 @@
 
 from __future__ import annotations
 from friendli.types import BaseModel
+from friendli.utils import validate_const
+import pydantic
+from pydantic.functional_validators import AfterValidator
 from typing import Literal
-from typing_extensions import TypedDict
-
-
-ResponseFormatTextType = Literal["text"]
-r"""The type of the response format: `text`"""
+from typing_extensions import Annotated, TypedDict
 
 
 class ResponseFormatTextTypedDict(TypedDict):
-    type: ResponseFormatTextType
+    type: Literal["text"]
     r"""The type of the response format: `text`"""
 
 
 class ResponseFormatText(BaseModel):
-    type: ResponseFormatTextType
+    TYPE: Annotated[
+        Annotated[Literal["text"], AfterValidator(validate_const("text"))],
+        pydantic.Field(alias="type"),
+    ] = "text"
     r"""The type of the response format: `text`"""

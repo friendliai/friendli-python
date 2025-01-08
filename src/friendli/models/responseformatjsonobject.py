@@ -2,18 +2,16 @@
 
 from __future__ import annotations
 from friendli.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
+from friendli.utils import validate_const
 import pydantic
 from pydantic import model_serializer
+from pydantic.functional_validators import AfterValidator
 from typing import Literal
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-ResponseFormatJSONObjectType = Literal["json_object"]
-r"""The type of the response format: `json_object`"""
-
-
 class ResponseFormatJSONObjectTypedDict(TypedDict):
-    type: ResponseFormatJSONObjectType
+    type: Literal["json_object"]
     r"""The type of the response format: `json_object`"""
     schema_: NotRequired[Nullable[str]]
     r"""The serialized JSON schema string to enforce as the response format.
@@ -23,7 +21,12 @@ class ResponseFormatJSONObjectTypedDict(TypedDict):
 
 
 class ResponseFormatJSONObject(BaseModel):
-    type: ResponseFormatJSONObjectType
+    TYPE: Annotated[
+        Annotated[
+            Literal["json_object"], AfterValidator(validate_const("json_object"))
+        ],
+        pydantic.Field(alias="type"),
+    ] = "json_object"
     r"""The type of the response format: `json_object`"""
 
     schema_: Annotated[

@@ -1,0 +1,10 @@
+# AssistantMessageToolCall
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `function`                                                                               | [models.AssistantMessageToolCallFunction](../models/assistantmessagetoolcallfunction.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `id`                                                                                     | *str*                                                                                    | :heavy_check_mark:                                                                       | The ID of tool call.                                                                     |
+| `type`                                                                                   | *Literal["function"]*                                                                    | :heavy_check_mark:                                                                       | The type of tool call.                                                                   |

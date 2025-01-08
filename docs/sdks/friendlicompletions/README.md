@@ -23,9 +23,9 @@ with SyncFriendli(
 ) as friendli:
 
     res = friendli.dedicated.completions.complete(
-        dedicated_completions_complete_body={
-            "prompt": "Say this is a test!",
+        dedicated_completions_body={
             "model": "(endpoint-id):(adapter-route)",
+            "prompt": "Say this is a test!",
             "max_tokens": 200,
             "top_k": 1,
         }
@@ -37,15 +37,15 @@ with SyncFriendli(
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `dedicated_completions_complete_body`                                                       | [models.DedicatedCompletionsCompleteBody](../../models/dedicatedcompletionscompletebody.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |
-| `x_friendli_team`                                                                           | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | ID of team to run requests as (optional parameter).                                         |
-| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `dedicated_completions_body`                                                  | [models.DedicatedCompletionsBody](../../models/dedicatedcompletionsbody.md)   | :heavy_check_mark:                                                            | N/A                                                                           | {<br/>"model": "(endpoint-id):(adapter-route)",<br/>"prompt": "Say this is a test!"<br/>} |
+| `x_friendli_team`                                                             | *OptionalNullable[str]*                                                       | :heavy_minus_sign:                                                            | ID of team to run requests as (optional parameter).                           |                                                                               |
+| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |                                                                               |
 
 ### Response
 
-**[models.CompletionsResult](../../models/completionsresult.md)**
+**[models.DedicatedCompletionsSuccess](../../models/dedicatedcompletionssuccess.md)**
 
 ### Errors
 
@@ -69,8 +69,8 @@ with SyncFriendli(
 
     res = friendli.dedicated.completions.stream(
         dedicated_completions_stream_body={
-            "prompt": "Say this is a test!",
             "model": "(endpoint-id):(adapter-route)",
+            "prompt": "Say this is a test!",
             "max_tokens": 200,
             "top_k": 1,
         }
@@ -84,15 +84,15 @@ with SyncFriendli(
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `dedicated_completions_stream_body`                                                     | [models.DedicatedCompletionsStreamBody](../../models/dedicatedcompletionsstreambody.md) | :heavy_check_mark:                                                                      | N/A                                                                                     |
-| `x_friendli_team`                                                                       | *Optional[str]*                                                                         | :heavy_minus_sign:                                                                      | ID of team to run requests as (optional parameter).                                     |
-| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `dedicated_completions_stream_body`                                                     | [models.DedicatedCompletionsStreamBody](../../models/dedicatedcompletionsstreambody.md) | :heavy_check_mark:                                                                      | N/A                                                                                     | {<br/>"model": "(endpoint-id):(adapter-route)",<br/>"prompt": "Say this is a test!"<br/>} |
+| `x_friendli_team`                                                                       | *OptionalNullable[str]*                                                                 | :heavy_minus_sign:                                                                      | ID of team to run requests as (optional parameter).                                     |                                                                                         |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |                                                                                         |
 
 ### Response
 
-**[Union[eventstreaming.EventStream[models.StreamedCompletionsResult], eventstreaming.EventStreamAsync[models.StreamedCompletionsResult]]](../../models/.md)**
+**[Union[eventstreaming.EventStream[models.DedicatedCompletionsStreamSuccess], eventstreaming.EventStreamAsync[models.DedicatedCompletionsStreamSuccess]]](../../models/.md)**
 
 ### Errors
 
