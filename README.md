@@ -19,22 +19,33 @@ When using Friendli Python SDK, you need to provide a Friendli Token for authent
 
 <!-- No Summary [summary] -->
 
+<!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [Friendli Python SDK](#friendli-python-sdk)
+  * [Token Setup](#token-setup)
+  * [SDK Installation](#sdk-installation)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Authentication](#authentication)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Server-sent event streaming](#server-sent-event-streaming)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Resource Management](#resource-management)
+  * [Debugging](#debugging)
+  * [IDE Support](#ide-support)
 
-* [SDK Installation](#sdk-installation)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Server-sent event streaming](#server-sent-event-streaming)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Custom HTTP Client](#custom-http-client)
-* [Debugging](#debugging)
-* [IDE Support](#ide-support)
-<!-- No Table of Contents [toc] -->
+<!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
+
+> [!NOTE]
+> **Python version upgrade policy**
+>
+> Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
 The SDK can be installed with either *pip* or *poetry* package managers.
 
@@ -53,6 +64,37 @@ pip install friendli
 ```bash
 poetry add friendli
 ```
+
+### Shell and script usage with `uv`
+
+You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
+
+```shell
+uvx --from friendli python
+```
+
+It's also possible to write a standalone Python script without needing to set up a whole project like so:
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "friendli",
+# ]
+# ///
+
+from friendli import SyncFriendli
+
+sdk = SyncFriendli(
+    # SDK arguments
+)
+
+# Rest of script here...
+```
+
+Once that is saved to a file, you can run it with `uv run script.py` where
+`script.py` can be replaced with the actual file name.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -64,13 +106,13 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.chat.complete(
         messages=[
             {
@@ -96,16 +138,16 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-from friendli import AsyncFriendli
 import os
+
+from friendli import AsyncFriendli
 
 
 async def main():
     async with AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
-
-        res = await friendli.serverless.chat.complete_async(
+        res = await friendli.serverless.chat.complete(
             messages=[
                 {
                     "content": "You are a helpful assistant.",
@@ -123,6 +165,7 @@ async def main():
         # Handle response
         print(res)
 
+
 asyncio.run(main())
 ```
 
@@ -132,13 +175,13 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.tool_assisted_chat.complete(
         messages=[
             {
@@ -165,16 +208,16 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-from friendli import AsyncFriendli
 import os
+
+from friendli import AsyncFriendli
 
 
 async def main():
     async with AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
-
-        res = await friendli.serverless.tool_assisted_chat.complete_async(
+        res = await friendli.serverless.tool_assisted_chat.complete(
             messages=[
                 {
                     "content": "What is 3 + 6?",
@@ -193,9 +236,50 @@ async def main():
         # Handle response
         print(res)
 
+
 asyncio.run(main())
 ```
 <!-- End SDK Example Usage [usage] -->
+
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name    | Type | Scheme      | Environment Variable |
+| ------- | ---- | ----------- | -------------------- |
+| `token` | http | HTTP Bearer | `FRIENDLI_TOKEN`     |
+
+To authenticate with the API the `token` parameter must be set when initializing the SDK client instance. For example:
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.serverless.chat.complete(
+        messages=[
+            {
+                "content": "You are a helpful assistant.",
+                "role": "system",
+            },
+            {
+                "content": "Hello!",
+                "role": "user",
+            },
+        ],
+        model="meta-llama-3.1-8b-instruct",
+        max_tokens=200,
+    )
+
+    # Handle response
+    print(res)
+```
+<!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -216,6 +300,10 @@ asyncio.run(main())
 * [complete](docs/sdks/friendlicompletions/README.md#complete) - Completions
 * [stream](docs/sdks/friendlicompletions/README.md#stream) - Stream completions
 
+#### [dedicated.endpoint](docs/sdks/endpoint/README.md)
+
+* [wandb_artifact_create](docs/sdks/endpoint/README.md#wandb_artifact_create) - Create endpoint from W&B artifact
+
 #### [dedicated.token](docs/sdks/friendlitoken/README.md)
 
 * [tokenization](docs/sdks/friendlitoken/README.md#tokenization) - Tokenization
@@ -234,6 +322,14 @@ asyncio.run(main())
 
 * [complete](docs/sdks/completions/README.md#complete) - Completions
 * [stream](docs/sdks/completions/README.md#stream) - Stream completions
+
+#### [serverless.knowledge](docs/sdks/knowledge/README.md)
+
+* [retrieve](docs/sdks/knowledge/README.md#retrieve) - Retrieve contexts from chosen knowledge base
+
+#### [serverless.model](docs/sdks/model/README.md)
+
+* [list](docs/sdks/model/README.md#list) - Retrieve serverless models
 
 #### [serverless.token](docs/sdks/token/README.md)
 
@@ -261,13 +357,13 @@ The stream is also a [Context Manager][context-manager] and can be used with the
 underlying connection when the context is exited.
 
 ```python
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.chat.stream(
         messages=[
             {
@@ -301,14 +397,14 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
+import os
+
 from friendli import SyncFriendli
 from friendli.utils import BackoffStrategy, RetryConfig
-import os
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.chat.complete(
         messages=[
             {
@@ -331,15 +427,15 @@ with SyncFriendli(
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
+import os
+
 from friendli import SyncFriendli
 from friendli.utils import BackoffStrategy, RetryConfig
-import os
 
 with SyncFriendli(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.chat.complete(
         messages=[
             {
@@ -374,7 +470,7 @@ By default, an API error will raise a models.SDKError exception, which has the f
 | `.raw_response` | *httpx.Response* | The raw HTTP response |
 | `.body`         | *str*            | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `complete_async` method may raise the following exceptions:
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `complete` method may raise the following exceptions:
 
 | Error Type      | Status Code | Content Type |
 | --------------- | ----------- | ------------ |
@@ -383,15 +479,15 @@ When custom error responses are specified for an operation, the SDK may also rai
 ### Example
 
 ```python
-from friendli import SyncFriendli, models
 import os
+
+from friendli import SyncFriendli, models
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = None
     try:
-
         res = friendli.serverless.chat.complete(
             messages=[
                 {
@@ -421,16 +517,16 @@ with SyncFriendli(
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     server_url="https://api.friendli.ai",
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.chat.complete(
         messages=[
             {
@@ -460,8 +556,9 @@ This allows you to wrap the client with your own custom logic, such as adding cu
 
 For example, you could specify a header for every request that this sdk makes as follows:
 ```python
-from friendli import SyncFriendli
 import httpx
+
+from friendli import SyncFriendli
 
 http_client = httpx.Client(headers={"x-custom-header": "someValue"})
 s = SyncFriendli(client=http_client)
@@ -469,10 +566,12 @@ s = SyncFriendli(client=http_client)
 
 or you could wrap the client with your own custom logic:
 ```python
+from typing import Any, Optional, Union
+
+import httpx
+
 from friendli import AsyncFriendli
 from friendli.httpclient import AsyncHttpClient
-import httpx
-from typing import Any, Optional, Union
 
 
 class CustomClient(AsyncHttpClient):
@@ -535,7 +634,30 @@ s = AsyncFriendli(async_client=CustomClient(httpx.AsyncClient()))
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
-<!-- No Authentication [security] -->
+## Resource Management
+
+The `SyncFriendli` class implements the context manager protocol and registers a finalizer function to close the underlying sync and async HTTPX clients it uses under the hood. This will close HTTP connections, release memory and free up other resources held by the SDK. In short-lived Python programs and notebooks that make a few SDK method calls, resource management may not be a concern. However, in longer-lived programs, it is beneficial to create a single SDK instance via a [context manager][context-manager] and reuse it across the application.
+
+[context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
+
+```python
+from friendli import SyncFriendli, AsyncFriendli
+import os
+def main():
+    with SyncFriendli(
+        token=os.getenv("FRIENDLI_TOKEN", ""),
+    ) as friendli:
+        # Rest of application here...
+
+
+# Or when using async:
+async def amain():
+    async with AsyncFriendli(
+        token=os.getenv("FRIENDLI_TOKEN", ""),
+    ) as friendli:
+        # Rest of application here...
+```
+<!-- No Resource Management [resource-management] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging
@@ -544,8 +666,9 @@ You can setup your SDK to emit debug logs for SDK requests and responses.
 
 You can pass your own logger class directly into your SDK.
 ```python
-from friendli import SyncFriendli
 import logging
+
+from friendli import SyncFriendli
 
 logging.basicConfig(level=logging.DEBUG)
 s = SyncFriendli(debug_logger=logging.getLogger("friendli"))

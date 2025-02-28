@@ -2,9 +2,11 @@
 
 from enum import Enum
 from typing import Any, Optional
+
 from friendli.types import UNSET
 
-def get_discriminator(model: Any, fieldname: str, key: str) -> str | None:
+
+def get_discriminator(model: Any, fieldname: str, key: str) -> str:
     """
     Recursively search for the discriminator attribute in a model.
 
@@ -20,7 +22,7 @@ def get_discriminator(model: Any, fieldname: str, key: str) -> str | None:
         ValueError: If the discriminator attribute is not found.
     """
     if model is UNSET:
-        return None
+        return "UNSET"
 
     upper_fieldname = fieldname.upper()
 
@@ -29,22 +31,21 @@ def get_discriminator(model: Any, fieldname: str, key: str) -> str | None:
 
         if isinstance(field, dict):
             if key in field:
-                return f'{field[key]}'
+                return f"{field[key]}"
 
         if hasattr(field, fieldname):
             attr = getattr(field, fieldname)
             if isinstance(attr, Enum):
-                return f'{attr.value}'
-            return f'{attr}'
+                return f"{attr.value}"
+            return f"{attr}"
 
         if hasattr(field, upper_fieldname):
             attr = getattr(field, upper_fieldname)
             if isinstance(attr, Enum):
-                return f'{attr.value}'
-            return f'{attr}'
+                return f"{attr.value}"
+            return f"{attr}"
 
         return None
-
 
     if isinstance(model, list):
         for field in model:
@@ -56,4 +57,4 @@ def get_discriminator(model: Any, fieldname: str, key: str) -> str | None:
     if discriminator is not None:
         return discriminator
 
-    raise ValueError(f'Could not find discriminator field {fieldname} in {model}')
+    raise ValueError(f"Could not find discriminator field {fieldname} in {model}")

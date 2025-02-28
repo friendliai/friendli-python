@@ -2,8 +2,9 @@
 
 The enforced format of the model's output.
 
-Note that the content of the output message may be truncated if it exceeds the `max_tokens`.
-You can check this by verifying that the `finish_reason` of the output message is `length`.
+Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.
+
+For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).
 
 ***Important***
 You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).

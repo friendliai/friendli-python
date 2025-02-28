@@ -15,19 +15,18 @@ Generate text based on the given text prompt.
 ### Example Usage
 
 ```python
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.dedicated.completions.complete(
         dedicated_completions_body={
-            "model": "(endpoint-id):(adapter-route)",
+            "model": "(endpoint-id)",
             "prompt": "Say this is a test!",
-            "max_tokens": 200,
-            "top_k": 1,
+            "stream": False,
         }
     )
 
@@ -37,11 +36,11 @@ with SyncFriendli(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `dedicated_completions_body`                                                  | [models.DedicatedCompletionsBody](../../models/dedicatedcompletionsbody.md)   | :heavy_check_mark:                                                            | N/A                                                                           | {<br/>"model": "(endpoint-id):(adapter-route)",<br/>"prompt": "Say this is a test!"<br/>} |
-| `x_friendli_team`                                                             | *OptionalNullable[str]*                                                       | :heavy_minus_sign:                                                            | ID of team to run requests as (optional parameter).                           |                                                                               |
-| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |                                                                               |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `dedicated_completions_body`                                                | [models.DedicatedCompletionsBody](../../models/dedicatedcompletionsbody.md) | :heavy_check_mark:                                                          | N/A                                                                         | {<br/>"model": "(endpoint-id)",<br/>"prompt": "Say this is a test!"<br/>}   |
+| `x_friendli_team`                                                           | *OptionalNullable[str]*                                                     | :heavy_minus_sign:                                                          | ID of team to run requests as (optional parameter).                         |                                                                             |
+| `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |                                                                             |
 
 ### Response
 
@@ -60,19 +59,18 @@ Generate text based on the given text prompt.
 ### Example Usage
 
 ```python
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.dedicated.completions.stream(
         dedicated_completions_stream_body={
-            "model": "(endpoint-id):(adapter-route)",
+            "model": "(endpoint-id)",
             "prompt": "Say this is a test!",
-            "max_tokens": 200,
-            "top_k": 1,
+            "stream": True,
         }
     )
 
@@ -86,7 +84,7 @@ with SyncFriendli(
 
 | Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `dedicated_completions_stream_body`                                                     | [models.DedicatedCompletionsStreamBody](../../models/dedicatedcompletionsstreambody.md) | :heavy_check_mark:                                                                      | N/A                                                                                     | {<br/>"model": "(endpoint-id):(adapter-route)",<br/>"prompt": "Say this is a test!"<br/>} |
+| `dedicated_completions_stream_body`                                                     | [models.DedicatedCompletionsStreamBody](../../models/dedicatedcompletionsstreambody.md) | :heavy_check_mark:                                                                      | N/A                                                                                     | {<br/>"model": "(endpoint-id)",<br/>"prompt": "Say this is a test!"<br/>}               |
 | `x_friendli_team`                                                                       | *OptionalNullable[str]*                                                                 | :heavy_minus_sign:                                                                      | ID of team to run requests as (optional parameter).                                     |                                                                                         |
 | `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |                                                                                         |
 
