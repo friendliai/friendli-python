@@ -5,13 +5,13 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.chat.complete(
         messages=[
             {
@@ -37,16 +37,16 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-from friendli import AsyncFriendli
 import os
+
+from friendli import AsyncFriendli
 
 
 async def main():
     async with AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
-
-        res = await friendli.serverless.chat.complete_async(
+        res = await friendli.serverless.chat.complete(
             messages=[
                 {
                     "content": "You are a helpful assistant.",
@@ -64,6 +64,7 @@ async def main():
         # Handle response
         print(res)
 
+
 asyncio.run(main())
 ```
 
@@ -73,13 +74,13 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.tool_assisted_chat.complete(
         messages=[
             {
@@ -106,16 +107,16 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-from friendli import AsyncFriendli
 import os
+
+from friendli import AsyncFriendli
 
 
 async def main():
     async with AsyncFriendli(
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
-
-        res = await friendli.serverless.tool_assisted_chat.complete_async(
+        res = await friendli.serverless.tool_assisted_chat.complete(
             messages=[
                 {
                     "content": "What is 3 + 6?",
@@ -133,6 +134,7 @@ async def main():
 
         # Handle response
         print(res)
+
 
 asyncio.run(main())
 ```

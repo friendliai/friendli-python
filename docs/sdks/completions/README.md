@@ -15,19 +15,18 @@ Generate text based on the given text prompt.
 ### Example Usage
 
 ```python
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.completions.complete(
         serverless_completions_body={
             "model": "meta-llama-3.1-8b-instruct",
             "prompt": "Say this is a test!",
-            "max_tokens": 200,
-            "top_k": 1,
+            "stream": False,
         }
     )
 
@@ -60,19 +59,18 @@ Generate text based on the given text prompt.
 ### Example Usage
 
 ```python
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.completions.stream(
         serverless_completions_stream_body={
             "model": "meta-llama-3.1-8b-instruct",
             "prompt": "Say this is a test!",
-            "max_tokens": 200,
-            "top_k": 1,
+            "stream": True,
         }
     )
 

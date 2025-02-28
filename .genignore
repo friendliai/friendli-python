@@ -1,4 +1,2 @@
-src/friendli/__init__.py
-src/friendli/httpclient.py
 src/friendli/utils/annotations.py
 scripts/prepare-readme.py

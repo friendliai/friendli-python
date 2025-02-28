@@ -1,0 +1,12 @@
+# AutoscalingPolicy
+
+Autoscaling policy.
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `cooldown_period`                                                                                         | *Optional[int]*                                                                                           | :heavy_minus_sign:                                                                                        | Determines how long the endpoint waits before scaling down after the last request.                        |
+| `max_replica`                                                                                             | *Optional[int]*                                                                                           | :heavy_minus_sign:                                                                                        | The maximum replicas that the endpoint can scale up to. The maximum value is 10.                          |
+| `min_replica`                                                                                             | *Optional[int]*                                                                                           | :heavy_minus_sign:                                                                                        | Setting `minReplica` to 0 allows the endpoint to sleep when idle, reducing costs. The minimum value is 0. |
