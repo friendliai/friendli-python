@@ -15,13 +15,13 @@ By giving a text input, generate a tokenized output of token IDs.
 ### Example Usage
 
 ```python
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.token.tokenization(
         model="meta-llama-3.1-8b-instruct", prompt="What is generative AI?"
     )
@@ -56,13 +56,13 @@ By giving a list of tokens, generate a detokenized output text string.
 ### Example Usage
 
 ```python
-from friendli import SyncFriendli
 import os
+
+from friendli import SyncFriendli
 
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-
     res = friendli.serverless.token.detokenization(
         model="meta-llama-3.1-8b-instruct",
         tokens=[

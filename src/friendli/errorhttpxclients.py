@@ -1,7 +1,9 @@
-import httpx
-from .httpclient import AsyncHttpClient, HttpClient
-from typing import Any, NoReturn, Optional, Union, Type, TypeVar
 from types import TracebackType
+from typing import Any, NoReturn, Optional, Type, TypeVar, Union
+
+import httpx
+
+from .httpclient import AsyncHttpClient, HttpClient
 
 T = TypeVar("T", bound="ErrorThrowingSyncClient")
 U = TypeVar("U", bound="ErrorThrowingAsyncClient")
@@ -54,12 +56,14 @@ class ErrorThrowingSyncClient(HttpClient):
         self,
         exc_type: Union[Type[BaseException], None],
         exc_val: Union[BaseException, None],
-        exc_tb: Union[TracebackType, None]
+        exc_tb: Union[TracebackType, None],
     ) -> None:
         pass
 
     def _raise_error(self) -> NoReturn:
-        raise MethodUsedInWrongPlaceError("Sync operations are not supported in AsyncFriendli.")
+        raise MethodUsedInWrongPlaceError(
+            "Sync operations are not supported in AsyncFriendli."
+        )
 
 
 class ErrorThrowingAsyncClient(AsyncHttpClient):
@@ -103,10 +107,11 @@ class ErrorThrowingAsyncClient(AsyncHttpClient):
         self,
         exc_type: Union[Type[BaseException], None],
         exc_val: Union[BaseException, None],
-        exc_tb: Union[TracebackType, None]
+        exc_tb: Union[TracebackType, None],
     ) -> None:
         pass
 
-
     def _raise_error(self) -> NoReturn:
-        raise MethodUsedInWrongPlaceError("Async operations are not supported in SyncFriendli.")
+        raise MethodUsedInWrongPlaceError(
+            "Async operations are not supported in SyncFriendli."
+        )
