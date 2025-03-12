@@ -8,6 +8,7 @@ import httpx
 
 from friendli import models, utils
 from friendli._hooks import SDKHooks
+from friendli.container import AsyncContainer, SyncContainer
 from friendli.dedicated import AsyncDedicated, SyncDedicated
 from friendli.serverless import AsyncServerless, SyncServerless
 from friendli.types import UNSET, OptionalNullable
@@ -111,10 +112,12 @@ class BaseFriendli(BaseSDK):
 class SyncFriendli(BaseFriendli, SyncSDK):
     serverless: SyncServerless
     dedicated: SyncDedicated
+    container: SyncContainer
 
     def _init_sdks(self):
         self.serverless = SyncServerless(self.sdk_configuration)
         self.dedicated = SyncDedicated(self.sdk_configuration)
+        self.container = SyncContainer(self.sdk_configuration)
 
     def __enter__(self):
         return self
@@ -130,10 +133,12 @@ class SyncFriendli(BaseFriendli, SyncSDK):
 class AsyncFriendli(BaseFriendli, AsyncSDK):
     serverless: AsyncServerless
     dedicated: AsyncDedicated
+    container: AsyncContainer
 
     def _init_sdks(self):
         self.serverless = AsyncServerless(self.sdk_configuration)
         self.dedicated = AsyncDedicated(self.sdk_configuration)
+        self.container = AsyncContainer(self.sdk_configuration)
 
     async def __aenter__(self):
         return self

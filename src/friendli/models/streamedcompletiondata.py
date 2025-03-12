@@ -25,10 +25,10 @@ class StreamedCompletionDataTypedDict(TypedDict):
     r"""The Unix timestamp (in seconds) for when the token sampled."""
     id: str
     r"""A unique ID of the completion."""
-    model: str
-    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id"""
     object: Literal["text_completion"]
     r"""The object type, which is always set to `text_completion`."""
+    model: NotRequired[Nullable[str]]
+    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id."""
     usage: NotRequired[Nullable[UsageTypedDict]]
 
 
@@ -41,9 +41,6 @@ class StreamedCompletionData(BaseModel):
     id: str
     r"""A unique ID of the completion."""
 
-    model: str
-    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id"""
-
     OBJECT: Annotated[
         Annotated[
             Literal["text_completion"],
@@ -53,12 +50,15 @@ class StreamedCompletionData(BaseModel):
     ] = "text_completion"
     r"""The object type, which is always set to `text_completion`."""
 
+    model: OptionalNullable[str] = UNSET
+    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id."""
+
     usage: OptionalNullable[Usage] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["usage"]
-        nullable_fields = ["usage"]
+        optional_fields = ["model", "usage"]
+        nullable_fields = ["model", "usage"]
         null_default_fields = []
 
         serialized = handler(self)

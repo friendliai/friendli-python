@@ -6,25 +6,28 @@ from typing import Union
 
 from typing_extensions import TypeAliasType
 
-from .completionsstreambodywithprompt import (
-    CompletionsStreamBodyWithPrompt,
-    CompletionsStreamBodyWithPromptTypedDict,
+from .completionsstreamserverlessmodelbodywithprompt import (
+    CompletionsStreamServerlessModelBodyWithPrompt,
+    CompletionsStreamServerlessModelBodyWithPromptTypedDict,
 )
-from .completionsstreambodywithtokens import (
-    CompletionsStreamBodyWithTokens,
-    CompletionsStreamBodyWithTokensTypedDict,
+from .completionsstreamserverlessmodelbodywithtokens import (
+    CompletionsStreamServerlessModelBodyWithTokens,
+    CompletionsStreamServerlessModelBodyWithTokensTypedDict,
 )
 
 ServerlessCompletionsStreamBodyTypedDict = TypeAliasType(
     "ServerlessCompletionsStreamBodyTypedDict",
     Union[
-        CompletionsStreamBodyWithPromptTypedDict,
-        CompletionsStreamBodyWithTokensTypedDict,
+        CompletionsStreamServerlessModelBodyWithPromptTypedDict,
+        CompletionsStreamServerlessModelBodyWithTokensTypedDict,
     ],
 )
 
 
 ServerlessCompletionsStreamBody = TypeAliasType(
     "ServerlessCompletionsStreamBody",
-    Union[CompletionsStreamBodyWithPrompt, CompletionsStreamBodyWithTokens],
+    Union[
+        CompletionsStreamServerlessModelBodyWithPrompt,
+        CompletionsStreamServerlessModelBodyWithTokens,
+    ],
 )
