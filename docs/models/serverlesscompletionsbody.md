@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### `models.CompletionsBodyWithPrompt`
+### `models.CompletionsServerlessModelBodyWithPrompt`
 
 ```python
-value: models.CompletionsBodyWithPrompt = /* values here */
+value: models.CompletionsServerlessModelBodyWithPrompt = /* values here */
 ```
 
-### `models.CompletionsBodyWithTokens`
+### `models.CompletionsServerlessModelBodyWithTokens`
 
 ```python
-value: models.CompletionsBodyWithTokens = /* values here */
+value: models.CompletionsServerlessModelBodyWithTokens = /* values here */
 ```
 

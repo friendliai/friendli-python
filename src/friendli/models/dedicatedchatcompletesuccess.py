@@ -5,10 +5,11 @@ from __future__ import annotations
 from typing import List, Literal
 
 import pydantic
+from pydantic import model_serializer
 from pydantic.functional_validators import AfterValidator
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
-from friendli.types import BaseModel
+from friendli.types import UNSET, UNSET_SENTINEL, BaseModel, Nullable, OptionalNullable
 from friendli.utils import validate_const
 
 from .chatchoice import ChatChoice, ChatChoiceTypedDict
@@ -21,11 +22,11 @@ class DedicatedChatCompleteSuccessTypedDict(TypedDict):
     r"""The Unix timestamp (in seconds) for when the generation completed."""
     id: str
     r"""A unique ID of the chat completion."""
-    model: str
-    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id"""
     usage: ChatUsageTypedDict
     object: Literal["chat.completion"]
     r"""The object type, which is always set to `chat.completion`."""
+    model: NotRequired[Nullable[str]]
+    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id."""
 
 
 class DedicatedChatCompleteSuccess(BaseModel):
@@ -37,9 +38,6 @@ class DedicatedChatCompleteSuccess(BaseModel):
     id: str
     r"""A unique ID of the chat completion."""
 
-    model: str
-    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id"""
-
     usage: ChatUsage
 
     OBJECT: Annotated[
@@ -50,3 +48,36 @@ class DedicatedChatCompleteSuccess(BaseModel):
         pydantic.Field(alias="object"),
     ] = "chat.completion"
     r"""The object type, which is always set to `chat.completion`."""
+
+    model: OptionalNullable[str] = UNSET
+    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["model"]
+        nullable_fields = ["model"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in self.model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m

@@ -22,10 +22,10 @@ class StreamedChatDataTypedDict(TypedDict):
     r"""The Unix timestamp (in seconds) for when the token sampled."""
     id: str
     r"""A unique ID of the chat completion."""
-    model: str
-    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id"""
     object: Literal["chat.completion.chunk"]
     r"""The object type, which is always set to `chat.completion.chunk`."""
+    model: NotRequired[Nullable[str]]
+    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id."""
     usage: NotRequired[Nullable[ChatUsageTypedDict]]
 
 
@@ -38,9 +38,6 @@ class StreamedChatData(BaseModel):
     id: str
     r"""A unique ID of the chat completion."""
 
-    model: str
-    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id"""
-
     OBJECT: Annotated[
         Annotated[
             Literal["chat.completion.chunk"],
@@ -50,12 +47,15 @@ class StreamedChatData(BaseModel):
     ] = "chat.completion.chunk"
     r"""The object type, which is always set to `chat.completion.chunk`."""
 
+    model: OptionalNullable[str] = UNSET
+    r"""The model to generate the completion. For dedicated endpoints, it returns the endpoint id."""
+
     usage: OptionalNullable[ChatUsage] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["usage"]
-        nullable_fields = ["usage"]
+        optional_fields = ["model", "usage"]
+        nullable_fields = ["model", "usage"]
         null_default_fields = []
 
         serialized = handler(self)

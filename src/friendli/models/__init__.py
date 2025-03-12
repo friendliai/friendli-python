@@ -35,11 +35,11 @@ from .chatlogprobscontenttoplogprob import (
 from .chatusage import ChatUsage, ChatUsageTypedDict
 from .completionsbodywithprompt import (
     CompletionsBodyWithPrompt,
+    CompletionsBodyWithPromptPrompt,
+    CompletionsBodyWithPromptPromptTypedDict,
     CompletionsBodyWithPromptSeed,
     CompletionsBodyWithPromptSeedTypedDict,
     CompletionsBodyWithPromptTypedDict,
-    Prompt,
-    PromptTypedDict,
 )
 from .completionsbodywithtokens import (
     CompletionsBodyWithTokens,
@@ -52,39 +52,39 @@ from .completionschoice import (
     CompletionsChoiceFinishReason,
     CompletionsChoiceTypedDict,
 )
+from .completionsdedicatedmodelbodywithprompt import (
+    CompletionsDedicatedModelBodyWithPrompt,
+    CompletionsDedicatedModelBodyWithPromptPrompt,
+    CompletionsDedicatedModelBodyWithPromptPromptTypedDict,
+    CompletionsDedicatedModelBodyWithPromptSeed,
+    CompletionsDedicatedModelBodyWithPromptSeedTypedDict,
+    CompletionsDedicatedModelBodyWithPromptTypedDict,
+)
+from .completionsdedicatedmodelbodywithtokens import (
+    CompletionsDedicatedModelBodyWithTokens,
+    CompletionsDedicatedModelBodyWithTokensSeed,
+    CompletionsDedicatedModelBodyWithTokensSeedTypedDict,
+    CompletionsDedicatedModelBodyWithTokensTypedDict,
+)
 from .completionslogprobs import (
     CompletionsLogprobs,
     CompletionsLogprobsTypedDict,
     TopLogprobs,
     TopLogprobsTypedDict,
 )
-from .completionsmodelbodywithprompt import (
-    CompletionsModelBodyWithPrompt,
-    CompletionsModelBodyWithPromptPrompt,
-    CompletionsModelBodyWithPromptPromptTypedDict,
-    CompletionsModelBodyWithPromptSeed,
-    CompletionsModelBodyWithPromptSeedTypedDict,
-    CompletionsModelBodyWithPromptTypedDict,
+from .completionsserverlessmodelbodywithprompt import (
+    CompletionsServerlessModelBodyWithPrompt,
+    CompletionsServerlessModelBodyWithPromptSeed,
+    CompletionsServerlessModelBodyWithPromptSeedTypedDict,
+    CompletionsServerlessModelBodyWithPromptTypedDict,
+    Prompt,
+    PromptTypedDict,
 )
-from .completionsmodelbodywithtokens import (
-    CompletionsModelBodyWithTokens,
-    CompletionsModelBodyWithTokensSeed,
-    CompletionsModelBodyWithTokensSeedTypedDict,
-    CompletionsModelBodyWithTokensTypedDict,
-)
-from .completionsmodelstreambodywithprompt import (
-    CompletionsModelStreamBodyWithPrompt,
-    CompletionsModelStreamBodyWithPromptPrompt,
-    CompletionsModelStreamBodyWithPromptPromptTypedDict,
-    CompletionsModelStreamBodyWithPromptSeed,
-    CompletionsModelStreamBodyWithPromptSeedTypedDict,
-    CompletionsModelStreamBodyWithPromptTypedDict,
-)
-from .completionsmodelstreambodywithtokens import (
-    CompletionsModelStreamBodyWithTokens,
-    CompletionsModelStreamBodyWithTokensSeed,
-    CompletionsModelStreamBodyWithTokensSeedTypedDict,
-    CompletionsModelStreamBodyWithTokensTypedDict,
+from .completionsserverlessmodelbodywithtokens import (
+    CompletionsServerlessModelBodyWithTokens,
+    CompletionsServerlessModelBodyWithTokensSeed,
+    CompletionsServerlessModelBodyWithTokensSeedTypedDict,
+    CompletionsServerlessModelBodyWithTokensTypedDict,
 )
 from .completionsstreambodywithprompt import (
     CompletionsStreamBodyWithPrompt,
@@ -99,6 +99,100 @@ from .completionsstreambodywithtokens import (
     CompletionsStreamBodyWithTokensSeed,
     CompletionsStreamBodyWithTokensSeedTypedDict,
     CompletionsStreamBodyWithTokensTypedDict,
+)
+from .completionsstreamdedicatedmodelbodywithprompt import (
+    CompletionsStreamDedicatedModelBodyWithPrompt,
+    CompletionsStreamDedicatedModelBodyWithPromptPrompt,
+    CompletionsStreamDedicatedModelBodyWithPromptPromptTypedDict,
+    CompletionsStreamDedicatedModelBodyWithPromptSeed,
+    CompletionsStreamDedicatedModelBodyWithPromptSeedTypedDict,
+    CompletionsStreamDedicatedModelBodyWithPromptTypedDict,
+)
+from .completionsstreamdedicatedmodelbodywithtokens import (
+    CompletionsStreamDedicatedModelBodyWithTokens,
+    CompletionsStreamDedicatedModelBodyWithTokensSeed,
+    CompletionsStreamDedicatedModelBodyWithTokensSeedTypedDict,
+    CompletionsStreamDedicatedModelBodyWithTokensTypedDict,
+)
+from .completionsstreamserverlessmodelbodywithprompt import (
+    CompletionsStreamServerlessModelBodyWithPrompt,
+    CompletionsStreamServerlessModelBodyWithPromptPrompt,
+    CompletionsStreamServerlessModelBodyWithPromptPromptTypedDict,
+    CompletionsStreamServerlessModelBodyWithPromptSeed,
+    CompletionsStreamServerlessModelBodyWithPromptSeedTypedDict,
+    CompletionsStreamServerlessModelBodyWithPromptTypedDict,
+)
+from .completionsstreamserverlessmodelbodywithtokens import (
+    CompletionsStreamServerlessModelBodyWithTokens,
+    CompletionsStreamServerlessModelBodyWithTokensSeed,
+    CompletionsStreamServerlessModelBodyWithTokensSeedTypedDict,
+    CompletionsStreamServerlessModelBodyWithTokensTypedDict,
+)
+from .containerchatcompleteop import CONTAINER_CHAT_COMPLETE_OP_SERVERS
+from .containerchatcompletesuccess import (
+    ContainerChatCompleteSuccess,
+    ContainerChatCompleteSuccessTypedDict,
+)
+from .containerchatcompletionbody import (
+    ContainerChatCompletionBody,
+    ContainerChatCompletionBodyLogitBias,
+    ContainerChatCompletionBodyLogitBiasTypedDict,
+    ContainerChatCompletionBodySeed,
+    ContainerChatCompletionBodySeedTypedDict,
+    ContainerChatCompletionBodyToolChoice,
+    ContainerChatCompletionBodyToolChoiceTypedDict,
+    ContainerChatCompletionBodyTypedDict,
+)
+from .containerchatcompletionstreambody import (
+    ContainerChatCompletionStreamBody,
+    ContainerChatCompletionStreamBodyLogitBias,
+    ContainerChatCompletionStreamBodyLogitBiasTypedDict,
+    ContainerChatCompletionStreamBodySeed,
+    ContainerChatCompletionStreamBodySeedTypedDict,
+    ContainerChatCompletionStreamBodyToolChoice,
+    ContainerChatCompletionStreamBodyToolChoiceTypedDict,
+    ContainerChatCompletionStreamBodyTypedDict,
+)
+from .containerchatcompletionstreamsuccess import (
+    ContainerChatCompletionStreamSuccess,
+    ContainerChatCompletionStreamSuccessTypedDict,
+)
+from .containerchatstreamop import CONTAINER_CHAT_STREAM_OP_SERVERS
+from .containercompletionsbody import (
+    ContainerCompletionsBody,
+    ContainerCompletionsBodyTypedDict,
+)
+from .containercompletionscompleteop import CONTAINER_COMPLETIONS_COMPLETE_OP_SERVERS
+from .containercompletionsstreambody import (
+    ContainerCompletionsStreamBody,
+    ContainerCompletionsStreamBodyTypedDict,
+)
+from .containercompletionsstreamop import CONTAINER_COMPLETIONS_STREAM_OP_SERVERS
+from .containercompletionsstreamsuccess import (
+    ContainerCompletionsStreamSuccess,
+    ContainerCompletionsStreamSuccessTypedDict,
+)
+from .containercompletionssuccess import (
+    ContainerCompletionsSuccess,
+    ContainerCompletionsSuccessTypedDict,
+)
+from .containerdetokenizationbody import (
+    ContainerDetokenizationBody,
+    ContainerDetokenizationBodyTypedDict,
+)
+from .containerdetokenizationop import CONTAINER_DETOKENIZATION_OP_SERVERS
+from .containerdetokenizationsuccess import (
+    ContainerDetokenizationSuccess,
+    ContainerDetokenizationSuccessTypedDict,
+)
+from .containertokenizationbody import (
+    ContainerTokenizationBody,
+    ContainerTokenizationBodyTypedDict,
+)
+from .containertokenizationop import CONTAINER_TOKENIZATION_OP_SERVERS
+from .containertokenizationsuccess import (
+    ContainerTokenizationSuccess,
+    ContainerTokenizationSuccessTypedDict,
 )
 from .dedicatedchatcompleteop import (
     DedicatedChatCompleteRequest,
@@ -439,6 +533,12 @@ __all__ = [
     "AudioDataTypedDict",
     "AutoscalingPolicy",
     "AutoscalingPolicyTypedDict",
+    "CONTAINER_CHAT_COMPLETE_OP_SERVERS",
+    "CONTAINER_CHAT_STREAM_OP_SERVERS",
+    "CONTAINER_COMPLETIONS_COMPLETE_OP_SERVERS",
+    "CONTAINER_COMPLETIONS_STREAM_OP_SERVERS",
+    "CONTAINER_DETOKENIZATION_OP_SERVERS",
+    "CONTAINER_TOKENIZATION_OP_SERVERS",
     "ChatChoice",
     "ChatChoiceMessage",
     "ChatChoiceMessageTypedDict",
@@ -456,6 +556,8 @@ __all__ = [
     "ChatUsage",
     "ChatUsageTypedDict",
     "CompletionsBodyWithPrompt",
+    "CompletionsBodyWithPromptPrompt",
+    "CompletionsBodyWithPromptPromptTypedDict",
     "CompletionsBodyWithPromptSeed",
     "CompletionsBodyWithPromptSeedTypedDict",
     "CompletionsBodyWithPromptTypedDict",
@@ -466,28 +568,26 @@ __all__ = [
     "CompletionsChoice",
     "CompletionsChoiceFinishReason",
     "CompletionsChoiceTypedDict",
+    "CompletionsDedicatedModelBodyWithPrompt",
+    "CompletionsDedicatedModelBodyWithPromptPrompt",
+    "CompletionsDedicatedModelBodyWithPromptPromptTypedDict",
+    "CompletionsDedicatedModelBodyWithPromptSeed",
+    "CompletionsDedicatedModelBodyWithPromptSeedTypedDict",
+    "CompletionsDedicatedModelBodyWithPromptTypedDict",
+    "CompletionsDedicatedModelBodyWithTokens",
+    "CompletionsDedicatedModelBodyWithTokensSeed",
+    "CompletionsDedicatedModelBodyWithTokensSeedTypedDict",
+    "CompletionsDedicatedModelBodyWithTokensTypedDict",
     "CompletionsLogprobs",
     "CompletionsLogprobsTypedDict",
-    "CompletionsModelBodyWithPrompt",
-    "CompletionsModelBodyWithPromptPrompt",
-    "CompletionsModelBodyWithPromptPromptTypedDict",
-    "CompletionsModelBodyWithPromptSeed",
-    "CompletionsModelBodyWithPromptSeedTypedDict",
-    "CompletionsModelBodyWithPromptTypedDict",
-    "CompletionsModelBodyWithTokens",
-    "CompletionsModelBodyWithTokensSeed",
-    "CompletionsModelBodyWithTokensSeedTypedDict",
-    "CompletionsModelBodyWithTokensTypedDict",
-    "CompletionsModelStreamBodyWithPrompt",
-    "CompletionsModelStreamBodyWithPromptPrompt",
-    "CompletionsModelStreamBodyWithPromptPromptTypedDict",
-    "CompletionsModelStreamBodyWithPromptSeed",
-    "CompletionsModelStreamBodyWithPromptSeedTypedDict",
-    "CompletionsModelStreamBodyWithPromptTypedDict",
-    "CompletionsModelStreamBodyWithTokens",
-    "CompletionsModelStreamBodyWithTokensSeed",
-    "CompletionsModelStreamBodyWithTokensSeedTypedDict",
-    "CompletionsModelStreamBodyWithTokensTypedDict",
+    "CompletionsServerlessModelBodyWithPrompt",
+    "CompletionsServerlessModelBodyWithPromptSeed",
+    "CompletionsServerlessModelBodyWithPromptSeedTypedDict",
+    "CompletionsServerlessModelBodyWithPromptTypedDict",
+    "CompletionsServerlessModelBodyWithTokens",
+    "CompletionsServerlessModelBodyWithTokensSeed",
+    "CompletionsServerlessModelBodyWithTokensSeedTypedDict",
+    "CompletionsServerlessModelBodyWithTokensTypedDict",
     "CompletionsStreamBodyWithPrompt",
     "CompletionsStreamBodyWithPromptPrompt",
     "CompletionsStreamBodyWithPromptPromptTypedDict",
@@ -498,6 +598,62 @@ __all__ = [
     "CompletionsStreamBodyWithTokensSeed",
     "CompletionsStreamBodyWithTokensSeedTypedDict",
     "CompletionsStreamBodyWithTokensTypedDict",
+    "CompletionsStreamDedicatedModelBodyWithPrompt",
+    "CompletionsStreamDedicatedModelBodyWithPromptPrompt",
+    "CompletionsStreamDedicatedModelBodyWithPromptPromptTypedDict",
+    "CompletionsStreamDedicatedModelBodyWithPromptSeed",
+    "CompletionsStreamDedicatedModelBodyWithPromptSeedTypedDict",
+    "CompletionsStreamDedicatedModelBodyWithPromptTypedDict",
+    "CompletionsStreamDedicatedModelBodyWithTokens",
+    "CompletionsStreamDedicatedModelBodyWithTokensSeed",
+    "CompletionsStreamDedicatedModelBodyWithTokensSeedTypedDict",
+    "CompletionsStreamDedicatedModelBodyWithTokensTypedDict",
+    "CompletionsStreamServerlessModelBodyWithPrompt",
+    "CompletionsStreamServerlessModelBodyWithPromptPrompt",
+    "CompletionsStreamServerlessModelBodyWithPromptPromptTypedDict",
+    "CompletionsStreamServerlessModelBodyWithPromptSeed",
+    "CompletionsStreamServerlessModelBodyWithPromptSeedTypedDict",
+    "CompletionsStreamServerlessModelBodyWithPromptTypedDict",
+    "CompletionsStreamServerlessModelBodyWithTokens",
+    "CompletionsStreamServerlessModelBodyWithTokensSeed",
+    "CompletionsStreamServerlessModelBodyWithTokensSeedTypedDict",
+    "CompletionsStreamServerlessModelBodyWithTokensTypedDict",
+    "ContainerChatCompleteSuccess",
+    "ContainerChatCompleteSuccessTypedDict",
+    "ContainerChatCompletionBody",
+    "ContainerChatCompletionBodyLogitBias",
+    "ContainerChatCompletionBodyLogitBiasTypedDict",
+    "ContainerChatCompletionBodySeed",
+    "ContainerChatCompletionBodySeedTypedDict",
+    "ContainerChatCompletionBodyToolChoice",
+    "ContainerChatCompletionBodyToolChoiceTypedDict",
+    "ContainerChatCompletionBodyTypedDict",
+    "ContainerChatCompletionStreamBody",
+    "ContainerChatCompletionStreamBodyLogitBias",
+    "ContainerChatCompletionStreamBodyLogitBiasTypedDict",
+    "ContainerChatCompletionStreamBodySeed",
+    "ContainerChatCompletionStreamBodySeedTypedDict",
+    "ContainerChatCompletionStreamBodyToolChoice",
+    "ContainerChatCompletionStreamBodyToolChoiceTypedDict",
+    "ContainerChatCompletionStreamBodyTypedDict",
+    "ContainerChatCompletionStreamSuccess",
+    "ContainerChatCompletionStreamSuccessTypedDict",
+    "ContainerCompletionsBody",
+    "ContainerCompletionsBodyTypedDict",
+    "ContainerCompletionsStreamBody",
+    "ContainerCompletionsStreamBodyTypedDict",
+    "ContainerCompletionsStreamSuccess",
+    "ContainerCompletionsStreamSuccessTypedDict",
+    "ContainerCompletionsSuccess",
+    "ContainerCompletionsSuccessTypedDict",
+    "ContainerDetokenizationBody",
+    "ContainerDetokenizationBodyTypedDict",
+    "ContainerDetokenizationSuccess",
+    "ContainerDetokenizationSuccessTypedDict",
+    "ContainerTokenizationBody",
+    "ContainerTokenizationBodyTypedDict",
+    "ContainerTokenizationSuccess",
+    "ContainerTokenizationSuccessTypedDict",
     "Content",
     "ContentTypedDict",
     "DedicatedChatCompleteRequest",
