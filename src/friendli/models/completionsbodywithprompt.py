@@ -13,11 +13,15 @@ from .responseformat import ResponseFormat, ResponseFormatTypedDict
 from .streamoptions import StreamOptions, StreamOptionsTypedDict
 from .tokensequence import TokenSequence, TokenSequenceTypedDict
 
-PromptTypedDict = TypeAliasType("PromptTypedDict", Union[str, List[str]])
+CompletionsBodyWithPromptPromptTypedDict = TypeAliasType(
+    "CompletionsBodyWithPromptPromptTypedDict", Union[str, List[str]]
+)
 r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
 
-Prompt = TypeAliasType("Prompt", Union[str, List[str]])
+CompletionsBodyWithPromptPrompt = TypeAliasType(
+    "CompletionsBodyWithPromptPrompt", Union[str, List[str]]
+)
 r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
 
@@ -34,9 +38,7 @@ r"""Seed to control random procedure. If nothing is given, the API generate the 
 
 
 class CompletionsBodyWithPromptTypedDict(TypedDict):
-    model: str
-    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
-    prompt: PromptTypedDict
+    prompt: CompletionsBodyWithPromptPromptTypedDict
     r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
     bad_word_tokens: NotRequired[Nullable[List[TokenSequenceTypedDict]]]
     r"""Same as the above `bad_words` field, but receives token sequences instead of text phrases. This is similar to Hugging Face's [`bad_word_ids`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.bad_words_ids) argument."""
@@ -85,6 +87,8 @@ class CompletionsBodyWithPromptTypedDict(TypedDict):
     """
     min_total_tokens: NotRequired[Nullable[int]]
     r"""The minimum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `min_tokens` and `min_total_tokens` is allowed. This is similar to Hugging Face's [`min_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.min_length) argument."""
+    model: NotRequired[Nullable[str]]
+    r"""Routes the request to a specific adapter."""
     n: NotRequired[Nullable[int]]
     r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
     no_repeat_ngram: NotRequired[Nullable[int]]
@@ -128,10 +132,7 @@ class CompletionsBodyWithPromptTypedDict(TypedDict):
 
 
 class CompletionsBodyWithPrompt(BaseModel):
-    model: str
-    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
-
-    prompt: Prompt
+    prompt: CompletionsBodyWithPromptPrompt
     r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
     bad_word_tokens: OptionalNullable[List[TokenSequence]] = UNSET
@@ -199,6 +200,9 @@ class CompletionsBodyWithPrompt(BaseModel):
 
     min_total_tokens: OptionalNullable[int] = UNSET
     r"""The minimum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `min_tokens` and `min_total_tokens` is allowed. This is similar to Hugging Face's [`min_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.min_length) argument."""
+
+    model: OptionalNullable[str] = UNSET
+    r"""Routes the request to a specific adapter."""
 
     n: OptionalNullable[int] = UNSET
     r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
@@ -277,6 +281,7 @@ class CompletionsBodyWithPrompt(BaseModel):
             "min_p",
             "min_tokens",
             "min_total_tokens",
+            "model",
             "n",
             "no_repeat_ngram",
             "num_beams",
@@ -313,6 +318,7 @@ class CompletionsBodyWithPrompt(BaseModel):
             "min_p",
             "min_tokens",
             "min_total_tokens",
+            "model",
             "n",
             "no_repeat_ngram",
             "num_beams",
