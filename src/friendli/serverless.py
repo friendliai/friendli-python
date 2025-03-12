@@ -28,31 +28,31 @@ class SyncServerless(BaseServerless, SyncSDK):
     chat: SyncChat
     completions: SyncCompletions
     token: SyncToken
-    tool_assisted_chat: SyncToolAssistedChat
     knowledge: SyncKnowledge
     model: SyncModel
+    tool_assisted_chat: SyncToolAssistedChat
 
     def _init_sdks(self):
         self.chat = SyncChat(self.sdk_configuration)
         self.completions = SyncCompletions(self.sdk_configuration)
         self.token = SyncToken(self.sdk_configuration)
-        self.tool_assisted_chat = SyncToolAssistedChat(self.sdk_configuration)
         self.knowledge = SyncKnowledge(self.sdk_configuration)
         self.model = SyncModel(self.sdk_configuration)
+        self.tool_assisted_chat = SyncToolAssistedChat(self.sdk_configuration)
 
 
 class AsyncServerless(BaseServerless, AsyncSDK):
     chat: AsyncChat
     completions: AsyncCompletions
     token: AsyncToken
-    tool_assisted_chat: AsyncToolAssistedChat
     knowledge: AsyncKnowledge
     model: AsyncModel
+    tool_assisted_chat: AsyncToolAssistedChat
 
     def _init_sdks(self):
         self.chat = AsyncChat(self.sdk_configuration)
         self.completions = AsyncCompletions(self.sdk_configuration)
         self.token = AsyncToken(self.sdk_configuration)
-        self.tool_assisted_chat = AsyncToolAssistedChat(self.sdk_configuration)
         self.knowledge = AsyncKnowledge(self.sdk_configuration)
         self.model = AsyncModel(self.sdk_configuration)
+        self.tool_assisted_chat = AsyncToolAssistedChat(self.sdk_configuration)

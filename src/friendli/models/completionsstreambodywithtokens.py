@@ -26,8 +26,6 @@ r"""Seed to control random procedure. If nothing is given, the API generate the 
 
 
 class CompletionsStreamBodyWithTokensTypedDict(TypedDict):
-    model: str
-    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
     tokens: List[int]
     r"""The tokenized prompt (i.e., input tokens). Either `prompt` or `tokens` field is required."""
     bad_word_tokens: NotRequired[Nullable[List[TokenSequenceTypedDict]]]
@@ -77,6 +75,8 @@ class CompletionsStreamBodyWithTokensTypedDict(TypedDict):
     """
     min_total_tokens: NotRequired[Nullable[int]]
     r"""The minimum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `min_tokens` and `min_total_tokens` is allowed. This is similar to Hugging Face's [`min_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.min_length) argument."""
+    model: NotRequired[Nullable[str]]
+    r"""Routes the request to a specific adapter."""
     n: NotRequired[Nullable[int]]
     r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
     no_repeat_ngram: NotRequired[Nullable[int]]
@@ -120,9 +120,6 @@ class CompletionsStreamBodyWithTokensTypedDict(TypedDict):
 
 
 class CompletionsStreamBodyWithTokens(BaseModel):
-    model: str
-    r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
-
     tokens: List[int]
     r"""The tokenized prompt (i.e., input tokens). Either `prompt` or `tokens` field is required."""
 
@@ -191,6 +188,9 @@ class CompletionsStreamBodyWithTokens(BaseModel):
 
     min_total_tokens: OptionalNullable[int] = UNSET
     r"""The minimum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `min_tokens` and `min_total_tokens` is allowed. This is similar to Hugging Face's [`min_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.min_length) argument."""
+
+    model: OptionalNullable[str] = UNSET
+    r"""Routes the request to a specific adapter."""
 
     n: OptionalNullable[int] = UNSET
     r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
@@ -269,6 +269,7 @@ class CompletionsStreamBodyWithTokens(BaseModel):
             "min_p",
             "min_tokens",
             "min_total_tokens",
+            "model",
             "n",
             "no_repeat_ngram",
             "num_beams",
@@ -305,6 +306,7 @@ class CompletionsStreamBodyWithTokens(BaseModel):
             "min_p",
             "min_tokens",
             "min_total_tokens",
+            "model",
             "n",
             "no_repeat_ngram",
             "num_beams",

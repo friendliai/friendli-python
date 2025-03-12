@@ -287,6 +287,24 @@ with SyncFriendli(
 <details open>
 <summary>Available methods</summary>
 
+### [container](docs/sdks/container/README.md)
+
+
+#### [container.chat](docs/sdks/friendlicontainerchat/README.md)
+
+* [complete](docs/sdks/friendlicontainerchat/README.md#complete) - Chat completions
+* [stream](docs/sdks/friendlicontainerchat/README.md#stream) - Stream chat completions
+
+#### [container.completions](docs/sdks/friendlicontainercompletions/README.md)
+
+* [complete](docs/sdks/friendlicontainercompletions/README.md#complete) - Completions
+* [stream](docs/sdks/friendlicontainercompletions/README.md#stream) - Stream completions
+
+#### [container.token](docs/sdks/friendlicontainertoken/README.md)
+
+* [tokenization](docs/sdks/friendlicontainertoken/README.md#tokenization) - Tokenization
+* [detokenization](docs/sdks/friendlicontainertoken/README.md#detokenization) - Detokenization
+
 ### [dedicated](docs/sdks/dedicated/README.md)
 
 
@@ -540,6 +558,37 @@ with SyncFriendli(
         ],
         model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+    )
+
+    # Handle response
+    print(res)
+```
+
+### Override Server URL Per-Operation
+
+The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.container.chat.complete(
+        messages=[
+            {
+                "content": "You are a helpful assistant.",
+                "role": "system",
+            },
+            {
+                "content": "Hello!",
+                "role": "user",
+            },
+        ],
+        max_tokens=200,
+        model="(adapter-route)",
+        server_url="http://localhost:8000",
     )
 
     # Handle response
