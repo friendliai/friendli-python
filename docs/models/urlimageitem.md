@@ -1,0 +1,10 @@
+# URLImageItem
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `response_format`                                                                          | [models.URLImageItemResponseFormat](../models/urlimageitemresponseformat.md)               | :heavy_check_mark:                                                                         | The format of the generated iamge. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`. |
+| `url`                                                                                      | *str*                                                                                      | :heavy_check_mark:                                                                         | The URL of the generated image.                                                            |
+| `seed`                                                                                     | *OptionalNullable[int]*                                                                    | :heavy_minus_sign:                                                                         | The seed used during image generation.                                                     |

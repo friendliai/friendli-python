@@ -1,0 +1,10 @@
+# B64ImageItem
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `b64_json`                                                                                 | *bytes*                                                                                    | :heavy_check_mark:                                                                         | The base64-encoded JSON of the generated image.                                            |
+| `response_format`                                                                          | [models.B64ImageItemResponseFormat](../models/b64imageitemresponseformat.md)               | :heavy_check_mark:                                                                         | The format of the generated iamge. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`. |
+| `seed`                                                                                     | *OptionalNullable[int]*                                                                    | :heavy_minus_sign:                                                                         | The seed used during image generation.                                                     |

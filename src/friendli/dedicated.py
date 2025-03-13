@@ -9,6 +9,7 @@ from friendli.friendli_completions import (
     SyncFriendliCompletions,
 )
 from friendli.friendli_token import AsyncFriendliToken, SyncFriendliToken
+from friendli.image import AsyncImage, SyncImage
 
 from .basesdk import AsyncSDK, BaseSDK, SyncSDK
 from .sdkconfiguration import SDKConfiguration
@@ -29,12 +30,14 @@ class SyncDedicated(BaseDedicated, SyncSDK):
     chat: SyncFriendliChat
     completions: SyncFriendliCompletions
     token: SyncFriendliToken
+    image: SyncImage
     endpoint: SyncEndpoint
 
     def _init_sdks(self):
         self.chat = SyncFriendliChat(self.sdk_configuration)
         self.completions = SyncFriendliCompletions(self.sdk_configuration)
         self.token = SyncFriendliToken(self.sdk_configuration)
+        self.image = SyncImage(self.sdk_configuration)
         self.endpoint = SyncEndpoint(self.sdk_configuration)
 
 
@@ -42,10 +45,12 @@ class AsyncDedicated(BaseDedicated, AsyncSDK):
     chat: AsyncFriendliChat
     completions: AsyncFriendliCompletions
     token: AsyncFriendliToken
+    image: AsyncImage
     endpoint: AsyncEndpoint
 
     def _init_sdks(self):
         self.chat = AsyncFriendliChat(self.sdk_configuration)
         self.completions = AsyncFriendliCompletions(self.sdk_configuration)
         self.token = AsyncFriendliToken(self.sdk_configuration)
+        self.image = AsyncImage(self.sdk_configuration)
         self.endpoint = AsyncEndpoint(self.sdk_configuration)
