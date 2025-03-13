@@ -16,6 +16,11 @@ from .assistantmessagetoolcallfunction import (
 from .audiocontent import AudioContent, AudioContentTypedDict
 from .audiodata import AudioData, AudioDataTypedDict
 from .autoscalingpolicy import AutoscalingPolicy, AutoscalingPolicyTypedDict
+from .b64imageitem import (
+    B64ImageItem,
+    B64ImageItemResponseFormat,
+    B64ImageItemTypedDict,
+)
 from .chatchoice import ChatChoice, ChatChoiceTypedDict, FinishReason
 from .chatchoicemessage import ChatChoiceMessage, ChatChoiceMessageTypedDict
 from .chatcompletebodytoolchoice import (
@@ -278,6 +283,21 @@ from .dedicatedendpointwandbartifactcreateresponse import (
     DedicatedEndpointWandbArtifactCreateResponse,
     DedicatedEndpointWandbArtifactCreateResponseTypedDict,
 )
+from .dedicatedimagegeneratesuccess import (
+    Data,
+    DataTypedDict,
+    DedicatedImageGenerateSuccess,
+    DedicatedImageGenerateSuccessTypedDict,
+)
+from .dedicatedimagegenerationbody import (
+    DedicatedImageGenerationBody,
+    DedicatedImageGenerationBodyResponseFormat,
+    DedicatedImageGenerationBodyTypedDict,
+)
+from .dedicatedimagesgenerateop import (
+    DedicatedImagesGenerateRequest,
+    DedicatedImagesGenerateRequestTypedDict,
+)
 from .dedicatedtokenizationbody import (
     DedicatedTokenizationBody,
     DedicatedTokenizationBodyTypedDict,
@@ -509,6 +529,11 @@ from .toolstatusdata import Name, Status, ToolStatusData, ToolStatusDataTypedDic
 from .toolstatuserror import ToolStatusError, ToolStatusErrorTypedDict
 from .toolstatusfile import ToolStatusFile, ToolStatusFileTypedDict
 from .toolstatusparameter import ToolStatusParameter, ToolStatusParameterTypedDict
+from .urlimageitem import (
+    URLImageItem,
+    URLImageItemResponseFormat,
+    URLImageItemTypedDict,
+)
 from .usage import Usage, UsageTypedDict
 from .usermessage import Content, ContentTypedDict, UserMessage, UserMessageTypedDict
 from .usermessagecontentmultimodal import (
@@ -533,6 +558,9 @@ __all__ = [
     "AudioDataTypedDict",
     "AutoscalingPolicy",
     "AutoscalingPolicyTypedDict",
+    "B64ImageItem",
+    "B64ImageItemResponseFormat",
+    "B64ImageItemTypedDict",
     "CONTAINER_CHAT_COMPLETE_OP_SERVERS",
     "CONTAINER_CHAT_STREAM_OP_SERVERS",
     "CONTAINER_COMPLETIONS_COMPLETE_OP_SERVERS",
@@ -656,6 +684,8 @@ __all__ = [
     "ContainerTokenizationSuccessTypedDict",
     "Content",
     "ContentTypedDict",
+    "Data",
+    "DataTypedDict",
     "DedicatedChatCompleteRequest",
     "DedicatedChatCompleteRequestTypedDict",
     "DedicatedChatCompleteSuccess",
@@ -704,6 +734,13 @@ __all__ = [
     "DedicatedEndpointWandbArtifactCreateRequestTypedDict",
     "DedicatedEndpointWandbArtifactCreateResponse",
     "DedicatedEndpointWandbArtifactCreateResponseTypedDict",
+    "DedicatedImageGenerateSuccess",
+    "DedicatedImageGenerateSuccessTypedDict",
+    "DedicatedImageGenerationBody",
+    "DedicatedImageGenerationBodyResponseFormat",
+    "DedicatedImageGenerationBodyTypedDict",
+    "DedicatedImagesGenerateRequest",
+    "DedicatedImagesGenerateRequestTypedDict",
     "DedicatedTokenizationBody",
     "DedicatedTokenizationBodyTypedDict",
     "DedicatedTokenizationRequest",
@@ -883,6 +920,9 @@ __all__ = [
     "TopLogprobs",
     "TopLogprobsTypedDict",
     "Type",
+    "URLImageItem",
+    "URLImageItemResponseFormat",
+    "URLImageItemTypedDict",
     "Usage",
     "UsageTypedDict",
     "UserMessage",
