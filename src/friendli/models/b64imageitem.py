@@ -4,21 +4,21 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import model_serializer
-from typing_extensions import NotRequired, TypedDict
+import pydantic
+from typing_extensions import Annotated, TypedDict
 
-from friendli.types import UNSET, UNSET_SENTINEL, BaseModel, Nullable, OptionalNullable
+from friendli.types import BaseModel
 
-B64ImageItemResponseFormat = Literal["url", "raw", "png", "jpeg", "jpg"]
-r"""The format of the generated iamge. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
+B64ImageItemFormat = Literal["url", "raw", "png", "jpeg", "jpg"]
+r"""The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
 
 
 class B64ImageItemTypedDict(TypedDict):
     b64_json: bytes
     r"""The base64-encoded JSON of the generated image."""
-    response_format: B64ImageItemResponseFormat
-    r"""The format of the generated iamge. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
-    seed: NotRequired[Nullable[int]]
+    format_: B64ImageItemFormat
+    r"""The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
+    seed: int
     r"""The seed used during image generation."""
 
 
@@ -26,38 +26,8 @@ class B64ImageItem(BaseModel):
     b64_json: bytes
     r"""The base64-encoded JSON of the generated image."""
 
-    response_format: B64ImageItemResponseFormat
-    r"""The format of the generated iamge. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
+    format_: Annotated[B64ImageItemFormat, pydantic.Field(alias="format")]
+    r"""The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
 
-    seed: OptionalNullable[int] = UNSET
+    seed: int
     r"""The seed used during image generation."""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = ["seed"]
-        nullable_fields = ["seed"]
-        null_default_fields = []
-
-        serialized = handler(self)
-
-        m = {}
-
-        for n, f in self.model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
-        return m
