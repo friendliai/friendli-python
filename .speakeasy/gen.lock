@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: da6193c1e41491b71ec138610507f7e8
+  docChecksum: d8eb3dadb32b88c74d7da8e7e8b48e6f
   docVersion: 0.1.0
-  speakeasyVersion: 1.517.0
-  generationVersion: 2.548.1
-  releaseVersion: 0.7.0
-  configChecksum: 0c9f1e5b48a0b5e82ec6a2407b5592f8
+  speakeasyVersion: 1.517.3
+  generationVersion: 2.548.6
+  releaseVersion: 0.7.1
+  configChecksum: 19516d7224ef1cd4ccca31299dc25bb3
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
@@ -47,6 +47,8 @@ generatedFiles:
   - docs/models/audiocontent.md
   - docs/models/audiodata.md
   - docs/models/autoscalingpolicy.md
+  - docs/models/b64imageitem.md
+  - docs/models/b64imageitemresponseformat.md
   - docs/models/chatchoice.md
   - docs/models/chatchoicemessage.md
   - docs/models/chatcompletebodytoolchoice.md
@@ -106,6 +108,7 @@ generatedFiles:
   - docs/models/containertokenizationbody.md
   - docs/models/containertokenizationsuccess.md
   - docs/models/content.md
+  - docs/models/data.md
   - docs/models/dedicatedchatcompleterequest.md
   - docs/models/dedicatedchatcompletesuccess.md
   - docs/models/dedicatedchatcompletionbody.md
@@ -130,6 +133,10 @@ generatedFiles:
   - docs/models/dedicatedendpointwandbartifactcreatebody.md
   - docs/models/dedicatedendpointwandbartifactcreaterequest.md
   - docs/models/dedicatedendpointwandbartifactcreateresponse.md
+  - docs/models/dedicatedimagegeneratesuccess.md
+  - docs/models/dedicatedimagegenerationbody.md
+  - docs/models/dedicatedimagegenerationbodyresponseformat.md
+  - docs/models/dedicatedimagesgeneraterequest.md
   - docs/models/dedicatedtokenizationbody.md
   - docs/models/dedicatedtokenizationrequest.md
   - docs/models/dedicatedtokenizationsuccess.md
@@ -222,6 +229,8 @@ generatedFiles:
   - docs/models/toolstatusparameter.md
   - docs/models/toplogprobs.md
   - docs/models/type.md
+  - docs/models/urlimageitem.md
+  - docs/models/urlimageitemresponseformat.md
   - docs/models/usage.md
   - docs/models/usermessage.md
   - docs/models/usermessagecontentmultimodal.md
@@ -240,6 +249,7 @@ generatedFiles:
   - docs/sdks/friendlicontainercompletions/README.md
   - docs/sdks/friendlicontainertoken/README.md
   - docs/sdks/friendlitoken/README.md
+  - docs/sdks/image/README.md
   - docs/sdks/knowledge/README.md
   - docs/sdks/model/README.md
   - docs/sdks/serverless/README.md
@@ -249,7 +259,6 @@ generatedFiles:
   - py.typed
   - pylintrc
   - pyproject.toml
-  - scripts/prepare_readme.py
   - scripts/publish.sh
   - src/friendli/__init__.py
   - src/friendli/_hooks/__init__.py
@@ -269,6 +278,7 @@ generatedFiles:
   - src/friendli/friendli_container_token.py
   - src/friendli/friendli_token.py
   - src/friendli/httpclient.py
+  - src/friendli/image.py
   - src/friendli/knowledge.py
   - src/friendli/model.py
   - src/friendli/models/__init__.py
@@ -279,6 +289,7 @@ generatedFiles:
   - src/friendli/models/audiocontent.py
   - src/friendli/models/audiodata.py
   - src/friendli/models/autoscalingpolicy.py
+  - src/friendli/models/b64imageitem.py
   - src/friendli/models/chatchoice.py
   - src/friendli/models/chatchoicemessage.py
   - src/friendli/models/chatcompletebodytoolchoice.py
@@ -337,6 +348,9 @@ generatedFiles:
   - src/friendli/models/dedicatedendpointwandbartifactcreatebody.py
   - src/friendli/models/dedicatedendpointwandbartifactcreateop.py
   - src/friendli/models/dedicatedendpointwandbartifactcreateresponse.py
+  - src/friendli/models/dedicatedimagegeneratesuccess.py
+  - src/friendli/models/dedicatedimagegenerationbody.py
+  - src/friendli/models/dedicatedimagesgenerateop.py
   - src/friendli/models/dedicatedtokenizationbody.py
   - src/friendli/models/dedicatedtokenizationop.py
   - src/friendli/models/dedicatedtokenizationsuccess.py
@@ -408,6 +422,7 @@ generatedFiles:
   - src/friendli/models/toolstatuserror.py
   - src/friendli/models/toolstatusfile.py
   - src/friendli/models/toolstatusparameter.py
+  - src/friendli/models/urlimageitem.py
   - src/friendli/models/usage.py
   - src/friendli/models/usermessage.py
   - src/friendli/models/usermessagecontentmultimodal.py
@@ -595,5 +610,12 @@ examples:
       responses:
         "200":
           application/json: {"text": "What is generative AI?"}
+  dedicatedImagesGenerate:
+    Example:
+      requestBody:
+        application/json: {"prompt": "<value>", "num_inference_steps": 4, "response_format": "url"}
+      responses:
+        "200":
+          application/json: {"data": [{"b64_json": "0x75e5323006", "response_format": "raw"}]}
 examplesVersion: 1.0.0
 generatedTests: {}

@@ -322,6 +322,10 @@ with SyncFriendli(
 
 * [wandb_artifact_create](docs/sdks/endpoint/README.md#wandb_artifact_create) - Create endpoint from W&B artifact
 
+#### [dedicated.image](docs/sdks/image/README.md)
+
+* [generate](docs/sdks/image/README.md#generate) - Image generations
+
 #### [dedicated.token](docs/sdks/friendlitoken/README.md)
 
 * [tokenization](docs/sdks/friendlitoken/README.md#tokenization) - Tokenization
