@@ -1,4 +1,4 @@
-# Format
+# B64ImageItemResponseFormat
 
 The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
 

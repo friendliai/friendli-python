@@ -4,19 +4,18 @@ from __future__ import annotations
 
 from typing import Literal
 
-import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 from friendli.types import BaseModel
 
-B64ImageItemFormat = Literal["url", "raw", "png", "jpeg", "jpg"]
+B64ImageItemResponseFormat = Literal["url", "raw", "png", "jpeg", "jpg"]
 r"""The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
 
 
 class B64ImageItemTypedDict(TypedDict):
     b64_json: bytes
     r"""The base64-encoded JSON of the generated image."""
-    format_: B64ImageItemFormat
+    response_format: B64ImageItemResponseFormat
     r"""The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
     seed: int
     r"""The seed used during image generation."""
@@ -26,7 +25,7 @@ class B64ImageItem(BaseModel):
     b64_json: bytes
     r"""The base64-encoded JSON of the generated image."""
 
-    format_: Annotated[B64ImageItemFormat, pydantic.Field(alias="format")]
+    response_format: B64ImageItemResponseFormat
     r"""The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
 
     seed: int

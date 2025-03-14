@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: 00f3762aadb2975f250ad4cba4a8eb41
+  docChecksum: f39acf0d20a402ff50e78290e71ff584
   docVersion: 0.1.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 0.7.3
-  configChecksum: 2dd5527b2f55f35fbad452c6a8062e24
+  releaseVersion: 0.7.4
+  configChecksum: 8b2391a0bbe13169963e7c4743f21763
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
@@ -48,7 +48,7 @@ generatedFiles:
   - docs/models/audiodata.md
   - docs/models/autoscalingpolicy.md
   - docs/models/b64imageitem.md
-  - docs/models/b64imageitemformat.md
+  - docs/models/b64imageitemresponseformat.md
   - docs/models/chatchoice.md
   - docs/models/chatchoicemessage.md
   - docs/models/chatcompletebodytoolchoice.md
@@ -142,7 +142,6 @@ generatedFiles:
   - docs/models/dedicatedtokenizationsuccess.md
   - docs/models/filebuiltintool.md
   - docs/models/finishreason.md
-  - docs/models/format_.md
   - docs/models/function.md
   - docs/models/functionality.md
   - docs/models/functionresult.md
@@ -231,6 +230,7 @@ generatedFiles:
   - docs/models/toplogprobs.md
   - docs/models/type.md
   - docs/models/urlimageitem.md
+  - docs/models/urlimageitemresponseformat.md
   - docs/models/usage.md
   - docs/models/usermessage.md
   - docs/models/usermessagecontentmultimodal.md
@@ -616,6 +616,6 @@ examples:
         application/json: {"model": "(endpoint-id)", "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "num_inference_steps": 4, "response_format": "url"}
       responses:
         "200":
-          application/json: {"data": [{"b64_json": "0x75e5323006", "format": "raw", "seed": 105213}]}
+          application/json: {"data": [{"b64_json": "0x75e5323006", "response_format": "raw", "seed": 105213}]}
 examplesVersion: 1.0.0
 generatedTests: {}
