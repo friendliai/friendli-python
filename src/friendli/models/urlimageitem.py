@@ -4,17 +4,16 @@ from __future__ import annotations
 
 from typing import Literal
 
-import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 from friendli.types import BaseModel
 
-Format = Literal["url", "raw", "png", "jpeg", "jpg"]
+URLImageItemResponseFormat = Literal["url", "raw", "png", "jpeg", "jpg"]
 r"""The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
 
 
 class URLImageItemTypedDict(TypedDict):
-    format_: Format
+    response_format: URLImageItemResponseFormat
     r"""The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
     seed: int
     r"""The seed used during image generation."""
@@ -23,7 +22,7 @@ class URLImageItemTypedDict(TypedDict):
 
 
 class URLImageItem(BaseModel):
-    format_: Annotated[Format, pydantic.Field(alias="format")]
+    response_format: URLImageItemResponseFormat
     r"""The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."""
 
     seed: int
