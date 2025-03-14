@@ -19,6 +19,7 @@ class SyncImage(BaseImage, SyncSDK):
     def generate(
         self,
         *,
+        model: str,
         prompt: str,
         x_friendli_team: OptionalNullable[str] = UNSET,
         num_inference_steps: OptionalNullable[int] = 4,
@@ -35,6 +36,7 @@ class SyncImage(BaseImage, SyncSDK):
 
         Given a description, the model generates image(s).
 
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: A text description of the desired image(s).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 10]. Defaults to 4.
@@ -56,6 +58,7 @@ class SyncImage(BaseImage, SyncSDK):
         request = models.DedicatedImagesGenerateRequest(
             x_friendli_team=x_friendli_team,
             dedicated_image_generation_body=models.DedicatedImageGenerationBody(
+                model=model,
                 prompt=prompt,
                 num_inference_steps=num_inference_steps,
                 response_format=response_format,
@@ -135,6 +138,7 @@ class AsyncImage(BaseImage, AsyncSDK):
     async def generate(
         self,
         *,
+        model: str,
         prompt: str,
         x_friendli_team: OptionalNullable[str] = UNSET,
         num_inference_steps: OptionalNullable[int] = 4,
@@ -151,6 +155,7 @@ class AsyncImage(BaseImage, AsyncSDK):
 
         Given a description, the model generates image(s).
 
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: A text description of the desired image(s).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 10]. Defaults to 4.
@@ -172,6 +177,7 @@ class AsyncImage(BaseImage, AsyncSDK):
         request = models.DedicatedImagesGenerateRequest(
             x_friendli_team=x_friendli_team,
             dedicated_image_generation_body=models.DedicatedImageGenerationBody(
+                model=model,
                 prompt=prompt,
                 num_inference_steps=num_inference_steps,
                 response_format=response_format,
