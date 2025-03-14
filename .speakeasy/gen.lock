@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: f3669dca-8853-4d85-914e-fb38172139b6
 management:
-  docChecksum: ee55e3b80e450853f4262f01e5dc1e81
+  docChecksum: 00f3762aadb2975f250ad4cba4a8eb41
   docVersion: 0.1.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 0.7.2
-  configChecksum: 9fc8a3e42400315fe813e31cd5d58f2e
+  releaseVersion: 0.7.3
+  configChecksum: 2dd5527b2f55f35fbad452c6a8062e24
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
@@ -613,7 +613,7 @@ examples:
   dedicatedImagesGenerate:
     Example:
       requestBody:
-        application/json: {"prompt": "<value>", "num_inference_steps": 4, "response_format": "url"}
+        application/json: {"model": "(endpoint-id)", "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "num_inference_steps": 4, "response_format": "url"}
       responses:
         "200":
           application/json: {"data": [{"b64_json": "0x75e5323006", "format": "raw", "seed": 105213}]}

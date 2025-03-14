@@ -14,6 +14,8 @@ r"""The format in which the generated image(s) will be returned. One of `url(def
 
 
 class DedicatedImageGenerationBodyTypedDict(TypedDict):
+    model: str
+    r"""ID of target endpoint. If you want to send request to specific adapter, use the format \"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\". Otherwise, you can just use \"YOUR_ENDPOINT_ID\" alone."""
     prompt: str
     r"""A text description of the desired image(s)."""
     num_inference_steps: NotRequired[Nullable[int]]
@@ -25,6 +27,9 @@ class DedicatedImageGenerationBodyTypedDict(TypedDict):
 
 
 class DedicatedImageGenerationBody(BaseModel):
+    model: str
+    r"""ID of target endpoint. If you want to send request to specific adapter, use the format \"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\". Otherwise, you can just use \"YOUR_ENDPOINT_ID\" alone."""
+
     prompt: str
     r"""A text description of the desired image(s)."""
 
