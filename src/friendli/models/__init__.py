@@ -16,7 +16,11 @@ from .assistantmessagetoolcallfunction import (
 from .audiocontent import AudioContent, AudioContentTypedDict
 from .audiodata import AudioData, AudioDataTypedDict
 from .autoscalingpolicy import AutoscalingPolicy, AutoscalingPolicyTypedDict
-from .b64imageitem import B64ImageItem, B64ImageItemFormat, B64ImageItemTypedDict
+from .b64imageitem import (
+    B64ImageItem,
+    B64ImageItemResponseFormat,
+    B64ImageItemTypedDict,
+)
 from .chatchoice import ChatChoice, ChatChoiceTypedDict, FinishReason
 from .chatchoicemessage import ChatChoiceMessage, ChatChoiceMessageTypedDict
 from .chatcompletebodytoolchoice import (
@@ -525,7 +529,11 @@ from .toolstatusdata import Name, Status, ToolStatusData, ToolStatusDataTypedDic
 from .toolstatuserror import ToolStatusError, ToolStatusErrorTypedDict
 from .toolstatusfile import ToolStatusFile, ToolStatusFileTypedDict
 from .toolstatusparameter import ToolStatusParameter, ToolStatusParameterTypedDict
-from .urlimageitem import Format, URLImageItem, URLImageItemTypedDict
+from .urlimageitem import (
+    URLImageItem,
+    URLImageItemResponseFormat,
+    URLImageItemTypedDict,
+)
 from .usage import Usage, UsageTypedDict
 from .usermessage import Content, ContentTypedDict, UserMessage, UserMessageTypedDict
 from .usermessagecontentmultimodal import (
@@ -551,7 +559,7 @@ __all__ = [
     "AutoscalingPolicy",
     "AutoscalingPolicyTypedDict",
     "B64ImageItem",
-    "B64ImageItemFormat",
+    "B64ImageItemResponseFormat",
     "B64ImageItemTypedDict",
     "CONTAINER_CHAT_COMPLETE_OP_SERVERS",
     "CONTAINER_CHAT_STREAM_OP_SERVERS",
@@ -742,7 +750,6 @@ __all__ = [
     "FileBuiltInTool",
     "FileBuiltInToolTypedDict",
     "FinishReason",
-    "Format",
     "Function",
     "FunctionResult",
     "FunctionResultTypedDict",
@@ -914,6 +921,7 @@ __all__ = [
     "TopLogprobsTypedDict",
     "Type",
     "URLImageItem",
+    "URLImageItemResponseFormat",
     "URLImageItemTypedDict",
     "Usage",
     "UsageTypedDict",
