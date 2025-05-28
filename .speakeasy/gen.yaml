@@ -1,6 +1,6 @@
 configVersion: 2.0.0
 generation:
-  sdkClassName: FriendliCore
+  sdkClassName: Friendli
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
@@ -15,7 +15,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 python:
-  version: 0.9.0
+  version: 0.7.4
   additionalDependencies:
     dev: {}
     main: {}
@@ -44,7 +44,7 @@ python:
   maxMethodParams: 8
   methodArguments: infer-optional-args
   outputModelSuffix: output
-  packageName: friendli_core
+  packageName: friendli
   pytestTimeout: 0
   responseFormat: flat
   templateVersion: v2

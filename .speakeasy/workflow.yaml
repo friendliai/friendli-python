@@ -7,6 +7,13 @@ sources:
         transformations:
             - cleanup: true
 targets:
-    friendli_core:
+    friendli:
         target: python
         source: Friendli-API-Schema
+        publish:
+            pypi:
+                token: $pypi_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-api-schema-code-samples
+            blocking: false
