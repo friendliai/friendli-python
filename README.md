@@ -8,9 +8,9 @@
 
 ## Token Setup
 
-When using Friendli Python SDK, you need to provide a Friendli Token for authentication and authorization purposes. A Friendli Token serves as an alternative method of authorization to signing in with an email and a password. You can generate a new Friendli Token through the [Friendli Suite](https://friendli.ai/suite), at your "Personal settings" page by following the steps below.
+When using Friendli Python SDK, you need to provide a Friendli Token for authentication and authorization purposes. A Friendli Token serves as an alternative method of authorization to signing in with an email and a password. You can generate a new Friendli Token through the [Friendli Suite](https://suite.friendli.ai), at your "Personal settings" page by following the steps below.
 
-1. Go to the [Friendli Suite](https://friendli.ai/suite) and sign in with your account.
+1. Go to the [Friendli Suite](https://suite.friendli.ai) and sign in with your account.
 2. Click the profile icon at the top-right corner of the page.
 3. Click "Personal settings" menu.
 4. Go to the "Tokens" tab on the navigation bar.
@@ -29,7 +29,6 @@ When using Friendli Python SDK, you need to provide a Friendli Token for authent
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Server-sent event streaming](#server-sent-event-streaming)
-  * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -43,10 +42,6 @@ When using Friendli Python SDK, you need to provide a Friendli Token for authent
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 > [!NOTE]
 > **Python version upgrade policy**
 >
@@ -59,7 +54,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+https://github.com/friendliai/friendli-python-internal.git
+pip install friendli
 ```
 
 ### Poetry
@@ -67,7 +62,7 @@ pip install git+https://github.com/friendliai/friendli-python-internal.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+https://github.com/friendliai/friendli-python-internal.git
+poetry add friendli
 ```
 
 ### Shell and script usage with `uv`
@@ -88,7 +83,6 @@ It's also possible to write a standalone Python script without needing to set up
 #     "friendli",
 # ]
 # ///
-
 
 from friendli import SyncFriendli
 
@@ -112,7 +106,6 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-
 import os
 
 from friendli import SyncFriendli
@@ -182,7 +175,6 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
-
 import os
 
 from friendli import SyncFriendli
@@ -298,73 +290,47 @@ with SyncFriendli(
 ### [container](docs/sdks/container/README.md)
 
 
-#### [container.chat](docs/sdks/friendlicorecontainerchat/README.md)
+#### [container.chat](docs/sdks/friendlicontainerchat/README.md)
 
-* [complete](docs/sdks/friendlicorecontainerchat/README.md#complete) - Chat completions
-* [stream](docs/sdks/friendlicorecontainerchat/README.md#stream) - Stream chat completions
+* [complete](docs/sdks/friendlicontainerchat/README.md#complete) - Chat completions
+* [stream](docs/sdks/friendlicontainerchat/README.md#stream) - Stream chat completions
 
-#### [container.completions](docs/sdks/friendlicorecontainercompletions/README.md)
+#### [container.completions](docs/sdks/friendlicontainercompletions/README.md)
 
-* [complete](docs/sdks/friendlicorecontainercompletions/README.md#complete) - Completions
-* [stream](docs/sdks/friendlicorecontainercompletions/README.md#stream) - Stream completions
+* [complete](docs/sdks/friendlicontainercompletions/README.md#complete) - Completions
+* [stream](docs/sdks/friendlicontainercompletions/README.md#stream) - Stream completions
 
-#### [container.image](docs/sdks/friendlicoreimage/README.md)
+#### [container.token](docs/sdks/friendlicontainertoken/README.md)
 
-* [generate](docs/sdks/friendlicoreimage/README.md#generate) - Image generations
-
-#### [container.token](docs/sdks/friendlicorecontainertoken/README.md)
-
-* [tokenization](docs/sdks/friendlicorecontainertoken/README.md#tokenization) - Tokenization
-* [detokenization](docs/sdks/friendlicorecontainertoken/README.md#detokenization) - Detokenization
+* [tokenization](docs/sdks/friendlicontainertoken/README.md#tokenization) - Tokenization
+* [detokenization](docs/sdks/friendlicontainertoken/README.md#detokenization) - Detokenization
 
 ### [dedicated](docs/sdks/dedicated/README.md)
 
 
-#### [dedicated.chat](docs/sdks/friendlicorechat/README.md)
+#### [dedicated.chat](docs/sdks/friendlichat/README.md)
 
-* [complete](docs/sdks/friendlicorechat/README.md#complete) - Chat completions
-* [stream](docs/sdks/friendlicorechat/README.md#stream) - Stream chat completions
+* [complete](docs/sdks/friendlichat/README.md#complete) - Chat completions
+* [stream](docs/sdks/friendlichat/README.md#stream) - Stream chat completions
 
-#### [dedicated.completions](docs/sdks/friendlicorecompletions/README.md)
+#### [dedicated.completions](docs/sdks/friendlicompletions/README.md)
 
-* [complete](docs/sdks/friendlicorecompletions/README.md#complete) - Completions
-* [stream](docs/sdks/friendlicorecompletions/README.md#stream) - Stream completions
+* [complete](docs/sdks/friendlicompletions/README.md#complete) - Completions
+* [stream](docs/sdks/friendlicompletions/README.md#stream) - Stream completions
 
 #### [dedicated.endpoint](docs/sdks/endpoint/README.md)
 
 * [wandb_artifact_create](docs/sdks/endpoint/README.md#wandb_artifact_create) - Create endpoint from W&B artifact
-* [create](docs/sdks/endpoint/README.md#create) - Create a new endpoint
-* [list](docs/sdks/endpoint/README.md#list) - List all endpoints
-* [get](docs/sdks/endpoint/README.md#get) - Get endpoint specification
-* [update](docs/sdks/endpoint/README.md#update) - Update endpoint spec
-* [delete](docs/sdks/endpoint/README.md#delete) - Delete endpoint
-* [get_version](docs/sdks/endpoint/README.md#get_version) - Get endpoint versions
-* [get_status](docs/sdks/endpoint/README.md#get_status) - Get endpoint status
-* [sleep](docs/sdks/endpoint/README.md#sleep) - Sleep endpoint
-* [wake](docs/sdks/endpoint/README.md#wake) - Wake endpoint
-* [terminate](docs/sdks/endpoint/README.md#terminate) - Terminate endpoint
-* [restart](docs/sdks/endpoint/README.md#restart) - Restart endpoint
 
 #### [dedicated.image](docs/sdks/image/README.md)
 
 * [generate](docs/sdks/image/README.md#generate) - Image generations
 
-#### [dedicated.token](docs/sdks/friendlicoretoken/README.md)
+#### [dedicated.token](docs/sdks/friendlitoken/README.md)
 
-* [tokenization](docs/sdks/friendlicoretoken/README.md#tokenization) - Tokenization
-* [detokenization](docs/sdks/friendlicoretoken/README.md#detokenization) - Detokenization
+* [tokenization](docs/sdks/friendlitoken/README.md#tokenization) - Tokenization
+* [detokenization](docs/sdks/friendlitoken/README.md#detokenization) - Detokenization
 
-
-### [platform](docs/sdks/platform/README.md)
-
-
-#### [platform.files](docs/sdks/files/README.md)
-
-* [upload](docs/sdks/files/README.md#upload) - Files upload
-* [list](docs/sdks/files/README.md#list) - Files list
-* [retrieve](docs/sdks/files/README.md#retrieve) - File retrieve
-* [delete](docs/sdks/files/README.md#delete) - Files delete
-* [download](docs/sdks/files/README.md#download) - Files download
 
 ### [serverless](docs/sdks/serverless/README.md)
 
@@ -446,37 +412,6 @@ with SyncFriendli(
 [context-manager]: https://book.pythontips.com/en/latest/context_managers.html
 <!-- End Server-sent event streaming [eventstream] -->
 
-<!-- Start File uploads [file-upload] -->
-## File uploads
-
-Certain SDK methods accept file objects as part of a request body or multi-part request. It is possible and typically recommended to upload files as a stream rather than reading the entire contents into memory. This avoids excessive memory consumption and potentially crashing with out-of-memory errors when working with very large files. The following example demonstrates how to attach a file stream to a request.
-
-> [!TIP]
->
-> For endpoints that handle file uploads bytes arrays can also be used. However, using streams is recommended for large files.
->
-
-```python
-import os
-
-from friendli import SyncFriendli
-
-with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.platform.files.upload(
-        file={
-            "file_name": "example.file",
-            "content": open("example.file", "rb"),
-        },
-        purpose="batch",
-    )
-
-    # Handle response
-    print(res)
-```
-<!-- End File uploads [file-upload] -->
-
 <!-- Start Retries [retries] -->
 ## Retries
 
@@ -557,12 +492,11 @@ By default, an API error will raise a models.SDKError exception, which has the f
 | `.raw_response` | *httpx.Response* | The raw HTTP response |
 | `.body`         | *str*            | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `create` method may raise the following exceptions:
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `complete` method may raise the following exceptions:
 
-| Error Type                 | Status Code | Content Type     |
-| -------------------------- | ----------- | ---------------- |
-| models.HTTPValidationError | 422         | application/json |
-| models.SDKError            | 4XX, 5XX    | \*/\*            |
+| Error Type      | Status Code | Content Type |
+| --------------- | ----------- | ------------ |
+| models.SDKError | 4XX, 5XX    | \*/\*        |
 
 ### Example
 
@@ -576,23 +510,24 @@ with SyncFriendli(
 ) as friendli:
     res = None
     try:
-        res = friendli.dedicated.endpoint.create(
-            advanced={
-                "tokenizer_add_special_tokens": True,
-                "tokenizer_skip_special_tokens": False,
-            },
-            hf_model_repo="<value>",
-            instance_option_id="<id>",
-            name="<value>",
-            project_id="<id>",
+        res = friendli.serverless.chat.complete(
+            messages=[
+                {
+                    "content": "You are a helpful assistant.",
+                    "role": "system",
+                },
+                {
+                    "content": "Hello!",
+                    "role": "user",
+                },
+            ],
+            model="meta-llama-3.1-8b-instruct",
+            max_tokens=200,
         )
 
         # Handle response
         print(res)
 
-    except models.HTTPValidationError as e:
-        # handle e.data: models.HTTPValidationErrorData
-        raise (e)
     except models.SDKError as e:
         # handle exception
         raise (e)
