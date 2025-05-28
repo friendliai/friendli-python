@@ -5,6 +5,7 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
+
 import os
 
 from friendli import SyncFriendli
@@ -74,6 +75,7 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ```python
 # Synchronous Example
+
 import os
 
 from friendli import SyncFriendli
