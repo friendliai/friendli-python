@@ -1,0 +1,25 @@
+name: Release code to public repo
+on:
+  release:
+  workflow_dispatch:
+jobs:
+  repo-migration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get current date
+        id: current-date
+        uses: friendliai/actions/get-current-time@main
+        with:
+          format: YYYY-MM-DD
+
+      - name: Run Repo Migrator
+        uses: friendliai/actions/repo-migrator@main
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          repo: friendliai/friendli-python
+          branch: main
+          title: Update ${{ steps.current-date.outputs.formattedTime }}
+          excludes: |
+            some-other-folders
