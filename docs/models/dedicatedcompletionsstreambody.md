@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### `models.CompletionsStreamDedicatedModelBodyWithPrompt`
+### `models.CompletionsStreamDedicatedBodyWithPrompt`
 
 ```python
-value: models.CompletionsStreamDedicatedModelBodyWithPrompt = /* values here */
+value: models.CompletionsStreamDedicatedBodyWithPrompt = /* values here */
 ```
 
-### `models.CompletionsStreamDedicatedModelBodyWithTokens`
+### `models.CompletionsStreamDedicatedBodyWithTokens`
 
 ```python
-value: models.CompletionsStreamDedicatedModelBodyWithTokens = /* values here */
+value: models.CompletionsStreamDedicatedBodyWithTokens = /* values here */
 ```
 

@@ -1,2 +1,3 @@
-src/friendli/utils/annotations.py
+src/friendli_core/utils/annotations.py
 scripts/prepare_readme.py
+pyproject.toml
