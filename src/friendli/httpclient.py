@@ -4,4 +4,9 @@
 
 from __future__ import annotations
 
-from friendli_core.httpclient import HttpClient, AsyncHttpClient, ClientOwner, close_clients
+from friendli_core.httpclient import (
+    AsyncHttpClient,
+    ClientOwner,
+    HttpClient,
+    close_clients,
+)

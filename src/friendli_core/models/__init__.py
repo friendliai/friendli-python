@@ -4,6 +4,9 @@ from .acceleratorrequirement import (
     AcceleratorRequirement,
     AcceleratorRequirementTypedDict,
 )
+from .accountfilestatus import AccountFileStatus
+from .add_samplesop import AddSamplesRequest, AddSamplesRequestTypedDict
+from .addsamplesresponse import AddSamplesResponse, AddSamplesResponseTypedDict
 from .assistantmessage import AssistantMessage, AssistantMessageTypedDict
 from .assistantmessagetoolcall import (
     AssistantMessageToolCall,
@@ -38,13 +41,14 @@ from .chatlogprobscontenttoplogprob import (
     ChatLogprobsContentTopLogprobTypedDict,
 )
 from .chatusage import ChatUsage, ChatUsageTypedDict
+from .complete_uploadop import CompleteUploadRequest, CompleteUploadRequestTypedDict
 from .completionsbodywithprompt import (
     CompletionsBodyWithPrompt,
-    CompletionsBodyWithPromptPrompt,
-    CompletionsBodyWithPromptPromptTypedDict,
     CompletionsBodyWithPromptSeed,
     CompletionsBodyWithPromptSeedTypedDict,
     CompletionsBodyWithPromptTypedDict,
+    Prompt,
+    PromptTypedDict,
 )
 from .completionsbodywithtokens import (
     CompletionsBodyWithTokens,
@@ -74,11 +78,11 @@ from .completionsdedicatedbodywithtokens import (
 from .completionslogprobs import CompletionsLogprobs, CompletionsLogprobsTypedDict
 from .completionsserverlessbodywithprompt import (
     CompletionsServerlessBodyWithPrompt,
+    CompletionsServerlessBodyWithPromptPrompt,
+    CompletionsServerlessBodyWithPromptPromptTypedDict,
     CompletionsServerlessBodyWithPromptSeed,
     CompletionsServerlessBodyWithPromptSeedTypedDict,
     CompletionsServerlessBodyWithPromptTypedDict,
-    Prompt,
-    PromptTypedDict,
 )
 from .completionsserverlessbodywithtokens import (
     CompletionsServerlessBodyWithTokens,
@@ -129,13 +133,17 @@ from .completionsstreamserverlessbodywithtokens import (
     CompletionsStreamServerlessBodyWithTokensTypedDict,
 )
 from .containerchatcompleteop import CONTAINER_CHAT_COMPLETE_OP_SERVERS
+from .containerchatcompletesuccess import (
+    ContainerChatCompleteSuccess,
+    ContainerChatCompleteSuccessTypedDict,
+)
 from .containerchatcompletionbody import (
     ContainerChatCompletionBody,
-    ContainerChatCompletionBodySeed,
-    ContainerChatCompletionBodySeedTypedDict,
-    ContainerChatCompletionBodyToolChoice,
-    ContainerChatCompletionBodyToolChoiceTypedDict,
     ContainerChatCompletionBodyTypedDict,
+    Seed,
+    SeedTypedDict,
+    ToolChoice,
+    ToolChoiceTypedDict,
 )
 from .containerchatcompletionstreambody import (
     ContainerChatCompletionStreamBody,
@@ -144,6 +152,10 @@ from .containerchatcompletionstreambody import (
     ContainerChatCompletionStreamBodyToolChoice,
     ContainerChatCompletionStreamBodyToolChoiceTypedDict,
     ContainerChatCompletionStreamBodyTypedDict,
+)
+from .containerchatcompletionstreamsuccess import (
+    ContainerChatCompletionStreamSuccess,
+    ContainerChatCompletionStreamSuccessTypedDict,
 )
 from .containerchatstreamop import CONTAINER_CHAT_STREAM_OP_SERVERS
 from .containercompletionsbody import (
@@ -156,6 +168,14 @@ from .containercompletionsstreambody import (
     ContainerCompletionsStreamBodyTypedDict,
 )
 from .containercompletionsstreamop import CONTAINER_COMPLETIONS_STREAM_OP_SERVERS
+from .containercompletionsstreamsuccess import (
+    ContainerCompletionsStreamSuccess,
+    ContainerCompletionsStreamSuccessTypedDict,
+)
+from .containercompletionssuccess import (
+    ContainerCompletionsSuccess,
+    ContainerCompletionsSuccessTypedDict,
+)
 from .containerdetokenizationbody import (
     ContainerDetokenizationBody,
     ContainerDetokenizationBodyTypedDict,
@@ -184,6 +204,11 @@ from .containertokenizationsuccess import (
     ContainerTokenizationSuccess,
     ContainerTokenizationSuccessTypedDict,
 )
+from .create_datasetop import CreateDatasetRequest1, CreateDatasetRequest1TypedDict
+from .create_splitop import CreateSplitRequest, CreateSplitRequestTypedDict
+from .create_versionop import CreateVersionRequest, CreateVersionRequestTypedDict
+from .createdatasetrequest import CreateDatasetRequest, CreateDatasetRequestTypedDict
+from .datasetinfo import DatasetInfo, DatasetInfoTypedDict
 from .dedicatedchatcompleteop import (
     DedicatedChatCompleteRequest,
     DedicatedChatCompleteRequestTypedDict,
@@ -224,6 +249,10 @@ from .dedicatedcompletionsstreamop import (
     DedicatedCompletionsStreamRequest,
     DedicatedCompletionsStreamRequestTypedDict,
 )
+from .dedicatedcreateendpointbetaop import (
+    DedicatedCreateEndpointBetaRequest,
+    DedicatedCreateEndpointBetaRequestTypedDict,
+)
 from .dedicatedcreateendpointop import (
     DedicatedCreateEndpointRequest,
     DedicatedCreateEndpointRequestTypedDict,
@@ -253,6 +282,10 @@ from .dedicatedendpointlistresponse import (
     DedicatedEndpointListResponseTypedDict,
 )
 from .dedicatedendpointspec import DedicatedEndpointSpec, DedicatedEndpointSpecTypedDict
+from .dedicatedendpointspecbeta import (
+    DedicatedEndpointSpecBeta,
+    DedicatedEndpointSpecBetaTypedDict,
+)
 from .dedicatedendpointstatus import (
     DedicatedEndpointStatus,
     DedicatedEndpointStatusTypedDict,
@@ -261,6 +294,10 @@ from .dedicatedendpointstatus import (
 from .dedicatedendpointupdatebody import (
     DedicatedEndpointUpdateBody,
     DedicatedEndpointUpdateBodyTypedDict,
+)
+from .dedicatedendpointversionhistoryresponse import (
+    DedicatedEndpointVersionHistoryResponse,
+    DedicatedEndpointVersionHistoryResponseTypedDict,
 )
 from .dedicatedendpointwandbartifactcreatebody import (
     DedicatedEndpointWandbArtifactCreateBody,
@@ -274,22 +311,30 @@ from .dedicatedendpointwandbartifactcreateresponse import (
     DedicatedEndpointWandbArtifactCreateResponse,
     DedicatedEndpointWandbArtifactCreateResponseTypedDict,
 )
+from .dedicatedgetendpointbetaop import (
+    DedicatedGetEndpointBetaRequest,
+    DedicatedGetEndpointBetaRequestTypedDict,
+)
 from .dedicatedgetendpointop import (
     DedicatedGetEndpointRequest,
     DedicatedGetEndpointRequestTypedDict,
+)
+from .dedicatedgetendpointstatusbetaop import (
+    DedicatedGetEndpointStatusBetaRequest,
+    DedicatedGetEndpointStatusBetaRequestTypedDict,
 )
 from .dedicatedgetendpointstatusop import (
     DedicatedGetEndpointStatusRequest,
     DedicatedGetEndpointStatusRequestTypedDict,
 )
-from .dedicatedgetendpointversionop import (
-    DedicatedGetEndpointVersionRequest,
-    DedicatedGetEndpointVersionRequestTypedDict,
+from .dedicatedgetendpointversionhistoryop import (
+    DedicatedGetEndpointVersionHistoryRequest,
+    DedicatedGetEndpointVersionHistoryRequestTypedDict,
 )
 from .dedicatedimagegeneratesuccess import (
-    Data,
-    DataTypedDict,
     DedicatedImageGenerateSuccess,
+    DedicatedImageGenerateSuccessData,
+    DedicatedImageGenerateSuccessDataTypedDict,
     DedicatedImageGenerateSuccessTypedDict,
 )
 from .dedicatedimagegenerationbody import (
@@ -301,9 +346,17 @@ from .dedicatedimagesgenerateop import (
     DedicatedImagesGenerateRequest,
     DedicatedImagesGenerateRequestTypedDict,
 )
+from .dedicatedlistendpointsbetaop import (
+    DedicatedListEndpointsBetaRequest,
+    DedicatedListEndpointsBetaRequestTypedDict,
+)
 from .dedicatedlistendpointsop import (
     DedicatedListEndpointsRequest,
     DedicatedListEndpointsRequestTypedDict,
+)
+from .dedicatedrestartendpointbetaop import (
+    DedicatedRestartEndpointBetaRequest,
+    DedicatedRestartEndpointBetaRequestTypedDict,
 )
 from .dedicatedrestartendpointop import (
     DedicatedRestartEndpointRequest,
@@ -312,6 +365,10 @@ from .dedicatedrestartendpointop import (
 from .dedicatedsleependpointop import (
     DedicatedSleepEndpointRequest,
     DedicatedSleepEndpointRequestTypedDict,
+)
+from .dedicatedterminateendpointbetaop import (
+    DedicatedTerminateEndpointBetaRequest,
+    DedicatedTerminateEndpointBetaRequestTypedDict,
 )
 from .dedicatedterminateendpointop import (
     DedicatedTerminateEndpointRequest,
@@ -329,6 +386,10 @@ from .dedicatedtokenizationsuccess import (
     DedicatedTokenizationSuccess,
     DedicatedTokenizationSuccessTypedDict,
 )
+from .dedicatedupdateendpointbetaop import (
+    DedicatedUpdateEndpointBetaRequest,
+    DedicatedUpdateEndpointBetaRequestTypedDict,
+)
 from .dedicatedupdateendpointop import (
     DedicatedUpdateEndpointRequest,
     DedicatedUpdateEndpointRequestTypedDict,
@@ -337,6 +398,10 @@ from .dedicatedwakeendpointop import (
     DedicatedWakeEndpointRequest,
     DedicatedWakeEndpointRequestTypedDict,
 )
+from .delete_datasetop import DeleteDatasetRequest, DeleteDatasetRequestTypedDict
+from .delete_samplesop import DeleteSamplesRequest, DeleteSamplesRequestTypedDict
+from .delete_splitop import DeleteSplitRequest, DeleteSplitRequestTypedDict
+from .delete_versionop import DeleteVersionRequest, DeleteVersionRequestTypedDict
 from .endpointadvancedconfig import (
     EndpointAdvancedConfig,
     EndpointAdvancedConfigTypedDict,
@@ -346,75 +411,53 @@ from .endpointsimplescaleconfig import (
     EndpointSimplescaleConfigTypedDict,
 )
 from .filebuiltintool import FileBuiltInTool, FileBuiltInToolTypedDict
-from .fileobject import FileObject, FileObjectPurpose, FileObjectTypedDict
+from .filegetdownloadurlresponse import (
+    FileGetDownloadURLResponse,
+    FileGetDownloadURLResponseTypedDict,
+)
+from .fileinfo import FileInfo, FileInfoTypedDict
+from .fileinituploadrequest import FileInitUploadRequest, FileInitUploadRequestTypedDict
+from .fileinituploadresponse import (
+    FileInitUploadResponse,
+    FileInitUploadResponseTypedDict,
+)
 from .function import Function, FunctionTypedDict
 from .functionality import Functionality, FunctionalityTypedDict
 from .functionresult import FunctionResult, FunctionResultTypedDict
+from .get_datasetop import GetDatasetRequest, GetDatasetRequestTypedDict
+from .get_download_urlop import GetDownloadURLRequest, GetDownloadURLRequestTypedDict
+from .get_infoop import GetInfoRequest, GetInfoRequestTypedDict
+from .get_splitop import GetSplitRequest, GetSplitRequestTypedDict
+from .get_versionop import GetVersionRequest, GetVersionRequestTypedDict
 from .httpvalidationerror import HTTPValidationError, HTTPValidationErrorData
 from .imagecontent import ImageContent, ImageContentTypedDict
 from .imagedata import ImageData, ImageDataTypedDict
 from .inferencedeploymenterrorcode import InferenceDeploymentErrorCode
 from .inferencedeploymentstatus import InferenceDeploymentStatus
+from .init_uploadop import InitUploadRequest, InitUploadRequestTypedDict
 from .knowledgeretrievedchunk import (
     KnowledgeRetrievedChunk,
     KnowledgeRetrievedChunkTypedDict,
 )
+from .list_datasetsop import ListDatasetsRequest, ListDatasetsRequestTypedDict
+from .list_samplesop import ListSamplesRequest, ListSamplesRequestTypedDict
+from .list_splitsop import ListSplitsRequest, ListSplitsRequestTypedDict
+from .list_versionsop import ListVersionsRequest, ListVersionsRequestTypedDict
+from .listdatasetsresponse import ListDatasetsResponse, ListDatasetsResponseTypedDict
+from .listsamplesresponse import (
+    Data,
+    DataTypedDict,
+    ListSamplesResponse,
+    ListSamplesResponseTypedDict,
+)
+from .listsplitsresponse import ListSplitsResponse, ListSplitsResponseTypedDict
+from .listversionsresponse import ListVersionsResponse, ListVersionsResponseTypedDict
 from .message import Message, MessageTypedDict
 from .modelcatalogresponseitem import (
     ModelCatalogResponseItem,
     ModelCatalogResponseItemTypedDict,
 )
 from .otherbuiltintool import OtherBuiltInTool, OtherBuiltInToolTypedDict, Type
-from .platformfilesdeleteop import (
-    PlatformFilesDeleteRequest,
-    PlatformFilesDeleteRequestTypedDict,
-)
-from .platformfilesdeleteresult import (
-    PlatformFilesDeleteResult,
-    PlatformFilesDeleteResultTypedDict,
-)
-from .platformfilesdownloadop import (
-    PlatformFilesDownloadRequest,
-    PlatformFilesDownloadRequestTypedDict,
-)
-from .platformfileslistbody import (
-    Order,
-    PlatformFilesListBody,
-    PlatformFilesListBodyTypedDict,
-)
-from .platformfileslistop import (
-    PlatformFilesListRequest,
-    PlatformFilesListRequestTypedDict,
-)
-from .platformfileslistresult import (
-    PlatformFilesListResult,
-    PlatformFilesListResultTypedDict,
-)
-from .platformfilesretrieveop import (
-    PlatformFilesRetrieveRequest,
-    PlatformFilesRetrieveRequestTypedDict,
-)
-from .platformfilesretrieveresult import (
-    PlatformFilesRetrieveResult,
-    PlatformFilesRetrieveResultPurpose,
-    PlatformFilesRetrieveResultTypedDict,
-)
-from .platformfilesuploadbody import (
-    File,
-    FileTypedDict,
-    PlatformFilesUploadBody,
-    PlatformFilesUploadBodyTypedDict,
-    Purpose,
-)
-from .platformfilesuploadop import (
-    PlatformFilesUploadRequest,
-    PlatformFilesUploadRequestTypedDict,
-)
-from .platformfilesuploadresult import (
-    PlatformFilesUploadResult,
-    PlatformFilesUploadResultPurpose,
-    PlatformFilesUploadResultTypedDict,
-)
 from .pricingmodel import PricingModel, PricingModelTypedDict
 from .responseformat import ResponseFormat, ResponseFormatTypedDict
 from .responseformatjsonobject import (
@@ -431,23 +474,20 @@ from .responseformatjsonschemaschema import (
 )
 from .responseformatregex import ResponseFormatRegex, ResponseFormatRegexTypedDict
 from .responseformattext import ResponseFormatText, ResponseFormatTextTypedDict
+from .revert_datasetop import RevertDatasetRequest, RevertDatasetRequestTypedDict
 from .sdkerror import SDKError
 from .security import Security, SecurityTypedDict
 from .serverlesschatcompleteop import (
     ServerlessChatCompleteRequest,
     ServerlessChatCompleteRequestTypedDict,
 )
-from .serverlesschatcompletesuccess import (
-    ServerlessChatCompleteSuccess,
-    ServerlessChatCompleteSuccessTypedDict,
-)
 from .serverlesschatcompletionbody import (
-    Seed,
-    SeedTypedDict,
     ServerlessChatCompletionBody,
+    ServerlessChatCompletionBodySeed,
+    ServerlessChatCompletionBodySeedTypedDict,
+    ServerlessChatCompletionBodyToolChoice,
+    ServerlessChatCompletionBodyToolChoiceTypedDict,
     ServerlessChatCompletionBodyTypedDict,
-    ToolChoice,
-    ToolChoiceTypedDict,
 )
 from .serverlesschatcompletionstreambody import (
     ServerlessChatCompletionStreamBody,
@@ -456,10 +496,6 @@ from .serverlesschatcompletionstreambody import (
     ServerlessChatCompletionStreamBodyToolChoice,
     ServerlessChatCompletionStreamBodyToolChoiceTypedDict,
     ServerlessChatCompletionStreamBodyTypedDict,
-)
-from .serverlesschatcompletionstreamsuccess import (
-    ServerlessChatCompletionStreamSuccess,
-    ServerlessChatCompletionStreamSuccessTypedDict,
 )
 from .serverlesschatstreamop import (
     ServerlessChatStreamRequest,
@@ -480,14 +516,6 @@ from .serverlesscompletionsstreambody import (
 from .serverlesscompletionsstreamop import (
     ServerlessCompletionsStreamRequest,
     ServerlessCompletionsStreamRequestTypedDict,
-)
-from .serverlesscompletionsstreamsuccess import (
-    ServerlessCompletionsStreamSuccess,
-    ServerlessCompletionsStreamSuccessTypedDict,
-)
-from .serverlesscompletionssuccess import (
-    ServerlessCompletionsSuccess,
-    ServerlessCompletionsSuccessTypedDict,
 )
 from .serverlessdetokenizationbody import (
     ServerlessDetokenizationBody,
@@ -557,6 +585,7 @@ from .serverlesstoolassistedchatstreamop import (
     ServerlessToolAssistedChatStreamRequest,
     ServerlessToolAssistedChatStreamRequestTypedDict,
 )
+from .splitinfo import SplitInfo, SplitInfoTypedDict
 from .streamedchatchoice import (
     StreamedChatChoice,
     StreamedChatChoiceFinishReason,
@@ -604,6 +633,12 @@ from .toolstatusdata import Name, Status, ToolStatusData, ToolStatusDataTypedDic
 from .toolstatuserror import ToolStatusError, ToolStatusErrorTypedDict
 from .toolstatusfile import ToolStatusFile, ToolStatusFileTypedDict
 from .toolstatusparameter import ToolStatusParameter, ToolStatusParameterTypedDict
+from .update_samplesop import (
+    RequestBody,
+    RequestBodyTypedDict,
+    UpdateSamplesRequest,
+    UpdateSamplesRequestTypedDict,
+)
 from .urlimageitem import (
     URLImageItem,
     URLImageItemResponseFormat,
@@ -621,12 +656,18 @@ from .validationerror import (
     ValidationError,
     ValidationErrorTypedDict,
 )
+from .versioninfo import VersionInfo, VersionInfoTypedDict
 from .videocontent import VideoContent, VideoContentTypedDict
 from .videodata import VideoData, VideoDataTypedDict
 
 __all__ = [
     "AcceleratorRequirement",
     "AcceleratorRequirementTypedDict",
+    "AccountFileStatus",
+    "AddSamplesRequest",
+    "AddSamplesRequestTypedDict",
+    "AddSamplesResponse",
+    "AddSamplesResponseTypedDict",
     "AssistantMessage",
     "AssistantMessageToolCall",
     "AssistantMessageToolCallFunction",
@@ -665,9 +706,9 @@ __all__ = [
     "ChatLogprobsTypedDict",
     "ChatUsage",
     "ChatUsageTypedDict",
+    "CompleteUploadRequest",
+    "CompleteUploadRequestTypedDict",
     "CompletionsBodyWithPrompt",
-    "CompletionsBodyWithPromptPrompt",
-    "CompletionsBodyWithPromptPromptTypedDict",
     "CompletionsBodyWithPromptSeed",
     "CompletionsBodyWithPromptSeedTypedDict",
     "CompletionsBodyWithPromptTypedDict",
@@ -691,6 +732,8 @@ __all__ = [
     "CompletionsLogprobs",
     "CompletionsLogprobsTypedDict",
     "CompletionsServerlessBodyWithPrompt",
+    "CompletionsServerlessBodyWithPromptPrompt",
+    "CompletionsServerlessBodyWithPromptPromptTypedDict",
     "CompletionsServerlessBodyWithPromptSeed",
     "CompletionsServerlessBodyWithPromptSeedTypedDict",
     "CompletionsServerlessBodyWithPromptTypedDict",
@@ -728,11 +771,9 @@ __all__ = [
     "CompletionsStreamServerlessBodyWithTokensSeed",
     "CompletionsStreamServerlessBodyWithTokensSeedTypedDict",
     "CompletionsStreamServerlessBodyWithTokensTypedDict",
+    "ContainerChatCompleteSuccess",
+    "ContainerChatCompleteSuccessTypedDict",
     "ContainerChatCompletionBody",
-    "ContainerChatCompletionBodySeed",
-    "ContainerChatCompletionBodySeedTypedDict",
-    "ContainerChatCompletionBodyToolChoice",
-    "ContainerChatCompletionBodyToolChoiceTypedDict",
     "ContainerChatCompletionBodyTypedDict",
     "ContainerChatCompletionStreamBody",
     "ContainerChatCompletionStreamBodySeed",
@@ -740,10 +781,16 @@ __all__ = [
     "ContainerChatCompletionStreamBodyToolChoice",
     "ContainerChatCompletionStreamBodyToolChoiceTypedDict",
     "ContainerChatCompletionStreamBodyTypedDict",
+    "ContainerChatCompletionStreamSuccess",
+    "ContainerChatCompletionStreamSuccessTypedDict",
     "ContainerCompletionsBody",
     "ContainerCompletionsBodyTypedDict",
     "ContainerCompletionsStreamBody",
     "ContainerCompletionsStreamBodyTypedDict",
+    "ContainerCompletionsStreamSuccess",
+    "ContainerCompletionsStreamSuccessTypedDict",
+    "ContainerCompletionsSuccess",
+    "ContainerCompletionsSuccessTypedDict",
     "ContainerDetokenizationBody",
     "ContainerDetokenizationBodyTypedDict",
     "ContainerDetokenizationSuccess",
@@ -759,8 +806,18 @@ __all__ = [
     "ContainerTokenizationSuccessTypedDict",
     "Content",
     "ContentTypedDict",
+    "CreateDatasetRequest",
+    "CreateDatasetRequest1",
+    "CreateDatasetRequest1TypedDict",
+    "CreateDatasetRequestTypedDict",
+    "CreateSplitRequest",
+    "CreateSplitRequestTypedDict",
+    "CreateVersionRequest",
+    "CreateVersionRequestTypedDict",
     "Data",
     "DataTypedDict",
+    "DatasetInfo",
+    "DatasetInfoTypedDict",
     "DedicatedChatCompleteRequest",
     "DedicatedChatCompleteRequestTypedDict",
     "DedicatedChatCompletionBody",
@@ -785,6 +842,8 @@ __all__ = [
     "DedicatedCompletionsStreamBodyTypedDict",
     "DedicatedCompletionsStreamRequest",
     "DedicatedCompletionsStreamRequestTypedDict",
+    "DedicatedCreateEndpointBetaRequest",
+    "DedicatedCreateEndpointBetaRequestTypedDict",
     "DedicatedCreateEndpointRequest",
     "DedicatedCreateEndpointRequestTypedDict",
     "DedicatedDeleteEndpointRequest",
@@ -800,36 +859,52 @@ __all__ = [
     "DedicatedEndpointListResponse",
     "DedicatedEndpointListResponseTypedDict",
     "DedicatedEndpointSpec",
+    "DedicatedEndpointSpecBeta",
+    "DedicatedEndpointSpecBetaTypedDict",
     "DedicatedEndpointSpecTypedDict",
     "DedicatedEndpointStatus",
     "DedicatedEndpointStatusTypedDict",
     "DedicatedEndpointUpdateBody",
     "DedicatedEndpointUpdateBodyTypedDict",
+    "DedicatedEndpointVersionHistoryResponse",
+    "DedicatedEndpointVersionHistoryResponseTypedDict",
     "DedicatedEndpointWandbArtifactCreateBody",
     "DedicatedEndpointWandbArtifactCreateBodyTypedDict",
     "DedicatedEndpointWandbArtifactCreateRequest",
     "DedicatedEndpointWandbArtifactCreateRequestTypedDict",
     "DedicatedEndpointWandbArtifactCreateResponse",
     "DedicatedEndpointWandbArtifactCreateResponseTypedDict",
+    "DedicatedGetEndpointBetaRequest",
+    "DedicatedGetEndpointBetaRequestTypedDict",
     "DedicatedGetEndpointRequest",
     "DedicatedGetEndpointRequestTypedDict",
+    "DedicatedGetEndpointStatusBetaRequest",
+    "DedicatedGetEndpointStatusBetaRequestTypedDict",
     "DedicatedGetEndpointStatusRequest",
     "DedicatedGetEndpointStatusRequestTypedDict",
-    "DedicatedGetEndpointVersionRequest",
-    "DedicatedGetEndpointVersionRequestTypedDict",
+    "DedicatedGetEndpointVersionHistoryRequest",
+    "DedicatedGetEndpointVersionHistoryRequestTypedDict",
     "DedicatedImageGenerateSuccess",
+    "DedicatedImageGenerateSuccessData",
+    "DedicatedImageGenerateSuccessDataTypedDict",
     "DedicatedImageGenerateSuccessTypedDict",
     "DedicatedImageGenerationBody",
     "DedicatedImageGenerationBodyResponseFormat",
     "DedicatedImageGenerationBodyTypedDict",
     "DedicatedImagesGenerateRequest",
     "DedicatedImagesGenerateRequestTypedDict",
+    "DedicatedListEndpointsBetaRequest",
+    "DedicatedListEndpointsBetaRequestTypedDict",
     "DedicatedListEndpointsRequest",
     "DedicatedListEndpointsRequestTypedDict",
+    "DedicatedRestartEndpointBetaRequest",
+    "DedicatedRestartEndpointBetaRequestTypedDict",
     "DedicatedRestartEndpointRequest",
     "DedicatedRestartEndpointRequestTypedDict",
     "DedicatedSleepEndpointRequest",
     "DedicatedSleepEndpointRequestTypedDict",
+    "DedicatedTerminateEndpointBetaRequest",
+    "DedicatedTerminateEndpointBetaRequestTypedDict",
     "DedicatedTerminateEndpointRequest",
     "DedicatedTerminateEndpointRequestTypedDict",
     "DedicatedTokenizationBody",
@@ -838,21 +913,34 @@ __all__ = [
     "DedicatedTokenizationRequestTypedDict",
     "DedicatedTokenizationSuccess",
     "DedicatedTokenizationSuccessTypedDict",
+    "DedicatedUpdateEndpointBetaRequest",
+    "DedicatedUpdateEndpointBetaRequestTypedDict",
     "DedicatedUpdateEndpointRequest",
     "DedicatedUpdateEndpointRequestTypedDict",
     "DedicatedWakeEndpointRequest",
     "DedicatedWakeEndpointRequestTypedDict",
+    "DeleteDatasetRequest",
+    "DeleteDatasetRequestTypedDict",
+    "DeleteSamplesRequest",
+    "DeleteSamplesRequestTypedDict",
+    "DeleteSplitRequest",
+    "DeleteSplitRequestTypedDict",
+    "DeleteVersionRequest",
+    "DeleteVersionRequestTypedDict",
     "EndpointAdvancedConfig",
     "EndpointAdvancedConfigTypedDict",
     "EndpointSimplescaleConfig",
     "EndpointSimplescaleConfigTypedDict",
-    "File",
     "FileBuiltInTool",
     "FileBuiltInToolTypedDict",
-    "FileObject",
-    "FileObjectPurpose",
-    "FileObjectTypedDict",
-    "FileTypedDict",
+    "FileGetDownloadURLResponse",
+    "FileGetDownloadURLResponseTypedDict",
+    "FileInfo",
+    "FileInfoTypedDict",
+    "FileInitUploadRequest",
+    "FileInitUploadRequestTypedDict",
+    "FileInitUploadResponse",
+    "FileInitUploadResponseTypedDict",
     "FinishReason",
     "Function",
     "FunctionResult",
@@ -860,6 +948,16 @@ __all__ = [
     "FunctionTypedDict",
     "Functionality",
     "FunctionalityTypedDict",
+    "GetDatasetRequest",
+    "GetDatasetRequestTypedDict",
+    "GetDownloadURLRequest",
+    "GetDownloadURLRequestTypedDict",
+    "GetInfoRequest",
+    "GetInfoRequestTypedDict",
+    "GetSplitRequest",
+    "GetSplitRequestTypedDict",
+    "GetVersionRequest",
+    "GetVersionRequestTypedDict",
     "HTTPValidationError",
     "HTTPValidationErrorData",
     "ImageContent",
@@ -868,8 +966,26 @@ __all__ = [
     "ImageDataTypedDict",
     "InferenceDeploymentErrorCode",
     "InferenceDeploymentStatus",
+    "InitUploadRequest",
+    "InitUploadRequestTypedDict",
     "KnowledgeRetrievedChunk",
     "KnowledgeRetrievedChunkTypedDict",
+    "ListDatasetsRequest",
+    "ListDatasetsRequestTypedDict",
+    "ListDatasetsResponse",
+    "ListDatasetsResponseTypedDict",
+    "ListSamplesRequest",
+    "ListSamplesRequestTypedDict",
+    "ListSamplesResponse",
+    "ListSamplesResponseTypedDict",
+    "ListSplitsRequest",
+    "ListSplitsRequestTypedDict",
+    "ListSplitsResponse",
+    "ListSplitsResponseTypedDict",
+    "ListVersionsRequest",
+    "ListVersionsRequestTypedDict",
+    "ListVersionsResponse",
+    "ListVersionsResponseTypedDict",
     "Loc",
     "LocTypedDict",
     "Message",
@@ -877,39 +993,15 @@ __all__ = [
     "ModelCatalogResponseItem",
     "ModelCatalogResponseItemTypedDict",
     "Name",
-    "Order",
     "OtherBuiltInTool",
     "OtherBuiltInToolTypedDict",
     "Phase",
-    "PlatformFilesDeleteRequest",
-    "PlatformFilesDeleteRequestTypedDict",
-    "PlatformFilesDeleteResult",
-    "PlatformFilesDeleteResultTypedDict",
-    "PlatformFilesDownloadRequest",
-    "PlatformFilesDownloadRequestTypedDict",
-    "PlatformFilesListBody",
-    "PlatformFilesListBodyTypedDict",
-    "PlatformFilesListRequest",
-    "PlatformFilesListRequestTypedDict",
-    "PlatformFilesListResult",
-    "PlatformFilesListResultTypedDict",
-    "PlatformFilesRetrieveRequest",
-    "PlatformFilesRetrieveRequestTypedDict",
-    "PlatformFilesRetrieveResult",
-    "PlatformFilesRetrieveResultPurpose",
-    "PlatformFilesRetrieveResultTypedDict",
-    "PlatformFilesUploadBody",
-    "PlatformFilesUploadBodyTypedDict",
-    "PlatformFilesUploadRequest",
-    "PlatformFilesUploadRequestTypedDict",
-    "PlatformFilesUploadResult",
-    "PlatformFilesUploadResultPurpose",
-    "PlatformFilesUploadResultTypedDict",
     "PricingModel",
     "PricingModelTypedDict",
     "Prompt",
     "PromptTypedDict",
-    "Purpose",
+    "RequestBody",
+    "RequestBodyTypedDict",
     "ResponseFormat",
     "ResponseFormatJSONObject",
     "ResponseFormatJSONObjectTypedDict",
@@ -922,6 +1014,8 @@ __all__ = [
     "ResponseFormatText",
     "ResponseFormatTextTypedDict",
     "ResponseFormatTypedDict",
+    "RevertDatasetRequest",
+    "RevertDatasetRequestTypedDict",
     "SDKError",
     "Security",
     "SecurityTypedDict",
@@ -929,9 +1023,11 @@ __all__ = [
     "SeedTypedDict",
     "ServerlessChatCompleteRequest",
     "ServerlessChatCompleteRequestTypedDict",
-    "ServerlessChatCompleteSuccess",
-    "ServerlessChatCompleteSuccessTypedDict",
     "ServerlessChatCompletionBody",
+    "ServerlessChatCompletionBodySeed",
+    "ServerlessChatCompletionBodySeedTypedDict",
+    "ServerlessChatCompletionBodyToolChoice",
+    "ServerlessChatCompletionBodyToolChoiceTypedDict",
     "ServerlessChatCompletionBodyTypedDict",
     "ServerlessChatCompletionStreamBody",
     "ServerlessChatCompletionStreamBodySeed",
@@ -939,8 +1035,6 @@ __all__ = [
     "ServerlessChatCompletionStreamBodyToolChoice",
     "ServerlessChatCompletionStreamBodyToolChoiceTypedDict",
     "ServerlessChatCompletionStreamBodyTypedDict",
-    "ServerlessChatCompletionStreamSuccess",
-    "ServerlessChatCompletionStreamSuccessTypedDict",
     "ServerlessChatStreamRequest",
     "ServerlessChatStreamRequestTypedDict",
     "ServerlessCompletionsBody",
@@ -951,10 +1045,6 @@ __all__ = [
     "ServerlessCompletionsStreamBodyTypedDict",
     "ServerlessCompletionsStreamRequest",
     "ServerlessCompletionsStreamRequestTypedDict",
-    "ServerlessCompletionsStreamSuccess",
-    "ServerlessCompletionsStreamSuccessTypedDict",
-    "ServerlessCompletionsSuccess",
-    "ServerlessCompletionsSuccessTypedDict",
     "ServerlessDetokenizationBody",
     "ServerlessDetokenizationBodyTypedDict",
     "ServerlessDetokenizationRequest",
@@ -993,6 +1083,8 @@ __all__ = [
     "ServerlessToolAssistedChatCompletionStreamSuccessTypedDict",
     "ServerlessToolAssistedChatStreamRequest",
     "ServerlessToolAssistedChatStreamRequestTypedDict",
+    "SplitInfo",
+    "SplitInfoTypedDict",
     "Status",
     "StreamOptions",
     "StreamOptionsTypedDict",
@@ -1044,6 +1136,8 @@ __all__ = [
     "URLImageItem",
     "URLImageItemResponseFormat",
     "URLImageItemTypedDict",
+    "UpdateSamplesRequest",
+    "UpdateSamplesRequestTypedDict",
     "Usage",
     "UsageTypedDict",
     "UserMessage",
@@ -1052,6 +1146,8 @@ __all__ = [
     "UserMessageTypedDict",
     "ValidationError",
     "ValidationErrorTypedDict",
+    "VersionInfo",
+    "VersionInfoTypedDict",
     "VideoContent",
     "VideoContentTypedDict",
     "VideoData",

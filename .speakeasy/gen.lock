@@ -1,34 +1,31 @@
 lockVersion: 2.0.0
 id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
-  docChecksum: c07274c2c6b8647c69803d2fd3383da4
+  docChecksum: 0613de4f92b602d47791cb99815500c2
   docVersion: 0.1.0
-  speakeasyVersion: 1.535.1
-  generationVersion: 2.585.2
-  releaseVersion: 0.9.0
-  configChecksum: aca28c6f2575000a5aecefd822ded4f3
+  speakeasyVersion: 1.548.3
+  generationVersion: 2.605.6
+  releaseVersion: 0.10.0
+  configChecksum: cd3fabc1f6e72d72d80f2e467a4be20d
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
 features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.14.0
+    core: 5.18.1
     defaultEnabledRetries: 0.2.0
-    downloadStreams: 1.0.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     examples: 3.0.1
     flatRequests: 1.0.1
     flattening: 3.1.1
-    getRequestBodies: 3.0.0
     globalSecurity: 3.0.3
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
-    globalServerURLs: 3.1.0
+    globalServerURLs: 3.1.1
     methodArguments: 1.0.2
     methodServerURLs: 3.1.1
-    multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
     nullables: 1.0.1
     responseFormat: 1.0.1
@@ -44,6 +41,9 @@ generatedFiles:
   - .vscode/settings.json
   - USAGE.md
   - docs/models/acceleratorrequirement.md
+  - docs/models/accountfilestatus.md
+  - docs/models/addsamplesrequest.md
+  - docs/models/addsamplesresponse.md
   - docs/models/assistantmessage.md
   - docs/models/assistantmessagetoolcall.md
   - docs/models/assistantmessagetoolcallfunction.md
@@ -60,8 +60,8 @@ generatedFiles:
   - docs/models/chatlogprobscontent.md
   - docs/models/chatlogprobscontenttoplogprob.md
   - docs/models/chatusage.md
+  - docs/models/completeuploadrequest.md
   - docs/models/completionsbodywithprompt.md
-  - docs/models/completionsbodywithpromptprompt.md
   - docs/models/completionsbodywithpromptseed.md
   - docs/models/completionsbodywithtokens.md
   - docs/models/completionsbodywithtokensseed.md
@@ -74,6 +74,7 @@ generatedFiles:
   - docs/models/completionsdedicatedbodywithtokensseed.md
   - docs/models/completionslogprobs.md
   - docs/models/completionsserverlessbodywithprompt.md
+  - docs/models/completionsserverlessbodywithpromptprompt.md
   - docs/models/completionsserverlessbodywithpromptseed.md
   - docs/models/completionsserverlessbodywithtokens.md
   - docs/models/completionsserverlessbodywithtokensseed.md
@@ -92,14 +93,16 @@ generatedFiles:
   - docs/models/completionsstreamserverlessbodywithpromptseed.md
   - docs/models/completionsstreamserverlessbodywithtokens.md
   - docs/models/completionsstreamserverlessbodywithtokensseed.md
+  - docs/models/containerchatcompletesuccess.md
   - docs/models/containerchatcompletionbody.md
-  - docs/models/containerchatcompletionbodyseed.md
-  - docs/models/containerchatcompletionbodytoolchoice.md
   - docs/models/containerchatcompletionstreambody.md
   - docs/models/containerchatcompletionstreambodyseed.md
   - docs/models/containerchatcompletionstreambodytoolchoice.md
+  - docs/models/containerchatcompletionstreamsuccess.md
   - docs/models/containercompletionsbody.md
   - docs/models/containercompletionsstreambody.md
+  - docs/models/containercompletionsstreamsuccess.md
+  - docs/models/containercompletionssuccess.md
   - docs/models/containerdetokenizationbody.md
   - docs/models/containerdetokenizationsuccess.md
   - docs/models/containerimagegeneratesuccess.md
@@ -108,7 +111,12 @@ generatedFiles:
   - docs/models/containertokenizationbody.md
   - docs/models/containertokenizationsuccess.md
   - docs/models/content.md
+  - docs/models/createdatasetrequest.md
+  - docs/models/createdatasetrequest1.md
+  - docs/models/createsplitrequest.md
+  - docs/models/createversionrequest.md
   - docs/models/data.md
+  - docs/models/datasetinfo.md
   - docs/models/dedicatedchatcompleterequest.md
   - docs/models/dedicatedchatcompletionbody.md
   - docs/models/dedicatedchatcompletionbodyseed.md
@@ -121,6 +129,7 @@ generatedFiles:
   - docs/models/dedicatedcompletionscompleterequest.md
   - docs/models/dedicatedcompletionsstreambody.md
   - docs/models/dedicatedcompletionsstreamrequest.md
+  - docs/models/dedicatedcreateendpointbetarequest.md
   - docs/models/dedicatedcreateendpointrequest.md
   - docs/models/dedicateddeleteendpointrequest.md
   - docs/models/dedicateddetokenizationbody.md
@@ -129,88 +138,101 @@ generatedFiles:
   - docs/models/dedicatedendpointcreatebody.md
   - docs/models/dedicatedendpointlistresponse.md
   - docs/models/dedicatedendpointspec.md
+  - docs/models/dedicatedendpointspecbeta.md
   - docs/models/dedicatedendpointstatus.md
   - docs/models/dedicatedendpointupdatebody.md
+  - docs/models/dedicatedendpointversionhistoryresponse.md
   - docs/models/dedicatedendpointwandbartifactcreatebody.md
   - docs/models/dedicatedendpointwandbartifactcreaterequest.md
   - docs/models/dedicatedendpointwandbartifactcreateresponse.md
+  - docs/models/dedicatedgetendpointbetarequest.md
   - docs/models/dedicatedgetendpointrequest.md
+  - docs/models/dedicatedgetendpointstatusbetarequest.md
   - docs/models/dedicatedgetendpointstatusrequest.md
-  - docs/models/dedicatedgetendpointversionrequest.md
+  - docs/models/dedicatedgetendpointversionhistoryrequest.md
   - docs/models/dedicatedimagegeneratesuccess.md
+  - docs/models/dedicatedimagegeneratesuccessdata.md
   - docs/models/dedicatedimagegenerationbody.md
   - docs/models/dedicatedimagegenerationbodyresponseformat.md
   - docs/models/dedicatedimagesgeneraterequest.md
+  - docs/models/dedicatedlistendpointsbetarequest.md
   - docs/models/dedicatedlistendpointsrequest.md
+  - docs/models/dedicatedrestartendpointbetarequest.md
   - docs/models/dedicatedrestartendpointrequest.md
   - docs/models/dedicatedsleependpointrequest.md
+  - docs/models/dedicatedterminateendpointbetarequest.md
   - docs/models/dedicatedterminateendpointrequest.md
   - docs/models/dedicatedtokenizationbody.md
   - docs/models/dedicatedtokenizationrequest.md
   - docs/models/dedicatedtokenizationsuccess.md
+  - docs/models/dedicatedupdateendpointbetarequest.md
   - docs/models/dedicatedupdateendpointrequest.md
   - docs/models/dedicatedwakeendpointrequest.md
+  - docs/models/deletedatasetrequest.md
+  - docs/models/deletesamplesrequest.md
+  - docs/models/deletesplitrequest.md
+  - docs/models/deleteversionrequest.md
   - docs/models/endpointadvancedconfig.md
   - docs/models/endpointsimplescaleconfig.md
-  - docs/models/file.md
   - docs/models/filebuiltintool.md
-  - docs/models/fileobject.md
-  - docs/models/fileobjectpurpose.md
+  - docs/models/filegetdownloadurlresponse.md
+  - docs/models/fileinfo.md
+  - docs/models/fileinituploadrequest.md
+  - docs/models/fileinituploadresponse.md
   - docs/models/finishreason.md
   - docs/models/function.md
   - docs/models/functionality.md
   - docs/models/functionresult.md
+  - docs/models/getdatasetrequest.md
+  - docs/models/getdownloadurlrequest.md
+  - docs/models/getinforequest.md
+  - docs/models/getsplitrequest.md
+  - docs/models/getversionrequest.md
   - docs/models/httpvalidationerror.md
   - docs/models/imagecontent.md
   - docs/models/imagedata.md
   - docs/models/inferencedeploymenterrorcode.md
   - docs/models/inferencedeploymentstatus.md
+  - docs/models/inituploadrequest.md
   - docs/models/knowledgeretrievedchunk.md
+  - docs/models/listdatasetsrequest.md
+  - docs/models/listdatasetsresponse.md
+  - docs/models/listsamplesrequest.md
+  - docs/models/listsamplesresponse.md
+  - docs/models/listsplitsrequest.md
+  - docs/models/listsplitsresponse.md
+  - docs/models/listversionsrequest.md
+  - docs/models/listversionsresponse.md
   - docs/models/loc.md
   - docs/models/message.md
   - docs/models/modelcatalogresponseitem.md
   - docs/models/name.md
-  - docs/models/order.md
   - docs/models/otherbuiltintool.md
   - docs/models/phase.md
-  - docs/models/platformfilesdeleterequest.md
-  - docs/models/platformfilesdeleteresult.md
-  - docs/models/platformfilesdownloadrequest.md
-  - docs/models/platformfileslistbody.md
-  - docs/models/platformfileslistrequest.md
-  - docs/models/platformfileslistresult.md
-  - docs/models/platformfilesretrieverequest.md
-  - docs/models/platformfilesretrieveresult.md
-  - docs/models/platformfilesretrieveresultpurpose.md
-  - docs/models/platformfilesuploadbody.md
-  - docs/models/platformfilesuploadrequest.md
-  - docs/models/platformfilesuploadresult.md
-  - docs/models/platformfilesuploadresultpurpose.md
   - docs/models/pricingmodel.md
   - docs/models/prompt.md
-  - docs/models/purpose.md
+  - docs/models/requestbody.md
   - docs/models/responseformat.md
   - docs/models/responseformatjsonobject.md
   - docs/models/responseformatjsonschema.md
   - docs/models/responseformatjsonschemaschema.md
   - docs/models/responseformatregex.md
   - docs/models/responseformattext.md
+  - docs/models/revertdatasetrequest.md
   - docs/models/security.md
   - docs/models/seed.md
   - docs/models/serverlesschatcompleterequest.md
-  - docs/models/serverlesschatcompletesuccess.md
   - docs/models/serverlesschatcompletionbody.md
+  - docs/models/serverlesschatcompletionbodyseed.md
+  - docs/models/serverlesschatcompletionbodytoolchoice.md
   - docs/models/serverlesschatcompletionstreambody.md
   - docs/models/serverlesschatcompletionstreambodyseed.md
   - docs/models/serverlesschatcompletionstreambodytoolchoice.md
-  - docs/models/serverlesschatcompletionstreamsuccess.md
   - docs/models/serverlesschatstreamrequest.md
   - docs/models/serverlesscompletionsbody.md
   - docs/models/serverlesscompletionscompleterequest.md
   - docs/models/serverlesscompletionsstreambody.md
   - docs/models/serverlesscompletionsstreamrequest.md
-  - docs/models/serverlesscompletionsstreamsuccess.md
-  - docs/models/serverlesscompletionssuccess.md
   - docs/models/serverlessdetokenizationbody.md
   - docs/models/serverlessdetokenizationrequest.md
   - docs/models/serverlessdetokenizationsuccess.md
@@ -230,6 +252,7 @@ generatedFiles:
   - docs/models/serverlesstoolassistedchatcompletionstreambodytoolchoice.md
   - docs/models/serverlesstoolassistedchatcompletionstreamsuccess.md
   - docs/models/serverlesstoolassistedchatstreamrequest.md
+  - docs/models/splitinfo.md
   - docs/models/status.md
   - docs/models/streamedchatchoice.md
   - docs/models/streamedchatchoicedelta.md
@@ -256,6 +279,7 @@ generatedFiles:
   - docs/models/toolstatusfile.md
   - docs/models/toolstatusparameter.md
   - docs/models/type.md
+  - docs/models/updatesamplesrequest.md
   - docs/models/urlimageitem.md
   - docs/models/urlimageitemresponseformat.md
   - docs/models/usage.md
@@ -263,26 +287,27 @@ generatedFiles:
   - docs/models/usermessagecontentmultimodal.md
   - docs/models/utils/retryconfig.md
   - docs/models/validationerror.md
+  - docs/models/versioninfo.md
   - docs/models/videocontent.md
   - docs/models/videodata.md
   - docs/sdks/chat/README.md
   - docs/sdks/completions/README.md
   - docs/sdks/container/README.md
+  - docs/sdks/dataset/README.md
   - docs/sdks/dedicated/README.md
   - docs/sdks/endpoint/README.md
-  - docs/sdks/files/README.md
+  - docs/sdks/file/README.md
   - docs/sdks/friendlicore/README.md
   - docs/sdks/friendlicorechat/README.md
   - docs/sdks/friendlicorecompletions/README.md
-  - docs/sdks/friendlicorecontainerchat/README.md
-  - docs/sdks/friendlicorecontainercompletions/README.md
-  - docs/sdks/friendlicorecontainertoken/README.md
   - docs/sdks/friendlicoreimage/README.md
+  - docs/sdks/friendlicoreserverlesschat/README.md
+  - docs/sdks/friendlicoreserverlesscompletions/README.md
+  - docs/sdks/friendlicoreserverlesstoken/README.md
   - docs/sdks/friendlicoretoken/README.md
   - docs/sdks/image/README.md
   - docs/sdks/knowledge/README.md
   - docs/sdks/model/README.md
-  - docs/sdks/platform/README.md
   - docs/sdks/serverless/README.md
   - docs/sdks/token/README.md
   - docs/sdks/toolassistedchat/README.md
@@ -299,15 +324,16 @@ generatedFiles:
   - src/friendli_core/chat.py
   - src/friendli_core/completions.py
   - src/friendli_core/container.py
+  - src/friendli_core/dataset.py
   - src/friendli_core/dedicated.py
   - src/friendli_core/endpoint.py
-  - src/friendli_core/files.py
+  - src/friendli_core/file.py
   - src/friendli_core/friendlicore_chat.py
   - src/friendli_core/friendlicore_completions.py
-  - src/friendli_core/friendlicore_container_chat.py
-  - src/friendli_core/friendlicore_container_completions.py
-  - src/friendli_core/friendlicore_container_token.py
   - src/friendli_core/friendlicore_image.py
+  - src/friendli_core/friendlicore_serverless_chat.py
+  - src/friendli_core/friendlicore_serverless_completions.py
+  - src/friendli_core/friendlicore_serverless_token.py
   - src/friendli_core/friendlicore_token.py
   - src/friendli_core/httpclient.py
   - src/friendli_core/image.py
@@ -315,6 +341,9 @@ generatedFiles:
   - src/friendli_core/model.py
   - src/friendli_core/models/__init__.py
   - src/friendli_core/models/acceleratorrequirement.py
+  - src/friendli_core/models/accountfilestatus.py
+  - src/friendli_core/models/add_samplesop.py
+  - src/friendli_core/models/addsamplesresponse.py
   - src/friendli_core/models/assistantmessage.py
   - src/friendli_core/models/assistantmessagetoolcall.py
   - src/friendli_core/models/assistantmessagetoolcallfunction.py
@@ -330,6 +359,7 @@ generatedFiles:
   - src/friendli_core/models/chatlogprobscontent.py
   - src/friendli_core/models/chatlogprobscontenttoplogprob.py
   - src/friendli_core/models/chatusage.py
+  - src/friendli_core/models/complete_uploadop.py
   - src/friendli_core/models/completionsbodywithprompt.py
   - src/friendli_core/models/completionsbodywithtokens.py
   - src/friendli_core/models/completionschoice.py
@@ -345,13 +375,17 @@ generatedFiles:
   - src/friendli_core/models/completionsstreamserverlessbodywithprompt.py
   - src/friendli_core/models/completionsstreamserverlessbodywithtokens.py
   - src/friendli_core/models/containerchatcompleteop.py
+  - src/friendli_core/models/containerchatcompletesuccess.py
   - src/friendli_core/models/containerchatcompletionbody.py
   - src/friendli_core/models/containerchatcompletionstreambody.py
+  - src/friendli_core/models/containerchatcompletionstreamsuccess.py
   - src/friendli_core/models/containerchatstreamop.py
   - src/friendli_core/models/containercompletionsbody.py
   - src/friendli_core/models/containercompletionscompleteop.py
   - src/friendli_core/models/containercompletionsstreambody.py
   - src/friendli_core/models/containercompletionsstreamop.py
+  - src/friendli_core/models/containercompletionsstreamsuccess.py
+  - src/friendli_core/models/containercompletionssuccess.py
   - src/friendli_core/models/containerdetokenizationbody.py
   - src/friendli_core/models/containerdetokenizationop.py
   - src/friendli_core/models/containerdetokenizationsuccess.py
@@ -361,6 +395,11 @@ generatedFiles:
   - src/friendli_core/models/containertokenizationbody.py
   - src/friendli_core/models/containertokenizationop.py
   - src/friendli_core/models/containertokenizationsuccess.py
+  - src/friendli_core/models/create_datasetop.py
+  - src/friendli_core/models/create_splitop.py
+  - src/friendli_core/models/create_versionop.py
+  - src/friendli_core/models/createdatasetrequest.py
+  - src/friendli_core/models/datasetinfo.py
   - src/friendli_core/models/dedicatedchatcompleteop.py
   - src/friendli_core/models/dedicatedchatcompletionbody.py
   - src/friendli_core/models/dedicatedchatcompletionstreambody.py
@@ -369,6 +408,7 @@ generatedFiles:
   - src/friendli_core/models/dedicatedcompletionscompleteop.py
   - src/friendli_core/models/dedicatedcompletionsstreambody.py
   - src/friendli_core/models/dedicatedcompletionsstreamop.py
+  - src/friendli_core/models/dedicatedcreateendpointbetaop.py
   - src/friendli_core/models/dedicatedcreateendpointop.py
   - src/friendli_core/models/dedicateddeleteendpointop.py
   - src/friendli_core/models/dedicateddetokenizationbody.py
@@ -377,53 +417,71 @@ generatedFiles:
   - src/friendli_core/models/dedicatedendpointcreatebody.py
   - src/friendli_core/models/dedicatedendpointlistresponse.py
   - src/friendli_core/models/dedicatedendpointspec.py
+  - src/friendli_core/models/dedicatedendpointspecbeta.py
   - src/friendli_core/models/dedicatedendpointstatus.py
   - src/friendli_core/models/dedicatedendpointupdatebody.py
+  - src/friendli_core/models/dedicatedendpointversionhistoryresponse.py
   - src/friendli_core/models/dedicatedendpointwandbartifactcreatebody.py
   - src/friendli_core/models/dedicatedendpointwandbartifactcreateop.py
   - src/friendli_core/models/dedicatedendpointwandbartifactcreateresponse.py
+  - src/friendli_core/models/dedicatedgetendpointbetaop.py
   - src/friendli_core/models/dedicatedgetendpointop.py
+  - src/friendli_core/models/dedicatedgetendpointstatusbetaop.py
   - src/friendli_core/models/dedicatedgetendpointstatusop.py
-  - src/friendli_core/models/dedicatedgetendpointversionop.py
+  - src/friendli_core/models/dedicatedgetendpointversionhistoryop.py
   - src/friendli_core/models/dedicatedimagegeneratesuccess.py
   - src/friendli_core/models/dedicatedimagegenerationbody.py
   - src/friendli_core/models/dedicatedimagesgenerateop.py
+  - src/friendli_core/models/dedicatedlistendpointsbetaop.py
   - src/friendli_core/models/dedicatedlistendpointsop.py
+  - src/friendli_core/models/dedicatedrestartendpointbetaop.py
   - src/friendli_core/models/dedicatedrestartendpointop.py
   - src/friendli_core/models/dedicatedsleependpointop.py
+  - src/friendli_core/models/dedicatedterminateendpointbetaop.py
   - src/friendli_core/models/dedicatedterminateendpointop.py
   - src/friendli_core/models/dedicatedtokenizationbody.py
   - src/friendli_core/models/dedicatedtokenizationop.py
   - src/friendli_core/models/dedicatedtokenizationsuccess.py
+  - src/friendli_core/models/dedicatedupdateendpointbetaop.py
   - src/friendli_core/models/dedicatedupdateendpointop.py
   - src/friendli_core/models/dedicatedwakeendpointop.py
+  - src/friendli_core/models/delete_datasetop.py
+  - src/friendli_core/models/delete_samplesop.py
+  - src/friendli_core/models/delete_splitop.py
+  - src/friendli_core/models/delete_versionop.py
   - src/friendli_core/models/endpointadvancedconfig.py
   - src/friendli_core/models/endpointsimplescaleconfig.py
   - src/friendli_core/models/filebuiltintool.py
-  - src/friendli_core/models/fileobject.py
+  - src/friendli_core/models/filegetdownloadurlresponse.py
+  - src/friendli_core/models/fileinfo.py
+  - src/friendli_core/models/fileinituploadrequest.py
+  - src/friendli_core/models/fileinituploadresponse.py
   - src/friendli_core/models/function.py
   - src/friendli_core/models/functionality.py
   - src/friendli_core/models/functionresult.py
+  - src/friendli_core/models/get_datasetop.py
+  - src/friendli_core/models/get_download_urlop.py
+  - src/friendli_core/models/get_infoop.py
+  - src/friendli_core/models/get_splitop.py
+  - src/friendli_core/models/get_versionop.py
   - src/friendli_core/models/httpvalidationerror.py
   - src/friendli_core/models/imagecontent.py
   - src/friendli_core/models/imagedata.py
   - src/friendli_core/models/inferencedeploymenterrorcode.py
   - src/friendli_core/models/inferencedeploymentstatus.py
+  - src/friendli_core/models/init_uploadop.py
   - src/friendli_core/models/knowledgeretrievedchunk.py
+  - src/friendli_core/models/list_datasetsop.py
+  - src/friendli_core/models/list_samplesop.py
+  - src/friendli_core/models/list_splitsop.py
+  - src/friendli_core/models/list_versionsop.py
+  - src/friendli_core/models/listdatasetsresponse.py
+  - src/friendli_core/models/listsamplesresponse.py
+  - src/friendli_core/models/listsplitsresponse.py
+  - src/friendli_core/models/listversionsresponse.py
   - src/friendli_core/models/message.py
   - src/friendli_core/models/modelcatalogresponseitem.py
   - src/friendli_core/models/otherbuiltintool.py
-  - src/friendli_core/models/platformfilesdeleteop.py
-  - src/friendli_core/models/platformfilesdeleteresult.py
-  - src/friendli_core/models/platformfilesdownloadop.py
-  - src/friendli_core/models/platformfileslistbody.py
-  - src/friendli_core/models/platformfileslistop.py
-  - src/friendli_core/models/platformfileslistresult.py
-  - src/friendli_core/models/platformfilesretrieveop.py
-  - src/friendli_core/models/platformfilesretrieveresult.py
-  - src/friendli_core/models/platformfilesuploadbody.py
-  - src/friendli_core/models/platformfilesuploadop.py
-  - src/friendli_core/models/platformfilesuploadresult.py
   - src/friendli_core/models/pricingmodel.py
   - src/friendli_core/models/responseformat.py
   - src/friendli_core/models/responseformatjsonobject.py
@@ -431,20 +489,17 @@ generatedFiles:
   - src/friendli_core/models/responseformatjsonschemaschema.py
   - src/friendli_core/models/responseformatregex.py
   - src/friendli_core/models/responseformattext.py
+  - src/friendli_core/models/revert_datasetop.py
   - src/friendli_core/models/sdkerror.py
   - src/friendli_core/models/security.py
   - src/friendli_core/models/serverlesschatcompleteop.py
-  - src/friendli_core/models/serverlesschatcompletesuccess.py
   - src/friendli_core/models/serverlesschatcompletionbody.py
   - src/friendli_core/models/serverlesschatcompletionstreambody.py
-  - src/friendli_core/models/serverlesschatcompletionstreamsuccess.py
   - src/friendli_core/models/serverlesschatstreamop.py
   - src/friendli_core/models/serverlesscompletionsbody.py
   - src/friendli_core/models/serverlesscompletionscompleteop.py
   - src/friendli_core/models/serverlesscompletionsstreambody.py
   - src/friendli_core/models/serverlesscompletionsstreamop.py
-  - src/friendli_core/models/serverlesscompletionsstreamsuccess.py
-  - src/friendli_core/models/serverlesscompletionssuccess.py
   - src/friendli_core/models/serverlessdetokenizationbody.py
   - src/friendli_core/models/serverlessdetokenizationop.py
   - src/friendli_core/models/serverlessdetokenizationsuccess.py
@@ -460,6 +515,7 @@ generatedFiles:
   - src/friendli_core/models/serverlesstoolassistedchatcompletionstreambody.py
   - src/friendli_core/models/serverlesstoolassistedchatcompletionstreamsuccess.py
   - src/friendli_core/models/serverlesstoolassistedchatstreamop.py
+  - src/friendli_core/models/splitinfo.py
   - src/friendli_core/models/streamedchatchoice.py
   - src/friendli_core/models/streamedchatchoicedelta.py
   - src/friendli_core/models/streamedchatdata.py
@@ -481,14 +537,15 @@ generatedFiles:
   - src/friendli_core/models/toolstatuserror.py
   - src/friendli_core/models/toolstatusfile.py
   - src/friendli_core/models/toolstatusparameter.py
+  - src/friendli_core/models/update_samplesop.py
   - src/friendli_core/models/urlimageitem.py
   - src/friendli_core/models/usage.py
   - src/friendli_core/models/usermessage.py
   - src/friendli_core/models/usermessagecontentmultimodal.py
   - src/friendli_core/models/validationerror.py
+  - src/friendli_core/models/versioninfo.py
   - src/friendli_core/models/videocontent.py
   - src/friendli_core/models/videodata.py
-  - src/friendli_core/platform.py
   - src/friendli_core/py.typed
   - src/friendli_core/sdk.py
   - src/friendli_core/sdkconfiguration.py
@@ -498,6 +555,7 @@ generatedFiles:
   - src/friendli_core/types/__init__.py
   - src/friendli_core/types/basemodel.py
   - src/friendli_core/utils/__init__.py
+  - src/friendli_core/utils/datetimes.py
   - src/friendli_core/utils/enums.py
   - src/friendli_core/utils/eventstreaming.py
   - src/friendli_core/utils/forms.py
@@ -512,74 +570,55 @@ generatedFiles:
   - src/friendli_core/utils/url.py
   - src/friendli_core/utils/values.py
 examples:
-  serverlessChatComplete:
+  containerChatComplete:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": false}
+        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "stream": false}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}, "model": "meta-llama-3.1-8b-instruct"}
-  serverlessChatStream:
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}}
+  containerChatStream:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": true}
+        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "stream": true}
       responses:
         "200":
           text/event-stream: "data: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294402}\n\ndata: [DONE]\n"
-  serverlessCompletionsComplete:
+  containerCompletionsComplete:
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "Say this is a test!", "stream": false}
+        application/json: {"prompt": "Say this is a test!", "stream": false}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"completion_tokens": 6, "prompt_tokens": 7, "total_tokens": 13}, "model": "meta-llama-3.1-8b-instruct"}
-  serverlessCompletionsStream:
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"completion_tokens": 6, "prompt_tokens": 7, "total_tokens": 13}}
+  containerCompletionsStream:
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "Say this is a test!", "stream": true}
+        application/json: {"prompt": "Say this is a test!", "stream": true}
       responses:
         "200":
           text/event-stream: "data: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" such\",\"token\":1778,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" as\",\"token\":439,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\n...\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\"\",\"finish_reason\":\"length\",\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[],\"usage\":{\"prompt_tokens\":5,\"completion_tokens\":10,\"total_tokens\":15},\"created\":1733382157}\n\ndata: [DONE]\n"
-  serverlessTokenization:
+  containerTokenization:
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "What is generative AI?"}
+        application/json: {"prompt": "What is generative AI?"}
       responses:
         "200":
           application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
-  serverlessDetokenization:
+  containerDetokenization:
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+        application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
       responses:
         "200":
           application/json: {"text": "What is generative AI?"}
-  serverlessKnowledgeRetrieve:
-    speakeasy-default-serverless-knowledge-retrieve:
-      requestBody:
-        application/json: {"k": 1, "knowledgeIds": ["knowledge-base-id-1"], "query": "Chicken dinner"}
-      responses:
-        "200":
-          application/json: {"results": [{"contentChunkId": "<id>", "contentId": "<id>", "score": 9198.31, "text": "<value>"}]}
-  serverlessModelList:
-    speakeasy-default-serverless-model-list:
-      responses:
-        "200":
-          application/json: {"data": [{"context_length": 547272, "created": 678317, "description": "bob inwardly beautifully comparison", "functionality": {"parallel_tool_call": true, "tool_call": false, "structured_output": true}, "hugging_face_url": "https://lazy-honesty.info/", "id": "<id>", "license": "https://careless-lid.org/", "max_completion_tokens": 410206, "name": "<value>", "policy": "https://funny-grandson.com", "pricing": {"input": 1811.18, "output": 9138.51}}, {"context_length": 33597, "created": 628106, "description": "worth reluctantly wound accompanist ajar though kindheartedly nor fooey a", "functionality": {"parallel_tool_call": true, "tool_call": false, "structured_output": true}, "hugging_face_url": "https://flawless-marimba.com", "id": "<id>", "license": "https://odd-breastplate.info", "max_completion_tokens": 602487, "name": "<value>", "policy": "https://vivacious-request.org/", "pricing": {"input": 5000.63, "output": 2061.63}}, {"context_length": 310383, "created": 710528, "description": "joyfully discourse merrily wherever failing orchestrate", "functionality": {"parallel_tool_call": false, "tool_call": false, "structured_output": true}, "hugging_face_url": "https://linear-molasses.biz", "id": "<id>", "license": "https://unlined-baseboard.name", "max_completion_tokens": 408575, "name": "<value>", "policy": "https://acceptable-validity.info/", "pricing": {"input": 9399.17, "output": 9104.79}}]}
-  serverlessToolAssistedChatComplete:
+  containerImagesGenerate:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "What is 3 + 6?", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": false, "tools": [{"type": "math:calculator"}]}
+        application/json: {"guidance_scale": 3.5, "num_inference_steps": 10, "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "response_format": "jpeg"}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "The result is 9."}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}, "model": "meta-llama-3.1-8b-instruct"}
-  serverlessToolAssistedChatStream:
-    Example:
-      requestBody:
-        application/json: {"messages": [{"content": "What is 3 + 6?", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": true, "tools": [{"type": "math:calculator"}]}
-      responses:
-        "200":
-          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":null,\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\"{\\\"result\\\": \\\"150 * 1.60934=241.401000000000\\\"}\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
+          application/json: {"image": "<base64 encoded image>"}
   dedicatedChatComplete:
     Example:
       requestBody:
@@ -637,218 +676,440 @@ examples:
         "200":
           application/json: {"endpointId": "endpoint-id", "endpointName": "endpoint-name", "projectId": "project-id", "projectName": "project-name", "teamId": "team-id", "teamName": "team-name"}
   dedicatedCreateEndpoint:
-    speakeasy-default-dedicated-create-endpoint:
+    Example:
       requestBody:
-        application/json: {"advanced": {"tokenizer_add_special_tokens": true, "tokenizer_skip_special_tokens": false, "max_batch_size": 256, "max_token_count": 2560}, "hfModelRepo": "<value>", "instanceOptionId": "<id>", "name": "<value>", "projectId": "<id>"}
+        application/json: {"advanced": {"tokenizer_add_special_tokens": false, "tokenizer_skip_special_tokens": false, "max_batch_size": 256, "max_token_count": 2560}, "hfModelRepo": "<value>", "instanceOptionId": "<id>", "name": "<value>", "projectId": "<id>"}
       responses:
         "200":
-          application/json: {"createdAt": "2024-04-02T12:48:32.253Z", "status": "INITIALIZING"}
-        "422":
-          application/json: {}
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
   dedicatedListEndpoints:
-    speakeasy-default-dedicated-list-endpoints:
+    Example:
       parameters:
         query:
           project_id: ""
           limit: 20
-        header: {}
       responses:
         "200":
-          application/json: {}
-        "422":
-          application/json: {}
+          application/json: {"data": {"endpoint-id-1": {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}, "endpoint-id-2": {"createdAt": "2025-01-01T00:00:00Z", "status": "RUNNING", "updatedAt": "2025-01-01T00:00:00Z"}}}
   dedicatedGetEndpoint:
-    speakeasy-default-dedicated-get-endpoint:
+    Example:
       parameters:
         path:
           endpoint_id: "<id>"
-        header: {}
       responses:
         "200":
-          application/json: {"autoscalingCooldown": 700347, "autoscalingMax": 558834, "autoscalingMin": 544221, "autoscalingScaleinFactor": 5212.35, "autoscalingScaleoutFactor": 9699.61, "creatorId": "<id>", "currReplicaCnt": 458049, "desiredReplicaCnt": 450824, "gpuType": "<value>", "maxBatchSize": 262795, "name": "<value>", "numGpu": 213457, "projectId": "<id>", "teamId": "<id>", "tokenizerAddSpecialTokens": false, "tokenizerSkipSpecialTokens": true, "updatedReplicaCnt": 801373}
-        "422":
-          application/json: {}
+          application/json: {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}
   dedicatedUpdateEndpoint:
-    speakeasy-default-dedicated-update-endpoint:
+    Example:
       parameters:
         path:
           endpoint_id: "<id>"
-        header: {}
       requestBody:
         application/json: {}
       responses:
         "200":
-          application/json: {"autoscalingCooldown": 857478, "autoscalingMax": 597129, "autoscalingMin": 344620, "autoscalingScaleinFactor": 9914.64, "autoscalingScaleoutFactor": 6276.9, "creatorId": "<id>", "currReplicaCnt": 488852, "desiredReplicaCnt": 984008, "gpuType": "<value>", "maxBatchSize": 54062, "name": "<value>", "numGpu": 896501, "projectId": "<id>", "teamId": "<id>", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "updatedReplicaCnt": 249440}
-        "422":
-          application/json: {}
+          application/json: {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}
   dedicatedDeleteEndpoint:
     speakeasy-default-dedicated-delete-endpoint:
       parameters:
         path:
           endpoint_id: "<id>"
-        header: {}
       responses:
         "200":
           application/json: "<value>"
         "422":
           application/json: {}
-  dedicatedGetEndpointVersion:
-    speakeasy-default-dedicated-get-endpoint-version:
+  dedicatedGetEndpointVersionHistory:
+    Example:
       parameters:
         path:
           endpoint_id: "<id>"
         query:
           limit: 20
-        header: {}
       responses:
         "200":
-          application/json: {"key": {"autoscalingCooldown": 530312, "autoscalingMax": 183484, "autoscalingMin": 963055, "autoscalingScaleinFactor": 9463.44, "autoscalingScaleoutFactor": 3274.51, "creatorId": "<id>", "currReplicaCnt": 828241, "desiredReplicaCnt": 260862, "gpuType": "<value>", "maxBatchSize": 394479, "name": "<value>", "numGpu": 222305, "projectId": "<id>", "teamId": "<id>", "tokenizerAddSpecialTokens": false, "tokenizerSkipSpecialTokens": true, "updatedReplicaCnt": 611346}, "key1": {"autoscalingCooldown": 401253, "autoscalingMax": 543559, "autoscalingMin": 114620, "autoscalingScaleinFactor": 2032.06, "autoscalingScaleoutFactor": 3289.03, "creatorId": "<id>", "currReplicaCnt": 567393, "desiredReplicaCnt": 871139, "gpuType": "<value>", "maxBatchSize": 755535, "name": "<value>", "numGpu": 932555, "projectId": "<id>", "teamId": "<id>", "tokenizerAddSpecialTokens": false, "tokenizerSkipSpecialTokens": false, "updatedReplicaCnt": 277560}}
-        "422":
-          application/json: {}
+          application/json: {"data": {"0": {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}}}
   dedicatedGetEndpointStatus:
-    speakeasy-default-dedicated-get-endpoint-status:
+    Example:
       parameters:
         path:
           endpoint_id: "<id>"
-        header: {}
       responses:
         "200":
-          application/json: {"createdAt": "2024-06-01T04:57:00.115Z", "status": "TERMINATING"}
-        "422":
-          application/json: {}
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
   dedicatedSleepEndpoint:
-    speakeasy-default-dedicated-sleep-endpoint:
+    Example:
       parameters:
         path:
           endpoint_id: "<id>"
-        header: {}
       responses:
         "200":
-          application/json: {"createdAt": "2023-02-20T04:56:04.360Z", "status": "READY"}
-        "422":
-          application/json: {}
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "SLEEPING", "updatedAt": "2025-01-01T00:00:00Z"}
   dedicatedWakeEndpoint:
-    speakeasy-default-dedicated-wake-endpoint:
+    Example:
       parameters:
         path:
           endpoint_id: "<id>"
-        header: {}
       responses:
         "200":
-          application/json: {"createdAt": "2024-06-02T17:24:51.079Z", "status": "FAILED"}
-        "422":
-          application/json: {}
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "AWAKING", "phase": "ENGINE_INITIALIZING", "updatedAt": "2025-01-01T00:00:00Z"}
   dedicatedTerminateEndpoint:
-    speakeasy-default-dedicated-terminate-endpoint:
+    Example:
       parameters:
         path:
           endpoint_id: "<id>"
-        header: {}
       responses:
         "200":
-          application/json: {"createdAt": "2024-03-02T14:19:44.822Z", "status": "RUNNING"}
-        "422":
-          application/json: {}
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "TERMINATING", "updatedAt": "2025-01-01T00:00:00Z"}
   dedicatedRestartEndpoint:
-    speakeasy-default-dedicated-restart-endpoint:
+    Example:
       parameters:
         path:
           endpoint_id: "<id>"
-        header: {}
       responses:
         "200":
-          application/json: {"createdAt": "2023-06-20T22:30:44.855Z", "status": "FAILED"}
-        "422":
-          application/json: {}
-  containerChatComplete:
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedCreateEndpointBeta:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "stream": false}
+        application/json: {"advanced": {"tokenizer_add_special_tokens": false, "tokenizer_skip_special_tokens": false, "max_batch_size": 256, "max_token_count": 2560}, "hfModelRepo": "<value>", "instanceOptionId": "<id>", "name": "<value>", "projectId": "<id>"}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}}
-  containerChatStream:
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedListEndpointsBeta:
+    Example:
+      parameters:
+        query:
+          project_id: ""
+          limit: 20
+      responses:
+        "200":
+          application/json: {"data": {"endpoint-id-1": {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}, "endpoint-id-2": {"createdAt": "2025-01-01T00:00:00Z", "status": "RUNNING", "updatedAt": "2025-01-01T00:00:00Z"}}}
+  dedicatedGetEndpointBeta:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}
+  dedicatedUpdateEndpointBeta:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}
+  dedicatedGetEndpointStatusBeta:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedTerminateEndpointBeta:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "TERMINATING", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedRestartEndpointBeta:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+  serverlessChatComplete:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "stream": true}
+        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": false}
+      responses:
+        "200":
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}, "model": "meta-llama-3.1-8b-instruct"}
+  serverlessChatStream:
+    Example:
+      requestBody:
+        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": true}
       responses:
         "200":
           text/event-stream: "data: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294402}\n\ndata: [DONE]\n"
-  containerCompletionsComplete:
+  serverlessCompletionsComplete:
     Example:
       requestBody:
-        application/json: {"prompt": "Say this is a test!", "stream": false}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "Say this is a test!", "stream": false}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"completion_tokens": 6, "prompt_tokens": 7, "total_tokens": 13}}
-  containerCompletionsStream:
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"completion_tokens": 6, "prompt_tokens": 7, "total_tokens": 13}, "model": "meta-llama-3.1-8b-instruct"}
+  serverlessCompletionsStream:
     Example:
       requestBody:
-        application/json: {"prompt": "Say this is a test!", "stream": true}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "Say this is a test!", "stream": true}
       responses:
         "200":
           text/event-stream: "data: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" such\",\"token\":1778,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" as\",\"token\":439,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\n...\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\"\",\"finish_reason\":\"length\",\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[],\"usage\":{\"prompt_tokens\":5,\"completion_tokens\":10,\"total_tokens\":15},\"created\":1733382157}\n\ndata: [DONE]\n"
-  containerTokenization:
+  serverlessTokenization:
     Example:
       requestBody:
-        application/json: {"prompt": "What is generative AI?"}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "What is generative AI?"}
       responses:
         "200":
           application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
-  containerDetokenization:
+  serverlessDetokenization:
     Example:
       requestBody:
-        application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
       responses:
         "200":
           application/json: {"text": "What is generative AI?"}
-  containerImagesGenerate:
+  serverlessToolAssistedChatComplete:
     Example:
       requestBody:
-        application/json: {"guidance_scale": 3.5, "num_inference_steps": 10, "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "response_format": "jpeg"}
+        application/json: {"messages": [{"content": "What is 3 + 6?", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": false, "tools": [{"type": "math:calculator"}]}
       responses:
         "200":
-          application/json: {"image": "<base64 encoded image>"}
-  platformFilesUpload:
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "The result is 9."}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}, "model": "meta-llama-3.1-8b-instruct"}
+  serverlessToolAssistedChatStream:
     Example:
       requestBody:
-        multipart/form-data: {"file": {"": "x-file: example.file"}, "purpose": "batch"}
+        application/json: {"messages": [{"content": "What is 3 + 6?", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": true, "tools": [{"type": "math:calculator"}]}
       responses:
         "200":
-          application/json: {"bytes": 20020306, "created": 1741186800, "expires": 1741273200, "filename": "lorem.txt", "id": "file-467269656e646c694149204578616d706c65", "object": "file", "purpose": "batch"}
-  platformFilesList:
+          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":null,\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\"{\\\"result\\\": \\\"150 * 1.60934=241.401000000000\\\"}\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
+  serverlessKnowledgeRetrieve:
+    speakeasy-default-serverless-knowledge-retrieve:
+      requestBody:
+        application/json: {"k": 1, "knowledgeIds": ["knowledge-base-id-1"], "query": "Chicken dinner"}
+      responses:
+        "200":
+          application/json: {"results": [{"contentChunkId": "<id>", "contentId": "<id>", "score": 5823.25, "text": "<value>"}, {"contentChunkId": "<id>", "contentId": "<id>", "score": 5823.25, "text": "<value>"}]}
+  serverlessModelList:
+    speakeasy-default-serverless-model-list:
+      responses:
+        "200":
+          application/json: {"data": [{"context_length": 373077, "created": 125077, "description": "as evenly adjourn", "functionality": {"parallel_tool_call": false, "tool_call": false, "structured_output": true}, "hugging_face_url": "https://enchanted-coliseum.org/", "id": "<id>", "license": "https://dapper-hutch.net/", "max_completion_tokens": 324596, "name": "<value>", "policy": "https://different-bookend.net/", "pricing": {"input": 8164.42, "output": 3961.62}}]}
+  create_dataset:
     Example:
       requestBody:
-        application/json: {"limit": 10000, "order": "desc"}
+        application/json: {"name": "<value>"}
       responses:
         "200":
-          application/json: {"data": [{"bytes": 20020306, "created": 1741186800, "expires": 1741273200, "filename": "lorem.txt", "id": "file-467269656e646c694149204578616d706c65", "object": "file", "purpose": "batch"}]}
-  platformFilesRetrieve:
+          application/json: {"createdAt": 570964, "id": "123", "length": 100, "name": "dataset-name", "size": 1024, "updatedAt": 993664}
+  list_datasets:
+    Example:
+      responses:
+        "200":
+          application/json: {"data": [{"createdAt": 547403, "id": "<id>", "length": 712366, "name": "<value>", "size": 674415, "updatedAt": 34223}, {"createdAt": 547403, "id": "<id>", "length": 712366, "name": "<value>", "size": 674415, "updatedAt": 34223}, {"createdAt": 547403, "id": "<id>", "length": 712366, "name": "<value>", "size": 674415, "updatedAt": 34223}]}
+  get_dataset:
+    Example:
+      parameters:
+        path:
+          dataset_id: 539201
+      responses:
+        "200":
+          application/json: {"createdAt": 985411, "id": "123", "length": 100, "name": "dataset-name", "size": 1024, "updatedAt": 761871}
+  delete_dataset:
+    speakeasy-default-delete-dataset:
+      parameters:
+        path:
+          dataset_id: 195431
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  create_version:
+    speakeasy-default-create-version:
+      parameters:
+        path:
+          dataset_id: 224113
+        query:
+          comment: "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart"
+      responses:
+        "200":
+          application/json: {"comment": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J", "createdAt": 300752, "id": "<id>", "length": 833667, "size": 46481}
+        "422":
+          application/json: {}
+  list_versions:
+    speakeasy-default-list-versions:
+      parameters:
+        path:
+          dataset_id: 653403
+      responses:
+        "200":
+          application/json: {"data": []}
+        "422":
+          application/json: {}
+  get_version:
+    speakeasy-default-get-version:
+      parameters:
+        path:
+          dataset_id: 665101
+          version_id: 813303
+      responses:
+        "200":
+          application/json: {"comment": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart", "createdAt": 78471, "id": "<id>", "length": 827193, "size": 748205}
+        "422":
+          application/json: {}
+  delete_version:
+    speakeasy-default-delete-version:
+      parameters:
+        path:
+          dataset_id: 310482
+          split_id: 944306
+          version_id: 434150
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  revert_dataset:
+    speakeasy-default-revert-dataset:
+      parameters:
+        path:
+          dataset_id: 147267
+        query:
+          versionId: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": 98021, "id": "<id>", "length": 960979, "name": "<value>", "size": 977772, "updatedAt": 847269}
+        "422":
+          application/json: {}
+  create_split:
+    speakeasy-default-create-split:
+      parameters:
+        path:
+          dataset_id: 334066
+        query:
+          name: "<value>"
+      responses:
+        "200":
+          application/json: {"createdAt": 48827, "id": "<id>", "length": 612501, "name": "<value>", "size": 170149, "updatedAt": 124256}
+        "422":
+          application/json: {}
+  list_splits:
+    speakeasy-default-list-splits:
+      parameters:
+        path:
+          dataset_id: 494482
+      responses:
+        "200":
+          application/json: {"data": [{"createdAt": 24292, "id": "<id>", "length": 347251, "name": "<value>", "size": 984127, "updatedAt": 283431}, {"createdAt": 24292, "id": "<id>", "length": 347251, "name": "<value>", "size": 984127, "updatedAt": 283431}]}
+        "422":
+          application/json: {}
+  get_split:
+    speakeasy-default-get-split:
+      parameters:
+        path:
+          dataset_id: 84405
+          split_id: 516409
+      responses:
+        "200":
+          application/json: {"createdAt": 658324, "id": "<id>", "length": 911363, "name": "<value>", "size": 309000, "updatedAt": 75101}
+        "422":
+          application/json: {}
+  delete_split:
+    speakeasy-default-delete-split:
+      parameters:
+        path:
+          dataset_id: 724178
+          split_id: 4400
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  add_samples:
+    speakeasy-default-add-samples:
+      parameters:
+        path:
+          dataset_id: 304268
+          split_id: 345943
+      requestBody:
+        application/json: [{"key": "<value>"}, {"key": "<value>"}, {"key": "<value>", "key1": "<value>", "key2": "<value>"}]
+      responses:
+        "200":
+          application/json: {"sampleIds": ["<value 1>"]}
+        "422":
+          application/json: {}
+  list_samples:
+    speakeasy-default-list-samples:
+      parameters:
+        path:
+          dataset_id: 282743
+          split_id: 505420
+      responses:
+        "200":
+          application/json: {"data": [["<value>", "<value>", "<value>"]]}
+        "422":
+          application/json: {}
+  update_samples:
+    speakeasy-default-update-samples:
+      parameters:
+        path:
+          dataset_id: 343546
+          split_id: 551652
+      requestBody:
+        application/json: [[], ["<value>", "<value>", "<value>"]]
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  delete_samples:
+    speakeasy-default-delete-samples:
+      parameters:
+        path:
+          dataset_id: 658326
+          split_id: 581117
+      requestBody:
+        application/json: ["<value 1>", "<value 2>"]
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  init_upload:
+    speakeasy-default-init-upload:
+      requestBody:
+        application/json: {"digest": "<value>", "name": "<value>", "projectId": "<id>", "size": 830650}
+      responses:
+        "200":
+          application/json: {"fileId": "<id>"}
+        "422":
+          application/json: {}
+  complete_upload:
+    speakeasy-default-complete-upload:
+      parameters:
+        path:
+          file_id: "<id>"
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  get_info:
     Example:
       parameters:
         path:
           file_id: "<id>"
-        header: {}
       responses:
         "200":
-          application/json: {"bytes": 20020306, "created": 1741186800, "expires": 1741273200, "filename": "lorem.txt", "id": "file-467269656e646c694149204578616d706c65", "object": "file", "purpose": "batch"}
-  platformFilesDelete:
+          application/json: {"createdAt": "2023-06-05T17:53:37.301Z", "creatorId": "<id>", "digest": "file-digest", "expiresAt": "2023-10-08T15:02:04.523Z", "id": "file-id", "name": "file-name", "projectId": "<id>", "size": 1024, "status": "UPLOADED"}
+  get_download_url:
     Example:
       parameters:
         path:
           file_id: "<id>"
-        header: {}
       responses:
         "200":
-          application/json: {"deleted": "true", "id": "file-467269656e646c694149204578616d706c65", "object": "file"}
-  platformFilesDownload:
-    speakeasy-default-platform-files-download:
-      parameters:
-        path:
-          file_id: "<id>"
-        header: {}
-      responses:
-        "200":
-          application/octet-stream: "x-file: example.file"
-examplesVersion: 1.0.1
+          application/json: {"downloadUrl": "https://immaculate-dredger.com", "fileId": "<id>"}
+examplesVersion: 1.0.2
 generatedTests: {}

@@ -11,17 +11,20 @@ from friendli_core.types import BaseModel
 from .b64imageitem import B64ImageItem, B64ImageItemTypedDict
 from .urlimageitem import URLImageItem, URLImageItemTypedDict
 
-DataTypedDict = TypeAliasType(
-    "DataTypedDict", Union[List[URLImageItemTypedDict], List[B64ImageItemTypedDict]]
+DedicatedImageGenerateSuccessDataTypedDict = TypeAliasType(
+    "DedicatedImageGenerateSuccessDataTypedDict",
+    Union[List[URLImageItemTypedDict], List[B64ImageItemTypedDict]],
 )
 
 
-Data = TypeAliasType("Data", Union[List[URLImageItem], List[B64ImageItem]])
+DedicatedImageGenerateSuccessData = TypeAliasType(
+    "DedicatedImageGenerateSuccessData", Union[List[URLImageItem], List[B64ImageItem]]
+)
 
 
 class DedicatedImageGenerateSuccessTypedDict(TypedDict):
-    data: DataTypedDict
+    data: DedicatedImageGenerateSuccessDataTypedDict
 
 
 class DedicatedImageGenerateSuccess(BaseModel):
-    data: Data
+    data: DedicatedImageGenerateSuccessData

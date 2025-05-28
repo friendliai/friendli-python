@@ -27,7 +27,7 @@ class SyncFriendliCoreCompletions(BaseFriendliCoreCompletions, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessCompletionsSuccess:
+    ) -> models.ContainerCompletionsSuccess:
         """Completions
 
         Generate text based on the given text prompt.
@@ -100,7 +100,7 @@ class SyncFriendliCoreCompletions(BaseFriendliCoreCompletions, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.ServerlessCompletionsSuccess
+                http_res.text, models.ContainerCompletionsSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -133,7 +133,7 @@ class SyncFriendliCoreCompletions(BaseFriendliCoreCompletions, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.ServerlessCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ContainerCompletionsStreamSuccess]:
         """Stream completions
 
         Generate text based on the given text prompt.
@@ -209,7 +209,7 @@ class SyncFriendliCoreCompletions(BaseFriendliCoreCompletions, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.ServerlessCompletionsStreamSuccess
+                    raw, models.ContainerCompletionsStreamSuccess
                 ),
                 sentinel="[DONE]",
             )
@@ -245,7 +245,7 @@ class AsyncFriendliCoreCompletions(BaseFriendliCoreCompletions, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessCompletionsSuccess:
+    ) -> models.ContainerCompletionsSuccess:
         """Completions
 
         Generate text based on the given text prompt.
@@ -318,7 +318,7 @@ class AsyncFriendliCoreCompletions(BaseFriendliCoreCompletions, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.ServerlessCompletionsSuccess
+                http_res.text, models.ContainerCompletionsSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -351,7 +351,7 @@ class AsyncFriendliCoreCompletions(BaseFriendliCoreCompletions, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.ServerlessCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStreamAsync[models.ContainerCompletionsStreamSuccess]:
         """Stream completions
 
         Generate text based on the given text prompt.
@@ -427,7 +427,7 @@ class AsyncFriendliCoreCompletions(BaseFriendliCoreCompletions, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.ServerlessCompletionsStreamSuccess
+                    raw, models.ContainerCompletionsStreamSuccess
                 ),
                 sentinel="[DONE]",
             )

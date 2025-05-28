@@ -1,0 +1,10 @@
+# ListDatasetsRequest
+
+
+## Fields
+
+| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `cursor`                                                       | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]* | :heavy_minus_sign:                                             | N/A                                                            |
+| `limit`                                                        | *OptionalNullable[int]*                                        | :heavy_minus_sign:                                             | N/A                                                            |
+| `x_friendli_team`                                              | *OptionalNullable[str]*                                        | :heavy_minus_sign:                                             | ID of team to run requests as (optional parameter).            |

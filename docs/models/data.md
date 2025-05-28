@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### `List[models.URLImageItem]`
+### `str`
 
 ```python
-value: List[models.URLImageItem] = /* values here */
+value: str = /* values here */
 ```
 
-### `List[models.B64ImageItem]`
+### `Dict[str, Any]`
 
 ```python
-value: List[models.B64ImageItem] = /* values here */
+value: Dict[str, Any] = /* values here */
 ```
 

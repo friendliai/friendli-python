@@ -74,7 +74,7 @@ with SyncFriendli(
 
 ### Response
 
-**[models.ServerlessChatCompleteSuccess](../../models/serverlesschatcompletesuccess.md)**
+**[models.ContainerChatCompleteSuccess](../../models/containerchatcompletesuccess.md)**
 
 ### Errors
 
@@ -150,7 +150,7 @@ with SyncFriendli(
 
 ### Response
 
-**[Union[eventstreaming.EventStream[models.ServerlessChatCompletionStreamSuccess], eventstreaming.EventStreamAsync[models.ServerlessChatCompletionStreamSuccess]]](../../models/.md)**
+**[Union[eventstreaming.EventStream[models.ContainerChatCompletionStreamSuccess], eventstreaming.EventStreamAsync[models.ContainerChatCompletionStreamSuccess]]](../../models/.md)**
 
 ### Errors
 

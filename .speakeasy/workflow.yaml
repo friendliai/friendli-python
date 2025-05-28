@@ -10,7 +10,7 @@ targets:
     friendli:
         target: python
         source: Friendli-API-Schema
-        publish:
+    publish:
             pypi:
                 token: $pypi_token
         codeSamples:
