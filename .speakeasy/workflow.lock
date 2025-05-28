@@ -1,20 +1,18 @@
-speakeasyVersion: 1.517.3
+speakeasyVersion: 1.535.1
 sources:
     Friendli-API-Schema:
         sourceNamespace: friendli-api-schema
-        sourceRevisionDigest: sha256:2a769cea8abb93efd02b2c5bfcccf6bd690ddfbd9d5bda2184c2bd54df40cfb0
-        sourceBlobDigest: sha256:8a23f52193709f8f36ee1f4788d9b92e1862e51f1252e3edc91acb396f3a752f
+        sourceRevisionDigest: sha256:f286fddced85b1bc7a5d5d896984808762eadffc857eb99f2421ccbaf2ff475e
+        sourceBlobDigest: sha256:198d668ecb6178ba1b89f7e246233cc7a91866d6eb032b0955c3700133f1e230
         tags:
             - latest
-            - speakeasy-sdk-regen-1741924776
+            - speakeasy-sdk-regen-1744933798
 targets:
     friendli:
         source: Friendli-API-Schema
         sourceNamespace: friendli-api-schema
-        sourceRevisionDigest: sha256:2a769cea8abb93efd02b2c5bfcccf6bd690ddfbd9d5bda2184c2bd54df40cfb0
-        sourceBlobDigest: sha256:8a23f52193709f8f36ee1f4788d9b92e1862e51f1252e3edc91acb396f3a752f
-        codeSamplesNamespace: friendli-api-schema-code-samples
-        codeSamplesRevisionDigest: sha256:bd1be131e3a010218f4ebec6a659fe06f924af4eb92c1c630de974941e0bb58c
+        sourceRevisionDigest: sha256:f286fddced85b1bc7a5d5d896984808762eadffc857eb99f2421ccbaf2ff475e
+        sourceBlobDigest: sha256:198d668ecb6178ba1b89f7e246233cc7a91866d6eb032b0955c3700133f1e230
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -28,10 +26,10 @@ workflow:
         friendli:
             target: python
             source: Friendli-API-Schema
-            publish:
-                pypi:
-                    token: $pypi_token
-            codeSamples:
-                registry:
-                    location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-api-schema-code-samples
-                blocking: false
+        publish:
+            pypi:
+                token: $pypi_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-api-schema-code-samples
+            blocking: false
