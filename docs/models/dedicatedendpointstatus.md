@@ -1,0 +1,14 @@
+# DedicatedEndpointStatus
+
+Dedicated endpoint status.
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `created_at`                                                                                       | [date](https://docs.python.org/3/library/datetime.html#date-objects)                               | :heavy_check_mark:                                                                                 | When the endpoint was created.                                                                     |
+| `status`                                                                                           | [models.InferenceDeploymentStatus](../models/inferencedeploymentstatus.md)                         | :heavy_check_mark:                                                                                 | Status of inference deployment.                                                                    |
+| `error_code`                                                                                       | [OptionalNullable[models.InferenceDeploymentErrorCode]](../models/inferencedeploymenterrorcode.md) | :heavy_minus_sign:                                                                                 | Error code if deployment failed.                                                                   |
+| `phase`                                                                                            | [OptionalNullable[models.Phase]](../models/phase.md)                                               | :heavy_minus_sign:                                                                                 | The current phase of the endpoint.                                                                 |
+| `updated_at`                                                                                       | [date](https://docs.python.org/3/library/datetime.html#date-objects)                               | :heavy_minus_sign:                                                                                 | When the endpoint was last updated.                                                                |
