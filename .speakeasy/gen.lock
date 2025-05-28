@@ -1,32 +1,34 @@
 lockVersion: 2.0.0
-id: f3669dca-8853-4d85-914e-fb38172139b6
+id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
-  docChecksum: f39acf0d20a402ff50e78290e71ff584
+  docChecksum: c07274c2c6b8647c69803d2fd3383da4
   docVersion: 0.1.0
-  speakeasyVersion: 1.517.3
-  generationVersion: 2.548.6
-  releaseVersion: 0.7.4
-  configChecksum: 8b2391a0bbe13169963e7c4743f21763
+  speakeasyVersion: 1.535.1
+  generationVersion: 2.585.2
+  releaseVersion: 0.9.0
+  configChecksum: aca28c6f2575000a5aecefd822ded4f3
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
-  published: true
 features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.12.3
+    core: 5.14.0
     defaultEnabledRetries: 0.2.0
+    downloadStreams: 1.0.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     examples: 3.0.1
     flatRequests: 1.0.1
     flattening: 3.1.1
+    getRequestBodies: 3.0.0
     globalSecurity: 3.0.3
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.0
     methodArguments: 1.0.2
     methodServerURLs: 3.1.1
+    multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
     nullables: 1.0.1
     responseFormat: 1.0.1
@@ -35,6 +37,7 @@ features:
     serverEvents: 1.0.7
     serverEventsSentinels: 0.1.0
     unions: 3.0.4
+    uploadStreams: 1.0.0
 generatedFiles:
   - .gitattributes
   - .python-version
@@ -64,112 +67,140 @@ generatedFiles:
   - docs/models/completionsbodywithtokensseed.md
   - docs/models/completionschoice.md
   - docs/models/completionschoicefinishreason.md
-  - docs/models/completionsdedicatedmodelbodywithprompt.md
-  - docs/models/completionsdedicatedmodelbodywithpromptprompt.md
-  - docs/models/completionsdedicatedmodelbodywithpromptseed.md
-  - docs/models/completionsdedicatedmodelbodywithtokens.md
-  - docs/models/completionsdedicatedmodelbodywithtokensseed.md
+  - docs/models/completionsdedicatedbodywithprompt.md
+  - docs/models/completionsdedicatedbodywithpromptprompt.md
+  - docs/models/completionsdedicatedbodywithpromptseed.md
+  - docs/models/completionsdedicatedbodywithtokens.md
+  - docs/models/completionsdedicatedbodywithtokensseed.md
   - docs/models/completionslogprobs.md
-  - docs/models/completionsserverlessmodelbodywithprompt.md
-  - docs/models/completionsserverlessmodelbodywithpromptseed.md
-  - docs/models/completionsserverlessmodelbodywithtokens.md
-  - docs/models/completionsserverlessmodelbodywithtokensseed.md
+  - docs/models/completionsserverlessbodywithprompt.md
+  - docs/models/completionsserverlessbodywithpromptseed.md
+  - docs/models/completionsserverlessbodywithtokens.md
+  - docs/models/completionsserverlessbodywithtokensseed.md
   - docs/models/completionsstreambodywithprompt.md
   - docs/models/completionsstreambodywithpromptprompt.md
   - docs/models/completionsstreambodywithpromptseed.md
   - docs/models/completionsstreambodywithtokens.md
   - docs/models/completionsstreambodywithtokensseed.md
-  - docs/models/completionsstreamdedicatedmodelbodywithprompt.md
-  - docs/models/completionsstreamdedicatedmodelbodywithpromptprompt.md
-  - docs/models/completionsstreamdedicatedmodelbodywithpromptseed.md
-  - docs/models/completionsstreamdedicatedmodelbodywithtokens.md
-  - docs/models/completionsstreamdedicatedmodelbodywithtokensseed.md
-  - docs/models/completionsstreamserverlessmodelbodywithprompt.md
-  - docs/models/completionsstreamserverlessmodelbodywithpromptprompt.md
-  - docs/models/completionsstreamserverlessmodelbodywithpromptseed.md
-  - docs/models/completionsstreamserverlessmodelbodywithtokens.md
-  - docs/models/completionsstreamserverlessmodelbodywithtokensseed.md
-  - docs/models/containerchatcompletesuccess.md
+  - docs/models/completionsstreamdedicatedbodywithprompt.md
+  - docs/models/completionsstreamdedicatedbodywithpromptprompt.md
+  - docs/models/completionsstreamdedicatedbodywithpromptseed.md
+  - docs/models/completionsstreamdedicatedbodywithtokens.md
+  - docs/models/completionsstreamdedicatedbodywithtokensseed.md
+  - docs/models/completionsstreamserverlessbodywithprompt.md
+  - docs/models/completionsstreamserverlessbodywithpromptprompt.md
+  - docs/models/completionsstreamserverlessbodywithpromptseed.md
+  - docs/models/completionsstreamserverlessbodywithtokens.md
+  - docs/models/completionsstreamserverlessbodywithtokensseed.md
   - docs/models/containerchatcompletionbody.md
-  - docs/models/containerchatcompletionbodylogitbias.md
   - docs/models/containerchatcompletionbodyseed.md
   - docs/models/containerchatcompletionbodytoolchoice.md
   - docs/models/containerchatcompletionstreambody.md
-  - docs/models/containerchatcompletionstreambodylogitbias.md
   - docs/models/containerchatcompletionstreambodyseed.md
   - docs/models/containerchatcompletionstreambodytoolchoice.md
-  - docs/models/containerchatcompletionstreamsuccess.md
   - docs/models/containercompletionsbody.md
   - docs/models/containercompletionsstreambody.md
-  - docs/models/containercompletionsstreamsuccess.md
-  - docs/models/containercompletionssuccess.md
   - docs/models/containerdetokenizationbody.md
   - docs/models/containerdetokenizationsuccess.md
+  - docs/models/containerimagegeneratesuccess.md
+  - docs/models/containerimagegenerationbody.md
+  - docs/models/containerimagegenerationbodyresponseformat.md
   - docs/models/containertokenizationbody.md
   - docs/models/containertokenizationsuccess.md
   - docs/models/content.md
   - docs/models/data.md
   - docs/models/dedicatedchatcompleterequest.md
-  - docs/models/dedicatedchatcompletesuccess.md
   - docs/models/dedicatedchatcompletionbody.md
-  - docs/models/dedicatedchatcompletionbodylogitbias.md
   - docs/models/dedicatedchatcompletionbodyseed.md
   - docs/models/dedicatedchatcompletionbodytoolchoice.md
   - docs/models/dedicatedchatcompletionstreambody.md
-  - docs/models/dedicatedchatcompletionstreambodylogitbias.md
   - docs/models/dedicatedchatcompletionstreambodyseed.md
   - docs/models/dedicatedchatcompletionstreambodytoolchoice.md
-  - docs/models/dedicatedchatcompletionstreamsuccess.md
   - docs/models/dedicatedchatstreamrequest.md
   - docs/models/dedicatedcompletionsbody.md
   - docs/models/dedicatedcompletionscompleterequest.md
   - docs/models/dedicatedcompletionsstreambody.md
   - docs/models/dedicatedcompletionsstreamrequest.md
-  - docs/models/dedicatedcompletionsstreamsuccess.md
-  - docs/models/dedicatedcompletionssuccess.md
+  - docs/models/dedicatedcreateendpointrequest.md
+  - docs/models/dedicateddeleteendpointrequest.md
   - docs/models/dedicateddetokenizationbody.md
   - docs/models/dedicateddetokenizationrequest.md
   - docs/models/dedicateddetokenizationsuccess.md
+  - docs/models/dedicatedendpointcreatebody.md
+  - docs/models/dedicatedendpointlistresponse.md
+  - docs/models/dedicatedendpointspec.md
+  - docs/models/dedicatedendpointstatus.md
+  - docs/models/dedicatedendpointupdatebody.md
   - docs/models/dedicatedendpointwandbartifactcreatebody.md
   - docs/models/dedicatedendpointwandbartifactcreaterequest.md
   - docs/models/dedicatedendpointwandbartifactcreateresponse.md
+  - docs/models/dedicatedgetendpointrequest.md
+  - docs/models/dedicatedgetendpointstatusrequest.md
+  - docs/models/dedicatedgetendpointversionrequest.md
   - docs/models/dedicatedimagegeneratesuccess.md
   - docs/models/dedicatedimagegenerationbody.md
   - docs/models/dedicatedimagegenerationbodyresponseformat.md
   - docs/models/dedicatedimagesgeneraterequest.md
+  - docs/models/dedicatedlistendpointsrequest.md
+  - docs/models/dedicatedrestartendpointrequest.md
+  - docs/models/dedicatedsleependpointrequest.md
+  - docs/models/dedicatedterminateendpointrequest.md
   - docs/models/dedicatedtokenizationbody.md
   - docs/models/dedicatedtokenizationrequest.md
   - docs/models/dedicatedtokenizationsuccess.md
+  - docs/models/dedicatedupdateendpointrequest.md
+  - docs/models/dedicatedwakeendpointrequest.md
+  - docs/models/endpointadvancedconfig.md
+  - docs/models/endpointsimplescaleconfig.md
+  - docs/models/file.md
   - docs/models/filebuiltintool.md
+  - docs/models/fileobject.md
+  - docs/models/fileobjectpurpose.md
   - docs/models/finishreason.md
   - docs/models/function.md
   - docs/models/functionality.md
   - docs/models/functionresult.md
+  - docs/models/httpvalidationerror.md
   - docs/models/imagecontent.md
   - docs/models/imagedata.md
+  - docs/models/inferencedeploymenterrorcode.md
+  - docs/models/inferencedeploymentstatus.md
   - docs/models/knowledgeretrievedchunk.md
-  - docs/models/logitbias.md
+  - docs/models/loc.md
   - docs/models/message.md
   - docs/models/modelcatalogresponseitem.md
   - docs/models/name.md
+  - docs/models/order.md
   - docs/models/otherbuiltintool.md
-  - docs/models/parameters.md
+  - docs/models/phase.md
+  - docs/models/platformfilesdeleterequest.md
+  - docs/models/platformfilesdeleteresult.md
+  - docs/models/platformfilesdownloadrequest.md
+  - docs/models/platformfileslistbody.md
+  - docs/models/platformfileslistrequest.md
+  - docs/models/platformfileslistresult.md
+  - docs/models/platformfilesretrieverequest.md
+  - docs/models/platformfilesretrieveresult.md
+  - docs/models/platformfilesretrieveresultpurpose.md
+  - docs/models/platformfilesuploadbody.md
+  - docs/models/platformfilesuploadrequest.md
+  - docs/models/platformfilesuploadresult.md
+  - docs/models/platformfilesuploadresultpurpose.md
   - docs/models/pricingmodel.md
   - docs/models/prompt.md
+  - docs/models/purpose.md
   - docs/models/responseformat.md
   - docs/models/responseformatjsonobject.md
   - docs/models/responseformatjsonschema.md
   - docs/models/responseformatjsonschemaschema.md
   - docs/models/responseformatregex.md
   - docs/models/responseformattext.md
-  - docs/models/schema.md
   - docs/models/security.md
   - docs/models/seed.md
   - docs/models/serverlesschatcompleterequest.md
   - docs/models/serverlesschatcompletesuccess.md
   - docs/models/serverlesschatcompletionbody.md
   - docs/models/serverlesschatcompletionstreambody.md
-  - docs/models/serverlesschatcompletionstreambodylogitbias.md
   - docs/models/serverlesschatcompletionstreambodyseed.md
   - docs/models/serverlesschatcompletionstreambodytoolchoice.md
   - docs/models/serverlesschatcompletionstreamsuccess.md
@@ -191,13 +222,10 @@ generatedFiles:
   - docs/models/serverlesstokenizationrequest.md
   - docs/models/serverlesstokenizationsuccess.md
   - docs/models/serverlesstoolassistedchatcompleterequest.md
-  - docs/models/serverlesstoolassistedchatcompletesuccess.md
   - docs/models/serverlesstoolassistedchatcompletionbody.md
-  - docs/models/serverlesstoolassistedchatcompletionbodylogitbias.md
   - docs/models/serverlesstoolassistedchatcompletionbodyseed.md
   - docs/models/serverlesstoolassistedchatcompletionbodytoolchoice.md
   - docs/models/serverlesstoolassistedchatcompletionstreambody.md
-  - docs/models/serverlesstoolassistedchatcompletionstreambodylogitbias.md
   - docs/models/serverlesstoolassistedchatcompletionstreambodyseed.md
   - docs/models/serverlesstoolassistedchatcompletionstreambodytoolchoice.md
   - docs/models/serverlesstoolassistedchatcompletionstreamsuccess.md
@@ -227,7 +255,6 @@ generatedFiles:
   - docs/models/toolstatuserror.md
   - docs/models/toolstatusfile.md
   - docs/models/toolstatusparameter.md
-  - docs/models/toplogprobs.md
   - docs/models/type.md
   - docs/models/urlimageitem.md
   - docs/models/urlimageitemresponseformat.md
@@ -235,6 +262,7 @@ generatedFiles:
   - docs/models/usermessage.md
   - docs/models/usermessagecontentmultimodal.md
   - docs/models/utils/retryconfig.md
+  - docs/models/validationerror.md
   - docs/models/videocontent.md
   - docs/models/videodata.md
   - docs/sdks/chat/README.md
@@ -242,214 +270,247 @@ generatedFiles:
   - docs/sdks/container/README.md
   - docs/sdks/dedicated/README.md
   - docs/sdks/endpoint/README.md
-  - docs/sdks/friendli/README.md
-  - docs/sdks/friendlichat/README.md
-  - docs/sdks/friendlicompletions/README.md
-  - docs/sdks/friendlicontainerchat/README.md
-  - docs/sdks/friendlicontainercompletions/README.md
-  - docs/sdks/friendlicontainertoken/README.md
-  - docs/sdks/friendlitoken/README.md
+  - docs/sdks/files/README.md
+  - docs/sdks/friendlicore/README.md
+  - docs/sdks/friendlicorechat/README.md
+  - docs/sdks/friendlicorecompletions/README.md
+  - docs/sdks/friendlicorecontainerchat/README.md
+  - docs/sdks/friendlicorecontainercompletions/README.md
+  - docs/sdks/friendlicorecontainertoken/README.md
+  - docs/sdks/friendlicoreimage/README.md
+  - docs/sdks/friendlicoretoken/README.md
   - docs/sdks/image/README.md
   - docs/sdks/knowledge/README.md
   - docs/sdks/model/README.md
+  - docs/sdks/platform/README.md
   - docs/sdks/serverless/README.md
   - docs/sdks/token/README.md
   - docs/sdks/toolassistedchat/README.md
   - poetry.toml
   - py.typed
   - pylintrc
-  - pyproject.toml
   - scripts/publish.sh
-  - src/friendli/__init__.py
-  - src/friendli/_hooks/__init__.py
-  - src/friendli/_hooks/sdkhooks.py
-  - src/friendli/_hooks/types.py
-  - src/friendli/_version.py
-  - src/friendli/basesdk.py
-  - src/friendli/chat.py
-  - src/friendli/completions.py
-  - src/friendli/container.py
-  - src/friendli/dedicated.py
-  - src/friendli/endpoint.py
-  - src/friendli/friendli_chat.py
-  - src/friendli/friendli_completions.py
-  - src/friendli/friendli_container_chat.py
-  - src/friendli/friendli_container_completions.py
-  - src/friendli/friendli_container_token.py
-  - src/friendli/friendli_token.py
-  - src/friendli/httpclient.py
-  - src/friendli/image.py
-  - src/friendli/knowledge.py
-  - src/friendli/model.py
-  - src/friendli/models/__init__.py
-  - src/friendli/models/acceleratorrequirement.py
-  - src/friendli/models/assistantmessage.py
-  - src/friendli/models/assistantmessagetoolcall.py
-  - src/friendli/models/assistantmessagetoolcallfunction.py
-  - src/friendli/models/audiocontent.py
-  - src/friendli/models/audiodata.py
-  - src/friendli/models/autoscalingpolicy.py
-  - src/friendli/models/b64imageitem.py
-  - src/friendli/models/chatchoice.py
-  - src/friendli/models/chatchoicemessage.py
-  - src/friendli/models/chatcompletebodytoolchoice.py
-  - src/friendli/models/chatcompletebodytoolchoicefunction.py
-  - src/friendli/models/chatlogprobs.py
-  - src/friendli/models/chatlogprobscontent.py
-  - src/friendli/models/chatlogprobscontenttoplogprob.py
-  - src/friendli/models/chatusage.py
-  - src/friendli/models/completionsbodywithprompt.py
-  - src/friendli/models/completionsbodywithtokens.py
-  - src/friendli/models/completionschoice.py
-  - src/friendli/models/completionsdedicatedmodelbodywithprompt.py
-  - src/friendli/models/completionsdedicatedmodelbodywithtokens.py
-  - src/friendli/models/completionslogprobs.py
-  - src/friendli/models/completionsserverlessmodelbodywithprompt.py
-  - src/friendli/models/completionsserverlessmodelbodywithtokens.py
-  - src/friendli/models/completionsstreambodywithprompt.py
-  - src/friendli/models/completionsstreambodywithtokens.py
-  - src/friendli/models/completionsstreamdedicatedmodelbodywithprompt.py
-  - src/friendli/models/completionsstreamdedicatedmodelbodywithtokens.py
-  - src/friendli/models/completionsstreamserverlessmodelbodywithprompt.py
-  - src/friendli/models/completionsstreamserverlessmodelbodywithtokens.py
-  - src/friendli/models/containerchatcompleteop.py
-  - src/friendli/models/containerchatcompletesuccess.py
-  - src/friendli/models/containerchatcompletionbody.py
-  - src/friendli/models/containerchatcompletionstreambody.py
-  - src/friendli/models/containerchatcompletionstreamsuccess.py
-  - src/friendli/models/containerchatstreamop.py
-  - src/friendli/models/containercompletionsbody.py
-  - src/friendli/models/containercompletionscompleteop.py
-  - src/friendli/models/containercompletionsstreambody.py
-  - src/friendli/models/containercompletionsstreamop.py
-  - src/friendli/models/containercompletionsstreamsuccess.py
-  - src/friendli/models/containercompletionssuccess.py
-  - src/friendli/models/containerdetokenizationbody.py
-  - src/friendli/models/containerdetokenizationop.py
-  - src/friendli/models/containerdetokenizationsuccess.py
-  - src/friendli/models/containertokenizationbody.py
-  - src/friendli/models/containertokenizationop.py
-  - src/friendli/models/containertokenizationsuccess.py
-  - src/friendli/models/dedicatedchatcompleteop.py
-  - src/friendli/models/dedicatedchatcompletesuccess.py
-  - src/friendli/models/dedicatedchatcompletionbody.py
-  - src/friendli/models/dedicatedchatcompletionstreambody.py
-  - src/friendli/models/dedicatedchatcompletionstreamsuccess.py
-  - src/friendli/models/dedicatedchatstreamop.py
-  - src/friendli/models/dedicatedcompletionsbody.py
-  - src/friendli/models/dedicatedcompletionscompleteop.py
-  - src/friendli/models/dedicatedcompletionsstreambody.py
-  - src/friendli/models/dedicatedcompletionsstreamop.py
-  - src/friendli/models/dedicatedcompletionsstreamsuccess.py
-  - src/friendli/models/dedicatedcompletionssuccess.py
-  - src/friendli/models/dedicateddetokenizationbody.py
-  - src/friendli/models/dedicateddetokenizationop.py
-  - src/friendli/models/dedicateddetokenizationsuccess.py
-  - src/friendli/models/dedicatedendpointwandbartifactcreatebody.py
-  - src/friendli/models/dedicatedendpointwandbartifactcreateop.py
-  - src/friendli/models/dedicatedendpointwandbartifactcreateresponse.py
-  - src/friendli/models/dedicatedimagegeneratesuccess.py
-  - src/friendli/models/dedicatedimagegenerationbody.py
-  - src/friendli/models/dedicatedimagesgenerateop.py
-  - src/friendli/models/dedicatedtokenizationbody.py
-  - src/friendli/models/dedicatedtokenizationop.py
-  - src/friendli/models/dedicatedtokenizationsuccess.py
-  - src/friendli/models/filebuiltintool.py
-  - src/friendli/models/function.py
-  - src/friendli/models/functionality.py
-  - src/friendli/models/functionresult.py
-  - src/friendli/models/imagecontent.py
-  - src/friendli/models/imagedata.py
-  - src/friendli/models/knowledgeretrievedchunk.py
-  - src/friendli/models/message.py
-  - src/friendli/models/modelcatalogresponseitem.py
-  - src/friendli/models/otherbuiltintool.py
-  - src/friendli/models/pricingmodel.py
-  - src/friendli/models/responseformat.py
-  - src/friendli/models/responseformatjsonobject.py
-  - src/friendli/models/responseformatjsonschema.py
-  - src/friendli/models/responseformatjsonschemaschema.py
-  - src/friendli/models/responseformatregex.py
-  - src/friendli/models/responseformattext.py
-  - src/friendli/models/sdkerror.py
-  - src/friendli/models/security.py
-  - src/friendli/models/serverlesschatcompleteop.py
-  - src/friendli/models/serverlesschatcompletesuccess.py
-  - src/friendli/models/serverlesschatcompletionbody.py
-  - src/friendli/models/serverlesschatcompletionstreambody.py
-  - src/friendli/models/serverlesschatcompletionstreamsuccess.py
-  - src/friendli/models/serverlesschatstreamop.py
-  - src/friendli/models/serverlesscompletionsbody.py
-  - src/friendli/models/serverlesscompletionscompleteop.py
-  - src/friendli/models/serverlesscompletionsstreambody.py
-  - src/friendli/models/serverlesscompletionsstreamop.py
-  - src/friendli/models/serverlesscompletionsstreamsuccess.py
-  - src/friendli/models/serverlesscompletionssuccess.py
-  - src/friendli/models/serverlessdetokenizationbody.py
-  - src/friendli/models/serverlessdetokenizationop.py
-  - src/friendli/models/serverlessdetokenizationsuccess.py
-  - src/friendli/models/serverlessknowledgeretrievalbody.py
-  - src/friendli/models/serverlessknowledgeretrievalsuccess.py
-  - src/friendli/models/serverlessknowledgeretrieveop.py
-  - src/friendli/models/serverlessmodellistsuccess.py
-  - src/friendli/models/serverlesstokenizationbody.py
-  - src/friendli/models/serverlesstokenizationop.py
-  - src/friendli/models/serverlesstokenizationsuccess.py
-  - src/friendli/models/serverlesstoolassistedchatcompleteop.py
-  - src/friendli/models/serverlesstoolassistedchatcompletesuccess.py
-  - src/friendli/models/serverlesstoolassistedchatcompletionbody.py
-  - src/friendli/models/serverlesstoolassistedchatcompletionstreambody.py
-  - src/friendli/models/serverlesstoolassistedchatcompletionstreamsuccess.py
-  - src/friendli/models/serverlesstoolassistedchatstreamop.py
-  - src/friendli/models/streamedchatchoice.py
-  - src/friendli/models/streamedchatchoicedelta.py
-  - src/friendli/models/streamedchatdata.py
-  - src/friendli/models/streamedcompletiondata.py
-  - src/friendli/models/streamedcompletionschoice.py
-  - src/friendli/models/streamedfunctionresult.py
-  - src/friendli/models/streamedtoolassistedchattoken.py
-  - src/friendli/models/streamedtoolassistedchattoolstatus.py
-  - src/friendli/models/streamedtoolcallresult.py
-  - src/friendli/models/streamoptions.py
-  - src/friendli/models/systemmessage.py
-  - src/friendli/models/textcontent.py
-  - src/friendli/models/tokensequence.py
-  - src/friendli/models/tool.py
-  - src/friendli/models/toolassistedchattool.py
-  - src/friendli/models/toolcallresult.py
-  - src/friendli/models/toolmessage.py
-  - src/friendli/models/toolstatusdata.py
-  - src/friendli/models/toolstatuserror.py
-  - src/friendli/models/toolstatusfile.py
-  - src/friendli/models/toolstatusparameter.py
-  - src/friendli/models/urlimageitem.py
-  - src/friendli/models/usage.py
-  - src/friendli/models/usermessage.py
-  - src/friendli/models/usermessagecontentmultimodal.py
-  - src/friendli/models/videocontent.py
-  - src/friendli/models/videodata.py
-  - src/friendli/py.typed
-  - src/friendli/sdk.py
-  - src/friendli/sdkconfiguration.py
-  - src/friendli/serverless.py
-  - src/friendli/token.py
-  - src/friendli/toolassistedchat.py
-  - src/friendli/types/__init__.py
-  - src/friendli/types/basemodel.py
-  - src/friendli/utils/__init__.py
-  - src/friendli/utils/enums.py
-  - src/friendli/utils/eventstreaming.py
-  - src/friendli/utils/forms.py
-  - src/friendli/utils/headers.py
-  - src/friendli/utils/logger.py
-  - src/friendli/utils/metadata.py
-  - src/friendli/utils/queryparams.py
-  - src/friendli/utils/requestbodies.py
-  - src/friendli/utils/retries.py
-  - src/friendli/utils/security.py
-  - src/friendli/utils/serializers.py
-  - src/friendli/utils/url.py
-  - src/friendli/utils/values.py
+  - src/friendli_core/__init__.py
+  - src/friendli_core/_hooks/__init__.py
+  - src/friendli_core/_hooks/sdkhooks.py
+  - src/friendli_core/_hooks/types.py
+  - src/friendli_core/_version.py
+  - src/friendli_core/basesdk.py
+  - src/friendli_core/chat.py
+  - src/friendli_core/completions.py
+  - src/friendli_core/container.py
+  - src/friendli_core/dedicated.py
+  - src/friendli_core/endpoint.py
+  - src/friendli_core/files.py
+  - src/friendli_core/friendlicore_chat.py
+  - src/friendli_core/friendlicore_completions.py
+  - src/friendli_core/friendlicore_container_chat.py
+  - src/friendli_core/friendlicore_container_completions.py
+  - src/friendli_core/friendlicore_container_token.py
+  - src/friendli_core/friendlicore_image.py
+  - src/friendli_core/friendlicore_token.py
+  - src/friendli_core/httpclient.py
+  - src/friendli_core/image.py
+  - src/friendli_core/knowledge.py
+  - src/friendli_core/model.py
+  - src/friendli_core/models/__init__.py
+  - src/friendli_core/models/acceleratorrequirement.py
+  - src/friendli_core/models/assistantmessage.py
+  - src/friendli_core/models/assistantmessagetoolcall.py
+  - src/friendli_core/models/assistantmessagetoolcallfunction.py
+  - src/friendli_core/models/audiocontent.py
+  - src/friendli_core/models/audiodata.py
+  - src/friendli_core/models/autoscalingpolicy.py
+  - src/friendli_core/models/b64imageitem.py
+  - src/friendli_core/models/chatchoice.py
+  - src/friendli_core/models/chatchoicemessage.py
+  - src/friendli_core/models/chatcompletebodytoolchoice.py
+  - src/friendli_core/models/chatcompletebodytoolchoicefunction.py
+  - src/friendli_core/models/chatlogprobs.py
+  - src/friendli_core/models/chatlogprobscontent.py
+  - src/friendli_core/models/chatlogprobscontenttoplogprob.py
+  - src/friendli_core/models/chatusage.py
+  - src/friendli_core/models/completionsbodywithprompt.py
+  - src/friendli_core/models/completionsbodywithtokens.py
+  - src/friendli_core/models/completionschoice.py
+  - src/friendli_core/models/completionsdedicatedbodywithprompt.py
+  - src/friendli_core/models/completionsdedicatedbodywithtokens.py
+  - src/friendli_core/models/completionslogprobs.py
+  - src/friendli_core/models/completionsserverlessbodywithprompt.py
+  - src/friendli_core/models/completionsserverlessbodywithtokens.py
+  - src/friendli_core/models/completionsstreambodywithprompt.py
+  - src/friendli_core/models/completionsstreambodywithtokens.py
+  - src/friendli_core/models/completionsstreamdedicatedbodywithprompt.py
+  - src/friendli_core/models/completionsstreamdedicatedbodywithtokens.py
+  - src/friendli_core/models/completionsstreamserverlessbodywithprompt.py
+  - src/friendli_core/models/completionsstreamserverlessbodywithtokens.py
+  - src/friendli_core/models/containerchatcompleteop.py
+  - src/friendli_core/models/containerchatcompletionbody.py
+  - src/friendli_core/models/containerchatcompletionstreambody.py
+  - src/friendli_core/models/containerchatstreamop.py
+  - src/friendli_core/models/containercompletionsbody.py
+  - src/friendli_core/models/containercompletionscompleteop.py
+  - src/friendli_core/models/containercompletionsstreambody.py
+  - src/friendli_core/models/containercompletionsstreamop.py
+  - src/friendli_core/models/containerdetokenizationbody.py
+  - src/friendli_core/models/containerdetokenizationop.py
+  - src/friendli_core/models/containerdetokenizationsuccess.py
+  - src/friendli_core/models/containerimagegeneratesuccess.py
+  - src/friendli_core/models/containerimagegenerationbody.py
+  - src/friendli_core/models/containerimagesgenerateop.py
+  - src/friendli_core/models/containertokenizationbody.py
+  - src/friendli_core/models/containertokenizationop.py
+  - src/friendli_core/models/containertokenizationsuccess.py
+  - src/friendli_core/models/dedicatedchatcompleteop.py
+  - src/friendli_core/models/dedicatedchatcompletionbody.py
+  - src/friendli_core/models/dedicatedchatcompletionstreambody.py
+  - src/friendli_core/models/dedicatedchatstreamop.py
+  - src/friendli_core/models/dedicatedcompletionsbody.py
+  - src/friendli_core/models/dedicatedcompletionscompleteop.py
+  - src/friendli_core/models/dedicatedcompletionsstreambody.py
+  - src/friendli_core/models/dedicatedcompletionsstreamop.py
+  - src/friendli_core/models/dedicatedcreateendpointop.py
+  - src/friendli_core/models/dedicateddeleteendpointop.py
+  - src/friendli_core/models/dedicateddetokenizationbody.py
+  - src/friendli_core/models/dedicateddetokenizationop.py
+  - src/friendli_core/models/dedicateddetokenizationsuccess.py
+  - src/friendli_core/models/dedicatedendpointcreatebody.py
+  - src/friendli_core/models/dedicatedendpointlistresponse.py
+  - src/friendli_core/models/dedicatedendpointspec.py
+  - src/friendli_core/models/dedicatedendpointstatus.py
+  - src/friendli_core/models/dedicatedendpointupdatebody.py
+  - src/friendli_core/models/dedicatedendpointwandbartifactcreatebody.py
+  - src/friendli_core/models/dedicatedendpointwandbartifactcreateop.py
+  - src/friendli_core/models/dedicatedendpointwandbartifactcreateresponse.py
+  - src/friendli_core/models/dedicatedgetendpointop.py
+  - src/friendli_core/models/dedicatedgetendpointstatusop.py
+  - src/friendli_core/models/dedicatedgetendpointversionop.py
+  - src/friendli_core/models/dedicatedimagegeneratesuccess.py
+  - src/friendli_core/models/dedicatedimagegenerationbody.py
+  - src/friendli_core/models/dedicatedimagesgenerateop.py
+  - src/friendli_core/models/dedicatedlistendpointsop.py
+  - src/friendli_core/models/dedicatedrestartendpointop.py
+  - src/friendli_core/models/dedicatedsleependpointop.py
+  - src/friendli_core/models/dedicatedterminateendpointop.py
+  - src/friendli_core/models/dedicatedtokenizationbody.py
+  - src/friendli_core/models/dedicatedtokenizationop.py
+  - src/friendli_core/models/dedicatedtokenizationsuccess.py
+  - src/friendli_core/models/dedicatedupdateendpointop.py
+  - src/friendli_core/models/dedicatedwakeendpointop.py
+  - src/friendli_core/models/endpointadvancedconfig.py
+  - src/friendli_core/models/endpointsimplescaleconfig.py
+  - src/friendli_core/models/filebuiltintool.py
+  - src/friendli_core/models/fileobject.py
+  - src/friendli_core/models/function.py
+  - src/friendli_core/models/functionality.py
+  - src/friendli_core/models/functionresult.py
+  - src/friendli_core/models/httpvalidationerror.py
+  - src/friendli_core/models/imagecontent.py
+  - src/friendli_core/models/imagedata.py
+  - src/friendli_core/models/inferencedeploymenterrorcode.py
+  - src/friendli_core/models/inferencedeploymentstatus.py
+  - src/friendli_core/models/knowledgeretrievedchunk.py
+  - src/friendli_core/models/message.py
+  - src/friendli_core/models/modelcatalogresponseitem.py
+  - src/friendli_core/models/otherbuiltintool.py
+  - src/friendli_core/models/platformfilesdeleteop.py
+  - src/friendli_core/models/platformfilesdeleteresult.py
+  - src/friendli_core/models/platformfilesdownloadop.py
+  - src/friendli_core/models/platformfileslistbody.py
+  - src/friendli_core/models/platformfileslistop.py
+  - src/friendli_core/models/platformfileslistresult.py
+  - src/friendli_core/models/platformfilesretrieveop.py
+  - src/friendli_core/models/platformfilesretrieveresult.py
+  - src/friendli_core/models/platformfilesuploadbody.py
+  - src/friendli_core/models/platformfilesuploadop.py
+  - src/friendli_core/models/platformfilesuploadresult.py
+  - src/friendli_core/models/pricingmodel.py
+  - src/friendli_core/models/responseformat.py
+  - src/friendli_core/models/responseformatjsonobject.py
+  - src/friendli_core/models/responseformatjsonschema.py
+  - src/friendli_core/models/responseformatjsonschemaschema.py
+  - src/friendli_core/models/responseformatregex.py
+  - src/friendli_core/models/responseformattext.py
+  - src/friendli_core/models/sdkerror.py
+  - src/friendli_core/models/security.py
+  - src/friendli_core/models/serverlesschatcompleteop.py
+  - src/friendli_core/models/serverlesschatcompletesuccess.py
+  - src/friendli_core/models/serverlesschatcompletionbody.py
+  - src/friendli_core/models/serverlesschatcompletionstreambody.py
+  - src/friendli_core/models/serverlesschatcompletionstreamsuccess.py
+  - src/friendli_core/models/serverlesschatstreamop.py
+  - src/friendli_core/models/serverlesscompletionsbody.py
+  - src/friendli_core/models/serverlesscompletionscompleteop.py
+  - src/friendli_core/models/serverlesscompletionsstreambody.py
+  - src/friendli_core/models/serverlesscompletionsstreamop.py
+  - src/friendli_core/models/serverlesscompletionsstreamsuccess.py
+  - src/friendli_core/models/serverlesscompletionssuccess.py
+  - src/friendli_core/models/serverlessdetokenizationbody.py
+  - src/friendli_core/models/serverlessdetokenizationop.py
+  - src/friendli_core/models/serverlessdetokenizationsuccess.py
+  - src/friendli_core/models/serverlessknowledgeretrievalbody.py
+  - src/friendli_core/models/serverlessknowledgeretrievalsuccess.py
+  - src/friendli_core/models/serverlessknowledgeretrieveop.py
+  - src/friendli_core/models/serverlessmodellistsuccess.py
+  - src/friendli_core/models/serverlesstokenizationbody.py
+  - src/friendli_core/models/serverlesstokenizationop.py
+  - src/friendli_core/models/serverlesstokenizationsuccess.py
+  - src/friendli_core/models/serverlesstoolassistedchatcompleteop.py
+  - src/friendli_core/models/serverlesstoolassistedchatcompletionbody.py
+  - src/friendli_core/models/serverlesstoolassistedchatcompletionstreambody.py
+  - src/friendli_core/models/serverlesstoolassistedchatcompletionstreamsuccess.py
+  - src/friendli_core/models/serverlesstoolassistedchatstreamop.py
+  - src/friendli_core/models/streamedchatchoice.py
+  - src/friendli_core/models/streamedchatchoicedelta.py
+  - src/friendli_core/models/streamedchatdata.py
+  - src/friendli_core/models/streamedcompletiondata.py
+  - src/friendli_core/models/streamedcompletionschoice.py
+  - src/friendli_core/models/streamedfunctionresult.py
+  - src/friendli_core/models/streamedtoolassistedchattoken.py
+  - src/friendli_core/models/streamedtoolassistedchattoolstatus.py
+  - src/friendli_core/models/streamedtoolcallresult.py
+  - src/friendli_core/models/streamoptions.py
+  - src/friendli_core/models/systemmessage.py
+  - src/friendli_core/models/textcontent.py
+  - src/friendli_core/models/tokensequence.py
+  - src/friendli_core/models/tool.py
+  - src/friendli_core/models/toolassistedchattool.py
+  - src/friendli_core/models/toolcallresult.py
+  - src/friendli_core/models/toolmessage.py
+  - src/friendli_core/models/toolstatusdata.py
+  - src/friendli_core/models/toolstatuserror.py
+  - src/friendli_core/models/toolstatusfile.py
+  - src/friendli_core/models/toolstatusparameter.py
+  - src/friendli_core/models/urlimageitem.py
+  - src/friendli_core/models/usage.py
+  - src/friendli_core/models/usermessage.py
+  - src/friendli_core/models/usermessagecontentmultimodal.py
+  - src/friendli_core/models/validationerror.py
+  - src/friendli_core/models/videocontent.py
+  - src/friendli_core/models/videodata.py
+  - src/friendli_core/platform.py
+  - src/friendli_core/py.typed
+  - src/friendli_core/sdk.py
+  - src/friendli_core/sdkconfiguration.py
+  - src/friendli_core/serverless.py
+  - src/friendli_core/token.py
+  - src/friendli_core/toolassistedchat.py
+  - src/friendli_core/types/__init__.py
+  - src/friendli_core/types/basemodel.py
+  - src/friendli_core/utils/__init__.py
+  - src/friendli_core/utils/enums.py
+  - src/friendli_core/utils/eventstreaming.py
+  - src/friendli_core/utils/forms.py
+  - src/friendli_core/utils/headers.py
+  - src/friendli_core/utils/logger.py
+  - src/friendli_core/utils/metadata.py
+  - src/friendli_core/utils/queryparams.py
+  - src/friendli_core/utils/requestbodies.py
+  - src/friendli_core/utils/retries.py
+  - src/friendli_core/utils/security.py
+  - src/friendli_core/utils/serializers.py
+  - src/friendli_core/utils/url.py
+  - src/friendli_core/utils/values.py
 examples:
   serverlessChatComplete:
     Example:
@@ -493,6 +554,18 @@ examples:
       responses:
         "200":
           application/json: {"text": "What is generative AI?"}
+  serverlessKnowledgeRetrieve:
+    speakeasy-default-serverless-knowledge-retrieve:
+      requestBody:
+        application/json: {"k": 1, "knowledgeIds": ["knowledge-base-id-1"], "query": "Chicken dinner"}
+      responses:
+        "200":
+          application/json: {"results": [{"contentChunkId": "<id>", "contentId": "<id>", "score": 9198.31, "text": "<value>"}]}
+  serverlessModelList:
+    speakeasy-default-serverless-model-list:
+      responses:
+        "200":
+          application/json: {"data": [{"context_length": 547272, "created": 678317, "description": "bob inwardly beautifully comparison", "functionality": {"parallel_tool_call": true, "tool_call": false, "structured_output": true}, "hugging_face_url": "https://lazy-honesty.info/", "id": "<id>", "license": "https://careless-lid.org/", "max_completion_tokens": 410206, "name": "<value>", "policy": "https://funny-grandson.com", "pricing": {"input": 1811.18, "output": 9138.51}}, {"context_length": 33597, "created": 628106, "description": "worth reluctantly wound accompanist ajar though kindheartedly nor fooey a", "functionality": {"parallel_tool_call": true, "tool_call": false, "structured_output": true}, "hugging_face_url": "https://flawless-marimba.com", "id": "<id>", "license": "https://odd-breastplate.info", "max_completion_tokens": 602487, "name": "<value>", "policy": "https://vivacious-request.org/", "pricing": {"input": 5000.63, "output": 2061.63}}, {"context_length": 310383, "created": 710528, "description": "joyfully discourse merrily wherever failing orchestrate", "functionality": {"parallel_tool_call": false, "tool_call": false, "structured_output": true}, "hugging_face_url": "https://linear-molasses.biz", "id": "<id>", "license": "https://unlined-baseboard.name", "max_completion_tokens": 408575, "name": "<value>", "policy": "https://acceptable-validity.info/", "pricing": {"input": 9399.17, "output": 9104.79}}]}
   serverlessToolAssistedChatComplete:
     Example:
       requestBody:
@@ -507,18 +580,6 @@ examples:
       responses:
         "200":
           text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":null,\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\"{\\\"result\\\": \\\"150 * 1.60934=241.401000000000\\\"}\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
-  serverlessKnowledgeRetrieve:
-    speakeasy-default-serverless-knowledge-retrieve:
-      requestBody:
-        application/json: {"k": 1, "knowledgeIds": ["knowledge-base-id-1"], "query": "Chicken dinner"}
-      responses:
-        "200":
-          application/json: {"results": [{"contentChunkId": "<id>", "contentId": "<id>", "score": 8594.49, "text": "<value>"}]}
-  serverlessModelList:
-    speakeasy-default-serverless-model-list:
-      responses:
-        "200":
-          application/json: {"data": []}
   dedicatedChatComplete:
     Example:
       requestBody:
@@ -561,6 +622,13 @@ examples:
       responses:
         "200":
           application/json: {"text": "What is generative AI?"}
+  dedicatedImagesGenerate:
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id)", "num_inference_steps": 10, "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "response_format": "url"}
+      responses:
+        "200":
+          application/json: {"data": [{"response_format": "url", "seed": 123, "url": "(url-to-generated-image)"}]}
   dedicatedEndpointWandbArtifactCreate:
     Example:
       requestBody:
@@ -568,6 +636,130 @@ examples:
       responses:
         "200":
           application/json: {"endpointId": "endpoint-id", "endpointName": "endpoint-name", "projectId": "project-id", "projectName": "project-name", "teamId": "team-id", "teamName": "team-name"}
+  dedicatedCreateEndpoint:
+    speakeasy-default-dedicated-create-endpoint:
+      requestBody:
+        application/json: {"advanced": {"tokenizer_add_special_tokens": true, "tokenizer_skip_special_tokens": false, "max_batch_size": 256, "max_token_count": 2560}, "hfModelRepo": "<value>", "instanceOptionId": "<id>", "name": "<value>", "projectId": "<id>"}
+      responses:
+        "200":
+          application/json: {"createdAt": "2024-04-02T12:48:32.253Z", "status": "INITIALIZING"}
+        "422":
+          application/json: {}
+  dedicatedListEndpoints:
+    speakeasy-default-dedicated-list-endpoints:
+      parameters:
+        query:
+          project_id: ""
+          limit: 20
+        header: {}
+      responses:
+        "200":
+          application/json: {}
+        "422":
+          application/json: {}
+  dedicatedGetEndpoint:
+    speakeasy-default-dedicated-get-endpoint:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"autoscalingCooldown": 700347, "autoscalingMax": 558834, "autoscalingMin": 544221, "autoscalingScaleinFactor": 5212.35, "autoscalingScaleoutFactor": 9699.61, "creatorId": "<id>", "currReplicaCnt": 458049, "desiredReplicaCnt": 450824, "gpuType": "<value>", "maxBatchSize": 262795, "name": "<value>", "numGpu": 213457, "projectId": "<id>", "teamId": "<id>", "tokenizerAddSpecialTokens": false, "tokenizerSkipSpecialTokens": true, "updatedReplicaCnt": 801373}
+        "422":
+          application/json: {}
+  dedicatedUpdateEndpoint:
+    speakeasy-default-dedicated-update-endpoint:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+        header: {}
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"autoscalingCooldown": 857478, "autoscalingMax": 597129, "autoscalingMin": 344620, "autoscalingScaleinFactor": 9914.64, "autoscalingScaleoutFactor": 6276.9, "creatorId": "<id>", "currReplicaCnt": 488852, "desiredReplicaCnt": 984008, "gpuType": "<value>", "maxBatchSize": 54062, "name": "<value>", "numGpu": 896501, "projectId": "<id>", "teamId": "<id>", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "updatedReplicaCnt": 249440}
+        "422":
+          application/json: {}
+  dedicatedDeleteEndpoint:
+    speakeasy-default-dedicated-delete-endpoint:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  dedicatedGetEndpointVersion:
+    speakeasy-default-dedicated-get-endpoint-version:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+        query:
+          limit: 20
+        header: {}
+      responses:
+        "200":
+          application/json: {"key": {"autoscalingCooldown": 530312, "autoscalingMax": 183484, "autoscalingMin": 963055, "autoscalingScaleinFactor": 9463.44, "autoscalingScaleoutFactor": 3274.51, "creatorId": "<id>", "currReplicaCnt": 828241, "desiredReplicaCnt": 260862, "gpuType": "<value>", "maxBatchSize": 394479, "name": "<value>", "numGpu": 222305, "projectId": "<id>", "teamId": "<id>", "tokenizerAddSpecialTokens": false, "tokenizerSkipSpecialTokens": true, "updatedReplicaCnt": 611346}, "key1": {"autoscalingCooldown": 401253, "autoscalingMax": 543559, "autoscalingMin": 114620, "autoscalingScaleinFactor": 2032.06, "autoscalingScaleoutFactor": 3289.03, "creatorId": "<id>", "currReplicaCnt": 567393, "desiredReplicaCnt": 871139, "gpuType": "<value>", "maxBatchSize": 755535, "name": "<value>", "numGpu": 932555, "projectId": "<id>", "teamId": "<id>", "tokenizerAddSpecialTokens": false, "tokenizerSkipSpecialTokens": false, "updatedReplicaCnt": 277560}}
+        "422":
+          application/json: {}
+  dedicatedGetEndpointStatus:
+    speakeasy-default-dedicated-get-endpoint-status:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"createdAt": "2024-06-01T04:57:00.115Z", "status": "TERMINATING"}
+        "422":
+          application/json: {}
+  dedicatedSleepEndpoint:
+    speakeasy-default-dedicated-sleep-endpoint:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"createdAt": "2023-02-20T04:56:04.360Z", "status": "READY"}
+        "422":
+          application/json: {}
+  dedicatedWakeEndpoint:
+    speakeasy-default-dedicated-wake-endpoint:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"createdAt": "2024-06-02T17:24:51.079Z", "status": "FAILED"}
+        "422":
+          application/json: {}
+  dedicatedTerminateEndpoint:
+    speakeasy-default-dedicated-terminate-endpoint:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"createdAt": "2024-03-02T14:19:44.822Z", "status": "RUNNING"}
+        "422":
+          application/json: {}
+  dedicatedRestartEndpoint:
+    speakeasy-default-dedicated-restart-endpoint:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"createdAt": "2023-06-20T22:30:44.855Z", "status": "FAILED"}
+        "422":
+          application/json: {}
   containerChatComplete:
     Example:
       requestBody:
@@ -610,12 +802,53 @@ examples:
       responses:
         "200":
           application/json: {"text": "What is generative AI?"}
-  dedicatedImagesGenerate:
+  containerImagesGenerate:
     Example:
       requestBody:
-        application/json: {"model": "(endpoint-id)", "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "num_inference_steps": 4, "response_format": "url"}
+        application/json: {"guidance_scale": 3.5, "num_inference_steps": 10, "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "response_format": "jpeg"}
       responses:
         "200":
-          application/json: {"data": [{"b64_json": "0x75e5323006", "response_format": "raw", "seed": 105213}]}
-examplesVersion: 1.0.0
+          application/json: {"image": "<base64 encoded image>"}
+  platformFilesUpload:
+    Example:
+      requestBody:
+        multipart/form-data: {"file": {"": "x-file: example.file"}, "purpose": "batch"}
+      responses:
+        "200":
+          application/json: {"bytes": 20020306, "created": 1741186800, "expires": 1741273200, "filename": "lorem.txt", "id": "file-467269656e646c694149204578616d706c65", "object": "file", "purpose": "batch"}
+  platformFilesList:
+    Example:
+      requestBody:
+        application/json: {"limit": 10000, "order": "desc"}
+      responses:
+        "200":
+          application/json: {"data": [{"bytes": 20020306, "created": 1741186800, "expires": 1741273200, "filename": "lorem.txt", "id": "file-467269656e646c694149204578616d706c65", "object": "file", "purpose": "batch"}]}
+  platformFilesRetrieve:
+    Example:
+      parameters:
+        path:
+          file_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"bytes": 20020306, "created": 1741186800, "expires": 1741273200, "filename": "lorem.txt", "id": "file-467269656e646c694149204578616d706c65", "object": "file", "purpose": "batch"}
+  platformFilesDelete:
+    Example:
+      parameters:
+        path:
+          file_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"deleted": "true", "id": "file-467269656e646c694149204578616d706c65", "object": "file"}
+  platformFilesDownload:
+    speakeasy-default-platform-files-download:
+      parameters:
+        path:
+          file_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/octet-stream: "x-file: example.file"
+examplesVersion: 1.0.1
 generatedTests: {}

@@ -6,6 +6,17 @@
 ### Available Operations
 
 * [wandb_artifact_create](#wandb_artifact_create) - Create endpoint from W&B artifact
+* [create](#create) - Create a new endpoint
+* [list](#list) - List all endpoints
+* [get](#get) - Get endpoint specification
+* [update](#update) - Update endpoint spec
+* [delete](#delete) - Delete endpoint
+* [get_version](#get_version) - Get endpoint versions
+* [get_status](#get_status) - Get endpoint status
+* [sleep](#sleep) - Sleep endpoint
+* [wake](#wake) - Wake endpoint
+* [terminate](#terminate) - Terminate endpoint
+* [restart](#restart) - Restart endpoint
 
 ## wandb_artifact_create
 
@@ -51,3 +62,461 @@ with SyncFriendli(
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | models.SDKError | 4XX, 5XX        | \*/\*           |
+
+## create
+
+Create a new endpoint and return its status
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.create(
+        advanced={
+            "tokenizer_add_special_tokens": True,
+            "tokenizer_skip_special_tokens": False,
+        },
+        hf_model_repo="<value>",
+        instance_option_id="<id>",
+        name="<value>",
+        project_id="<id>",
+    )
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `advanced`                                                                                      | [models.EndpointAdvancedConfig](../../models/endpointadvancedconfig.md)                         | :heavy_check_mark:                                                                              | Endpoint advanced config.                                                                       |
+| `hf_model_repo`                                                                                 | *str*                                                                                           | :heavy_check_mark:                                                                              | HF ID of the model.                                                                             |
+| `instance_option_id`                                                                            | *str*                                                                                           | :heavy_check_mark:                                                                              | The ID of the instance option.                                                                  |
+| `name`                                                                                          | *str*                                                                                           | :heavy_check_mark:                                                                              | The name of the endpoint.                                                                       |
+| `project_id`                                                                                    | *str*                                                                                           | :heavy_check_mark:                                                                              | The ID of the project that owns the endpoint.                                                   |
+| `x_friendli_team`                                                                               | *OptionalNullable[str]*                                                                         | :heavy_minus_sign:                                                                              | ID of team to run requests as (optional parameter).                                             |
+| `autoscaling_policy`                                                                            | [OptionalNullable[models.AutoscalingPolicy]](../../models/autoscalingpolicy.md)                 | :heavy_minus_sign:                                                                              | The auto scaling configuration of the endpoint.                                                 |
+| `hf_model_repo_revision`                                                                        | *OptionalNullable[str]*                                                                         | :heavy_minus_sign:                                                                              | HF commit hash of the model.                                                                    |
+| `initial_version_comment`                                                                       | *OptionalNullable[str]*                                                                         | :heavy_minus_sign:                                                                              | The comment for the initial version.                                                            |
+| `simplescale`                                                                                   | [OptionalNullable[models.EndpointSimplescaleConfig]](../../models/endpointsimplescaleconfig.md) | :heavy_minus_sign:                                                                              | The simple scaling configuration of the endpoint.                                               |
+| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
+
+### Response
+
+**[models.DedicatedEndpointStatus](../../models/dedicatedendpointstatus.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## list
+
+List all endpoint statuses
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.list()
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `project_id`                                                           | *OptionalNullable[str]*                                                | :heavy_minus_sign:                                                     | The ID of the project. If omitted, query all endpoints under the team. |
+| `cursor`                                                               | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]*         | :heavy_minus_sign:                                                     | Cursor for pagination                                                  |
+| `limit`                                                                | *OptionalNullable[int]*                                                | :heavy_minus_sign:                                                     | Limit of items per page                                                |
+| `x_friendli_team`                                                      | *OptionalNullable[str]*                                                | :heavy_minus_sign:                                                     | ID of team to run requests as (optional parameter).                    |
+| `retries`                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)       | :heavy_minus_sign:                                                     | Configuration to override the default retry behavior of the client.    |
+
+### Response
+
+**[models.DedicatedEndpointListResponse](../../models/dedicatedendpointlistresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## get
+
+Get the specification of an endpoint
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.get(endpoint_id="<id>")
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `endpoint_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The ID of the endpoint                                              |
+| `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.DedicatedEndpointSpec](../../models/dedicatedendpointspec.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## update
+
+Update the specification of a specific endpoint
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.update(endpoint_id="<id>")
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `endpoint_id`                                                                                   | *str*                                                                                           | :heavy_check_mark:                                                                              | The ID of the endpoint                                                                          |
+| `x_friendli_team`                                                                               | *OptionalNullable[str]*                                                                         | :heavy_minus_sign:                                                                              | ID of team to run requests as (optional parameter).                                             |
+| `advanced`                                                                                      | [OptionalNullable[models.EndpointAdvancedConfig]](../../models/endpointadvancedconfig.md)       | :heavy_minus_sign:                                                                              | The advanced configuration of the endpoint.                                                     |
+| `autoscaling_policy`                                                                            | [OptionalNullable[models.AutoscalingPolicy]](../../models/autoscalingpolicy.md)                 | :heavy_minus_sign:                                                                              | The auto scaling configuration of the endpoint.                                                 |
+| `hf_model_repo`                                                                                 | *OptionalNullable[str]*                                                                         | :heavy_minus_sign:                                                                              | HF ID of the model.                                                                             |
+| `hf_model_repo_revision`                                                                        | *OptionalNullable[str]*                                                                         | :heavy_minus_sign:                                                                              | HF commit hash of the model.                                                                    |
+| `instance_option_id`                                                                            | *OptionalNullable[str]*                                                                         | :heavy_minus_sign:                                                                              | The ID of the instance option.                                                                  |
+| `name`                                                                                          | *OptionalNullable[str]*                                                                         | :heavy_minus_sign:                                                                              | The name of the endpoint.                                                                       |
+| `new_version_comment`                                                                           | *OptionalNullable[str]*                                                                         | :heavy_minus_sign:                                                                              | Comment for the new version.                                                                    |
+| `simplescale`                                                                                   | [OptionalNullable[models.EndpointSimplescaleConfig]](../../models/endpointsimplescaleconfig.md) | :heavy_minus_sign:                                                                              | The simple scaling configuration of the endpoint.                                               |
+| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
+
+### Response
+
+**[models.DedicatedEndpointSpec](../../models/dedicatedendpointspec.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## delete
+
+Delete a specific endpoint
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.delete(endpoint_id="<id>")
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `endpoint_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The ID of the endpoint                                              |
+| `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[Any](../../models/.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## get_version
+
+Get versions of a specific endpoint
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.get_version(endpoint_id="<id>")
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `endpoint_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The ID of the endpoint                                              |
+| `cursor`                                                            | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]*      | :heavy_minus_sign:                                                  | Cursor for pagination                                               |
+| `limit`                                                             | *OptionalNullable[int]*                                             | :heavy_minus_sign:                                                  | Limit of items per page                                             |
+| `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[Dict[str, models.DedicatedEndpointSpec]](../../models/.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## get_status
+
+Get the status of a specific endpoint
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.get_status(endpoint_id="<id>")
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `endpoint_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The ID of the endpoint                                              |
+| `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.DedicatedEndpointStatus](../../models/dedicatedendpointstatus.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## sleep
+
+Put a specific endpoint to sleep
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.sleep(endpoint_id="<id>")
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `endpoint_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The ID of the endpoint                                              |
+| `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.DedicatedEndpointStatus](../../models/dedicatedendpointstatus.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## wake
+
+Wake up a specific endpoint
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.wake(endpoint_id="<id>")
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `endpoint_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The ID of the endpoint                                              |
+| `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.DedicatedEndpointStatus](../../models/dedicatedendpointstatus.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## terminate
+
+Terminate a specific endpoint
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.terminate(endpoint_id="<id>")
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `endpoint_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The ID of the endpoint                                              |
+| `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.DedicatedEndpointStatus](../../models/dedicatedendpointstatus.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## restart
+
+Restart a FAILED or TERMINATED endpoint
+
+### Example Usage
+
+```python
+import os
+
+from friendli import SyncFriendli
+
+with SyncFriendli(
+    token=os.getenv("FRIENDLI_TOKEN", ""),
+) as friendli:
+    res = friendli.dedicated.endpoint.restart(endpoint_id="<id>")
+
+    # Handle response
+    print(res)
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `endpoint_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The ID of the endpoint                                              |
+| `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.DedicatedEndpointStatus](../../models/dedicatedendpointstatus.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
