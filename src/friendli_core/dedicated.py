@@ -8,11 +8,14 @@ from friendli_core.friendlicore_completions import (
     AsyncFriendliCoreCompletions,
     SyncFriendliCoreCompletions,
 )
+from friendli_core.friendlicore_image import (
+    AsyncFriendliCoreImage,
+    SyncFriendliCoreImage,
+)
 from friendli_core.friendlicore_token import (
     AsyncFriendliCoreToken,
     SyncFriendliCoreToken,
 )
-from friendli_core.image import AsyncImage, SyncImage
 
 from .basesdk import AsyncSDK, BaseSDK, SyncSDK
 from .sdkconfiguration import SDKConfiguration
@@ -33,14 +36,14 @@ class SyncDedicated(BaseDedicated, SyncSDK):
     chat: SyncFriendliCoreChat
     completions: SyncFriendliCoreCompletions
     token: SyncFriendliCoreToken
-    image: SyncImage
+    image: SyncFriendliCoreImage
     endpoint: SyncEndpoint
 
     def _init_sdks(self):
         self.chat = SyncFriendliCoreChat(self.sdk_configuration)
         self.completions = SyncFriendliCoreCompletions(self.sdk_configuration)
         self.token = SyncFriendliCoreToken(self.sdk_configuration)
-        self.image = SyncImage(self.sdk_configuration)
+        self.image = SyncFriendliCoreImage(self.sdk_configuration)
         self.endpoint = SyncEndpoint(self.sdk_configuration)
 
 
@@ -48,12 +51,12 @@ class AsyncDedicated(BaseDedicated, AsyncSDK):
     chat: AsyncFriendliCoreChat
     completions: AsyncFriendliCoreCompletions
     token: AsyncFriendliCoreToken
-    image: AsyncImage
+    image: AsyncFriendliCoreImage
     endpoint: AsyncEndpoint
 
     def _init_sdks(self):
         self.chat = AsyncFriendliCoreChat(self.sdk_configuration)
         self.completions = AsyncFriendliCoreCompletions(self.sdk_configuration)
         self.token = AsyncFriendliCoreToken(self.sdk_configuration)
-        self.image = AsyncImage(self.sdk_configuration)
+        self.image = AsyncFriendliCoreImage(self.sdk_configuration)
         self.endpoint = AsyncEndpoint(self.sdk_configuration)
