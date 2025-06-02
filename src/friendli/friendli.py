@@ -14,8 +14,9 @@ from friendli_core.utils.retries import RetryConfig
 
 from .config import Config
 from .container import AsyncContainer, SyncContainer
+from .dataset import AsyncDataset, SyncDataset
 from .dedicated import AsyncDedicated, SyncDedicated
-from .platform import AsyncPlatform, SyncPlatform
+from .file import AsyncFile, SyncFile
 from .serverless import AsyncServerless, SyncServerless
 
 
@@ -49,10 +50,11 @@ class SyncFriendli:
         )
         self._config = config_cls(*args, **kwargs)
 
-        self.serverless = SyncServerless(core=self._core, config=self._config)
-        self.dedicated = SyncDedicated(core=self._core, config=self._config)
         self.container = SyncContainer(core=self._core, config=self._config)
-        self.platform = SyncPlatform(core=self._core, config=self._config)
+        self.dataset = SyncDataset(core=self._core, config=self._config)
+        self.dedicated = SyncDedicated(core=self._core, config=self._config)
+        self.file = SyncFile(core=self._core, config=self._config)
+        self.serverless = SyncServerless(core=self._core, config=self._config)
 
     @property
     def core(self) -> SyncFriendliCore:
@@ -100,10 +102,11 @@ class AsyncFriendli:
         )
         self._config = config_cls(*args, **kwargs)
 
-        self.serverless = AsyncServerless(core=self._core, config=self._config)
-        self.dedicated = AsyncDedicated(core=self._core, config=self._config)
         self.container = AsyncContainer(core=self._core, config=self._config)
-        self.platform = AsyncPlatform(core=self._core, config=self._config)
+        self.dataset = AsyncDataset(core=self._core, config=self._config)
+        self.dedicated = AsyncDedicated(core=self._core, config=self._config)
+        self.file = AsyncFile(core=self._core, config=self._config)
+        self.serverless = AsyncServerless(core=self._core, config=self._config)
 
     @property
     def core(self) -> AsyncFriendliCore:

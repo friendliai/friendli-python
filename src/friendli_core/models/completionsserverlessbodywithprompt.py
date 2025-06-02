@@ -19,11 +19,15 @@ from .responseformat import ResponseFormat, ResponseFormatTypedDict
 from .streamoptions import StreamOptions, StreamOptionsTypedDict
 from .tokensequence import TokenSequence, TokenSequenceTypedDict
 
-PromptTypedDict = TypeAliasType("PromptTypedDict", Union[str, List[str]])
+CompletionsServerlessBodyWithPromptPromptTypedDict = TypeAliasType(
+    "CompletionsServerlessBodyWithPromptPromptTypedDict", Union[str, List[str]]
+)
 r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
 
-Prompt = TypeAliasType("Prompt", Union[str, List[str]])
+CompletionsServerlessBodyWithPromptPrompt = TypeAliasType(
+    "CompletionsServerlessBodyWithPromptPrompt", Union[str, List[str]]
+)
 r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
 
@@ -42,7 +46,7 @@ r"""Seed to control random procedure. If nothing is given, the API generate the 
 class CompletionsServerlessBodyWithPromptTypedDict(TypedDict):
     model: str
     r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
-    prompt: PromptTypedDict
+    prompt: CompletionsServerlessBodyWithPromptPromptTypedDict
     r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
     bad_word_tokens: NotRequired[Nullable[List[TokenSequenceTypedDict]]]
     r"""Same as the above `bad_words` field, but receives token sequences instead of text phrases. This is similar to Hugging Face's [`bad_word_ids`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.bad_words_ids) argument."""
@@ -137,7 +141,7 @@ class CompletionsServerlessBodyWithPrompt(BaseModel):
     model: str
     r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
 
-    prompt: Prompt
+    prompt: CompletionsServerlessBodyWithPromptPrompt
     r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
     bad_word_tokens: OptionalNullable[List[TokenSequence]] = UNSET

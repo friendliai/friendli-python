@@ -19,21 +19,19 @@ class SyncToken(BaseToken, SyncSDK):
     def tokenization(
         self,
         *,
-        model: str,
         prompt: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        model: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessTokenizationSuccess:
+    ) -> models.ContainerTokenizationSuccess:
         """Tokenization
 
         By giving a text input, generate a tokenized output of token IDs.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param prompt: Input text prompt to tokenize.
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param model: Routes the request to a specific adapter.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -46,16 +44,11 @@ class SyncToken(BaseToken, SyncSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessTokenizationRequest(
-            x_friendli_team=x_friendli_team,
-            serverless_tokenization_body=models.ServerlessTokenizationBody(
-                model=model, prompt=prompt
-            ),
-        )
+            base_url = models.CONTAINER_TOKENIZATION_OP_SERVERS[0]
+        request = models.ContainerTokenizationBody(prompt=prompt, model=model)
         req = self._build_request(
             method="POST",
-            path="/serverless/v1/tokenize",
+            path="/v1/tokenize",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -67,11 +60,7 @@ class SyncToken(BaseToken, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_tokenization_body,
-                False,
-                False,
-                "json",
-                models.ServerlessTokenizationBody,
+                request, False, False, "json", models.ContainerTokenizationBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -88,7 +77,7 @@ class SyncToken(BaseToken, SyncSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="serverlessTokenization",
+                operation_id="containerTokenization",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -100,7 +89,7 @@ class SyncToken(BaseToken, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.ServerlessTokenizationSuccess
+                http_res.text, models.ContainerTokenizationSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -124,21 +113,19 @@ class SyncToken(BaseToken, SyncSDK):
     def detokenization(
         self,
         *,
-        model: str,
         tokens: List[int],
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        model: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessDetokenizationSuccess:
+    ) -> models.ContainerDetokenizationSuccess:
         """Detokenization
 
         By giving a list of tokens, generate a detokenized output text string.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param tokens: A token sequence to detokenize.
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param model: Routes the request to a specific adapter.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -151,16 +138,11 @@ class SyncToken(BaseToken, SyncSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessDetokenizationRequest(
-            x_friendli_team=x_friendli_team,
-            serverless_detokenization_body=models.ServerlessDetokenizationBody(
-                model=model, tokens=tokens
-            ),
-        )
+            base_url = models.CONTAINER_DETOKENIZATION_OP_SERVERS[0]
+        request = models.ContainerDetokenizationBody(tokens=tokens, model=model)
         req = self._build_request(
             method="POST",
-            path="/serverless/v1/detokenize",
+            path="/v1/detokenize",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -172,11 +154,7 @@ class SyncToken(BaseToken, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_detokenization_body,
-                False,
-                False,
-                "json",
-                models.ServerlessDetokenizationBody,
+                request, False, False, "json", models.ContainerDetokenizationBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -193,7 +171,7 @@ class SyncToken(BaseToken, SyncSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="serverlessDetokenization",
+                operation_id="containerDetokenization",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -205,7 +183,7 @@ class SyncToken(BaseToken, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.ServerlessDetokenizationSuccess
+                http_res.text, models.ContainerDetokenizationSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -231,21 +209,19 @@ class AsyncToken(BaseToken, AsyncSDK):
     async def tokenization(
         self,
         *,
-        model: str,
         prompt: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        model: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessTokenizationSuccess:
+    ) -> models.ContainerTokenizationSuccess:
         """Tokenization
 
         By giving a text input, generate a tokenized output of token IDs.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param prompt: Input text prompt to tokenize.
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param model: Routes the request to a specific adapter.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -258,16 +234,11 @@ class AsyncToken(BaseToken, AsyncSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessTokenizationRequest(
-            x_friendli_team=x_friendli_team,
-            serverless_tokenization_body=models.ServerlessTokenizationBody(
-                model=model, prompt=prompt
-            ),
-        )
+            base_url = models.CONTAINER_TOKENIZATION_OP_SERVERS[0]
+        request = models.ContainerTokenizationBody(prompt=prompt, model=model)
         req = self._build_request(
             method="POST",
-            path="/serverless/v1/tokenize",
+            path="/v1/tokenize",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -279,11 +250,7 @@ class AsyncToken(BaseToken, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_tokenization_body,
-                False,
-                False,
-                "json",
-                models.ServerlessTokenizationBody,
+                request, False, False, "json", models.ContainerTokenizationBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -300,7 +267,7 @@ class AsyncToken(BaseToken, AsyncSDK):
         http_res = await self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="serverlessTokenization",
+                operation_id="containerTokenization",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -312,7 +279,7 @@ class AsyncToken(BaseToken, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.ServerlessTokenizationSuccess
+                http_res.text, models.ContainerTokenizationSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -336,21 +303,19 @@ class AsyncToken(BaseToken, AsyncSDK):
     async def detokenization(
         self,
         *,
-        model: str,
         tokens: List[int],
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        model: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessDetokenizationSuccess:
+    ) -> models.ContainerDetokenizationSuccess:
         """Detokenization
 
         By giving a list of tokens, generate a detokenized output text string.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models).
         :param tokens: A token sequence to detokenize.
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param model: Routes the request to a specific adapter.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -363,16 +328,11 @@ class AsyncToken(BaseToken, AsyncSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessDetokenizationRequest(
-            x_friendli_team=x_friendli_team,
-            serverless_detokenization_body=models.ServerlessDetokenizationBody(
-                model=model, tokens=tokens
-            ),
-        )
+            base_url = models.CONTAINER_DETOKENIZATION_OP_SERVERS[0]
+        request = models.ContainerDetokenizationBody(tokens=tokens, model=model)
         req = self._build_request(
             method="POST",
-            path="/serverless/v1/detokenize",
+            path="/v1/detokenize",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -384,11 +344,7 @@ class AsyncToken(BaseToken, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_detokenization_body,
-                False,
-                False,
-                "json",
-                models.ServerlessDetokenizationBody,
+                request, False, False, "json", models.ContainerDetokenizationBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -405,7 +361,7 @@ class AsyncToken(BaseToken, AsyncSDK):
         http_res = await self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="serverlessDetokenization",
+                operation_id="containerDetokenization",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -417,7 +373,7 @@ class AsyncToken(BaseToken, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.ServerlessDetokenizationSuccess
+                http_res.text, models.ContainerDetokenizationSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

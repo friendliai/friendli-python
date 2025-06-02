@@ -59,7 +59,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install friendli
+pip install git+https://github.com/friendliai/friendli-python.git
 ```
 
 ### Poetry
@@ -67,7 +67,7 @@ pip install friendli
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add friendli
+poetry add git+https://github.com/friendliai/friendli-python.git
 ```
 
 ### Shell and script usage with `uv`
@@ -269,7 +269,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.serverless.chat.complete(
+    res = friendli.container.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -280,8 +280,8 @@ with SyncFriendli(
                 "role": "user",
             },
         ],
-        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        model="(adapter-route)",
     )
 
     # Handle response
@@ -298,24 +298,43 @@ with SyncFriendli(
 ### [container](docs/sdks/container/README.md)
 
 
-#### [container.chat](docs/sdks/friendlicorecontainerchat/README.md)
+#### [container.chat](docs/sdks/chat/README.md)
 
-* [complete](docs/sdks/friendlicorecontainerchat/README.md#complete) - Chat completions
-* [stream](docs/sdks/friendlicorecontainerchat/README.md#stream) - Stream chat completions
+* [complete](docs/sdks/chat/README.md#complete) - Chat completions
+* [stream](docs/sdks/chat/README.md#stream) - Stream chat completions
 
-#### [container.completions](docs/sdks/friendlicorecontainercompletions/README.md)
+#### [container.completions](docs/sdks/completions/README.md)
 
-* [complete](docs/sdks/friendlicorecontainercompletions/README.md#complete) - Completions
-* [stream](docs/sdks/friendlicorecontainercompletions/README.md#stream) - Stream completions
+* [complete](docs/sdks/completions/README.md#complete) - Completions
+* [stream](docs/sdks/completions/README.md#stream) - Stream completions
 
-#### [container.image](docs/sdks/friendlicoreimage/README.md)
+#### [container.image](docs/sdks/image/README.md)
 
-* [generate](docs/sdks/friendlicoreimage/README.md#generate) - Image generations
+* [generate](docs/sdks/image/README.md#generate) - Image generations
 
-#### [container.token](docs/sdks/friendlicorecontainertoken/README.md)
+#### [container.token](docs/sdks/token/README.md)
 
-* [tokenization](docs/sdks/friendlicorecontainertoken/README.md#tokenization) - Tokenization
-* [detokenization](docs/sdks/friendlicorecontainertoken/README.md#detokenization) - Detokenization
+* [tokenization](docs/sdks/token/README.md#tokenization) - Tokenization
+* [detokenization](docs/sdks/token/README.md#detokenization) - Detokenization
+
+### [dataset](docs/sdks/dataset/README.md)
+
+* [create_dataset](docs/sdks/dataset/README.md#create_dataset) - Create a new dataset
+* [list_datasets](docs/sdks/dataset/README.md#list_datasets) - List datasets
+* [get_dataset](docs/sdks/dataset/README.md#get_dataset) - Get dataset info
+* [delete_dataset](docs/sdks/dataset/README.md#delete_dataset) - Delete dataset
+* [create_version](docs/sdks/dataset/README.md#create_version) - Create a version
+* [list_versions](docs/sdks/dataset/README.md#list_versions) - List versions
+* [get_version](docs/sdks/dataset/README.md#get_version) - Get version info
+* [delete_version](docs/sdks/dataset/README.md#delete_version) - Delete a version
+* [create_split](docs/sdks/dataset/README.md#create_split) - Create a split
+* [list_splits](docs/sdks/dataset/README.md#list_splits) - List splits
+* [get_split](docs/sdks/dataset/README.md#get_split) - Get split info
+* [delete_split](docs/sdks/dataset/README.md#delete_split) - Delete split
+* [add_samples](docs/sdks/dataset/README.md#add_samples) - Add samples
+* [list_samples](docs/sdks/dataset/README.md#list_samples) - List samples
+* [update_samples](docs/sdks/dataset/README.md#update_samples) - Update samples
+* [delete_samples](docs/sdks/dataset/README.md#delete_samples) - Delete samples
 
 ### [dedicated](docs/sdks/dedicated/README.md)
 
@@ -335,49 +354,52 @@ with SyncFriendli(
 * [wandb_artifact_create](docs/sdks/endpoint/README.md#wandb_artifact_create) - Create endpoint from W&B artifact
 * [create](docs/sdks/endpoint/README.md#create) - Create a new endpoint
 * [list](docs/sdks/endpoint/README.md#list) - List all endpoints
-* [get](docs/sdks/endpoint/README.md#get) - Get endpoint specification
+* [get_spec](docs/sdks/endpoint/README.md#get_spec) - Get endpoint specification
 * [update](docs/sdks/endpoint/README.md#update) - Update endpoint spec
 * [delete](docs/sdks/endpoint/README.md#delete) - Delete endpoint
-* [get_version](docs/sdks/endpoint/README.md#get_version) - Get endpoint versions
+* [get_version_history](docs/sdks/endpoint/README.md#get_version_history) - Get endpoint version history
 * [get_status](docs/sdks/endpoint/README.md#get_status) - Get endpoint status
 * [sleep](docs/sdks/endpoint/README.md#sleep) - Sleep endpoint
 * [wake](docs/sdks/endpoint/README.md#wake) - Wake endpoint
 * [terminate](docs/sdks/endpoint/README.md#terminate) - Terminate endpoint
 * [restart](docs/sdks/endpoint/README.md#restart) - Restart endpoint
+* [create_beta](docs/sdks/endpoint/README.md#create_beta) - Create a new endpoint (Beta)
+* [list_beta](docs/sdks/endpoint/README.md#list_beta) - List all endpoints (Beta)
+* [get_spec_beta](docs/sdks/endpoint/README.md#get_spec_beta) - Get endpoint specification (Beta)
+* [update_beta](docs/sdks/endpoint/README.md#update_beta) - Update endpoint spec (Beta)
+* [get_status_beta](docs/sdks/endpoint/README.md#get_status_beta) - Get endpoint status (Beta)
+* [terminate_beta](docs/sdks/endpoint/README.md#terminate_beta) - Terminate endpoint (Beta)
+* [restart_beta](docs/sdks/endpoint/README.md#restart_beta) - Restart endpoint (Beta)
 
-#### [dedicated.image](docs/sdks/image/README.md)
+#### [dedicated.image](docs/sdks/friendlicoreimage/README.md)
 
-* [generate](docs/sdks/image/README.md#generate) - Image generations
+* [generate](docs/sdks/friendlicoreimage/README.md#generate) - Image generations
 
 #### [dedicated.token](docs/sdks/friendlicoretoken/README.md)
 
 * [tokenization](docs/sdks/friendlicoretoken/README.md#tokenization) - Tokenization
 * [detokenization](docs/sdks/friendlicoretoken/README.md#detokenization) - Detokenization
 
+### [file](docs/sdks/file/README.md)
 
-### [platform](docs/sdks/platform/README.md)
+* [init_upload](docs/sdks/file/README.md#init_upload) - Initiate file upload
+* [complete_upload](docs/sdks/file/README.md#complete_upload) - Complete file upload
+* [get_info](docs/sdks/file/README.md#get_info) - Get file info
+* [get_download_url](docs/sdks/file/README.md#get_download_url) - Get file download URL
 
-
-#### [platform.files](docs/sdks/files/README.md)
-
-* [upload](docs/sdks/files/README.md#upload) - Files upload
-* [list](docs/sdks/files/README.md#list) - Files list
-* [retrieve](docs/sdks/files/README.md#retrieve) - File retrieve
-* [delete](docs/sdks/files/README.md#delete) - Files delete
-* [download](docs/sdks/files/README.md#download) - Files download
 
 ### [serverless](docs/sdks/serverless/README.md)
 
 
-#### [serverless.chat](docs/sdks/chat/README.md)
+#### [serverless.chat](docs/sdks/friendlicoreserverlesschat/README.md)
 
-* [complete](docs/sdks/chat/README.md#complete) - Chat completions
-* [stream](docs/sdks/chat/README.md#stream) - Stream chat completions
+* [complete](docs/sdks/friendlicoreserverlesschat/README.md#complete) - Chat completions
+* [stream](docs/sdks/friendlicoreserverlesschat/README.md#stream) - Stream chat completions
 
-#### [serverless.completions](docs/sdks/completions/README.md)
+#### [serverless.completions](docs/sdks/friendlicoreserverlesscompletions/README.md)
 
-* [complete](docs/sdks/completions/README.md#complete) - Completions
-* [stream](docs/sdks/completions/README.md#stream) - Stream completions
+* [complete](docs/sdks/friendlicoreserverlesscompletions/README.md#complete) - Completions
+* [stream](docs/sdks/friendlicoreserverlesscompletions/README.md#stream) - Stream completions
 
 #### [serverless.knowledge](docs/sdks/knowledge/README.md)
 
@@ -387,10 +409,10 @@ with SyncFriendli(
 
 * [list](docs/sdks/model/README.md#list) - Retrieve serverless models
 
-#### [serverless.token](docs/sdks/token/README.md)
+#### [serverless.token](docs/sdks/friendlicoreserverlesstoken/README.md)
 
-* [tokenization](docs/sdks/token/README.md#tokenization) - Tokenization
-* [detokenization](docs/sdks/token/README.md#detokenization) - Detokenization
+* [tokenization](docs/sdks/friendlicoreserverlesstoken/README.md#tokenization) - Tokenization
+* [detokenization](docs/sdks/friendlicoreserverlesstoken/README.md#detokenization) - Detokenization
 
 #### [serverless.tool_assisted_chat](docs/sdks/toolassistedchat/README.md)
 
@@ -420,7 +442,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.serverless.chat.stream(
+    res = friendli.container.chat.stream(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -431,8 +453,8 @@ with SyncFriendli(
                 "role": "user",
             },
         ],
-        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        model="(adapter-route)",
     )
 
     with res as event_stream:
@@ -464,12 +486,13 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.platform.files.upload(
+    res = friendli.dataset.update_samples(
+        dataset_id="<id>",
+        split_id="<id>",
         file={
             "file_name": "example.file",
             "content": open("example.file", "rb"),
         },
-        purpose="batch",
     )
 
     # Handle response
@@ -492,7 +515,7 @@ from friendli.utils import BackoffStrategy, RetryConfig
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.serverless.chat.complete(
+    res = friendli.container.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -503,8 +526,8 @@ with SyncFriendli(
                 "role": "user",
             },
         ],
-        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        model="(adapter-route)",
         retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     )
 
@@ -523,7 +546,7 @@ with SyncFriendli(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.serverless.chat.complete(
+    res = friendli.container.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -534,8 +557,8 @@ with SyncFriendli(
                 "role": "user",
             },
         ],
-        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        model="(adapter-route)",
     )
 
     # Handle response
@@ -557,7 +580,7 @@ By default, an API error will raise a models.SDKError exception, which has the f
 | `.raw_response` | *httpx.Response* | The raw HTTP response |
 | `.body`         | *str*            | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `create` method may raise the following exceptions:
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `delete` method may raise the following exceptions:
 
 | Error Type                 | Status Code | Content Type     |
 | -------------------------- | ----------- | ---------------- |
@@ -576,16 +599,7 @@ with SyncFriendli(
 ) as friendli:
     res = None
     try:
-        res = friendli.dedicated.endpoint.create(
-            advanced={
-                "tokenizer_add_special_tokens": True,
-                "tokenizer_skip_special_tokens": False,
-            },
-            hf_model_repo="<value>",
-            instance_option_id="<id>",
-            name="<value>",
-            project_id="<id>",
-        )
+        res = friendli.dedicated.endpoint.delete(endpoint_id="<id>")
 
         # Handle response
         print(res)
@@ -614,7 +628,7 @@ with SyncFriendli(
     server_url="https://api.friendli.ai",
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.serverless.chat.complete(
+    res = friendli.container.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -625,8 +639,8 @@ with SyncFriendli(
                 "role": "user",
             },
         ],
-        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        model="(adapter-route)",
     )
 
     # Handle response

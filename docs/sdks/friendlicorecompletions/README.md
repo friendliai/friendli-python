@@ -44,7 +44,7 @@ with SyncFriendli(
 
 ### Response
 
-**[models.ServerlessCompletionsSuccess](../../models/serverlesscompletionssuccess.md)**
+**[models.ContainerCompletionsSuccess](../../models/containercompletionssuccess.md)**
 
 ### Errors
 
@@ -90,7 +90,7 @@ with SyncFriendli(
 
 ### Response
 
-**[Union[eventstreaming.EventStream[models.ServerlessCompletionsStreamSuccess], eventstreaming.EventStreamAsync[models.ServerlessCompletionsStreamSuccess]]](../../models/.md)**
+**[Union[eventstreaming.EventStream[models.ContainerCompletionsStreamSuccess], eventstreaming.EventStreamAsync[models.ContainerCompletionsStreamSuccess]]](../../models/.md)**
 
 ### Errors
 

@@ -19,30 +19,28 @@ class SyncImage(BaseImage, SyncSDK):
     def generate(
         self,
         *,
-        model: str,
+        guidance_scale: float,
         num_inference_steps: int,
         prompt: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        guidance_scale: OptionalNullable[float] = UNSET,
+        model: OptionalNullable[str] = UNSET,
         response_format: OptionalNullable[
-            models.DedicatedImageGenerationBodyResponseFormat
-        ] = "url",
+            models.ContainerImageGenerationBodyResponseFormat
+        ] = "jpeg",
         seed: OptionalNullable[int] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedImageGenerateSuccess:
+    ) -> models.ContainerImageGenerateSuccess:
         """Image generations
 
-        Given a description, the model generates image(s).
+        Given a description, the model generates image.
 
-        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
-        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
-        :param prompt: A text description of the desired image(s).
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
-        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
+        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
+        :param prompt: A text description of the desired image.
+        :param model: Routes the request to a specific adapter.
+        :param response_format: The format in which the generated image will be returned. One of `raw` and `jpeg`.
         :param seed: The seed to use for image generation.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -56,21 +54,18 @@ class SyncImage(BaseImage, SyncSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedImagesGenerateRequest(
-            x_friendli_team=x_friendli_team,
-            dedicated_image_generation_body=models.DedicatedImageGenerationBody(
-                model=model,
-                num_inference_steps=num_inference_steps,
-                prompt=prompt,
-                guidance_scale=guidance_scale,
-                response_format=response_format,
-                seed=seed,
-            ),
+            base_url = models.CONTAINER_IMAGES_GENERATE_OP_SERVERS[0]
+        request = models.ContainerImageGenerationBody(
+            guidance_scale=guidance_scale,
+            num_inference_steps=num_inference_steps,
+            prompt=prompt,
+            model=model,
+            response_format=response_format,
+            seed=seed,
         )
         req = self._build_request(
             method="POST",
-            path="/dedicated/v1/images/generations",
+            path="/v1/images/generations",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -82,11 +77,7 @@ class SyncImage(BaseImage, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.dedicated_image_generation_body,
-                False,
-                False,
-                "json",
-                models.DedicatedImageGenerationBody,
+                request, False, False, "json", models.ContainerImageGenerationBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -103,7 +94,7 @@ class SyncImage(BaseImage, SyncSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="dedicatedImagesGenerate",
+                operation_id="containerImagesGenerate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -115,7 +106,7 @@ class SyncImage(BaseImage, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DedicatedImageGenerateSuccess
+                http_res.text, models.ContainerImageGenerateSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -141,30 +132,28 @@ class AsyncImage(BaseImage, AsyncSDK):
     async def generate(
         self,
         *,
-        model: str,
+        guidance_scale: float,
         num_inference_steps: int,
         prompt: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        guidance_scale: OptionalNullable[float] = UNSET,
+        model: OptionalNullable[str] = UNSET,
         response_format: OptionalNullable[
-            models.DedicatedImageGenerationBodyResponseFormat
-        ] = "url",
+            models.ContainerImageGenerationBodyResponseFormat
+        ] = "jpeg",
         seed: OptionalNullable[int] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedImageGenerateSuccess:
+    ) -> models.ContainerImageGenerateSuccess:
         """Image generations
 
-        Given a description, the model generates image(s).
+        Given a description, the model generates image.
 
-        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
-        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
-        :param prompt: A text description of the desired image(s).
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
-        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
+        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
+        :param prompt: A text description of the desired image.
+        :param model: Routes the request to a specific adapter.
+        :param response_format: The format in which the generated image will be returned. One of `raw` and `jpeg`.
         :param seed: The seed to use for image generation.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -178,21 +167,18 @@ class AsyncImage(BaseImage, AsyncSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedImagesGenerateRequest(
-            x_friendli_team=x_friendli_team,
-            dedicated_image_generation_body=models.DedicatedImageGenerationBody(
-                model=model,
-                num_inference_steps=num_inference_steps,
-                prompt=prompt,
-                guidance_scale=guidance_scale,
-                response_format=response_format,
-                seed=seed,
-            ),
+            base_url = models.CONTAINER_IMAGES_GENERATE_OP_SERVERS[0]
+        request = models.ContainerImageGenerationBody(
+            guidance_scale=guidance_scale,
+            num_inference_steps=num_inference_steps,
+            prompt=prompt,
+            model=model,
+            response_format=response_format,
+            seed=seed,
         )
         req = self._build_request(
             method="POST",
-            path="/dedicated/v1/images/generations",
+            path="/v1/images/generations",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -204,11 +190,7 @@ class AsyncImage(BaseImage, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.dedicated_image_generation_body,
-                False,
-                False,
-                "json",
-                models.DedicatedImageGenerationBody,
+                request, False, False, "json", models.ContainerImageGenerationBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -225,7 +207,7 @@ class AsyncImage(BaseImage, AsyncSDK):
         http_res = await self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="dedicatedImagesGenerate",
+                operation_id="containerImagesGenerate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -237,7 +219,7 @@ class AsyncImage(BaseImage, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DedicatedImageGenerateSuccess
+                http_res.text, models.ContainerImageGenerateSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

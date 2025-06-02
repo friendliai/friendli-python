@@ -1,21 +1,20 @@
-speakeasyVersion: 1.535.1
+speakeasyVersion: 1.548.3
 sources:
     Friendli-API-Schema:
         sourceNamespace: friendli-api-schema
-        sourceRevisionDigest: sha256:f286fddced85b1bc7a5d5d896984808762eadffc857eb99f2421ccbaf2ff475e
-        sourceBlobDigest: sha256:198d668ecb6178ba1b89f7e246233cc7a91866d6eb032b0955c3700133f1e230
+        sourceRevisionDigest: sha256:0edcd928bef3a876471d95af46bb05cb1a7c47cede6eb4cc2ca3c249204e8d7e
+        sourceBlobDigest: sha256:e2d9c85d9f4cc5819b2b109f919e692d2fa9baa2833b19257fa01dc9bbd3aa43
         tags:
             - latest
-            - speakeasy-sdk-regen-1744933798
 targets:
     friendli:
         source: Friendli-API-Schema
         sourceNamespace: friendli-api-schema
-        sourceRevisionDigest: sha256:f286fddced85b1bc7a5d5d896984808762eadffc857eb99f2421ccbaf2ff475e
-        sourceBlobDigest: sha256:198d668ecb6178ba1b89f7e246233cc7a91866d6eb032b0955c3700133f1e230
+        sourceRevisionDigest: sha256:0edcd928bef3a876471d95af46bb05cb1a7c47cede6eb4cc2ca3c249204e8d7e
+        sourceBlobDigest: sha256:e2d9c85d9f4cc5819b2b109f919e692d2fa9baa2833b19257fa01dc9bbd3aa43
 workflow:
     workflowVersion: 1.0.0
-    speakeasyVersion: latest
+    speakeasyVersion: 1.548.3
     sources:
         Friendli-API-Schema:
             inputs:
@@ -33,3 +32,4 @@ workflow:
             registry:
                 location: registry.speakeasyapi.dev/friendliai/friendliai/friendli-api-schema-code-samples
             blocking: false
+

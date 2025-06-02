@@ -24,16 +24,8 @@ class DedicatedEndpointSpecTypedDict(TypedDict):
     r"""The maximum number of replicas allowed."""
     autoscaling_min: int
     r"""The minimum number of replicas to maintain."""
-    autoscaling_scalein_factor: float
-    r"""The factor to scale in replicas by."""
-    autoscaling_scaleout_factor: float
-    r"""The factor to scale out replicas by."""
     creator_id: str
     r"""The ID of the user who created the endpoint."""
-    curr_replica_cnt: int
-    r"""The current number of replicas."""
-    desired_replica_cnt: int
-    r"""The desired number of replicas."""
     gpu_type: str
     r"""The type of GPU to use for the endpoint."""
     max_batch_size: int
@@ -50,16 +42,16 @@ class DedicatedEndpointSpecTypedDict(TypedDict):
     r"""Whether to add special tokens in tokenizer input."""
     tokenizer_skip_special_tokens: bool
     r"""Whether to skip special tokens in tokenizer output."""
-    updated_replica_cnt: int
-    r"""The updated number of replicas."""
-    idempotency_key: NotRequired[Nullable[str]]
-    r"""The idempotency key of the endpoint."""
+    curr_replica_cnt: NotRequired[Nullable[int]]
+    r"""The current number of replicas."""
+    desired_replica_cnt: NotRequired[Nullable[int]]
+    r"""The desired number of replicas."""
     instance_id: NotRequired[Nullable[str]]
     r"""The ID of the instance."""
     max_input_length: NotRequired[Nullable[int]]
     r"""The maximum allowed input length."""
-    vm_region: NotRequired[Nullable[str]]
-    r"""The region where the VM is deployed."""
+    updated_replica_cnt: NotRequired[Nullable[int]]
+    r"""The updated number of replicas."""
 
 
 class DedicatedEndpointSpec(BaseModel):
@@ -74,24 +66,8 @@ class DedicatedEndpointSpec(BaseModel):
     autoscaling_min: Annotated[int, pydantic.Field(alias="autoscalingMin")]
     r"""The minimum number of replicas to maintain."""
 
-    autoscaling_scalein_factor: Annotated[
-        float, pydantic.Field(alias="autoscalingScaleinFactor")
-    ]
-    r"""The factor to scale in replicas by."""
-
-    autoscaling_scaleout_factor: Annotated[
-        float, pydantic.Field(alias="autoscalingScaleoutFactor")
-    ]
-    r"""The factor to scale out replicas by."""
-
     creator_id: Annotated[str, pydantic.Field(alias="creatorId")]
     r"""The ID of the user who created the endpoint."""
-
-    curr_replica_cnt: Annotated[int, pydantic.Field(alias="currReplicaCnt")]
-    r"""The current number of replicas."""
-
-    desired_replica_cnt: Annotated[int, pydantic.Field(alias="desiredReplicaCnt")]
-    r"""The desired number of replicas."""
 
     gpu_type: Annotated[str, pydantic.Field(alias="gpuType")]
     r"""The type of GPU to use for the endpoint."""
@@ -121,13 +97,15 @@ class DedicatedEndpointSpec(BaseModel):
     ]
     r"""Whether to skip special tokens in tokenizer output."""
 
-    updated_replica_cnt: Annotated[int, pydantic.Field(alias="updatedReplicaCnt")]
-    r"""The updated number of replicas."""
-
-    idempotency_key: Annotated[
-        OptionalNullable[str], pydantic.Field(alias="idempotencyKey")
+    curr_replica_cnt: Annotated[
+        OptionalNullable[int], pydantic.Field(alias="currReplicaCnt")
     ] = UNSET
-    r"""The idempotency key of the endpoint."""
+    r"""The current number of replicas."""
+
+    desired_replica_cnt: Annotated[
+        OptionalNullable[int], pydantic.Field(alias="desiredReplicaCnt")
+    ] = UNSET
+    r"""The desired number of replicas."""
 
     instance_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="instanceId")
@@ -139,15 +117,27 @@ class DedicatedEndpointSpec(BaseModel):
     ] = UNSET
     r"""The maximum allowed input length."""
 
-    vm_region: Annotated[OptionalNullable[str], pydantic.Field(alias="vmRegion")] = (
-        UNSET
-    )
-    r"""The region where the VM is deployed."""
+    updated_replica_cnt: Annotated[
+        OptionalNullable[int], pydantic.Field(alias="updatedReplicaCnt")
+    ] = UNSET
+    r"""The updated number of replicas."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["idempotencyKey", "instanceId", "maxInputLength", "vmRegion"]
-        nullable_fields = ["idempotencyKey", "instanceId", "maxInputLength", "vmRegion"]
+        optional_fields = [
+            "currReplicaCnt",
+            "desiredReplicaCnt",
+            "instanceId",
+            "maxInputLength",
+            "updatedReplicaCnt",
+        ]
+        nullable_fields = [
+            "currReplicaCnt",
+            "desiredReplicaCnt",
+            "instanceId",
+            "maxInputLength",
+            "updatedReplicaCnt",
+        ]
         null_default_fields = []
 
         serialized = handler(self)

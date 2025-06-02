@@ -2,11 +2,20 @@
 
 from abc import abstractmethod
 
-from friendli_core.chat import AsyncChat, SyncChat
-from friendli_core.completions import AsyncCompletions, SyncCompletions
+from friendli_core.friendlicore_serverless_chat import (
+    AsyncFriendliCoreServerlessChat,
+    SyncFriendliCoreServerlessChat,
+)
+from friendli_core.friendlicore_serverless_completions import (
+    AsyncFriendliCoreServerlessCompletions,
+    SyncFriendliCoreServerlessCompletions,
+)
+from friendli_core.friendlicore_serverless_token import (
+    AsyncFriendliCoreServerlessToken,
+    SyncFriendliCoreServerlessToken,
+)
 from friendli_core.knowledge import AsyncKnowledge, SyncKnowledge
 from friendli_core.model import AsyncModel, SyncModel
-from friendli_core.token import AsyncToken, SyncToken
 from friendli_core.toolassistedchat import AsyncToolAssistedChat, SyncToolAssistedChat
 
 from .basesdk import AsyncSDK, BaseSDK, SyncSDK
@@ -25,34 +34,36 @@ class BaseServerless(BaseSDK):
 
 
 class SyncServerless(BaseServerless, SyncSDK):
-    chat: SyncChat
-    completions: SyncCompletions
-    token: SyncToken
+    chat: SyncFriendliCoreServerlessChat
+    completions: SyncFriendliCoreServerlessCompletions
+    token: SyncFriendliCoreServerlessToken
+    tool_assisted_chat: SyncToolAssistedChat
     knowledge: SyncKnowledge
     model: SyncModel
-    tool_assisted_chat: SyncToolAssistedChat
 
     def _init_sdks(self):
-        self.chat = SyncChat(self.sdk_configuration)
-        self.completions = SyncCompletions(self.sdk_configuration)
-        self.token = SyncToken(self.sdk_configuration)
+        self.chat = SyncFriendliCoreServerlessChat(self.sdk_configuration)
+        self.completions = SyncFriendliCoreServerlessCompletions(self.sdk_configuration)
+        self.token = SyncFriendliCoreServerlessToken(self.sdk_configuration)
+        self.tool_assisted_chat = SyncToolAssistedChat(self.sdk_configuration)
         self.knowledge = SyncKnowledge(self.sdk_configuration)
         self.model = SyncModel(self.sdk_configuration)
-        self.tool_assisted_chat = SyncToolAssistedChat(self.sdk_configuration)
 
 
 class AsyncServerless(BaseServerless, AsyncSDK):
-    chat: AsyncChat
-    completions: AsyncCompletions
-    token: AsyncToken
+    chat: AsyncFriendliCoreServerlessChat
+    completions: AsyncFriendliCoreServerlessCompletions
+    token: AsyncFriendliCoreServerlessToken
+    tool_assisted_chat: AsyncToolAssistedChat
     knowledge: AsyncKnowledge
     model: AsyncModel
-    tool_assisted_chat: AsyncToolAssistedChat
 
     def _init_sdks(self):
-        self.chat = AsyncChat(self.sdk_configuration)
-        self.completions = AsyncCompletions(self.sdk_configuration)
-        self.token = AsyncToken(self.sdk_configuration)
+        self.chat = AsyncFriendliCoreServerlessChat(self.sdk_configuration)
+        self.completions = AsyncFriendliCoreServerlessCompletions(
+            self.sdk_configuration
+        )
+        self.token = AsyncFriendliCoreServerlessToken(self.sdk_configuration)
+        self.tool_assisted_chat = AsyncToolAssistedChat(self.sdk_configuration)
         self.knowledge = AsyncKnowledge(self.sdk_configuration)
         self.model = AsyncModel(self.sdk_configuration)
-        self.tool_assisted_chat = AsyncToolAssistedChat(self.sdk_configuration)
