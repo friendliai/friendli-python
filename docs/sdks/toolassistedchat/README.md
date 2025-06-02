@@ -74,7 +74,7 @@ with SyncFriendli(
 
 ### Response
 
-**[models.ServerlessChatCompleteSuccess](../../models/serverlesschatcompletesuccess.md)**
+**[models.ContainerChatCompleteSuccess](../../models/containerchatcompletesuccess.md)**
 
 ### Errors
 

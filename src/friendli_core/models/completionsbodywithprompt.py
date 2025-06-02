@@ -19,15 +19,11 @@ from .responseformat import ResponseFormat, ResponseFormatTypedDict
 from .streamoptions import StreamOptions, StreamOptionsTypedDict
 from .tokensequence import TokenSequence, TokenSequenceTypedDict
 
-CompletionsBodyWithPromptPromptTypedDict = TypeAliasType(
-    "CompletionsBodyWithPromptPromptTypedDict", Union[str, List[str]]
-)
+PromptTypedDict = TypeAliasType("PromptTypedDict", Union[str, List[str]])
 r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
 
-CompletionsBodyWithPromptPrompt = TypeAliasType(
-    "CompletionsBodyWithPromptPrompt", Union[str, List[str]]
-)
+Prompt = TypeAliasType("Prompt", Union[str, List[str]])
 r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
 
@@ -44,7 +40,7 @@ r"""Seed to control random procedure. If nothing is given, the API generate the 
 
 
 class CompletionsBodyWithPromptTypedDict(TypedDict):
-    prompt: CompletionsBodyWithPromptPromptTypedDict
+    prompt: PromptTypedDict
     r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
     bad_word_tokens: NotRequired[Nullable[List[TokenSequenceTypedDict]]]
     r"""Same as the above `bad_words` field, but receives token sequences instead of text phrases. This is similar to Hugging Face's [`bad_word_ids`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.bad_words_ids) argument."""
@@ -138,7 +134,7 @@ class CompletionsBodyWithPromptTypedDict(TypedDict):
 
 
 class CompletionsBodyWithPrompt(BaseModel):
-    prompt: CompletionsBodyWithPromptPrompt
+    prompt: Prompt
     r"""The prompt (i.e., input text) to generate completions for. Either `prompt` or `tokens` field is required."""
 
     bad_word_tokens: OptionalNullable[List[TokenSequence]] = UNSET

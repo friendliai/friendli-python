@@ -24,16 +24,21 @@ from .responseformat import ResponseFormat, ResponseFormatTypedDict
 from .streamoptions import StreamOptions, StreamOptionsTypedDict
 from .tool import Tool, ToolTypedDict
 
-SeedTypedDict = TypeAliasType("SeedTypedDict", Union[List[int], int])
+ServerlessChatCompletionBodySeedTypedDict = TypeAliasType(
+    "ServerlessChatCompletionBodySeedTypedDict", Union[List[int], int]
+)
 r"""Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
 
 
-Seed = TypeAliasType("Seed", Union[List[int], int])
+ServerlessChatCompletionBodySeed = TypeAliasType(
+    "ServerlessChatCompletionBodySeed", Union[List[int], int]
+)
 r"""Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
 
 
-ToolChoiceTypedDict = TypeAliasType(
-    "ToolChoiceTypedDict", Union[ChatCompleteBodyToolChoiceTypedDict, str]
+ServerlessChatCompletionBodyToolChoiceTypedDict = TypeAliasType(
+    "ServerlessChatCompletionBodyToolChoiceTypedDict",
+    Union[ChatCompleteBodyToolChoiceTypedDict, str],
 )
 r"""Determines the tool calling behavior of the model.
 When set to `none`, the model will bypass tool execution and generate a response directly.
@@ -44,7 +49,9 @@ You can also specify a particular tool by `{\"type\": \"function\", \"function\"
 """
 
 
-ToolChoice = TypeAliasType("ToolChoice", Union[ChatCompleteBodyToolChoice, str])
+ServerlessChatCompletionBodyToolChoice = TypeAliasType(
+    "ServerlessChatCompletionBodyToolChoice", Union[ChatCompleteBodyToolChoice, str]
+)
 r"""Determines the tool calling behavior of the model.
 When set to `none`, the model will bypass tool execution and generate a response directly.
 In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.
@@ -101,7 +108,7 @@ class ServerlessChatCompletionBodyTypedDict(TypedDict):
 
 
     """
-    seed: NotRequired[Nullable[SeedTypedDict]]
+    seed: NotRequired[Nullable[ServerlessChatCompletionBodySeedTypedDict]]
     r"""Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
     stop: NotRequired[Nullable[List[str]]]
     r"""When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list."""
@@ -114,7 +121,7 @@ class ServerlessChatCompletionBodyTypedDict(TypedDict):
     """
     temperature: NotRequired[Nullable[float]]
     r"""Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument."""
-    tool_choice: NotRequired[ToolChoiceTypedDict]
+    tool_choice: NotRequired[ServerlessChatCompletionBodyToolChoiceTypedDict]
     r"""Determines the tool calling behavior of the model.
     When set to `none`, the model will bypass tool execution and generate a response directly.
     In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.
@@ -200,7 +207,7 @@ class ServerlessChatCompletionBody(BaseModel):
 
     """
 
-    seed: OptionalNullable[Seed] = UNSET
+    seed: OptionalNullable[ServerlessChatCompletionBodySeed] = UNSET
     r"""Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
 
     stop: OptionalNullable[List[str]] = UNSET
@@ -218,7 +225,7 @@ class ServerlessChatCompletionBody(BaseModel):
     temperature: OptionalNullable[float] = UNSET
     r"""Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument."""
 
-    tool_choice: Optional[ToolChoice] = None
+    tool_choice: Optional[ServerlessChatCompletionBodyToolChoice] = None
     r"""Determines the tool calling behavior of the model.
     When set to `none`, the model will bypass tool execution and generate a response directly.
     In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.

@@ -9,8 +9,9 @@ import httpx
 from friendli_core import models, utils
 from friendli_core._hooks import SDKHooks
 from friendli_core.container import AsyncContainer, SyncContainer
+from friendli_core.dataset import AsyncDataset, SyncDataset
 from friendli_core.dedicated import AsyncDedicated, SyncDedicated
-from friendli_core.platform import AsyncPlatform, SyncPlatform
+from friendli_core.file import AsyncFile, SyncFile
 from friendli_core.serverless import AsyncServerless, SyncServerless
 from friendli_core.types import UNSET, OptionalNullable
 
@@ -111,16 +112,18 @@ class BaseFriendliCore(BaseSDK):
 
 
 class SyncFriendliCore(BaseFriendliCore, SyncSDK):
-    serverless: SyncServerless
-    dedicated: SyncDedicated
     container: SyncContainer
-    platform: SyncPlatform
+    dedicated: SyncDedicated
+    serverless: SyncServerless
+    dataset: SyncDataset
+    file: SyncFile
 
     def _init_sdks(self):
-        self.serverless = SyncServerless(self.sdk_configuration)
-        self.dedicated = SyncDedicated(self.sdk_configuration)
         self.container = SyncContainer(self.sdk_configuration)
-        self.platform = SyncPlatform(self.sdk_configuration)
+        self.dedicated = SyncDedicated(self.sdk_configuration)
+        self.serverless = SyncServerless(self.sdk_configuration)
+        self.dataset = SyncDataset(self.sdk_configuration)
+        self.file = SyncFile(self.sdk_configuration)
 
     def __enter__(self):
         return self
@@ -134,16 +137,18 @@ class SyncFriendliCore(BaseFriendliCore, SyncSDK):
 
 
 class AsyncFriendliCore(BaseFriendliCore, AsyncSDK):
-    serverless: AsyncServerless
-    dedicated: AsyncDedicated
     container: AsyncContainer
-    platform: AsyncPlatform
+    dedicated: AsyncDedicated
+    serverless: AsyncServerless
+    dataset: AsyncDataset
+    file: AsyncFile
 
     def _init_sdks(self):
-        self.serverless = AsyncServerless(self.sdk_configuration)
-        self.dedicated = AsyncDedicated(self.sdk_configuration)
         self.container = AsyncContainer(self.sdk_configuration)
-        self.platform = AsyncPlatform(self.sdk_configuration)
+        self.dedicated = AsyncDedicated(self.sdk_configuration)
+        self.serverless = AsyncServerless(self.sdk_configuration)
+        self.dataset = AsyncDataset(self.sdk_configuration)
+        self.file = AsyncFile(self.sdk_configuration)
 
     async def __aenter__(self):
         return self

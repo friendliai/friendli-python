@@ -64,7 +64,7 @@ class SyncFriendliCoreChat(BaseFriendliCoreChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteSuccess:
         """Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -191,7 +191,7 @@ class SyncFriendliCoreChat(BaseFriendliCoreChat, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.ServerlessChatCompleteSuccess
+                http_res.text, models.ContainerChatCompleteSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -260,7 +260,7 @@ class SyncFriendliCoreChat(BaseFriendliCoreChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.ServerlessChatCompletionStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ContainerChatCompletionStreamSuccess]:
         """Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -391,7 +391,7 @@ class SyncFriendliCoreChat(BaseFriendliCoreChat, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.ServerlessChatCompletionStreamSuccess
+                    raw, models.ContainerChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
             )
@@ -464,7 +464,7 @@ class AsyncFriendliCoreChat(BaseFriendliCoreChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteSuccess:
         """Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -591,7 +591,7 @@ class AsyncFriendliCoreChat(BaseFriendliCoreChat, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.ServerlessChatCompleteSuccess
+                http_res.text, models.ContainerChatCompleteSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -660,7 +660,7 @@ class AsyncFriendliCoreChat(BaseFriendliCoreChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.ServerlessChatCompletionStreamSuccess]:
+    ) -> eventstreaming.EventStreamAsync[models.ContainerChatCompletionStreamSuccess]:
         """Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -791,7 +791,7 @@ class AsyncFriendliCoreChat(BaseFriendliCoreChat, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.ServerlessChatCompletionStreamSuccess
+                    raw, models.ContainerChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
             )
