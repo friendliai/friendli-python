@@ -64,7 +64,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteSuccess:
         """Tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
@@ -188,7 +188,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.ServerlessChatCompleteSuccess
+                http_res.text, models.ContainerChatCompleteSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -461,7 +461,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteSuccess:
         """Tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
@@ -585,7 +585,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.ServerlessChatCompleteSuccess
+                http_res.text, models.ContainerChatCompleteSuccess
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

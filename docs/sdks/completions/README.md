@@ -1,5 +1,5 @@
 # Completions
-(*serverless.completions*)
+(*container.completions*)
 
 ## Overview
 
@@ -22,9 +22,8 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.serverless.completions.complete(
-        serverless_completions_body={
-            "model": "meta-llama-3.1-8b-instruct",
+    res = friendli.container.completions.complete(
+        request={
             "prompt": "Say this is a test!",
             "stream": False,
         }
@@ -36,15 +35,15 @@ with SyncFriendli(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `serverless_completions_body`                                                 | [models.ServerlessCompletionsBody](../../models/serverlesscompletionsbody.md) | :heavy_check_mark:                                                            | N/A                                                                           | {<br/>"model": "meta-llama-3.1-8b-instruct",<br/>"prompt": "Say this is a test!"<br/>} |
-| `x_friendli_team`                                                             | *OptionalNullable[str]*                                                       | :heavy_minus_sign:                                                            | ID of team to run requests as (optional parameter).                           |                                                                               |
-| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |                                                                               |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [models.ContainerCompletionsBody](../../models/containercompletionsbody.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
+| `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |
+| `server_url`                                                                | *Optional[str]*                                                             | :heavy_minus_sign:                                                          | An optional server URL to use.                                              |
 
 ### Response
 
-**[models.ServerlessCompletionsSuccess](../../models/serverlesscompletionssuccess.md)**
+**[models.ContainerCompletionsSuccess](../../models/containercompletionssuccess.md)**
 
 ### Errors
 
@@ -66,9 +65,8 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.serverless.completions.stream(
-        serverless_completions_stream_body={
-            "model": "meta-llama-3.1-8b-instruct",
+    res = friendli.container.completions.stream(
+        request={
             "prompt": "Say this is a test!",
             "stream": True,
         }
@@ -82,15 +80,15 @@ with SyncFriendli(
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `serverless_completions_stream_body`                                                      | [models.ServerlessCompletionsStreamBody](../../models/serverlesscompletionsstreambody.md) | :heavy_check_mark:                                                                        | N/A                                                                                       | {<br/>"model": "meta-llama-3.1-8b-instruct",<br/>"prompt": "Say this is a test!"<br/>}    |
-| `x_friendli_team`                                                                         | *OptionalNullable[str]*                                                                   | :heavy_minus_sign:                                                                        | ID of team to run requests as (optional parameter).                                       |                                                                                           |
-| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |                                                                                           |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `request`                                                                               | [models.ContainerCompletionsStreamBody](../../models/containercompletionsstreambody.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
+| `server_url`                                                                            | *Optional[str]*                                                                         | :heavy_minus_sign:                                                                      | An optional server URL to use.                                                          |
 
 ### Response
 
-**[Union[eventstreaming.EventStream[models.ServerlessCompletionsStreamSuccess], eventstreaming.EventStreamAsync[models.ServerlessCompletionsStreamSuccess]]](../../models/.md)**
+**[Union[eventstreaming.EventStream[models.ContainerCompletionsStreamSuccess], eventstreaming.EventStreamAsync[models.ContainerCompletionsStreamSuccess]]](../../models/.md)**
 
 ### Errors
 

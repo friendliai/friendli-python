@@ -2,22 +2,10 @@
 
 from abc import abstractmethod
 
-from friendli_core.friendlicore_container_chat import (
-    AsyncFriendliCoreContainerChat,
-    SyncFriendliCoreContainerChat,
-)
-from friendli_core.friendlicore_container_completions import (
-    AsyncFriendliCoreContainerCompletions,
-    SyncFriendliCoreContainerCompletions,
-)
-from friendli_core.friendlicore_container_token import (
-    AsyncFriendliCoreContainerToken,
-    SyncFriendliCoreContainerToken,
-)
-from friendli_core.friendlicore_image import (
-    AsyncFriendliCoreImage,
-    SyncFriendliCoreImage,
-)
+from friendli_core.chat import AsyncChat, SyncChat
+from friendli_core.completions import AsyncCompletions, SyncCompletions
+from friendli_core.image import AsyncImage, SyncImage
+from friendli_core.token import AsyncToken, SyncToken
 
 from .basesdk import AsyncSDK, BaseSDK, SyncSDK
 from .sdkconfiguration import SDKConfiguration
@@ -35,26 +23,26 @@ class BaseContainer(BaseSDK):
 
 
 class SyncContainer(BaseContainer, SyncSDK):
-    chat: SyncFriendliCoreContainerChat
-    completions: SyncFriendliCoreContainerCompletions
-    token: SyncFriendliCoreContainerToken
-    image: SyncFriendliCoreImage
+    chat: SyncChat
+    completions: SyncCompletions
+    token: SyncToken
+    image: SyncImage
 
     def _init_sdks(self):
-        self.chat = SyncFriendliCoreContainerChat(self.sdk_configuration)
-        self.completions = SyncFriendliCoreContainerCompletions(self.sdk_configuration)
-        self.token = SyncFriendliCoreContainerToken(self.sdk_configuration)
-        self.image = SyncFriendliCoreImage(self.sdk_configuration)
+        self.chat = SyncChat(self.sdk_configuration)
+        self.completions = SyncCompletions(self.sdk_configuration)
+        self.token = SyncToken(self.sdk_configuration)
+        self.image = SyncImage(self.sdk_configuration)
 
 
 class AsyncContainer(BaseContainer, AsyncSDK):
-    chat: AsyncFriendliCoreContainerChat
-    completions: AsyncFriendliCoreContainerCompletions
-    token: AsyncFriendliCoreContainerToken
-    image: AsyncFriendliCoreImage
+    chat: AsyncChat
+    completions: AsyncCompletions
+    token: AsyncToken
+    image: AsyncImage
 
     def _init_sdks(self):
-        self.chat = AsyncFriendliCoreContainerChat(self.sdk_configuration)
-        self.completions = AsyncFriendliCoreContainerCompletions(self.sdk_configuration)
-        self.token = AsyncFriendliCoreContainerToken(self.sdk_configuration)
-        self.image = AsyncFriendliCoreImage(self.sdk_configuration)
+        self.chat = AsyncChat(self.sdk_configuration)
+        self.completions = AsyncCompletions(self.sdk_configuration)
+        self.token = AsyncToken(self.sdk_configuration)
+        self.image = AsyncImage(self.sdk_configuration)
