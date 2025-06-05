@@ -529,9 +529,9 @@ with SyncFriendli(
         dataset_id="304268",
         split_id="345943",
         request_body=[
-            "0xA76F67a260".encode(),
-            "0x0274A1ADf1".encode(),
-            "0x626BF2e0Df".encode(),
+            "0xA76F67a260",
+            "0x0274A1ADf1",
+            "0x626BF2e0Df",
         ],
     )
 
@@ -545,7 +545,7 @@ with SyncFriendli(
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `dataset_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | ID of the dataset.                                                  |
 | `split_id`                                                          | *str*                                                               | :heavy_check_mark:                                                  | ID of the split.                                                    |
-| `request_body`                                                      | List[*bytes*]                                                       | :heavy_check_mark:                                                  | N/A                                                                 |
+| `request_body`                                                      | List[*str*]                                                         | :heavy_check_mark:                                                  | N/A                                                                 |
 | `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
