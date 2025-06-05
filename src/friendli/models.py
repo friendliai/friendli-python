@@ -10,6 +10,7 @@ from typing import (
     TYPE_CHECKING,
     Annotated,
     Any,
+    ByteString,
     Callable,
     Literal,
     Union,
@@ -286,15 +287,6 @@ class Message(RootModel[SystemMessage | UserMessage | AssistantMessage | ToolMes
 
 class Sample(BaseModel):
     messages: list[Message]
-
-    def to_bytes(self) -> bytes:
-        """Convert the sample to bytes, which is what the backend expects.
-
-        Returns:
-            bytes: The sample in bytes.
-        """
-
-        return self.model_dump_json().encode()
 
 
 class S3Dsn(AnyUrl):

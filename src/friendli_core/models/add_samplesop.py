@@ -28,7 +28,7 @@ class AddSamplesRequestTypedDict(TypedDict):
     r"""ID of the dataset."""
     split_id: str
     r"""ID of the split."""
-    request_body: List[bytes]
+    request_body: List[str]
     x_friendli_team: NotRequired[Nullable[str]]
     r"""ID of team to run requests as (optional parameter)."""
 
@@ -45,8 +45,7 @@ class AddSamplesRequest(BaseModel):
     r"""ID of the split."""
 
     request_body: Annotated[
-        List[bytes],
-        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+        List[str], FieldMetadata(request=RequestMetadata(media_type="application/json"))
     ]
 
     x_friendli_team: Annotated[

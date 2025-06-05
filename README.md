@@ -43,10 +43,6 @@ When using Friendli Python SDK, you need to provide a Friendli Token for authent
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 > [!NOTE]
 > **Python version upgrade policy**
 >
@@ -269,7 +265,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.chat.complete(
+    res = friendli.dedicated.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -429,7 +425,7 @@ with SyncFriendli(
 operations. These operations will expose the stream as [Generator][generator] that
 can be consumed using a simple `for` loop. The loop will
 terminate when the server no longer has any events to send and closes the
-underlying connection.  
+underlying connection.
 
 The stream is also a [Context Manager][context-manager] and can be used with the `with` statement and will close the
 underlying connection when the context is exited.
@@ -442,7 +438,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.chat.stream(
+    res = friendli.dedicated.chat.stream(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -453,8 +449,8 @@ with SyncFriendli(
                 "role": "user",
             },
         ],
+        model="(endpoint-id)",
         max_tokens=200,
-        model="(adapter-route)",
     )
 
     with res as event_stream:
@@ -515,7 +511,7 @@ from friendli.utils import BackoffStrategy, RetryConfig
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.chat.complete(
+    res = friendli.dedicated.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -546,7 +542,7 @@ with SyncFriendli(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.chat.complete(
+    res = friendli.dedicated.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -628,7 +624,7 @@ with SyncFriendli(
     server_url="https://api.friendli.ai",
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.chat.complete(
+    res = friendli.dedicated.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -658,7 +654,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.chat.complete(
+    res = friendli.dedicated.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
