@@ -1248,7 +1248,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         *,
         dataset_id: str,
         split_id: str,
-        request_body: List[bytes],
+        request_body: List[str],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1296,7 +1296,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body, False, False, "json", List[bytes]
+                request.request_body, False, False, "json", List[str]
             ),
             timeout_ms=timeout_ms,
         )
@@ -2918,7 +2918,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         *,
         dataset_id: str,
         split_id: str,
-        request_body: List[bytes],
+        request_body: List[str],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2966,7 +2966,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body, False, False, "json", List[bytes]
+                request.request_body, False, False, "json", List[str]
             ),
             timeout_ms=timeout_ms,
         )
