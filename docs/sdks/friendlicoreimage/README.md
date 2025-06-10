@@ -25,6 +25,7 @@ with SyncFriendli(
         model="(endpoint-id)",
         num_inference_steps=10,
         prompt="An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.",
+        response_format="url",
     )
 
     # Handle response

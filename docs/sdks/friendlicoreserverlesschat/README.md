@@ -35,6 +35,7 @@ with SyncFriendli(
         ],
         model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        stream=False,
     )
 
     # Handle response
@@ -109,6 +110,7 @@ with SyncFriendli(
         ],
         model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        stream=True,
     )
 
     with res as event_stream:

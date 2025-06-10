@@ -89,6 +89,7 @@ class SyncFriendliCoreServerlessCompletions(
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessCompletionsComplete",
                 oauth2_scopes=[],
@@ -196,6 +197,7 @@ class SyncFriendliCoreServerlessCompletions(
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessCompletionsStream",
                 oauth2_scopes=[],
@@ -310,6 +312,7 @@ class AsyncFriendliCoreServerlessCompletions(
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessCompletionsComplete",
                 oauth2_scopes=[],
@@ -417,6 +420,7 @@ class AsyncFriendliCoreServerlessCompletions(
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessCompletionsStream",
                 oauth2_scopes=[],

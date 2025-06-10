@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "friendli-core"
-__version__: str = "0.10.1"
+__version__: str = "0.10.2"
 __openapi_doc_version__: str = "0.1.0"
-__gen_version__: str = "2.605.6"
-__user_agent__: str = "speakeasy-sdk/python 0.10.1 2.605.6 0.1.0 friendli-core"
+__gen_version__: str = "2.623.4"
+__user_agent__: str = "speakeasy-sdk/python 0.10.2 2.623.4 0.1.0 friendli-core"
 
 try:
     if __package__ is not None:

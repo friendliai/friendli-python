@@ -35,6 +35,7 @@ with SyncFriendli(
         ],
         model="(endpoint-id)",
         max_tokens=200,
+        stream=False,
     )
 
     # Handle response
@@ -109,6 +110,7 @@ with SyncFriendli(
         ],
         model="(endpoint-id)",
         max_tokens=200,
+        stream=True,
     )
 
     with res as event_stream:

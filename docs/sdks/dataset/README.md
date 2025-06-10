@@ -79,7 +79,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dataset.list_datasets(project_id="<id>")
+    res = friendli.dataset.list_datasets(project_id="<id>", limit=20)
 
     # Handle response
     print(res)
@@ -402,7 +402,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dataset.list_splits(dataset_id="494482")
+    res = friendli.dataset.list_splits(dataset_id="494482", limit=20)
 
     # Handle response
     print(res)
@@ -574,7 +574,9 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dataset.list_samples(dataset_id="282743", split_id="505420")
+    res = friendli.dataset.list_samples(
+        dataset_id="282743", split_id="505420", limit=20
+    )
 
     # Handle response
     print(res)

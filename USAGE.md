@@ -26,6 +26,7 @@ with SyncFriendli(
         ],
         model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        stream=False,
     )
 
     # Handle response
@@ -60,6 +61,7 @@ async def main():
             ],
             model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
+            stream=False,
         )
 
         # Handle response
@@ -92,6 +94,7 @@ with SyncFriendli(
         ],
         model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        stream=False,
         tools=[
             {
                 "type": "math:calculator",
@@ -127,6 +130,7 @@ async def main():
             ],
             model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
+            stream=False,
             tools=[
                 {
                     "type": "math:calculator",
