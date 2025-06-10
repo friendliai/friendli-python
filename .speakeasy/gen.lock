@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
-  docChecksum: 394eead63f70eaaeb118d6663db1a426
+  docChecksum: 52ffa94ecd4431370a3fcf59b4683590
   docVersion: 0.1.0
-  speakeasyVersion: 1.558.1
-  generationVersion: 2.623.4
-  releaseVersion: 0.10.2
-  configChecksum: 19a1e6846115e745c5119596f66e9c1d
+  speakeasyVersion: 1.559.0
+  generationVersion: 2.624.0
+  releaseVersion: 0.10.3
+  configChecksum: 9cb48e0cbdf8b8d0f021f8146624cb78
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
@@ -132,7 +132,6 @@ generatedFiles:
   - docs/models/dedicatedcompletionscompleterequest.md
   - docs/models/dedicatedcompletionsstreambody.md
   - docs/models/dedicatedcompletionsstreamrequest.md
-  - docs/models/dedicatedcreateendpointbetarequest.md
   - docs/models/dedicatedcreateendpointrequest.md
   - docs/models/dedicateddatasetmodality.md
   - docs/models/dedicateddatasetmodalitytype.md
@@ -143,33 +142,26 @@ generatedFiles:
   - docs/models/dedicatedendpointcreatebody.md
   - docs/models/dedicatedendpointlistresponse.md
   - docs/models/dedicatedendpointspec.md
-  - docs/models/dedicatedendpointspecbeta.md
   - docs/models/dedicatedendpointstatus.md
   - docs/models/dedicatedendpointupdatebody.md
   - docs/models/dedicatedendpointversionhistoryresponse.md
   - docs/models/dedicatedendpointwandbartifactcreatebody.md
   - docs/models/dedicatedendpointwandbartifactcreaterequest.md
   - docs/models/dedicatedendpointwandbartifactcreateresponse.md
-  - docs/models/dedicatedgetendpointbetarequest.md
   - docs/models/dedicatedgetendpointrequest.md
-  - docs/models/dedicatedgetendpointstatusbetarequest.md
   - docs/models/dedicatedgetendpointstatusrequest.md
   - docs/models/dedicatedgetendpointversionhistoryrequest.md
   - docs/models/dedicatedimagegeneratesuccess.md
   - docs/models/dedicatedimagegenerationbody.md
   - docs/models/dedicatedimagegenerationbodyresponseformat.md
   - docs/models/dedicatedimagesgeneraterequest.md
-  - docs/models/dedicatedlistendpointsbetarequest.md
   - docs/models/dedicatedlistendpointsrequest.md
-  - docs/models/dedicatedrestartendpointbetarequest.md
   - docs/models/dedicatedrestartendpointrequest.md
   - docs/models/dedicatedsleependpointrequest.md
-  - docs/models/dedicatedterminateendpointbetarequest.md
   - docs/models/dedicatedterminateendpointrequest.md
   - docs/models/dedicatedtokenizationbody.md
   - docs/models/dedicatedtokenizationrequest.md
   - docs/models/dedicatedtokenizationsuccess.md
-  - docs/models/dedicatedupdateendpointbetarequest.md
   - docs/models/dedicatedupdateendpointrequest.md
   - docs/models/dedicatedwakeendpointrequest.md
   - docs/models/deletedatasetrequest.md
@@ -417,7 +409,6 @@ generatedFiles:
   - src/friendli_core/models/dedicatedcompletionscompleteop.py
   - src/friendli_core/models/dedicatedcompletionsstreambody.py
   - src/friendli_core/models/dedicatedcompletionsstreamop.py
-  - src/friendli_core/models/dedicatedcreateendpointbetaop.py
   - src/friendli_core/models/dedicatedcreateendpointop.py
   - src/friendli_core/models/dedicateddatasetmodality.py
   - src/friendli_core/models/dedicateddatasetmodalitytype.py
@@ -428,32 +419,25 @@ generatedFiles:
   - src/friendli_core/models/dedicatedendpointcreatebody.py
   - src/friendli_core/models/dedicatedendpointlistresponse.py
   - src/friendli_core/models/dedicatedendpointspec.py
-  - src/friendli_core/models/dedicatedendpointspecbeta.py
   - src/friendli_core/models/dedicatedendpointstatus.py
   - src/friendli_core/models/dedicatedendpointupdatebody.py
   - src/friendli_core/models/dedicatedendpointversionhistoryresponse.py
   - src/friendli_core/models/dedicatedendpointwandbartifactcreatebody.py
   - src/friendli_core/models/dedicatedendpointwandbartifactcreateop.py
   - src/friendli_core/models/dedicatedendpointwandbartifactcreateresponse.py
-  - src/friendli_core/models/dedicatedgetendpointbetaop.py
   - src/friendli_core/models/dedicatedgetendpointop.py
-  - src/friendli_core/models/dedicatedgetendpointstatusbetaop.py
   - src/friendli_core/models/dedicatedgetendpointstatusop.py
   - src/friendli_core/models/dedicatedgetendpointversionhistoryop.py
   - src/friendli_core/models/dedicatedimagegeneratesuccess.py
   - src/friendli_core/models/dedicatedimagegenerationbody.py
   - src/friendli_core/models/dedicatedimagesgenerateop.py
-  - src/friendli_core/models/dedicatedlistendpointsbetaop.py
   - src/friendli_core/models/dedicatedlistendpointsop.py
-  - src/friendli_core/models/dedicatedrestartendpointbetaop.py
   - src/friendli_core/models/dedicatedrestartendpointop.py
   - src/friendli_core/models/dedicatedsleependpointop.py
-  - src/friendli_core/models/dedicatedterminateendpointbetaop.py
   - src/friendli_core/models/dedicatedterminateendpointop.py
   - src/friendli_core/models/dedicatedtokenizationbody.py
   - src/friendli_core/models/dedicatedtokenizationop.py
   - src/friendli_core/models/dedicatedtokenizationsuccess.py
-  - src/friendli_core/models/dedicatedupdateendpointbetaop.py
   - src/friendli_core/models/dedicatedupdateendpointop.py
   - src/friendli_core/models/dedicatedwakeendpointop.py
   - src/friendli_core/models/delete_datasetop.py

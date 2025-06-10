@@ -59,7 +59,7 @@ class SyncFile(BaseFile, SyncSDK):
         )
         req = self._build_request(
             method="POST",
-            path="/beta/file/",
+            path="/beta/file",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -471,7 +471,7 @@ class AsyncFile(BaseFile, AsyncSDK):
         )
         req = self._build_request(
             method="POST",
-            path="/beta/file/",
+            path="/beta/file",
             base_url=base_url,
             url_variables=url_variables,
             request=request,

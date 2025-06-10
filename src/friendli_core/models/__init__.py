@@ -264,10 +264,6 @@ if TYPE_CHECKING:
         DedicatedCompletionsStreamRequest,
         DedicatedCompletionsStreamRequestTypedDict,
     )
-    from .dedicatedcreateendpointbetaop import (
-        DedicatedCreateEndpointBetaRequest,
-        DedicatedCreateEndpointBetaRequestTypedDict,
-    )
     from .dedicatedcreateendpointop import (
         DedicatedCreateEndpointRequest,
         DedicatedCreateEndpointRequestTypedDict,
@@ -305,10 +301,6 @@ if TYPE_CHECKING:
         DedicatedEndpointSpec,
         DedicatedEndpointSpecTypedDict,
     )
-    from .dedicatedendpointspecbeta import (
-        DedicatedEndpointSpecBeta,
-        DedicatedEndpointSpecBetaTypedDict,
-    )
     from .dedicatedendpointstatus import (
         DedicatedEndpointStatus,
         DedicatedEndpointStatusTypedDict,
@@ -334,17 +326,9 @@ if TYPE_CHECKING:
         DedicatedEndpointWandbArtifactCreateResponse,
         DedicatedEndpointWandbArtifactCreateResponseTypedDict,
     )
-    from .dedicatedgetendpointbetaop import (
-        DedicatedGetEndpointBetaRequest,
-        DedicatedGetEndpointBetaRequestTypedDict,
-    )
     from .dedicatedgetendpointop import (
         DedicatedGetEndpointRequest,
         DedicatedGetEndpointRequestTypedDict,
-    )
-    from .dedicatedgetendpointstatusbetaop import (
-        DedicatedGetEndpointStatusBetaRequest,
-        DedicatedGetEndpointStatusBetaRequestTypedDict,
     )
     from .dedicatedgetendpointstatusop import (
         DedicatedGetEndpointStatusRequest,
@@ -369,17 +353,9 @@ if TYPE_CHECKING:
         DedicatedImagesGenerateRequest,
         DedicatedImagesGenerateRequestTypedDict,
     )
-    from .dedicatedlistendpointsbetaop import (
-        DedicatedListEndpointsBetaRequest,
-        DedicatedListEndpointsBetaRequestTypedDict,
-    )
     from .dedicatedlistendpointsop import (
         DedicatedListEndpointsRequest,
         DedicatedListEndpointsRequestTypedDict,
-    )
-    from .dedicatedrestartendpointbetaop import (
-        DedicatedRestartEndpointBetaRequest,
-        DedicatedRestartEndpointBetaRequestTypedDict,
     )
     from .dedicatedrestartendpointop import (
         DedicatedRestartEndpointRequest,
@@ -388,10 +364,6 @@ if TYPE_CHECKING:
     from .dedicatedsleependpointop import (
         DedicatedSleepEndpointRequest,
         DedicatedSleepEndpointRequestTypedDict,
-    )
-    from .dedicatedterminateendpointbetaop import (
-        DedicatedTerminateEndpointBetaRequest,
-        DedicatedTerminateEndpointBetaRequestTypedDict,
     )
     from .dedicatedterminateendpointop import (
         DedicatedTerminateEndpointRequest,
@@ -408,10 +380,6 @@ if TYPE_CHECKING:
     from .dedicatedtokenizationsuccess import (
         DedicatedTokenizationSuccess,
         DedicatedTokenizationSuccessTypedDict,
-    )
-    from .dedicatedupdateendpointbetaop import (
-        DedicatedUpdateEndpointBetaRequest,
-        DedicatedUpdateEndpointBetaRequestTypedDict,
     )
     from .dedicatedupdateendpointop import (
         DedicatedUpdateEndpointRequest,
@@ -900,8 +868,6 @@ __all__ = [
     "DedicatedCompletionsStreamBodyTypedDict",
     "DedicatedCompletionsStreamRequest",
     "DedicatedCompletionsStreamRequestTypedDict",
-    "DedicatedCreateEndpointBetaRequest",
-    "DedicatedCreateEndpointBetaRequestTypedDict",
     "DedicatedCreateEndpointRequest",
     "DedicatedCreateEndpointRequestTypedDict",
     "DedicatedDatasetModality",
@@ -920,8 +886,6 @@ __all__ = [
     "DedicatedEndpointListResponse",
     "DedicatedEndpointListResponseTypedDict",
     "DedicatedEndpointSpec",
-    "DedicatedEndpointSpecBeta",
-    "DedicatedEndpointSpecBetaTypedDict",
     "DedicatedEndpointSpecTypedDict",
     "DedicatedEndpointStatus",
     "DedicatedEndpointStatusTypedDict",
@@ -935,12 +899,8 @@ __all__ = [
     "DedicatedEndpointWandbArtifactCreateRequestTypedDict",
     "DedicatedEndpointWandbArtifactCreateResponse",
     "DedicatedEndpointWandbArtifactCreateResponseTypedDict",
-    "DedicatedGetEndpointBetaRequest",
-    "DedicatedGetEndpointBetaRequestTypedDict",
     "DedicatedGetEndpointRequest",
     "DedicatedGetEndpointRequestTypedDict",
-    "DedicatedGetEndpointStatusBetaRequest",
-    "DedicatedGetEndpointStatusBetaRequestTypedDict",
     "DedicatedGetEndpointStatusRequest",
     "DedicatedGetEndpointStatusRequestTypedDict",
     "DedicatedGetEndpointVersionHistoryRequest",
@@ -952,18 +912,12 @@ __all__ = [
     "DedicatedImageGenerationBodyTypedDict",
     "DedicatedImagesGenerateRequest",
     "DedicatedImagesGenerateRequestTypedDict",
-    "DedicatedListEndpointsBetaRequest",
-    "DedicatedListEndpointsBetaRequestTypedDict",
     "DedicatedListEndpointsRequest",
     "DedicatedListEndpointsRequestTypedDict",
-    "DedicatedRestartEndpointBetaRequest",
-    "DedicatedRestartEndpointBetaRequestTypedDict",
     "DedicatedRestartEndpointRequest",
     "DedicatedRestartEndpointRequestTypedDict",
     "DedicatedSleepEndpointRequest",
     "DedicatedSleepEndpointRequestTypedDict",
-    "DedicatedTerminateEndpointBetaRequest",
-    "DedicatedTerminateEndpointBetaRequestTypedDict",
     "DedicatedTerminateEndpointRequest",
     "DedicatedTerminateEndpointRequestTypedDict",
     "DedicatedTokenizationBody",
@@ -972,8 +926,6 @@ __all__ = [
     "DedicatedTokenizationRequestTypedDict",
     "DedicatedTokenizationSuccess",
     "DedicatedTokenizationSuccessTypedDict",
-    "DedicatedUpdateEndpointBetaRequest",
-    "DedicatedUpdateEndpointBetaRequestTypedDict",
     "DedicatedUpdateEndpointRequest",
     "DedicatedUpdateEndpointRequestTypedDict",
     "DedicatedWakeEndpointRequest",
@@ -1407,8 +1359,6 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedCompletionsStreamBodyTypedDict": ".dedicatedcompletionsstreambody",
     "DedicatedCompletionsStreamRequest": ".dedicatedcompletionsstreamop",
     "DedicatedCompletionsStreamRequestTypedDict": ".dedicatedcompletionsstreamop",
-    "DedicatedCreateEndpointBetaRequest": ".dedicatedcreateendpointbetaop",
-    "DedicatedCreateEndpointBetaRequestTypedDict": ".dedicatedcreateendpointbetaop",
     "DedicatedCreateEndpointRequest": ".dedicatedcreateendpointop",
     "DedicatedCreateEndpointRequestTypedDict": ".dedicatedcreateendpointop",
     "DedicatedDatasetModality": ".dedicateddatasetmodality",
@@ -1428,8 +1378,6 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedEndpointListResponseTypedDict": ".dedicatedendpointlistresponse",
     "DedicatedEndpointSpec": ".dedicatedendpointspec",
     "DedicatedEndpointSpecTypedDict": ".dedicatedendpointspec",
-    "DedicatedEndpointSpecBeta": ".dedicatedendpointspecbeta",
-    "DedicatedEndpointSpecBetaTypedDict": ".dedicatedendpointspecbeta",
     "DedicatedEndpointStatus": ".dedicatedendpointstatus",
     "DedicatedEndpointStatusTypedDict": ".dedicatedendpointstatus",
     "Phase": ".dedicatedendpointstatus",
@@ -1443,12 +1391,8 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedEndpointWandbArtifactCreateRequestTypedDict": ".dedicatedendpointwandbartifactcreateop",
     "DedicatedEndpointWandbArtifactCreateResponse": ".dedicatedendpointwandbartifactcreateresponse",
     "DedicatedEndpointWandbArtifactCreateResponseTypedDict": ".dedicatedendpointwandbartifactcreateresponse",
-    "DedicatedGetEndpointBetaRequest": ".dedicatedgetendpointbetaop",
-    "DedicatedGetEndpointBetaRequestTypedDict": ".dedicatedgetendpointbetaop",
     "DedicatedGetEndpointRequest": ".dedicatedgetendpointop",
     "DedicatedGetEndpointRequestTypedDict": ".dedicatedgetendpointop",
-    "DedicatedGetEndpointStatusBetaRequest": ".dedicatedgetendpointstatusbetaop",
-    "DedicatedGetEndpointStatusBetaRequestTypedDict": ".dedicatedgetendpointstatusbetaop",
     "DedicatedGetEndpointStatusRequest": ".dedicatedgetendpointstatusop",
     "DedicatedGetEndpointStatusRequestTypedDict": ".dedicatedgetendpointstatusop",
     "DedicatedGetEndpointVersionHistoryRequest": ".dedicatedgetendpointversionhistoryop",
@@ -1462,18 +1406,12 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedImageGenerationBodyTypedDict": ".dedicatedimagegenerationbody",
     "DedicatedImagesGenerateRequest": ".dedicatedimagesgenerateop",
     "DedicatedImagesGenerateRequestTypedDict": ".dedicatedimagesgenerateop",
-    "DedicatedListEndpointsBetaRequest": ".dedicatedlistendpointsbetaop",
-    "DedicatedListEndpointsBetaRequestTypedDict": ".dedicatedlistendpointsbetaop",
     "DedicatedListEndpointsRequest": ".dedicatedlistendpointsop",
     "DedicatedListEndpointsRequestTypedDict": ".dedicatedlistendpointsop",
-    "DedicatedRestartEndpointBetaRequest": ".dedicatedrestartendpointbetaop",
-    "DedicatedRestartEndpointBetaRequestTypedDict": ".dedicatedrestartendpointbetaop",
     "DedicatedRestartEndpointRequest": ".dedicatedrestartendpointop",
     "DedicatedRestartEndpointRequestTypedDict": ".dedicatedrestartendpointop",
     "DedicatedSleepEndpointRequest": ".dedicatedsleependpointop",
     "DedicatedSleepEndpointRequestTypedDict": ".dedicatedsleependpointop",
-    "DedicatedTerminateEndpointBetaRequest": ".dedicatedterminateendpointbetaop",
-    "DedicatedTerminateEndpointBetaRequestTypedDict": ".dedicatedterminateendpointbetaop",
     "DedicatedTerminateEndpointRequest": ".dedicatedterminateendpointop",
     "DedicatedTerminateEndpointRequestTypedDict": ".dedicatedterminateendpointop",
     "DedicatedTokenizationBody": ".dedicatedtokenizationbody",
@@ -1482,8 +1420,6 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedTokenizationRequestTypedDict": ".dedicatedtokenizationop",
     "DedicatedTokenizationSuccess": ".dedicatedtokenizationsuccess",
     "DedicatedTokenizationSuccessTypedDict": ".dedicatedtokenizationsuccess",
-    "DedicatedUpdateEndpointBetaRequest": ".dedicatedupdateendpointbetaop",
-    "DedicatedUpdateEndpointBetaRequestTypedDict": ".dedicatedupdateendpointbetaop",
     "DedicatedUpdateEndpointRequest": ".dedicatedupdateendpointop",
     "DedicatedUpdateEndpointRequestTypedDict": ".dedicatedupdateendpointop",
     "DedicatedWakeEndpointRequest": ".dedicatedwakeendpointop",

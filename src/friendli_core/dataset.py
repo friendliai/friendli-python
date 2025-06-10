@@ -64,7 +64,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         )
         req = self._build_request(
             method="POST",
-            path="/beta/dataset/",
+            path="/beta/dataset",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -182,7 +182,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         )
         req = self._build_request(
             method="GET",
-            path="/beta/dataset/",
+            path="/beta/dataset",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1750,7 +1750,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         )
         req = self._build_request(
             method="POST",
-            path="/beta/dataset/",
+            path="/beta/dataset",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1868,7 +1868,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         )
         req = self._build_request(
             method="GET",
-            path="/beta/dataset/",
+            path="/beta/dataset",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
