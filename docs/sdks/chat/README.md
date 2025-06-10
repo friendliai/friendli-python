@@ -35,6 +35,7 @@ with SyncFriendli(
         ],
         max_tokens=200,
         model="(adapter-route)",
+        stream=False,
     )
 
     # Handle response
@@ -109,6 +110,7 @@ with SyncFriendli(
         ],
         max_tokens=200,
         model="(adapter-route)",
+        stream=True,
     )
 
     with res as event_stream:
