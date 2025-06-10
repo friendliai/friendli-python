@@ -364,13 +364,6 @@ with SyncFriendli(
 * [wake](docs/sdks/endpoint/README.md#wake) - Wake endpoint
 * [terminate](docs/sdks/endpoint/README.md#terminate) - Terminate endpoint
 * [restart](docs/sdks/endpoint/README.md#restart) - Restart endpoint
-* [create_beta](docs/sdks/endpoint/README.md#create_beta) - Create a new endpoint (Beta)
-* [list_beta](docs/sdks/endpoint/README.md#list_beta) - List all endpoints (Beta)
-* [get_spec_beta](docs/sdks/endpoint/README.md#get_spec_beta) - Get endpoint specification (Beta)
-* [update_beta](docs/sdks/endpoint/README.md#update_beta) - Update endpoint spec (Beta)
-* [get_status_beta](docs/sdks/endpoint/README.md#get_status_beta) - Get endpoint status (Beta)
-* [terminate_beta](docs/sdks/endpoint/README.md#terminate_beta) - Terminate endpoint (Beta)
-* [restart_beta](docs/sdks/endpoint/README.md#restart_beta) - Restart endpoint (Beta)
 
 #### [dedicated.image](docs/sdks/friendlicoreimage/README.md)
 

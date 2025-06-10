@@ -4,7 +4,8 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, Mapping, Optional, Union
+import io
+from typing import IO, Any, Dict, Mapping, Optional, Union
 
 from friendli_core import models, utils
 from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore

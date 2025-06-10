@@ -134,3 +134,13 @@ Based on:
 - Speakeasy CLI 1.548.3 (2.605.6) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.10.0] .
+
+## 2025-06-10 23:06:21
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.559.0 (2.624.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v0.10.3] .
+### Releases
+- [PyPI v0.10.3] https://pypi.org/project/friendli-core/0.10.3 - .
