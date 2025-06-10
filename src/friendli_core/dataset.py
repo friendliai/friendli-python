@@ -96,6 +96,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_dataset",
                 oauth2_scopes=[],
@@ -206,6 +207,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_datasets",
                 oauth2_scopes=[],
@@ -303,6 +305,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_dataset",
                 oauth2_scopes=[],
@@ -400,6 +403,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_dataset",
                 oauth2_scopes=[],
@@ -499,6 +503,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_version",
                 oauth2_scopes=[],
@@ -596,6 +601,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_versions",
                 oauth2_scopes=[],
@@ -697,6 +703,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_version",
                 oauth2_scopes=[],
@@ -798,6 +805,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_version",
                 oauth2_scopes=[],
@@ -897,6 +905,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_split",
                 oauth2_scopes=[],
@@ -1007,6 +1016,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_splits",
                 oauth2_scopes=[],
@@ -1106,6 +1116,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_split",
                 oauth2_scopes=[],
@@ -1205,6 +1216,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_split",
                 oauth2_scopes=[],
@@ -1312,6 +1324,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="add_samples",
                 oauth2_scopes=[],
@@ -1425,6 +1438,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_samples",
                 oauth2_scopes=[],
@@ -1538,6 +1552,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="upload_raw_samples",
                 oauth2_scopes=[],
@@ -1647,6 +1662,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_samples",
                 oauth2_scopes=[],
@@ -1766,6 +1782,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_dataset",
                 oauth2_scopes=[],
@@ -1876,6 +1893,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_datasets",
                 oauth2_scopes=[],
@@ -1973,6 +1991,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_dataset",
                 oauth2_scopes=[],
@@ -2070,6 +2089,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_dataset",
                 oauth2_scopes=[],
@@ -2169,6 +2189,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_version",
                 oauth2_scopes=[],
@@ -2266,6 +2287,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_versions",
                 oauth2_scopes=[],
@@ -2367,6 +2389,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_version",
                 oauth2_scopes=[],
@@ -2468,6 +2491,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_version",
                 oauth2_scopes=[],
@@ -2567,6 +2591,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_split",
                 oauth2_scopes=[],
@@ -2677,6 +2702,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_splits",
                 oauth2_scopes=[],
@@ -2776,6 +2802,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_split",
                 oauth2_scopes=[],
@@ -2875,6 +2902,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_split",
                 oauth2_scopes=[],
@@ -2982,6 +3010,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="add_samples",
                 oauth2_scopes=[],
@@ -3095,6 +3124,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_samples",
                 oauth2_scopes=[],
@@ -3208,6 +3238,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="upload_raw_samples",
                 oauth2_scopes=[],
@@ -3317,6 +3348,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_samples",
                 oauth2_scopes=[],

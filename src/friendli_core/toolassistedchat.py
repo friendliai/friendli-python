@@ -175,6 +175,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessToolAssistedChatComplete",
                 oauth2_scopes=[],
@@ -372,6 +373,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessToolAssistedChatStream",
                 oauth2_scopes=[],
@@ -572,6 +574,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessToolAssistedChatComplete",
                 oauth2_scopes=[],
@@ -769,6 +772,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessToolAssistedChatStream",
                 oauth2_scopes=[],

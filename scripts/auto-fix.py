@@ -108,13 +108,9 @@ def format_markdown_files():
             updated_content,
         )
         updated_content = re.sub("_async", "", updated_content)
-        updated_content = re.sub('"friendli_core"', '"friendli"', updated_content)
+        updated_content = re.sub("friendli_core", "friendli", updated_content)
+        updated_content = re.sub("friendli-core", "friendli", updated_content)
         updated_content = re.sub(r"git\+\<UNSET\>.git", "friendli", updated_content)
-        updated_content = re.sub(
-            "uvx --from friendli_core python",
-            "uvx --from friendli python",
-            updated_content,
-        )
 
         if content != updated_content:
             try:

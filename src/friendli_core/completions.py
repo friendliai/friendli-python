@@ -78,6 +78,7 @@ class SyncCompletions(BaseCompletions, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerCompletionsComplete",
                 oauth2_scopes=[],
@@ -175,6 +176,7 @@ class SyncCompletions(BaseCompletions, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerCompletionsStream",
                 oauth2_scopes=[],
@@ -278,6 +280,7 @@ class AsyncCompletions(BaseCompletions, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerCompletionsComplete",
                 oauth2_scopes=[],
@@ -375,6 +378,7 @@ class AsyncCompletions(BaseCompletions, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerCompletionsStream",
                 oauth2_scopes=[],

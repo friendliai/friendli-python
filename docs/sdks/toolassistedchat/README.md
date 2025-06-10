@@ -31,6 +31,7 @@ with SyncFriendli(
         ],
         model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        stream=False,
         tools=[
             {
                 "type": "math:calculator",
@@ -105,6 +106,7 @@ with SyncFriendli(
         ],
         model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        stream=True,
         tools=[
             {
                 "type": "math:calculator",

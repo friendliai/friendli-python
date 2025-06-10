@@ -139,7 +139,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dedicated.endpoint.list()
+    res = friendli.dedicated.endpoint.list(project_id="", limit=20)
 
     # Handle response
     print(res)
@@ -302,7 +302,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dedicated.endpoint.get_version_history(endpoint_id="<id>")
+    res = friendli.dedicated.endpoint.get_version_history(endpoint_id="<id>", limit=20)
 
     # Handle response
     print(res)
@@ -587,7 +587,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dedicated.endpoint.list_beta()
+    res = friendli.dedicated.endpoint.list_beta(project_id="", limit=20)
 
     # Handle response
     print(res)

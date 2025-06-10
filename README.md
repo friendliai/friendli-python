@@ -129,6 +129,7 @@ with SyncFriendli(
         ],
         model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        stream=False,
     )
 
     # Handle response
@@ -163,6 +164,7 @@ async def main():
             ],
             model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
+            stream=False,
         )
 
         # Handle response
@@ -195,6 +197,7 @@ with SyncFriendli(
         ],
         model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
+        stream=False,
         tools=[
             {
                 "type": "math:calculator",
@@ -230,6 +233,7 @@ async def main():
             ],
             model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
+            stream=False,
             tools=[
                 {
                     "type": "math:calculator",
@@ -278,6 +282,7 @@ with SyncFriendli(
         ],
         max_tokens=200,
         model="(adapter-route)",
+        stream=False,
     )
 
     # Handle response
@@ -451,6 +456,7 @@ with SyncFriendli(
         ],
         model="(endpoint-id)",
         max_tokens=200,
+        stream=True,
     )
 
     with res as event_stream:
@@ -524,6 +530,7 @@ with SyncFriendli(
         ],
         max_tokens=200,
         model="(adapter-route)",
+        stream=False,
         retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     )
 
@@ -555,6 +562,7 @@ with SyncFriendli(
         ],
         max_tokens=200,
         model="(adapter-route)",
+        stream=False,
     )
 
     # Handle response
@@ -624,7 +632,7 @@ with SyncFriendli(
     server_url="https://api.friendli.ai",
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dedicated.chat.complete(
+    res = friendli.container.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -637,6 +645,7 @@ with SyncFriendli(
         ],
         max_tokens=200,
         model="(adapter-route)",
+        stream=False,
     )
 
     # Handle response
@@ -654,7 +663,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dedicated.chat.complete(
+    res = friendli.container.chat.complete(
         messages=[
             {
                 "content": "You are a helpful assistant.",
@@ -667,6 +676,7 @@ with SyncFriendli(
         ],
         max_tokens=200,
         model="(adapter-route)",
+        stream=False,
         server_url="http://localhost:8000",
     )
 

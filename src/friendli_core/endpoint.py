@@ -109,6 +109,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedEndpointWandbArtifactCreate",
                 oauth2_scopes=[],
@@ -251,6 +252,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedCreateEndpoint",
                 oauth2_scopes=[],
@@ -349,6 +351,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedListEndpoints",
                 oauth2_scopes=[],
@@ -442,6 +445,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpoint",
                 oauth2_scopes=[],
@@ -582,6 +586,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedUpdateEndpoint",
                 oauth2_scopes=[],
@@ -673,6 +678,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedDeleteEndpoint",
                 oauth2_scopes=[],
@@ -777,6 +783,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointVersionHistory",
                 oauth2_scopes=[],
@@ -870,6 +877,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointStatus",
                 oauth2_scopes=[],
@@ -961,6 +969,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedSleepEndpoint",
                 oauth2_scopes=[],
@@ -1052,6 +1061,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedWakeEndpoint",
                 oauth2_scopes=[],
@@ -1143,6 +1153,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedTerminateEndpoint",
                 oauth2_scopes=[],
@@ -1234,6 +1245,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedRestartEndpoint",
                 oauth2_scopes=[],
@@ -1374,6 +1386,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedCreateEndpointBeta",
                 oauth2_scopes=[],
@@ -1472,6 +1485,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedListEndpointsBeta",
                 oauth2_scopes=[],
@@ -1565,6 +1579,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointBeta",
                 oauth2_scopes=[],
@@ -1705,6 +1720,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedUpdateEndpointBeta",
                 oauth2_scopes=[],
@@ -1796,6 +1812,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointStatusBeta",
                 oauth2_scopes=[],
@@ -1887,6 +1904,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedTerminateEndpointBeta",
                 oauth2_scopes=[],
@@ -1978,6 +1996,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedRestartEndpointBeta",
                 oauth2_scopes=[],
@@ -2104,6 +2123,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedEndpointWandbArtifactCreate",
                 oauth2_scopes=[],
@@ -2246,6 +2266,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedCreateEndpoint",
                 oauth2_scopes=[],
@@ -2344,6 +2365,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedListEndpoints",
                 oauth2_scopes=[],
@@ -2437,6 +2459,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpoint",
                 oauth2_scopes=[],
@@ -2577,6 +2600,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedUpdateEndpoint",
                 oauth2_scopes=[],
@@ -2668,6 +2692,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedDeleteEndpoint",
                 oauth2_scopes=[],
@@ -2772,6 +2797,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointVersionHistory",
                 oauth2_scopes=[],
@@ -2865,6 +2891,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointStatus",
                 oauth2_scopes=[],
@@ -2956,6 +2983,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedSleepEndpoint",
                 oauth2_scopes=[],
@@ -3047,6 +3075,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedWakeEndpoint",
                 oauth2_scopes=[],
@@ -3138,6 +3167,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedTerminateEndpoint",
                 oauth2_scopes=[],
@@ -3229,6 +3259,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedRestartEndpoint",
                 oauth2_scopes=[],
@@ -3369,6 +3400,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedCreateEndpointBeta",
                 oauth2_scopes=[],
@@ -3467,6 +3499,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedListEndpointsBeta",
                 oauth2_scopes=[],
@@ -3560,6 +3593,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointBeta",
                 oauth2_scopes=[],
@@ -3700,6 +3734,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedUpdateEndpointBeta",
                 oauth2_scopes=[],
@@ -3791,6 +3826,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointStatusBeta",
                 oauth2_scopes=[],
@@ -3882,6 +3918,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedTerminateEndpointBeta",
                 oauth2_scopes=[],
@@ -3973,6 +4010,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config = (retries, ["429", "500", "502", "503", "504"])
         http_res = await self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedRestartEndpointBeta",
                 oauth2_scopes=[],
