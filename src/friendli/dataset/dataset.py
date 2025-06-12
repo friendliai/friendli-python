@@ -1094,7 +1094,9 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         *,
         dataset_id: str,
         split_id: str,
-        file: Union[models.FileModel, models.FileModelTypedDict],
+        file: Union[
+            models.BodyUploadRawSamplesFile, models.BodyUploadRawSamplesFileTypedDict
+        ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1952,7 +1954,9 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         *,
         dataset_id: str,
         split_id: str,
-        file: Union[models.FileModel, models.FileModelTypedDict],
+        file: Union[
+            models.BodyUploadRawSamplesFile, models.BodyUploadRawSamplesFileTypedDict
+        ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,

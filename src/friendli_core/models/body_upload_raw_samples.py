@@ -12,13 +12,13 @@ from friendli_core.types import BaseModel
 from friendli_core.utils import FieldMetadata, MultipartFormMetadata
 
 
-class FileModelTypedDict(TypedDict):
+class BodyUploadRawSamplesFileTypedDict(TypedDict):
     file_name: str
     content: Union[bytes, IO[bytes], io.BufferedReader]
     content_type: NotRequired[str]
 
 
-class FileModel(BaseModel):
+class BodyUploadRawSamplesFile(BaseModel):
     file_name: Annotated[
         str, pydantic.Field(alias="fileName"), FieldMetadata(multipart=True)
     ]
@@ -37,12 +37,13 @@ class FileModel(BaseModel):
 
 
 class BodyUploadRawSamplesTypedDict(TypedDict):
-    file: FileModelTypedDict
+    file: BodyUploadRawSamplesFileTypedDict
     r"""File to update samples."""
 
 
 class BodyUploadRawSamples(BaseModel):
     file: Annotated[
-        FileModel, FieldMetadata(multipart=MultipartFormMetadata(file=True))
+        BodyUploadRawSamplesFile,
+        FieldMetadata(multipart=MultipartFormMetadata(file=True)),
     ]
     r"""File to update samples."""
