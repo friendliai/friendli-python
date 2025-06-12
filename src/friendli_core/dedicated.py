@@ -2,6 +2,7 @@
 
 from abc import abstractmethod
 
+from friendli_core.audio import AsyncAudio, SyncAudio
 from friendli_core.endpoint import AsyncEndpoint, SyncEndpoint
 from friendli_core.friendlicore_chat import AsyncFriendliCoreChat, SyncFriendliCoreChat
 from friendli_core.friendlicore_completions import (
@@ -37,6 +38,7 @@ class SyncDedicated(BaseDedicated, SyncSDK):
     completions: SyncFriendliCoreCompletions
     token: SyncFriendliCoreToken
     image: SyncFriendliCoreImage
+    audio: SyncAudio
     endpoint: SyncEndpoint
 
     def _init_sdks(self):
@@ -44,6 +46,7 @@ class SyncDedicated(BaseDedicated, SyncSDK):
         self.completions = SyncFriendliCoreCompletions(self.sdk_configuration)
         self.token = SyncFriendliCoreToken(self.sdk_configuration)
         self.image = SyncFriendliCoreImage(self.sdk_configuration)
+        self.audio = SyncAudio(self.sdk_configuration)
         self.endpoint = SyncEndpoint(self.sdk_configuration)
 
 
@@ -52,6 +55,7 @@ class AsyncDedicated(BaseDedicated, AsyncSDK):
     completions: AsyncFriendliCoreCompletions
     token: AsyncFriendliCoreToken
     image: AsyncFriendliCoreImage
+    audio: AsyncAudio
     endpoint: AsyncEndpoint
 
     def _init_sdks(self):
@@ -59,4 +63,5 @@ class AsyncDedicated(BaseDedicated, AsyncSDK):
         self.completions = AsyncFriendliCoreCompletions(self.sdk_configuration)
         self.token = AsyncFriendliCoreToken(self.sdk_configuration)
         self.image = AsyncFriendliCoreImage(self.sdk_configuration)
+        self.audio = AsyncAudio(self.sdk_configuration)
         self.endpoint = AsyncEndpoint(self.sdk_configuration)

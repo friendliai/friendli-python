@@ -340,6 +340,10 @@ with SyncFriendli(
 ### [dedicated](docs/sdks/dedicated/README.md)
 
 
+#### [dedicated.audio](docs/sdks/audio/README.md)
+
+* [transcribe](docs/sdks/audio/README.md#transcribe) - Audio transcriptions
+
 #### [dedicated.chat](docs/sdks/friendlicorechat/README.md)
 
 * [complete](docs/sdks/friendlicorechat/README.md#complete) - Chat completions
@@ -481,13 +485,12 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dataset.update_samples(
-        dataset_id="<id>",
-        split_id="<id>",
+    res = friendli.dedicated.audio.transcribe(
         file={
             "file_name": "example.file",
             "content": open("example.file", "rb"),
         },
+        model="(endpoint-id)",
     )
 
     # Handle response

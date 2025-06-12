@@ -7,6 +7,7 @@ from __future__ import annotations
 from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore
 
 from ..config import Config
+from .audio import AsyncAudio, SyncAudio
 from .chat import AsyncChat, SyncChat
 from .completions import AsyncCompletions, SyncCompletions
 from .endpoint import AsyncEndpoint, SyncEndpoint
@@ -23,6 +24,7 @@ class SyncDedicated:
         self.completions = SyncCompletions(core=self._core, config=self._config)
         self.token = SyncToken(core=self._core, config=self._config)
         self.image = SyncImage(core=self._core, config=self._config)
+        self.audio = SyncAudio(core=self._core, config=self._config)
         self.endpoint = SyncEndpoint(core=self._core, config=self._config)
 
 
@@ -35,4 +37,5 @@ class AsyncDedicated:
         self.completions = AsyncCompletions(core=self._core, config=self._config)
         self.token = AsyncToken(core=self._core, config=self._config)
         self.image = AsyncImage(core=self._core, config=self._config)
+        self.audio = AsyncAudio(core=self._core, config=self._config)
         self.endpoint = AsyncEndpoint(core=self._core, config=self._config)
