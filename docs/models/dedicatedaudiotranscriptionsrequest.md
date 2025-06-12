@@ -1,0 +1,9 @@
+# DedicatedAudioTranscriptionsRequest
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `x_friendli_team`                                                                      | *OptionalNullable[str]*                                                                | :heavy_minus_sign:                                                                     | ID of team to run requests as (optional parameter).                                    |                                                                                        |
+| `dedicated_audio_transcription_body`                                                   | [models.DedicatedAudioTranscriptionBody](../models/dedicatedaudiotranscriptionbody.md) | :heavy_check_mark:                                                                     | N/A                                                                                    | {<br/>"file": "@/path/to/file/audio.mp3",<br/>"model": "(endpoint-id)"<br/>}           |

@@ -1482,7 +1482,9 @@ class SyncDataset(BaseDataset, SyncSDK):
         *,
         dataset_id: str,
         split_id: str,
-        file: Union[models.FileModel, models.FileModelTypedDict],
+        file: Union[
+            models.BodyUploadRawSamplesFile, models.BodyUploadRawSamplesFileTypedDict
+        ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1515,7 +1517,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             split_id=split_id,
             x_friendli_team=x_friendli_team,
             body_upload_raw_samples=models.BodyUploadRawSamples(
-                file=utils.get_pydantic_model(file, models.FileModel)
+                file=utils.get_pydantic_model(file, models.BodyUploadRawSamplesFile)
             ),
         )
         req = self._build_request(
@@ -3168,7 +3170,9 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         *,
         dataset_id: str,
         split_id: str,
-        file: Union[models.FileModel, models.FileModelTypedDict],
+        file: Union[
+            models.BodyUploadRawSamplesFile, models.BodyUploadRawSamplesFileTypedDict
+        ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -3201,7 +3205,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             split_id=split_id,
             x_friendli_team=x_friendli_team,
             body_upload_raw_samples=models.BodyUploadRawSamples(
-                file=utils.get_pydantic_model(file, models.FileModel)
+                file=utils.get_pydantic_model(file, models.BodyUploadRawSamplesFile)
             ),
         )
         req = self._build_request(

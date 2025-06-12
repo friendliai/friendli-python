@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
-  docChecksum: 52ffa94ecd4431370a3fcf59b4683590
+  docChecksum: b12cc2b0c610308db4c15f24e5e457d7
   docVersion: 0.1.0
-  speakeasyVersion: 1.559.0
-  generationVersion: 2.624.0
-  releaseVersion: 0.10.3
-  configChecksum: 9cb48e0cbdf8b8d0f021f8146624cb78
+  speakeasyVersion: 1.561.0
+  generationVersion: 2.628.0
+  releaseVersion: 0.10.4
+  configChecksum: 267a1af63ed53a1a736533224ed084be
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.19.2
+    core: 5.19.3
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -55,6 +55,7 @@ generatedFiles:
   - docs/models/b64imageitem.md
   - docs/models/b64imageitemresponseformat.md
   - docs/models/bodyuploadrawsamples.md
+  - docs/models/bodyuploadrawsamplesfile.md
   - docs/models/chatchoice.md
   - docs/models/chatchoicemessage.md
   - docs/models/chatcompletebodytoolchoice.md
@@ -63,6 +64,7 @@ generatedFiles:
   - docs/models/chatlogprobscontent.md
   - docs/models/chatlogprobscontenttoplogprob.md
   - docs/models/chatusage.md
+  - docs/models/chunkingstrategy.md
   - docs/models/completeuploadrequest.md
   - docs/models/completionsbodywithprompt.md
   - docs/models/completionsbodywithpromptseed.md
@@ -120,6 +122,9 @@ generatedFiles:
   - docs/models/createversionrequest.md
   - docs/models/data.md
   - docs/models/datasetinfo.md
+  - docs/models/dedicatedaudiotranscriptionbody.md
+  - docs/models/dedicatedaudiotranscriptionsrequest.md
+  - docs/models/dedicatedaudiotranscriptionsuccess.md
   - docs/models/dedicatedchatcompleterequest.md
   - docs/models/dedicatedchatcompletionbody.md
   - docs/models/dedicatedchatcompletionbodyseed.md
@@ -252,6 +257,7 @@ generatedFiles:
   - docs/models/serverlesstoolassistedchatcompletionstreambodytoolchoice.md
   - docs/models/serverlesstoolassistedchatcompletionstreamsuccess.md
   - docs/models/serverlesstoolassistedchatstreamrequest.md
+  - docs/models/servervadchunkingstrategy.md
   - docs/models/splitinfo.md
   - docs/models/status.md
   - docs/models/streamedchatchoice.md
@@ -290,6 +296,7 @@ generatedFiles:
   - docs/models/versioninfo.md
   - docs/models/videocontent.md
   - docs/models/videodata.md
+  - docs/sdks/audio/README.md
   - docs/sdks/chat/README.md
   - docs/sdks/completions/README.md
   - docs/sdks/container/README.md
@@ -320,6 +327,7 @@ generatedFiles:
   - src/friendli_core/_hooks/sdkhooks.py
   - src/friendli_core/_hooks/types.py
   - src/friendli_core/_version.py
+  - src/friendli_core/audio.py
   - src/friendli_core/basesdk.py
   - src/friendli_core/chat.py
   - src/friendli_core/completions.py
@@ -401,6 +409,9 @@ generatedFiles:
   - src/friendli_core/models/create_versionop.py
   - src/friendli_core/models/createdatasetrequest.py
   - src/friendli_core/models/datasetinfo.py
+  - src/friendli_core/models/dedicatedaudiotranscriptionbody.py
+  - src/friendli_core/models/dedicatedaudiotranscriptionsop.py
+  - src/friendli_core/models/dedicatedaudiotranscriptionsuccess.py
   - src/friendli_core/models/dedicatedchatcompleteop.py
   - src/friendli_core/models/dedicatedchatcompletionbody.py
   - src/friendli_core/models/dedicatedchatcompletionstreambody.py
@@ -510,6 +521,7 @@ generatedFiles:
   - src/friendli_core/models/serverlesstoolassistedchatcompletionstreambody.py
   - src/friendli_core/models/serverlesstoolassistedchatcompletionstreamsuccess.py
   - src/friendli_core/models/serverlesstoolassistedchatstreamop.py
+  - src/friendli_core/models/servervadchunkingstrategy.py
   - src/friendli_core/models/splitinfo.py
   - src/friendli_core/models/streamedchatchoice.py
   - src/friendli_core/models/streamedchatchoicedelta.py
@@ -1128,5 +1140,12 @@ examples:
           application/json: {"samples": []}
         "422":
           application/json: {}
+  dedicatedAudioTranscriptions:
+    Example:
+      requestBody:
+        multipart/form-data: {"file": "@/path/to/file/audio.mp3", "model": "(endpoint-id)"}
+      responses:
+        "200":
+          application/json: {"text": "Hello, how are you?"}
 examplesVersion: 1.0.2
 generatedTests: {}

@@ -30,9 +30,9 @@ if TYPE_CHECKING:
     )
     from .body_upload_raw_samples import (
         BodyUploadRawSamples,
+        BodyUploadRawSamplesFile,
+        BodyUploadRawSamplesFileTypedDict,
         BodyUploadRawSamplesTypedDict,
-        FileModel,
-        FileModelTypedDict,
     )
     from .chatchoice import ChatChoice, ChatChoiceTypedDict, FinishReason
     from .chatchoicemessage import ChatChoiceMessage, ChatChoiceMessageTypedDict
@@ -224,6 +224,22 @@ if TYPE_CHECKING:
         CreateDatasetRequestTypedDict,
     )
     from .datasetinfo import DatasetInfo, DatasetInfoTypedDict
+    from .dedicatedaudiotranscriptionbody import (
+        ChunkingStrategy,
+        ChunkingStrategyTypedDict,
+        DedicatedAudioTranscriptionBody,
+        DedicatedAudioTranscriptionBodyTypedDict,
+        FileModel,
+        FileModelTypedDict,
+    )
+    from .dedicatedaudiotranscriptionsop import (
+        DedicatedAudioTranscriptionsRequest,
+        DedicatedAudioTranscriptionsRequestTypedDict,
+    )
+    from .dedicatedaudiotranscriptionsuccess import (
+        DedicatedAudioTranscriptionSuccess,
+        DedicatedAudioTranscriptionSuccessTypedDict,
+    )
     from .dedicatedchatcompleteop import (
         DedicatedChatCompleteRequest,
         DedicatedChatCompleteRequestTypedDict,
@@ -603,6 +619,10 @@ if TYPE_CHECKING:
         ServerlessToolAssistedChatStreamRequest,
         ServerlessToolAssistedChatStreamRequestTypedDict,
     )
+    from .servervadchunkingstrategy import (
+        ServerVadChunkingStrategy,
+        ServerVadChunkingStrategyTypedDict,
+    )
     from .splitinfo import SplitInfo, SplitInfoTypedDict
     from .streamedchatchoice import (
         StreamedChatChoice,
@@ -708,6 +728,8 @@ __all__ = [
     "B64ImageItemResponseFormat",
     "B64ImageItemTypedDict",
     "BodyUploadRawSamples",
+    "BodyUploadRawSamplesFile",
+    "BodyUploadRawSamplesFileTypedDict",
     "BodyUploadRawSamplesTypedDict",
     "CONTAINER_CHAT_COMPLETE_OP_SERVERS",
     "CONTAINER_CHAT_STREAM_OP_SERVERS",
@@ -732,6 +754,8 @@ __all__ = [
     "ChatLogprobsTypedDict",
     "ChatUsage",
     "ChatUsageTypedDict",
+    "ChunkingStrategy",
+    "ChunkingStrategyTypedDict",
     "CompleteUploadRequest",
     "CompleteUploadRequestTypedDict",
     "CompletionsBodyWithPrompt",
@@ -844,6 +868,12 @@ __all__ = [
     "DataTypedDict",
     "DatasetInfo",
     "DatasetInfoTypedDict",
+    "DedicatedAudioTranscriptionBody",
+    "DedicatedAudioTranscriptionBodyTypedDict",
+    "DedicatedAudioTranscriptionSuccess",
+    "DedicatedAudioTranscriptionSuccessTypedDict",
+    "DedicatedAudioTranscriptionsRequest",
+    "DedicatedAudioTranscriptionsRequestTypedDict",
     "DedicatedChatCompleteRequest",
     "DedicatedChatCompleteRequestTypedDict",
     "DedicatedChatCompletionBody",
@@ -1037,6 +1067,8 @@ __all__ = [
     "SecurityTypedDict",
     "Seed",
     "SeedTypedDict",
+    "ServerVadChunkingStrategy",
+    "ServerVadChunkingStrategyTypedDict",
     "ServerlessChatCompleteRequest",
     "ServerlessChatCompleteRequestTypedDict",
     "ServerlessChatCompletionBody",
@@ -1194,9 +1226,9 @@ _dynamic_imports: dict[str, str] = {
     "B64ImageItemResponseFormat": ".b64imageitem",
     "B64ImageItemTypedDict": ".b64imageitem",
     "BodyUploadRawSamples": ".body_upload_raw_samples",
+    "BodyUploadRawSamplesFile": ".body_upload_raw_samples",
+    "BodyUploadRawSamplesFileTypedDict": ".body_upload_raw_samples",
     "BodyUploadRawSamplesTypedDict": ".body_upload_raw_samples",
-    "FileModel": ".body_upload_raw_samples",
-    "FileModelTypedDict": ".body_upload_raw_samples",
     "ChatChoice": ".chatchoice",
     "ChatChoiceTypedDict": ".chatchoice",
     "FinishReason": ".chatchoice",
@@ -1335,6 +1367,16 @@ _dynamic_imports: dict[str, str] = {
     "CreateDatasetRequestTypedDict": ".createdatasetrequest",
     "DatasetInfo": ".datasetinfo",
     "DatasetInfoTypedDict": ".datasetinfo",
+    "ChunkingStrategy": ".dedicatedaudiotranscriptionbody",
+    "ChunkingStrategyTypedDict": ".dedicatedaudiotranscriptionbody",
+    "DedicatedAudioTranscriptionBody": ".dedicatedaudiotranscriptionbody",
+    "DedicatedAudioTranscriptionBodyTypedDict": ".dedicatedaudiotranscriptionbody",
+    "FileModel": ".dedicatedaudiotranscriptionbody",
+    "FileModelTypedDict": ".dedicatedaudiotranscriptionbody",
+    "DedicatedAudioTranscriptionsRequest": ".dedicatedaudiotranscriptionsop",
+    "DedicatedAudioTranscriptionsRequestTypedDict": ".dedicatedaudiotranscriptionsop",
+    "DedicatedAudioTranscriptionSuccess": ".dedicatedaudiotranscriptionsuccess",
+    "DedicatedAudioTranscriptionSuccessTypedDict": ".dedicatedaudiotranscriptionsuccess",
     "DedicatedChatCompleteRequest": ".dedicatedchatcompleteop",
     "DedicatedChatCompleteRequestTypedDict": ".dedicatedchatcompleteop",
     "DedicatedChatCompletionBody": ".dedicatedchatcompletionbody",
@@ -1583,6 +1625,8 @@ _dynamic_imports: dict[str, str] = {
     "ServerlessToolAssistedChatCompletionStreamSuccessTypedDict": ".serverlesstoolassistedchatcompletionstreamsuccess",
     "ServerlessToolAssistedChatStreamRequest": ".serverlesstoolassistedchatstreamop",
     "ServerlessToolAssistedChatStreamRequestTypedDict": ".serverlesstoolassistedchatstreamop",
+    "ServerVadChunkingStrategy": ".servervadchunkingstrategy",
+    "ServerVadChunkingStrategyTypedDict": ".servervadchunkingstrategy",
     "SplitInfo": ".splitinfo",
     "SplitInfoTypedDict": ".splitinfo",
     "StreamedChatChoice": ".streamedchatchoice",
