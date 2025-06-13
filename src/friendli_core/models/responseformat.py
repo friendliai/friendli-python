@@ -40,8 +40,6 @@ You must explicitly instruct the model to produce the desired output format usin
 Otherwise, the model may result in an unending stream of whitespace or other characters.
 
 **When `response_format` is specified, `min_tokens` field is unsupported.**
-
-
 """
 
 
@@ -65,6 +63,4 @@ You must explicitly instruct the model to produce the desired output format usin
 Otherwise, the model may result in an unending stream of whitespace or other characters.
 
 **When `response_format` is specified, `min_tokens` field is unsupported.**
-
-
 """

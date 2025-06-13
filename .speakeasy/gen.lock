@@ -1,11 +1,11 @@
 lockVersion: 2.0.0
 id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
-  docChecksum: b12cc2b0c610308db4c15f24e5e457d7
+  docChecksum: 5fb1bdfa1fc4aa2481b778de307dd114
   docVersion: 0.1.0
   speakeasyVersion: 1.561.0
   generationVersion: 2.628.0
-  releaseVersion: 0.10.4
+  releaseVersion: 0.10.5
   configChecksum: 267a1af63ed53a1a736533224ed084be
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git

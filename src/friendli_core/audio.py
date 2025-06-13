@@ -36,7 +36,7 @@ class SyncAudio(BaseAudio, SyncSDK):
 
         Given an audio file, the model transcribes it into text.
 
-        :param file: The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
+        :param file: The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats.
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chunking_strategy: Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
@@ -158,7 +158,7 @@ class AsyncAudio(BaseAudio, AsyncSDK):
 
         Given an audio file, the model transcribes it into text.
 
-        :param file: The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
+        :param file: The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats.
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chunking_strategy: Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.

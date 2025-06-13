@@ -13,8 +13,6 @@ Otherwise, the model may result in an unending stream of whitespace or other cha
 **When `response_format` is specified, `min_tokens` field is unsupported.**
 
 
-
-
 ## Supported Types
 
 ### `models.ResponseFormatJSONObject`

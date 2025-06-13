@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Coroutine, List, Mapping, Optional, Union
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 from friendli_core import models, utils
 from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore
@@ -27,12 +27,7 @@ class SyncToolAssistedChat:
         x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[
-            Union[
-                models.ServerlessToolAssistedChatCompletionBodyLogitBias,
-                models.ServerlessToolAssistedChatCompletionBodyLogitBiasTypedDict,
-            ]
-        ] = UNSET,
+        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -72,7 +67,7 @@ class SyncToolAssistedChat:
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessToolAssistedChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteSuccess:
         """Tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
@@ -86,7 +81,7 @@ class SyncToolAssistedChat:
         :param logprobs: Whether to return log probabilities of the output tokens or not.
         :param max_tokens: The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument.
         :param min_p: A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling.
-        :param n: The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
+        :param n: The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
@@ -120,6 +115,7 @@ class SyncToolAssistedChat:
             parallel_tool_calls=parallel_tool_calls,
             presence_penalty=presence_penalty,
             repetition_penalty=repetition_penalty,
+            resume_generation=resume_generation,
             seed=seed,
             stop=stop,
             stream=stream,
@@ -144,12 +140,7 @@ class SyncToolAssistedChat:
         x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[
-            Union[
-                models.ServerlessToolAssistedChatCompletionStreamBodyLogitBias,
-                models.ServerlessToolAssistedChatCompletionStreamBodyLogitBiasTypedDict,
-            ]
-        ] = UNSET,
+        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -205,7 +196,7 @@ class SyncToolAssistedChat:
         :param logprobs: Whether to return log probabilities of the output tokens or not.
         :param max_tokens: The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument.
         :param min_p: A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling.
-        :param n: The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
+        :param n: The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
@@ -239,6 +230,7 @@ class SyncToolAssistedChat:
             parallel_tool_calls=parallel_tool_calls,
             presence_penalty=presence_penalty,
             repetition_penalty=repetition_penalty,
+            resume_generation=resume_generation,
             seed=seed,
             stop=stop,
             stream=stream,
@@ -269,12 +261,7 @@ class AsyncToolAssistedChat:
         x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[
-            Union[
-                models.ServerlessToolAssistedChatCompletionBodyLogitBias,
-                models.ServerlessToolAssistedChatCompletionBodyLogitBiasTypedDict,
-            ]
-        ] = UNSET,
+        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -314,7 +301,7 @@ class AsyncToolAssistedChat:
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessToolAssistedChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteSuccess:
         """Tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
@@ -328,7 +315,7 @@ class AsyncToolAssistedChat:
         :param logprobs: Whether to return log probabilities of the output tokens or not.
         :param max_tokens: The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument.
         :param min_p: A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling.
-        :param n: The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
+        :param n: The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
@@ -362,6 +349,7 @@ class AsyncToolAssistedChat:
             parallel_tool_calls=parallel_tool_calls,
             presence_penalty=presence_penalty,
             repetition_penalty=repetition_penalty,
+            resume_generation=resume_generation,
             seed=seed,
             stop=stop,
             stream=stream,
@@ -386,12 +374,7 @@ class AsyncToolAssistedChat:
         x_friendli_team: OptionalNullable[str] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[
-            Union[
-                models.ServerlessToolAssistedChatCompletionStreamBodyLogitBias,
-                models.ServerlessToolAssistedChatCompletionStreamBodyLogitBiasTypedDict,
-            ]
-        ] = UNSET,
+        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -447,7 +430,7 @@ class AsyncToolAssistedChat:
         :param logprobs: Whether to return log probabilities of the output tokens or not.
         :param max_tokens: The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument.
         :param min_p: A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling.
-        :param n: The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
+        :param n: The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
@@ -481,6 +464,7 @@ class AsyncToolAssistedChat:
             parallel_tool_calls=parallel_tool_calls,
             presence_penalty=presence_penalty,
             repetition_penalty=repetition_penalty,
+            resume_generation=resume_generation,
             seed=seed,
             stop=stop,
             stream=stream,
