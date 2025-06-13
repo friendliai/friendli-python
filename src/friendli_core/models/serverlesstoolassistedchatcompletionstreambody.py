@@ -79,7 +79,7 @@ class ServerlessToolAssistedChatCompletionStreamBodyTypedDict(TypedDict):
     min_p: NotRequired[Nullable[float]]
     r"""A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling."""
     n: NotRequired[Nullable[int]]
-    r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
+    r"""The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
     parallel_tool_calls: NotRequired[Nullable[bool]]
     r"""Whether to enable parallel function calling."""
     presence_penalty: NotRequired[Nullable[float]]
@@ -95,7 +95,6 @@ class ServerlessToolAssistedChatCompletionStreamBodyTypedDict(TypedDict):
     ***Tip***
     This is useful in scenarios where you want to maintain text generation flow despite errors, such as when generating long-form content.
     The user will not be interrupted by tool call issues, ensuring a smoother experience.
-
     """
     seed: NotRequired[
         Nullable[ServerlessToolAssistedChatCompletionStreamBodySeedTypedDict]
@@ -108,7 +107,6 @@ class ServerlessToolAssistedChatCompletionStreamBodyTypedDict(TypedDict):
     stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     r"""Options related to stream.
     It can only be used when `stream: true`.
-
     """
     temperature: NotRequired[Nullable[float]]
     r"""Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument."""
@@ -127,7 +125,6 @@ class ServerlessToolAssistedChatCompletionStreamBodyTypedDict(TypedDict):
     A maximum of 128 functions is supported.
     Use this to provide a list of functions the model may generate JSON inputs for.
     For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tool-assisted-api#built-in-tools).
-
     """
     top_k: NotRequired[Nullable[int]]
     r"""Limits sampling to the top k tokens with the highest probabilities. Values range from 0 (no filtering) to the model's vocabulary size (inclusive). The default value of 0 applies no filtering, allowing all tokens."""
@@ -163,7 +160,7 @@ class ServerlessToolAssistedChatCompletionStreamBody(BaseModel):
     r"""A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling."""
 
     n: OptionalNullable[int] = UNSET
-    r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
+    r"""The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
 
     parallel_tool_calls: OptionalNullable[bool] = UNSET
     r"""Whether to enable parallel function calling."""
@@ -183,7 +180,6 @@ class ServerlessToolAssistedChatCompletionStreamBody(BaseModel):
     ***Tip***
     This is useful in scenarios where you want to maintain text generation flow despite errors, such as when generating long-form content.
     The user will not be interrupted by tool call issues, ensuring a smoother experience.
-
     """
 
     seed: OptionalNullable[ServerlessToolAssistedChatCompletionStreamBodySeed] = UNSET
@@ -198,7 +194,6 @@ class ServerlessToolAssistedChatCompletionStreamBody(BaseModel):
     stream_options: OptionalNullable[StreamOptions] = UNSET
     r"""Options related to stream.
     It can only be used when `stream: true`.
-
     """
 
     temperature: OptionalNullable[float] = UNSET
@@ -220,7 +215,6 @@ class ServerlessToolAssistedChatCompletionStreamBody(BaseModel):
     A maximum of 128 functions is supported.
     Use this to provide a list of functions the model may generate JSON inputs for.
     For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tool-assisted-api#built-in-tools).
-
     """
 
     top_k: OptionalNullable[int] = UNSET

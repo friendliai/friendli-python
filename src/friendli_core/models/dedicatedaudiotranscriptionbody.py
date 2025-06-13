@@ -62,7 +62,7 @@ r"""Controls how the audio is cut into chunks. When set to `\"auto\"`, the serve
 
 class DedicatedAudioTranscriptionBodyTypedDict(TypedDict):
     file: FileModelTypedDict
-    r"""The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm."""
+    r"""The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats."""
     model: str
     r"""ID of target endpoint. If you want to send request to specific adapter, use the format \"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\". Otherwise, you can just use \"YOUR_ENDPOINT_ID\" alone."""
     chunking_strategy: NotRequired[Nullable[ChunkingStrategyTypedDict]]
@@ -77,7 +77,7 @@ class DedicatedAudioTranscriptionBody(BaseModel):
     file: Annotated[
         FileModel, FieldMetadata(multipart=MultipartFormMetadata(file=True))
     ]
-    r"""The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm."""
+    r"""The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats."""
 
     model: Annotated[str, FieldMetadata(multipart=True)]
     r"""ID of target endpoint. If you want to send request to specific adapter, use the format \"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\". Otherwise, you can just use \"YOUR_ENDPOINT_ID\" alone."""

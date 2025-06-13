@@ -83,10 +83,9 @@ class ServerlessChatCompletionStreamBodyTypedDict(TypedDict):
     r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
 
     **This field is unsupported when `tools` or `response_format` is specified.**
-
     """
     n: NotRequired[Nullable[int]]
-    r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
+    r"""The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
     parallel_tool_calls: NotRequired[Nullable[bool]]
     r"""Whether to enable parallel function calling."""
     presence_penalty: NotRequired[Nullable[float]]
@@ -106,8 +105,6 @@ class ServerlessChatCompletionStreamBodyTypedDict(TypedDict):
 
     **This field is unsupported when `tools` is specified.**
     **When `response_format` is specified, `min_tokens` field is unsupported.**
-
-
     """
     seed: NotRequired[Nullable[ServerlessChatCompletionStreamBodySeedTypedDict]]
     r"""Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."""
@@ -118,7 +115,6 @@ class ServerlessChatCompletionStreamBodyTypedDict(TypedDict):
     stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     r"""Options related to stream.
     It can only be used when `stream: true`.
-
     """
     temperature: NotRequired[Nullable[float]]
     r"""Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument."""
@@ -137,7 +133,6 @@ class ServerlessChatCompletionStreamBodyTypedDict(TypedDict):
     Use this to provide a list of functions the model may generate JSON inputs for.
 
     **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
-
     """
     top_k: NotRequired[Nullable[int]]
     r"""Limits sampling to the top k tokens with the highest probabilities. Values range from 0 (no filtering) to the model's vocabulary size (inclusive). The default value of 0 applies no filtering, allowing all tokens."""
@@ -176,11 +171,10 @@ class ServerlessChatCompletionStreamBody(BaseModel):
     r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
 
     **This field is unsupported when `tools` or `response_format` is specified.**
-
     """
 
     n: OptionalNullable[int] = UNSET
-    r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
+    r"""The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
 
     parallel_tool_calls: OptionalNullable[bool] = UNSET
     r"""Whether to enable parallel function calling."""
@@ -204,8 +198,6 @@ class ServerlessChatCompletionStreamBody(BaseModel):
 
     **This field is unsupported when `tools` is specified.**
     **When `response_format` is specified, `min_tokens` field is unsupported.**
-
-
     """
 
     seed: OptionalNullable[ServerlessChatCompletionStreamBodySeed] = UNSET
@@ -220,7 +212,6 @@ class ServerlessChatCompletionStreamBody(BaseModel):
     stream_options: OptionalNullable[StreamOptions] = UNSET
     r"""Options related to stream.
     It can only be used when `stream: true`.
-
     """
 
     temperature: OptionalNullable[float] = UNSET
@@ -242,7 +233,6 @@ class ServerlessChatCompletionStreamBody(BaseModel):
     Use this to provide a list of functions the model may generate JSON inputs for.
 
     **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
-
     """
 
     top_k: OptionalNullable[int] = UNSET
