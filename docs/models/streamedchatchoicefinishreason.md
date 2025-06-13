@@ -5,7 +5,6 @@ Termination condition of the generation. `stop` means the API returned the full 
 `tool_calls` means the API has generated tool calls.
 
 
-
 ## Values
 
 | Name         | Value        |

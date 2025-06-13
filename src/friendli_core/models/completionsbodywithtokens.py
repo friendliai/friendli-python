@@ -45,12 +45,6 @@ class CompletionsBodyWithTokensTypedDict(TypedDict):
     Defaults to empty list.
 
     """
-    beam_compat_no_post_normalization: NotRequired[Nullable[bool]]
-    beam_compat_pre_normalization: NotRequired[Nullable[bool]]
-    beam_search_type: NotRequired[Nullable[str]]
-    r"""One of `DETERMINISTIC`, `NAIVE_SAMPLING`, and `STOCHASTIC`. Which beam search type to use. `DETERMINISTIC` means the standard, deterministic beam search, which is similar to Hugging Face's [`beam_search`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_search). Arguments for controlling random sampling such as `top_k` and `top_p` are not allowed for this option. `NAIVE_SAMPLING` is similar to Hugging Face's [`beam_sample`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_sample). `STOCHASTIC` means stochastic beam search (more details in [Kool et al. (2019)](https://proceedings.mlr.press/v97/kool19a.html)). This option is ignored if `num_beams` is not provided. Defaults to `DETERMINISTIC`."""
-    early_stopping: NotRequired[Nullable[bool]]
-    r"""Whether to stop the beam search when at least `num_beams` beams are finished with the EOS token. Only allowed for beam search. Defaults to false. This is similar to Hugging Face's [`early_stopping`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.early_stopping) argument."""
     embedding_to_replace: NotRequired[Nullable[List[float]]]
     r"""A list of flattened embedding vectors used for replacing the tokens at the specified indices provided via `token_index_to_replace`."""
     encoder_no_repeat_ngram: NotRequired[Nullable[int]]
@@ -63,8 +57,6 @@ class CompletionsBodyWithTokensTypedDict(TypedDict):
     r"""A token sequence that is enforced as a generation output. This option can be used when evaluating the model for the datasets with multi-choice problems (e.g., [HellaSwag](https://huggingface.co/datasets/hellaswag), [MMLU](https://huggingface.co/datasets/cais/mmlu)). Use this option with `logprobs` to get logprobs for the evaluation."""
     frequency_penalty: NotRequired[Nullable[float]]
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim."""
-    length_penalty: NotRequired[Nullable[float]]
-    r"""Coefficient for exponential length penalty that is used with beam search. Only allowed for beam search. Defaults to 1.0. This is similar to Hugging Face's [`length_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.length_penalty) argument."""
     logprobs: NotRequired[Nullable[int]]
     r"""Include the log probabilities on the logprobs most likely output tokens, as well the chosen tokens."""
     max_tokens: NotRequired[Nullable[int]]
@@ -77,18 +69,15 @@ class CompletionsBodyWithTokensTypedDict(TypedDict):
     r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
 
     **This field is unsupported when `response_format` is specified.**
-
     """
     min_total_tokens: NotRequired[Nullable[int]]
     r"""The minimum number of tokens including both the generated result and the input tokens. Only allowed for decoder-only models. Only one argument between `min_tokens` and `min_total_tokens` is allowed. This is similar to Hugging Face's [`min_length`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.min_length) argument."""
     model: NotRequired[Nullable[str]]
     r"""Routes the request to a specific adapter."""
     n: NotRequired[Nullable[int]]
-    r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
+    r"""The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
     no_repeat_ngram: NotRequired[Nullable[int]]
     r"""If this exceeds 1, every ngram of that size can only occur once among the generated result (plus the input tokens for decoder-only models). 1 means that this mechanism is disabled (i.e., you cannot prevent 1-gram from being generated repeatedly). Defaults to 1. This is similar to Hugging Face's [`no_repeat_ngram_size`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.no_repeat_ngram_size) argument."""
-    num_beams: NotRequired[Nullable[int]]
-    r"""Number of beams for beam search. Numbers between 1 and 31 (both inclusive) are allowed. Default behavior is no beam search. This is similar to Hugging Face's [`num_beams`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_beams) argument."""
     presence_penalty: NotRequired[Nullable[float]]
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."""
     repetition_penalty: NotRequired[Nullable[float]]
@@ -99,21 +88,15 @@ class CompletionsBodyWithTokensTypedDict(TypedDict):
     stop: NotRequired[Nullable[List[str]]]
     r"""When one of the stop phrases appears in the generation result, the API will stop generation.
     The stop phrases are excluded from the result.
-    This option is incompatible with beam search (specified by `num_beams`); use `stop_tokens` for that case instead.
     Defaults to empty list.
-
     """
     stop_tokens: NotRequired[Nullable[List[TokenSequenceTypedDict]]]
-    r"""Stop generating further tokens when generated token corresponds to any of the tokens in the sequence.
-    If beam search is enabled, all of the active beams should contain the stop token to terminate generation.
-
-    """
+    r"""Stop generating further tokens when generated token corresponds to any of the tokens in the sequence."""
     stream: NotRequired[Nullable[bool]]
-    r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated. Not supported when using beam search."""
+    r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."""
     stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     r"""Options related to stream.
     It can only be used when `stream: true`.
-
     """
     temperature: NotRequired[Nullable[float]]
     r"""Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument."""
@@ -142,16 +125,6 @@ class CompletionsBodyWithTokens(BaseModel):
 
     """
 
-    beam_compat_no_post_normalization: OptionalNullable[bool] = UNSET
-
-    beam_compat_pre_normalization: OptionalNullable[bool] = UNSET
-
-    beam_search_type: OptionalNullable[str] = UNSET
-    r"""One of `DETERMINISTIC`, `NAIVE_SAMPLING`, and `STOCHASTIC`. Which beam search type to use. `DETERMINISTIC` means the standard, deterministic beam search, which is similar to Hugging Face's [`beam_search`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_search). Arguments for controlling random sampling such as `top_k` and `top_p` are not allowed for this option. `NAIVE_SAMPLING` is similar to Hugging Face's [`beam_sample`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationMixin.beam_sample). `STOCHASTIC` means stochastic beam search (more details in [Kool et al. (2019)](https://proceedings.mlr.press/v97/kool19a.html)). This option is ignored if `num_beams` is not provided. Defaults to `DETERMINISTIC`."""
-
-    early_stopping: OptionalNullable[bool] = UNSET
-    r"""Whether to stop the beam search when at least `num_beams` beams are finished with the EOS token. Only allowed for beam search. Defaults to false. This is similar to Hugging Face's [`early_stopping`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.early_stopping) argument."""
-
     embedding_to_replace: OptionalNullable[List[float]] = UNSET
     r"""A list of flattened embedding vectors used for replacing the tokens at the specified indices provided via `token_index_to_replace`."""
 
@@ -170,9 +143,6 @@ class CompletionsBodyWithTokens(BaseModel):
     frequency_penalty: OptionalNullable[float] = UNSET
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim."""
 
-    length_penalty: OptionalNullable[float] = UNSET
-    r"""Coefficient for exponential length penalty that is used with beam search. Only allowed for beam search. Defaults to 1.0. This is similar to Hugging Face's [`length_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.length_penalty) argument."""
-
     logprobs: OptionalNullable[int] = UNSET
     r"""Include the log probabilities on the logprobs most likely output tokens, as well the chosen tokens."""
 
@@ -189,7 +159,6 @@ class CompletionsBodyWithTokens(BaseModel):
     r"""The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
 
     **This field is unsupported when `response_format` is specified.**
-
     """
 
     min_total_tokens: OptionalNullable[int] = UNSET
@@ -199,13 +168,10 @@ class CompletionsBodyWithTokens(BaseModel):
     r"""Routes the request to a specific adapter."""
 
     n: OptionalNullable[int] = UNSET
-    r"""The number of independently generated results for the prompt. Not supported when using beam search. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
+    r"""The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument."""
 
     no_repeat_ngram: OptionalNullable[int] = UNSET
     r"""If this exceeds 1, every ngram of that size can only occur once among the generated result (plus the input tokens for decoder-only models). 1 means that this mechanism is disabled (i.e., you cannot prevent 1-gram from being generated repeatedly). Defaults to 1. This is similar to Hugging Face's [`no_repeat_ngram_size`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.no_repeat_ngram_size) argument."""
-
-    num_beams: OptionalNullable[int] = UNSET
-    r"""Number of beams for beam search. Numbers between 1 and 31 (both inclusive) are allowed. Default behavior is no beam search. This is similar to Hugging Face's [`num_beams`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_beams) argument."""
 
     presence_penalty: OptionalNullable[float] = UNSET
     r"""Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."""
@@ -221,24 +187,18 @@ class CompletionsBodyWithTokens(BaseModel):
     stop: OptionalNullable[List[str]] = UNSET
     r"""When one of the stop phrases appears in the generation result, the API will stop generation.
     The stop phrases are excluded from the result.
-    This option is incompatible with beam search (specified by `num_beams`); use `stop_tokens` for that case instead.
     Defaults to empty list.
-
     """
 
     stop_tokens: OptionalNullable[List[TokenSequence]] = UNSET
-    r"""Stop generating further tokens when generated token corresponds to any of the tokens in the sequence.
-    If beam search is enabled, all of the active beams should contain the stop token to terminate generation.
-
-    """
+    r"""Stop generating further tokens when generated token corresponds to any of the tokens in the sequence."""
 
     stream: OptionalNullable[bool] = False
-    r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated. Not supported when using beam search."""
+    r"""Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."""
 
     stream_options: OptionalNullable[StreamOptions] = UNSET
     r"""Options related to stream.
     It can only be used when `stream: true`.
-
     """
 
     temperature: OptionalNullable[float] = UNSET
@@ -258,17 +218,12 @@ class CompletionsBodyWithTokens(BaseModel):
         optional_fields = [
             "bad_word_tokens",
             "bad_words",
-            "beam_compat_no_post_normalization",
-            "beam_compat_pre_normalization",
-            "beam_search_type",
-            "early_stopping",
             "embedding_to_replace",
             "encoder_no_repeat_ngram",
             "encoder_repetition_penalty",
             "eos_token",
             "forced_output_tokens",
             "frequency_penalty",
-            "length_penalty",
             "logprobs",
             "max_tokens",
             "max_total_tokens",
@@ -278,7 +233,6 @@ class CompletionsBodyWithTokens(BaseModel):
             "model",
             "n",
             "no_repeat_ngram",
-            "num_beams",
             "presence_penalty",
             "repetition_penalty",
             "response_format",
@@ -295,17 +249,12 @@ class CompletionsBodyWithTokens(BaseModel):
         nullable_fields = [
             "bad_word_tokens",
             "bad_words",
-            "beam_compat_no_post_normalization",
-            "beam_compat_pre_normalization",
-            "beam_search_type",
-            "early_stopping",
             "embedding_to_replace",
             "encoder_no_repeat_ngram",
             "encoder_repetition_penalty",
             "eos_token",
             "forced_output_tokens",
             "frequency_penalty",
-            "length_penalty",
             "logprobs",
             "max_tokens",
             "max_total_tokens",
@@ -315,7 +264,6 @@ class CompletionsBodyWithTokens(BaseModel):
             "model",
             "n",
             "no_repeat_ngram",
-            "num_beams",
             "presence_penalty",
             "repetition_penalty",
             "response_format",
