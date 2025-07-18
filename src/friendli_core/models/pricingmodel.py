@@ -2,25 +2,39 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing import Optional
+
+from typing_extensions import NotRequired, TypedDict
 
 from friendli_core.types import BaseModel
 
+from .serverlesspriceunittype import ServerlessPriceUnitType
+
 
 class PricingModelTypedDict(TypedDict):
-    r"""Price per 1M tokens in USD currency."""
+    r"""Pricing model supporting both token-based and time-based pricing."""
 
     input: float
     r"""Price per input token"""
     output: float
     r"""Price per output token"""
+    response_time: NotRequired[float]
+    r"""Price per response time in seconds"""
+    unit_type: NotRequired[ServerlessPriceUnitType]
+    r"""Serverless price unit type."""
 
 
 class PricingModel(BaseModel):
-    r"""Price per 1M tokens in USD currency."""
+    r"""Pricing model supporting both token-based and time-based pricing."""
 
     input: float
     r"""Price per input token"""
 
     output: float
     r"""Price per output token"""
+
+    response_time: Optional[float] = 0
+    r"""Price per response time in seconds"""
+
+    unit_type: Optional[ServerlessPriceUnitType] = None
+    r"""Serverless price unit type."""

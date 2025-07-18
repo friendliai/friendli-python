@@ -183,7 +183,7 @@ class SyncSDK(BaseSDK):
                     raise e
             if http_res is None:
                 logger.debug("Raising no response SDK error")
-                raise models.SDKError("No response received")
+                raise models.NoResponseError("No response received")
             logger.debug(
                 "Response:\nStatus Code: %s\nURL: %s\nHeaders: %s\nBody: %s",
                 http_res.status_code,
@@ -202,7 +202,7 @@ class SyncSDK(BaseSDK):
                     http_res = result
                 else:
                     logger.debug("Raising unexpected SDK error")
-                    raise models.SDKError("Unexpected error occurred")
+                    raise models.SDKError("Unexpected error occurred", http_res)
             return http_res
 
         if retry_config is not None:
@@ -290,7 +290,7 @@ class AsyncSDK(BaseSDK):
                     raise e
             if http_res is None:
                 logger.debug("Raising no response SDK error")
-                raise models.SDKError("No response received")
+                raise models.NoResponseError("No response received")
             logger.debug(
                 "Response:\nStatus Code: %s\nURL: %s\nHeaders: %s\nBody: %s",
                 http_res.status_code,
@@ -309,7 +309,7 @@ class AsyncSDK(BaseSDK):
                     http_res = result
                 else:
                     logger.debug("Raising unexpected SDK error")
-                    raise models.SDKError("Unexpected error occurred")
+                    raise models.SDKError("Unexpected error occurred", http_res)
             return http_res
 
         if retry_config is not None:

@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from friendli_core import utils
+import httpx
+
+from friendli_core.models import FriendliCoreError
 from friendli_core.types import BaseModel
 
 from .validationerror import ValidationError
@@ -14,11 +16,15 @@ class HTTPValidationErrorData(BaseModel):
     detail: Optional[List[ValidationError]] = None
 
 
-class HTTPValidationError(Exception):
+class HTTPValidationError(FriendliCoreError):
     data: HTTPValidationErrorData
 
-    def __init__(self, data: HTTPValidationErrorData):
+    def __init__(
+        self,
+        data: HTTPValidationErrorData,
+        raw_response: httpx.Response,
+        body: Optional[str] = None,
+    ):
+        message = body or raw_response.text
+        super().__init__(message, raw_response, body)
         self.data = data
-
-    def __str__(self) -> str:
-        return utils.marshal_json(self.data, HTTPValidationErrorData)

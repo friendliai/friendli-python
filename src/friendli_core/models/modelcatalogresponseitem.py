@@ -26,7 +26,7 @@ class ModelCatalogResponseItemTypedDict(TypedDict):
     name: str
     policy: Nullable[str]
     pricing: PricingModelTypedDict
-    r"""Price per 1M tokens in USD currency."""
+    r"""Pricing model supporting both token-based and time-based pricing."""
 
 
 class ModelCatalogResponseItem(BaseModel):
@@ -54,7 +54,7 @@ class ModelCatalogResponseItem(BaseModel):
     policy: Nullable[str]
 
     pricing: PricingModel
-    r"""Price per 1M tokens in USD currency."""
+    r"""Pricing model supporting both token-based and time-based pricing."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
