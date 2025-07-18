@@ -4,7 +4,8 @@
 
 from __future__ import annotations
 
-from typing import Callable, Dict, Optional, Union
+from types import TracebackType
+from typing import Callable, Dict, Optional, Type, Union
 
 from friendli_core.httpclient import AsyncHttpClient, HttpClient
 from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore
@@ -57,18 +58,23 @@ class SyncFriendli:
         self.serverless = SyncServerless(core=self._core, config=self._config)
 
     @property
-    def core(self) -> SyncFriendliCore:
+    def core(self) -> "SyncFriendliCore":
         return self._core
 
     @property
-    def config(self) -> Config:
+    def config(self) -> "Config":
         return self._config
 
-    def __enter__(self):
+    def __enter__(self) -> "SyncFriendli":
         self._core.__enter__()
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> None:
         self._core.__exit__(exc_type, exc_val, exc_tb)
 
 
@@ -109,16 +115,21 @@ class AsyncFriendli:
         self.serverless = AsyncServerless(core=self._core, config=self._config)
 
     @property
-    def core(self) -> AsyncFriendliCore:
+    def core(self) -> "AsyncFriendliCore":
         return self._core
 
     @property
-    def config(self) -> Config:
+    def config(self) -> "Config":
         return self._config
 
-    async def __aenter__(self):
+    async def __aenter__(self) -> "AsyncFriendli":
         await self._core.__aenter__()
         return self
 
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> None:
         await self._core.__aexit__(exc_type, exc_val, exc_tb)

@@ -4,4 +4,6 @@
 
 from __future__ import annotations
 
-from .file import AsyncFile, SyncFile
+from .file import AsyncFile, SyncFile  # noqa: F401
+
+__all__ = ["AsyncFile", "SyncFile"]

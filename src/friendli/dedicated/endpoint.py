@@ -290,7 +290,7 @@ class SyncEndpoint:
             http_headers=http_headers,
         )
 
-    def get_version(
+    def get_version_history(
         self,
         *,
         endpoint_id: str,
@@ -301,10 +301,10 @@ class SyncEndpoint:
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Dict[str, models.DedicatedEndpointSpec]:
-        """Get endpoint versions
+    ) -> models.DedicatedEndpointVersionHistoryResponse:
+        """Get endpoint version history
 
-        Get versions of a specific endpoint
+        Get version history of a specific endpoint
 
         :param endpoint_id: The ID of the endpoint
         :param cursor: Cursor for pagination
@@ -315,7 +315,7 @@ class SyncEndpoint:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return self._core.dedicated.endpoint.get_version(
+        return self._core.dedicated.endpoint.get_version_history(
             endpoint_id=endpoint_id,
             cursor=cursor,
             limit=limit,
@@ -753,7 +753,7 @@ class AsyncEndpoint:
             http_headers=http_headers,
         )
 
-    async def get_version(
+    async def get_version_history(
         self,
         *,
         endpoint_id: str,
@@ -764,10 +764,10 @@ class AsyncEndpoint:
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Dict[str, models.DedicatedEndpointSpec]:
-        """Get endpoint versions
+    ) -> models.DedicatedEndpointVersionHistoryResponse:
+        """Get endpoint version history
 
-        Get versions of a specific endpoint
+        Get version history of a specific endpoint
 
         :param endpoint_id: The ID of the endpoint
         :param cursor: Cursor for pagination
@@ -778,7 +778,7 @@ class AsyncEndpoint:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return await self._core.dedicated.endpoint.get_version(
+        return await self._core.dedicated.endpoint.get_version_history(
             endpoint_id=endpoint_id,
             cursor=cursor,
             limit=limit,
@@ -900,7 +900,7 @@ class AsyncEndpoint:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return self.core.dedicated.endpoint.terminate(
+        return self._core.dedicated.endpoint.terminate(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
             retries=retries,
