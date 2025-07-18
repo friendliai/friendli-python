@@ -4,4 +4,6 @@
 
 from __future__ import annotations
 
-from .dataset import AsyncDataset, SyncDataset
+from .dataset import AsyncDataset, SyncDataset  # noqa: F401
+
+__all__ = ["AsyncDataset", "SyncDataset"]

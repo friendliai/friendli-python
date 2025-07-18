@@ -29,7 +29,7 @@ def download_from_url(*, url: str) -> bytes:
     Raises:
         httpx.HTTPStatusError: If download fails
     """
-    res = httpx.get(url, follow_redirects=True)
+    res: httpx.Response = httpx.get(url, follow_redirects=True)
     res.raise_for_status()
     return res.content
 

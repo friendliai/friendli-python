@@ -52,7 +52,7 @@ def fix_oneof_schema(titles: list[str]) -> Callable[[JsonDict], None]:
             for title, model in zip(titles, cast("Any", oneof), strict=True)
         ]
         schema.pop("title")
-        schema["oneOf"] = oneof_with_title  # type: ignore
+
 
     return _fixer
 
@@ -72,7 +72,7 @@ def fix_union_schema(
             for title, model in zip(titles, cast("Any", oneof), strict=True)
         ]
         schema.pop("title")
-        schema["oneOf"] = oneof_with_title  # type: ignore
+        schema["oneOf"] = oneof_with_title
         schema.update(extra_json_schema)
 
     return _fixer

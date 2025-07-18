@@ -66,6 +66,8 @@ class ServerlessChatCompletionBodyTypedDict(TypedDict):
     r"""A list of messages comprising the conversation so far."""
     model: str
     r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
+    chat_template_kwargs: NotRequired[Nullable[Dict[str, Any]]]
+    r"""Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template."""
     eos_token: NotRequired[Nullable[List[int]]]
     r"""A list of endpoint sentence tokens."""
     frequency_penalty: NotRequired[Nullable[float]]
@@ -147,6 +149,9 @@ class ServerlessChatCompletionBody(BaseModel):
 
     model: str
     r"""Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#text-generation-models)."""
+
+    chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template."""
 
     eos_token: OptionalNullable[List[int]] = UNSET
     r"""A list of endpoint sentence tokens."""
@@ -246,6 +251,7 @@ class ServerlessChatCompletionBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "chat_template_kwargs",
             "eos_token",
             "frequency_penalty",
             "logit_bias",
@@ -270,6 +276,7 @@ class ServerlessChatCompletionBody(BaseModel):
             "top_p",
         ]
         nullable_fields = [
+            "chat_template_kwargs",
             "eos_token",
             "frequency_penalty",
             "logit_bias",

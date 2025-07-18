@@ -4,6 +4,6 @@
 
 from __future__ import annotations
 
-from friendli_core import VERSION
+from friendli_core import VERSION  # noqa: F401
 
-from .friendli import AsyncFriendli, SyncFriendli
+from .friendli import AsyncFriendli, SyncFriendli  # noqa: F401
