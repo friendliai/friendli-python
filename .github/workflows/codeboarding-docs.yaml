@@ -69,7 +69,7 @@ jobs:
         id: codeboarding
         uses: CodeBoarding/CodeBoarding-GHAction@0.1.2
         with:
-          repository_url: ${{ github.event.inputs.repository_url || github.server_url }}/${{ github.repository }}
+          repository_url: ${{ github.event.inputs.repository_url }}
           source_branch: ${{ steps.set-branches.outputs.source_branch }}
           target_branch: ${{ steps.set-branches.outputs.target_branch }}
           output_directory: ${{ github.event.inputs.output_directory || '.codeboarding' }}
