@@ -11,8 +11,7 @@
           "reference_start_line": 19,
           "reference_end_line": 106
         }
-      ],
-      "can_expand": true
+      ]
     },
     {
       "name": "Dedicated Client",
@@ -36,8 +35,7 @@
           "reference_start_line": 52,
           "reference_end_line": 66
         }
-      ],
-      "can_expand": true
+      ]
     },
     {
       "name": "Serverless Client",
@@ -61,8 +59,7 @@
           "reference_start_line": 52,
           "reference_end_line": 68
         }
-      ],
-      "can_expand": true
+      ]
     }
   ],
   "components_relations": [

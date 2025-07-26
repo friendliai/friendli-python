@@ -5,7 +5,7 @@ graph LR
     Serverless_Client["Serverless Client"]
     Dedicated_Client -- "implements" --> Platform_Abstractions
     Serverless_Client -- "implements" --> Platform_Abstractions
-    click Platform_Abstractions href "https://github.com/friendliai/friendli-python/blob/main/.codeboarding/Platform_Abstractions.md" "Details"
+    click Platform_Abstractions href "https://github.com/CodeBoarding/friendli-python/blob/main/.codeboarding/Platform_Abstractions.md" "Details"
 ```
 
 [![CodeBoarding](https://img.shields.io/badge/Generated%20by-CodeBoarding-9cf?style=flat-square)](https://github.com/CodeBoarding/GeneratedOnBoardings)[![Demo](https://img.shields.io/badge/Try%20our-Demo-blue?style=flat-square)](https://www.codeboarding.org/demo)[![Contact](https://img.shields.io/badge/Contact%20us%20-%20contact@codeboarding.org-lightgrey?style=flat-square)](mailto:contact@codeboarding.org)
@@ -20,7 +20,7 @@ Defines the foundational base structures and interfaces that enable the SDK to a
 
 **Related Classes/Methods**:
 
-- <a href="https://github.com/friendliai/friendli-python/blob/main/src/friendli_core/basesdk.py#L19-L106" target="_blank" rel="noopener noreferrer">`friendli_core.basesdk:BaseSDK` (19:106)</a>
+- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/basesdk.py#L19-L106" target="_blank" rel="noopener noreferrer">`friendli_core.basesdk:BaseSDK` (19:106)</a>
 
 
 ### Dedicated Client
@@ -29,9 +29,9 @@ A concrete implementation of the `Platform Abstractions` tailored specifically f
 
 **Related Classes/Methods**:
 
-- <a href="https://github.com/friendliai/friendli-python/blob/main/src/friendli_core/dedicated.py#L24-L32" target="_blank" rel="noopener noreferrer">`friendli_core.dedicated:BaseDedicated` (24:32)</a>
-- <a href="https://github.com/friendliai/friendli-python/blob/main/src/friendli_core/dedicated.py#L35-L49" target="_blank" rel="noopener noreferrer">`friendli_core.dedicated:SyncDedicated` (35:49)</a>
-- <a href="https://github.com/friendliai/friendli-python/blob/main/src/friendli_core/dedicated.py#L52-L66" target="_blank" rel="noopener noreferrer">`friendli_core.dedicated:AsyncDedicated` (52:66)</a>
+- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/dedicated.py#L24-L32" target="_blank" rel="noopener noreferrer">`friendli_core.dedicated:BaseDedicated` (24:32)</a>
+- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/dedicated.py#L35-L49" target="_blank" rel="noopener noreferrer">`friendli_core.dedicated:SyncDedicated` (35:49)</a>
+- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/dedicated.py#L52-L66" target="_blank" rel="noopener noreferrer">`friendli_core.dedicated:AsyncDedicated` (52:66)</a>
 
 
 ### Serverless Client
@@ -40,9 +40,9 @@ A concrete implementation of the `Platform Abstractions` designed for interactin
 
 **Related Classes/Methods**:
 
-- <a href="https://github.com/friendliai/friendli-python/blob/main/src/friendli_core/serverless.py#L24-L32" target="_blank" rel="noopener noreferrer">`friendli_core.serverless:BaseServerless` (24:32)</a>
-- <a href="https://github.com/friendliai/friendli-python/blob/main/src/friendli_core/serverless.py#L35-L49" target="_blank" rel="noopener noreferrer">`friendli_core.serverless:SyncServerless` (35:49)</a>
-- <a href="https://github.com/friendliai/friendli-python/blob/main/src/friendli_core/serverless.py#L52-L68" target="_blank" rel="noopener noreferrer">`friendli_core.serverless:AsyncServerless` (52:68)</a>
+- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/serverless.py#L24-L32" target="_blank" rel="noopener noreferrer">`friendli_core.serverless:BaseServerless` (24:32)</a>
+- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/serverless.py#L35-L49" target="_blank" rel="noopener noreferrer">`friendli_core.serverless:SyncServerless` (35:49)</a>
+- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/serverless.py#L52-L68" target="_blank" rel="noopener noreferrer">`friendli_core.serverless:AsyncServerless` (52:68)</a>
 
 
 

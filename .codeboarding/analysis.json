@@ -101,7 +101,7 @@
           "reference_end_line": 0
         }
       ],
-      "can_expand": false
+      "can_expand": true
     }
   ],
   "components_relations": [

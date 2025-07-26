@@ -11,8 +11,7 @@
           "reference_start_line": 1,
           "reference_end_line": 1
         }
-      ],
-      "can_expand": true
+      ]
     },
     {
       "name": "Service Modules",
@@ -42,8 +41,7 @@
           "reference_start_line": null,
           "reference_end_line": null
         }
-      ],
-      "can_expand": true
+      ]
     },
     {
       "name": "Data Models & Error Handling",
@@ -61,8 +59,7 @@
           "reference_start_line": 1,
           "reference_end_line": 1
         }
-      ],
-      "can_expand": true
+      ]
     },
     {
       "name": "Utility Functions",
@@ -74,8 +71,7 @@
           "reference_start_line": 1,
           "reference_end_line": 1
         }
-      ],
-      "can_expand": false
+      ]
     },
     {
       "name": "Examples and Documentation",
@@ -93,8 +89,7 @@
           "reference_start_line": 1,
           "reference_end_line": 1
         }
-      ],
-      "can_expand": false
+      ]
     }
   ],
   "components_relations": [

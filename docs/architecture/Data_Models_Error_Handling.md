@@ -13,8 +13,8 @@ graph LR
     Examples_and_Documentation -- "showcases usage of" --> Core_Client
     Examples_and_Documentation -- "showcases usage of" --> Service_Modules
     Examples_and_Documentation -- "relies on" --> Data_Models_Error_Handling
-    click Service_Modules href "https://github.com/friendliai/friendli-python/blob/main/.codeboarding/Service_Modules.md" "Details"
-    click Data_Models_Error_Handling href "https://github.com/friendliai/friendli-python/blob/main/.codeboarding/Data_Models_Error_Handling.md" "Details"
+    click Service_Modules href "https://github.com/CodeBoarding/friendli-python/blob/main/.codeboarding/Service_Modules.md" "Details"
+    click Data_Models_Error_Handling href "https://github.com/CodeBoarding/friendli-python/blob/main/.codeboarding/Data_Models_Error_Handling.md" "Details"
 ```
 
 [![CodeBoarding](https://img.shields.io/badge/Generated%20by-CodeBoarding-9cf?style=flat-square)](https://github.com/CodeBoarding/GeneratedOnBoardings)[![Demo](https://img.shields.io/badge/Try%20our-Demo-blue?style=flat-square)](https://www.codeboarding.org/demo)[![Contact](https://img.shields.io/badge/Contact%20us%20-%20contact@codeboarding.org-lightgrey?style=flat-square)](mailto:contact@codeboarding.org)
