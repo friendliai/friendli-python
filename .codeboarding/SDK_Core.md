@@ -26,9 +26,9 @@ graph LR
     Error_Handling -- "defines error types for" --> Service_Modules
     Utility_Functions -- "provides helpers to" --> SDK_Core
     Utility_Functions -- "provides helpers to" --> Service_Modules
-    click SDK_Core href "https://github.com/CodeBoarding/friendli-python/blob/main/.codeboarding/SDK_Core.md" "Details"
-    click Service_Modules href "https://github.com/CodeBoarding/friendli-python/blob/main/.codeboarding/Service_Modules.md" "Details"
-    click Error_Handling href "https://github.com/CodeBoarding/friendli-python/blob/main/.codeboarding/Error_Handling.md" "Details"
+    click SDK_Core href "https://github.com/friendliai/friendli-python/blob/main/.codeboarding/SDK_Core.md" "Details"
+    click Service_Modules href "https://github.com/friendliai/friendli-python/blob/main/.codeboarding/Service_Modules.md" "Details"
+    click Error_Handling href "https://github.com/friendliai/friendli-python/blob/main/.codeboarding/Error_Handling.md" "Details"
 ```
 
 [![CodeBoarding](https://img.shields.io/badge/Generated%20by-CodeBoarding-9cf?style=flat-square)](https://github.com/CodeBoarding/GeneratedOnBoardings)[![Demo](https://img.shields.io/badge/Try%20our-Demo-blue?style=flat-square)](https://www.codeboarding.org/demo)[![Contact](https://img.shields.io/badge/Contact%20us%20-%20contact@codeboarding.org-lightgrey?style=flat-square)](mailto:contact@codeboarding.org)
