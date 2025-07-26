@@ -1,0 +1,142 @@
+{
+  "description": "This analysis outlines the final component structure of the `friendli_core` SDK, detailing its five key components: Core Client, Service Modules, Data Models & Error Handling, Utility Functions, and Examples and Documentation. It describes each component's role, associated source files, and interactions within the SDK, providing a comprehensive overview of the system's architecture and interdependencies.",
+  "components": [
+    {
+      "name": "Core Client",
+      "description": "The central entry point for the SDK, responsible for managing authentication, session handling, and dispatching requests to the appropriate service modules. It provides the primary interface for users to interact with the Friendli AI platform.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.client",
+          "reference_file": "friendli_core.client.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Service Modules",
+      "description": "Encapsulate specific API functionalities (e.g., chat, completions, image generation, audio processing). Each module provides high-level methods for its domain, abstracting the underlying RESTful API calls and handling domain-specific logic.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.chat",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/chat.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.completions",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/completions.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.image",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/image.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.audio",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/audio.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Data Models & Error Handling",
+      "description": "Defines standardized data structures for all API requests and responses, ensuring consistent data representation across the SDK. This component also provides a comprehensive set of error types, facilitating robust and standardized error reporting from the Friendli AI platform.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.models",
+          "reference_file": "friendli_core.models.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "friendli_core.errors",
+          "reference_file": "friendli_core.errors.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Utility Functions",
+      "description": "Provides common helper functions for SDK-wide tasks such as JSON serialization/deserialization, parameter validation, configuration loading, and other reusable logic that supports the core functionalities.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.utils",
+          "reference_file": "friendli_core.utils.py",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ],
+      "can_expand": false
+    },
+    {
+      "name": "Examples and Documentation",
+      "description": "Comprises practical code examples demonstrating how to effectively use the SDK's functionalities and comprehensive documentation (API references, guides) to assist developers in integrating and utilizing the Friendli AI platform.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "examples",
+          "reference_file": "examples/",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "docs",
+          "reference_file": "docs/",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ],
+      "can_expand": false
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "uses",
+      "src_name": "Core Client",
+      "dst_name": "Service Modules"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Core Client",
+      "dst_name": "Data Models & Error Handling"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Core Client",
+      "dst_name": "Utility Functions"
+    },
+    {
+      "relation": "utilizes",
+      "src_name": "Service Modules",
+      "dst_name": "Data Models & Error Handling"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Service Modules",
+      "dst_name": "Utility Functions"
+    },
+    {
+      "relation": "showcases usage of",
+      "src_name": "Examples and Documentation",
+      "dst_name": "Core Client"
+    },
+    {
+      "relation": "showcases usage of",
+      "src_name": "Examples and Documentation",
+      "dst_name": "Service Modules"
+    },
+    {
+      "relation": "relies on",
+      "src_name": "Examples and Documentation",
+      "dst_name": "Data Models & Error Handling"
+    }
+  ]
+}
