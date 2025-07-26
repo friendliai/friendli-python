@@ -1,0 +1,80 @@
+{
+  "description": "Abstract Components Overview",
+  "components": [
+    {
+      "name": "Platform Abstractions",
+      "description": "Defines the foundational base structures and interfaces that enable the SDK to adapt its behavior to various operational modes (e.g., dedicated, serverless) of the Friendli platform. It provides the abstract contracts for interacting with different deployment types.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.basesdk:BaseSDK",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/basesdk.py",
+          "reference_start_line": 19,
+          "reference_end_line": 106
+        }
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Dedicated Client",
+      "description": "A concrete implementation of the `Platform Abstractions` tailored specifically for interacting with the Friendli platform in a \"dedicated\" operational mode. It provides the specific logic and configurations required for this environment.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.dedicated:BaseDedicated",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/dedicated.py",
+          "reference_start_line": 24,
+          "reference_end_line": 32
+        },
+        {
+          "qualified_name": "friendli_core.dedicated:SyncDedicated",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/dedicated.py",
+          "reference_start_line": 35,
+          "reference_end_line": 49
+        },
+        {
+          "qualified_name": "friendli_core.dedicated:AsyncDedicated",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/dedicated.py",
+          "reference_start_line": 52,
+          "reference_end_line": 66
+        }
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Serverless Client",
+      "description": "A concrete implementation of the `Platform Abstractions` designed for interacting with the Friendli platform in a \"serverless\" operational mode. It encapsulates the specific logic and configurations for this environment.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.serverless:BaseServerless",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/serverless.py",
+          "reference_start_line": 24,
+          "reference_end_line": 32
+        },
+        {
+          "qualified_name": "friendli_core.serverless:SyncServerless",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/serverless.py",
+          "reference_start_line": 35,
+          "reference_end_line": 49
+        },
+        {
+          "qualified_name": "friendli_core.serverless:AsyncServerless",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/serverless.py",
+          "reference_start_line": 52,
+          "reference_end_line": 68
+        }
+      ],
+      "can_expand": true
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "implements",
+      "src_name": "Dedicated Client",
+      "dst_name": "Platform Abstractions"
+    },
+    {
+      "relation": "implements",
+      "src_name": "Serverless Client",
+      "dst_name": "Platform Abstractions"
+    }
+  ]
+}

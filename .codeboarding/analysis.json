@@ -1,0 +1,139 @@
+{
+  "description": "One paragraph explaining the functionality which is represented by this graph. What the main flow is and what is its purpose.",
+  "components": [
+    {
+      "name": "Friendli Client (Public API)",
+      "description": "The primary entry point for end-users, offering a high-level, consistent interface for interacting with the Friendli AI platform, supporting both synchronous and asynchronous operations.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.sdk",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/sdk.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "SDK Core",
+      "description": "The central orchestrator managing fundamental logic for API communication, request/response processing, and integrating foundational SDK abstractions and extensibility points.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.basesdk",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/basesdk.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Service Modules",
+      "description": "Encapsulate specific API domains (e.g., chat, completions, datasets), providing high-level, domain-specific methods that simplify interactions with particular parts of the Friendli API.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.chat",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/chat.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.completions",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/completions.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.dataset",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/dataset.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.image",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/image.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Data Models & Error Handling",
+      "description": "Defines standardized data structures for API requests and responses, along with a comprehensive set of error types, ensuring consistent data representation and robust error reporting.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.models",
+          "reference_file": "N/A",
+          "reference_start_line": 0,
+          "reference_end_line": 0
+        }
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Platform Abstractions",
+      "description": "Provides base structures and interfaces tailored for different operational modes or deployment types within the Friendli platform, enabling the SDK to adapt its behavior to the target environment.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.dedicated",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/dedicated.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.serverless",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/serverless.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Hooks & Extensibility",
+      "description": "Offers an extensible mechanism for injecting custom logic at various stages of the request/response lifecycle, allowing for pre-processing, post-processing, and error handling customization.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core._hooks",
+          "reference_file": "N/A",
+          "reference_start_line": 0,
+          "reference_end_line": 0
+        }
+      ],
+      "can_expand": false
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "delegates requests to",
+      "src_name": "Friendli Client (Public API)",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "utilizes",
+      "src_name": "SDK Core",
+      "dst_name": "Data Models & Error Handling"
+    },
+    {
+      "relation": "adapts behavior based on",
+      "src_name": "SDK Core",
+      "dst_name": "Platform Abstractions"
+    },
+    {
+      "relation": "integrates and consumes",
+      "src_name": "SDK Core",
+      "dst_name": "Hooks & Extensibility"
+    },
+    {
+      "relation": "utilize",
+      "src_name": "Service Modules",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "rely on",
+      "src_name": "Service Modules",
+      "dst_name": "Data Models & Error Handling"
+    }
+  ]
+}
