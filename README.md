@@ -19,8 +19,7 @@ When using Friendli Python SDK, you need to provide a Friendli Token for authent
 
 ## Architecture & Development Onboarding
 
-For developers looking to understand the codebase architecture and get started with contributing to the Friendli Python SDK, please refer to our comprehensive [Architecture & Onboarding Guide](./docs/architecture/on_boarding.md). This documentation is automatically generated and maintained to provide up-to-date insights into the codebase structure, patterns, and development workflows.
-
+For developers looking to understand the codebase architecture and get started with contributing to the Friendli Python SDK, please refer to our [Architecture Documentation](./docs/architecture/on_boarding.md).
 <!-- No Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
