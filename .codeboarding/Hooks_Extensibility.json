@@ -29,8 +29,7 @@
           "reference_start_line": 55,
           "reference_end_line": 63
         }
-      ],
-      "can_expand": false
+      ]
     },
     {
       "name": "Hook Interface",
@@ -42,8 +41,7 @@
           "reference_start_line": 99,
           "reference_end_line": 114
         }
-      ],
-      "can_expand": false
+      ]
     },
     {
       "name": "SDK Hooks Orchestrator",
@@ -55,8 +53,7 @@
           "reference_start_line": 21,
           "reference_end_line": 78
         }
-      ],
-      "can_expand": true
+      ]
     }
   ],
   "components_relations": [
