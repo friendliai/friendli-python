@@ -20,7 +20,7 @@ Defines the foundational base structures and interfaces that enable the SDK to a
 
 **Related Classes/Methods**:
 
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/basesdk.py#L19-L106" target="_blank" rel="noopener noreferrer">`friendli_core.basesdk:BaseSDK` (19:106)</a>
+- `friendli_core.basesdk:BaseSDK`:19-106
 
 
 ### Dedicated Client
@@ -29,9 +29,9 @@ A concrete implementation of the `Platform Abstractions` tailored specifically f
 
 **Related Classes/Methods**:
 
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/dedicated.py#L24-L32" target="_blank" rel="noopener noreferrer">`friendli_core.dedicated:BaseDedicated` (24:32)</a>
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/dedicated.py#L35-L49" target="_blank" rel="noopener noreferrer">`friendli_core.dedicated:SyncDedicated` (35:49)</a>
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/dedicated.py#L52-L66" target="_blank" rel="noopener noreferrer">`friendli_core.dedicated:AsyncDedicated` (52:66)</a>
+- `friendli_core.dedicated:BaseDedicated`:24-32
+- `friendli_core.dedicated:SyncDedicated`:35-49
+- `friendli_core.dedicated:AsyncDedicated`:52-66
 
 
 ### Serverless Client
@@ -40,9 +40,9 @@ A concrete implementation of the `Platform Abstractions` designed for interactin
 
 **Related Classes/Methods**:
 
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/serverless.py#L24-L32" target="_blank" rel="noopener noreferrer">`friendli_core.serverless:BaseServerless` (24:32)</a>
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/serverless.py#L35-L49" target="_blank" rel="noopener noreferrer">`friendli_core.serverless:SyncServerless` (35:49)</a>
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/serverless.py#L52-L68" target="_blank" rel="noopener noreferrer">`friendli_core.serverless:AsyncServerless` (52:68)</a>
+- `friendli_core.serverless:BaseServerless`:24-32
+- `friendli_core.serverless:SyncServerless`:35-49
+- `friendli_core.serverless:AsyncServerless`:52-68
 
 
 

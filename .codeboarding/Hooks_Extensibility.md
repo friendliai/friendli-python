@@ -21,10 +21,10 @@ A set of specialized Data Transfer Objects (DTOs) that encapsulate and pass rele
 
 **Related Classes/Methods**:
 
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/_hooks/types.py#L11-L30" target="_blank" rel="noopener noreferrer">`friendli_core._hooks.types.HookContext` (11:30)</a>
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/_hooks/types.py#L33-L41" target="_blank" rel="noopener noreferrer">`friendli_core._hooks.types.BeforeRequestContext` (33:41)</a>
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/_hooks/types.py#L44-L52" target="_blank" rel="noopener noreferrer">`friendli_core._hooks.types.AfterSuccessContext` (44:52)</a>
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/_hooks/types.py#L55-L63" target="_blank" rel="noopener noreferrer">`friendli_core._hooks.types.AfterErrorContext` (55:63)</a>
+- `friendli_core._hooks.types.HookContext`:11-30
+- `friendli_core._hooks.types.BeforeRequestContext`:33-41
+- `friendli_core._hooks.types.AfterSuccessContext`:44-52
+- `friendli_core._hooks.types.AfterErrorContext`:55-63
 
 
 ### Hook Interface
@@ -33,7 +33,7 @@ Defines the abstract interface or base class that custom hooks must implement. I
 
 **Related Classes/Methods**:
 
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/_hooks/types.py#L99-L114" target="_blank" rel="noopener noreferrer">`friendli_core._hooks.types.Hooks` (99:114)</a>
+- `friendli_core._hooks.types.Hooks`:99-114
 
 
 ### SDK Hooks Orchestrator
@@ -42,7 +42,7 @@ The central manager responsible for registering, storing, and orchestrating the 
 
 **Related Classes/Methods**:
 
-- <a href="https://github.com/CodeBoarding/friendli-python/blob/main/src/friendli_core/_hooks/sdkhooks.py#L21-L78" target="_blank" rel="noopener noreferrer">`friendli_core._hooks.sdkhooks.SDKHooks` (21:78)</a>
+- `friendli_core._hooks.sdkhooks.SDKHooks`:21-78
 
 
 

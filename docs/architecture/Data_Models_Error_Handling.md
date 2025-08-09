@@ -29,7 +29,7 @@ The central entry point for the SDK, responsible for managing authentication, se
 
 **Related Classes/Methods**:
 
-- `friendli_core.client` (1:1)
+- `friendli_core.client`
 
 
 ### Service Modules [[Expand]](./Service_Modules.md)
@@ -50,8 +50,8 @@ Defines standardized data structures for all API requests and responses, ensurin
 
 **Related Classes/Methods**:
 
-- `friendli_core.models` (1:1)
-- `friendli_core.errors` (1:1)
+- `friendli_core.models`
+- `friendli_core.errors`
 
 
 ### Utility Functions
@@ -60,7 +60,7 @@ Provides common helper functions for SDK-wide tasks such as JSON serialization/d
 
 **Related Classes/Methods**:
 
-- `friendli_core.utils` (1:1)
+- `friendli_core.utils`
 
 
 ### Examples and Documentation
@@ -69,8 +69,8 @@ Comprises practical code examples demonstrating how to effectively use the SDK's
 
 **Related Classes/Methods**:
 
-- `examples` (1:1)
-- `docs` (1:1)
+- `examples`
+- `docs`
 
 
 

@@ -44,7 +44,7 @@ Encapsulate the logic for interacting with specific API endpoints (e.g., chat, c
 
 - `friendli_core.chat`
 - `friendli_core.completions`
-- `friendli_core.images` (1:1)
+- `friendli_core.images`
 - `friendli_core.audio`
 
 
@@ -54,7 +54,7 @@ Define the structure of data exchanged with the Friendli AI platform, including 
 
 **Related Classes/Methods**:
 
-- `friendli_core.models` (1:1)
+- `friendli_core.models`
 
 
 ### HTTP Client/Transport Layer
@@ -63,7 +63,7 @@ Handles the low-level HTTP communication with the Friendli AI platform. This inc
 
 **Related Classes/Methods**:
 
-- `friendli_core.http_client` (1:1)
+- `friendli_core.http_client`
 
 
 ### Error Handling [[Expand]](./Error_Handling.md)
@@ -72,7 +72,7 @@ Manages and standardizes error responses from both the API and the network layer
 
 **Related Classes/Methods**:
 
-- `friendli_core.errors` (1:1)
+- `friendli_core.errors`
 
 
 ### Configuration Management
@@ -81,7 +81,7 @@ Centralizes and manages SDK-wide configuration settings, such as API keys, base 
 
 **Related Classes/Methods**:
 
-- `friendli_core.config` (1:1)
+- `friendli_core.config`
 
 
 ### Utility Functions
@@ -90,7 +90,7 @@ Provides common helper functions and reusable functionalities that support vario
 
 **Related Classes/Methods**:
 
-- `friendli_core.utils` (1:1)
+- `friendli_core.utils`
 
 
 
