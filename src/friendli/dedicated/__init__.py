@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore
+from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
 
 from ..config import Config
 from .audio import AsyncAudio, SyncAudio

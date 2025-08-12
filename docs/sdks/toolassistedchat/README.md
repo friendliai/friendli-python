@@ -14,6 +14,7 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="serverlessToolAssistedChatComplete" method="post" path="/serverless/tools/v1/chat/completions" -->
 ```python
 import os
 
@@ -90,6 +91,7 @@ Given a list of messages forming a conversation, the model generates a response.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="serverlessToolAssistedChatStream" method="post" path="/serverless/tools/v1/chat/completions#stream" -->
 ```python
 import os
 

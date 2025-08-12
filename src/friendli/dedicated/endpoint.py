@@ -5,11 +5,11 @@
 from __future__ import annotations
 
 import io
-from typing import IO, Any, Dict, Mapping, Optional, Union
+from typing import IO, Any, Mapping, Optional, Union
 
-from friendli_core import models, utils
-from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore
-from friendli_core.types import UNSET, OptionalNullable
+from friendli.core import models, utils
+from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+from friendli.core.types import UNSET, OptionalNullable
 
 from ..config import Config
 
@@ -810,7 +810,7 @@ class AsyncEndpoint:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return self._core.dedicated.endpoint.get_status(
+        return await self._core.dedicated.endpoint.get_status(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
             retries=retries,
@@ -900,7 +900,7 @@ class AsyncEndpoint:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return self._core.dedicated.endpoint.terminate(
+        return await self._core.dedicated.endpoint.terminate(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
             retries=retries,

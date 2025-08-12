@@ -7,11 +7,11 @@ from __future__ import annotations
 from types import TracebackType
 from typing import Callable, Dict, Optional, Type, Union
 
-from friendli_core.httpclient import AsyncHttpClient, HttpClient
-from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore
-from friendli_core.types import UNSET, OptionalNullable
-from friendli_core.utils.logger import Logger
-from friendli_core.utils.retries import RetryConfig
+from friendli.core.httpclient import AsyncHttpClient, HttpClient
+from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+from friendli.core.types import UNSET, OptionalNullable
+from friendli.core.utils.logger import Logger
+from friendli.core.utils.retries import RetryConfig
 
 from .config import Config
 from .container import AsyncContainer, SyncContainer

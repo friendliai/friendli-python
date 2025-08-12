@@ -138,7 +138,7 @@ with SyncFriendli(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
 ```python
 # Asynchronous Example
 import asyncio
@@ -211,7 +211,7 @@ with SyncFriendli(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
 ```python
 # Asynchronous Example
 import asyncio
@@ -299,24 +299,24 @@ with SyncFriendli(
 ### [container](docs/sdks/container/README.md)
 
 
-#### [container.chat](docs/sdks/chat/README.md)
+#### [container.chat](docs/sdks/containerchat/README.md)
 
-* [complete](docs/sdks/chat/README.md#complete) - Chat completions
-* [stream](docs/sdks/chat/README.md#stream) - Stream chat completions
+* [complete](docs/sdks/containerchat/README.md#complete) - Chat completions
+* [stream](docs/sdks/containerchat/README.md#stream) - Stream chat completions
 
-#### [container.completions](docs/sdks/completions/README.md)
+#### [container.completions](docs/sdks/containercompletions/README.md)
 
-* [complete](docs/sdks/completions/README.md#complete) - Completions
-* [stream](docs/sdks/completions/README.md#stream) - Stream completions
+* [complete](docs/sdks/containercompletions/README.md#complete) - Completions
+* [stream](docs/sdks/containercompletions/README.md#stream) - Stream completions
 
-#### [container.image](docs/sdks/image/README.md)
+#### [container.image](docs/sdks/containerimage/README.md)
 
-* [generate](docs/sdks/image/README.md#generate) - Image generations
+* [generate](docs/sdks/containerimage/README.md#generate) - Image generations
 
-#### [container.token](docs/sdks/token/README.md)
+#### [container.token](docs/sdks/containertoken/README.md)
 
-* [tokenization](docs/sdks/token/README.md#tokenization) - Tokenization
-* [detokenization](docs/sdks/token/README.md#detokenization) - Detokenization
+* [tokenize](docs/sdks/containertoken/README.md#tokenize) - Tokenization
+* [detokenize](docs/sdks/containertoken/README.md#detokenize) - Detokenization
 
 ### [dataset](docs/sdks/dataset/README.md)
 
@@ -344,15 +344,15 @@ with SyncFriendli(
 
 * [transcribe](docs/sdks/audio/README.md#transcribe) - Audio transcriptions
 
-#### [dedicated.chat](docs/sdks/friendlicorechat/README.md)
+#### [dedicated.chat](docs/sdks/dedicatedchat/README.md)
 
-* [complete](docs/sdks/friendlicorechat/README.md#complete) - Chat completions
-* [stream](docs/sdks/friendlicorechat/README.md#stream) - Stream chat completions
+* [complete](docs/sdks/dedicatedchat/README.md#complete) - Chat completions
+* [stream](docs/sdks/dedicatedchat/README.md#stream) - Stream chat completions
 
-#### [dedicated.completions](docs/sdks/friendlicorecompletions/README.md)
+#### [dedicated.completions](docs/sdks/dedicatedcompletions/README.md)
 
-* [complete](docs/sdks/friendlicorecompletions/README.md#complete) - Completions
-* [stream](docs/sdks/friendlicorecompletions/README.md#stream) - Stream completions
+* [complete](docs/sdks/dedicatedcompletions/README.md#complete) - Completions
+* [stream](docs/sdks/dedicatedcompletions/README.md#stream) - Stream completions
 
 #### [dedicated.endpoint](docs/sdks/endpoint/README.md)
 
@@ -369,35 +369,35 @@ with SyncFriendli(
 * [terminate](docs/sdks/endpoint/README.md#terminate) - Terminate endpoint
 * [restart](docs/sdks/endpoint/README.md#restart) - Restart endpoint
 
-#### [dedicated.image](docs/sdks/friendlicoreimage/README.md)
+#### [dedicated.image](docs/sdks/dedicatedimage/README.md)
 
-* [generate](docs/sdks/friendlicoreimage/README.md#generate) - Image generations
+* [generate](docs/sdks/dedicatedimage/README.md#generate) - Image generations
 
-#### [dedicated.token](docs/sdks/friendlicoretoken/README.md)
+#### [dedicated.token](docs/sdks/dedicatedtoken/README.md)
 
-* [tokenization](docs/sdks/friendlicoretoken/README.md#tokenization) - Tokenization
-* [detokenization](docs/sdks/friendlicoretoken/README.md#detokenization) - Detokenization
+* [tokenize](docs/sdks/dedicatedtoken/README.md#tokenize) - Tokenization
+* [detokenize](docs/sdks/dedicatedtoken/README.md#detokenize) - Detokenization
 
-### [file](docs/sdks/file/README.md)
+### [file](docs/sdks/filesdk/README.md)
 
-* [init_upload](docs/sdks/file/README.md#init_upload) - Initiate file upload
-* [complete_upload](docs/sdks/file/README.md#complete_upload) - Complete file upload
-* [get_info](docs/sdks/file/README.md#get_info) - Get file info
-* [get_download_url](docs/sdks/file/README.md#get_download_url) - Get file download URL
+* [init_upload](docs/sdks/filesdk/README.md#init_upload) - Initiate file upload
+* [complete_upload](docs/sdks/filesdk/README.md#complete_upload) - Complete file upload
+* [get_info](docs/sdks/filesdk/README.md#get_info) - Get file info
+* [get_download_url](docs/sdks/filesdk/README.md#get_download_url) - Get file download URL
 
 
 ### [serverless](docs/sdks/serverless/README.md)
 
 
-#### [serverless.chat](docs/sdks/friendlicoreserverlesschat/README.md)
+#### [serverless.chat](docs/sdks/serverlesschat/README.md)
 
-* [complete](docs/sdks/friendlicoreserverlesschat/README.md#complete) - Chat completions
-* [stream](docs/sdks/friendlicoreserverlesschat/README.md#stream) - Stream chat completions
+* [complete](docs/sdks/serverlesschat/README.md#complete) - Chat completions
+* [stream](docs/sdks/serverlesschat/README.md#stream) - Stream chat completions
 
-#### [serverless.completions](docs/sdks/friendlicoreserverlesscompletions/README.md)
+#### [serverless.completions](docs/sdks/serverlesscompletions/README.md)
 
-* [complete](docs/sdks/friendlicoreserverlesscompletions/README.md#complete) - Completions
-* [stream](docs/sdks/friendlicoreserverlesscompletions/README.md#stream) - Stream completions
+* [complete](docs/sdks/serverlesscompletions/README.md#complete) - Completions
+* [stream](docs/sdks/serverlesscompletions/README.md#stream) - Stream completions
 
 #### [serverless.knowledge](docs/sdks/knowledge/README.md)
 
@@ -407,10 +407,10 @@ with SyncFriendli(
 
 * [list](docs/sdks/model/README.md#list) - Retrieve serverless models
 
-#### [serverless.token](docs/sdks/friendlicoreserverlesstoken/README.md)
+#### [serverless.token](docs/sdks/serverlesstoken/README.md)
 
-* [tokenization](docs/sdks/friendlicoreserverlesstoken/README.md#tokenization) - Tokenization
-* [detokenization](docs/sdks/friendlicoreserverlesstoken/README.md#detokenization) - Detokenization
+* [tokenize](docs/sdks/serverlesstoken/README.md#tokenize) - Tokenization
+* [detokenize](docs/sdks/serverlesstoken/README.md#detokenize) - Detokenization
 
 #### [serverless.tool_assisted_chat](docs/sdks/toolassistedchat/README.md)
 

@@ -28,6 +28,7 @@ Create a new dataset.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create_dataset" method="post" path="/beta/dataset" -->
 ```python
 import os
 
@@ -71,6 +72,7 @@ List datasets accessible to the user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list_datasets" method="get" path="/beta/dataset" -->
 ```python
 import os
 
@@ -87,15 +89,15 @@ with SyncFriendli(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `project_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `cursor`                                                            | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]*      | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `limit`                                                             | *OptionalNullable[int]*                                             | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `direction`                                                         | [OptionalNullable[models.Direction]](../../models/direction.md)     | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `name_search`                                                       | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `project_id`                                                                            | *str*                                                                                   | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `cursor`                                                                                | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]*                          | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `limit`                                                                                 | *OptionalNullable[int]*                                                                 | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `direction`                                                                             | [OptionalNullable[models.ListDatasetsDirection]](../../models/listdatasetsdirection.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `name_search`                                                                           | *OptionalNullable[str]*                                                                 | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `x_friendli_team`                                                                       | *OptionalNullable[str]*                                                                 | :heavy_minus_sign:                                                                      | ID of team to run requests as (optional parameter).                                     |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
 
 ### Response
 
@@ -114,6 +116,7 @@ Get information about a specific dataset.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_dataset" method="get" path="/beta/dataset/{dataset_id}" -->
 ```python
 import os
 
@@ -153,6 +156,7 @@ Delete a specific dataset.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete_dataset" method="delete" path="/beta/dataset/{dataset_id}" -->
 ```python
 import os
 
@@ -192,6 +196,7 @@ Create a version for the current state of the split.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create_version" method="post" path="/beta/dataset/{dataset_id}/version" -->
 ```python
 import os
 
@@ -235,6 +240,7 @@ List versions for a dataset.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list_versions" method="get" path="/beta/dataset/{dataset_id}/version" -->
 ```python
 import os
 
@@ -274,6 +280,7 @@ Get a dataset version.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_version" method="get" path="/beta/dataset/{dataset_id}/version/{version_id}" -->
 ```python
 import os
 
@@ -314,6 +321,7 @@ Delete a version from the dataset.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete_version" method="delete" path="/beta/dataset/{dataset_id}/version/{version_id}" -->
 ```python
 import os
 
@@ -354,6 +362,7 @@ Create a new split in the dataset.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create_split" method="post" path="/beta/dataset/{dataset_id}/split" -->
 ```python
 import os
 
@@ -394,6 +403,7 @@ List splits in the dataset.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list_splits" method="get" path="/beta/dataset/{dataset_id}/split" -->
 ```python
 import os
 
@@ -415,7 +425,7 @@ with SyncFriendli(
 | `dataset_id`                                                                        | *str*                                                                               | :heavy_check_mark:                                                                  | ID of the dataset.                                                                  |
 | `cursor`                                                                            | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]*                      | :heavy_minus_sign:                                                                  | N/A                                                                                 |
 | `limit`                                                                             | *OptionalNullable[int]*                                                             | :heavy_minus_sign:                                                                  | N/A                                                                                 |
-| `direction`                                                                         | [OptionalNullable[models.QueryParamDirection]](../../models/queryparamdirection.md) | :heavy_minus_sign:                                                                  | N/A                                                                                 |
+| `direction`                                                                         | [OptionalNullable[models.ListSplitsDirection]](../../models/listsplitsdirection.md) | :heavy_minus_sign:                                                                  | N/A                                                                                 |
 | `version_id`                                                                        | *OptionalNullable[str]*                                                             | :heavy_minus_sign:                                                                  | N/A                                                                                 |
 | `x_friendli_team`                                                                   | *OptionalNullable[str]*                                                             | :heavy_minus_sign:                                                                  | ID of team to run requests as (optional parameter).                                 |
 | `retries`                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                    | :heavy_minus_sign:                                                                  | Configuration to override the default retry behavior of the client.                 |
@@ -437,6 +447,7 @@ Get information about a specific split.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_split" method="get" path="/beta/dataset/{dataset_id}/split/{split_id}" -->
 ```python
 import os
 
@@ -477,6 +488,7 @@ Delete a specific split.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete_split" method="delete" path="/beta/dataset/{dataset_id}/split/{split_id}" -->
 ```python
 import os
 
@@ -517,6 +529,7 @@ Add samples to the split.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="add_samples" method="post" path="/beta/dataset/{dataset_id}/split/{split_id}/sample" -->
 ```python
 import os
 
@@ -566,6 +579,7 @@ List samples from the split.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list_samples" method="get" path="/beta/dataset/{dataset_id}/split/{split_id}/sample" -->
 ```python
 import os
 
@@ -584,16 +598,16 @@ with SyncFriendli(
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `dataset_id`                                                                                              | *str*                                                                                                     | :heavy_check_mark:                                                                                        | ID of the dataset.                                                                                        |
-| `split_id`                                                                                                | *str*                                                                                                     | :heavy_check_mark:                                                                                        | ID of the split.                                                                                          |
-| `cursor`                                                                                                  | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]*                                            | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
-| `limit`                                                                                                   | *OptionalNullable[int]*                                                                                   | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
-| `direction`                                                                                               | [OptionalNullable[models.ListSamplesQueryParamDirection]](../../models/listsamplesqueryparamdirection.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
-| `version_id`                                                                                              | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
-| `x_friendli_team`                                                                                         | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | ID of team to run requests as (optional parameter).                                                       |
-| `retries`                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                          | :heavy_minus_sign:                                                                                        | Configuration to override the default retry behavior of the client.                                       |
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `dataset_id`                                                                          | *str*                                                                                 | :heavy_check_mark:                                                                    | ID of the dataset.                                                                    |
+| `split_id`                                                                            | *str*                                                                                 | :heavy_check_mark:                                                                    | ID of the split.                                                                      |
+| `cursor`                                                                              | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]*                        | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `limit`                                                                               | *OptionalNullable[int]*                                                               | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `direction`                                                                           | [OptionalNullable[models.ListSamplesDirection]](../../models/listsamplesdirection.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `version_id`                                                                          | *OptionalNullable[str]*                                                               | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `x_friendli_team`                                                                     | *OptionalNullable[str]*                                                               | :heavy_minus_sign:                                                                    | ID of team to run requests as (optional parameter).                                   |
+| `retries`                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                      | :heavy_minus_sign:                                                                    | Configuration to override the default retry behavior of the client.                   |
 
 ### Response
 
@@ -612,6 +626,7 @@ Update samples as raw file.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="upload_raw_samples" method="put" path="/beta/dataset/{dataset_id}/split/{split_id}/sample" -->
 ```python
 import os
 
@@ -660,6 +675,7 @@ Delete samples from the split.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete_samples" method="post" path="/beta/dataset/{dataset_id}/split/{split_id}/sample/delete" -->
 ```python
 import os
 
