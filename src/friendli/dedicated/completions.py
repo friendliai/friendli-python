@@ -4,12 +4,12 @@
 
 from __future__ import annotations
 
-from typing import Any, Coroutine, Mapping, Optional, Union
+from typing import Mapping, Optional, Union
 
-from friendli_core import models, utils
-from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore
-from friendli_core.types import UNSET, OptionalNullable
-from friendli_core.utils import eventstreaming
+from friendli.core import models, utils
+from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+from friendli.core.types import UNSET, OptionalNullable
+from friendli.core.utils import eventstreaming
 
 from ..config import Config
 

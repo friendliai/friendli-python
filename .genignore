@@ -1,3 +1,4 @@
-src/friendli_core/utils/annotations.py
-scripts/prepare_readme.py
 pyproject.toml
+poetry.toml
+scripts/publish.sh
+src/friendli_core/utils/annotations.py

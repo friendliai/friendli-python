@@ -7,8 +7,8 @@ from __future__ import annotations
 import logging
 from typing import Any, Mapping, Optional
 
-from friendli_core.types import UNSET, BaseModel, OptionalNullable
-from friendli_core.utils.retries import RetryConfig
+from friendli.core.types import UNSET, BaseModel, OptionalNullable
+from friendli.core.utils.retries import RetryConfig
 
 DEFAULT_SPLIT_NAME = "train"
 

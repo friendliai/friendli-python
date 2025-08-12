@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
-  docChecksum: 8daaf6ff623b2023140e03b8f50c0ee9
+  docChecksum: e3d907d20ebe9ae3e82b181b80f259b7
   docVersion: 0.1.0
-  speakeasyVersion: 1.582.0
-  generationVersion: 2.657.1
-  releaseVersion: 0.10.6
-  configChecksum: 510a7b4aed60c8754ec84d48fc5af884
+  speakeasyVersion: 1.600.2
+  generationVersion: 2.677.3
+  releaseVersion: 0.10.7
+  configChecksum: 148b74a605b77eeb2404d8b544ff0e55
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.19.4
+    core: 5.19.7
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -56,6 +56,7 @@ generatedFiles:
   - docs/models/bodyuploadrawsamples.md
   - docs/models/bodyuploadrawsamplesfile.md
   - docs/models/chatchoice.md
+  - docs/models/chatchoicefinishreason.md
   - docs/models/chatchoicemessage.md
   - docs/models/chatcompletebodytoolchoice.md
   - docs/models/chatcompletebodytoolchoicefunction.md
@@ -66,6 +67,7 @@ generatedFiles:
   - docs/models/chunkingstrategy.md
   - docs/models/completeuploadrequest.md
   - docs/models/completionsbodywithprompt.md
+  - docs/models/completionsbodywithpromptprompt.md
   - docs/models/completionsbodywithpromptseed.md
   - docs/models/completionsbodywithtokens.md
   - docs/models/completionsbodywithtokensseed.md
@@ -99,6 +101,8 @@ generatedFiles:
   - docs/models/completionsstreamserverlessbodywithtokensseed.md
   - docs/models/containerchatcompletesuccess.md
   - docs/models/containerchatcompletionbody.md
+  - docs/models/containerchatcompletionbodyseed.md
+  - docs/models/containerchatcompletionbodytoolchoice.md
   - docs/models/containerchatcompletionstreambody.md
   - docs/models/containerchatcompletionstreambodyseed.md
   - docs/models/containerchatcompletionstreambodytoolchoice.md
@@ -116,12 +120,13 @@ generatedFiles:
   - docs/models/containertokenizationsuccess.md
   - docs/models/content.md
   - docs/models/createdatasetrequest.md
-  - docs/models/createdatasetrequest1.md
+  - docs/models/createdatasetrequestrequest.md
   - docs/models/createsplitrequest.md
   - docs/models/createversionrequest.md
   - docs/models/data.md
   - docs/models/datasetinfo.md
   - docs/models/dedicatedaudiotranscriptionbody.md
+  - docs/models/dedicatedaudiotranscriptionbodyfile.md
   - docs/models/dedicatedaudiotranscriptionsrequest.md
   - docs/models/dedicatedaudiotranscriptionsuccess.md
   - docs/models/dedicatedchatcompleterequest.md
@@ -173,7 +178,6 @@ generatedFiles:
   - docs/models/deletesamplesresponse.md
   - docs/models/deletesplitrequest.md
   - docs/models/deleteversionrequest.md
-  - docs/models/direction.md
   - docs/models/endpointadvancedconfig.md
   - docs/models/endpointsimplescaleconfig.md
   - docs/models/filebuiltintool.md
@@ -181,8 +185,6 @@ generatedFiles:
   - docs/models/fileinfo.md
   - docs/models/fileinituploadrequest.md
   - docs/models/fileinituploadresponse.md
-  - docs/models/filemodel.md
-  - docs/models/finishreason.md
   - docs/models/function.md
   - docs/models/functionality.md
   - docs/models/functionresult.md
@@ -198,11 +200,13 @@ generatedFiles:
   - docs/models/inferencedeploymentstatus.md
   - docs/models/inituploadrequest.md
   - docs/models/knowledgeretrievedchunk.md
+  - docs/models/listdatasetsdirection.md
   - docs/models/listdatasetsrequest.md
   - docs/models/listdatasetsresponse.md
-  - docs/models/listsamplesqueryparamdirection.md
+  - docs/models/listsamplesdirection.md
   - docs/models/listsamplesrequest.md
   - docs/models/listsamplesresponse.md
+  - docs/models/listsplitsdirection.md
   - docs/models/listsplitsrequest.md
   - docs/models/listsplitsresponse.md
   - docs/models/listversionsrequest.md
@@ -214,8 +218,6 @@ generatedFiles:
   - docs/models/otherbuiltintool.md
   - docs/models/phase.md
   - docs/models/pricingmodel.md
-  - docs/models/prompt.md
-  - docs/models/queryparamdirection.md
   - docs/models/requestbody.md
   - docs/models/responseformat.md
   - docs/models/responseformatjsonobject.md
@@ -224,7 +226,6 @@ generatedFiles:
   - docs/models/responseformatregex.md
   - docs/models/responseformattext.md
   - docs/models/security.md
-  - docs/models/seed.md
   - docs/models/serverlesschatcompleterequest.md
   - docs/models/serverlesschatcompletionbody.md
   - docs/models/serverlesschatcompletionbodyseed.md
@@ -278,7 +279,6 @@ generatedFiles:
   - docs/models/tool.md
   - docs/models/toolassistedchattool.md
   - docs/models/toolcallresult.md
-  - docs/models/toolchoice.md
   - docs/models/toolmessage.md
   - docs/models/toolstatusdata.md
   - docs/models/toolstatuserror.md
@@ -297,31 +297,30 @@ generatedFiles:
   - docs/models/videocontent.md
   - docs/models/videodata.md
   - docs/sdks/audio/README.md
-  - docs/sdks/chat/README.md
-  - docs/sdks/completions/README.md
   - docs/sdks/container/README.md
+  - docs/sdks/containerchat/README.md
+  - docs/sdks/containercompletions/README.md
+  - docs/sdks/containerimage/README.md
+  - docs/sdks/containertoken/README.md
   - docs/sdks/dataset/README.md
   - docs/sdks/dedicated/README.md
+  - docs/sdks/dedicatedchat/README.md
+  - docs/sdks/dedicatedcompletions/README.md
+  - docs/sdks/dedicatedimage/README.md
+  - docs/sdks/dedicatedtoken/README.md
   - docs/sdks/endpoint/README.md
-  - docs/sdks/file/README.md
+  - docs/sdks/filesdk/README.md
   - docs/sdks/friendlicore/README.md
-  - docs/sdks/friendlicorechat/README.md
-  - docs/sdks/friendlicorecompletions/README.md
-  - docs/sdks/friendlicoreimage/README.md
-  - docs/sdks/friendlicoreserverlesschat/README.md
-  - docs/sdks/friendlicoreserverlesscompletions/README.md
-  - docs/sdks/friendlicoreserverlesstoken/README.md
-  - docs/sdks/friendlicoretoken/README.md
-  - docs/sdks/image/README.md
   - docs/sdks/knowledge/README.md
   - docs/sdks/model/README.md
   - docs/sdks/serverless/README.md
-  - docs/sdks/token/README.md
+  - docs/sdks/serverlesschat/README.md
+  - docs/sdks/serverlesscompletions/README.md
+  - docs/sdks/serverlesstoken/README.md
   - docs/sdks/toolassistedchat/README.md
-  - poetry.toml
   - py.typed
   - pylintrc
-  - scripts/publish.sh
+  - scripts/prepare_readme.py
   - src/friendli_core/__init__.py
   - src/friendli_core/_hooks/__init__.py
   - src/friendli_core/_hooks/sdkhooks.py
@@ -329,22 +328,20 @@ generatedFiles:
   - src/friendli_core/_version.py
   - src/friendli_core/audio.py
   - src/friendli_core/basesdk.py
-  - src/friendli_core/chat.py
-  - src/friendli_core/completions.py
   - src/friendli_core/container.py
+  - src/friendli_core/container_chat.py
+  - src/friendli_core/container_completions.py
+  - src/friendli_core/container_image.py
+  - src/friendli_core/container_token.py
   - src/friendli_core/dataset.py
   - src/friendli_core/dedicated.py
+  - src/friendli_core/dedicated_chat.py
+  - src/friendli_core/dedicated_completions.py
+  - src/friendli_core/dedicated_image.py
+  - src/friendli_core/dedicated_token.py
   - src/friendli_core/endpoint.py
-  - src/friendli_core/file.py
-  - src/friendli_core/friendlicore_chat.py
-  - src/friendli_core/friendlicore_completions.py
-  - src/friendli_core/friendlicore_image.py
-  - src/friendli_core/friendlicore_serverless_chat.py
-  - src/friendli_core/friendlicore_serverless_completions.py
-  - src/friendli_core/friendlicore_serverless_token.py
-  - src/friendli_core/friendlicore_token.py
+  - src/friendli_core/file_sdk.py
   - src/friendli_core/httpclient.py
-  - src/friendli_core/image.py
   - src/friendli_core/knowledge.py
   - src/friendli_core/model.py
   - src/friendli_core/models/__init__.py
@@ -561,7 +558,9 @@ generatedFiles:
   - src/friendli_core/sdk.py
   - src/friendli_core/sdkconfiguration.py
   - src/friendli_core/serverless.py
-  - src/friendli_core/token.py
+  - src/friendli_core/serverless_chat.py
+  - src/friendli_core/serverless_completions.py
+  - src/friendli_core/serverless_token.py
   - src/friendli_core/toolassistedchat.py
   - src/friendli_core/types/__init__.py
   - src/friendli_core/types/basemodel.py

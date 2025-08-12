@@ -24,6 +24,7 @@ Create an endpoint from Weights & Biases artifact. If the idempotency key is pro
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedEndpointWandbArtifactCreate" method="post" path="/dedicated/endpoint/wandb-artifact-create" -->
 ```python
 import os
 
@@ -69,6 +70,7 @@ Create a new endpoint and return its status
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedCreateEndpoint" method="post" path="/dedicated/beta/endpoint" -->
 ```python
 import os
 
@@ -124,6 +126,7 @@ List all endpoint statuses
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedListEndpoints" method="get" path="/dedicated/beta/endpoint" -->
 ```python
 import os
 
@@ -164,6 +167,7 @@ Get the specification of an endpoint
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedGetEndpoint" method="get" path="/dedicated/beta/endpoint/{endpoint_id}" -->
 ```python
 import os
 
@@ -202,6 +206,7 @@ Update the specification of a specific endpoint
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedUpdateEndpoint" method="put" path="/dedicated/beta/endpoint/{endpoint_id}" -->
 ```python
 import os
 
@@ -248,6 +253,7 @@ Delete a specific endpoint
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedDeleteEndpoint" method="delete" path="/dedicated/beta/endpoint/{endpoint_id}" -->
 ```python
 import os
 
@@ -287,6 +293,7 @@ Get version history of a specific endpoint
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedGetEndpointVersionHistory" method="get" path="/dedicated/beta/endpoint/{endpoint_id}/version" -->
 ```python
 import os
 
@@ -327,6 +334,7 @@ Get the status of a specific endpoint
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedGetEndpointStatus" method="get" path="/dedicated/beta/endpoint/{endpoint_id}/status" -->
 ```python
 import os
 
@@ -365,6 +373,7 @@ Put a specific endpoint to sleep
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedSleepEndpoint" method="put" path="/dedicated/beta/endpoint/{endpoint_id}/sleep" -->
 ```python
 import os
 
@@ -403,6 +412,7 @@ Wake up a specific endpoint
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedWakeEndpoint" method="put" path="/dedicated/beta/endpoint/{endpoint_id}/wake" -->
 ```python
 import os
 
@@ -441,6 +451,7 @@ Terminate a specific endpoint
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedTerminateEndpoint" method="put" path="/dedicated/beta/endpoint/{endpoint_id}/terminate" -->
 ```python
 import os
 
@@ -479,6 +490,7 @@ Restart a FAILED or TERMINATED endpoint
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="dedicatedRestartEndpoint" method="put" path="/dedicated/beta/endpoint/{endpoint_id}/restart" -->
 ```python
 import os
 

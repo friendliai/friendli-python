@@ -27,13 +27,13 @@ from typing import (
 import httpx
 from pydantic import AnyHttpUrl
 
-from friendli_core import (
+from friendli.core import (
     AsyncFriendliCore,
     SyncFriendliCore,
     models,
     utils,
 )
-from friendli_core.types import UNSET, OptionalNullable
+from friendli.core.types import UNSET, OptionalNullable
 
 from ..config import DEFAULT_SPLIT_NAME, Config
 from ..models import (
@@ -143,7 +143,7 @@ class BaseDataset(ABC, Generic[TCore]):
                 ),
             )
 
-        elif isinstance(message.root, UserMessage):
+        if isinstance(message.root, UserMessage):
             if isinstance(message.root.content, str):
                 # NOTE: `UserMessageContentString` type, which is a string, so we skip it.
                 input_modal_set.add("TEXT")
@@ -155,7 +155,7 @@ class BaseDataset(ABC, Generic[TCore]):
                     ),
                 )
 
-            elif isinstance(message.root.content, list):
+            if isinstance(message.root.content, list):
                 # NOTE: `UserMessageContentArray` type
                 for content in message.root.content:
                     if isinstance(content.root, TextContent):
@@ -163,7 +163,7 @@ class BaseDataset(ABC, Generic[TCore]):
                         input_modal_set.add("TEXT")
                         continue
 
-                    elif isinstance(content.root, AudioContent):
+                    if isinstance(content.root, AudioContent):
                         input_modal_set.add("AUDIO")
                         original_audio = content.root.audio_url.url
                         content.root.audio_url.url = str(
@@ -174,7 +174,7 @@ class BaseDataset(ABC, Generic[TCore]):
                         )
                         continue
 
-                    elif isinstance(content.root, ImageContent):
+                    if isinstance(content.root, ImageContent):
                         input_modal_set.add("IMAGE")
                         if isinstance(content.root.root, ImageUrlData):
                             if isinstance(content.root.root.image_url, str):
@@ -202,7 +202,7 @@ class BaseDataset(ABC, Generic[TCore]):
                             content.root.root = content.root.root.to_ImageData()
                             continue
 
-                        elif isinstance(content.root.root, ImageData):
+                        if isinstance(content.root.root, ImageData):
                             original_image = content.root.root.image
                             if any(
                                 original_image.startswith(prefix)
@@ -278,12 +278,10 @@ class BaseDataset(ABC, Generic[TCore]):
                     ),
                 )
 
-            else:
-                raise TypeError(
-                    f"Invalid user message content type: {type(message.root.content)}."
-                )
-        else:
-            raise TypeError(f"Invalid message type: {type(message.root)}.")
+            raise TypeError(
+                f"Invalid user message content type: {type(message.root.content)}."
+            )
+        raise TypeError(f"Invalid message type: {type(message.root)}.")
 
     @abstractmethod
     async def _upload_to_s3(
@@ -368,7 +366,6 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             name: Name of the dataset
             project_id: Project ID
         """
-
         self._project_id = project_id
 
         try:
@@ -390,15 +387,13 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
                     **self._config.model_dump(),
                 )
                 self._splits.update({split.name: split for split in list_splits.data})
-                if list_splits.next_cursor is None:
+                if (
+                    list_splits.next_cursor is None
+                    or list_splits.next_cursor == prev_cursor
+                ):
                     break
                 else:
-                    # FIXME: This is a temporary fix to avoid infinite loop,
-                    # we should fix the backend  to return the correct next_cursor
-                    if list_splits.next_cursor == prev_cursor:
-                        break
-                    else:
-                        prev_cursor = list_splits.next_cursor
+                    prev_cursor = list_splits.next_cursor
 
             self._default_split = self._splits.get(DEFAULT_SPLIT_NAME, None)
 
@@ -1249,15 +1244,13 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
                     )
                 )
                 self._splits.update({split.name: split for split in list_splits.data})
-                if list_splits.next_cursor is None:
+                if (
+                    list_splits.next_cursor is None
+                    or list_splits.next_cursor == prev_cursor
+                ):
                     break
                 else:
-                    # FIXME: This is a temporary fix to avoid infinite loop,
-                    # we should fix the backend  to return the correct next_cursor
-                    if list_splits.next_cursor == prev_cursor:
-                        break
-                    else:
-                        prev_cursor = list_splits.next_cursor
+                    prev_cursor = list_splits.next_cursor
 
             self._default_split = self._splits.get(DEFAULT_SPLIT_NAME, None)
 

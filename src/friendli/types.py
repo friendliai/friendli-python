@@ -4,4 +4,4 @@
 
 from __future__ import annotations
 
-from friendli_core.types import *  # noqa: F403
+from friendli.core.types import *  # noqa: F403

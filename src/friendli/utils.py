@@ -8,8 +8,8 @@ from hashlib import sha256
 
 import httpx
 
-from friendli_core.models import DedicatedDatasetModality
-from friendli_core.utils import *  # noqa: F403
+from friendli.core.models import DedicatedDatasetModality
+from friendli.core.utils import *  # noqa: F403
 
 
 def digest(*, data: bytes) -> str:

@@ -4,11 +4,11 @@
 
 from __future__ import annotations
 
-from typing import Any, Coroutine, List, Mapping, Optional
+from typing import List, Mapping, Optional
 
-from friendli_core import models, utils
-from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore
-from friendli_core.types import UNSET, OptionalNullable
+from friendli.core import models, utils
+from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+from friendli.core.types import UNSET, OptionalNullable
 
 from ..config import Config
 
@@ -18,7 +18,7 @@ class SyncToken:
         self._core = core
         self._config = config
 
-    def tokenization(
+    def tokenize(
         self,
         *,
         prompt: str,
@@ -39,7 +39,7 @@ class SyncToken:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return self._core.container.token.tokenization(
+        return self._core.container.token.tokenize(
             prompt=prompt,
             model=model,
             retries=retries,
@@ -48,7 +48,7 @@ class SyncToken:
             http_headers=http_headers,
         )
 
-    def detokenization(
+    def detokenize(
         self,
         *,
         tokens: List[int],
@@ -69,7 +69,7 @@ class SyncToken:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return self._core.container.token.detokenization(
+        return self._core.container.token.detokenize(
             tokens=tokens,
             model=model,
             retries=retries,
@@ -84,7 +84,7 @@ class AsyncToken:
         self._core = core
         self._config = config
 
-    async def tokenization(
+    async def tokenize(
         self,
         *,
         prompt: str,
@@ -105,7 +105,7 @@ class AsyncToken:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return await self._core.container.token.tokenization(
+        return await self._core.container.token.tokenize(
             prompt=prompt,
             model=model,
             retries=retries,
@@ -114,7 +114,7 @@ class AsyncToken:
             http_headers=http_headers,
         )
 
-    async def detokenization(
+    async def detokenize(
         self,
         *,
         tokens: List[int],
@@ -135,7 +135,7 @@ class AsyncToken:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return await self._core.container.token.detokenization(
+        return await self._core.container.token.detokenize(
             tokens=tokens,
             model=model,
             retries=retries,

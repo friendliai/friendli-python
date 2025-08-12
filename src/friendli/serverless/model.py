@@ -4,11 +4,11 @@
 
 from __future__ import annotations
 
-from typing import Any, Coroutine, Mapping, Optional
+from typing import Mapping, Optional
 
-from friendli_core import models, utils
-from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore
-from friendli_core.types import UNSET, OptionalNullable
+from friendli.core import models, utils
+from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+from friendli.core.types import UNSET, OptionalNullable
 
 from ..config import Config
 
