@@ -13,6 +13,7 @@ Retrieve related documents from knowledge base by similarity.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="serverlessKnowledgeRetrieve" method="post" path="/serverless/v1/knowledge/retrieve" -->
 ```python
 import os
 

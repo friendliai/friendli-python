@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from friendli_core.httpclient import (
+from friendli.core.httpclient import (
     AsyncHttpClient,  # noqa: F401
     ClientOwner,  # noqa: F401
     HttpClient,  # noqa: F401

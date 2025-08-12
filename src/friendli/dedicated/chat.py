@@ -6,10 +6,10 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Mapping, Optional, Union
 
-from friendli_core import models, utils
-from friendli_core.sdk import AsyncFriendliCore, SyncFriendliCore
-from friendli_core.types import UNSET, OptionalNullable
-from friendli_core.utils import eventstreaming
+from friendli.core import models, utils
+from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+from friendli.core.types import UNSET, OptionalNullable
+from friendli.core.utils import eventstreaming
 
 from ..config import Config
 
@@ -346,7 +346,7 @@ class AsyncChat:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return self._core.dedicated.chat.complete(
+        return await self._core.dedicated.chat.complete(
             messages=messages,
             model=model,
             x_friendli_team=x_friendli_team,
@@ -464,7 +464,7 @@ class AsyncChat:
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        return self._core.dedicated.chat.stream(
+        return await self._core.dedicated.chat.stream(
             messages=messages,
             model=model,
             x_friendli_team=x_friendli_team,

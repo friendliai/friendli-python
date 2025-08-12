@@ -10,7 +10,6 @@ from typing import (
     TYPE_CHECKING,
     Annotated,
     Any,
-    ByteString,
     Callable,
     Literal,
     Union,
@@ -27,7 +26,7 @@ from pydantic import (
     field_validator,
 )
 
-from friendli_core.models import *  # noqa: F403
+from friendli.core.models import *  # noqa: F403
 
 if TYPE_CHECKING:
     from pydantic.config import JsonDict
@@ -52,7 +51,6 @@ def fix_oneof_schema(titles: list[str]) -> Callable[[JsonDict], None]:
             for title, model in zip(titles, cast("Any", oneof), strict=True)
         ]
         schema.pop("title")
-
 
     return _fixer
 

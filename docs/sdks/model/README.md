@@ -13,6 +13,7 @@ Retrieve list of serverless models.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="serverlessModelList" method="get" path="/serverless/v1/models" -->
 ```python
 import os
 
