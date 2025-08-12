@@ -16,7 +16,6 @@ class BaseToolAssistedChat(BaseSDK):
 
 
 class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
-
     def complete(
         self,
         *,
@@ -401,7 +400,6 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
 
 
 class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
-
     async def complete(
         self,
         *,

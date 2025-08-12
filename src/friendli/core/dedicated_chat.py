@@ -16,7 +16,6 @@ class BaseDedicatedChat(BaseSDK):
 
 
 class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
-
     def complete(
         self,
         *,
@@ -404,7 +403,6 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
 
 
 class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
-
     async def complete(
         self,
         *,

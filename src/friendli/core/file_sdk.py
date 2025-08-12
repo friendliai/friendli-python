@@ -16,7 +16,6 @@ class BaseFileSDK(BaseSDK):
 
 
 class SyncFileSDK(BaseFileSDK, SyncSDK):
-
     def init_upload(
         self,
         *,
@@ -383,7 +382,6 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
 
 
 class AsyncFileSDK(BaseFileSDK, AsyncSDK):
-
     async def init_upload(
         self,
         *,

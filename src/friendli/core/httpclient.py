@@ -9,7 +9,6 @@ from typing_extensions import Protocol, runtime_checkable
 
 @runtime_checkable
 class HttpClient(Protocol):
-
     def send(
         self,
         request: httpx.Request,
@@ -49,7 +48,6 @@ class HttpClient(Protocol):
 
 @runtime_checkable
 class AsyncHttpClient(Protocol):
-
     async def send(
         self,
         request: httpx.Request,

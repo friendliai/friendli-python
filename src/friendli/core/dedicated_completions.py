@@ -16,7 +16,6 @@ class BaseDedicatedCompletions(BaseSDK):
 
 
 class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
-
     def complete(
         self,
         *,
@@ -214,7 +213,6 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
 
 
 class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
-
     async def complete(
         self,
         *,

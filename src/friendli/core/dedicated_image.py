@@ -16,7 +16,6 @@ class BaseDedicatedImage(BaseSDK):
 
 
 class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
-
     def generate(
         self,
         *,
@@ -129,7 +128,6 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
 
 
 class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
-
     async def generate(
         self,
         *,

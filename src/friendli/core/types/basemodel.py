@@ -14,7 +14,6 @@ class BaseModel(PydanticBaseModel):
 
 
 class Unset(BaseModel):
-
     @model_serializer(mode="plain")
     def serialize_model(self):
         return UNSET_SENTINEL

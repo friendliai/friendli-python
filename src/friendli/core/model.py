@@ -16,7 +16,6 @@ class BaseModel(BaseSDK):
 
 
 class SyncModel(BaseModel, SyncSDK):
-
     def list(
         self,
         *,
@@ -93,7 +92,6 @@ class SyncModel(BaseModel, SyncSDK):
 
 
 class AsyncModel(BaseModel, AsyncSDK):
-
     async def list(
         self,
         *,

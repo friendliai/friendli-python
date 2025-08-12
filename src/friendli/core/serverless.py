@@ -15,7 +15,6 @@ from .sdkconfiguration import SDKConfiguration
 
 
 class BaseServerless(BaseSDK):
-
     def __init__(self, sdk_config: SDKConfiguration) -> None:
         BaseSDK.__init__(self, sdk_config)
         self.sdk_configuration = sdk_config

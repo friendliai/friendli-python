@@ -16,7 +16,6 @@ class BaseDedicatedToken(BaseSDK):
 
 
 class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
-
     def tokenize(
         self,
         *,
@@ -209,7 +208,6 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
 
 
 class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
-
     async def tokenize(
         self,
         *,

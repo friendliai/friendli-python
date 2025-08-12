@@ -32,7 +32,6 @@ class HookContext:
 
 
 class BeforeRequestContext(HookContext):
-
     def __init__(self, hook_ctx: HookContext):
         super().__init__(
             hook_ctx.config,
@@ -44,7 +43,6 @@ class BeforeRequestContext(HookContext):
 
 
 class AfterSuccessContext(HookContext):
-
     def __init__(self, hook_ctx: HookContext):
         super().__init__(
             hook_ctx.config,
@@ -56,7 +54,6 @@ class AfterSuccessContext(HookContext):
 
 
 class AfterErrorContext(HookContext):
-
     def __init__(self, hook_ctx: HookContext):
         super().__init__(
             hook_ctx.config,
@@ -68,14 +65,12 @@ class AfterErrorContext(HookContext):
 
 
 class SDKInitHook(ABC):
-
     @abstractmethod
     def sdk_init(self, base_url: str, client: HttpClient) -> Tuple[str, HttpClient]:
         pass
 
 
 class BeforeRequestHook(ABC):
-
     @abstractmethod
     def before_request(
         self, hook_ctx: BeforeRequestContext, request: httpx.Request
@@ -84,7 +79,6 @@ class BeforeRequestHook(ABC):
 
 
 class AfterSuccessHook(ABC):
-
     @abstractmethod
     def after_success(
         self, hook_ctx: AfterSuccessContext, response: httpx.Response
@@ -93,7 +87,6 @@ class AfterSuccessHook(ABC):
 
 
 class AfterErrorHook(ABC):
-
     @abstractmethod
     def after_error(
         self,
@@ -105,7 +98,6 @@ class AfterErrorHook(ABC):
 
 
 class Hooks(ABC):
-
     @abstractmethod
     def register_sdk_init_hook(self, hook: SDKInitHook):
         pass

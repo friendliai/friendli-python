@@ -16,7 +16,6 @@ class BaseContainerImage(BaseSDK):
 
 
 class SyncContainerImage(BaseContainerImage, SyncSDK):
-
     def generate(
         self,
         *,
@@ -120,7 +119,6 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
 
 
 class AsyncContainerImage(BaseContainerImage, AsyncSDK):
-
     async def generate(
         self,
         *,

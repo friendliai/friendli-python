@@ -194,7 +194,6 @@ class BaseSDK(abc.ABC):
 
 
 class SyncSDK(BaseSDK):
-
     def do_request(
         self,
         hook_ctx,
@@ -260,7 +259,6 @@ class SyncSDK(BaseSDK):
 
 
 class AsyncSDK(BaseSDK):
-
     async def do_request_async(
         self,
         hook_ctx,

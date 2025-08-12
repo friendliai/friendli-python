@@ -16,7 +16,6 @@ class BaseServerlessChat(BaseSDK):
 
 
 class SyncServerlessChat(BaseServerlessChat, SyncSDK):
-
     def complete(
         self,
         *,
@@ -404,7 +403,6 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
 
 
 class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
-
     async def complete(
         self,
         *,

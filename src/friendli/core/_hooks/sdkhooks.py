@@ -20,7 +20,6 @@ from .types import (
 
 
 class SDKHooks(Hooks):
-
     def __init__(self) -> None:
         self.sdk_init_hooks: List[SDKInitHook] = []
         self.before_request_hooks: List[BeforeRequestHook] = []

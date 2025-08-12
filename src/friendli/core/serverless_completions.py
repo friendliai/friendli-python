@@ -16,7 +16,6 @@ class BaseServerlessCompletions(BaseSDK):
 
 
 class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
-
     def complete(
         self,
         *,
@@ -215,7 +214,6 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
 
 
 class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
-
     async def complete(
         self,
         *,

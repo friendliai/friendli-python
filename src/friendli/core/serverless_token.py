@@ -16,7 +16,6 @@ class BaseServerlessToken(BaseSDK):
 
 
 class SyncServerlessToken(BaseServerlessToken, SyncSDK):
-
     def tokenize(
         self,
         *,
@@ -209,7 +208,6 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
 
 
 class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
-
     async def tokenize(
         self,
         *,

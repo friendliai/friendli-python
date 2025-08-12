@@ -16,7 +16,6 @@ from ..types.basemodel import BaseModel, Nullable, OptionalNullable, Unset
 
 
 def serialize_decimal(as_str: bool):
-
     def serialize(d):
         if is_union(type(d)) and type(None) in get_args(type(d)) and (d is None):
             return None
@@ -40,7 +39,6 @@ def validate_decimal(d):
 
 
 def serialize_float(as_str: bool):
-
     def serialize(f):
         if is_union(type(f)) and type(None) in get_args(type(f)) and (f is None):
             return None
@@ -64,7 +62,6 @@ def validate_float(f):
 
 
 def serialize_int(as_str: bool):
-
     def serialize(i):
         if is_union(type(i)) and type(None) in get_args(type(i)) and (i is None):
             return None
@@ -88,7 +85,6 @@ def validate_int(b):
 
 
 def validate_open_enum(is_int: bool):
-
     def validate(e):
         if e is None:
             return None
@@ -105,7 +101,6 @@ def validate_open_enum(is_int: bool):
 
 
 def validate_const(v):
-
     def validate(c):
         if is_union(type(c)) and type(None) in get_args(type(c)) and (c is None):
             return None

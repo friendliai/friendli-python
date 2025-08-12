@@ -17,7 +17,6 @@ class BaseDataset(BaseSDK):
 
 
 class SyncDataset(BaseDataset, SyncSDK):
-
     def create_dataset(
         self,
         *,
@@ -1530,7 +1529,6 @@ class SyncDataset(BaseDataset, SyncSDK):
 
 
 class AsyncDataset(BaseDataset, AsyncSDK):
-
     async def create_dataset(
         self,
         *,

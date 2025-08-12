@@ -16,7 +16,6 @@ class BaseAudio(BaseSDK):
 
 
 class SyncAudio(BaseAudio, SyncSDK):
-
     def transcribe(
         self,
         *,
@@ -133,7 +132,6 @@ class SyncAudio(BaseAudio, SyncSDK):
 
 
 class AsyncAudio(BaseAudio, AsyncSDK):
-
     async def transcribe(
         self,
         *,

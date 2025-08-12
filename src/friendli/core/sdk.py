@@ -56,18 +56,18 @@ class BaseFriendliCore(BaseSDK):
         if client is None:
             client = httpx.Client()
             client_supplied = False
-        assert issubclass(
-            type(client), HttpClient
-        ), "The provided client must implement the HttpClient protocol."
+        assert issubclass(type(client), HttpClient), (
+            "The provided client must implement the HttpClient protocol."
+        )
         async_client_supplied = True
         if async_client is None:
             async_client = httpx.AsyncClient()
             async_client_supplied = False
         if debug_logger is None:
             debug_logger = get_default_logger()
-        assert issubclass(
-            type(async_client), AsyncHttpClient
-        ), "The provided async_client must implement the AsyncHttpClient protocol."
+        assert issubclass(type(async_client), AsyncHttpClient), (
+            "The provided async_client must implement the AsyncHttpClient protocol."
+        )
         security: Any = None
         if callable(token):
             security = lambda: models.Security(token=token())

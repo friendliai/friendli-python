@@ -16,7 +16,6 @@ class BaseContainerToken(BaseSDK):
 
 
 class SyncContainerToken(BaseContainerToken, SyncSDK):
-
     def tokenize(
         self,
         *,
@@ -187,7 +186,6 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
 
 
 class AsyncContainerToken(BaseContainerToken, AsyncSDK):
-
     async def tokenize(
         self,
         *,

@@ -16,7 +16,6 @@ class BaseKnowledge(BaseSDK):
 
 
 class SyncKnowledge(BaseKnowledge, SyncSDK):
-
     def retrieve(
         self,
         *,
@@ -116,7 +115,6 @@ class SyncKnowledge(BaseKnowledge, SyncSDK):
 
 
 class AsyncKnowledge(BaseKnowledge, AsyncSDK):
-
     async def retrieve(
         self,
         *,

@@ -16,7 +16,6 @@ class BaseContainerChat(BaseSDK):
 
 
 class SyncContainerChat(BaseContainerChat, SyncSDK):
-
     def complete(
         self,
         *,
@@ -382,7 +381,6 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
 
 
 class AsyncContainerChat(BaseContainerChat, AsyncSDK):
-
     async def complete(
         self,
         *,

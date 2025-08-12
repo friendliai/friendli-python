@@ -17,7 +17,6 @@ class BaseEndpoint(BaseSDK):
 
 
 class SyncEndpoint(BaseEndpoint, SyncSDK):
-
     def wandb_artifact_create(
         self,
         *,
@@ -1149,7 +1148,6 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
 
 
 class AsyncEndpoint(BaseEndpoint, AsyncSDK):
-
     async def wandb_artifact_create(
         self,
         *,

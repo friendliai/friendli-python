@@ -16,7 +16,6 @@ class BaseContainerCompletions(BaseSDK):
 
 
 class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
-
     def complete(
         self,
         *,
@@ -196,7 +195,6 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
 
 
 class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
-
     async def complete(
         self,
         *,
