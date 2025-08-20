@@ -42,7 +42,6 @@ class OpenEnumMeta(enum.EnumMeta):
                 )
             except ValueError:
                 return value
-
     else:
 
         def __call__(

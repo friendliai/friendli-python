@@ -50,6 +50,7 @@ def fix_oneof_schema(titles: list[str]) -> Callable[[JsonDict], None]:
             {**model, "title": title}
             for title, model in zip(titles, cast("Any", oneof), strict=True)
         ]
+        _ = oneof_with_title
         schema.pop("title")
 
     return _fixer
@@ -80,20 +81,29 @@ def fix_union_schema(
 
 
 class SystemMessage(BaseModel):
+    """System message."""
+
     role: Literal["system"] = Field(..., description="The role of the messages author.")
     content: str = Field(..., description="The content of system message.")
     name: str | None = Field(
         None,
-        description="The name for the participant to distinguish between participants with the same role.",
+        description=(
+            "The name for the participant to distinguish between participants with the"
+            "same role."
+        ),
     )
 
 
 class TextContent(BaseModel):
+    """Text content."""
+
     type: Literal["text"] = Field(..., description="The type of the message content.")
     text: str = Field(..., description="The text content of the message.")
 
 
 class AudioData(BaseModel):
+    """Audio data."""
+
     url: str = Field(..., description="The URL of the audio.")
 
 
@@ -106,18 +116,22 @@ BASE64_IMAGE_PREFIXES = (
 
 
 class ImageData(BaseModel):
+    """Image data."""
+
     type: Literal["image"] = Field(..., description="The type of the message content.")
     image: str = Field(..., description="The URL or base64 string of the image.")
 
     @field_validator("image")
     @classmethod
     def validate_image(cls, v: str) -> str:
+        """Validate image."""
         if any(v.startswith(prefix) for prefix in BASE64_IMAGE_PREFIXES):
             try:
                 base64_data = v.split(sep=",", maxsplit=1)[1]
                 base64.b64decode(base64_data, validate=True)
             except binascii.Error:
-                raise ValueError("`image` must be a valid base64 string.")
+                msg = "`image` must be a valid base64 string."
+                raise ValueError(msg) from None
             return v
         try:
             AnyHttpUrl(v)
@@ -125,27 +139,34 @@ class ImageData(BaseModel):
             try:
                 S3Dsn(v)
             except ValueError:
-                raise ValueError("`image` must be a valid HTTP URL or S3 URL.")
+                msg = "`image` must be a valid HTTP URL or S3 URL."
+                raise ValueError(msg) from None
         return v
 
 
 class ImageUrl(BaseModel):
+    """Image URL."""
+
     url: str = Field(..., description="The URL of the image.")
 
     @field_validator("url")
     @classmethod
     def validate_url(cls, v: str) -> str:
+        """Validate URL."""
         try:
             AnyHttpUrl(v)
         except ValueError:
             try:
                 S3Dsn(v)
             except ValueError:
-                raise ValueError("`url` must be a valid HTTP URL or S3 URL.")
+                msg = "`url` must be a valid HTTP URL or S3 URL."
+                raise ValueError(msg) from None
         return v
 
 
 class ImageUrlData(BaseModel):
+    """Image URL data."""
+
     type: Literal["image_url"] = Field(
         ..., description="The type of the message content."
     )
@@ -153,18 +174,25 @@ class ImageUrlData(BaseModel):
         ..., description="The URL of the image or image data object."
     )
 
-    def to_ImageData(self) -> ImageData:
+    def to_image_data(self) -> ImageData:
+        """Convert to ImageData."""
         if isinstance(self.image_url, str):
             return ImageData(type="image", image=self.image_url)
         if isinstance(self.image_url, ImageUrl):
             return ImageData(type="image", image=self.image_url.url)
+        msg = "`image_url` must be a string or ImageUrl."
+        raise ValueError(msg) from None
 
 
 class VideoData(BaseModel):
+    """Video data."""
+
     url: str = Field(..., description="The URL of the video.")
 
 
 class AudioContent(BaseModel):
+    """Audio content."""
+
     type: Literal["audio_url"] = Field(
         ..., description="The type of the message content."
     )
@@ -172,6 +200,8 @@ class AudioContent(BaseModel):
 
 
 class ImageContent(RootModel[ImageData | ImageUrlData]):
+    """Image content."""
+
     root: ImageData | ImageUrlData = Field(
         discriminator="type",
         json_schema_extra=fix_oneof_schema(["Image", "ImageUrl"]),
@@ -179,6 +209,8 @@ class ImageContent(RootModel[ImageData | ImageUrlData]):
 
 
 class VideoContent(BaseModel):
+    """Video content."""
+
     type: Literal["video_url"] = Field(
         ..., description="The type of the message content."
     )
@@ -188,6 +220,8 @@ class VideoContent(BaseModel):
 class UserMessageContentMultiModal(
     RootModel[TextContent | AudioContent | ImageContent | VideoContent]
 ):
+    """User message content multi-modal."""
+
     root: TextContent | AudioContent | ImageContent | VideoContent = Field(
         discriminator="type",
         json_schema_extra=fix_oneof_schema(["Text", "Audio", "Image", "Video"]),
@@ -219,25 +253,36 @@ UserMessageContentArray = Annotated[
 
 
 class UserMessage(BaseModel):
+    """User message."""
+
     role: Literal["user"] = Field(..., description="The role of the message's author.")
     content: Union[UserMessageContentString, UserMessageContentArray] = Field(
         ..., title="Content"
     )
     name: str | None = Field(
         None,
-        description="The name for the participant to distinguish between participants with the same role.",
+        description=(
+            "The name for the participant to distinguish between participants with the"
+            "same role."
+        ),
     )
 
 
 class AssistantMessageToolCallFunction(BaseModel):
+    """Assistant message tool call function."""
+
     name: str = Field(..., description="The name of function")
     arguments: str = Field(
         ...,
-        description="The arguments of function in JSON schema format to call the function.",
+        description=(
+            "The arguments of function in JSON schema format to call the function."
+        ),
     )
 
 
 class AssistantMessageToolCall(BaseModel):
+    """Assistant message tool call."""
+
     id: str = Field(..., description="The ID of tool call.")
     type: Literal["function"] = Field(..., description="The type of tool call.")
     function: AssistantMessageToolCallFunction = Field(
@@ -246,25 +291,37 @@ class AssistantMessageToolCall(BaseModel):
 
 
 class AssistantMessage(BaseModel):
+    """Assistant message."""
+
     role: Literal["assistant"] = Field(
         ..., description="The role of the messages author."
     )
     content: str | None = Field(
         None,
-        description="The content of assistant message. Required unless `tool_calls` is specified.",
+        description=(
+            "The content of assistant message. Required unless `tool_calls` is"
+            "specified."
+        ),
     )
     name: str | None = Field(
         None,
-        description="The name for the participant to distinguish between participants with the same role.",
+        description=(
+            "The name for the participant to distinguish between participants with the"
+            "same role."
+        ),
     )
     tool_calls: list[AssistantMessageToolCall] | None = None
 
 
 class ToolMessage(BaseModel):
+    """Tool message."""
+
     role: Literal["tool"] = Field(..., description="The role of the messages author.")
     content: str = Field(
         ...,
-        description="The content of tool message that contains the result of tool calling.",
+        description=(
+            "The content of tool message that contains the result of tool calling."
+        ),
     )
     tool_call_id: str = Field(
         ..., description="The ID of tool call corresponding to this message."
@@ -276,6 +333,8 @@ class ToolMessage(BaseModel):
 
 
 class Message(RootModel[SystemMessage | UserMessage | AssistantMessage | ToolMessage]):
+    """Message."""
+
     root: SystemMessage | UserMessage | AssistantMessage | ToolMessage = Field(
         ...,
         discriminator="role",
@@ -284,6 +343,8 @@ class Message(RootModel[SystemMessage | UserMessage | AssistantMessage | ToolMes
 
 
 class Sample(BaseModel):
+    """Sample."""
+
     messages: list[Message]
 
 
@@ -293,6 +354,6 @@ class S3Dsn(AnyUrl):
     This is a custom type. Refer to `pydantic.networks.AnyUrl` and its derived types for details.
 
     Format: s3://<bucket_name>/<path>
-    """
+    """  # noqa: E501
 
     _constraints = UrlConstraints(allowed_schemes=["s3"])

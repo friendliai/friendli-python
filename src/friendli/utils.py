@@ -5,11 +5,14 @@
 from __future__ import annotations
 
 from hashlib import sha256
+from typing import TYPE_CHECKING
 
 import httpx
 
-from friendli.core.models import DedicatedDatasetModality
 from friendli.core.utils import *  # noqa: F403
+
+if TYPE_CHECKING:
+    from friendli.core.models import DedicatedDatasetModality
 
 
 def digest(*, data: bytes) -> str:
@@ -46,7 +49,8 @@ def check_modality(
         message_modality: Message modality to be checked
 
     Returns:
-        DedicatedDatasetModality: The input message modality object, returned unchanged for convenience.
+        DedicatedDatasetModality: The input message modality object, returned unchanged
+            for convenience.
 
     Raises:
         ValueError: If message modality is not a subset of dataset modality
@@ -55,20 +59,23 @@ def check_modality(
         modal in dataset_modality.input_modals
         for modal in message_modality.input_modals
     ):
-        raise ValueError(
-            f"Input modality mismatch - Dataset supports {dataset_modality.input_modals} "
-            f"but got {message_modality.input_modals}. "
+        msg = (
+            f"Input modality mismatch - Dataset supports "
+            f"{dataset_modality.input_modals} but got {message_modality.input_modals}. "
             f"Please check the input modalities."
         )
+        raise ValueError(msg)
 
     if not all(
         modal in dataset_modality.output_modals
         for modal in message_modality.output_modals
     ):
-        raise ValueError(
-            f"Output modality mismatch - Dataset supports {dataset_modality.output_modals} "
-            f"but got {message_modality.output_modals}. "
+        msg = (
+            f"Output modality mismatch - Dataset supports "
+            f"{dataset_modality.output_modals} but got "
+            f"{message_modality.output_modals}. "
             f"Please check the output modalities."
         )
+        raise ValueError(msg)
 
     return message_modality

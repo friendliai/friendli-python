@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `models.OtherBuiltInTool`
+### `models.FriendliBuiltInTool`
 
 ```python
-value: models.OtherBuiltInTool = /* values here */
+value: models.FriendliBuiltInTool = /* values here */
 ```
 
 ### `models.FileBuiltInTool`
@@ -21,33 +21,39 @@ value: models.FileBuiltInTool = /* values here */
 value: models.Tool = /* values here */
 ```
 
-### `models.OtherBuiltInTool`
+### `models.IntegratedBuiltInTool`
 
 ```python
-value: models.OtherBuiltInTool = /* values here */
+value: models.IntegratedBuiltInTool = /* values here */
 ```
 
-### `models.OtherBuiltInTool`
+### `models.FriendliBuiltInTool`
 
 ```python
-value: models.OtherBuiltInTool = /* values here */
+value: models.FriendliBuiltInTool = /* values here */
 ```
 
-### `models.OtherBuiltInTool`
+### `models.FriendliBuiltInTool`
 
 ```python
-value: models.OtherBuiltInTool = /* values here */
+value: models.FriendliBuiltInTool = /* values here */
 ```
 
-### `models.OtherBuiltInTool`
+### `models.FriendliBuiltInTool`
 
 ```python
-value: models.OtherBuiltInTool = /* values here */
+value: models.FriendliBuiltInTool = /* values here */
 ```
 
-### `models.OtherBuiltInTool`
+### `models.FriendliBuiltInTool`
 
 ```python
-value: models.OtherBuiltInTool = /* values here */
+value: models.FriendliBuiltInTool = /* values here */
+```
+
+### `models.FriendliBuiltInTool`
+
+```python
+value: models.FriendliBuiltInTool = /* values here */
 ```
 

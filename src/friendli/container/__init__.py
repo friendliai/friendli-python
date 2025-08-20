@@ -13,7 +13,10 @@ from .token import AsyncToken, SyncToken
 
 
 class SyncContainer:
-    def __init__(self, core: SyncFriendliCore, config: Config):
+    """SyncContainer."""
+
+    def __init__(self, core: SyncFriendliCore, config: Config) -> None:
+        """Initialize the SyncContainer class."""
         self._core = core
         self._config = config
 
@@ -23,7 +26,10 @@ class SyncContainer:
 
 
 class AsyncContainer:
-    def __init__(self, core: AsyncFriendliCore, config: Config):
+    """AsyncContainer."""
+
+    def __init__(self, core: AsyncFriendliCore, config: Config) -> None:
+        """Initialize the AsyncContainer class."""
         self._core = core
         self._config = config
 
