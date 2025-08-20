@@ -16,7 +16,10 @@ from .tool_assisted_chat import AsyncToolAssistedChat, SyncToolAssistedChat
 
 
 class SyncServerless:
-    def __init__(self, core: SyncFriendliCore, config: Config):
+    """Friendli Python SDK Serverless."""
+
+    def __init__(self, core: SyncFriendliCore, config: Config) -> None:
+        """Initialize the SyncServerless class."""
         self._core = core
         self._config = config
 
@@ -31,7 +34,10 @@ class SyncServerless:
 
 
 class AsyncServerless:
-    def __init__(self, core: AsyncFriendliCore, config: Config):
+    """Friendli Python SDK Serverless."""
+
+    def __init__(self, core: AsyncFriendliCore, config: Config) -> None:
+        """Initialize the AsyncServerless class."""
         self._core = core
         self._config = config
 

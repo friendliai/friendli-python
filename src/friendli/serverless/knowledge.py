@@ -4,21 +4,26 @@
 
 from __future__ import annotations
 
-from typing import List, Mapping, Optional
+from typing import TYPE_CHECKING, List, Mapping, Optional
 
-from friendli.core import models, utils
-from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
 from friendli.core.types import UNSET, OptionalNullable
 
-from ..config import Config
+if TYPE_CHECKING:
+    from friendli.core import models, utils
+    from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+
+    from ..config import Config
 
 
 class SyncKnowledge:
-    def __init__(self, core: SyncFriendliCore, config: Config):
+    """Knowledge."""
+
+    def __init__(self, core: SyncFriendliCore, config: Config) -> None:
+        """Initialize the SyncKnowledge class."""
         self._core = core
         self._config = config
 
-    def retrieve(
+    def retrieve(  # noqa: PLR0913
         self,
         *,
         k: int,
@@ -30,17 +35,21 @@ class SyncKnowledge:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerlessKnowledgeRetrievalSuccess:
-        """Retrieve contexts from chosen knowledge base
+        r"""Retrieve contexts from chosen knowledge base.
 
         Retrieve related documents from knowledge base by similarity.
 
-        :param k: Maximum number of top-ranked knowledge-base entries to return in results.
-        :param knowledge_ids: A List of knowledge-base IDs. For now, only one knowledge-base is supported.
-        :param query: A text string used to find relevant information within the knowledge-base.
+        :param k: Maximum number of top-ranked knowledge-base entries to return in
+            results.
+        :param knowledge_ids: A List of knowledge-base IDs. For now, only one
+            knowledge-base is supported.
+        :param query: A text string used to find relevant information within the
+            knowledge-base.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param timeout_ms: Override the default request timeout configuration for this
+            method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
         return self._core.serverless.knowledge.retrieve(
@@ -56,11 +65,14 @@ class SyncKnowledge:
 
 
 class AsyncKnowledge:
-    def __init__(self, core: AsyncFriendliCore, config: Config):
+    """Knowledge."""
+
+    def __init__(self, core: AsyncFriendliCore, config: Config) -> None:
+        """Initialize the AsyncKnowledge class."""
         self._core = core
         self._config = config
 
-    async def retrieve(
+    async def retrieve(  # noqa: PLR0913
         self,
         *,
         k: int,
@@ -72,17 +84,21 @@ class AsyncKnowledge:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerlessKnowledgeRetrievalSuccess:
-        """Retrieve contexts from chosen knowledge base
+        r"""Retrieve contexts from chosen knowledge base.
 
         Retrieve related documents from knowledge base by similarity.
 
-        :param k: Maximum number of top-ranked knowledge-base entries to return in results.
-        :param knowledge_ids: A List of knowledge-base IDs. For now, only one knowledge-base is supported.
-        :param query: A text string used to find relevant information within the knowledge-base.
+        :param k: Maximum number of top-ranked knowledge-base entries to return in
+            results.
+        :param knowledge_ids: A List of knowledge-base IDs. For now, only one
+            knowledge-base is supported.
+        :param query: A text string used to find relevant information within the
+            knowledge-base.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param timeout_ms: Override the default request timeout configuration for this
+            method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
         return await self._core.serverless.knowledge.retrieve(

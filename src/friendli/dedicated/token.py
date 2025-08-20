@@ -4,17 +4,22 @@
 
 from __future__ import annotations
 
-from typing import List, Mapping, Optional
+from typing import TYPE_CHECKING, List, Mapping, Optional
 
-from friendli.core import models, utils
-from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
 from friendli.core.types import UNSET, OptionalNullable
 
-from ..config import Config
+if TYPE_CHECKING:
+    from friendli.core import models, utils
+    from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+
+    from ..config import Config
 
 
 class SyncToken:
-    def __init__(self, core: SyncFriendliCore, config: Config):
+    """SyncToken."""
+
+    def __init__(self, core: SyncFriendliCore, config: Config) -> None:
+        """Initialize the SyncToken class."""
         self._core = core
         self._config = config
 
@@ -29,18 +34,19 @@ class SyncToken:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedTokenizationSuccess:
-        """Tokenization
+        r"""Tokenization.
 
         By giving a text input, generate a tokenized output of token IDs.
 
-        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format
+            \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: Input text prompt to tokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.token.tokenize(
             model=model,
             prompt=prompt,
@@ -62,18 +68,19 @@ class SyncToken:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedDetokenizationSuccess:
-        """Detokenization
+        r"""Detokenization.
 
         By giving a list of tokens, generate a detokenized output text string.
 
-        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format
+            \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param tokens: A token sequence to detokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.token.detokenize(
             model=model,
             tokens=tokens,
@@ -86,7 +93,10 @@ class SyncToken:
 
 
 class AsyncToken:
-    def __init__(self, core: AsyncFriendliCore, config: Config):
+    """AsyncToken."""
+
+    def __init__(self, core: AsyncFriendliCore, config: Config) -> None:
+        """Initialize the AsyncToken class."""
         self._core = core
         self._config = config
 
@@ -101,18 +111,19 @@ class AsyncToken:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedTokenizationSuccess:
-        """Tokenization
+        r"""Tokenization.
 
         By giving a text input, generate a tokenized output of token IDs.
 
-        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format
+            \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: Input text prompt to tokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.token.tokenize(
             model=model,
             prompt=prompt,
@@ -134,18 +145,19 @@ class AsyncToken:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedDetokenizationSuccess:
-        """Detokenization
+        r"""Detokenization.
 
         By giving a list of tokens, generate a detokenized output text string.
 
-        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format
+            \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param tokens: A token sequence to detokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.token.detokenize(
             model=model,
             tokens=tokens,

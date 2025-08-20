@@ -4,21 +4,26 @@
 
 from __future__ import annotations
 
-from typing import Any, Mapping, Optional
+from typing import TYPE_CHECKING, Any, Mapping, Optional
 
-from friendli.core import models, utils
-from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
 from friendli.core.types import UNSET, OptionalNullable
 
-from ..config import Config
+if TYPE_CHECKING:
+    from friendli.core import models, utils
+    from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+
+    from ..config import Config
 
 
 class SyncFile:
-    def __init__(self, core: SyncFriendliCore, config: Config):
+    """SyncFile."""
+
+    def __init__(self, core: SyncFriendliCore, config: Config) -> None:
+        """Initialize the SyncFile class."""
         self._core = core
         self._config = config
 
-    def init_upload(
+    def init_upload(  # noqa: PLR0913
         self,
         *,
         digest: str,
@@ -31,7 +36,7 @@ class SyncFile:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FileInitUploadResponse:
-        """Initiate file upload
+        """Initiate file upload.
 
         Initiate file upload.
 
@@ -44,7 +49,7 @@ class SyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.file.init_upload(
             digest=digest,
             name=name,
@@ -66,8 +71,8 @@ class SyncFile:
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
-        """Complete file upload
+    ) -> Any:  # noqa: ANN401
+        """Complete file upload.
 
         Complete file upload.
 
@@ -77,7 +82,7 @@ class SyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.file.complete_upload(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
@@ -97,7 +102,7 @@ class SyncFile:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FileInfo:
-        """Get file info
+        """Get file info.
 
         Get file info.
 
@@ -107,7 +112,7 @@ class SyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.file.get_info(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
@@ -127,7 +132,7 @@ class SyncFile:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FileGetDownloadURLResponse:
-        """Get file download URL
+        """Get file download URL.
 
         Get file download URL.
 
@@ -137,7 +142,7 @@ class SyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.file.get_download_url(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
@@ -149,11 +154,14 @@ class SyncFile:
 
 
 class AsyncFile:
-    def __init__(self, core: AsyncFriendliCore, config: Config):
+    """AsyncFile."""
+
+    def __init__(self, core: AsyncFriendliCore, config: Config) -> None:
+        """Initialize the AsyncFile class."""
         self._core = core
         self._config = config
 
-    async def init_upload(
+    async def init_upload(  # noqa: PLR0913
         self,
         *,
         digest: str,
@@ -166,7 +174,7 @@ class AsyncFile:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FileInitUploadResponse:
-        """Initiate file upload
+        """Initiate file upload.
 
         Initiate file upload.
 
@@ -179,7 +187,7 @@ class AsyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.file.init_upload(
             digest=digest,
             name=name,
@@ -201,8 +209,8 @@ class AsyncFile:
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
-        """Complete file upload
+    ) -> Any:  # noqa: ANN401
+        """Complete file upload.
 
         Complete file upload.
 
@@ -212,7 +220,7 @@ class AsyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.file.complete_upload(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
@@ -232,7 +240,7 @@ class AsyncFile:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FileInfo:
-        """Get file info
+        """Get file info.
 
         Get file info.
 
@@ -242,7 +250,7 @@ class AsyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.file.get_info(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
@@ -262,7 +270,7 @@ class AsyncFile:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FileGetDownloadURLResponse:
-        """Get file download URL
+        """Get file download URL.
 
         Get file download URL.
 
@@ -272,7 +280,7 @@ class AsyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.file.get_download_url(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
