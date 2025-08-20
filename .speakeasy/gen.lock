@@ -1,0 +1,1156 @@
+lockVersion: 2.0.0
+id: 37076cef-26b6-4da9-bb49-e710061cab77
+management:
+  docChecksum: b4324bb604a4f43551c0ad98be5a06cc
+  docVersion: 0.1.0
+  speakeasyVersion: 1.606.0
+  generationVersion: 2.686.7
+  releaseVersion: 0.10.9
+  configChecksum: 746766cebb84adea54779a80ce213905
+  repoURL: https://github.com/friendliai/friendli-python.git
+  installationURL: https://github.com/friendliai/friendli-python.git
+  published: true
+features:
+  python:
+    additionalDependencies: 1.0.0
+    constsAndDefaults: 1.0.5
+    core: 5.19.9
+    defaultEnabledRetries: 0.2.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.3.2
+    examples: 3.0.2
+    flatRequests: 1.0.1
+    flattening: 3.1.1
+    globalSecurity: 3.0.3
+    globalSecurityCallbacks: 1.0.0
+    globalSecurityFlattening: 1.0.0
+    globalServerURLs: 3.1.1
+    methodArguments: 1.0.2
+    methodServerURLs: 3.1.1
+    multipartFileContentType: 1.0.0
+    nameOverrides: 3.0.1
+    nullables: 1.0.1
+    responseFormat: 1.0.1
+    retries: 3.0.2
+    sdkHooks: 1.1.0
+    serverEvents: 1.0.7
+    serverEventsSentinels: 0.1.0
+    unions: 3.0.4
+    uploadStreams: 1.0.0
+generatedFiles:
+  - .gitattributes
+  - .vscode/settings.json
+  - USAGE.md
+  - docs/models/acceleratorrequirement.md
+  - docs/models/accountfilestatus.md
+  - docs/models/addsamplesrequest.md
+  - docs/models/addsamplesresponse.md
+  - docs/models/assistantmessage.md
+  - docs/models/assistantmessagetoolcall.md
+  - docs/models/assistantmessagetoolcallfunction.md
+  - docs/models/audiocontent.md
+  - docs/models/audiodata.md
+  - docs/models/autoscalingpolicy.md
+  - docs/models/b64imageitem.md
+  - docs/models/b64imageitemresponseformat.md
+  - docs/models/bodyuploadrawsamples.md
+  - docs/models/bodyuploadrawsamplesfile.md
+  - docs/models/chatchoice.md
+  - docs/models/chatchoicefinishreason.md
+  - docs/models/chatchoicemessage.md
+  - docs/models/chatcompletebodytoolchoice.md
+  - docs/models/chatcompletebodytoolchoicefunction.md
+  - docs/models/chatlogprobs.md
+  - docs/models/chatlogprobscontent.md
+  - docs/models/chatlogprobscontenttoplogprob.md
+  - docs/models/chatusage.md
+  - docs/models/chunkingstrategy.md
+  - docs/models/completeuploadrequest.md
+  - docs/models/completionsbodywithprompt.md
+  - docs/models/completionsbodywithpromptprompt.md
+  - docs/models/completionsbodywithpromptseed.md
+  - docs/models/completionsbodywithtokens.md
+  - docs/models/completionsbodywithtokensseed.md
+  - docs/models/completionschoice.md
+  - docs/models/completionschoicefinishreason.md
+  - docs/models/completionsdedicatedbodywithprompt.md
+  - docs/models/completionsdedicatedbodywithpromptprompt.md
+  - docs/models/completionsdedicatedbodywithpromptseed.md
+  - docs/models/completionsdedicatedbodywithtokens.md
+  - docs/models/completionsdedicatedbodywithtokensseed.md
+  - docs/models/completionslogprobs.md
+  - docs/models/completionsserverlessbodywithprompt.md
+  - docs/models/completionsserverlessbodywithpromptprompt.md
+  - docs/models/completionsserverlessbodywithpromptseed.md
+  - docs/models/completionsserverlessbodywithtokens.md
+  - docs/models/completionsserverlessbodywithtokensseed.md
+  - docs/models/completionsstreambodywithprompt.md
+  - docs/models/completionsstreambodywithpromptprompt.md
+  - docs/models/completionsstreambodywithpromptseed.md
+  - docs/models/completionsstreambodywithtokens.md
+  - docs/models/completionsstreambodywithtokensseed.md
+  - docs/models/completionsstreamdedicatedbodywithprompt.md
+  - docs/models/completionsstreamdedicatedbodywithpromptprompt.md
+  - docs/models/completionsstreamdedicatedbodywithpromptseed.md
+  - docs/models/completionsstreamdedicatedbodywithtokens.md
+  - docs/models/completionsstreamdedicatedbodywithtokensseed.md
+  - docs/models/completionsstreamserverlessbodywithprompt.md
+  - docs/models/completionsstreamserverlessbodywithpromptprompt.md
+  - docs/models/completionsstreamserverlessbodywithpromptseed.md
+  - docs/models/completionsstreamserverlessbodywithtokens.md
+  - docs/models/completionsstreamserverlessbodywithtokensseed.md
+  - docs/models/containerchatcompletesuccess.md
+  - docs/models/containerchatcompletionbody.md
+  - docs/models/containerchatcompletionbodyseed.md
+  - docs/models/containerchatcompletionbodytoolchoice.md
+  - docs/models/containerchatcompletionstreambody.md
+  - docs/models/containerchatcompletionstreambodyseed.md
+  - docs/models/containerchatcompletionstreambodytoolchoice.md
+  - docs/models/containerchatcompletionstreamsuccess.md
+  - docs/models/containercompletionsbody.md
+  - docs/models/containercompletionsstreambody.md
+  - docs/models/containercompletionsstreamsuccess.md
+  - docs/models/containercompletionssuccess.md
+  - docs/models/containerdetokenizationbody.md
+  - docs/models/containerdetokenizationsuccess.md
+  - docs/models/containerimagegeneratesuccess.md
+  - docs/models/containerimagegenerationbody.md
+  - docs/models/containerimagegenerationbodyresponseformat.md
+  - docs/models/containertokenizationbody.md
+  - docs/models/containertokenizationsuccess.md
+  - docs/models/content.md
+  - docs/models/createdatasetrequest.md
+  - docs/models/createdatasetrequestrequest.md
+  - docs/models/createsplitrequest.md
+  - docs/models/createversionrequest.md
+  - docs/models/data.md
+  - docs/models/datasetinfo.md
+  - docs/models/dedicatedaudiotranscriptionbody.md
+  - docs/models/dedicatedaudiotranscriptionbodyfile.md
+  - docs/models/dedicatedaudiotranscriptionsrequest.md
+  - docs/models/dedicatedaudiotranscriptionsuccess.md
+  - docs/models/dedicatedchatcompleterequest.md
+  - docs/models/dedicatedchatcompletionbody.md
+  - docs/models/dedicatedchatcompletionbodyseed.md
+  - docs/models/dedicatedchatcompletionbodytoolchoice.md
+  - docs/models/dedicatedchatcompletionstreambody.md
+  - docs/models/dedicatedchatcompletionstreambodyseed.md
+  - docs/models/dedicatedchatcompletionstreambodytoolchoice.md
+  - docs/models/dedicatedchatstreamrequest.md
+  - docs/models/dedicatedcompletionsbody.md
+  - docs/models/dedicatedcompletionscompleterequest.md
+  - docs/models/dedicatedcompletionsstreambody.md
+  - docs/models/dedicatedcompletionsstreamrequest.md
+  - docs/models/dedicatedcreateendpointrequest.md
+  - docs/models/dedicateddatasetmodality.md
+  - docs/models/dedicateddatasetmodalitytype.md
+  - docs/models/dedicateddeleteendpointrequest.md
+  - docs/models/dedicateddetokenizationbody.md
+  - docs/models/dedicateddetokenizationrequest.md
+  - docs/models/dedicateddetokenizationsuccess.md
+  - docs/models/dedicatedendpointcreatebody.md
+  - docs/models/dedicatedendpointlistresponse.md
+  - docs/models/dedicatedendpointspec.md
+  - docs/models/dedicatedendpointstatus.md
+  - docs/models/dedicatedendpointupdatebody.md
+  - docs/models/dedicatedendpointversionhistoryresponse.md
+  - docs/models/dedicatedendpointwandbartifactcreatebody.md
+  - docs/models/dedicatedendpointwandbartifactcreaterequest.md
+  - docs/models/dedicatedendpointwandbartifactcreateresponse.md
+  - docs/models/dedicatedgetendpointrequest.md
+  - docs/models/dedicatedgetendpointstatusrequest.md
+  - docs/models/dedicatedgetendpointversionhistoryrequest.md
+  - docs/models/dedicatedimagegeneratesuccess.md
+  - docs/models/dedicatedimagegenerationbody.md
+  - docs/models/dedicatedimagegenerationbodyresponseformat.md
+  - docs/models/dedicatedimagesgeneraterequest.md
+  - docs/models/dedicatedlistendpointsrequest.md
+  - docs/models/dedicatedrestartendpointrequest.md
+  - docs/models/dedicatedsleependpointrequest.md
+  - docs/models/dedicatedterminateendpointrequest.md
+  - docs/models/dedicatedtokenizationbody.md
+  - docs/models/dedicatedtokenizationrequest.md
+  - docs/models/dedicatedtokenizationsuccess.md
+  - docs/models/dedicatedupdateendpointrequest.md
+  - docs/models/dedicatedwakeendpointrequest.md
+  - docs/models/deletedatasetrequest.md
+  - docs/models/deletesamplesrequest.md
+  - docs/models/deletesamplesresponse.md
+  - docs/models/deletesplitrequest.md
+  - docs/models/deleteversionrequest.md
+  - docs/models/endpointadvancedconfig.md
+  - docs/models/endpointsimplescaleconfig.md
+  - docs/models/filebuiltintool.md
+  - docs/models/filegetdownloadurlresponse.md
+  - docs/models/fileinfo.md
+  - docs/models/fileinituploadrequest.md
+  - docs/models/fileinituploadresponse.md
+  - docs/models/friendlibuiltintool.md
+  - docs/models/function.md
+  - docs/models/functionality.md
+  - docs/models/functionresult.md
+  - docs/models/getdatasetrequest.md
+  - docs/models/getdownloadurlrequest.md
+  - docs/models/getinforequest.md
+  - docs/models/getsplitrequest.md
+  - docs/models/getversionrequest.md
+  - docs/models/httpvalidationerror.md
+  - docs/models/imagecontent.md
+  - docs/models/imagedata.md
+  - docs/models/inferencedeploymenterrorcode.md
+  - docs/models/inferencedeploymentstatus.md
+  - docs/models/inituploadrequest.md
+  - docs/models/integratedbuiltintool.md
+  - docs/models/knowledgeretrievedchunk.md
+  - docs/models/listdatasetsdirection.md
+  - docs/models/listdatasetsrequest.md
+  - docs/models/listdatasetsresponse.md
+  - docs/models/listsamplesdirection.md
+  - docs/models/listsamplesrequest.md
+  - docs/models/listsamplesresponse.md
+  - docs/models/listsplitsdirection.md
+  - docs/models/listsplitsrequest.md
+  - docs/models/listsplitsresponse.md
+  - docs/models/listversionsrequest.md
+  - docs/models/listversionsresponse.md
+  - docs/models/loc.md
+  - docs/models/message.md
+  - docs/models/modelcatalogresponseitem.md
+  - docs/models/name.md
+  - docs/models/phase.md
+  - docs/models/pricingmodel.md
+  - docs/models/requestbody.md
+  - docs/models/responseformat.md
+  - docs/models/responseformatjsonobject.md
+  - docs/models/responseformatjsonschema.md
+  - docs/models/responseformatjsonschemaschema.md
+  - docs/models/responseformatregex.md
+  - docs/models/responseformattext.md
+  - docs/models/security.md
+  - docs/models/serverlesschatcompleterequest.md
+  - docs/models/serverlesschatcompletionbody.md
+  - docs/models/serverlesschatcompletionbodyseed.md
+  - docs/models/serverlesschatcompletionbodytoolchoice.md
+  - docs/models/serverlesschatcompletionstreambody.md
+  - docs/models/serverlesschatcompletionstreambodyseed.md
+  - docs/models/serverlesschatcompletionstreambodytoolchoice.md
+  - docs/models/serverlesschatstreamrequest.md
+  - docs/models/serverlesscompletionsbody.md
+  - docs/models/serverlesscompletionscompleterequest.md
+  - docs/models/serverlesscompletionsstreambody.md
+  - docs/models/serverlesscompletionsstreamrequest.md
+  - docs/models/serverlessdetokenizationbody.md
+  - docs/models/serverlessdetokenizationrequest.md
+  - docs/models/serverlessdetokenizationsuccess.md
+  - docs/models/serverlessknowledgeretrievalbody.md
+  - docs/models/serverlessknowledgeretrievalsuccess.md
+  - docs/models/serverlessknowledgeretrieverequest.md
+  - docs/models/serverlessmodellistsuccess.md
+  - docs/models/serverlesspriceunittype.md
+  - docs/models/serverlesstokenizationbody.md
+  - docs/models/serverlesstokenizationrequest.md
+  - docs/models/serverlesstokenizationsuccess.md
+  - docs/models/serverlesstoolassistedchatcompleterequest.md
+  - docs/models/serverlesstoolassistedchatcompletionbody.md
+  - docs/models/serverlesstoolassistedchatcompletionbodyseed.md
+  - docs/models/serverlesstoolassistedchatcompletionbodytoolchoice.md
+  - docs/models/serverlesstoolassistedchatcompletionstreambody.md
+  - docs/models/serverlesstoolassistedchatcompletionstreambodyseed.md
+  - docs/models/serverlesstoolassistedchatcompletionstreambodytoolchoice.md
+  - docs/models/serverlesstoolassistedchatcompletionstreamsuccess.md
+  - docs/models/serverlesstoolassistedchatstreamrequest.md
+  - docs/models/servervadchunkingstrategy.md
+  - docs/models/splitinfo.md
+  - docs/models/status.md
+  - docs/models/streamedchatchoice.md
+  - docs/models/streamedchatchoicedelta.md
+  - docs/models/streamedchatchoicefinishreason.md
+  - docs/models/streamedchatdata.md
+  - docs/models/streamedcompletiondata.md
+  - docs/models/streamedcompletionschoice.md
+  - docs/models/streamedcompletionschoicefinishreason.md
+  - docs/models/streamedfunctionresult.md
+  - docs/models/streamedtoolassistedchattoken.md
+  - docs/models/streamedtoolassistedchattoolstatus.md
+  - docs/models/streamedtoolcallresult.md
+  - docs/models/streamoptions.md
+  - docs/models/systemmessage.md
+  - docs/models/textcontent.md
+  - docs/models/tokensequence.md
+  - docs/models/tool.md
+  - docs/models/toolassistedchattool.md
+  - docs/models/toolcallresult.md
+  - docs/models/toolmessage.md
+  - docs/models/toolstatusdata.md
+  - docs/models/toolstatuserror.md
+  - docs/models/toolstatusfile.md
+  - docs/models/toolstatusparameter.md
+  - docs/models/type.md
+  - docs/models/uploadrawsamplesrequest.md
+  - docs/models/urlimageitem.md
+  - docs/models/urlimageitemresponseformat.md
+  - docs/models/usage.md
+  - docs/models/usermessage.md
+  - docs/models/usermessagecontentmultimodal.md
+  - docs/models/utils/retryconfig.md
+  - docs/models/validationerror.md
+  - docs/models/versioninfo.md
+  - docs/models/videocontent.md
+  - docs/models/videodata.md
+  - docs/sdks/audio/README.md
+  - docs/sdks/container/README.md
+  - docs/sdks/containerchat/README.md
+  - docs/sdks/containercompletions/README.md
+  - docs/sdks/containerimage/README.md
+  - docs/sdks/containertoken/README.md
+  - docs/sdks/dataset/README.md
+  - docs/sdks/dedicated/README.md
+  - docs/sdks/dedicatedchat/README.md
+  - docs/sdks/dedicatedcompletions/README.md
+  - docs/sdks/dedicatedimage/README.md
+  - docs/sdks/dedicatedtoken/README.md
+  - docs/sdks/endpoint/README.md
+  - docs/sdks/filesdk/README.md
+  - docs/sdks/friendlicore/README.md
+  - docs/sdks/knowledge/README.md
+  - docs/sdks/model/README.md
+  - docs/sdks/serverless/README.md
+  - docs/sdks/serverlesschat/README.md
+  - docs/sdks/serverlesscompletions/README.md
+  - docs/sdks/serverlesstoken/README.md
+  - docs/sdks/toolassistedchat/README.md
+  - poetry.toml
+  - pylintrc
+  - scripts/prepare_readme.py
+  - src/friendli_core/__init__.py
+  - src/friendli_core/_hooks/__init__.py
+  - src/friendli_core/_hooks/sdkhooks.py
+  - src/friendli_core/_hooks/types.py
+  - src/friendli_core/_version.py
+  - src/friendli_core/audio.py
+  - src/friendli_core/basesdk.py
+  - src/friendli_core/container.py
+  - src/friendli_core/container_chat.py
+  - src/friendli_core/container_completions.py
+  - src/friendli_core/container_image.py
+  - src/friendli_core/container_token.py
+  - src/friendli_core/dataset.py
+  - src/friendli_core/dedicated.py
+  - src/friendli_core/dedicated_chat.py
+  - src/friendli_core/dedicated_completions.py
+  - src/friendli_core/dedicated_image.py
+  - src/friendli_core/dedicated_token.py
+  - src/friendli_core/endpoint.py
+  - src/friendli_core/file_sdk.py
+  - src/friendli_core/httpclient.py
+  - src/friendli_core/knowledge.py
+  - src/friendli_core/model.py
+  - src/friendli_core/models/__init__.py
+  - src/friendli_core/models/acceleratorrequirement.py
+  - src/friendli_core/models/accountfilestatus.py
+  - src/friendli_core/models/add_samplesop.py
+  - src/friendli_core/models/addsamplesresponse.py
+  - src/friendli_core/models/assistantmessage.py
+  - src/friendli_core/models/assistantmessagetoolcall.py
+  - src/friendli_core/models/assistantmessagetoolcallfunction.py
+  - src/friendli_core/models/audiocontent.py
+  - src/friendli_core/models/audiodata.py
+  - src/friendli_core/models/autoscalingpolicy.py
+  - src/friendli_core/models/b64imageitem.py
+  - src/friendli_core/models/body_upload_raw_samples.py
+  - src/friendli_core/models/chatchoice.py
+  - src/friendli_core/models/chatchoicemessage.py
+  - src/friendli_core/models/chatcompletebodytoolchoice.py
+  - src/friendli_core/models/chatcompletebodytoolchoicefunction.py
+  - src/friendli_core/models/chatlogprobs.py
+  - src/friendli_core/models/chatlogprobscontent.py
+  - src/friendli_core/models/chatlogprobscontenttoplogprob.py
+  - src/friendli_core/models/chatusage.py
+  - src/friendli_core/models/complete_uploadop.py
+  - src/friendli_core/models/completionsbodywithprompt.py
+  - src/friendli_core/models/completionsbodywithtokens.py
+  - src/friendli_core/models/completionschoice.py
+  - src/friendli_core/models/completionsdedicatedbodywithprompt.py
+  - src/friendli_core/models/completionsdedicatedbodywithtokens.py
+  - src/friendli_core/models/completionslogprobs.py
+  - src/friendli_core/models/completionsserverlessbodywithprompt.py
+  - src/friendli_core/models/completionsserverlessbodywithtokens.py
+  - src/friendli_core/models/completionsstreambodywithprompt.py
+  - src/friendli_core/models/completionsstreambodywithtokens.py
+  - src/friendli_core/models/completionsstreamdedicatedbodywithprompt.py
+  - src/friendli_core/models/completionsstreamdedicatedbodywithtokens.py
+  - src/friendli_core/models/completionsstreamserverlessbodywithprompt.py
+  - src/friendli_core/models/completionsstreamserverlessbodywithtokens.py
+  - src/friendli_core/models/containerchatcompleteop.py
+  - src/friendli_core/models/containerchatcompletesuccess.py
+  - src/friendli_core/models/containerchatcompletionbody.py
+  - src/friendli_core/models/containerchatcompletionstreambody.py
+  - src/friendli_core/models/containerchatcompletionstreamsuccess.py
+  - src/friendli_core/models/containerchatstreamop.py
+  - src/friendli_core/models/containercompletionsbody.py
+  - src/friendli_core/models/containercompletionscompleteop.py
+  - src/friendli_core/models/containercompletionsstreambody.py
+  - src/friendli_core/models/containercompletionsstreamop.py
+  - src/friendli_core/models/containercompletionsstreamsuccess.py
+  - src/friendli_core/models/containercompletionssuccess.py
+  - src/friendli_core/models/containerdetokenizationbody.py
+  - src/friendli_core/models/containerdetokenizationop.py
+  - src/friendli_core/models/containerdetokenizationsuccess.py
+  - src/friendli_core/models/containerimagegeneratesuccess.py
+  - src/friendli_core/models/containerimagegenerationbody.py
+  - src/friendli_core/models/containerimagesgenerateop.py
+  - src/friendli_core/models/containertokenizationbody.py
+  - src/friendli_core/models/containertokenizationop.py
+  - src/friendli_core/models/containertokenizationsuccess.py
+  - src/friendli_core/models/create_datasetop.py
+  - src/friendli_core/models/create_splitop.py
+  - src/friendli_core/models/create_versionop.py
+  - src/friendli_core/models/createdatasetrequest.py
+  - src/friendli_core/models/datasetinfo.py
+  - src/friendli_core/models/dedicatedaudiotranscriptionbody.py
+  - src/friendli_core/models/dedicatedaudiotranscriptionsop.py
+  - src/friendli_core/models/dedicatedaudiotranscriptionsuccess.py
+  - src/friendli_core/models/dedicatedchatcompleteop.py
+  - src/friendli_core/models/dedicatedchatcompletionbody.py
+  - src/friendli_core/models/dedicatedchatcompletionstreambody.py
+  - src/friendli_core/models/dedicatedchatstreamop.py
+  - src/friendli_core/models/dedicatedcompletionsbody.py
+  - src/friendli_core/models/dedicatedcompletionscompleteop.py
+  - src/friendli_core/models/dedicatedcompletionsstreambody.py
+  - src/friendli_core/models/dedicatedcompletionsstreamop.py
+  - src/friendli_core/models/dedicatedcreateendpointop.py
+  - src/friendli_core/models/dedicateddatasetmodality.py
+  - src/friendli_core/models/dedicateddatasetmodalitytype.py
+  - src/friendli_core/models/dedicateddeleteendpointop.py
+  - src/friendli_core/models/dedicateddetokenizationbody.py
+  - src/friendli_core/models/dedicateddetokenizationop.py
+  - src/friendli_core/models/dedicateddetokenizationsuccess.py
+  - src/friendli_core/models/dedicatedendpointcreatebody.py
+  - src/friendli_core/models/dedicatedendpointlistresponse.py
+  - src/friendli_core/models/dedicatedendpointspec.py
+  - src/friendli_core/models/dedicatedendpointstatus.py
+  - src/friendli_core/models/dedicatedendpointupdatebody.py
+  - src/friendli_core/models/dedicatedendpointversionhistoryresponse.py
+  - src/friendli_core/models/dedicatedendpointwandbartifactcreatebody.py
+  - src/friendli_core/models/dedicatedendpointwandbartifactcreateop.py
+  - src/friendli_core/models/dedicatedendpointwandbartifactcreateresponse.py
+  - src/friendli_core/models/dedicatedgetendpointop.py
+  - src/friendli_core/models/dedicatedgetendpointstatusop.py
+  - src/friendli_core/models/dedicatedgetendpointversionhistoryop.py
+  - src/friendli_core/models/dedicatedimagegeneratesuccess.py
+  - src/friendli_core/models/dedicatedimagegenerationbody.py
+  - src/friendli_core/models/dedicatedimagesgenerateop.py
+  - src/friendli_core/models/dedicatedlistendpointsop.py
+  - src/friendli_core/models/dedicatedrestartendpointop.py
+  - src/friendli_core/models/dedicatedsleependpointop.py
+  - src/friendli_core/models/dedicatedterminateendpointop.py
+  - src/friendli_core/models/dedicatedtokenizationbody.py
+  - src/friendli_core/models/dedicatedtokenizationop.py
+  - src/friendli_core/models/dedicatedtokenizationsuccess.py
+  - src/friendli_core/models/dedicatedupdateendpointop.py
+  - src/friendli_core/models/dedicatedwakeendpointop.py
+  - src/friendli_core/models/delete_datasetop.py
+  - src/friendli_core/models/delete_samplesop.py
+  - src/friendli_core/models/delete_splitop.py
+  - src/friendli_core/models/delete_versionop.py
+  - src/friendli_core/models/deletesamplesresponse.py
+  - src/friendli_core/models/endpointadvancedconfig.py
+  - src/friendli_core/models/endpointsimplescaleconfig.py
+  - src/friendli_core/models/filebuiltintool.py
+  - src/friendli_core/models/filegetdownloadurlresponse.py
+  - src/friendli_core/models/fileinfo.py
+  - src/friendli_core/models/fileinituploadrequest.py
+  - src/friendli_core/models/fileinituploadresponse.py
+  - src/friendli_core/models/friendlibuiltintool.py
+  - src/friendli_core/models/friendlicoreerror.py
+  - src/friendli_core/models/function.py
+  - src/friendli_core/models/functionality.py
+  - src/friendli_core/models/functionresult.py
+  - src/friendli_core/models/get_datasetop.py
+  - src/friendli_core/models/get_download_urlop.py
+  - src/friendli_core/models/get_infoop.py
+  - src/friendli_core/models/get_splitop.py
+  - src/friendli_core/models/get_versionop.py
+  - src/friendli_core/models/httpvalidationerror.py
+  - src/friendli_core/models/imagecontent.py
+  - src/friendli_core/models/imagedata.py
+  - src/friendli_core/models/inferencedeploymenterrorcode.py
+  - src/friendli_core/models/inferencedeploymentstatus.py
+  - src/friendli_core/models/init_uploadop.py
+  - src/friendli_core/models/integratedbuiltintool.py
+  - src/friendli_core/models/knowledgeretrievedchunk.py
+  - src/friendli_core/models/list_datasetsop.py
+  - src/friendli_core/models/list_samplesop.py
+  - src/friendli_core/models/list_splitsop.py
+  - src/friendli_core/models/list_versionsop.py
+  - src/friendli_core/models/listdatasetsresponse.py
+  - src/friendli_core/models/listsamplesresponse.py
+  - src/friendli_core/models/listsplitsresponse.py
+  - src/friendli_core/models/listversionsresponse.py
+  - src/friendli_core/models/message.py
+  - src/friendli_core/models/modelcatalogresponseitem.py
+  - src/friendli_core/models/no_response_error.py
+  - src/friendli_core/models/pricingmodel.py
+  - src/friendli_core/models/responseformat.py
+  - src/friendli_core/models/responseformatjsonobject.py
+  - src/friendli_core/models/responseformatjsonschema.py
+  - src/friendli_core/models/responseformatjsonschemaschema.py
+  - src/friendli_core/models/responseformatregex.py
+  - src/friendli_core/models/responseformattext.py
+  - src/friendli_core/models/responsevalidationerror.py
+  - src/friendli_core/models/sdkerror.py
+  - src/friendli_core/models/security.py
+  - src/friendli_core/models/serverlesschatcompleteop.py
+  - src/friendli_core/models/serverlesschatcompletionbody.py
+  - src/friendli_core/models/serverlesschatcompletionstreambody.py
+  - src/friendli_core/models/serverlesschatstreamop.py
+  - src/friendli_core/models/serverlesscompletionsbody.py
+  - src/friendli_core/models/serverlesscompletionscompleteop.py
+  - src/friendli_core/models/serverlesscompletionsstreambody.py
+  - src/friendli_core/models/serverlesscompletionsstreamop.py
+  - src/friendli_core/models/serverlessdetokenizationbody.py
+  - src/friendli_core/models/serverlessdetokenizationop.py
+  - src/friendli_core/models/serverlessdetokenizationsuccess.py
+  - src/friendli_core/models/serverlessknowledgeretrievalbody.py
+  - src/friendli_core/models/serverlessknowledgeretrievalsuccess.py
+  - src/friendli_core/models/serverlessknowledgeretrieveop.py
+  - src/friendli_core/models/serverlessmodellistsuccess.py
+  - src/friendli_core/models/serverlesspriceunittype.py
+  - src/friendli_core/models/serverlesstokenizationbody.py
+  - src/friendli_core/models/serverlesstokenizationop.py
+  - src/friendli_core/models/serverlesstokenizationsuccess.py
+  - src/friendli_core/models/serverlesstoolassistedchatcompleteop.py
+  - src/friendli_core/models/serverlesstoolassistedchatcompletionbody.py
+  - src/friendli_core/models/serverlesstoolassistedchatcompletionstreambody.py
+  - src/friendli_core/models/serverlesstoolassistedchatcompletionstreamsuccess.py
+  - src/friendli_core/models/serverlesstoolassistedchatstreamop.py
+  - src/friendli_core/models/servervadchunkingstrategy.py
+  - src/friendli_core/models/splitinfo.py
+  - src/friendli_core/models/streamedchatchoice.py
+  - src/friendli_core/models/streamedchatchoicedelta.py
+  - src/friendli_core/models/streamedchatdata.py
+  - src/friendli_core/models/streamedcompletiondata.py
+  - src/friendli_core/models/streamedcompletionschoice.py
+  - src/friendli_core/models/streamedfunctionresult.py
+  - src/friendli_core/models/streamedtoolassistedchattoken.py
+  - src/friendli_core/models/streamedtoolassistedchattoolstatus.py
+  - src/friendli_core/models/streamedtoolcallresult.py
+  - src/friendli_core/models/streamoptions.py
+  - src/friendli_core/models/systemmessage.py
+  - src/friendli_core/models/textcontent.py
+  - src/friendli_core/models/tokensequence.py
+  - src/friendli_core/models/tool.py
+  - src/friendli_core/models/toolassistedchattool.py
+  - src/friendli_core/models/toolcallresult.py
+  - src/friendli_core/models/toolmessage.py
+  - src/friendli_core/models/toolstatusdata.py
+  - src/friendli_core/models/toolstatuserror.py
+  - src/friendli_core/models/toolstatusfile.py
+  - src/friendli_core/models/toolstatusparameter.py
+  - src/friendli_core/models/upload_raw_samplesop.py
+  - src/friendli_core/models/urlimageitem.py
+  - src/friendli_core/models/usage.py
+  - src/friendli_core/models/usermessage.py
+  - src/friendli_core/models/usermessagecontentmultimodal.py
+  - src/friendli_core/models/validationerror.py
+  - src/friendli_core/models/versioninfo.py
+  - src/friendli_core/models/videocontent.py
+  - src/friendli_core/models/videodata.py
+  - src/friendli_core/sdk.py
+  - src/friendli_core/sdkconfiguration.py
+  - src/friendli_core/serverless.py
+  - src/friendli_core/serverless_chat.py
+  - src/friendli_core/serverless_completions.py
+  - src/friendli_core/serverless_token.py
+  - src/friendli_core/toolassistedchat.py
+  - src/friendli_core/types/__init__.py
+  - src/friendli_core/types/basemodel.py
+  - src/friendli_core/utils/__init__.py
+  - src/friendli_core/utils/datetimes.py
+  - src/friendli_core/utils/enums.py
+  - src/friendli_core/utils/eventstreaming.py
+  - src/friendli_core/utils/forms.py
+  - src/friendli_core/utils/headers.py
+  - src/friendli_core/utils/logger.py
+  - src/friendli_core/utils/metadata.py
+  - src/friendli_core/utils/queryparams.py
+  - src/friendli_core/utils/requestbodies.py
+  - src/friendli_core/utils/retries.py
+  - src/friendli_core/utils/security.py
+  - src/friendli_core/utils/serializers.py
+  - src/friendli_core/utils/unmarshal_json_response.py
+  - src/friendli_core/utils/url.py
+  - src/friendli_core/utils/values.py
+examples:
+  containerChatComplete:
+    Example:
+      requestBody:
+        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "stream": false}
+      responses:
+        "200":
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}}
+  containerChatStream:
+    Example:
+      requestBody:
+        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "stream": true}
+      responses:
+        "200":
+          text/event-stream: "data: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294402}\n\ndata: [DONE]\n"
+  containerCompletionsComplete:
+    Example:
+      requestBody:
+        application/json: {"prompt": "Say this is a test!", "stream": false}
+      responses:
+        "200":
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"completion_tokens": 6, "prompt_tokens": 7, "total_tokens": 13}}
+  containerCompletionsStream:
+    Example:
+      requestBody:
+        application/json: {"prompt": "Say this is a test!", "stream": true}
+      responses:
+        "200":
+          text/event-stream: "data: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" such\",\"token\":1778,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" as\",\"token\":439,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\n...\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\"\",\"finish_reason\":\"length\",\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[],\"usage\":{\"prompt_tokens\":5,\"completion_tokens\":10,\"total_tokens\":15},\"created\":1733382157}\n\ndata: [DONE]\n"
+  containerTokenization:
+    Example:
+      requestBody:
+        application/json: {"prompt": "What is generative AI?"}
+      responses:
+        "200":
+          application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+  containerDetokenization:
+    Example:
+      requestBody:
+        application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+      responses:
+        "200":
+          application/json: {"text": "What is generative AI?"}
+  containerImagesGenerate:
+    Example:
+      requestBody:
+        application/json: {"guidance_scale": 3.5, "num_inference_steps": 10, "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "response_format": "jpeg"}
+      responses:
+        "200":
+          application/json: {"image": "<base64 encoded image>"}
+  dedicatedChatComplete:
+    Example:
+      requestBody:
+        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "(endpoint-id)", "stream": false}
+      responses:
+        "200":
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}, "model": "(endpoint-id)"}
+  dedicatedChatStream:
+    Example:
+      requestBody:
+        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "(endpoint-id)", "stream": true}
+      responses:
+        "200":
+          text/event-stream: "data: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294402}\n\ndata: [DONE]\n"
+  dedicatedCompletionsComplete:
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id)", "prompt": "Say this is a test!", "stream": false}
+      responses:
+        "200":
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"completion_tokens": 6, "prompt_tokens": 7, "total_tokens": 13}, "model": "(endpoint-id)"}
+  dedicatedCompletionsStream:
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id)", "prompt": "Say this is a test!", "stream": true}
+      responses:
+        "200":
+          text/event-stream: "data: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" such\",\"token\":1778,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" as\",\"token\":439,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\n...\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\"\",\"finish_reason\":\"length\",\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[],\"usage\":{\"prompt_tokens\":5,\"completion_tokens\":10,\"total_tokens\":15},\"created\":1733382157}\n\ndata: [DONE]\n"
+  dedicatedTokenization:
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id)", "prompt": "What is generative AI?"}
+      responses:
+        "200":
+          application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+  dedicatedDetokenization:
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id)", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+      responses:
+        "200":
+          application/json: {"text": "What is generative AI?"}
+  dedicatedImagesGenerate:
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id)", "num_inference_steps": 10, "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "response_format": "url"}
+      responses:
+        "200":
+          application/json: {"data": [{"response_format": "url", "seed": 123, "url": "(url-to-generated-image)"}]}
+  dedicatedEndpointWandbArtifactCreate:
+    Example:
+      requestBody:
+        application/json: {"wandbArtifactVersionName": "org/registry/name:v0"}
+      responses:
+        "200":
+          application/json: {"endpointId": "endpoint-id", "endpointName": "endpoint-name", "projectId": "project-id", "projectName": "project-name", "teamId": "team-id", "teamName": "team-name"}
+  dedicatedCreateEndpoint:
+    Example:
+      requestBody:
+        application/json: {"advanced": {"tokenizer_add_special_tokens": false, "tokenizer_skip_special_tokens": false, "max_batch_size": 256, "max_token_count": 2560}, "hfModelRepo": "<value>", "instanceOptionId": "<id>", "name": "<value>", "projectId": "<id>"}
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedListEndpoints:
+    Example:
+      parameters:
+        query:
+          project_id: ""
+          limit: 20
+      responses:
+        "200":
+          application/json: {"data": {"endpoint-id-1": {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}, "endpoint-id-2": {"createdAt": "2025-01-01T00:00:00Z", "status": "RUNNING", "updatedAt": "2025-01-01T00:00:00Z"}}}
+  dedicatedGetEndpoint:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}
+  dedicatedUpdateEndpoint:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}
+  dedicatedDeleteEndpoint:
+    speakeasy-default-dedicated-delete-endpoint:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  dedicatedGetEndpointVersionHistory:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+        query:
+          limit: 20
+      responses:
+        "200":
+          application/json: {"data": {"0": {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}}}
+  dedicatedGetEndpointStatus:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedSleepEndpoint:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "SLEEPING", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedWakeEndpoint:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "AWAKING", "phase": "ENGINE_INITIALIZING", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedTerminateEndpoint:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "TERMINATING", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedRestartEndpoint:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedCreateEndpointBeta:
+    Example:
+      requestBody:
+        application/json: {"advanced": {"tokenizer_add_special_tokens": false, "tokenizer_skip_special_tokens": false, "max_batch_size": 256, "max_token_count": 2560}, "hfModelRepo": "<value>", "instanceOptionId": "<id>", "name": "<value>", "projectId": "<id>"}
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedListEndpointsBeta:
+    Example:
+      parameters:
+        query:
+          project_id: ""
+          limit: 20
+      responses:
+        "200":
+          application/json: {"data": {"endpoint-id-1": {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}, "endpoint-id-2": {"createdAt": "2025-01-01T00:00:00Z", "status": "RUNNING", "updatedAt": "2025-01-01T00:00:00Z"}}}
+  dedicatedGetEndpointBeta:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}
+  dedicatedUpdateEndpointBeta:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}
+  dedicatedGetEndpointStatusBeta:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedTerminateEndpointBeta:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "TERMINATING", "updatedAt": "2025-01-01T00:00:00Z"}
+  dedicatedRestartEndpointBeta:
+    Example:
+      parameters:
+        path:
+          endpoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+  serverlessChatComplete:
+    Example:
+      requestBody:
+        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": false}
+      responses:
+        "200":
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}, "model": "meta-llama-3.1-8b-instruct"}
+  serverlessChatStream:
+    Example:
+      requestBody:
+        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": true}
+      responses:
+        "200":
+          text/event-stream: "data: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294402}\n\ndata: [DONE]\n"
+  serverlessCompletionsComplete:
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "Say this is a test!", "stream": false}
+      responses:
+        "200":
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"completion_tokens": 6, "prompt_tokens": 7, "total_tokens": 13}, "model": "meta-llama-3.1-8b-instruct"}
+  serverlessCompletionsStream:
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "Say this is a test!", "stream": true}
+      responses:
+        "200":
+          text/event-stream: "data: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" such\",\"token\":1778,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" as\",\"token\":439,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\n...\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\"\",\"finish_reason\":\"length\",\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[],\"usage\":{\"prompt_tokens\":5,\"completion_tokens\":10,\"total_tokens\":15},\"created\":1733382157}\n\ndata: [DONE]\n"
+  serverlessTokenization:
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "What is generative AI?"}
+      responses:
+        "200":
+          application/json: {"tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+  serverlessDetokenization:
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "tokens": [128000, 3923, 374, 1803, 1413, 15592, 30]}
+      responses:
+        "200":
+          application/json: {"text": "What is generative AI?"}
+  serverlessToolAssistedChatComplete:
+    Example:
+      requestBody:
+        application/json: {"messages": [{"content": "What is 3 + 6?", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": false, "tools": [{"type": "math:calculator"}]}
+      responses:
+        "200":
+          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "The result is 9."}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}, "model": "meta-llama-3.1-8b-instruct"}
+  serverlessToolAssistedChatStream:
+    Example:
+      requestBody:
+        application/json: {"messages": [{"content": "What is 3 + 6?", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": true, "tools": [{"type": "math:calculator"}]}
+      responses:
+        "200":
+          text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":null,\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\"{\\\"result\\\": \\\"150 * 1.60934=241.401000000000\\\"}\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
+  serverlessKnowledgeRetrieve:
+    speakeasy-default-serverless-knowledge-retrieve:
+      requestBody:
+        application/json: {"k": 1, "knowledgeIds": ["knowledge-base-id-1"], "query": "Chicken dinner"}
+      responses:
+        "200":
+          application/json: {"results": [{"contentChunkId": "<id>", "contentId": "<id>", "score": 5823.25, "text": "<value>"}, {"contentChunkId": "<id>", "contentId": "<id>", "score": 5823.25, "text": "<value>"}]}
+  serverlessModelList:
+    speakeasy-default-serverless-model-list:
+      responses:
+        "200":
+          application/json: {"data": [{"context_length": 373077, "created": 125077, "description": "as evenly adjourn", "functionality": {"parallel_tool_call": false, "tool_call": false, "structured_output": true}, "hugging_face_url": "https://enchanted-coliseum.org/", "id": "<id>", "license": "https://dapper-hutch.net/", "max_completion_tokens": 324596, "name": "<value>", "policy": "https://different-bookend.net/", "pricing": {"input": 8164.42, "output": 3961.62, "response_time": 0}}]}
+  create_dataset:
+    Example:
+      requestBody:
+        application/json: {"modality": {}, "name": "<value>", "projectId": "<id>"}
+      responses:
+        "200":
+          application/json: {"createdAt": 570964, "id": "123", "modality": {}, "name": "dataset-name", "updatedAt": 993664}
+  list_datasets:
+    Example:
+      parameters:
+        query:
+          limit: 20
+          projectId: "<id>"
+      responses:
+        "200":
+          application/json: {"data": [{"createdAt": 547403, "id": "123", "modality": {}, "name": "dataset-name", "updatedAt": 34223}]}
+  get_dataset:
+    Example:
+      parameters:
+        path:
+          dataset_id: "539201"
+      responses:
+        "200":
+          application/json: {"createdAt": 985411, "id": "123", "modality": {}, "name": "dataset-name", "updatedAt": 761871}
+  delete_dataset:
+    speakeasy-default-delete-dataset:
+      parameters:
+        path:
+          dataset_id: "195431"
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  create_version:
+    speakeasy-default-create-version:
+      parameters:
+        path:
+          dataset_id: "224113"
+        query:
+          comment: "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart"
+      responses:
+        "200":
+          application/json: {"comment": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J", "createdAt": 300752, "id": "<id>"}
+        "422":
+          application/json: {}
+  list_versions:
+    speakeasy-default-list-versions:
+      parameters:
+        path:
+          dataset_id: "653403"
+      responses:
+        "200":
+          application/json: {"versions": [{"comment": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals", "createdAt": 193400, "id": "<id>"}, {"comment": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals", "createdAt": 193400, "id": "<id>"}]}
+        "422":
+          application/json: {}
+  get_version:
+    speakeasy-default-get-version:
+      parameters:
+        path:
+          dataset_id: "665101"
+          version_id: "813303"
+      responses:
+        "200":
+          application/json: {"comment": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart", "createdAt": 78471, "id": "<id>"}
+        "422":
+          application/json: {}
+  delete_version:
+    speakeasy-default-delete-version:
+      parameters:
+        path:
+          dataset_id: "310482"
+          split_id: 944306
+          version_id: "434150"
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  revert_dataset:
+    speakeasy-default-revert-dataset:
+      parameters:
+        path:
+          dataset_id: 147267
+        query:
+          versionId: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": 98021, "id": "<id>", "length": 960979, "name": "<value>", "size": 977772, "updatedAt": 847269}
+        "422":
+          application/json: {}
+  create_split:
+    speakeasy-default-create-split:
+      parameters:
+        path:
+          dataset_id: "334066"
+        query:
+          name: "<value>"
+      responses:
+        "200":
+          application/json: {"createdAt": 48827, "id": "<id>", "name": "<value>", "updatedAt": 124256}
+        "422":
+          application/json: {}
+  list_splits:
+    speakeasy-default-list-splits:
+      parameters:
+        path:
+          dataset_id: "494482"
+        query:
+          limit: 20
+      responses:
+        "200":
+          application/json: {"data": [{"createdAt": 24292, "id": "<id>", "name": "<value>", "updatedAt": 283431}, {"createdAt": 24292, "id": "<id>", "name": "<value>", "updatedAt": 283431}]}
+        "422":
+          application/json: {}
+  get_split:
+    speakeasy-default-get-split:
+      parameters:
+        path:
+          dataset_id: "84405"
+          split_id: "516409"
+      responses:
+        "200":
+          application/json: {"createdAt": 658324, "id": "<id>", "name": "<value>", "updatedAt": 75101}
+        "422":
+          application/json: {}
+  delete_split:
+    speakeasy-default-delete-split:
+      parameters:
+        path:
+          dataset_id: "724178"
+          split_id: "4400"
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  add_samples:
+    speakeasy-default-add-samples:
+      parameters:
+        path:
+          dataset_id: "304268"
+          split_id: "345943"
+      requestBody:
+        application/json: ["0xA76F67a260", "0x0274A1ADf1", "0x626BF2e0Df"]
+      responses:
+        "200":
+          application/json: {"samples": [["<value>"], ["<value>", "<value>", "<value>"], []]}
+        "422":
+          application/json: {}
+  list_samples:
+    speakeasy-default-list-samples:
+      parameters:
+        path:
+          dataset_id: "282743"
+          split_id: "505420"
+        query:
+          limit: 20
+      responses:
+        "200":
+          application/json: {"data": [["<value>", "<value>", "<value>"]]}
+        "422":
+          application/json: {}
+  update_samples:
+    speakeasy-default-update-samples:
+      parameters:
+        path:
+          dataset_id: "343546"
+          split_id: "551652"
+      requestBody:
+        application/json: [[], ["<value>", "<value>", "<value>"]]
+        multipart/form-data: {"file": {"": "x-file: example.file"}}
+      responses:
+        "200":
+          application/json: {"samples": [[], ["<value>", "<value>", "<value>"]]}
+        "422":
+          application/json: {}
+  delete_samples:
+    speakeasy-default-delete-samples:
+      parameters:
+        path:
+          dataset_id: "658326"
+          split_id: "581117"
+      requestBody:
+        application/json: ["<value 1>", "<value 2>"]
+      responses:
+        "200":
+          application/json: {"sampleIds": ["<value 1>", "<value 2>"]}
+        "422":
+          application/json: {}
+  init_upload:
+    speakeasy-default-init-upload:
+      requestBody:
+        application/json: {"digest": "<value>", "name": "<value>", "projectId": "<id>", "size": 830650}
+      responses:
+        "200":
+          application/json: {"fileId": "<id>"}
+        "422":
+          application/json: {}
+  complete_upload:
+    speakeasy-default-complete-upload:
+      parameters:
+        path:
+          file_id: "<id>"
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  get_info:
+    Example:
+      parameters:
+        path:
+          file_id: "<id>"
+      responses:
+        "200":
+          application/json: {"createdAt": "2023-06-05T17:53:37.301Z", "creatorId": "<id>", "digest": "file-digest", "expiresAt": "2023-10-08T15:02:04.523Z", "id": "file-id", "name": "file-name", "projectId": "<id>", "size": 1024, "status": "UPLOADED"}
+  get_download_url:
+    Example:
+      parameters:
+        path:
+          file_id: "<id>"
+      responses:
+        "200":
+          application/json: {"downloadUrl": "https://immaculate-dredger.com", "fileId": "<id>", "s3Uri": "https://immaculate-dredger.com"}
+  upload_raw_samples:
+    speakeasy-default-upload-raw-samples:
+      parameters:
+        path:
+          dataset_id: "<id>"
+          split_id: "<id>"
+      requestBody:
+        multipart/form-data: {"file": "x-file: example.file"}
+      responses:
+        "200":
+          application/json: {"samples": []}
+        "422":
+          application/json: {}
+  dedicatedAudioTranscriptions:
+    Example:
+      requestBody:
+        multipart/form-data: {"file": "@/path/to/file/audio.mp3", "model": "(endpoint-id)"}
+      responses:
+        "200":
+          application/json: {"text": "Hello, how are you?"}
+examplesVersion: 1.0.2
+generatedTests: {}
