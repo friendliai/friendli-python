@@ -1,8 +1,12 @@
 speakeasy run --skip-versioning && \
+uv venv --python 3.13 && \
+uv sync --group lint && \
 uv run scripts/auto-fix.py && \
-uv python pin 3.13 && \
-uv pip install git+ssh://git@github.com/friendliai/sdk-transpiler.git && \
+uv pip install git+https://github.com/friendliai/sdk-transpiler.git && \
 uv run python -m sdk_transpiler --config pyproject.toml --log-level DEBUG && \
+uvx ruff check --fix-only src/ && \
+uvx ruff format src/ && \
+rm -rf src/friendli_core poetry.* && \
 uv pip uninstall friendli && \
 uv build && \
 VERSION=$(uv run python -c "

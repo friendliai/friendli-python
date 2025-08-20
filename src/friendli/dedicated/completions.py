@@ -4,18 +4,23 @@
 
 from __future__ import annotations
 
-from typing import Mapping, Optional, Union
+from typing import TYPE_CHECKING, Mapping, Optional, Union
 
-from friendli.core import models, utils
-from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
 from friendli.core.types import UNSET, OptionalNullable
-from friendli.core.utils import eventstreaming
 
-from ..config import Config
+if TYPE_CHECKING:
+    from friendli.core import models, utils
+    from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+    from friendli.core.utils import eventstreaming
+
+    from ..config import Config
 
 
 class SyncCompletions:
-    def __init__(self, core: SyncFriendliCore, config: Config):
+    """SyncCompletions."""
+
+    def __init__(self, core: SyncFriendliCore, config: Config) -> None:
+        """Initialize the SyncCompletions class."""
         self._core = core
         self._config = config
 
@@ -31,7 +36,7 @@ class SyncCompletions:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedCompletionsSuccess:
-        """Completions
+        r"""Completions.
 
         Generate text based on the given text prompt.
 
@@ -41,7 +46,7 @@ class SyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.completions.complete(
             dedicated_completions_body=dedicated_completions_body,
             x_friendli_team=x_friendli_team,
@@ -64,7 +69,7 @@ class SyncCompletions:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStream[models.DedicatedCompletionsStreamSuccess]:
-        """Stream completions
+        r"""Stream completions.
 
         Generate text based on the given text prompt.
 
@@ -74,7 +79,7 @@ class SyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.completions.stream(
             dedicated_completions_stream_body=dedicated_completions_stream_body,
             x_friendli_team=x_friendli_team,
@@ -86,7 +91,10 @@ class SyncCompletions:
 
 
 class AsyncCompletions:
-    def __init__(self, core: AsyncFriendliCore, config: Config):
+    """AsyncCompletions."""
+
+    def __init__(self, core: AsyncFriendliCore, config: Config) -> None:
+        """Initialize the AsyncCompletions class."""
         self._core = core
         self._config = config
 
@@ -102,7 +110,7 @@ class AsyncCompletions:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedCompletionsSuccess:
-        """Completions
+        r"""Completions.
 
         Generate text based on the given text prompt.
 
@@ -112,7 +120,7 @@ class AsyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.completions.complete(
             dedicated_completions_body=dedicated_completions_body,
             x_friendli_team=x_friendli_team,
@@ -135,7 +143,7 @@ class AsyncCompletions:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStreamAsync[models.DedicatedCompletionsStreamSuccess]:
-        """Stream completions
+        r"""Stream completions.
 
         Generate text based on the given text prompt.
 
@@ -145,7 +153,7 @@ class AsyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.completions.stream(
             dedicated_completions_stream_body=dedicated_completions_stream_body,
             x_friendli_team=x_friendli_team,

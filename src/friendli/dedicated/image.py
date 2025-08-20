@@ -4,21 +4,26 @@
 
 from __future__ import annotations
 
-from typing import Mapping, Optional
+from typing import TYPE_CHECKING, Mapping, Optional
 
-from friendli.core import models, utils
-from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
 from friendli.core.types import UNSET, OptionalNullable
 
-from ..config import Config
+if TYPE_CHECKING:
+    from friendli.core import models, utils
+    from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+
+    from ..config import Config
 
 
 class SyncImage:
-    def __init__(self, core: SyncFriendliCore, config: Config):
+    """SyncImage."""
+
+    def __init__(self, core: SyncFriendliCore, config: Config) -> None:
+        """Initialize the SyncImage class."""
         self._core = core
         self._config = config
 
-    def generate(
+    def generate(  # noqa: PLR0913
         self,
         *,
         model: str,
@@ -35,22 +40,27 @@ class SyncImage:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedImageGenerateSuccess:
-        """Image generations
+        r"""Image generations.
 
         Given a description, the model generates image(s).
 
-        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
-        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format
+            \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param num_inference_steps: The number of inference steps to use during image generation.
+            Supported range: [1, 50].
         :param prompt: A text description of the desired image(s).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
-        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
+        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values
+            (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more
+            creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
+        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`,
+            `raw`, `png`, `jpeg`, and `jpg`.
         :param seed: The seed to use for image generation.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.image.generate(
             model=model,
             num_inference_steps=num_inference_steps,
@@ -67,11 +77,14 @@ class SyncImage:
 
 
 class AsyncImage:
-    def __init__(self, core: AsyncFriendliCore, config: Config):
+    """AsyncImage."""
+
+    def __init__(self, core: AsyncFriendliCore, config: Config) -> None:
+        """Initialize the AsyncImage class."""
         self._core = core
         self._config = config
 
-    async def generate(
+    async def generate(  # noqa: PLR0913
         self,
         *,
         model: str,
@@ -88,22 +101,28 @@ class AsyncImage:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedImageGenerateSuccess:
-        """Image generations
+        r"""Image generations.
 
         Given a description, the model generates image(s).
 
-        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
-        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format
+            \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param num_inference_steps: The number of inference steps to use during image generation.
+            Supported range: [1, 50].
         :param prompt: A text description of the desired image(s).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
-        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
+        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values
+            (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more
+            creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
+        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`,
+            `raw`, `png`, `jpeg`, and `jpg`.
         :param seed: The seed to use for image generation.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
+        _ = guidance_scale
         return await self._core.dedicated.image.generate(
             model=model,
             prompt=prompt,

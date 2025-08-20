@@ -4,22 +4,28 @@
 
 from __future__ import annotations
 
-import io
-from typing import IO, Any, Mapping, Optional, Union
+from typing import IO, TYPE_CHECKING, Any, Mapping, Optional, Union
 
-from friendli.core import models, utils
-from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
 from friendli.core.types import UNSET, OptionalNullable
 
-from ..config import Config
+if TYPE_CHECKING:
+    import io
+
+    from friendli.core import models, utils
+    from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+
+    from ..config import Config
 
 
 class SyncEndpoint:
-    def __init__(self, core: SyncFriendliCore, config: Config):
+    """SyncEndpoint."""
+
+    def __init__(self, core: SyncFriendliCore, config: Config) -> None:
+        """Initialize the SyncEndpoint class."""
         self._core = core
         self._config = config
 
-    def wandb_artifact_create(
+    def wandb_artifact_create(  # noqa: PLR0913
         self,
         *,
         wandb_artifact_version_name: str,
@@ -38,22 +44,30 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointWandbArtifactCreateResponse:
-        """Create endpoint from W&B artifact
+        r"""Create endpoint from W&B artifact.
 
-        Create an endpoint from Weights & Biases artifact. If the idempotency key is provided, the API will check if the endpoint already exists, and rollout the existing endpoint if it does. In such cases, the project id must be provided.
+        Create an endpoint from Weights & Biases artifact. If the idempotency key is provided, the API will check if the
+        endpoint already exists, and rollout the existing endpoint if it does. In such cases, the project id must be
+        provided.
 
-        :param wandb_artifact_version_name: The specific model artifact version from Weights & Biases. The referred artifact will be used to create a new endpoint in Friendli Dedicated Endpoints or rollout an existing one.
+        :param wandb_artifact_version_name: The specific model artifact version from Weights & Biases. The referred
+            artifact will be used to create a new endpoint in Friendli Dedicated Endpoints or rollout an existing one.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param accelerator: Specifies the instance type for the endpoint.
         :param autoscaling_policy: Defines autoscaling settings for the endpoint.
-        :param idempotency_key: Used by Friendli Dedicated Endpoints to track which webhook automation triggered an endpoint rollout. If the `idempotencyKey` is provided, the API will check if the endpoint already exists, and rollout the existing endpoint if it does. In such cases, the `projectId` must be provided. Any unique value can be used.
-        :param name: Specifies the name of your endpoint. If not provided, a name will be automatically generated for you.
-        :param project_id: Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not provided, a new project will be created within your default team.
+        :param idempotency_key: Used by Friendli Dedicated Endpoints to track which webhook automation triggered an
+            endpoint rollout. If the `idempotencyKey` is provided, the API will check if the endpoint already exists,
+            and rollout the existing endpoint if it does. In such cases, the `projectId` must be provided. Any unique
+            value can be used.
+        :param name: Specifies the name of your endpoint. If not provided, a name will be automatically generated for
+            you.
+        :param project_id: Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not
+            provided, a new project will be created within your default team.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.wandb_artifact_create(
             wandb_artifact_version_name=wandb_artifact_version_name,
             x_friendli_team=x_friendli_team,
@@ -68,7 +82,7 @@ class SyncEndpoint:
             http_headers=http_headers,
         )
 
-    def create(
+    def create(  # noqa: PLR0913
         self,
         *,
         advanced: Union[
@@ -95,7 +109,7 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Create a new endpoint
+        r"""Create a new endpoint.
 
         Create a new endpoint and return its status
 
@@ -113,7 +127,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.create(
             advanced=advanced,
             hf_model_repo=hf_model_repo,
@@ -131,7 +145,7 @@ class SyncEndpoint:
             http_headers=http_headers,
         )
 
-    def list(
+    def list(  # noqa: PLR0913
         self,
         *,
         project_id: OptionalNullable[str] = "",
@@ -143,7 +157,7 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointListResponse:
-        """List all endpoints
+        r"""List all endpoints.
 
         List all endpoint statuses
 
@@ -155,7 +169,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.list(
             project_id=project_id,
             cursor=cursor,
@@ -177,7 +191,7 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Get endpoint status
+        r"""Get endpoint status.
 
         Get the status of an endpoint
 
@@ -185,7 +199,8 @@ class SyncEndpoint:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param timeout_ms: Override the default request timeout configuration for this
+            method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
         return self._core.dedicated.endpoint.get(
@@ -197,7 +212,7 @@ class SyncEndpoint:
             http_headers=http_headers,
         )
 
-    def update(
+    def update(  # noqa: PLR0913
         self,
         *,
         endpoint_id: str,
@@ -224,7 +239,7 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointSpec:
-        """Update endpoint spec
+        r"""Update endpoint spec.
 
         Update the specification of a specific endpoint
 
@@ -242,7 +257,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.update(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -269,8 +284,8 @@ class SyncEndpoint:
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
-        """Delete endpoint
+    ) -> Any:  # noqa: ANN401
+        r"""Delete endpoint.
 
         Delete a specific endpoint
 
@@ -280,7 +295,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.delete(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -290,7 +305,7 @@ class SyncEndpoint:
             http_headers=http_headers,
         )
 
-    def get_version_history(
+    def get_version_history(  # noqa: PLR0913
         self,
         *,
         endpoint_id: str,
@@ -302,7 +317,7 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointVersionHistoryResponse:
-        """Get endpoint version history
+        r"""Get endpoint version history.
 
         Get version history of a specific endpoint
 
@@ -314,7 +329,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.get_version_history(
             endpoint_id=endpoint_id,
             cursor=cursor,
@@ -336,7 +351,7 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Get endpoint status
+        r"""Get endpoint status.
 
         Get the status of a specific endpoint
 
@@ -346,7 +361,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.get_status(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -366,7 +381,7 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Sleep endpoint
+        r"""Sleep endpoint.
 
         Put a specific endpoint to sleep
 
@@ -376,7 +391,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.sleep(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -396,7 +411,7 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Wake endpoint
+        r"""Wake endpoint.
 
         Wake up a specific endpoint
 
@@ -406,7 +421,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.wake(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -426,7 +441,7 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Terminate endpoint
+        r"""Terminate endpoint.
 
         Terminate a specific endpoint
 
@@ -436,7 +451,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.terminate(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -456,7 +471,7 @@ class SyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Restart endpoint
+        r"""Restart endpoint.
 
         Restart a FAILED or TERMINATED endpoint
 
@@ -466,7 +481,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dedicated.endpoint.restart(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -478,11 +493,14 @@ class SyncEndpoint:
 
 
 class AsyncEndpoint:
-    def __init__(self, core: AsyncFriendliCore, config: Config):
+    """AsyncEndpoint."""
+
+    def __init__(self, core: AsyncFriendliCore, config: Config) -> None:
+        """Initialize the AsyncEndpoint class."""
         self._core = core
         self._config = config
 
-    async def wandb_artifact_create(
+    async def wandb_artifact_create(  # noqa: PLR0913
         self,
         *,
         wandb_artifact_version_name: str,
@@ -501,22 +519,30 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointWandbArtifactCreateResponse:
-        """Create endpoint from W&B artifact
+        r"""Create endpoint from W&B artifact.
 
-        Create an endpoint from Weights & Biases artifact. If the idempotency key is provided, the API will check if the endpoint already exists, and rollout the existing endpoint if it does. In such cases, the project id must be provided.
+        Create an endpoint from Weights & Biases artifact. If the idempotency key is provided, the API will check if the
+        endpoint already exists, and rollout the existing endpoint if it does. In such cases, the project id must be
+        provided.
 
-        :param wandb_artifact_version_name: The specific model artifact version from Weights & Biases. The referred artifact will be used to create a new endpoint in Friendli Dedicated Endpoints or rollout an existing one.
+        :param wandb_artifact_version_name: The specific model artifact version from Weights & Biases. The referred
+            artifact will be used to create a new endpoint in Friendli Dedicated Endpoints or rollout an existing one.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param accelerator: Specifies the instance type for the endpoint.
         :param autoscaling_policy: Defines autoscaling settings for the endpoint.
-        :param idempotency_key: Used by Friendli Dedicated Endpoints to track which webhook automation triggered an endpoint rollout. If the `idempotencyKey` is provided, the API will check if the endpoint already exists, and rollout the existing endpoint if it does. In such cases, the `projectId` must be provided. Any unique value can be used.
-        :param name: Specifies the name of your endpoint. If not provided, a name will be automatically generated for you.
-        :param project_id: Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not provided, a new project will be created within your default team.
+        :param idempotency_key: Used by Friendli Dedicated Endpoints to track which webhook automation triggered an
+            endpoint rollout. If the `idempotencyKey` is provided, the API will check if the endpoint already exists,
+            and rollout the existing endpoint if it does. In such cases, the `projectId` must be provided. Any unique
+            value can be used.
+        :param name: Specifies the name of your endpoint. If not provided, a name will be automatically generated for
+            you.
+        :param project_id: Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not
+            provided, a new project will be created within your default team.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.wandb_artifact_create(
             wandb_artifact_version_name=wandb_artifact_version_name,
             x_friendli_team=x_friendli_team,
@@ -531,7 +557,7 @@ class AsyncEndpoint:
             http_headers=http_headers,
         )
 
-    async def create(
+    async def create(  # noqa: PLR0913
         self,
         *,
         advanced: Union[
@@ -558,7 +584,7 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Create a new endpoint
+        r"""Create a new endpoint.
 
         Create a new endpoint and return its status
 
@@ -576,7 +602,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.create(
             advanced=advanced,
             hf_model_repo=hf_model_repo,
@@ -594,7 +620,7 @@ class AsyncEndpoint:
             http_headers=http_headers,
         )
 
-    async def list(
+    async def list(  # noqa: PLR0913
         self,
         *,
         project_id: OptionalNullable[str] = "",
@@ -606,7 +632,7 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointListResponse:
-        """List all endpoints
+        r"""List all endpoints.
 
         List all endpoint statuses
 
@@ -618,7 +644,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.list(
             project_id=project_id,
             cursor=cursor,
@@ -640,7 +666,7 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointSpec:
-        """Get endpoint specification
+        r"""Get endpoint specification.
 
         Get the specification of an endpoint
 
@@ -650,7 +676,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.get(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -660,7 +686,7 @@ class AsyncEndpoint:
             http_headers=http_headers,
         )
 
-    async def update(
+    async def update(  # noqa: PLR0913
         self,
         *,
         endpoint_id: str,
@@ -687,7 +713,7 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointSpec:
-        """Update endpoint spec
+        r"""Update endpoint spec.
 
         Update the specification of a specific endpoint
 
@@ -705,7 +731,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.update(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -732,8 +758,8 @@ class AsyncEndpoint:
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
-        """Delete endpoint
+    ) -> Any:  # noqa: ANN401
+        r"""Delete endpoint.
 
         Delete a specific endpoint
 
@@ -743,7 +769,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.delete(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -753,7 +779,7 @@ class AsyncEndpoint:
             http_headers=http_headers,
         )
 
-    async def get_version_history(
+    async def get_version_history(  # noqa: PLR0913
         self,
         *,
         endpoint_id: str,
@@ -765,7 +791,7 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointVersionHistoryResponse:
-        """Get endpoint version history
+        r"""Get endpoint version history.
 
         Get version history of a specific endpoint
 
@@ -777,7 +803,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.get_version_history(
             endpoint_id=endpoint_id,
             cursor=cursor,
@@ -799,7 +825,7 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Get endpoint status
+        r"""Get endpoint status.
 
         Get the status of a specific endpoint
 
@@ -809,7 +835,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.get_status(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -829,7 +855,7 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Sleep endpoint
+        r"""Sleep endpoint.
 
         Put a specific endpoint to sleep
 
@@ -839,7 +865,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.sleep(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -859,7 +885,7 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Wake endpoint
+        r"""Wake endpoint.
 
         Wake up a specific endpoint
 
@@ -869,7 +895,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.wake(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -889,7 +915,7 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Terminate endpoint
+        r"""Terminate endpoint.
 
         Terminate a specific endpoint
 
@@ -899,7 +925,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.terminate(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -919,7 +945,7 @@ class AsyncEndpoint:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedEndpointStatus:
-        """Restart endpoint
+        r"""Restart endpoint.
 
         Restart a FAILED or TERMINATED endpoint
 
@@ -929,7 +955,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dedicated.endpoint.restart(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,

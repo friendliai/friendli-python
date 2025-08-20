@@ -4,14 +4,10 @@
 
 from __future__ import annotations
 
-from types import TracebackType
-from typing import Callable, Dict, Optional, Type, Union
+from typing import TYPE_CHECKING, Any, Callable, Dict, Optional, Type, Union
 
-from friendli.core.httpclient import AsyncHttpClient, HttpClient
 from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
 from friendli.core.types import UNSET, OptionalNullable
-from friendli.core.utils.logger import Logger
-from friendli.core.utils.retries import RetryConfig
 
 from .config import Config
 from .container import AsyncContainer, SyncContainer
@@ -20,9 +16,18 @@ from .dedicated import AsyncDedicated, SyncDedicated
 from .file import AsyncFile, SyncFile
 from .serverless import AsyncServerless, SyncServerless
 
+if TYPE_CHECKING:
+    from types import TracebackType
+
+    from friendli.core.httpclient import AsyncHttpClient, HttpClient
+    from friendli.core.utils.logger import Logger
+    from friendli.core.utils.retries import RetryConfig
+
 
 class SyncFriendli:
-    def __init__(
+    """Friendli Python SDK."""
+
+    def __init__(  # noqa: PLR0913
         self,
         token: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         server_idx: Optional[int] = None,
@@ -35,9 +40,10 @@ class SyncFriendli:
         debug_logger: Optional[Logger] = None,
         core_cls: type[SyncFriendliCore] = SyncFriendliCore,
         config_cls: type[Config] = Config,
-        *args,
-        **kwargs,
-    ):
+        *args: Any,
+        **kwargs: Any,
+    ) -> None:
+        """Initialize the Friendli class."""
         self._core = core_cls(
             token=token,
             server_idx=server_idx,
@@ -59,13 +65,16 @@ class SyncFriendli:
 
     @property
     def core(self) -> "SyncFriendliCore":
+        """Get the core instance."""
         return self._core
 
     @property
     def config(self) -> "Config":
+        """Get the config instance."""
         return self._config
 
     def __enter__(self) -> "SyncFriendli":
+        """Enter the context."""
         self._core.__enter__()
         return self
 
@@ -75,11 +84,14 @@ class SyncFriendli:
         exc_val: Optional[BaseException],
         exc_tb: Optional[TracebackType],
     ) -> None:
+        """Exit the context."""
         self._core.__exit__(exc_type, exc_val, exc_tb)
 
 
 class AsyncFriendli:
-    def __init__(
+    """Friendli Python SDK."""
+
+    def __init__(  # noqa: PLR0913
         self,
         token: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         server_idx: Optional[int] = None,
@@ -92,9 +104,10 @@ class AsyncFriendli:
         debug_logger: Optional[Logger] = None,
         core_cls: type[AsyncFriendliCore] = AsyncFriendliCore,
         config_cls: type[Config] = Config,
-        *args,
-        **kwargs,
-    ):
+        *args: Any,
+        **kwargs: Any,
+    ) -> None:
+        """Initialize the Friendli class."""
         self._core = core_cls(
             token=token,
             server_idx=server_idx,
@@ -116,13 +129,16 @@ class AsyncFriendli:
 
     @property
     def core(self) -> "AsyncFriendliCore":
+        """Get the core instance."""
         return self._core
 
     @property
     def config(self) -> "Config":
+        """Get the config instance."""
         return self._config
 
     async def __aenter__(self) -> "AsyncFriendli":
+        """Enter the context."""
         await self._core.__aenter__()
         return self
 
@@ -132,4 +148,5 @@ class AsyncFriendli:
         exc_val: Optional[BaseException],
         exc_tb: Optional[TracebackType],
     ) -> None:
+        """Exit the context."""
         await self._core.__aexit__(exc_type, exc_val, exc_tb)

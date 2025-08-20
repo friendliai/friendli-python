@@ -16,7 +16,10 @@ from .token import AsyncToken, SyncToken
 
 
 class SyncDedicated:
-    def __init__(self, core: SyncFriendliCore, config: Config):
+    """SyncDedicated."""
+
+    def __init__(self, core: SyncFriendliCore, config: Config) -> None:
+        """Initialize the SyncDedicated class."""
         self._core = core
         self._config = config
 
@@ -29,7 +32,10 @@ class SyncDedicated:
 
 
 class AsyncDedicated:
-    def __init__(self, core: AsyncFriendliCore, config: Config):
+    """AsyncDedicated."""
+
+    def __init__(self, core: AsyncFriendliCore, config: Config) -> None:
+        """Initialize the AsyncDedicated class."""
         self._core = core
         self._config = config
 

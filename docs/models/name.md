@@ -7,6 +7,7 @@ The name of the built-in tool.
 
 | Name                      | Value                     |
 | ------------------------- | ------------------------- |
+| `LINKUP_SEARCH`           | linkup:search             |
 | `MATH_CALCULATOR`         | math:calculator           |
 | `MATH_STATISTICS`         | math:statistics           |
 | `MATH_CALENDAR`           | math:calendar             |

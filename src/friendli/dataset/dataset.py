@@ -70,7 +70,10 @@ TCore = TypeVar("TCore", SyncFriendliCore, AsyncFriendliCore)
 
 
 class BaseDataset(ABC, Generic[TCore]):
-    def __init__(self, core: TCore, config: Config):
+    """BaseDataset."""
+
+    def __init__(self, core: TCore, config: Config) -> None:
+        """Initialize the BaseDataset class."""
         self._core = core
         self._config = config
 
@@ -110,7 +113,7 @@ class BaseDataset(ABC, Generic[TCore]):
             ]
         return Sample(messages=[task.result()[0] for task in tasks])
 
-    async def _process_message(
+    async def _process_message(  # noqa: PLR0912, PLR0915, C901
         self,
         *,
         message: Message,
@@ -129,11 +132,12 @@ class BaseDataset(ABC, Generic[TCore]):
             ValueError: If message modality is not compatible with dataset modality
         """
         input_modal_set: set[models.DedicatedDatasetModalityType] = set()
-        output_modal_set: set[models.DedicatedDatasetModalityType] = set(["TEXT"])
+        output_modal_set: set[models.DedicatedDatasetModalityType] = {"TEXT"}
         # NOTE: We only support text output modality for now.
 
         if isinstance(message.root, (SystemMessage, AssistantMessage, ToolMessage)):
-            # NOTE: These types don't support multimodal content at the moment, so we skip them.
+            # NOTE: These types don't support multimodal content at the moment,
+            #       so we skip them.
             input_modal_set.add("TEXT")
             return message, check_modality(
                 dataset_modality=self._dataset.modality,
@@ -145,7 +149,8 @@ class BaseDataset(ABC, Generic[TCore]):
 
         if isinstance(message.root, UserMessage):
             if isinstance(message.root.content, str):
-                # NOTE: `UserMessageContentString` type, which is a string, so we skip it.
+                # NOTE: `UserMessageContentString` type, which is a string, so we
+                #       skip it.
                 input_modal_set.add("TEXT")
                 return message, check_modality(
                     dataset_modality=self._dataset.modality,
@@ -196,10 +201,9 @@ class BaseDataset(ABC, Generic[TCore]):
                                 )
 
                             else:
-                                raise ValueError(
-                                    "`image_url` must be a string or ImageUrl."
-                                )
-                            content.root.root = content.root.root.to_ImageData()
+                                msg = "`image_url` must be a string or ImageUrl."
+                                raise ValueError(msg)  # noqa: TRY004
+                            content.root.root = content.root.root.to_image_data()
                             continue
 
                         if isinstance(content.root.root, ImageData):
@@ -208,7 +212,8 @@ class BaseDataset(ABC, Generic[TCore]):
                                 original_image.startswith(prefix)
                                 for prefix in BASE64_IMAGE_PREFIXES
                             ):
-                                # If base64 image, we upload it to S3 and replace the original image with the S3 URL
+                                # If base64 image, we upload it to S3 and replace the
+                                # original image with the S3 URL
                                 try:
                                     base64_string = original_image.split(
                                         sep=",", maxsplit=1
@@ -217,17 +222,16 @@ class BaseDataset(ABC, Generic[TCore]):
                                         base64_string, validate=True
                                     )
                                 except binascii.Error:
-                                    raise ValueError(
-                                        "`image` must be a valid base64 string."
-                                    )
+                                    msg = "`image` must be a valid base64 string."
+                                    raise ValueError(msg) from None
                                 else:
                                     # Replace the original image with the S3 URL
                                     content.root.root.image = str(
                                         await self._upload_to_s3(
                                             data=decoded_data,
-                                            name=digest(
-                                                data=decoded_data
-                                            ),  # NOTE: Use the digest as the name for base64 image for now
+                                            name=digest(data=decoded_data),
+                                            # NOTE: Use the digest as the name for
+                                            # base64 image for now
                                         )
                                     )
                                     continue
@@ -237,11 +241,11 @@ class BaseDataset(ABC, Generic[TCore]):
                                 try:
                                     AnyHttpUrl(original_image)
                                 except ValueError:
-                                    raise ValueError(
-                                        "`image` must be a valid HTTP URL or S3 URL."
-                                    )
+                                    msg = "`image` must be a valid HTTP URL or S3 URL."
+                                    raise ValueError(msg) from None
                                 else:
-                                    # If HTTP URL, we download it and upload it to S3 and replace the original URL with the S3 URL
+                                    # If HTTP URL, we download it and upload it to S3
+                                    # and replace the original URL with the S3 URL
                                     content.root.root.image = str(
                                         await self._upload_to_s3(
                                             data=download_from_url(url=original_image),
@@ -266,9 +270,10 @@ class BaseDataset(ABC, Generic[TCore]):
                         continue
 
                     else:
-                        raise TypeError(
+                        msg = (
                             f"Invalid user message content type: {type(content.root)}."
                         )
+                        raise TypeError(msg)
 
                 return message, check_modality(
                     dataset_modality=self._dataset.modality,
@@ -278,10 +283,11 @@ class BaseDataset(ABC, Generic[TCore]):
                     ),
                 )
 
-            raise TypeError(
-                f"Invalid user message content type: {type(message.root.content)}."
-            )
-        raise TypeError(f"Invalid message type: {type(message.root)}.")
+            msg = f"Invalid user message content type: {type(message.root.content)}."
+            raise TypeError(msg)
+
+        msg = f"Invalid message type: {type(message.root)}."
+        raise TypeError(msg)
 
     @abstractmethod
     async def _upload_to_s3(
@@ -306,6 +312,8 @@ class BaseDataset(ABC, Generic[TCore]):
 
 
 class SyncDataset(BaseDataset[SyncFriendliCore]):
+    """SyncDataset."""
+
     #### High-Level Methods ####
     @contextmanager
     def create(
@@ -319,9 +327,11 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         """Create a new dataset.
 
         Args:
-            modality: Input modality of the dataset. Note that we only support text output modality for now.
+            modality: Input modality of the dataset. Note that we only support text
+                output modality for now.
             name: Name of the dataset
             project_id: Project ID
+            default_split_name: Name of the default split to create
         """
         self._project_id = project_id
 
@@ -363,7 +373,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         """Get a dataset.
 
         Args:
-            name: Name of the dataset
+            dataset_id: ID of the dataset
             project_id: Project ID
         """
         self._project_id = project_id
@@ -421,12 +431,14 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             ValueError: If split with given name already exists
         """
         if self._dataset is None:
-            raise RuntimeError(
+            msg = (
                 "No active dataset. You must first create or get a dataset "
                 "using create_dataset() or get_dataset() before creating splits."
             )
+            raise RuntimeError(msg)
         if name in self._splits:
-            raise ValueError(f"Split '{name}' already exists.")
+            msg = f"Split '{name}' already exists."
+            raise ValueError(msg)
         split_info = self._core.dataset.create_split(
             dataset_id=self._dataset.id,
             name=name,
@@ -440,7 +452,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         *,
         name: str = DEFAULT_SPLIT_NAME,
     ) -> models.SplitInfo:
-        """Get the information for a split, returns for the default split if not specified.
+        """Get the information for a split, returns the default split if not specified.
 
         Args:
             name: Name of the split to get. If `None`, returns the default split.
@@ -453,12 +465,14 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             KeyError: If split with given name does not exist
         """
         if self._dataset is None:
-            raise RuntimeError(
+            msg = (
                 "No active dataset. You must first create or get a dataset "
                 "using create_dataset() or get_dataset() before creating splits."
             )
+            raise RuntimeError(msg)
         if name not in self._splits:
-            raise KeyError(f"Split '{name}' does not exist.")
+            msg = f"Split '{name}' does not exist."
+            raise KeyError(msg)
         return self._splits[name]
 
     def upload_samples(
@@ -479,14 +493,16 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         Raises:
             RuntimeError: If no dataset is active
             ValueError: If split with given name does not exist
-        """
+        """  # noqa: E501
         if self._dataset is None:
-            raise RuntimeError(
+            msg = (
                 "No active dataset. You must first create or get a dataset "
                 "using create_dataset() or get_dataset() before adding samples."
             )
+            raise RuntimeError(msg)
         if split not in self._splits:
-            raise ValueError(f"Split '{split}' does not exist.")
+            msg = f"Split '{split}' does not exist."
+            raise ValueError(msg)
 
         # Process samples
         processed_samples: list[Sample] = asyncio.run(
@@ -567,11 +583,12 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             return S3Dsn(download_url.s3_uri)
 
         except Exception as e:
-            raise RuntimeError(f"Failed to upload content to S3: {e}") from e
+            msg = f"Failed to upload content to S3: {e}"
+            raise RuntimeError(msg) from e
 
     #### Low-Level Methods ####
 
-    def create_dataset(
+    def create_dataset(  # noqa: PLR0913
         self,
         *,
         modality: Union[
@@ -599,7 +616,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             DatasetInfo: Information about the created dataset.
-        """
+        """  # noqa: E501
         return self._core.dataset.create_dataset(
             modality=modality,
             name=name,
@@ -611,7 +628,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def list_datasets(
+    def list_datasets(  # noqa: PLR0913
         self,
         *,
         project_id: str,
@@ -641,7 +658,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             ListDatasetsResponse: List of datasets and pagination information.
-        """
+        """  # noqa: E501
         return self._core.dataset.list_datasets(
             project_id=project_id,
             cursor=cursor,
@@ -677,7 +694,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             DatasetInfo: Information about the dataset.
-        """
+        """  # noqa: E501
         return self._core.dataset.get_dataset(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -696,7 +713,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
+    ) -> Any:  # noqa: ANN401
         """Delete a specific dataset.
 
         Args:
@@ -709,7 +726,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             Any: Response from the server.
-        """
+        """  # noqa: E501
         return self._core.dataset.delete_dataset(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -743,7 +760,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             VersionInfo: Information about the created version.
-        """
+        """  # noqa: E501
         return self._core.dataset.create_version(
             dataset_id=dataset_id,
             comment=comment,
@@ -776,7 +793,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             ListVersionsResponse: List of versions and pagination information.
-        """
+        """  # noqa: E501
         return self._core.dataset.list_versions(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -810,7 +827,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             VersionInfo: Information about the version.
-        """
+        """  # noqa: E501
         return self._core.dataset.get_version(
             dataset_id=dataset_id,
             version_id=version_id,
@@ -831,8 +848,8 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
-        """Delete a version
+    ) -> Any:  # noqa: ANN401
+        """Delete a version.
 
         Delete a version from the dataset.
 
@@ -843,7 +860,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dataset.delete_version(
             dataset_id=dataset_id,
             version_id=version_id,
@@ -878,7 +895,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             SplitInfo: Information about the created split.
-        """
+        """  # noqa: E501
         return self._core.dataset.create_split(
             dataset_id=dataset_id,
             name=name,
@@ -889,7 +906,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def list_splits(
+    def list_splits(  # noqa: PLR0913
         self,
         *,
         dataset_id: str,
@@ -919,7 +936,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             ListSplitsResponse: List of splits and pagination information.
-        """
+        """  # noqa: E501
         return self._core.dataset.list_splits(
             dataset_id=dataset_id,
             cursor=cursor,
@@ -957,7 +974,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             SplitInfo: Information about the split.
-        """
+        """  # noqa: E501
         return self._core.dataset.get_split(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -978,7 +995,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
+    ) -> Any:  # noqa: ANN401
         """Delete a specific split from a dataset.
 
         Args:
@@ -992,7 +1009,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             Any: Response from the server.
-        """
+        """  # noqa: E501
         return self._core.dataset.delete_split(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1003,7 +1020,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def add_samples(
+    def add_samples(  # noqa: PLR0913
         self,
         *,
         dataset_id: str,
@@ -1015,7 +1032,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.AddSamplesResponse:
-        """Add samples
+        """Add samples.
 
         Add samples to the split.
 
@@ -1027,7 +1044,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dataset.add_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1039,7 +1056,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def list_samples(
+    def list_samples(  # noqa: PLR0913
         self,
         *,
         dataset_id: str,
@@ -1054,7 +1071,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ListSamplesResponse:
-        """List samples
+        """List samples.
 
         List samples from the split.
 
@@ -1069,7 +1086,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dataset.list_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1084,7 +1101,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def update_samples(
+    def update_samples(  # noqa: PLR0913
         self,
         *,
         dataset_id: str,
@@ -1098,7 +1115,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.AddSamplesResponse:
-        """Update samples
+        """Update samples.
 
         Update samples as raw file.
 
@@ -1110,7 +1127,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dataset.update_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1122,7 +1139,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def delete_samples(
+    def delete_samples(  # noqa: PLR0913
         self,
         *,
         dataset_id: str,
@@ -1136,7 +1153,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DeleteSamplesResponse:
-        """Delete samples
+        """Delete samples.
 
         Delete samples from the split.
 
@@ -1148,7 +1165,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return self._core.dataset.delete_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1162,6 +1179,8 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
 
 class AsyncDataset(BaseDataset[AsyncFriendliCore]):
+    """AsyncDataset."""
+
     #### High-Level Methods ####
 
     @asynccontextmanager
@@ -1179,7 +1198,8 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             modality: Input modality of the dataset. Note that we only support text output modality for now.
             name: Name of the dataset
             project_id: Project ID
-        """
+            default_split_name: Name of the default split to create
+        """  # noqa: E501
         self._project_id = project_id
         try:
             # Create dataset
@@ -1219,7 +1239,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         """Get a dataset.
 
         Args:
-            name: Name of the dataset
+            dataset_id: ID of the dataset
             project_id: Project ID
         """
         self._project_id = project_id
@@ -1278,12 +1298,14 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             ValueError: If split with given name already exists
         """
         if self._dataset is None:
-            raise RuntimeError(
+            msg = (
                 "No active dataset. You must first create or get a dataset "
                 "using create_dataset() or get_dataset() before creating splits."
             )
+            raise RuntimeError(msg)
         if name in self._splits:
-            raise ValueError(f"Split '{name}' already exists.")
+            msg = f"Split '{name}' already exists."
+            raise ValueError(msg)
         split_info = await self._core.dataset.create_split(
             dataset_id=self._dataset.id,
             name=name,
@@ -1308,14 +1330,16 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         Raises:
             RuntimeError: If no dataset is active
             KeyError: If split with given name does not exist
-        """
+        """  # noqa: E501
         if self._dataset is None:
-            raise RuntimeError(
+            msg = (
                 "No active dataset. You must first create or get a dataset "
                 "using create_dataset() or get_dataset() before creating splits."
             )
+            raise RuntimeError(msg)
         if name not in self._splits:
-            raise KeyError(f"Split '{name}' does not exist.")
+            msg = f"Split '{name}' does not exist."
+            raise KeyError(msg)
         return self._splits[name]
 
     async def upload_samples(
@@ -1336,14 +1360,16 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         Raises:
             RuntimeError: If no dataset is active
             ValueError: If split with given name does not exist
-        """
+        """  # noqa: E501
         if self._dataset is None:
-            raise RuntimeError(
+            msg = (
                 "No active dataset. You must first create or get a dataset "
                 "using create_dataset() or get_dataset() before adding samples."
             )
+            raise RuntimeError(msg)
         if split not in self._splits:
-            raise ValueError(f"Split '{split}' does not exist.")
+            msg = f"Split '{split}' does not exist."
+            raise ValueError(msg)
 
         # Process samples
         processed_samples: list[Sample] = await self._process_samples(samples=samples)
@@ -1425,11 +1451,12 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             return S3Dsn(download_url.s3_uri)
 
         except Exception as e:
-            raise RuntimeError(f"Failed to upload content to S3: {e}") from e
+            msg = f"Failed to upload content to S3: {e}"
+            raise RuntimeError(msg) from e
 
     #### Low-Level Methods ####
 
-    async def create_dataset(
+    async def create_dataset(  # noqa: PLR0913
         self,
         *,
         modality: Union[
@@ -1457,7 +1484,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             DatasetInfo: Information about the created dataset.
-        """
+        """  # noqa: E501
         return await self._core.dataset.create_dataset(
             modality=modality,
             name=name,
@@ -1469,7 +1496,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def list_datasets(
+    async def list_datasets(  # noqa: PLR0913
         self,
         *,
         project_id: str,
@@ -1499,7 +1526,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             ListDatasetsResponse: List of datasets and pagination information.
-        """
+        """  # noqa: E501
         return await self._core.dataset.list_datasets(
             project_id=project_id,
             cursor=cursor,
@@ -1535,7 +1562,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             DatasetInfo: Information about the dataset.
-        """
+        """  # noqa: E501
         return await self._core.dataset.get_dataset(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -1554,7 +1581,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
+    ) -> Any:  # noqa: ANN401
         """Delete a specific dataset.
 
         Args:
@@ -1567,7 +1594,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             Any: Response from the server.
-        """
+        """  # noqa: E501
         return await self._core.dataset.delete_dataset(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -1601,7 +1628,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             VersionInfo: Information about the created version.
-        """
+        """  # noqa: E501
         return await self._core.dataset.create_version(
             dataset_id=dataset_id,
             comment=comment,
@@ -1634,7 +1661,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             ListVersionsResponse: List of versions and pagination information.
-        """
+        """  # noqa: E501
         return await self._core.dataset.list_versions(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -1668,7 +1695,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             VersionInfo: Information about the version.
-        """
+        """  # noqa: E501
         return await self._core.dataset.get_version(
             dataset_id=dataset_id,
             version_id=version_id,
@@ -1689,8 +1716,8 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
-        """Delete a version
+    ) -> Any:  # noqa: ANN401
+        """Delete a version.
 
         Delete a version from the dataset.
 
@@ -1701,7 +1728,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dataset.delete_version(
             dataset_id=dataset_id,
             version_id=version_id,
@@ -1736,7 +1763,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             SplitInfo: Information about the created split.
-        """
+        """  # noqa: E501
         return await self._core.dataset.create_split(
             dataset_id=dataset_id,
             name=name,
@@ -1747,7 +1774,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def list_splits(
+    async def list_splits(  # noqa: PLR0913
         self,
         *,
         dataset_id: str,
@@ -1777,7 +1804,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             ListSplitsResponse: List of splits and pagination information.
-        """
+        """  # noqa: E501
         return await self._core.dataset.list_splits(
             dataset_id=dataset_id,
             cursor=cursor,
@@ -1815,7 +1842,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             SplitInfo: Information about the split.
-        """
+        """  # noqa: E501
         return await self._core.dataset.get_split(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1836,7 +1863,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
+    ) -> Any:  # noqa: ANN401
         """Delete a specific split from a dataset.
 
         Args:
@@ -1850,7 +1877,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             Any: Response from the server.
-        """
+        """  # noqa: E501
         return await self._core.dataset.delete_split(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1861,7 +1888,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def add_samples(
+    async def add_samples(  # noqa: PLR0913
         self,
         *,
         dataset_id: str,
@@ -1873,7 +1900,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.AddSamplesResponse:
-        """Add samples
+        """Add samples.
 
         Add samples to the split.
 
@@ -1885,7 +1912,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dataset.add_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1897,7 +1924,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def list_samples(
+    async def list_samples(  # noqa: PLR0913
         self,
         *,
         dataset_id: str,
@@ -1912,7 +1939,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ListSamplesResponse:
-        """List samples
+        """List samples.
 
         List samples from the split.
 
@@ -1927,7 +1954,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dataset.list_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1942,7 +1969,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def update_samples(
+    async def update_samples(  # noqa: PLR0913
         self,
         *,
         dataset_id: str,
@@ -1956,7 +1983,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.AddSamplesResponse:
-        """Update samples
+        """Update samples.
 
         Update samples as raw file.
 
@@ -1968,7 +1995,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dataset.update_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1980,7 +2007,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def delete_samples(
+    async def delete_samples(  # noqa: PLR0913
         self,
         *,
         dataset_id: str,
@@ -1994,7 +2021,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DeleteSamplesResponse:
-        """Delete samples
+        """Delete samples.
 
         Delete samples from the split.
 
@@ -2006,7 +2033,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """
+        """  # noqa: E501
         return await self._core.dataset.delete_samples(
             dataset_id=dataset_id,
             split_id=split_id,

@@ -1,6 +1,6 @@
 # Type
 
-The type of the built-in tool.
+The type of the built-in tool provided by Friendli.
 
 
 ## Values

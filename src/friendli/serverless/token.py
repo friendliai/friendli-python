@@ -4,17 +4,22 @@
 
 from __future__ import annotations
 
-from typing import List, Mapping, Optional
+from typing import TYPE_CHECKING, List, Mapping, Optional
 
-from friendli.core import models, utils
-from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
 from friendli.core.types import UNSET, OptionalNullable
 
-from ..config import Config
+if TYPE_CHECKING:
+    from friendli.core import models, utils
+    from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
+
+    from ..config import Config
 
 
 class SyncToken:
-    def __init__(self, core: SyncFriendliCore, config: Config):
+    """Token."""
+
+    def __init__(self, core: SyncFriendliCore, config: Config) -> None:
+        """Initialize the SyncToken class."""
         self._core = core
         self._config = config
 
@@ -29,7 +34,7 @@ class SyncToken:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerlessTokenizationSuccess:
-        """Tokenization
+        r"""Tokenization.
 
         By giving a text input, generate a tokenized output of token IDs.
 
@@ -38,7 +43,8 @@ class SyncToken:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param timeout_ms: Override the default request timeout configuration for this\
+            method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
         return self._core.serverless.token.tokenize(
@@ -62,7 +68,7 @@ class SyncToken:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerlessDetokenizationSuccess:
-        """Detokenization
+        r"""Detokenization.
 
         By giving a list of tokens, generate a detokenized output text string.
 
@@ -71,7 +77,8 @@ class SyncToken:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param timeout_ms: Override the default request timeout configuration for this
+            method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
         return self._core.serverless.token.detokenize(
@@ -86,7 +93,10 @@ class SyncToken:
 
 
 class AsyncToken:
-    def __init__(self, core: AsyncFriendliCore, config: Config):
+    """Token."""
+
+    def __init__(self, core: AsyncFriendliCore, config: Config) -> None:
+        """Initialize the AsyncToken class."""
         self._core = core
         self._config = config
 
@@ -101,7 +111,7 @@ class AsyncToken:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerlessTokenizationSuccess:
-        """Tokenization
+        r"""Tokenization.
 
         By giving a text input, generate a tokenized output of token IDs.
 
@@ -110,7 +120,8 @@ class AsyncToken:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param timeout_ms: Override the default request timeout configuration for this
+            method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
         return await self._core.serverless.token.tokenize(
@@ -134,7 +145,7 @@ class AsyncToken:
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerlessDetokenizationSuccess:
-        """Detokenization
+        r"""Detokenization.
 
         By giving a list of tokens, generate a detokenized output text string.
 
@@ -143,7 +154,8 @@ class AsyncToken:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param timeout_ms: Override the default request timeout configuration for this
+            method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
         return await self._core.serverless.token.detokenize(
