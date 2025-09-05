@@ -23,6 +23,7 @@ def get_discriminator(model: Any, fieldname: str, key: str) -> str:
 
     Raises:
         ValueError: If the discriminator attribute is not found.
+
     """
     if model is UNSET:
         return "UNSET"
