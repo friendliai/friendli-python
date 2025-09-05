@@ -44,7 +44,7 @@ class SyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.container.completions.complete(
             request=request,
             retries=retries,
@@ -74,7 +74,7 @@ class SyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.container.completions.stream(
             request=request,
             retries=retries,
@@ -112,7 +112,7 @@ class AsyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.container.completions.complete(
             request=request,
             retries=retries,
@@ -142,7 +142,7 @@ class AsyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.container.completions.stream(
             request=request,
             retries=retries,

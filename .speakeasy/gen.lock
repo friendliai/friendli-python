@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
-  docChecksum: b4324bb604a4f43551c0ad98be5a06cc
+  docChecksum: 787ca3f630ec20c7346213b6e4bc84e4
   docVersion: 0.1.0
-  speakeasyVersion: 1.606.0
-  generationVersion: 2.686.7
-  releaseVersion: 0.10.9
-  configChecksum: 746766cebb84adea54779a80ce213905
+  speakeasyVersion: 1.609.0
+  generationVersion: 2.692.0
+  releaseVersion: 0.11.0
+  configChecksum: 47faddfbe7c1259058ad96423b8aeecd
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.19.9
+    core: 5.20.3
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -33,7 +33,7 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
-    serverEvents: 1.0.7
+    serverEvents: 1.0.8
     serverEventsSentinels: 0.1.0
     unions: 3.0.4
     uploadStreams: 1.0.0
@@ -1154,3 +1154,12 @@ examples:
           application/json: {"text": "Hello, how are you?"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Python SDK Changes Detected:
+  * `friendli_core.container.chat.complete()`:  `request` **Changed**
+  * `friendli_core.container.completions.complete()`:  `request` **Changed**
+  * `friendli_core.dedicated.chat.complete()`:  `request` **Changed**
+  * `friendli_core.dedicated.completions.complete()`:  `request.dedicated_completions_body` **Changed**
+  * `friendli_core.serverless.chat.complete()`:  `request` **Changed**
+  * `friendli_core.serverless.completions.complete()`:  `request.serverless_completions_body` **Changed**
+  * `friendli_core.serverless.tool_assisted_chat.complete()`:  `request` **Changed**

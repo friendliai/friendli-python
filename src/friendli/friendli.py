@@ -27,7 +27,7 @@ if TYPE_CHECKING:
 class SyncFriendli:
     """Friendli Python SDK."""
 
-    def __init__(  # noqa: PLR0913
+    def __init__(
         self,
         token: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         server_idx: Optional[int] = None,
@@ -91,7 +91,7 @@ class SyncFriendli:
 class AsyncFriendli:
     """Friendli Python SDK."""
 
-    def __init__(  # noqa: PLR0913
+    def __init__(
         self,
         token: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         server_idx: Optional[int] = None,

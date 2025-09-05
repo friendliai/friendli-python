@@ -23,7 +23,7 @@ class SyncAudio:
         self._core = core
         self._config = config
 
-    def transcribe(  # noqa: PLR0913
+    def transcribe(
         self,
         *,
         file: Union[models.FileModel, models.FileModelTypedDict],
@@ -60,7 +60,7 @@ class SyncAudio:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.audio.transcribe(
             file=file,
             model=model,
@@ -83,7 +83,7 @@ class AsyncAudio:
         self._core = core
         self._config = config
 
-    async def transcribe(  # noqa: PLR0913
+    async def transcribe(
         self,
         *,
         file: Union[models.FileModel, models.FileModelTypedDict],
@@ -120,7 +120,7 @@ class AsyncAudio:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.audio.transcribe(
             file=file,
             model=model,

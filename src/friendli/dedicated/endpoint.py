@@ -25,7 +25,7 @@ class SyncEndpoint:
         self._core = core
         self._config = config
 
-    def wandb_artifact_create(  # noqa: PLR0913
+    def wandb_artifact_create(
         self,
         *,
         wandb_artifact_version_name: str,
@@ -67,7 +67,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.wandb_artifact_create(
             wandb_artifact_version_name=wandb_artifact_version_name,
             x_friendli_team=x_friendli_team,
@@ -82,7 +82,7 @@ class SyncEndpoint:
             http_headers=http_headers,
         )
 
-    def create(  # noqa: PLR0913
+    def create(
         self,
         *,
         advanced: Union[
@@ -127,7 +127,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.create(
             advanced=advanced,
             hf_model_repo=hf_model_repo,
@@ -145,7 +145,7 @@ class SyncEndpoint:
             http_headers=http_headers,
         )
 
-    def list(  # noqa: PLR0913
+    def list(
         self,
         *,
         project_id: OptionalNullable[str] = "",
@@ -169,7 +169,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.list(
             project_id=project_id,
             cursor=cursor,
@@ -212,7 +212,7 @@ class SyncEndpoint:
             http_headers=http_headers,
         )
 
-    def update(  # noqa: PLR0913
+    def update(
         self,
         *,
         endpoint_id: str,
@@ -257,7 +257,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.update(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -295,7 +295,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.delete(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -305,7 +305,7 @@ class SyncEndpoint:
             http_headers=http_headers,
         )
 
-    def get_version_history(  # noqa: PLR0913
+    def get_version_history(
         self,
         *,
         endpoint_id: str,
@@ -329,7 +329,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.get_version_history(
             endpoint_id=endpoint_id,
             cursor=cursor,
@@ -361,7 +361,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.get_status(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -391,7 +391,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.sleep(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -421,7 +421,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.wake(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -451,7 +451,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.terminate(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -481,7 +481,7 @@ class SyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.endpoint.restart(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -500,7 +500,7 @@ class AsyncEndpoint:
         self._core = core
         self._config = config
 
-    async def wandb_artifact_create(  # noqa: PLR0913
+    async def wandb_artifact_create(
         self,
         *,
         wandb_artifact_version_name: str,
@@ -542,7 +542,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.wandb_artifact_create(
             wandb_artifact_version_name=wandb_artifact_version_name,
             x_friendli_team=x_friendli_team,
@@ -557,7 +557,7 @@ class AsyncEndpoint:
             http_headers=http_headers,
         )
 
-    async def create(  # noqa: PLR0913
+    async def create(
         self,
         *,
         advanced: Union[
@@ -602,7 +602,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.create(
             advanced=advanced,
             hf_model_repo=hf_model_repo,
@@ -620,7 +620,7 @@ class AsyncEndpoint:
             http_headers=http_headers,
         )
 
-    async def list(  # noqa: PLR0913
+    async def list(
         self,
         *,
         project_id: OptionalNullable[str] = "",
@@ -644,7 +644,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.list(
             project_id=project_id,
             cursor=cursor,
@@ -676,7 +676,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.get(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -686,7 +686,7 @@ class AsyncEndpoint:
             http_headers=http_headers,
         )
 
-    async def update(  # noqa: PLR0913
+    async def update(
         self,
         *,
         endpoint_id: str,
@@ -731,7 +731,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.update(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -769,7 +769,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.delete(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -779,7 +779,7 @@ class AsyncEndpoint:
             http_headers=http_headers,
         )
 
-    async def get_version_history(  # noqa: PLR0913
+    async def get_version_history(
         self,
         *,
         endpoint_id: str,
@@ -803,7 +803,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.get_version_history(
             endpoint_id=endpoint_id,
             cursor=cursor,
@@ -835,7 +835,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.get_status(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -865,7 +865,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.sleep(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -895,7 +895,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.wake(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -925,7 +925,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.terminate(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
@@ -955,7 +955,7 @@ class AsyncEndpoint:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.endpoint.restart(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,

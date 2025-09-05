@@ -4,6 +4,7 @@ import asyncio
 import random
 import time
 from typing import List
+
 import httpx
 
 
@@ -32,7 +33,10 @@ class RetryConfig:
     retry_connection_errors: bool
 
     def __init__(
-        self, strategy: str, backoff: BackoffStrategy, retry_connection_errors: bool
+        self,
+        strategy: str,
+        backoff: BackoffStrategy,
+        retry_connection_errors: bool,
     ):
         self.strategy = strategy
         self.backoff = backoff

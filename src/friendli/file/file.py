@@ -23,7 +23,7 @@ class SyncFile:
         self._core = core
         self._config = config
 
-    def init_upload(  # noqa: PLR0913
+    def init_upload(
         self,
         *,
         digest: str,
@@ -49,7 +49,7 @@ class SyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.file.init_upload(
             digest=digest,
             name=name,
@@ -82,7 +82,7 @@ class SyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.file.complete_upload(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
@@ -112,7 +112,7 @@ class SyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.file.get_info(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
@@ -142,7 +142,7 @@ class SyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.file.get_download_url(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
@@ -161,7 +161,7 @@ class AsyncFile:
         self._core = core
         self._config = config
 
-    async def init_upload(  # noqa: PLR0913
+    async def init_upload(
         self,
         *,
         digest: str,
@@ -187,7 +187,7 @@ class AsyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.file.init_upload(
             digest=digest,
             name=name,
@@ -220,7 +220,7 @@ class AsyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.file.complete_upload(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
@@ -250,7 +250,7 @@ class AsyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.file.get_info(
             file_id=file_id,
             x_friendli_team=x_friendli_team,
@@ -280,7 +280,7 @@ class AsyncFile:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.file.get_download_url(
             file_id=file_id,
             x_friendli_team=x_friendli_team,

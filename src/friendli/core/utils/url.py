@@ -4,15 +4,17 @@ from decimal import Decimal
 from typing import (
     Any,
     Dict,
-    get_type_hints,
     List,
     Optional,
     Union,
     get_args,
     get_origin,
+    get_type_hints,
 )
+
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
+
 from .metadata import PathParamMetadata, find_field_metadata
 from .values import (
     _get_serialized_params,
@@ -23,11 +25,17 @@ from .values import (
 
 
 def generate_url(
-    server_url: str, path: str, path_params: Any, gbls: Optional[Any] = None
+    server_url: str,
+    path: str,
+    path_params: Any,
+    gbls: Optional[Any] = None,
 ) -> str:
     path_param_values: Dict[str, str] = {}
     globals_already_populated = _populate_path_params(
-        path_params, gbls, path_param_values, []
+        path_params,
+        gbls,
+        path_param_values,
+        [],
     )
     if _is_set(gbls):
         _populate_path_params(gbls, None, path_param_values, globals_already_populated)
@@ -56,7 +64,10 @@ def _populate_path_params(
             continue
         param = getattr(path_params, name) if _is_set(path_params) else None
         param, global_found = _populate_from_globals(
-            name, param, PathParamMetadata, gbls
+            name,
+            param,
+            PathParamMetadata,
+            gbls,
         )
         if global_found:
             globals_already_populated.append(name)
@@ -66,7 +77,10 @@ def _populate_path_params(
         serialization = param_metadata.serialization
         if serialization is not None:
             serialized_params = _get_serialized_params(
-                param_metadata, f_name, param, path_param_field_types[name]
+                param_metadata,
+                f_name,
+                param,
+                path_param_field_types[name],
             )
             for key, value in serialized_params.items():
                 path_param_values[key] = value
@@ -93,7 +107,8 @@ def _populate_path_params(
                     for name in param_fields:
                         param_field = param_fields[name]
                         param_value_metadata = find_field_metadata(
-                            param_field, PathParamMetadata
+                            param_field,
+                            PathParamMetadata,
                         )
                         if param_value_metadata is None:
                             continue
@@ -105,11 +120,11 @@ def _populate_path_params(
                             continue
                         if param_metadata.explode:
                             pp_vals.append(
-                                f"{param_name}={_val_to_string(param_field_val)}"
+                                f"{param_name}={_val_to_string(param_field_val)}",
                             )
                         else:
                             pp_vals.append(
-                                f"{param_name},{_val_to_string(param_field_val)}"
+                                f"{param_name},{_val_to_string(param_field_val)}",
                             )
                     path_param_values[f_name] = ",".join(pp_vals)
                 elif _is_set(param):

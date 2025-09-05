@@ -46,7 +46,7 @@ class SyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.completions.complete(
             dedicated_completions_body=dedicated_completions_body,
             x_friendli_team=x_friendli_team,
@@ -79,7 +79,7 @@ class SyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.completions.stream(
             dedicated_completions_stream_body=dedicated_completions_stream_body,
             x_friendli_team=x_friendli_team,
@@ -120,7 +120,7 @@ class AsyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.completions.complete(
             dedicated_completions_body=dedicated_completions_body,
             x_friendli_team=x_friendli_team,
@@ -153,7 +153,7 @@ class AsyncCompletions:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dedicated.completions.stream(
             dedicated_completions_stream_body=dedicated_completions_stream_body,
             x_friendli_team=x_friendli_team,

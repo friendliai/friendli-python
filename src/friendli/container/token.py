@@ -43,7 +43,7 @@ class SyncToken:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.container.token.tokenize(
             prompt=prompt,
             model=model,
@@ -73,7 +73,7 @@ class SyncToken:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.container.token.detokenize(
             tokens=tokens,
             model=model,
@@ -112,7 +112,7 @@ class AsyncToken:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.container.token.tokenize(
             prompt=prompt,
             model=model,
@@ -142,7 +142,7 @@ class AsyncToken:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.container.token.detokenize(
             tokens=tokens,
             model=model,
