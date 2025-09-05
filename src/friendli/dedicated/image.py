@@ -23,7 +23,7 @@ class SyncImage:
         self._core = core
         self._config = config
 
-    def generate(  # noqa: PLR0913
+    def generate(
         self,
         *,
         model: str,
@@ -60,7 +60,7 @@ class SyncImage:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dedicated.image.generate(
             model=model,
             num_inference_steps=num_inference_steps,
@@ -84,7 +84,7 @@ class AsyncImage:
         self._core = core
         self._config = config
 
-    async def generate(  # noqa: PLR0913
+    async def generate(
         self,
         *,
         model: str,
@@ -121,7 +121,7 @@ class AsyncImage:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         _ = guidance_scale
         return await self._core.dedicated.image.generate(
             model=model,

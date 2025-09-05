@@ -354,6 +354,6 @@ class S3Dsn(AnyUrl):
     This is a custom type. Refer to `pydantic.networks.AnyUrl` and its derived types for details.
 
     Format: s3://<bucket_name>/<path>
-    """  # noqa: E501
+    """
 
     _constraints = UrlConstraints(allowed_schemes=["s3"])

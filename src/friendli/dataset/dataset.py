@@ -493,7 +493,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         Raises:
             RuntimeError: If no dataset is active
             ValueError: If split with given name does not exist
-        """  # noqa: E501
+        """
         if self._dataset is None:
             msg = (
                 "No active dataset. You must first create or get a dataset "
@@ -588,7 +588,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
     #### Low-Level Methods ####
 
-    def create_dataset(  # noqa: PLR0913
+    def create_dataset(
         self,
         *,
         modality: Union[
@@ -616,7 +616,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             DatasetInfo: Information about the created dataset.
-        """  # noqa: E501
+        """
         return self._core.dataset.create_dataset(
             modality=modality,
             name=name,
@@ -628,7 +628,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def list_datasets(  # noqa: PLR0913
+    def list_datasets(
         self,
         *,
         project_id: str,
@@ -658,7 +658,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             ListDatasetsResponse: List of datasets and pagination information.
-        """  # noqa: E501
+        """
         return self._core.dataset.list_datasets(
             project_id=project_id,
             cursor=cursor,
@@ -694,7 +694,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             DatasetInfo: Information about the dataset.
-        """  # noqa: E501
+        """
         return self._core.dataset.get_dataset(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -726,7 +726,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             Any: Response from the server.
-        """  # noqa: E501
+        """
         return self._core.dataset.delete_dataset(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -760,7 +760,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             VersionInfo: Information about the created version.
-        """  # noqa: E501
+        """
         return self._core.dataset.create_version(
             dataset_id=dataset_id,
             comment=comment,
@@ -793,7 +793,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             ListVersionsResponse: List of versions and pagination information.
-        """  # noqa: E501
+        """
         return self._core.dataset.list_versions(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -827,7 +827,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             VersionInfo: Information about the version.
-        """  # noqa: E501
+        """
         return self._core.dataset.get_version(
             dataset_id=dataset_id,
             version_id=version_id,
@@ -860,7 +860,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dataset.delete_version(
             dataset_id=dataset_id,
             version_id=version_id,
@@ -895,7 +895,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             SplitInfo: Information about the created split.
-        """  # noqa: E501
+        """
         return self._core.dataset.create_split(
             dataset_id=dataset_id,
             name=name,
@@ -906,7 +906,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def list_splits(  # noqa: PLR0913
+    def list_splits(
         self,
         *,
         dataset_id: str,
@@ -936,7 +936,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             ListSplitsResponse: List of splits and pagination information.
-        """  # noqa: E501
+        """
         return self._core.dataset.list_splits(
             dataset_id=dataset_id,
             cursor=cursor,
@@ -974,7 +974,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             SplitInfo: Information about the split.
-        """  # noqa: E501
+        """
         return self._core.dataset.get_split(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1009,7 +1009,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         Returns:
             Any: Response from the server.
-        """  # noqa: E501
+        """
         return self._core.dataset.delete_split(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1020,7 +1020,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def add_samples(  # noqa: PLR0913
+    def add_samples(
         self,
         *,
         dataset_id: str,
@@ -1044,7 +1044,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dataset.add_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1056,7 +1056,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def list_samples(  # noqa: PLR0913
+    def list_samples(
         self,
         *,
         dataset_id: str,
@@ -1086,7 +1086,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dataset.list_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1101,7 +1101,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def update_samples(  # noqa: PLR0913
+    def update_samples(
         self,
         *,
         dataset_id: str,
@@ -1127,7 +1127,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dataset.update_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1139,7 +1139,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    def delete_samples(  # noqa: PLR0913
+    def delete_samples(
         self,
         *,
         dataset_id: str,
@@ -1165,7 +1165,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.dataset.delete_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1199,7 +1199,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             name: Name of the dataset
             project_id: Project ID
             default_split_name: Name of the default split to create
-        """  # noqa: E501
+        """
         self._project_id = project_id
         try:
             # Create dataset
@@ -1330,7 +1330,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         Raises:
             RuntimeError: If no dataset is active
             KeyError: If split with given name does not exist
-        """  # noqa: E501
+        """
         if self._dataset is None:
             msg = (
                 "No active dataset. You must first create or get a dataset "
@@ -1360,7 +1360,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         Raises:
             RuntimeError: If no dataset is active
             ValueError: If split with given name does not exist
-        """  # noqa: E501
+        """
         if self._dataset is None:
             msg = (
                 "No active dataset. You must first create or get a dataset "
@@ -1456,7 +1456,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
     #### Low-Level Methods ####
 
-    async def create_dataset(  # noqa: PLR0913
+    async def create_dataset(
         self,
         *,
         modality: Union[
@@ -1484,7 +1484,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             DatasetInfo: Information about the created dataset.
-        """  # noqa: E501
+        """
         return await self._core.dataset.create_dataset(
             modality=modality,
             name=name,
@@ -1496,7 +1496,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def list_datasets(  # noqa: PLR0913
+    async def list_datasets(
         self,
         *,
         project_id: str,
@@ -1526,7 +1526,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             ListDatasetsResponse: List of datasets and pagination information.
-        """  # noqa: E501
+        """
         return await self._core.dataset.list_datasets(
             project_id=project_id,
             cursor=cursor,
@@ -1562,7 +1562,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             DatasetInfo: Information about the dataset.
-        """  # noqa: E501
+        """
         return await self._core.dataset.get_dataset(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -1594,7 +1594,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             Any: Response from the server.
-        """  # noqa: E501
+        """
         return await self._core.dataset.delete_dataset(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -1628,7 +1628,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             VersionInfo: Information about the created version.
-        """  # noqa: E501
+        """
         return await self._core.dataset.create_version(
             dataset_id=dataset_id,
             comment=comment,
@@ -1661,7 +1661,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             ListVersionsResponse: List of versions and pagination information.
-        """  # noqa: E501
+        """
         return await self._core.dataset.list_versions(
             dataset_id=dataset_id,
             x_friendli_team=x_friendli_team,
@@ -1695,7 +1695,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             VersionInfo: Information about the version.
-        """  # noqa: E501
+        """
         return await self._core.dataset.get_version(
             dataset_id=dataset_id,
             version_id=version_id,
@@ -1728,7 +1728,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dataset.delete_version(
             dataset_id=dataset_id,
             version_id=version_id,
@@ -1763,7 +1763,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             SplitInfo: Information about the created split.
-        """  # noqa: E501
+        """
         return await self._core.dataset.create_split(
             dataset_id=dataset_id,
             name=name,
@@ -1774,7 +1774,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def list_splits(  # noqa: PLR0913
+    async def list_splits(
         self,
         *,
         dataset_id: str,
@@ -1804,7 +1804,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             ListSplitsResponse: List of splits and pagination information.
-        """  # noqa: E501
+        """
         return await self._core.dataset.list_splits(
             dataset_id=dataset_id,
             cursor=cursor,
@@ -1842,7 +1842,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             SplitInfo: Information about the split.
-        """  # noqa: E501
+        """
         return await self._core.dataset.get_split(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1877,7 +1877,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
 
         Returns:
             Any: Response from the server.
-        """  # noqa: E501
+        """
         return await self._core.dataset.delete_split(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1888,7 +1888,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def add_samples(  # noqa: PLR0913
+    async def add_samples(
         self,
         *,
         dataset_id: str,
@@ -1912,7 +1912,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dataset.add_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1924,7 +1924,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def list_samples(  # noqa: PLR0913
+    async def list_samples(
         self,
         *,
         dataset_id: str,
@@ -1954,7 +1954,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dataset.list_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -1969,7 +1969,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def update_samples(  # noqa: PLR0913
+    async def update_samples(
         self,
         *,
         dataset_id: str,
@@ -1995,7 +1995,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dataset.update_samples(
             dataset_id=dataset_id,
             split_id=split_id,
@@ -2007,7 +2007,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             http_headers=http_headers,
         )
 
-    async def delete_samples(  # noqa: PLR0913
+    async def delete_samples(
         self,
         *,
         dataset_id: str,
@@ -2033,7 +2033,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.dataset.delete_samples(
             dataset_id=dataset_id,
             split_id=split_id,

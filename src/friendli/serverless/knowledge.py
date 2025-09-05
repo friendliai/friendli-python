@@ -23,7 +23,7 @@ class SyncKnowledge:
         self._core = core
         self._config = config
 
-    def retrieve(  # noqa: PLR0913
+    def retrieve(
         self,
         *,
         k: int,
@@ -72,7 +72,7 @@ class AsyncKnowledge:
         self._core = core
         self._config = config
 
-    async def retrieve(  # noqa: PLR0913
+    async def retrieve(
         self,
         *,
         k: int,

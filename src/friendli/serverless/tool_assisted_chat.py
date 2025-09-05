@@ -24,7 +24,7 @@ class SyncToolAssistedChat:
         self._core = core
         self._config = config
 
-    def complete(  # noqa: PLR0913
+    def complete(
         self,
         *,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
@@ -172,7 +172,7 @@ class SyncToolAssistedChat:
         :param timeout_ms: Override the default request timeout configuration for this method
             in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.serverless.tool_assisted_chat.complete(
             messages=messages,
             model=model,
@@ -205,7 +205,7 @@ class SyncToolAssistedChat:
             http_headers=http_headers,
         )
 
-    def stream(  # noqa: PLR0913
+    def stream(
         self,
         *,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
@@ -352,7 +352,7 @@ class SyncToolAssistedChat:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return self._core.serverless.tool_assisted_chat.stream(
             messages=messages,
             model=model,
@@ -394,7 +394,7 @@ class AsyncToolAssistedChat:
         self._core = core
         self._config = config
 
-    async def complete(  # noqa: PLR0913
+    async def complete(
         self,
         *,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
@@ -540,7 +540,7 @@ class AsyncToolAssistedChat:
         :param timeout_ms: Override the default request timeout configuration for this method
             in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.serverless.tool_assisted_chat.complete(
             messages=messages,
             model=model,
@@ -573,7 +573,7 @@ class AsyncToolAssistedChat:
             http_headers=http_headers,
         )
 
-    async def stream(  # noqa: PLR0913
+    async def stream(
         self,
         *,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
@@ -720,7 +720,7 @@ class AsyncToolAssistedChat:
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
-        """  # noqa: E501
+        """
         return await self._core.serverless.tool_assisted_chat.stream(
             messages=messages,
             model=model,
