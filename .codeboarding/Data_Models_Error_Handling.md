@@ -70,7 +70,7 @@ Comprises practical code examples demonstrating how to effectively use the SDK's
 **Related Classes/Methods**:
 
 - `examples`
-- `docs`
+- <a href="https://github.com/CodeBoarding/friendli-python/blob/maindocs/" target="_blank" rel="noopener noreferrer">`docs`</a>
 
 
 
