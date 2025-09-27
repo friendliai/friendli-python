@@ -8,6 +8,7 @@ graph LR
     Hooks_Extensibility["Hooks & Extensibility"]
     Unclassified["Unclassified"]
     Unclassified["Unclassified"]
+    Unclassified["Unclassified"]
     Friendli_Client_Public_API_ -- "delegates requests to" --> SDK_Core
     SDK_Core -- "utilizes" --> Data_Models_Error_Handling
     SDK_Core -- "adapts behavior based on" --> Platform_Abstractions
@@ -85,6 +86,12 @@ Offers an extensible mechanism for injecting custom logic at various stages of t
 
 - `friendli_core._hooks`
 
+
+### Unclassified
+Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)
+
+
+**Related Classes/Methods**: _None_
 
 ### Unclassified
 Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)
