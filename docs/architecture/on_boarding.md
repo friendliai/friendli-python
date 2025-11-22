@@ -179,3 +179,11 @@ _Last updated: 2025-11-08 20:30:16 UTC_
 - [overview.md](./overview.md)
 
 _Last updated: 2025-11-15 20:35:14 UTC_
+- [Data_Models_Error_Handling.md](./Data_Models_Error_Handling.md)
+- [Friendli_Client_Public_API_.md](./Friendli_Client_Public_API_.md)
+- [Platform_Abstractions.md](./Platform_Abstractions.md)
+- [SDK_Core.md](./SDK_Core.md)
+- [Service_Modules.md](./Service_Modules.md)
+- [overview.md](./overview.md)
+
+_Last updated: 2025-11-22 20:33:01 UTC_
