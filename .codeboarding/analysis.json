@@ -34,7 +34,7 @@
         "src/friendli/httpclient.py",
         "src/friendli/config.py",
         "src/friendli_core/__init__.py",
-        "src/friendli_core/_version.py",
+        "src/friendli_core/endpoint.py",
         "src/friendli_core/basesdk.py",
         "src/friendli_core/httpclient.py",
         "src/friendli_core/sdkconfiguration.py"
@@ -88,19 +88,16 @@
         "src/friendli/dataset/dataset.py",
         "src/friendli/file/__init__.py",
         "src/friendli/file/file.py",
-        "src/friendli_core/friendlicore_serverless_chat.py",
         "src/friendli_core/completions.py",
         "src/friendli_core/file.py",
         "src/friendli_core/chat.py",
         "src/friendli_core/friendlicore_image.py",
         "src/friendli_core/friendlicore_completions.py",
-        "src/friendli_core/friendlicore_serverless_token.py",
         "src/friendli_core/image.py",
         "src/friendli_core/toolassistedchat.py",
         "src/friendli_core/dataset.py",
         "src/friendli_core/token.py",
         "src/friendli_core/friendlicore_token.py",
-        "src/friendli_core/friendlicore_serverless_completions.py",
         "src/friendli_core/friendlicore_chat.py",
         "src/friendli_core/knowledge.py",
         "src/friendli_core/audio.py"
@@ -121,6 +118,7 @@
       "assigned_files": [
         "src/friendli/models.py",
         "src/friendli/types.py",
+        "src/friendli/serverless/model.py",
         "src/friendli_core/model.py",
         "src/friendli_core/models/containerdetokenizationop.py",
         "src/friendli_core/models/splitinfo.py",
@@ -331,9 +329,7 @@
         "src/friendli_core/models/init_uploadop.py",
         "src/friendli_core/models/streamedchatdata.py",
         "src/friendli_core/models/fileinfo.py",
-        "src/friendli_core/models/streamedcompletiondata.py",
-        "src/friendli_core/types/__init__.py",
-        "src/friendli_core/types/basemodel.py"
+        "src/friendli_core/models/streamedcompletiondata.py"
       ],
       "can_expand": true
     },
@@ -357,13 +353,14 @@
       "assigned_files": [
         "src/friendli/container/__init__.py",
         "src/friendli/serverless/__init__.py",
-        "src/friendli/serverless/model.py",
         "src/friendli/dedicated/__init__.py",
         "src/friendli/dedicated/endpoint.py",
+        "src/friendli_core/friendlicore_serverless_chat.py",
         "src/friendli_core/dedicated.py",
         "src/friendli_core/container.py",
-        "src/friendli_core/endpoint.py",
-        "src/friendli_core/serverless.py"
+        "src/friendli_core/friendlicore_serverless_token.py",
+        "src/friendli_core/serverless.py",
+        "src/friendli_core/friendlicore_serverless_completions.py"
       ],
       "can_expand": true
     },
@@ -384,7 +381,7 @@
         "src/friendli_core/_hooks/registration.py",
         "src/friendli_core/_hooks/types.py"
       ],
-      "can_expand": false
+      "can_expand": true
     },
     {
       "name": "Unclassified",
@@ -392,6 +389,7 @@
       "referenced_source_code": [],
       "assigned_files": [
         "src/friendli/utils.py",
+        "src/friendli_core/_version.py",
         "src/friendli_core/utils/metadata.py",
         "src/friendli_core/utils/__init__.py",
         "src/friendli_core/utils/forms.py",
@@ -409,9 +407,18 @@
         "src/friendli_core/utils/unmarshal_json_response.py",
         "src/friendli_core/utils/eventstreaming.py",
         "src/friendli_core/utils/annotations.py",
+        "src/friendli_core/types/__init__.py",
+        "src/friendli_core/types/basemodel.py",
         "scripts/prepare_readme.py",
         "scripts/auto-fix.py"
       ],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
       "can_expand": false
     },
     {
