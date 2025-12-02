@@ -72,6 +72,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
                 "json",
                 models.ServerlessCompletionsBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -89,7 +90,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessCompletionsComplete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -167,6 +168,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
                 "json",
                 models.ServerlessCompletionsStreamBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -184,7 +186,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessCompletionsStream",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -271,6 +273,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
                 "json",
                 models.ServerlessCompletionsBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -288,7 +291,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessCompletionsComplete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -366,6 +369,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
                 "json",
                 models.ServerlessCompletionsStreamBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -383,7 +387,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessCompletionsStream",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

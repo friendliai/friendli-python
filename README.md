@@ -146,6 +146,7 @@ with SyncFriendli(
 </br>
 
 The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -218,6 +219,7 @@ with SyncFriendli(
 </br>
 
 The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -301,9 +303,6 @@ with SyncFriendli(
 <details open>
 <summary>Available methods</summary>
 
-### [container](docs/sdks/container/README.md)
-
-
 #### [container.audio](docs/sdks/containeraudio/README.md)
 
 * [transcribe](docs/sdks/containeraudio/README.md#transcribe) - Audio transcriptions
@@ -345,9 +344,6 @@ with SyncFriendli(
 * [list_samples](docs/sdks/dataset/README.md#list_samples) - List samples
 * [update_samples](docs/sdks/dataset/README.md#update_samples) - Update samples
 * [delete_samples](docs/sdks/dataset/README.md#delete_samples) - Delete samples
-
-### [dedicated](docs/sdks/dedicated/README.md)
-
 
 #### [dedicated.audio](docs/sdks/dedicatedaudio/README.md)
 
@@ -401,10 +397,6 @@ with SyncFriendli(
 * [complete_upload](docs/sdks/filesdk/README.md#complete_upload) - Complete file upload
 * [get_info](docs/sdks/filesdk/README.md#get_info) - Get file info
 * [get_download_url](docs/sdks/filesdk/README.md#get_download_url) - Get file download URL
-
-
-### [serverless](docs/sdks/serverless/README.md)
-
 
 #### [serverless.chat](docs/sdks/serverlesschat/README.md)
 

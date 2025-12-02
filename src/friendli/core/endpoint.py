@@ -94,6 +94,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 "json",
                 models.DedicatedEndpointWandbArtifactCreateBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -111,7 +112,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedEndpointWandbArtifactCreate",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -226,6 +227,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 "json",
                 models.DedicatedEndpointCreateBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -243,7 +245,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedCreateEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -314,6 +316,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -331,7 +334,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedListEndpoints",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -397,6 +400,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -414,7 +418,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -527,6 +531,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 "json",
                 models.DedicatedEndpointUpdateBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -544,7 +549,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedUpdateEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -608,6 +613,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -625,7 +631,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedDeleteEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -702,6 +708,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -719,7 +726,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointVersionHistory",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -785,6 +792,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -802,7 +810,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointStatus",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -866,6 +874,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -883,7 +892,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedSleepEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -947,6 +956,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -964,7 +974,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedWakeEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1028,6 +1038,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1045,7 +1056,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedTerminateEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1109,6 +1120,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1126,7 +1138,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedRestartEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1225,6 +1237,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 "json",
                 models.DedicatedEndpointWandbArtifactCreateBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1242,7 +1255,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedEndpointWandbArtifactCreate",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1357,6 +1370,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 "json",
                 models.DedicatedEndpointCreateBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1374,7 +1388,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedCreateEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1445,6 +1459,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1462,7 +1477,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedListEndpoints",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1528,6 +1543,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1545,7 +1561,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1658,6 +1674,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 "json",
                 models.DedicatedEndpointUpdateBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1675,7 +1692,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedUpdateEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1739,6 +1756,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1756,7 +1774,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedDeleteEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1833,6 +1851,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1850,7 +1869,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointVersionHistory",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1916,6 +1935,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1933,7 +1953,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedGetEndpointStatus",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1997,6 +2017,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2014,7 +2035,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedSleepEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2078,6 +2099,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2095,7 +2117,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedWakeEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2159,6 +2181,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2176,7 +2199,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedTerminateEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2240,6 +2263,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2257,7 +2281,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedRestartEndpoint",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

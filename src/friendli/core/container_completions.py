@@ -63,6 +63,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.ContainerCompletionsBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -80,7 +81,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerCompletionsComplete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -148,6 +149,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.ContainerCompletionsStreamBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -165,7 +167,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerCompletionsStream",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -243,6 +245,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.ContainerCompletionsBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -260,7 +263,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerCompletionsComplete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -328,6 +331,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.ContainerCompletionsStreamBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -345,7 +349,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerCompletionsStream",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

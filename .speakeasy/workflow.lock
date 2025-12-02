@@ -1,4 +1,4 @@
-speakeasyVersion: 1.609.0
+speakeasyVersion: 1.666.0
 sources:
     Friendli-API-Schema:
         sourceNamespace: friendli-api-schema
@@ -6,7 +6,6 @@ sources:
         sourceBlobDigest: sha256:e9e6482dafd76b0a34faf3bab74a64ad1f2badf029fbd1911bbb3d3bbfabb13c
         tags:
             - latest
-            - speakeasy-sdk-regen-1764376259
 targets:
     friendli:
         source: Friendli-API-Schema
@@ -14,7 +13,7 @@ targets:
         sourceRevisionDigest: sha256:c90ee4f3b352175df1da3115c8883ea7cde256a9cd91ef65857286386e508a2f
         sourceBlobDigest: sha256:e9e6482dafd76b0a34faf3bab74a64ad1f2badf029fbd1911bbb3d3bbfabb13c
         codeSamplesNamespace: friendli-api-schema-code-samples
-        codeSamplesRevisionDigest: sha256:49d5df01db54f84de65033efeccedd6b73ced54079b886ab96e98b30035bd89c
+        codeSamplesRevisionDigest: sha256:98caf969f7e14bd1f7bc14fcbb136bafd8f62afda2ff6defd63a0c521bfaffda
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

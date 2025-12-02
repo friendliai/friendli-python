@@ -97,6 +97,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
                 "multipart",
                 models.DedicatedAudioTranscriptionBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -114,7 +115,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedAudioTranscriptions",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -219,6 +220,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
                 "multipart",
                 models.DedicatedAudioTranscriptionBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -236,7 +238,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedAudioTranscriptions",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

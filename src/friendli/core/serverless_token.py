@@ -72,6 +72,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
                 "json",
                 models.ServerlessTokenizationBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -89,7 +90,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessTokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -167,6 +168,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
                 "json",
                 models.ServerlessDetokenizationBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -184,7 +186,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessDetokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -264,6 +266,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
                 "json",
                 models.ServerlessTokenizationBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -281,7 +284,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessTokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -359,6 +362,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
                 "json",
                 models.ServerlessDetokenizationBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -376,7 +380,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessDetokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

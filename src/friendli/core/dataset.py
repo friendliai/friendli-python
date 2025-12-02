@@ -81,6 +81,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 "json",
                 models.CreateDatasetRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -98,7 +99,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_dataset",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -181,6 +182,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -198,7 +200,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_datasets",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -268,6 +270,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -285,7 +288,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_dataset",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -355,6 +358,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -372,7 +376,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_dataset",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -444,6 +448,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -461,7 +466,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_version",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -531,6 +536,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -548,7 +554,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_versions",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -622,6 +628,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -639,7 +646,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_version",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -713,6 +720,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -730,7 +738,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_version",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -802,6 +810,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -819,7 +828,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_split",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -902,6 +911,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -919,7 +929,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_splits",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -991,6 +1001,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1008,7 +1019,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_split",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1080,6 +1091,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1097,7 +1109,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_split",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1177,6 +1189,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body, False, False, "json", List[str]
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1194,7 +1207,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="add_samples",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1280,6 +1293,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1297,7 +1311,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_samples",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1385,6 +1399,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 "multipart",
                 models.BodyUploadRawSamples,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1402,7 +1417,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="upload_raw_samples",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1484,6 +1499,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body, False, False, "json", List[models.RequestBody]
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1501,7 +1517,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_samples",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1593,6 +1609,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 "json",
                 models.CreateDatasetRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1610,7 +1627,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_dataset",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1693,6 +1710,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1710,7 +1728,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_datasets",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1780,6 +1798,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1797,7 +1816,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_dataset",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1867,6 +1886,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1884,7 +1904,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_dataset",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1956,6 +1976,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -1973,7 +1994,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_version",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2043,6 +2064,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2060,7 +2082,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_versions",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2134,6 +2156,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2151,7 +2174,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_version",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2225,6 +2248,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2242,7 +2266,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_version",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2314,6 +2338,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2331,7 +2356,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_split",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2414,6 +2439,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2431,7 +2457,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_splits",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2503,6 +2529,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2520,7 +2547,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_split",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2592,6 +2619,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2609,7 +2637,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_split",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2689,6 +2717,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body, False, False, "json", List[str]
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2706,7 +2735,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="add_samples",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2792,6 +2821,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2809,7 +2839,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_samples",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2897,6 +2927,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 "multipart",
                 models.BodyUploadRawSamples,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -2914,7 +2945,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="upload_raw_samples",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2996,6 +3027,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body, False, False, "json", List[models.RequestBody]
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -3013,7 +3045,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_samples",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
