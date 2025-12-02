@@ -20,14 +20,18 @@ generation:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
+  requestBodyFieldName: ""
+  schemas:
+    allOfMergeStrategy: shallowMerge
 python:
-  version: 0.11.0
+  version: 0.12.1
   additionalDependencies:
     dev: {}
     main: {}
   allowedRedefinedBuiltins:
     - id
     - object
+  asyncMode: both
   authors:
     - Speakeasy
   baseErrorName: FriendliCoreError
@@ -50,14 +54,18 @@ python:
       operations: ""
       shared: ""
       webhooks: ""
+  inferUnionDiscriminators: true
   inputModelSuffix: input
+  license: ""
   maxMethodParams: 8
   methodArguments: infer-optional-args
   moduleName: ""
+  multipartArrayFormat: legacy
   outputModelSuffix: output
-  packageManager: poetry
+  packageManager: uv
   packageName: friendli-core
   pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat
+  sseFlatResponse: false
   templateVersion: v2

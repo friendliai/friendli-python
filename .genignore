@@ -1,4 +1,5 @@
+py.typed
+pylintrc
+pyproject.toml
 scripts/publish.sh
 src/friendli_core/utils/annotations.py
-pyproject.toml
-py.typed

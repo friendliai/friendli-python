@@ -125,19 +125,18 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.chat.complete(
+        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "content": "You are a helpful assistant.",
                 "role": "system",
+                "content": "You are a helpful assistant.",
             },
             {
-                "content": "Hello!",
                 "role": "user",
+                "content": "Hello!",
             },
         ],
-        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
-        stream=False,
     )
 
     # Handle response
@@ -160,19 +159,18 @@ async def main():
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
         res = await friendli.serverless.chat.complete(
+            model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
-                    "content": "You are a helpful assistant.",
                     "role": "system",
+                    "content": "You are a helpful assistant.",
                 },
                 {
-                    "content": "Hello!",
                     "role": "user",
+                    "content": "Hello!",
                 },
             ],
-            model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
-            stream=False,
         )
 
         # Handle response
@@ -197,13 +195,13 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.tool_assisted_chat.complete(
+        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "content": "What is 3 + 6?",
                 "role": "user",
+                "content": "What is 3 + 6?",
             },
         ],
-        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
         stream=False,
         tools=[
@@ -233,13 +231,13 @@ async def main():
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
         res = await friendli.serverless.tool_assisted_chat.complete(
+            model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
-                    "content": "What is 3 + 6?",
                     "role": "user",
+                    "content": "What is 3 + 6?",
                 },
             ],
-            model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
             stream=False,
             tools=[
@@ -280,17 +278,16 @@ with SyncFriendli(
     res = friendli.container.chat.complete(
         messages=[
             {
-                "content": "You are a helpful assistant.",
                 "role": "system",
+                "content": "You are a helpful assistant.",
             },
             {
-                "content": "Hello!",
                 "role": "user",
+                "content": "Hello!",
             },
         ],
-        max_tokens=200,
         model="(adapter-route)",
-        stream=False,
+        max_tokens=200,
     )
 
     # Handle response
@@ -306,6 +303,10 @@ with SyncFriendli(
 
 ### [container](docs/sdks/container/README.md)
 
+
+#### [container.audio](docs/sdks/containeraudio/README.md)
+
+* [transcribe](docs/sdks/containeraudio/README.md#transcribe) - Audio transcriptions
 
 #### [container.chat](docs/sdks/containerchat/README.md)
 
@@ -348,19 +349,27 @@ with SyncFriendli(
 ### [dedicated](docs/sdks/dedicated/README.md)
 
 
-#### [dedicated.audio](docs/sdks/audio/README.md)
+#### [dedicated.audio](docs/sdks/dedicatedaudio/README.md)
 
-* [transcribe](docs/sdks/audio/README.md#transcribe) - Audio transcriptions
+* [transcribe](docs/sdks/dedicatedaudio/README.md#transcribe) - Audio transcriptions
 
 #### [dedicated.chat](docs/sdks/dedicatedchat/README.md)
 
 * [complete](docs/sdks/dedicatedchat/README.md#complete) - Chat completions
 * [stream](docs/sdks/dedicatedchat/README.md#stream) - Stream chat completions
 
+#### [dedicated.chat_render](docs/sdks/dedicatedchatrender/README.md)
+
+* [render](docs/sdks/dedicatedchatrender/README.md#render) - Chat render
+
 #### [dedicated.completions](docs/sdks/dedicatedcompletions/README.md)
 
 * [complete](docs/sdks/dedicatedcompletions/README.md#complete) - Completions
 * [stream](docs/sdks/dedicatedcompletions/README.md#stream) - Stream completions
+
+#### [dedicated.embeddings](docs/sdks/embeddings/README.md)
+
+* [embeddings](docs/sdks/embeddings/README.md#embeddings) - Embeddings
 
 #### [dedicated.endpoint](docs/sdks/endpoint/README.md)
 
@@ -401,6 +410,10 @@ with SyncFriendli(
 
 * [complete](docs/sdks/serverlesschat/README.md#complete) - Chat completions
 * [stream](docs/sdks/serverlesschat/README.md#stream) - Stream chat completions
+
+#### [serverless.chat_render](docs/sdks/serverlesschatrender/README.md)
+
+* [render](docs/sdks/serverlesschatrender/README.md#render) - Chat render
 
 #### [serverless.completions](docs/sdks/serverlesscompletions/README.md)
 
@@ -449,19 +462,18 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.dedicated.chat.stream(
+        model="(endpoint-id)",
         messages=[
             {
-                "content": "You are a helpful assistant.",
                 "role": "system",
+                "content": "You are a helpful assistant.",
             },
             {
-                "content": "Hello!",
                 "role": "user",
+                "content": "Hello!",
             },
         ],
-        model="(endpoint-id)",
         max_tokens=200,
-        stream=True,
     )
 
     with res as event_stream:
@@ -494,11 +506,11 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.dedicated.audio.transcribe(
+        model="(endpoint-id)",
         file={
             "file_name": "example.file",
             "content": open("example.file", "rb"),
         },
-        model="(endpoint-id)",
     )
 
     # Handle response
@@ -524,17 +536,16 @@ with SyncFriendli(
     res = friendli.container.chat.complete(
         messages=[
             {
-                "content": "You are a helpful assistant.",
                 "role": "system",
+                "content": "You are a helpful assistant.",
             },
             {
-                "content": "Hello!",
                 "role": "user",
+                "content": "Hello!",
             },
         ],
-        max_tokens=200,
         model="(adapter-route)",
-        stream=False,
+        max_tokens=200,
         retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     )
 
@@ -556,17 +567,16 @@ with SyncFriendli(
     res = friendli.container.chat.complete(
         messages=[
             {
-                "content": "You are a helpful assistant.",
                 "role": "system",
+                "content": "You are a helpful assistant.",
             },
             {
-                "content": "Hello!",
                 "role": "user",
+                "content": "Hello!",
             },
         ],
-        max_tokens=200,
         model="(adapter-route)",
-        stream=False,
+        max_tokens=200,
     )
 
     # Handle response
@@ -633,7 +643,7 @@ with SyncFriendli(
 
 
 **Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 57 methods.*
+* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 61 methods.*
 * [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -659,17 +669,16 @@ with SyncFriendli(
     res = friendli.container.chat.complete(
         messages=[
             {
-                "content": "You are a helpful assistant.",
                 "role": "system",
+                "content": "You are a helpful assistant.",
             },
             {
-                "content": "Hello!",
                 "role": "user",
+                "content": "Hello!",
             },
         ],
-        max_tokens=200,
         model="(adapter-route)",
-        stream=False,
+        max_tokens=200,
     )
 
     # Handle response
@@ -690,17 +699,16 @@ with SyncFriendli(
     res = friendli.container.chat.complete(
         messages=[
             {
-                "content": "You are a helpful assistant.",
                 "role": "system",
+                "content": "You are a helpful assistant.",
             },
             {
-                "content": "Hello!",
                 "role": "user",
+                "content": "Hello!",
             },
         ],
-        max_tokens=200,
         model="(adapter-route)",
-        stream=False,
+        max_tokens=200,
         server_url="http://localhost:8000",
     )
 

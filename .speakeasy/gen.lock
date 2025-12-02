@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
-  docChecksum: 787ca3f630ec20c7346213b6e4bc84e4
+  docChecksum: b2c95cace61df6c7ef5fcbeba2dca904
   docVersion: 0.1.0
   speakeasyVersion: 1.609.0
   generationVersion: 2.692.0
-  releaseVersion: 0.11.0
-  configChecksum: 47faddfbe7c1259058ad96423b8aeecd
+  releaseVersion: 0.12.1
+  configChecksum: d250084e6b7dc84a658f39be34f9b2d2
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
@@ -50,6 +50,8 @@ generatedFiles:
   - docs/models/assistantmessagetoolcallfunction.md
   - docs/models/audiocontent.md
   - docs/models/audiodata.md
+  - docs/models/audiotranscriptioninputtokendetails.md
+  - docs/models/audiotranscriptionusage.md
   - docs/models/autoscalingpolicy.md
   - docs/models/b64imageitem.md
   - docs/models/b64imageitemresponseformat.md
@@ -64,7 +66,6 @@ generatedFiles:
   - docs/models/chatlogprobscontent.md
   - docs/models/chatlogprobscontenttoplogprob.md
   - docs/models/chatusage.md
-  - docs/models/chunkingstrategy.md
   - docs/models/completeuploadrequest.md
   - docs/models/completionsbodywithprompt.md
   - docs/models/completionsbodywithpromptprompt.md
@@ -99,6 +100,9 @@ generatedFiles:
   - docs/models/completionsstreamserverlessbodywithpromptseed.md
   - docs/models/completionsstreamserverlessbodywithtokens.md
   - docs/models/completionsstreamserverlessbodywithtokensseed.md
+  - docs/models/containeraudiotranscriptionbody.md
+  - docs/models/containeraudiotranscriptionbodychunkingstrategy.md
+  - docs/models/containeraudiotranscriptionsuccess.md
   - docs/models/containerchatcompletesuccess.md
   - docs/models/containerchatcompletionbody.md
   - docs/models/containerchatcompletionbodyseed.md
@@ -126,9 +130,9 @@ generatedFiles:
   - docs/models/data.md
   - docs/models/datasetinfo.md
   - docs/models/dedicatedaudiotranscriptionbody.md
+  - docs/models/dedicatedaudiotranscriptionbodychunkingstrategy.md
   - docs/models/dedicatedaudiotranscriptionbodyfile.md
   - docs/models/dedicatedaudiotranscriptionsrequest.md
-  - docs/models/dedicatedaudiotranscriptionsuccess.md
   - docs/models/dedicatedchatcompleterequest.md
   - docs/models/dedicatedchatcompletionbody.md
   - docs/models/dedicatedchatcompletionbodyseed.md
@@ -136,6 +140,9 @@ generatedFiles:
   - docs/models/dedicatedchatcompletionstreambody.md
   - docs/models/dedicatedchatcompletionstreambodyseed.md
   - docs/models/dedicatedchatcompletionstreambodytoolchoice.md
+  - docs/models/dedicatedchatrenderbody.md
+  - docs/models/dedicatedchatrenderrequest.md
+  - docs/models/dedicatedchatrendersuccess.md
   - docs/models/dedicatedchatstreamrequest.md
   - docs/models/dedicatedcompletionsbody.md
   - docs/models/dedicatedcompletionscompleterequest.md
@@ -148,6 +155,9 @@ generatedFiles:
   - docs/models/dedicateddetokenizationbody.md
   - docs/models/dedicateddetokenizationrequest.md
   - docs/models/dedicateddetokenizationsuccess.md
+  - docs/models/dedicatedembeddingsbody.md
+  - docs/models/dedicatedembeddingsrequest.md
+  - docs/models/dedicatedembeddingssuccess.md
   - docs/models/dedicatedendpointcreatebody.md
   - docs/models/dedicatedendpointlistresponse.md
   - docs/models/dedicatedendpointspec.md
@@ -178,6 +188,10 @@ generatedFiles:
   - docs/models/deletesamplesresponse.md
   - docs/models/deletesplitrequest.md
   - docs/models/deleteversionrequest.md
+  - docs/models/embedding.md
+  - docs/models/embeddingobject.md
+  - docs/models/embeddingsusage.md
+  - docs/models/encodingformat.md
   - docs/models/endpointadvancedconfig.md
   - docs/models/endpointsimplescaleconfig.md
   - docs/models/filebuiltintool.md
@@ -197,9 +211,11 @@ generatedFiles:
   - docs/models/httpvalidationerror.md
   - docs/models/imagecontent.md
   - docs/models/imagedata.md
+  - docs/models/imageinput.md
   - docs/models/inferencedeploymenterrorcode.md
   - docs/models/inferencedeploymentstatus.md
   - docs/models/inituploadrequest.md
+  - docs/models/input.md
   - docs/models/integratedbuiltintool.md
   - docs/models/knowledgeretrievedchunk.md
   - docs/models/listdatasetsdirection.md
@@ -219,6 +235,7 @@ generatedFiles:
   - docs/models/name.md
   - docs/models/phase.md
   - docs/models/pricingmodel.md
+  - docs/models/prompttokensdetails.md
   - docs/models/requestbody.md
   - docs/models/responseformat.md
   - docs/models/responseformatjsonobject.md
@@ -234,6 +251,9 @@ generatedFiles:
   - docs/models/serverlesschatcompletionstreambody.md
   - docs/models/serverlesschatcompletionstreambodyseed.md
   - docs/models/serverlesschatcompletionstreambodytoolchoice.md
+  - docs/models/serverlesschatrenderbody.md
+  - docs/models/serverlesschatrenderrequest.md
+  - docs/models/serverlesschatrendersuccess.md
   - docs/models/serverlesschatstreamrequest.md
   - docs/models/serverlesscompletionsbody.md
   - docs/models/serverlesscompletionscompleterequest.md
@@ -276,6 +296,7 @@ generatedFiles:
   - docs/models/streamoptions.md
   - docs/models/systemmessage.md
   - docs/models/textcontent.md
+  - docs/models/textusage.md
   - docs/models/tokensequence.md
   - docs/models/tool.md
   - docs/models/toolassistedchattool.md
@@ -289,7 +310,6 @@ generatedFiles:
   - docs/models/uploadrawsamplesrequest.md
   - docs/models/urlimageitem.md
   - docs/models/urlimageitemresponseformat.md
-  - docs/models/usage.md
   - docs/models/usermessage.md
   - docs/models/usermessagecontentmultimodal.md
   - docs/models/utils/retryconfig.md
@@ -297,18 +317,21 @@ generatedFiles:
   - docs/models/versioninfo.md
   - docs/models/videocontent.md
   - docs/models/videodata.md
-  - docs/sdks/audio/README.md
   - docs/sdks/container/README.md
+  - docs/sdks/containeraudio/README.md
   - docs/sdks/containerchat/README.md
   - docs/sdks/containercompletions/README.md
   - docs/sdks/containerimage/README.md
   - docs/sdks/containertoken/README.md
   - docs/sdks/dataset/README.md
   - docs/sdks/dedicated/README.md
+  - docs/sdks/dedicatedaudio/README.md
   - docs/sdks/dedicatedchat/README.md
+  - docs/sdks/dedicatedchatrender/README.md
   - docs/sdks/dedicatedcompletions/README.md
   - docs/sdks/dedicatedimage/README.md
   - docs/sdks/dedicatedtoken/README.md
+  - docs/sdks/embeddings/README.md
   - docs/sdks/endpoint/README.md
   - docs/sdks/filesdk/README.md
   - docs/sdks/friendlicore/README.md
@@ -316,30 +339,32 @@ generatedFiles:
   - docs/sdks/model/README.md
   - docs/sdks/serverless/README.md
   - docs/sdks/serverlesschat/README.md
+  - docs/sdks/serverlesschatrender/README.md
   - docs/sdks/serverlesscompletions/README.md
   - docs/sdks/serverlesstoken/README.md
   - docs/sdks/toolassistedchat/README.md
-  - poetry.toml
-  - pylintrc
   - scripts/prepare_readme.py
   - src/friendli_core/__init__.py
   - src/friendli_core/_hooks/__init__.py
   - src/friendli_core/_hooks/sdkhooks.py
   - src/friendli_core/_hooks/types.py
   - src/friendli_core/_version.py
-  - src/friendli_core/audio.py
   - src/friendli_core/basesdk.py
   - src/friendli_core/container.py
+  - src/friendli_core/container_audio.py
   - src/friendli_core/container_chat.py
   - src/friendli_core/container_completions.py
   - src/friendli_core/container_image.py
   - src/friendli_core/container_token.py
   - src/friendli_core/dataset.py
   - src/friendli_core/dedicated.py
+  - src/friendli_core/dedicated_audio.py
   - src/friendli_core/dedicated_chat.py
+  - src/friendli_core/dedicated_chatrender.py
   - src/friendli_core/dedicated_completions.py
   - src/friendli_core/dedicated_image.py
   - src/friendli_core/dedicated_token.py
+  - src/friendli_core/embeddings.py
   - src/friendli_core/endpoint.py
   - src/friendli_core/file_sdk.py
   - src/friendli_core/httpclient.py
@@ -355,6 +380,8 @@ generatedFiles:
   - src/friendli_core/models/assistantmessagetoolcallfunction.py
   - src/friendli_core/models/audiocontent.py
   - src/friendli_core/models/audiodata.py
+  - src/friendli_core/models/audiotranscriptioninputtokendetails.py
+  - src/friendli_core/models/audiotranscriptionusage.py
   - src/friendli_core/models/autoscalingpolicy.py
   - src/friendli_core/models/b64imageitem.py
   - src/friendli_core/models/body_upload_raw_samples.py
@@ -381,6 +408,9 @@ generatedFiles:
   - src/friendli_core/models/completionsstreamdedicatedbodywithtokens.py
   - src/friendli_core/models/completionsstreamserverlessbodywithprompt.py
   - src/friendli_core/models/completionsstreamserverlessbodywithtokens.py
+  - src/friendli_core/models/containeraudiotranscriptionbody.py
+  - src/friendli_core/models/containeraudiotranscriptionsop.py
+  - src/friendli_core/models/containeraudiotranscriptionsuccess.py
   - src/friendli_core/models/containerchatcompleteop.py
   - src/friendli_core/models/containerchatcompletesuccess.py
   - src/friendli_core/models/containerchatcompletionbody.py
@@ -409,10 +439,12 @@ generatedFiles:
   - src/friendli_core/models/datasetinfo.py
   - src/friendli_core/models/dedicatedaudiotranscriptionbody.py
   - src/friendli_core/models/dedicatedaudiotranscriptionsop.py
-  - src/friendli_core/models/dedicatedaudiotranscriptionsuccess.py
   - src/friendli_core/models/dedicatedchatcompleteop.py
   - src/friendli_core/models/dedicatedchatcompletionbody.py
   - src/friendli_core/models/dedicatedchatcompletionstreambody.py
+  - src/friendli_core/models/dedicatedchatrenderbody.py
+  - src/friendli_core/models/dedicatedchatrenderop.py
+  - src/friendli_core/models/dedicatedchatrendersuccess.py
   - src/friendli_core/models/dedicatedchatstreamop.py
   - src/friendli_core/models/dedicatedcompletionsbody.py
   - src/friendli_core/models/dedicatedcompletionscompleteop.py
@@ -425,6 +457,9 @@ generatedFiles:
   - src/friendli_core/models/dedicateddetokenizationbody.py
   - src/friendli_core/models/dedicateddetokenizationop.py
   - src/friendli_core/models/dedicateddetokenizationsuccess.py
+  - src/friendli_core/models/dedicatedembeddingsbody.py
+  - src/friendli_core/models/dedicatedembeddingsop.py
+  - src/friendli_core/models/dedicatedembeddingssuccess.py
   - src/friendli_core/models/dedicatedendpointcreatebody.py
   - src/friendli_core/models/dedicatedendpointlistresponse.py
   - src/friendli_core/models/dedicatedendpointspec.py
@@ -454,6 +489,8 @@ generatedFiles:
   - src/friendli_core/models/delete_splitop.py
   - src/friendli_core/models/delete_versionop.py
   - src/friendli_core/models/deletesamplesresponse.py
+  - src/friendli_core/models/embeddingobject.py
+  - src/friendli_core/models/embeddingsusage.py
   - src/friendli_core/models/endpointadvancedconfig.py
   - src/friendli_core/models/endpointsimplescaleconfig.py
   - src/friendli_core/models/filebuiltintool.py
@@ -474,6 +511,7 @@ generatedFiles:
   - src/friendli_core/models/httpvalidationerror.py
   - src/friendli_core/models/imagecontent.py
   - src/friendli_core/models/imagedata.py
+  - src/friendli_core/models/imageinput.py
   - src/friendli_core/models/inferencedeploymenterrorcode.py
   - src/friendli_core/models/inferencedeploymentstatus.py
   - src/friendli_core/models/init_uploadop.py
@@ -491,6 +529,7 @@ generatedFiles:
   - src/friendli_core/models/modelcatalogresponseitem.py
   - src/friendli_core/models/no_response_error.py
   - src/friendli_core/models/pricingmodel.py
+  - src/friendli_core/models/prompttokensdetails.py
   - src/friendli_core/models/responseformat.py
   - src/friendli_core/models/responseformatjsonobject.py
   - src/friendli_core/models/responseformatjsonschema.py
@@ -503,6 +542,9 @@ generatedFiles:
   - src/friendli_core/models/serverlesschatcompleteop.py
   - src/friendli_core/models/serverlesschatcompletionbody.py
   - src/friendli_core/models/serverlesschatcompletionstreambody.py
+  - src/friendli_core/models/serverlesschatrenderbody.py
+  - src/friendli_core/models/serverlesschatrenderop.py
+  - src/friendli_core/models/serverlesschatrendersuccess.py
   - src/friendli_core/models/serverlesschatstreamop.py
   - src/friendli_core/models/serverlesscompletionsbody.py
   - src/friendli_core/models/serverlesscompletionscompleteop.py
@@ -538,6 +580,7 @@ generatedFiles:
   - src/friendli_core/models/streamoptions.py
   - src/friendli_core/models/systemmessage.py
   - src/friendli_core/models/textcontent.py
+  - src/friendli_core/models/textusage.py
   - src/friendli_core/models/tokensequence.py
   - src/friendli_core/models/tool.py
   - src/friendli_core/models/toolassistedchattool.py
@@ -549,7 +592,6 @@ generatedFiles:
   - src/friendli_core/models/toolstatusparameter.py
   - src/friendli_core/models/upload_raw_samplesop.py
   - src/friendli_core/models/urlimageitem.py
-  - src/friendli_core/models/usage.py
   - src/friendli_core/models/usermessage.py
   - src/friendli_core/models/usermessagecontentmultimodal.py
   - src/friendli_core/models/validationerror.py
@@ -560,6 +602,7 @@ generatedFiles:
   - src/friendli_core/sdkconfiguration.py
   - src/friendli_core/serverless.py
   - src/friendli_core/serverless_chat.py
+  - src/friendli_core/serverless_chatrender.py
   - src/friendli_core/serverless_completions.py
   - src/friendli_core/serverless_token.py
   - src/friendli_core/toolassistedchat.py
@@ -585,28 +628,28 @@ examples:
   containerChatComplete:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "stream": false}
+        application/json: {"messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}]}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}}
+          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "choices": [{"index": 0, "message": {"content": "Hello there, how may I assist you today?", "role": "assistant"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}, "object": "chat.completion", "created": 1735722153}
   containerChatStream:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "stream": true}
+        application/json: {"messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}]}
       responses:
         "200":
           text/event-stream: "data: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294402}\n\ndata: [DONE]\n"
   containerCompletionsComplete:
     Example:
       requestBody:
-        application/json: {"prompt": "Say this is a test!", "stream": false}
+        application/json: {"stream": false, "prompt": "Say this is a test!"}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"completion_tokens": 6, "prompt_tokens": 7, "total_tokens": 13}}
+          application/json: {"id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}, "choices": [{"index": 0, "text": "This is indeed a test", "seed": 42, "finish_reason": "stop", "tokens": [128000, 2028, 374, 13118, 264, 1296]}]}
   containerCompletionsStream:
     Example:
       requestBody:
-        application/json: {"prompt": "Say this is a test!", "stream": true}
+        application/json: {"stream": true, "prompt": "Say this is a test!"}
       responses:
         "200":
           text/event-stream: "data: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" such\",\"token\":1778,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" as\",\"token\":439,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\n...\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\"\",\"finish_reason\":\"length\",\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[],\"usage\":{\"prompt_tokens\":5,\"completion_tokens\":10,\"total_tokens\":15},\"created\":1733382157}\n\ndata: [DONE]\n"
@@ -627,35 +670,35 @@ examples:
   containerImagesGenerate:
     Example:
       requestBody:
-        application/json: {"guidance_scale": 3.5, "num_inference_steps": 10, "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "response_format": "jpeg"}
+        application/json: {"prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "num_inference_steps": 10, "guidance_scale": 3.5}
       responses:
         "200":
           application/json: {"image": "<base64 encoded image>"}
   dedicatedChatComplete:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "(endpoint-id)", "stream": false}
+        application/json: {"model": "(endpoint-id)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}]}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}, "model": "(endpoint-id)"}
+          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "choices": [{"index": 0, "message": {"content": "Hello there, how may I assist you today?", "role": "assistant"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}, "object": "chat.completion", "created": 1735722153, "model": "(endpoint-id)"}
   dedicatedChatStream:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "(endpoint-id)", "stream": true}
+        application/json: {"model": "(endpoint-id)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}]}
       responses:
         "200":
           text/event-stream: "data: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294402}\n\ndata: [DONE]\n"
   dedicatedCompletionsComplete:
     Example:
       requestBody:
-        application/json: {"model": "(endpoint-id)", "prompt": "Say this is a test!", "stream": false}
+        application/json: {"model": "(endpoint-id)", "stream": false, "prompt": "Say this is a test!"}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"completion_tokens": 6, "prompt_tokens": 7, "total_tokens": 13}, "model": "(endpoint-id)"}
+          application/json: {"id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}, "choices": [{"index": 0, "text": "This is indeed a test", "seed": 42, "finish_reason": "stop", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "model": "(endpoint-id)"}
   dedicatedCompletionsStream:
     Example:
       requestBody:
-        application/json: {"model": "(endpoint-id)", "prompt": "Say this is a test!", "stream": true}
+        application/json: {"model": "(endpoint-id)", "stream": true, "prompt": "Say this is a test!"}
       responses:
         "200":
           text/event-stream: "data: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" such\",\"token\":1778,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" as\",\"token\":439,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\n...\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\"\",\"finish_reason\":\"length\",\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[],\"usage\":{\"prompt_tokens\":5,\"completion_tokens\":10,\"total_tokens\":15},\"created\":1733382157}\n\ndata: [DONE]\n"
@@ -676,10 +719,10 @@ examples:
   dedicatedImagesGenerate:
     Example:
       requestBody:
-        application/json: {"model": "(endpoint-id)", "num_inference_steps": 10, "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "response_format": "url"}
+        application/json: {"model": "(endpoint-id)", "prompt": "An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", "num_inference_steps": 10}
       responses:
         "200":
-          application/json: {"data": [{"response_format": "url", "seed": 123, "url": "(url-to-generated-image)"}]}
+          application/json: {"data": [{"seed": 123, "response_format": "url", "url": "(url-to-generated-image)"}]}
   dedicatedEndpointWandbArtifactCreate:
     Example:
       requestBody:
@@ -690,10 +733,10 @@ examples:
   dedicatedCreateEndpoint:
     Example:
       requestBody:
-        application/json: {"advanced": {"tokenizer_add_special_tokens": false, "tokenizer_skip_special_tokens": false, "max_batch_size": 256, "max_token_count": 2560}, "hfModelRepo": "<value>", "instanceOptionId": "<id>", "name": "<value>", "projectId": "<id>"}
+        application/json: {"projectId": "<id>", "name": "<value>", "instanceOptionId": "<id>", "advanced": {"max_batch_size": 256, "tokenizer_skip_special_tokens": false, "tokenizer_add_special_tokens": false, "max_token_count": 2560}, "hfModelRepo": "<value>"}
       responses:
         "200":
-          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+          application/json: {"status": "INITIALIZING", "createdAt": "2025-01-01T00:00:00Z", "updatedAt": "2025-01-01T00:00:00Z", "phase": "DOWNLOADING_MODEL"}
   dedicatedListEndpoints:
     Example:
       parameters:
@@ -702,7 +745,7 @@ examples:
           limit: 20
       responses:
         "200":
-          application/json: {"data": {"endpoint-id-1": {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}, "endpoint-id-2": {"createdAt": "2025-01-01T00:00:00Z", "status": "RUNNING", "updatedAt": "2025-01-01T00:00:00Z"}}}
+          application/json: {"data": {"endpoint-id-1": {"status": "INITIALIZING", "createdAt": "2025-01-01T00:00:00Z", "updatedAt": "2025-01-01T00:00:00Z", "phase": "DOWNLOADING_MODEL"}, "endpoint-id-2": {"status": "RUNNING", "createdAt": "2025-01-01T00:00:00Z", "updatedAt": "2025-01-01T00:00:00Z"}}}
   dedicatedGetEndpoint:
     Example:
       parameters:
@@ -710,7 +753,7 @@ examples:
           endpoint_id: "<id>"
       responses:
         "200":
-          application/json: {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}
+          application/json: {"name": "endpoint-name", "gpuType": "NVIDIA H100", "numGpu": 1, "instanceId": "instance-id", "projectId": "project-id", "creatorId": "creator-id", "teamId": "team-id", "autoscalingMin": 0, "autoscalingMax": 1, "autoscalingCooldown": 300, "maxBatchSize": 10, "maxInputLength": 1024, "tokenizerSkipSpecialTokens": true, "tokenizerAddSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "updatedReplicaCnt": 1}
   dedicatedUpdateEndpoint:
     Example:
       parameters:
@@ -720,7 +763,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}
+          application/json: {"name": "endpoint-name", "gpuType": "NVIDIA H100", "numGpu": 1, "instanceId": "instance-id", "projectId": "project-id", "creatorId": "creator-id", "teamId": "team-id", "autoscalingMin": 0, "autoscalingMax": 1, "autoscalingCooldown": 300, "maxBatchSize": 10, "maxInputLength": 1024, "tokenizerSkipSpecialTokens": true, "tokenizerAddSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "updatedReplicaCnt": 1}
   dedicatedDeleteEndpoint:
     speakeasy-default-dedicated-delete-endpoint:
       parameters:
@@ -740,7 +783,7 @@ examples:
           limit: 20
       responses:
         "200":
-          application/json: {"data": {"0": {"autoscalingCooldown": 300, "autoscalingMax": 1, "autoscalingMin": 0, "creatorId": "creator-id", "gpuType": "NVIDIA H100", "maxBatchSize": 10, "name": "endpoint-name", "numGpu": 1, "projectId": "project-id", "teamId": "team-id", "tokenizerAddSpecialTokens": true, "tokenizerSkipSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "instanceId": "instance-id", "maxInputLength": 1024, "updatedReplicaCnt": 1}}}
+          application/json: {"data": {"0": {"name": "endpoint-name", "gpuType": "NVIDIA H100", "numGpu": 1, "instanceId": "instance-id", "projectId": "project-id", "creatorId": "creator-id", "teamId": "team-id", "autoscalingMin": 0, "autoscalingMax": 1, "autoscalingCooldown": 300, "maxBatchSize": 10, "maxInputLength": 1024, "tokenizerSkipSpecialTokens": true, "tokenizerAddSpecialTokens": true, "currReplicaCnt": 1, "desiredReplicaCnt": 1, "updatedReplicaCnt": 1}}}
   dedicatedGetEndpointStatus:
     Example:
       parameters:
@@ -748,7 +791,7 @@ examples:
           endpoint_id: "<id>"
       responses:
         "200":
-          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+          application/json: {"status": "INITIALIZING", "createdAt": "2025-01-01T00:00:00Z", "updatedAt": "2025-01-01T00:00:00Z", "phase": "DOWNLOADING_MODEL"}
   dedicatedSleepEndpoint:
     Example:
       parameters:
@@ -756,7 +799,7 @@ examples:
           endpoint_id: "<id>"
       responses:
         "200":
-          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "SLEEPING", "updatedAt": "2025-01-01T00:00:00Z"}
+          application/json: {"status": "SLEEPING", "createdAt": "2025-01-01T00:00:00Z", "updatedAt": "2025-01-01T00:00:00Z"}
   dedicatedWakeEndpoint:
     Example:
       parameters:
@@ -764,7 +807,7 @@ examples:
           endpoint_id: "<id>"
       responses:
         "200":
-          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "AWAKING", "phase": "ENGINE_INITIALIZING", "updatedAt": "2025-01-01T00:00:00Z"}
+          application/json: {"status": "AWAKING", "createdAt": "2025-01-01T00:00:00Z", "updatedAt": "2025-01-01T00:00:00Z", "phase": "ENGINE_INITIALIZING"}
   dedicatedTerminateEndpoint:
     Example:
       parameters:
@@ -772,7 +815,7 @@ examples:
           endpoint_id: "<id>"
       responses:
         "200":
-          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "TERMINATING", "updatedAt": "2025-01-01T00:00:00Z"}
+          application/json: {"status": "TERMINATING", "createdAt": "2025-01-01T00:00:00Z", "updatedAt": "2025-01-01T00:00:00Z"}
   dedicatedRestartEndpoint:
     Example:
       parameters:
@@ -780,7 +823,7 @@ examples:
           endpoint_id: "<id>"
       responses:
         "200":
-          application/json: {"createdAt": "2025-01-01T00:00:00Z", "status": "INITIALIZING", "phase": "DOWNLOADING_MODEL", "updatedAt": "2025-01-01T00:00:00Z"}
+          application/json: {"status": "INITIALIZING", "createdAt": "2025-01-01T00:00:00Z", "updatedAt": "2025-01-01T00:00:00Z", "phase": "DOWNLOADING_MODEL"}
   dedicatedCreateEndpointBeta:
     Example:
       requestBody:
@@ -842,28 +885,28 @@ examples:
   serverlessChatComplete:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": false}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}]}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "Hello there, how may I assist you today?"}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}, "model": "meta-llama-3.1-8b-instruct"}
+          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "choices": [{"index": 0, "message": {"content": "Hello there, how may I assist you today?", "role": "assistant"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}, "object": "chat.completion", "created": 1735722153, "model": "meta-llama-3.1-8b-instruct"}
   serverlessChatStream:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "You are a helpful assistant.", "role": "system"}, {"content": "Hello!", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": true}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}]}
       responses:
         "200":
           text/event-stream: "data: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"This\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" is\"},\"finish_reason\":null,\"logprobs\":null}],\"usage\":null,\"created\":1726294381}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"usage\":null,\"created\":1726294383}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[],\"usage\":{\"prompt_tokens\":8,\"completion_tokens\":4,\"total_tokens\":12},\"created\":1726294402}\n\ndata: [DONE]\n"
   serverlessCompletionsComplete:
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "Say this is a test!", "stream": false}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "stream": false, "prompt": "Say this is a test!"}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "seed": 42, "text": "This is indeed a test", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"completion_tokens": 6, "prompt_tokens": 7, "total_tokens": 13}, "model": "meta-llama-3.1-8b-instruct"}
+          application/json: {"id": "cmpl-26a1e10db8544bc3adb488d2d205288b", "object": "text_completion", "usage": {"prompt_tokens": 7, "completion_tokens": 6, "total_tokens": 13}, "choices": [{"index": 0, "text": "This is indeed a test", "seed": 42, "finish_reason": "stop", "tokens": [128000, 2028, 374, 13118, 264, 1296]}], "model": "meta-llama-3.1-8b-instruct"}
   serverlessCompletionsStream:
     Example:
       requestBody:
-        application/json: {"model": "meta-llama-3.1-8b-instruct", "prompt": "Say this is a test!", "stream": true}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "stream": true, "prompt": "Say this is a test!"}
       responses:
         "200":
           text/event-stream: "data: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" such\",\"token\":1778,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\" as\",\"token\":439,\"finish_reason\":null,\"logprobs\":null}],\"created\":1733382157}\n\n...\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[{\"index\":0,\"text\":\"\",\"finish_reason\":\"length\",\"logprobs\":null}],\"created\":1733382157}\n\ndata: {\"id\":\"cmpl-26a1e10db8544bc3adb488d2d205288b\",\"object\":\"text_completion\",\"choices\":[],\"usage\":{\"prompt_tokens\":5,\"completion_tokens\":10,\"total_tokens\":15},\"created\":1733382157}\n\ndata: [DONE]\n"
@@ -884,36 +927,36 @@ examples:
   serverlessToolAssistedChatComplete:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "What is 3 + 6?", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": false, "tools": [{"type": "math:calculator"}]}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "user", "content": "What is 3 + 6?"}], "stream": false, "tools": [{"type": "math:calculator"}]}
       responses:
         "200":
-          application/json: {"choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant", "content": "The result is 9."}}], "created": 1735722153, "id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "object": "chat.completion", "usage": {"completion_tokens": 11, "prompt_tokens": 9, "total_tokens": 20}, "model": "meta-llama-3.1-8b-instruct"}
+          application/json: {"id": "chatcmpl-4b71d12c86d94e719c7e3984a7bb7941", "choices": [{"index": 0, "message": {"content": "The result is 9.", "role": "assistant"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 9, "completion_tokens": 11, "total_tokens": 20}, "object": "chat.completion", "created": 1735722153, "model": "meta-llama-3.1-8b-instruct"}
   serverlessToolAssistedChatStream:
     Example:
       requestBody:
-        application/json: {"messages": [{"content": "What is 3 + 6?", "role": "user"}], "model": "meta-llama-3.1-8b-instruct", "stream": true, "tools": [{"type": "math:calculator"}]}
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "user", "content": "What is 3 + 6?"}], "stream": true, "tools": [{"type": "math:calculator"}]}
       responses:
         "200":
           text/event-stream: "event: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"STARTED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":null,\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\nevent: tool_status\ndata: {\"tool_call_id\":\"call_3QrfStXSU6fGdOGPcETocIAq\",\"name\":\"math:calculator\",\"status\":\"ENDED\",\"parameters\":[{\"name\":\"expression\",\"value\":\"150 * 1.60934\"}],\"result\":\"\"{\\\"result\\\": \\\"150 * 1.60934=241.401000000000\\\"}\"\",\"files\":null,\"message\":null,\"error\":null,\"usage\":null,\"timestamp\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"To\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\n...\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\".\"},\"finish_reason\":null,\"logprobs\":null}],\"created\":1726277121}\n\ndata: {\"id\":\"chatcmpl-4b71d12c86d94e719c7e3984a7bb7941\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1726277121}\n\ndata: [DONE]\n"
   serverlessKnowledgeRetrieve:
     speakeasy-default-serverless-knowledge-retrieve:
       requestBody:
-        application/json: {"k": 1, "knowledgeIds": ["knowledge-base-id-1"], "query": "Chicken dinner"}
+        application/json: {"query": "Chicken dinner", "k": 1, "knowledgeIds": ["knowledge-base-id-1"]}
       responses:
         "200":
-          application/json: {"results": [{"contentChunkId": "<id>", "contentId": "<id>", "score": 5823.25, "text": "<value>"}, {"contentChunkId": "<id>", "contentId": "<id>", "score": 5823.25, "text": "<value>"}]}
+          application/json: {"results": [{"text": "<value>", "score": 5823.25, "contentChunkId": "<id>", "contentId": "<id>"}, {"text": "<value>", "score": 5823.25, "contentChunkId": "<id>", "contentId": "<id>"}]}
   serverlessModelList:
     speakeasy-default-serverless-model-list:
       responses:
         "200":
-          application/json: {"data": [{"context_length": 373077, "created": 125077, "description": "as evenly adjourn", "functionality": {"parallel_tool_call": false, "tool_call": false, "structured_output": true}, "hugging_face_url": "https://enchanted-coliseum.org/", "id": "<id>", "license": "https://dapper-hutch.net/", "max_completion_tokens": 324596, "name": "<value>", "policy": "https://different-bookend.net/", "pricing": {"input": 8164.42, "output": 3961.62, "response_time": 0}}]}
+          application/json: {"data": [{"id": "<id>", "name": "<value>", "max_completion_tokens": 324596, "context_length": 373077, "functionality": {"tool_call": false, "parallel_tool_call": false, "structured_output": true}, "pricing": {"input": 8164.42, "output": 3961.62, "response_time": 0}, "hugging_face_url": "https://enchanted-coliseum.org/", "description": "as evenly adjourn", "license": "https://dapper-hutch.net/", "policy": "https://different-bookend.net/", "created": 125077}]}
   create_dataset:
     Example:
       requestBody:
-        application/json: {"modality": {}, "name": "<value>", "projectId": "<id>"}
+        application/json: {"name": "<value>", "projectId": "<id>", "modality": {}}
       responses:
         "200":
-          application/json: {"createdAt": 570964, "id": "123", "modality": {}, "name": "dataset-name", "updatedAt": 993664}
+          application/json: {"id": "123", "name": "dataset-name", "createdAt": 570964, "updatedAt": 993664, "modality": {}}
   list_datasets:
     Example:
       parameters:
@@ -922,7 +965,7 @@ examples:
           projectId: "<id>"
       responses:
         "200":
-          application/json: {"data": [{"createdAt": 547403, "id": "123", "modality": {}, "name": "dataset-name", "updatedAt": 34223}]}
+          application/json: {"data": [{"id": "123", "name": "dataset-name", "createdAt": 547403, "updatedAt": 34223, "modality": {}}]}
   get_dataset:
     Example:
       parameters:
@@ -930,7 +973,7 @@ examples:
           dataset_id: "539201"
       responses:
         "200":
-          application/json: {"createdAt": 985411, "id": "123", "modality": {}, "name": "dataset-name", "updatedAt": 761871}
+          application/json: {"id": "123", "name": "dataset-name", "createdAt": 985411, "updatedAt": 761871, "modality": {}}
   delete_dataset:
     speakeasy-default-delete-dataset:
       parameters:
@@ -950,7 +993,7 @@ examples:
           comment: "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart"
       responses:
         "200":
-          application/json: {"comment": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J", "createdAt": 300752, "id": "<id>"}
+          application/json: {"id": "<id>", "comment": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J", "createdAt": 300752}
         "422":
           application/json: {}
   list_versions:
@@ -960,7 +1003,7 @@ examples:
           dataset_id: "653403"
       responses:
         "200":
-          application/json: {"versions": [{"comment": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals", "createdAt": 193400, "id": "<id>"}, {"comment": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals", "createdAt": 193400, "id": "<id>"}]}
+          application/json: {"versions": [{"id": "<id>", "comment": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals", "createdAt": 193400}, {"id": "<id>", "comment": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals", "createdAt": 193400}]}
         "422":
           application/json: {}
   get_version:
@@ -971,7 +1014,7 @@ examples:
           version_id: "813303"
       responses:
         "200":
-          application/json: {"comment": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart", "createdAt": 78471, "id": "<id>"}
+          application/json: {"id": "<id>", "comment": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart", "createdAt": 78471}
         "422":
           application/json: {}
   delete_version:
@@ -1007,7 +1050,7 @@ examples:
           name: "<value>"
       responses:
         "200":
-          application/json: {"createdAt": 48827, "id": "<id>", "name": "<value>", "updatedAt": 124256}
+          application/json: {"id": "<id>", "name": "<value>", "createdAt": 48827, "updatedAt": 124256}
         "422":
           application/json: {}
   list_splits:
@@ -1019,7 +1062,7 @@ examples:
           limit: 20
       responses:
         "200":
-          application/json: {"data": [{"createdAt": 24292, "id": "<id>", "name": "<value>", "updatedAt": 283431}, {"createdAt": 24292, "id": "<id>", "name": "<value>", "updatedAt": 283431}]}
+          application/json: {"data": [{"id": "<id>", "name": "<value>", "createdAt": 24292, "updatedAt": 283431}, {"id": "<id>", "name": "<value>", "createdAt": 24292, "updatedAt": 283431}]}
         "422":
           application/json: {}
   get_split:
@@ -1030,7 +1073,7 @@ examples:
           split_id: "516409"
       responses:
         "200":
-          application/json: {"createdAt": 658324, "id": "<id>", "name": "<value>", "updatedAt": 75101}
+          application/json: {"id": "<id>", "name": "<value>", "createdAt": 658324, "updatedAt": 75101}
         "422":
           application/json: {}
   delete_split:
@@ -1100,7 +1143,7 @@ examples:
   init_upload:
     speakeasy-default-init-upload:
       requestBody:
-        application/json: {"digest": "<value>", "name": "<value>", "projectId": "<id>", "size": 830650}
+        application/json: {"name": "<value>", "size": 830650, "digest": "<value>", "projectId": "<id>"}
       responses:
         "200":
           application/json: {"fileId": "<id>"}
@@ -1123,7 +1166,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"createdAt": "2023-06-05T17:53:37.301Z", "creatorId": "<id>", "digest": "file-digest", "expiresAt": "2023-10-08T15:02:04.523Z", "id": "file-id", "name": "file-name", "projectId": "<id>", "size": 1024, "status": "UPLOADED"}
+          application/json: {"id": "file-id", "name": "file-name", "size": 1024, "digest": "file-digest", "projectId": "<id>", "creatorId": "<id>", "createdAt": "2023-06-05T17:53:37.301Z", "expiresAt": "2023-10-08T15:02:04.523Z", "status": "UPLOADED"}
   get_download_url:
     Example:
       parameters:
@@ -1131,7 +1174,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"downloadUrl": "https://immaculate-dredger.com", "fileId": "<id>", "s3Uri": "https://immaculate-dredger.com"}
+          application/json: {"fileId": "<id>", "s3Uri": "https://immaculate-dredger.com", "downloadUrl": "https://immaculate-dredger.com"}
   upload_raw_samples:
     speakeasy-default-upload-raw-samples:
       parameters:
@@ -1148,18 +1191,38 @@ examples:
   dedicatedAudioTranscriptions:
     Example:
       requestBody:
-        multipart/form-data: {"file": "@/path/to/file/audio.mp3", "model": "(endpoint-id)"}
+        multipart/form-data: {"model": "(endpoint-id)", "file": "@/path/to/file/audio.mp3"}
       responses:
         "200":
-          application/json: {"text": "Hello, how are you?"}
+          application/json: {"text": "Hello, how are you?", "usage": {"type": "tokens", "input_tokens": 954350, "output_tokens": 232664, "total_tokens": 30, "input_token_details": {"audio_tokens": 10, "text_tokens": 10}}}
+  containerAudioTranscriptions:
+    Example:
+      requestBody:
+        application/json: {"file": "@/path/to/file/audio.mp3"}
+      responses:
+        "200":
+          application/json: {"text": "Hello, how are you?", "usage": {"type": "tokens", "input_tokens": 561364, "output_tokens": 514817, "total_tokens": 30, "input_token_details": {"audio_tokens": 10, "text_tokens": 10}}}
+  dedicatedChatRender:
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id)", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}]}
+      responses:
+        "200":
+          application/json: {"text": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\nYou are a helpful assistant.<|eot_id|><|start_header_id|>user<|end_header_id|>\nHello!<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"}
+  dedicatedEmbeddings:
+    Example:
+      requestBody:
+        application/json: {"model": "(endpoint-id)", "input": "The food was delicious and the waiter...", "encoding_format": "float"}
+      responses:
+        "200":
+          application/json: {"id": "embd-26a1e10db1311bc2adb488d2d205288b", "model": "(endpoint-id)", "object": "list", "data": [{"index": 0, "object": "embedding", "embedding": [0.0023064255, -0.009327292, -0.0028842222]}], "usage": {"prompt_tokens": 26, "completion_tokens": 0, "total_tokens": 26}, "created": 1735722153}
+  serverlessChatRender:
+    Example:
+      requestBody:
+        application/json: {"model": "meta-llama-3.1-8b-instruct", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Hello!"}]}
+      responses:
+        "200":
+          application/json: {"text": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\nYou are a helpful assistant.<|eot_id|><|start_header_id|>user<|end_header_id|>\nHello!<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes Detected:
-  * `friendli_core.container.chat.complete()`:  `request` **Changed**
-  * `friendli_core.container.completions.complete()`:  `request` **Changed**
-  * `friendli_core.dedicated.chat.complete()`:  `request` **Changed**
-  * `friendli_core.dedicated.completions.complete()`:  `request.dedicated_completions_body` **Changed**
-  * `friendli_core.serverless.chat.complete()`:  `request` **Changed**
-  * `friendli_core.serverless.completions.complete()`:  `request.serverless_completions_body` **Changed**
-  * `friendli_core.serverless.tool_assisted_chat.complete()`:  `request` **Changed**
+releaseNotes: "## Python SDK Changes Detected:\n* `friendli_core.container.audio.transcribe()`: **Added**\n* `friendli_core.dedicated.chat_render.render()`: **Added**\n* `friendli_core.dedicated.embeddings.embeddings()`: **Added**\n* `friendli_core.serverless.chat_render.render()`: **Added**\n* `friendli_core.container.chat.complete()`:  `request` **Changed**\n* `friendli_core.container.completions.complete()`:  `request` **Changed**\n* `friendli_core.container.image.generate()`:  `request` **Changed**\n* `friendli_core.dedicated.chat.complete()`:  `request` **Changed**\n* `friendli_core.dedicated.completions.complete()`:  `request.dedicated_completions_body` **Changed**\n* `friendli_core.dedicated.image.generate()`:  `request` **Changed**\n* `friendli_core.dedicated.audio.transcribe()`: \n  *  `request.chunking_strategy.[server_vad_chunking_strategy]` **Changed**\n  *  `response.usage` **Added**\n* `friendli_core.dedicated.endpoint.list()`:  `request` **Changed**\n* `friendli_core.dedicated.endpoint.get_version_history()`:  `request.limit` **Changed**\n* `friendli_core.serverless.chat.complete()`:  `request` **Changed**\n* `friendli_core.serverless.completions.complete()`:  `request.serverless_completions_body` **Changed**\n* `friendli_core.serverless.tool_assisted_chat.complete()`:  `request` **Changed**\n* `friendli_core.dataset.list_datasets()`:  `request.limit` **Changed**\n* `friendli_core.dataset.list_splits()`:  `request.limit` **Changed**\n* `friendli_core.dataset.list_samples()`:  `request.limit` **Changed**\n"

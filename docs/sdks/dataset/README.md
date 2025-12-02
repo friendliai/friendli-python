@@ -38,7 +38,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.dataset.create_dataset(
-        modality={}, name="<value>", project_id="<id>"
+        name="<value>", project_id="<id>", modality={}
     )
 
     # Handle response
@@ -49,9 +49,9 @@ with SyncFriendli(
 
 | Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
 | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `modality`                                                                  | [models.DedicatedDatasetModality](../../models/dedicateddatasetmodality.md) | :heavy_check_mark:                                                          | Dataset modality.                                                           |
 | `name`                                                                      | *str*                                                                       | :heavy_check_mark:                                                          | Name of the dataset.                                                        |
 | `project_id`                                                                | *str*                                                                       | :heavy_check_mark:                                                          | ID of the project.                                                          |
+| `modality`                                                                  | [models.DedicatedDatasetModality](../../models/dedicateddatasetmodality.md) | :heavy_check_mark:                                                          | Dataset modality.                                                           |
 | `x_friendli_team`                                                           | *OptionalNullable[str]*                                                     | :heavy_minus_sign:                                                          | ID of team to run requests as (optional parameter).                         |
 | `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |
 

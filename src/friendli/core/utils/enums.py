@@ -45,14 +45,7 @@ class OpenEnumMeta(enum.EnumMeta):
     else:
 
         def __call__(
-            cls,
-            value,
-            names=None,
-            *,
-            module=None,
-            qualname=None,
-            type=None,
-            start=1,
+            cls, value, names=None, *, module=None, qualname=None, type=None, start=1
         ):
             if names is not None:
                 return super().__call__(

@@ -14,19 +14,18 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.chat.complete(
+        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "content": "You are a helpful assistant.",
                 "role": "system",
+                "content": "You are a helpful assistant.",
             },
             {
-                "content": "Hello!",
                 "role": "user",
+                "content": "Hello!",
             },
         ],
-        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
-        stream=False,
     )
 
     # Handle response
@@ -49,19 +48,18 @@ async def main():
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
         res = await friendli.serverless.chat.complete(
+            model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
-                    "content": "You are a helpful assistant.",
                     "role": "system",
+                    "content": "You are a helpful assistant.",
                 },
                 {
-                    "content": "Hello!",
                     "role": "user",
+                    "content": "Hello!",
                 },
             ],
-            model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
-            stream=False,
         )
 
         # Handle response
@@ -86,13 +84,13 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.tool_assisted_chat.complete(
+        model="meta-llama-3.1-8b-instruct",
         messages=[
             {
-                "content": "What is 3 + 6?",
                 "role": "user",
+                "content": "What is 3 + 6?",
             },
         ],
-        model="meta-llama-3.1-8b-instruct",
         max_tokens=200,
         stream=False,
         tools=[
@@ -122,13 +120,13 @@ async def main():
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
         res = await friendli.serverless.tool_assisted_chat.complete(
+            model="meta-llama-3.1-8b-instruct",
             messages=[
                 {
-                    "content": "What is 3 + 6?",
                     "role": "user",
+                    "content": "What is 3 + 6?",
                 },
             ],
-            model="meta-llama-3.1-8b-instruct",
             max_tokens=200,
             stream=False,
             tools=[

@@ -7,6 +7,6 @@ Version info.
 
 | Field                                                        | Type                                                         | Required                                                     | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `id`                                                         | *str*                                                        | :heavy_check_mark:                                           | ID of the version.                                           |
 | `comment`                                                    | *str*                                                        | :heavy_check_mark:                                           | Comment for the version.                                     |
 | `created_at`                                                 | *int*                                                        | :heavy_check_mark:                                           | Unix timestamp (in seconds) of when the version was created. |
-| `id`                                                         | *str*                                                        | :heavy_check_mark:                                           | ID of the version.                                           |

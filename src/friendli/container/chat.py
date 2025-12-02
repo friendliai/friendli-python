@@ -28,6 +28,7 @@ class SyncChat:
         self,
         *,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        model: OptionalNullable[str] = UNSET,
         chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -35,15 +36,10 @@ class SyncChat:
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
-        min_tokens: OptionalNullable[int] = UNSET,
-        model: OptionalNullable[str] = UNSET,
         n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: OptionalNullable[
-            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.ContainerChatCompletionBodySeed,
@@ -51,10 +47,12 @@ class SyncChat:
             ]
         ] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
-        stream: OptionalNullable[bool] = False,
+        stream: OptionalNullable[bool] = UNSET,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
+        parse_reasoning: OptionalNullable[bool] = UNSET,
+        include_reasoning: OptionalNullable[bool] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
@@ -62,24 +60,29 @@ class SyncChat:
                 models.ContainerChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
-        tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
-        ] = UNSET,
         top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
-        xtc_probability: OptionalNullable[float] = UNSET,
         xtc_threshold: OptionalNullable[float] = UNSET,
+        xtc_probability: OptionalNullable[float] = UNSET,
+        tools: OptionalNullable[
+            Union[List[models.Tool], List[models.ToolTypedDict]]
+        ] = UNSET,
+        min_tokens: OptionalNullable[int] = UNSET,
+        response_format: OptionalNullable[
+            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ContainerChatCompleteSuccess:
-        r"""Chat completions.
+        """Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
 
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Routes the request to a specific adapter.
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -87,25 +90,26 @@ class SyncChat:
         :param logprobs: Whether to return log probabilities of the output tokens or not.
         :param max_tokens: The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument.
         :param min_p: A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling.
-        :param min_tokens: The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.  **This field is unsupported when `tools` or `response_format` is specified.**
-        :param model: Routes the request to a specific adapter.
         :param n: The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
         :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream. It can only be used when `stream: true`.
+        :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
+        :param include_reasoning: When `parse_reasoning=true`, include parsed reasoning (`reasoning_content`). Defaults to true.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
         :param temperature: Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument.
         :param tool_choice: Determines the tool calling behavior of the model. When set to `none`, the model will bypass tool execution and generate a response directly. In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message. Alternatively, setting `required` ensures that the model invokes at least one tool before responding to the user. You can also specify a particular tool by `{\\"type\\": \\"function\\", \\"function\\": {\\"name\\": \\"my_function\\"}}`.
-        :param tools: A list of tools the model may call. Currently, only functions are supported as a tool. A maximum of 128 functions is supported. Use this to provide a list of functions the model may generate JSON inputs for.  **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
         :param top_k: Limits sampling to the top k tokens with the highest probabilities. Values range from 0 (no filtering) to the model's vocabulary size (inclusive). The default value of 0 applies no filtering, allowing all tokens.
         :param top_logprobs: The number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to true if this parameter is used.
         :param top_p: Keeps only the smallest set of tokens whose cumulative probabilities reach `top_p` or higher. Values range from 0.0 (exclusive) to 1.0 (inclusive). The default value of 1.0 includes all tokens, allowing maximum diversity.
+        :param xtc_threshold: A probability threshold used to identify "top choice" tokens for exclusion in XTC (Exclude Top Choices) sampling. Tokens with probabilities at or above this threshold are considered viable candidates, and all but the least likely viable token are excluded from sampling. This option reduces the dominance of highly probable tokens while preserving some diversity by keeping the least confident "top choice." Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values make the filtering more selective by requiring higher probabilities to trigger exclusion, while lower values apply filtering more broadly. The default value of 0.0 disables XTC filtering entirely.
         :param xtc_probability: The probability that XTC (Exclude Top Choices) filtering will be applied for each sampling decision. When XTC is triggered, high-probability tokens above the `xtc_threshold` are excluded except for the least likely viable token. This stochastic activation allows for a balance between standard sampling and creativity-boosting exclusion filtering. Values range from 0.0 (inclusive) to 1.0 (inclusive), where 0.0 means XTC is never applied, 1.0 means XTC is always applied when viable tokens exist, and intermediate values provide probabilistic activation. The default value of 0.0 disables XTC filtering.
-        :param xtc_threshold: A probability threshold used to identify “top choice” tokens for exclusion in XTC (Exclude Top Choices) sampling. Tokens with probabilities at or above this threshold are considered viable candidates, and all but the least likely viable token are excluded from sampling. This option reduces the dominance of highly probable tokens while preserving some diversity by keeping the least confident “top choice.” Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values make the filtering more selective by requiring higher probabilities to trigger exclusion, while lower values apply filtering more broadly. The default value of 0.0 disables XTC filtering entirely.
+        :param tools: A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.  **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
+        :param min_tokens: The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.  **This field is unsupported when `tools` or `response_format` is specified.**
+        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -113,6 +117,7 @@ class SyncChat:
         """
         return self._core.container.chat.complete(
             messages=messages,
+            model=model,
             chat_template_kwargs=chat_template_kwargs,
             eos_token=eos_token,
             frequency_penalty=frequency_penalty,
@@ -120,25 +125,26 @@ class SyncChat:
             logprobs=logprobs,
             max_tokens=max_tokens,
             min_p=min_p,
-            min_tokens=min_tokens,
-            model=model,
             n=n,
             parallel_tool_calls=parallel_tool_calls,
             presence_penalty=presence_penalty,
             repetition_penalty=repetition_penalty,
-            response_format=response_format,
             seed=seed,
             stop=stop,
             stream=stream,
             stream_options=stream_options,
+            parse_reasoning=parse_reasoning,
+            include_reasoning=include_reasoning,
             temperature=temperature,
             tool_choice=tool_choice,
-            tools=tools,
             top_k=top_k,
             top_logprobs=top_logprobs,
             top_p=top_p,
-            xtc_probability=xtc_probability,
             xtc_threshold=xtc_threshold,
+            xtc_probability=xtc_probability,
+            tools=tools,
+            min_tokens=min_tokens,
+            response_format=response_format,
             retries=retries,
             server_url=server_url,
             timeout_ms=timeout_ms,
@@ -149,6 +155,7 @@ class SyncChat:
         self,
         *,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        model: OptionalNullable[str] = UNSET,
         chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -156,15 +163,10 @@ class SyncChat:
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
-        min_tokens: OptionalNullable[int] = UNSET,
-        model: OptionalNullable[str] = UNSET,
         n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: OptionalNullable[
-            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.ContainerChatCompletionStreamBodySeed,
@@ -172,10 +174,12 @@ class SyncChat:
             ]
         ] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
-        stream: OptionalNullable[bool] = True,
+        stream: OptionalNullable[bool] = UNSET,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
+        parse_reasoning: OptionalNullable[bool] = UNSET,
+        include_reasoning: OptionalNullable[bool] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
@@ -183,24 +187,29 @@ class SyncChat:
                 models.ContainerChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
-        tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
-        ] = UNSET,
         top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
-        xtc_probability: OptionalNullable[float] = UNSET,
         xtc_threshold: OptionalNullable[float] = UNSET,
+        xtc_probability: OptionalNullable[float] = UNSET,
+        tools: OptionalNullable[
+            Union[List[models.Tool], List[models.ToolTypedDict]]
+        ] = UNSET,
+        min_tokens: OptionalNullable[int] = UNSET,
+        response_format: OptionalNullable[
+            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStream[models.ContainerChatCompletionStreamSuccess]:
-        r"""Stream chat completions.
+        """Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
 
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Routes the request to a specific adapter.
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -208,25 +217,26 @@ class SyncChat:
         :param logprobs: Whether to return log probabilities of the output tokens or not.
         :param max_tokens: The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument.
         :param min_p: A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling.
-        :param min_tokens: The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.  **This field is unsupported when `tools` or `response_format` is specified.**
-        :param model: Routes the request to a specific adapter.
         :param n: The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
         :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream. It can only be used when `stream: true`.
+        :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
+        :param include_reasoning: When `parse_reasoning=true`, include parsed reasoning (`reasoning_content`). Defaults to true.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
         :param temperature: Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument.
         :param tool_choice: Determines the tool calling behavior of the model. When set to `none`, the model will bypass tool execution and generate a response directly. In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message. Alternatively, setting `required` ensures that the model invokes at least one tool before responding to the user. You can also specify a particular tool by `{\\"type\\": \\"function\\", \\"function\\": {\\"name\\": \\"my_function\\"}}`.
-        :param tools: A list of tools the model may call. Currently, only functions are supported as a tool. A maximum of 128 functions is supported. Use this to provide a list of functions the model may generate JSON inputs for.  **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
         :param top_k: Limits sampling to the top k tokens with the highest probabilities. Values range from 0 (no filtering) to the model's vocabulary size (inclusive). The default value of 0 applies no filtering, allowing all tokens.
         :param top_logprobs: The number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to true if this parameter is used.
         :param top_p: Keeps only the smallest set of tokens whose cumulative probabilities reach `top_p` or higher. Values range from 0.0 (exclusive) to 1.0 (inclusive). The default value of 1.0 includes all tokens, allowing maximum diversity.
+        :param xtc_threshold: A probability threshold used to identify "top choice" tokens for exclusion in XTC (Exclude Top Choices) sampling. Tokens with probabilities at or above this threshold are considered viable candidates, and all but the least likely viable token are excluded from sampling. This option reduces the dominance of highly probable tokens while preserving some diversity by keeping the least confident "top choice." Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values make the filtering more selective by requiring higher probabilities to trigger exclusion, while lower values apply filtering more broadly. The default value of 0.0 disables XTC filtering entirely.
         :param xtc_probability: The probability that XTC (Exclude Top Choices) filtering will be applied for each sampling decision. When XTC is triggered, high-probability tokens above the `xtc_threshold` are excluded except for the least likely viable token. This stochastic activation allows for a balance between standard sampling and creativity-boosting exclusion filtering. Values range from 0.0 (inclusive) to 1.0 (inclusive), where 0.0 means XTC is never applied, 1.0 means XTC is always applied when viable tokens exist, and intermediate values provide probabilistic activation. The default value of 0.0 disables XTC filtering.
-        :param xtc_threshold: A probability threshold used to identify “top choice” tokens for exclusion in XTC (Exclude Top Choices) sampling. Tokens with probabilities at or above this threshold are considered viable candidates, and all but the least likely viable token are excluded from sampling. This option reduces the dominance of highly probable tokens while preserving some diversity by keeping the least confident “top choice.” Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values make the filtering more selective by requiring higher probabilities to trigger exclusion, while lower values apply filtering more broadly. The default value of 0.0 disables XTC filtering entirely.
+        :param tools: A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.  **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
+        :param min_tokens: The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.  **This field is unsupported when `tools` or `response_format` is specified.**
+        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -234,6 +244,7 @@ class SyncChat:
         """
         return self._core.container.chat.stream(
             messages=messages,
+            model=model,
             chat_template_kwargs=chat_template_kwargs,
             eos_token=eos_token,
             frequency_penalty=frequency_penalty,
@@ -241,25 +252,26 @@ class SyncChat:
             logprobs=logprobs,
             max_tokens=max_tokens,
             min_p=min_p,
-            min_tokens=min_tokens,
-            model=model,
             n=n,
             parallel_tool_calls=parallel_tool_calls,
             presence_penalty=presence_penalty,
             repetition_penalty=repetition_penalty,
-            response_format=response_format,
             seed=seed,
             stop=stop,
             stream=stream,
             stream_options=stream_options,
+            parse_reasoning=parse_reasoning,
+            include_reasoning=include_reasoning,
             temperature=temperature,
             tool_choice=tool_choice,
-            tools=tools,
             top_k=top_k,
             top_logprobs=top_logprobs,
             top_p=top_p,
-            xtc_probability=xtc_probability,
             xtc_threshold=xtc_threshold,
+            xtc_probability=xtc_probability,
+            tools=tools,
+            min_tokens=min_tokens,
+            response_format=response_format,
             retries=retries,
             server_url=server_url,
             timeout_ms=timeout_ms,
@@ -279,6 +291,7 @@ class AsyncChat:
         self,
         *,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        model: OptionalNullable[str] = UNSET,
         chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -286,15 +299,10 @@ class AsyncChat:
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
-        min_tokens: OptionalNullable[int] = UNSET,
-        model: OptionalNullable[str] = UNSET,
         n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: OptionalNullable[
-            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.ContainerChatCompletionBodySeed,
@@ -302,10 +310,12 @@ class AsyncChat:
             ]
         ] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
-        stream: OptionalNullable[bool] = False,
+        stream: OptionalNullable[bool] = UNSET,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
+        parse_reasoning: OptionalNullable[bool] = UNSET,
+        include_reasoning: OptionalNullable[bool] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
@@ -313,24 +323,29 @@ class AsyncChat:
                 models.ContainerChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
-        tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
-        ] = UNSET,
         top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
-        xtc_probability: OptionalNullable[float] = UNSET,
         xtc_threshold: OptionalNullable[float] = UNSET,
+        xtc_probability: OptionalNullable[float] = UNSET,
+        tools: OptionalNullable[
+            Union[List[models.Tool], List[models.ToolTypedDict]]
+        ] = UNSET,
+        min_tokens: OptionalNullable[int] = UNSET,
+        response_format: OptionalNullable[
+            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ContainerChatCompleteSuccess:
-        r"""Chat completions.
+        """Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
 
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Routes the request to a specific adapter.
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -338,25 +353,26 @@ class AsyncChat:
         :param logprobs: Whether to return log probabilities of the output tokens or not.
         :param max_tokens: The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument.
         :param min_p: A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling.
-        :param min_tokens: The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.  **This field is unsupported when `tools` or `response_format` is specified.**
-        :param model: Routes the request to a specific adapter.
         :param n: The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
         :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream. It can only be used when `stream: true`.
+        :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
+        :param include_reasoning: When `parse_reasoning=true`, include parsed reasoning (`reasoning_content`). Defaults to true.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
         :param temperature: Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument.
         :param tool_choice: Determines the tool calling behavior of the model. When set to `none`, the model will bypass tool execution and generate a response directly. In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message. Alternatively, setting `required` ensures that the model invokes at least one tool before responding to the user. You can also specify a particular tool by `{\\"type\\": \\"function\\", \\"function\\": {\\"name\\": \\"my_function\\"}}`.
-        :param tools: A list of tools the model may call. Currently, only functions are supported as a tool. A maximum of 128 functions is supported. Use this to provide a list of functions the model may generate JSON inputs for.  **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
         :param top_k: Limits sampling to the top k tokens with the highest probabilities. Values range from 0 (no filtering) to the model's vocabulary size (inclusive). The default value of 0 applies no filtering, allowing all tokens.
         :param top_logprobs: The number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to true if this parameter is used.
         :param top_p: Keeps only the smallest set of tokens whose cumulative probabilities reach `top_p` or higher. Values range from 0.0 (exclusive) to 1.0 (inclusive). The default value of 1.0 includes all tokens, allowing maximum diversity.
+        :param xtc_threshold: A probability threshold used to identify "top choice" tokens for exclusion in XTC (Exclude Top Choices) sampling. Tokens with probabilities at or above this threshold are considered viable candidates, and all but the least likely viable token are excluded from sampling. This option reduces the dominance of highly probable tokens while preserving some diversity by keeping the least confident "top choice." Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values make the filtering more selective by requiring higher probabilities to trigger exclusion, while lower values apply filtering more broadly. The default value of 0.0 disables XTC filtering entirely.
         :param xtc_probability: The probability that XTC (Exclude Top Choices) filtering will be applied for each sampling decision. When XTC is triggered, high-probability tokens above the `xtc_threshold` are excluded except for the least likely viable token. This stochastic activation allows for a balance between standard sampling and creativity-boosting exclusion filtering. Values range from 0.0 (inclusive) to 1.0 (inclusive), where 0.0 means XTC is never applied, 1.0 means XTC is always applied when viable tokens exist, and intermediate values provide probabilistic activation. The default value of 0.0 disables XTC filtering.
-        :param xtc_threshold: A probability threshold used to identify “top choice” tokens for exclusion in XTC (Exclude Top Choices) sampling. Tokens with probabilities at or above this threshold are considered viable candidates, and all but the least likely viable token are excluded from sampling. This option reduces the dominance of highly probable tokens while preserving some diversity by keeping the least confident “top choice.” Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values make the filtering more selective by requiring higher probabilities to trigger exclusion, while lower values apply filtering more broadly. The default value of 0.0 disables XTC filtering entirely.
+        :param tools: A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.  **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
+        :param min_tokens: The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.  **This field is unsupported when `tools` or `response_format` is specified.**
+        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -364,6 +380,7 @@ class AsyncChat:
         """
         return await self._core.container.chat.complete(
             messages=messages,
+            model=model,
             chat_template_kwargs=chat_template_kwargs,
             eos_token=eos_token,
             frequency_penalty=frequency_penalty,
@@ -371,25 +388,26 @@ class AsyncChat:
             logprobs=logprobs,
             max_tokens=max_tokens,
             min_p=min_p,
-            min_tokens=min_tokens,
-            model=model,
             n=n,
             parallel_tool_calls=parallel_tool_calls,
             presence_penalty=presence_penalty,
             repetition_penalty=repetition_penalty,
-            response_format=response_format,
             seed=seed,
             stop=stop,
             stream=stream,
             stream_options=stream_options,
+            parse_reasoning=parse_reasoning,
+            include_reasoning=include_reasoning,
             temperature=temperature,
             tool_choice=tool_choice,
-            tools=tools,
             top_k=top_k,
             top_logprobs=top_logprobs,
             top_p=top_p,
-            xtc_probability=xtc_probability,
             xtc_threshold=xtc_threshold,
+            xtc_probability=xtc_probability,
+            tools=tools,
+            min_tokens=min_tokens,
+            response_format=response_format,
             retries=retries,
             server_url=server_url,
             timeout_ms=timeout_ms,
@@ -400,6 +418,7 @@ class AsyncChat:
         self,
         *,
         messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        model: OptionalNullable[str] = UNSET,
         chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
         eos_token: OptionalNullable[List[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -407,15 +426,10 @@ class AsyncChat:
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
-        min_tokens: OptionalNullable[int] = UNSET,
-        model: OptionalNullable[str] = UNSET,
         n: OptionalNullable[int] = UNSET,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
-        response_format: OptionalNullable[
-            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
-        ] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.ContainerChatCompletionStreamBodySeed,
@@ -423,10 +437,12 @@ class AsyncChat:
             ]
         ] = UNSET,
         stop: OptionalNullable[List[str]] = UNSET,
-        stream: OptionalNullable[bool] = True,
+        stream: OptionalNullable[bool] = UNSET,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
+        parse_reasoning: OptionalNullable[bool] = UNSET,
+        include_reasoning: OptionalNullable[bool] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
@@ -434,24 +450,29 @@ class AsyncChat:
                 models.ContainerChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
-        tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
-        ] = UNSET,
         top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
-        xtc_probability: OptionalNullable[float] = UNSET,
         xtc_threshold: OptionalNullable[float] = UNSET,
+        xtc_probability: OptionalNullable[float] = UNSET,
+        tools: OptionalNullable[
+            Union[List[models.Tool], List[models.ToolTypedDict]]
+        ] = UNSET,
+        min_tokens: OptionalNullable[int] = UNSET,
+        response_format: OptionalNullable[
+            Union[models.ResponseFormat, models.ResponseFormatTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStreamAsync[models.ContainerChatCompletionStreamSuccess]:
-        r"""Stream chat completions.
+        """Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
 
         :param messages: A list of messages comprising the conversation so far.
+        :param model: Routes the request to a specific adapter.
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
         :param eos_token: A list of endpoint sentence tokens.
         :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
@@ -459,25 +480,26 @@ class AsyncChat:
         :param logprobs: Whether to return log probabilities of the output tokens or not.
         :param max_tokens: The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument.
         :param min_p: A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling.
-        :param min_tokens: The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.  **This field is unsupported when `tools` or `response_format` is specified.**
-        :param model: Routes the request to a specific adapter.
         :param n: The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
         :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream. It can only be used when `stream: true`.
+        :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
+        :param include_reasoning: When `parse_reasoning=true`, include parsed reasoning (`reasoning_content`). Defaults to true.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
         :param temperature: Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument.
         :param tool_choice: Determines the tool calling behavior of the model. When set to `none`, the model will bypass tool execution and generate a response directly. In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message. Alternatively, setting `required` ensures that the model invokes at least one tool before responding to the user. You can also specify a particular tool by `{\\"type\\": \\"function\\", \\"function\\": {\\"name\\": \\"my_function\\"}}`.
-        :param tools: A list of tools the model may call. Currently, only functions are supported as a tool. A maximum of 128 functions is supported. Use this to provide a list of functions the model may generate JSON inputs for.  **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
         :param top_k: Limits sampling to the top k tokens with the highest probabilities. Values range from 0 (no filtering) to the model's vocabulary size (inclusive). The default value of 0 applies no filtering, allowing all tokens.
         :param top_logprobs: The number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to true if this parameter is used.
         :param top_p: Keeps only the smallest set of tokens whose cumulative probabilities reach `top_p` or higher. Values range from 0.0 (exclusive) to 1.0 (inclusive). The default value of 1.0 includes all tokens, allowing maximum diversity.
+        :param xtc_threshold: A probability threshold used to identify "top choice" tokens for exclusion in XTC (Exclude Top Choices) sampling. Tokens with probabilities at or above this threshold are considered viable candidates, and all but the least likely viable token are excluded from sampling. This option reduces the dominance of highly probable tokens while preserving some diversity by keeping the least confident "top choice." Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values make the filtering more selective by requiring higher probabilities to trigger exclusion, while lower values apply filtering more broadly. The default value of 0.0 disables XTC filtering entirely.
         :param xtc_probability: The probability that XTC (Exclude Top Choices) filtering will be applied for each sampling decision. When XTC is triggered, high-probability tokens above the `xtc_threshold` are excluded except for the least likely viable token. This stochastic activation allows for a balance between standard sampling and creativity-boosting exclusion filtering. Values range from 0.0 (inclusive) to 1.0 (inclusive), where 0.0 means XTC is never applied, 1.0 means XTC is always applied when viable tokens exist, and intermediate values provide probabilistic activation. The default value of 0.0 disables XTC filtering.
-        :param xtc_threshold: A probability threshold used to identify “top choice” tokens for exclusion in XTC (Exclude Top Choices) sampling. Tokens with probabilities at or above this threshold are considered viable candidates, and all but the least likely viable token are excluded from sampling. This option reduces the dominance of highly probable tokens while preserving some diversity by keeping the least confident “top choice.” Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values make the filtering more selective by requiring higher probabilities to trigger exclusion, while lower values apply filtering more broadly. The default value of 0.0 disables XTC filtering entirely.
+        :param tools: A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.  **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
+        :param min_tokens: The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.  **This field is unsupported when `tools` or `response_format` is specified.**
+        :param response_format: The enforced format of the model's output.  Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.  For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).  ***Important*** You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`). Otherwise, the model may result in an unending stream of whitespace or other characters.  **This field is unsupported when `tools` is specified.** **When `response_format` is specified, `min_tokens` field is unsupported.**
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -485,6 +507,7 @@ class AsyncChat:
         """
         return await self._core.container.chat.stream(
             messages=messages,
+            model=model,
             chat_template_kwargs=chat_template_kwargs,
             eos_token=eos_token,
             frequency_penalty=frequency_penalty,
@@ -492,25 +515,26 @@ class AsyncChat:
             logprobs=logprobs,
             max_tokens=max_tokens,
             min_p=min_p,
-            min_tokens=min_tokens,
-            model=model,
             n=n,
             parallel_tool_calls=parallel_tool_calls,
             presence_penalty=presence_penalty,
             repetition_penalty=repetition_penalty,
-            response_format=response_format,
             seed=seed,
             stop=stop,
             stream=stream,
             stream_options=stream_options,
+            parse_reasoning=parse_reasoning,
+            include_reasoning=include_reasoning,
             temperature=temperature,
             tool_choice=tool_choice,
-            tools=tools,
             top_k=top_k,
             top_logprobs=top_logprobs,
             top_p=top_p,
-            xtc_probability=xtc_probability,
             xtc_threshold=xtc_threshold,
+            xtc_probability=xtc_probability,
+            tools=tools,
+            min_tokens=min_tokens,
+            response_format=response_format,
             retries=retries,
             server_url=server_url,
             timeout_ms=timeout_ms,

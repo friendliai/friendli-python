@@ -17,7 +17,9 @@ Repository = "https://github.com/friendliai/friendli-python.git"
 
 [dependency-groups]
 dev = [
+    "mypy>=1.15.0",
     "nox>=2025.5.1",
+    "pylint>=3.2.3",
 ]
 lint = [
     "black>=25.1.0",
@@ -236,7 +238,3 @@ omit = ["**/*/__main__.py"]
 exclude_lines = ["pragma: no cover", "@overload", "if TYPE_CHECKING:"]
 skip_covered = true
 sort = "Cover"
-
-[tool.poetry.group.dev.dependencies] # This is needed for SDK generation GitHub Workflow to run.
-mypy = "==1.15.0"
-pylint = "==3.2.3"

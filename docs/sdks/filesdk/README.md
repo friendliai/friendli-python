@@ -26,7 +26,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.file.init_upload(
-        digest="<value>", name="<value>", project_id="<id>", size=830650
+        name="<value>", size=830650, digest="<value>", project_id="<id>"
     )
 
     # Handle response
@@ -37,10 +37,10 @@ with SyncFriendli(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `digest`                                                            | *str*                                                               | :heavy_check_mark:                                                  | Digest of the file.                                                 |
 | `name`                                                              | *str*                                                               | :heavy_check_mark:                                                  | Name of the file.                                                   |
-| `project_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | ID of the project the file belongs to.                              |
 | `size`                                                              | *int*                                                               | :heavy_check_mark:                                                  | Size of the file in bytes.                                          |
+| `digest`                                                            | *str*                                                               | :heavy_check_mark:                                                  | Digest of the file.                                                 |
+| `project_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | ID of the project the file belongs to.                              |
 | `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
