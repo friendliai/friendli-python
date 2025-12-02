@@ -53,6 +53,7 @@ class BaseSDK(abc.ABC):
         ] = None,
         url_override: Optional[str] = None,
         http_headers: Optional[Mapping[str, str]] = None,
+        allow_empty_value: Optional[List[str]] = None,
     ) -> httpx.Request:
         client = self.sdk_configuration.async_client
         return self._build_request_with_client(
@@ -73,6 +74,7 @@ class BaseSDK(abc.ABC):
             get_serialized_body,
             url_override,
             http_headers,
+            allow_empty_value,
         )
 
     def _build_request(
@@ -95,6 +97,7 @@ class BaseSDK(abc.ABC):
         ] = None,
         url_override: Optional[str] = None,
         http_headers: Optional[Mapping[str, str]] = None,
+        allow_empty_value: Optional[List[str]] = None,
     ) -> httpx.Request:
         client = self.sdk_configuration.client
         return self._build_request_with_client(
@@ -115,6 +118,7 @@ class BaseSDK(abc.ABC):
             get_serialized_body,
             url_override,
             http_headers,
+            allow_empty_value,
         )
 
     def _build_request_with_client(
@@ -138,6 +142,7 @@ class BaseSDK(abc.ABC):
         ] = None,
         url_override: Optional[str] = None,
         http_headers: Optional[Mapping[str, str]] = None,
+        allow_empty_value: Optional[List[str]] = None,
     ) -> httpx.Request:
         query_params = {}
         url = url_override
@@ -151,6 +156,7 @@ class BaseSDK(abc.ABC):
             query_params = utils.get_query_params(
                 request if request_has_query_params else None,
                 _globals if request_has_query_params else None,
+                allow_empty_value,
             )
         else:
             parsed_override = urlparse(str(url_override))

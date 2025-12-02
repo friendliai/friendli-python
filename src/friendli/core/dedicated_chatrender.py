@@ -38,7 +38,10 @@ class SyncDedicatedChatRender(BaseDedicatedChatRender, SyncSDK):
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
-        :param tools: A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.  **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
+        :param tools: A list of tools the model may call.
+            Use this to provide a list of functions the model may generate JSON inputs for.
+
+            **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -83,6 +86,7 @@ class SyncDedicatedChatRender(BaseDedicatedChatRender, SyncSDK):
                 "json",
                 models.DedicatedChatRenderBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -100,7 +104,7 @@ class SyncDedicatedChatRender(BaseDedicatedChatRender, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedChatRender",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -144,7 +148,10 @@ class AsyncDedicatedChatRender(BaseDedicatedChatRender, AsyncSDK):
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
-        :param tools: A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.  **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
+        :param tools: A list of tools the model may call.
+            Use this to provide a list of functions the model may generate JSON inputs for.
+
+            **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -189,6 +196,7 @@ class AsyncDedicatedChatRender(BaseDedicatedChatRender, AsyncSDK):
                 "json",
                 models.DedicatedChatRenderBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -206,7 +214,7 @@ class AsyncDedicatedChatRender(BaseDedicatedChatRender, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedChatRender",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

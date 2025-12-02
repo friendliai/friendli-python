@@ -76,6 +76,7 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
                 "json",
                 models.FileInitUploadRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -93,7 +94,7 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="init_upload",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -163,6 +164,7 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -180,7 +182,7 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="complete_upload",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -250,6 +252,7 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -267,7 +270,7 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_info",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -337,6 +340,7 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -354,7 +358,7 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_download_url",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -442,6 +446,7 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
                 "json",
                 models.FileInitUploadRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -459,7 +464,7 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="init_upload",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -529,6 +534,7 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -546,7 +552,7 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="complete_upload",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -616,6 +622,7 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -633,7 +640,7 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_info",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -703,6 +710,7 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -720,7 +728,7 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_download_url",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

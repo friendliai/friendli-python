@@ -2,11 +2,13 @@
 
 import httpx
 from typing import Optional
+from dataclasses import dataclass
 from friendli.core.models import FriendliCoreError
 
 MAX_MESSAGE_LEN = 10000
 
 
+@dataclass(unsafe_hash=True)
 class SDKError(FriendliCoreError):
     """The fallback error class if no more specific error class is matched."""
 
