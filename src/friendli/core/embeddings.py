@@ -74,6 +74,7 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
                 "json",
                 models.DedicatedEmbeddingsBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -91,7 +92,7 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedEmbeddings",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -171,6 +172,7 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
                 "json",
                 models.DedicatedEmbeddingsBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -188,7 +190,7 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedEmbeddings",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

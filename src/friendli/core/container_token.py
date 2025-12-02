@@ -61,6 +61,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.ContainerTokenizationBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -78,7 +79,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerTokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -145,6 +146,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.ContainerDetokenizationBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -162,7 +164,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerDetokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -231,6 +233,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.ContainerTokenizationBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -248,7 +251,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerTokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -315,6 +318,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.ContainerDetokenizationBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -332,7 +336,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="containerDetokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

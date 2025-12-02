@@ -72,6 +72,7 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
                 "json",
                 models.DedicatedCompletionsBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -89,7 +90,7 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedCompletionsComplete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -166,6 +167,7 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
                 "json",
                 models.DedicatedCompletionsStreamBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -183,7 +185,7 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedCompletionsStream",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -270,6 +272,7 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
                 "json",
                 models.DedicatedCompletionsBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -287,7 +290,7 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedCompletionsComplete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -364,6 +367,7 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
                 "json",
                 models.DedicatedCompletionsStreamBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -381,7 +385,7 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedCompletionsStream",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

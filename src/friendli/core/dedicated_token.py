@@ -72,6 +72,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
                 "json",
                 models.DedicatedTokenizationBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -89,7 +90,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedTokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -167,6 +168,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
                 "json",
                 models.DedicatedDetokenizationBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -184,7 +186,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedDetokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -264,6 +266,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
                 "json",
                 models.DedicatedTokenizationBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -281,7 +284,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedTokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -359,6 +362,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
                 "json",
                 models.DedicatedDetokenizationBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -376,7 +380,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedDetokenization",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

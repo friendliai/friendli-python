@@ -97,6 +97,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 "json",
                 models.DedicatedImageGenerationBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -114,7 +115,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedImagesGenerate",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -219,6 +220,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 "json",
                 models.DedicatedImageGenerationBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -236,7 +238,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedImagesGenerate",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

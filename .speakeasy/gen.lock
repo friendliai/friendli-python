@@ -3,10 +3,10 @@ id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
   docChecksum: b2c95cace61df6c7ef5fcbeba2dca904
   docVersion: 0.1.0
-  speakeasyVersion: 1.609.0
-  generationVersion: 2.692.0
-  releaseVersion: 0.12.1
-  configChecksum: d250084e6b7dc84a658f39be34f9b2d2
+  speakeasyVersion: 1.666.0
+  generationVersion: 2.768.0
+  releaseVersion: 0.12.2
+  configChecksum: 83178aa94efa481eb5eb5138f0865a8b
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
@@ -14,28 +14,28 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.20.3
+    core: 5.23.13
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     examples: 3.0.2
     flatRequests: 1.0.1
     flattening: 3.1.1
-    globalSecurity: 3.0.3
+    globalSecurity: 3.0.4
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
-    globalServerURLs: 3.1.1
+    globalServerURLs: 3.2.0
     methodArguments: 1.0.2
     methodServerURLs: 3.1.1
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
     nullables: 1.0.1
     responseFormat: 1.0.1
-    retries: 3.0.2
-    sdkHooks: 1.1.0
-    serverEvents: 1.0.8
+    retries: 3.0.3
+    sdkHooks: 1.2.0
+    serverEvents: 1.0.11
     serverEventsSentinels: 0.1.0
-    unions: 3.0.4
+    unions: 3.1.0
     uploadStreams: 1.0.0
 generatedFiles:
   - .gitattributes
@@ -317,14 +317,12 @@ generatedFiles:
   - docs/models/versioninfo.md
   - docs/models/videocontent.md
   - docs/models/videodata.md
-  - docs/sdks/container/README.md
   - docs/sdks/containeraudio/README.md
   - docs/sdks/containerchat/README.md
   - docs/sdks/containercompletions/README.md
   - docs/sdks/containerimage/README.md
   - docs/sdks/containertoken/README.md
   - docs/sdks/dataset/README.md
-  - docs/sdks/dedicated/README.md
   - docs/sdks/dedicatedaudio/README.md
   - docs/sdks/dedicatedchat/README.md
   - docs/sdks/dedicatedchatrender/README.md
@@ -334,15 +332,14 @@ generatedFiles:
   - docs/sdks/embeddings/README.md
   - docs/sdks/endpoint/README.md
   - docs/sdks/filesdk/README.md
-  - docs/sdks/friendlicore/README.md
   - docs/sdks/knowledge/README.md
   - docs/sdks/model/README.md
-  - docs/sdks/serverless/README.md
   - docs/sdks/serverlesschat/README.md
   - docs/sdks/serverlesschatrender/README.md
   - docs/sdks/serverlesscompletions/README.md
   - docs/sdks/serverlesstoken/README.md
   - docs/sdks/toolassistedchat/README.md
+  - py.typed
   - scripts/prepare_readme.py
   - src/friendli_core/__init__.py
   - src/friendli_core/_hooks/__init__.py
@@ -598,6 +595,7 @@ generatedFiles:
   - src/friendli_core/models/versioninfo.py
   - src/friendli_core/models/videocontent.py
   - src/friendli_core/models/videodata.py
+  - src/friendli_core/py.typed
   - src/friendli_core/sdk.py
   - src/friendli_core/sdkconfiguration.py
   - src/friendli_core/serverless.py
@@ -609,6 +607,7 @@ generatedFiles:
   - src/friendli_core/types/__init__.py
   - src/friendli_core/types/basemodel.py
   - src/friendli_core/utils/__init__.py
+  - src/friendli_core/utils/annotations.py
   - src/friendli_core/utils/datetimes.py
   - src/friendli_core/utils/enums.py
   - src/friendli_core/utils/eventstreaming.py
@@ -1225,4 +1224,3 @@ examples:
           application/json: {"text": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\nYou are a helpful assistant.<|eot_id|><|start_header_id|>user<|end_header_id|>\nHello!<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes Detected:\n* `friendli_core.container.audio.transcribe()`: **Added**\n* `friendli_core.dedicated.chat_render.render()`: **Added**\n* `friendli_core.dedicated.embeddings.embeddings()`: **Added**\n* `friendli_core.serverless.chat_render.render()`: **Added**\n* `friendli_core.container.chat.complete()`:  `request` **Changed**\n* `friendli_core.container.completions.complete()`:  `request` **Changed**\n* `friendli_core.container.image.generate()`:  `request` **Changed**\n* `friendli_core.dedicated.chat.complete()`:  `request` **Changed**\n* `friendli_core.dedicated.completions.complete()`:  `request.dedicated_completions_body` **Changed**\n* `friendli_core.dedicated.image.generate()`:  `request` **Changed**\n* `friendli_core.dedicated.audio.transcribe()`: \n  *  `request.chunking_strategy.[server_vad_chunking_strategy]` **Changed**\n  *  `response.usage` **Added**\n* `friendli_core.dedicated.endpoint.list()`:  `request` **Changed**\n* `friendli_core.dedicated.endpoint.get_version_history()`:  `request.limit` **Changed**\n* `friendli_core.serverless.chat.complete()`:  `request` **Changed**\n* `friendli_core.serverless.completions.complete()`:  `request.serverless_completions_body` **Changed**\n* `friendli_core.serverless.tool_assisted_chat.complete()`:  `request` **Changed**\n* `friendli_core.dataset.list_datasets()`:  `request.limit` **Changed**\n* `friendli_core.dataset.list_splits()`:  `request.limit` **Changed**\n* `friendli_core.dataset.list_samples()`:  `request.limit` **Changed**\n"

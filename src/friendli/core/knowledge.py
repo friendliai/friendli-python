@@ -74,6 +74,7 @@ class SyncKnowledge(BaseKnowledge, SyncSDK):
                 "json",
                 models.ServerlessKnowledgeRetrievalBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -91,7 +92,7 @@ class SyncKnowledge(BaseKnowledge, SyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessKnowledgeRetrieve",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -173,6 +174,7 @@ class AsyncKnowledge(BaseKnowledge, AsyncSDK):
                 "json",
                 models.ServerlessKnowledgeRetrievalBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
         if retries == UNSET:
@@ -190,7 +192,7 @@ class AsyncKnowledge(BaseKnowledge, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="serverlessKnowledgeRetrieve",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
