@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Mapping, Optional
+from typing import TYPE_CHECKING, List, Mapping, Optional, Union
 
 from friendli.core.types import UNSET, OptionalNullable
 
@@ -27,35 +27,36 @@ class SyncImage:
         self,
         *,
         model: str,
-        num_inference_steps: int,
         prompt: str,
+        num_inference_steps: int,
         x_friendli_team: OptionalNullable[str] = UNSET,
         guidance_scale: OptionalNullable[float] = UNSET,
+        seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
             models.DedicatedImageGenerationBodyResponseFormat
-        ] = "url",
-        seed: OptionalNullable[int] = UNSET,
+        ] = UNSET,
+        control_images: OptionalNullable[
+            Union[List[models.ImageInput], List[models.ImageInputTypedDict]]
+        ] = UNSET,
+        controlnet_weights: OptionalNullable[List[float]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedImageGenerateSuccess:
-        r"""Image generations.
+        """Image generations
 
         Given a description, the model generates image(s).
 
-        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format
-            \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
-        :param num_inference_steps: The number of inference steps to use during image generation.
-            Supported range: [1, 50].
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: A text description of the desired image(s).
+        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values
-            (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more
-            creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
-        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`,
-            `raw`, `png`, `jpeg`, and `jpg`.
+        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
         :param seed: The seed to use for image generation.
+        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
+        :param control_images: Optional input images used to condition or guide the generation process (e.g., for ControlNet or image editing models). This field is only applicable when using ControlNet or image editing models.
+        :param controlnet_weights: A list of weights that determine the influence of each ControlNet model in the generation process. Each value must be within [0, 1], where 0 disables the corresponding ControlNet and 1 applies it fully. When multiple ControlNet models are used, the list length must match the number of control images. If omitted, all ControlNet models default to full influence (1.0). This field is only applicable when using ControlNet models.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -63,12 +64,14 @@ class SyncImage:
         """
         return self._core.dedicated.image.generate(
             model=model,
-            num_inference_steps=num_inference_steps,
             prompt=prompt,
+            num_inference_steps=num_inference_steps,
             x_friendli_team=x_friendli_team,
             guidance_scale=guidance_scale,
-            response_format=response_format,
             seed=seed,
+            response_format=response_format,
+            control_images=control_images,
+            controlnet_weights=controlnet_weights,
             retries=retries,
             server_url=server_url,
             timeout_ms=timeout_ms,
@@ -88,48 +91,51 @@ class AsyncImage:
         self,
         *,
         model: str,
-        num_inference_steps: int,
         prompt: str,
+        num_inference_steps: int,
         x_friendli_team: OptionalNullable[str] = UNSET,
         guidance_scale: OptionalNullable[float] = UNSET,
+        seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
             models.DedicatedImageGenerationBodyResponseFormat
-        ] = "url",
-        seed: OptionalNullable[int] = UNSET,
+        ] = UNSET,
+        control_images: OptionalNullable[
+            Union[List[models.ImageInput], List[models.ImageInputTypedDict]]
+        ] = UNSET,
+        controlnet_weights: OptionalNullable[List[float]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DedicatedImageGenerateSuccess:
-        r"""Image generations.
+        """Image generations
 
         Given a description, the model generates image(s).
 
-        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format
-            \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
-        :param num_inference_steps: The number of inference steps to use during image generation.
-            Supported range: [1, 50].
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: A text description of the desired image(s).
+        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values
-            (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more
-            creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
-        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`,
-            `raw`, `png`, `jpeg`, and `jpg`.
+        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
         :param seed: The seed to use for image generation.
+        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
+        :param control_images: Optional input images used to condition or guide the generation process (e.g., for ControlNet or image editing models). This field is only applicable when using ControlNet or image editing models.
+        :param controlnet_weights: A list of weights that determine the influence of each ControlNet model in the generation process. Each value must be within [0, 1], where 0 disables the corresponding ControlNet and 1 applies it fully. When multiple ControlNet models are used, the list length must match the number of control images. If omitted, all ControlNet models default to full influence (1.0). This field is only applicable when using ControlNet models.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
         """
-        _ = guidance_scale
         return await self._core.dedicated.image.generate(
             model=model,
             prompt=prompt,
-            x_friendli_team=x_friendli_team,
             num_inference_steps=num_inference_steps,
-            response_format=response_format,
+            x_friendli_team=x_friendli_team,
+            guidance_scale=guidance_scale,
             seed=seed,
+            response_format=response_format,
+            control_images=control_images,
+            controlnet_weights=controlnet_weights,
             retries=retries,
             server_url=server_url,
             timeout_ms=timeout_ms,

@@ -7,6 +7,6 @@ Get download URL response.
 
 | Field                     | Type                      | Required                  | Description               |
 | ------------------------- | ------------------------- | ------------------------- | ------------------------- |
-| `download_url`            | *str*                     | :heavy_check_mark:        | Download URL of the file. |
 | `file_id`                 | *str*                     | :heavy_check_mark:        | ID of the file.           |
 | `s3_uri`                  | *str*                     | :heavy_check_mark:        | S3 URI of the file.       |
+| `download_url`            | *str*                     | :heavy_check_mark:        | Download URL of the file. |
