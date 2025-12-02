@@ -25,8 +25,8 @@ with SyncFriendli(
 ) as friendli:
     res = friendli.container.completions.complete(
         request={
-            "prompt": "Say this is a test!",
             "stream": False,
+            "prompt": "Say this is a test!",
         }
     )
 
@@ -69,8 +69,8 @@ with SyncFriendli(
 ) as friendli:
     res = friendli.container.completions.stream(
         request={
-            "prompt": "Say this is a test!",
             "stream": True,
+            "prompt": "Say this is a test!",
         }
     )
 

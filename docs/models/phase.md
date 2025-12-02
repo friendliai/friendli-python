@@ -1,7 +1,5 @@
 # Phase
 
-The current phase of the endpoint.
-
 
 ## Values
 

@@ -8,6 +8,7 @@ from friendli.core.sdk import AsyncFriendliCore, SyncFriendliCore
 
 from ..config import Config
 from .chat import AsyncChat, SyncChat
+from .chat_render import AsyncChatRender, SyncChatRender
 from .completions import AsyncCompletions, SyncCompletions
 from .knowledge import AsyncKnowledge, SyncKnowledge
 from .model import AsyncModel, SyncModel
@@ -24,6 +25,7 @@ class SyncServerless:
         self._config = config
 
         self.chat = SyncChat(core=self._core, config=self._config)
+        self.chat_render = SyncChatRender(core=self._core, config=self._config)
         self.completions = SyncCompletions(core=self._core, config=self._config)
         self.token = SyncToken(core=self._core, config=self._config)
         self.knowledge = SyncKnowledge(core=self._core, config=self._config)
@@ -42,6 +44,7 @@ class AsyncServerless:
         self._config = config
 
         self.chat = AsyncChat(core=self._core, config=self._config)
+        self.chat_render = AsyncChatRender(core=self._core, config=self._config)
         self.completions = AsyncCompletions(core=self._core, config=self._config)
         self.token = AsyncToken(core=self._core, config=self._config)
         self.knowledge = AsyncKnowledge(core=self._core, config=self._config)
