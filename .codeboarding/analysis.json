@@ -14,8 +14,7 @@
       ],
       "assigned_files": [
         "src/friendli/friendli.py",
-        "src/friendli/__init__.py",
-        "src/friendli_core/sdk.py"
+        "src/friendli/__init__.py"
       ],
       "can_expand": true
     },
@@ -34,8 +33,6 @@
         "src/friendli/httpclient.py",
         "src/friendli/config.py",
         "src/friendli_core/__init__.py",
-        "src/friendli_core/endpoint.py",
-        "src/friendli_core/basesdk.py",
         "src/friendli_core/httpclient.py",
         "src/friendli_core/sdkconfiguration.py"
       ],
@@ -72,15 +69,20 @@
       ],
       "assigned_files": [
         "src/friendli/container/completions.py",
+        "src/friendli/container/__init__.py",
         "src/friendli/container/chat.py",
         "src/friendli/container/token.py",
         "src/friendli/serverless/completions.py",
+        "src/friendli/serverless/__init__.py",
         "src/friendli/serverless/chat.py",
         "src/friendli/serverless/tool_assisted_chat.py",
+        "src/friendli/serverless/model.py",
         "src/friendli/serverless/token.py",
         "src/friendli/serverless/knowledge.py",
         "src/friendli/dedicated/completions.py",
+        "src/friendli/dedicated/__init__.py",
         "src/friendli/dedicated/chat.py",
+        "src/friendli/dedicated/endpoint.py",
         "src/friendli/dedicated/image.py",
         "src/friendli/dedicated/token.py",
         "src/friendli/dedicated/audio.py",
@@ -88,14 +90,11 @@
         "src/friendli/dataset/dataset.py",
         "src/friendli/file/__init__.py",
         "src/friendli/file/file.py",
-        "src/friendli_core/completions.py",
         "src/friendli_core/file.py",
-        "src/friendli_core/chat.py",
+        "src/friendli_core/container.py",
         "src/friendli_core/friendlicore_image.py",
         "src/friendli_core/friendlicore_completions.py",
-        "src/friendli_core/image.py",
         "src/friendli_core/toolassistedchat.py",
-        "src/friendli_core/dataset.py",
         "src/friendli_core/token.py",
         "src/friendli_core/friendlicore_token.py",
         "src/friendli_core/friendlicore_chat.py",
@@ -118,7 +117,6 @@
       "assigned_files": [
         "src/friendli/models.py",
         "src/friendli/types.py",
-        "src/friendli/serverless/model.py",
         "src/friendli_core/model.py",
         "src/friendli_core/models/containerdetokenizationop.py",
         "src/friendli_core/models/splitinfo.py",
@@ -329,7 +327,9 @@
         "src/friendli_core/models/init_uploadop.py",
         "src/friendli_core/models/streamedchatdata.py",
         "src/friendli_core/models/fileinfo.py",
-        "src/friendli_core/models/streamedcompletiondata.py"
+        "src/friendli_core/models/streamedcompletiondata.py",
+        "src/friendli_core/types/__init__.py",
+        "src/friendli_core/types/basemodel.py"
       ],
       "can_expand": true
     },
@@ -351,15 +351,9 @@
         }
       ],
       "assigned_files": [
-        "src/friendli/container/__init__.py",
-        "src/friendli/serverless/__init__.py",
-        "src/friendli/dedicated/__init__.py",
-        "src/friendli/dedicated/endpoint.py",
         "src/friendli_core/friendlicore_serverless_chat.py",
-        "src/friendli_core/dedicated.py",
-        "src/friendli_core/container.py",
+        "src/friendli_core/endpoint.py",
         "src/friendli_core/friendlicore_serverless_token.py",
-        "src/friendli_core/serverless.py",
         "src/friendli_core/friendlicore_serverless_completions.py"
       ],
       "can_expand": true
@@ -407,11 +401,16 @@
         "src/friendli_core/utils/unmarshal_json_response.py",
         "src/friendli_core/utils/eventstreaming.py",
         "src/friendli_core/utils/annotations.py",
-        "src/friendli_core/types/__init__.py",
-        "src/friendli_core/types/basemodel.py",
         "scripts/prepare_readme.py",
         "scripts/auto-fix.py"
       ],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
       "can_expand": false
     },
     {

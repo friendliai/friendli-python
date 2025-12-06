@@ -17,21 +17,12 @@
           "reference_start_line": 22,
           "reference_end_line": 79
         }
-      ],
-      "assigned_files": [
-        "src/friendli_core/_hooks/__init__.py",
-        "src/friendli_core/_hooks/sdkhooks.py",
-        "src/friendli_core/_hooks/registration.py",
-        "src/friendli_core/_hooks/types.py"
-      ],
-      "can_expand": true
+      ]
     },
     {
       "name": "Unclassified",
       "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
-      "referenced_source_code": [],
-      "assigned_files": [],
-      "can_expand": false
+      "referenced_source_code": []
     }
   ],
   "components_relations": [
