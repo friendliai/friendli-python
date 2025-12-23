@@ -1,0 +1,159 @@
+{
+  "description": "Final Component Overview for the `Friendli Client (Public API)` subsystem, structured according to Client-side SDK patterns.",
+  "components": [
+    {
+      "name": "Core Client (Public API)",
+      "description": "The primary entry point for end-users, offering a high-level, consistent interface for interacting with the Friendli AI platform, supporting both synchronous and asynchronous operations. It acts as the orchestrator, delegating requests to specific service modules.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.sdk",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/sdk.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ]
+    },
+    {
+      "name": "Service Modules",
+      "description": "Encapsulate the logic for interacting with specific API endpoints (e.g., chat, completions, images, audio). Each module handles the construction of requests, serialization of data models, and deserialization of responses for its domain.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.chat",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/chat.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.completions",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/completions.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.images",
+          "reference_file": "friendli_core.images",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        },
+        {
+          "qualified_name": "friendli_core.audio",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/audio.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ]
+    },
+    {
+      "name": "Data Models",
+      "description": "Define the structure of data exchanged with the Friendli AI platform, including request bodies, response objects, and various parameters. Ensures type safety and consistency across all API interactions within the SDK.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.models",
+          "reference_file": "friendli_core.models",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "HTTP Client/Transport Layer",
+      "description": "Handles the low-level HTTP communication with the Friendli AI platform. This includes managing connections, sending requests, receiving responses, and abstracting away network-level concerns like retries and timeouts.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.http_client",
+          "reference_file": "friendli_core.http_client",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Error Handling",
+      "description": "Manages and standardizes error responses from both the API and the network layer. It provides custom exception classes and mechanisms for users to gracefully handle API-related issues and network errors, ensuring a consistent error reporting experience.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.errors",
+          "reference_file": "friendli_core.errors",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Configuration Management",
+      "description": "Centralizes and manages SDK-wide configuration settings, such as API keys, base URLs, default timeouts, and retry policies. It provides a consistent and accessible way to configure the SDK's behavior.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.config",
+          "reference_file": "friendli_core.config",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    },
+    {
+      "name": "Utility Functions",
+      "description": "Provides common helper functions and reusable functionalities that support various parts of the SDK, such as authentication token management, data validation, or specific data transformations that are not tied to a particular API domain.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.utils",
+          "reference_file": "friendli_core.utils",
+          "reference_start_line": 1,
+          "reference_end_line": 1
+        }
+      ]
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "uses",
+      "src_name": "Core Client (Public API)",
+      "dst_name": "Service Modules"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Core Client (Public API)",
+      "dst_name": "Configuration Management"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Core Client (Public API)",
+      "dst_name": "Data Models"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Core Client (Public API)",
+      "dst_name": "Utility Functions"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Service Modules",
+      "dst_name": "HTTP Client/Transport Layer"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Service Modules",
+      "dst_name": "Data Models"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Service Modules",
+      "dst_name": "Error Handling"
+    },
+    {
+      "relation": "uses",
+      "src_name": "Service Modules",
+      "dst_name": "Utility Functions"
+    },
+    {
+      "relation": "uses",
+      "src_name": "HTTP Client/Transport Layer",
+      "dst_name": "Configuration Management"
+    },
+    {
+      "relation": "uses",
+      "src_name": "HTTP Client/Transport Layer",
+      "dst_name": "Error Handling"
+    }
+  ]
+}
