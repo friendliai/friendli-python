@@ -1,5 +1,4 @@
-# ToolAssistedChat
-(*serverless.tool_assisted_chat*)
+# Serverless.ToolAssistedChat
 
 ## Overview
 

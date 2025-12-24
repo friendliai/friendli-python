@@ -221,6 +221,13 @@ if TYPE_CHECKING:
         ContainerDetokenizationSuccess,
         ContainerDetokenizationSuccessTypedDict,
     )
+    from .containerimageeditbody import (
+        ContainerImageEditBody,
+        ContainerImageEditBodyImage,
+        ContainerImageEditBodyImageTypedDict,
+        ContainerImageEditBodyResponseFormat,
+        ContainerImageEditBodyTypedDict,
+    )
     from .containerimagegeneratesuccess import (
         ContainerImageGenerateSuccess,
         ContainerImageGenerateSuccessTypedDict,
@@ -230,6 +237,7 @@ if TYPE_CHECKING:
         ContainerImageGenerationBodyResponseFormat,
         ContainerImageGenerationBodyTypedDict,
     )
+    from .containerimageseditop import CONTAINER_IMAGES_EDIT_OP_SERVERS
     from .containerimagesgenerateop import CONTAINER_IMAGES_GENERATE_OP_SERVERS
     from .containertokenizationbody import (
         ContainerTokenizationBody,
@@ -404,6 +412,13 @@ if TYPE_CHECKING:
         DedicatedGetEndpointVersionHistoryRequest,
         DedicatedGetEndpointVersionHistoryRequestTypedDict,
     )
+    from .dedicatedimageeditbody import (
+        DedicatedImageEditBody,
+        DedicatedImageEditBodyImage,
+        DedicatedImageEditBodyImageTypedDict,
+        DedicatedImageEditBodyResponseFormat,
+        DedicatedImageEditBodyTypedDict,
+    )
     from .dedicatedimagegeneratesuccess import (
         Data,
         DataTypedDict,
@@ -414,6 +429,10 @@ if TYPE_CHECKING:
         DedicatedImageGenerationBody,
         DedicatedImageGenerationBodyResponseFormat,
         DedicatedImageGenerationBodyTypedDict,
+    )
+    from .dedicatedimageseditop import (
+        DedicatedImagesEditRequest,
+        DedicatedImagesEditRequestTypedDict,
     )
     from .dedicatedimagesgenerateop import (
         DedicatedImagesGenerateRequest,
@@ -822,6 +841,7 @@ __all__ = [
     "CONTAINER_COMPLETIONS_COMPLETE_OP_SERVERS",
     "CONTAINER_COMPLETIONS_STREAM_OP_SERVERS",
     "CONTAINER_DETOKENIZATION_OP_SERVERS",
+    "CONTAINER_IMAGES_EDIT_OP_SERVERS",
     "CONTAINER_IMAGES_GENERATE_OP_SERVERS",
     "CONTAINER_TOKENIZATION_OP_SERVERS",
     "ChatChoice",
@@ -942,6 +962,11 @@ __all__ = [
     "ContainerDetokenizationBodyTypedDict",
     "ContainerDetokenizationSuccess",
     "ContainerDetokenizationSuccessTypedDict",
+    "ContainerImageEditBody",
+    "ContainerImageEditBodyImage",
+    "ContainerImageEditBodyImageTypedDict",
+    "ContainerImageEditBodyResponseFormat",
+    "ContainerImageEditBodyTypedDict",
     "ContainerImageGenerateSuccess",
     "ContainerImageGenerateSuccessTypedDict",
     "ContainerImageGenerationBody",
@@ -1046,11 +1071,18 @@ __all__ = [
     "DedicatedGetEndpointStatusRequestTypedDict",
     "DedicatedGetEndpointVersionHistoryRequest",
     "DedicatedGetEndpointVersionHistoryRequestTypedDict",
+    "DedicatedImageEditBody",
+    "DedicatedImageEditBodyImage",
+    "DedicatedImageEditBodyImageTypedDict",
+    "DedicatedImageEditBodyResponseFormat",
+    "DedicatedImageEditBodyTypedDict",
     "DedicatedImageGenerateSuccess",
     "DedicatedImageGenerateSuccessTypedDict",
     "DedicatedImageGenerationBody",
     "DedicatedImageGenerationBodyResponseFormat",
     "DedicatedImageGenerationBodyTypedDict",
+    "DedicatedImagesEditRequest",
+    "DedicatedImagesEditRequestTypedDict",
     "DedicatedImagesGenerateRequest",
     "DedicatedImagesGenerateRequestTypedDict",
     "DedicatedListEndpointsRequest",
@@ -1483,11 +1515,17 @@ _dynamic_imports: dict[str, str] = {
     "CONTAINER_DETOKENIZATION_OP_SERVERS": ".containerdetokenizationop",
     "ContainerDetokenizationSuccess": ".containerdetokenizationsuccess",
     "ContainerDetokenizationSuccessTypedDict": ".containerdetokenizationsuccess",
+    "ContainerImageEditBody": ".containerimageeditbody",
+    "ContainerImageEditBodyImage": ".containerimageeditbody",
+    "ContainerImageEditBodyImageTypedDict": ".containerimageeditbody",
+    "ContainerImageEditBodyResponseFormat": ".containerimageeditbody",
+    "ContainerImageEditBodyTypedDict": ".containerimageeditbody",
     "ContainerImageGenerateSuccess": ".containerimagegeneratesuccess",
     "ContainerImageGenerateSuccessTypedDict": ".containerimagegeneratesuccess",
     "ContainerImageGenerationBody": ".containerimagegenerationbody",
     "ContainerImageGenerationBodyResponseFormat": ".containerimagegenerationbody",
     "ContainerImageGenerationBodyTypedDict": ".containerimagegenerationbody",
+    "CONTAINER_IMAGES_EDIT_OP_SERVERS": ".containerimageseditop",
     "CONTAINER_IMAGES_GENERATE_OP_SERVERS": ".containerimagesgenerateop",
     "ContainerTokenizationBody": ".containertokenizationbody",
     "ContainerTokenizationBodyTypedDict": ".containertokenizationbody",
@@ -1589,6 +1627,11 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedGetEndpointStatusRequestTypedDict": ".dedicatedgetendpointstatusop",
     "DedicatedGetEndpointVersionHistoryRequest": ".dedicatedgetendpointversionhistoryop",
     "DedicatedGetEndpointVersionHistoryRequestTypedDict": ".dedicatedgetendpointversionhistoryop",
+    "DedicatedImageEditBody": ".dedicatedimageeditbody",
+    "DedicatedImageEditBodyImage": ".dedicatedimageeditbody",
+    "DedicatedImageEditBodyImageTypedDict": ".dedicatedimageeditbody",
+    "DedicatedImageEditBodyResponseFormat": ".dedicatedimageeditbody",
+    "DedicatedImageEditBodyTypedDict": ".dedicatedimageeditbody",
     "Data": ".dedicatedimagegeneratesuccess",
     "DataTypedDict": ".dedicatedimagegeneratesuccess",
     "DedicatedImageGenerateSuccess": ".dedicatedimagegeneratesuccess",
@@ -1596,6 +1639,8 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedImageGenerationBody": ".dedicatedimagegenerationbody",
     "DedicatedImageGenerationBodyResponseFormat": ".dedicatedimagegenerationbody",
     "DedicatedImageGenerationBodyTypedDict": ".dedicatedimagegenerationbody",
+    "DedicatedImagesEditRequest": ".dedicatedimageseditop",
+    "DedicatedImagesEditRequestTypedDict": ".dedicatedimageseditop",
     "DedicatedImagesGenerateRequest": ".dedicatedimagesgenerateop",
     "DedicatedImagesGenerateRequestTypedDict": ".dedicatedimagesgenerateop",
     "DedicatedListEndpointsRequest": ".dedicatedlistendpointsop",

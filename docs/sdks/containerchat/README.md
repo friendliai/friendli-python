@@ -1,5 +1,4 @@
-# ContainerChat
-(*container.chat*)
+# Container.Chat
 
 ## Overview
 

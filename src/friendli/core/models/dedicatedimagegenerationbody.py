@@ -10,7 +10,7 @@ from friendli.core.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import List, Literal
+from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 DedicatedImageGenerationBodyResponseFormat = Literal["url", "raw", "png", "jpeg", "jpg"]
@@ -21,8 +21,8 @@ class DedicatedImageGenerationBodyTypedDict(TypedDict):
     'ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.'
     prompt: str
     "A text description of the desired image(s)."
-    num_inference_steps: int
-    "The number of inference steps to use during image generation. Supported range: [1, 50]."
+    num_inference_steps: NotRequired[int]
+    "The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50]."
     guidance_scale: NotRequired[Nullable[float]]
     "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     seed: NotRequired[Nullable[int]]
@@ -40,8 +40,8 @@ class DedicatedImageGenerationBody(BaseModel):
     'ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.'
     prompt: str
     "A text description of the desired image(s)."
-    num_inference_steps: int
-    "The number of inference steps to use during image generation. Supported range: [1, 50]."
+    num_inference_steps: Optional[int] = 20
+    "The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50]."
     guidance_scale: OptionalNullable[float] = UNSET
     "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     seed: OptionalNullable[int] = UNSET
@@ -58,6 +58,7 @@ class DedicatedImageGenerationBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "num_inference_steps",
             "guidance_scale",
             "seed",
             "response_format",

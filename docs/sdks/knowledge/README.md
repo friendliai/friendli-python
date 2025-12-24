@@ -1,5 +1,4 @@
-# Knowledge
-(*serverless.knowledge*)
+# Serverless.Knowledge
 
 ## Overview
 

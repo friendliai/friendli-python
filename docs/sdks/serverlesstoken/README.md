@@ -1,5 +1,4 @@
-# ServerlessToken
-(*serverless.token*)
+# Serverless.Token
 
 ## Overview
 

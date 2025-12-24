@@ -5,8 +5,7 @@ from .assistantmessage import AssistantMessage, AssistantMessageTypedDict
 from .systemmessage import SystemMessage, SystemMessageTypedDict
 from .toolmessage import ToolMessage, ToolMessageTypedDict
 from .usermessage import UserMessage, UserMessageTypedDict
-from friendli.core.utils import get_discriminator
-from pydantic import Discriminator, Tag
+from pydantic import Field
 from typing import Union
 from typing_extensions import Annotated, TypeAliasType
 
@@ -20,11 +19,6 @@ MessageTypedDict = TypeAliasType(
     ],
 )
 Message = Annotated[
-    Union[
-        Annotated[AssistantMessage, Tag("assistant")],
-        Annotated[SystemMessage, Tag("system")],
-        Annotated[ToolMessage, Tag("tool")],
-        Annotated[UserMessage, Tag("user")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "role", "role")),
+    Union[AssistantMessage, SystemMessage, ToolMessage, UserMessage],
+    Field(discriminator="ROLE"),
 ]

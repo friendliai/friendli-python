@@ -1,5 +1,4 @@
-# DedicatedChat
-(*dedicated.chat*)
+# Dedicated.Chat
 
 ## Overview
 

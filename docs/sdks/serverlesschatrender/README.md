@@ -1,5 +1,4 @@
-# ServerlessChatRender
-(*serverless.chat_render*)
+# Serverless.ChatRender
 
 ## Overview
 

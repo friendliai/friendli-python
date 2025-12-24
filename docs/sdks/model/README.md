@@ -1,5 +1,4 @@
-# Model
-(*serverless.model*)
+# Serverless.Model
 
 ## Overview
 

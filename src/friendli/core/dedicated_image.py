@@ -20,8 +20,8 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
         *,
         model: str,
         prompt: str,
-        num_inference_steps: int,
         x_friendli_team: OptionalNullable[str] = UNSET,
+        num_inference_steps: Optional[int] = 20,
         guidance_scale: OptionalNullable[float] = UNSET,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
@@ -42,8 +42,8 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: A text description of the desired image(s).
-        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
         :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param num_inference_steps: The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50].
         :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
         :param seed: The seed to use for image generation.
         :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
@@ -136,6 +136,125 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
             raise models.SDKError("API error occurred", http_res, http_res_text)
         raise models.SDKError("Unexpected response received", http_res)
 
+    def edit(
+        self,
+        *,
+        image: Union[
+            models.DedicatedImageEditBodyImage,
+            models.DedicatedImageEditBodyImageTypedDict,
+        ],
+        prompt: str,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
+        num_inference_steps: Optional[int] = 20,
+        guidance_scale: OptionalNullable[float] = UNSET,
+        seed: OptionalNullable[int] = UNSET,
+        response_format: OptionalNullable[
+            models.DedicatedImageEditBodyResponseFormat
+        ] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DedicatedImageGenerateSuccess:
+        """Image edits
+
+        Given an image and a description, the model edits the image.
+
+        :param image: The image(s) to edit. Must be in a supported image format.
+        :param prompt: A text description of the desired image(s).
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param num_inference_steps: The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50].
+        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
+        :param seed: The seed to use for image generation.
+        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        request = models.DedicatedImagesEditRequest(
+            x_friendli_team=x_friendli_team,
+            dedicated_image_edit_body=models.DedicatedImageEditBody(
+                image=utils.get_pydantic_model(
+                    image, models.DedicatedImageEditBodyImage
+                ),
+                prompt=prompt,
+                model=model,
+                num_inference_steps=num_inference_steps,
+                guidance_scale=guidance_scale,
+                seed=seed,
+                response_format=response_format,
+            ),
+        )
+        req = self._build_request(
+            method="POST",
+            path="/dedicated/v1/images/edits",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.dedicated_image_edit_body,
+                False,
+                False,
+                "json",
+                models.DedicatedImageEditBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="dedicatedImagesEdit",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["422", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.DedicatedImageGenerateSuccess, http_res
+            )
+        if utils.match_response(http_res, ["422", "4XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        raise models.SDKError("Unexpected response received", http_res)
+
 
 class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
     async def generate(
@@ -143,8 +262,8 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
         *,
         model: str,
         prompt: str,
-        num_inference_steps: int,
         x_friendli_team: OptionalNullable[str] = UNSET,
+        num_inference_steps: Optional[int] = 20,
         guidance_scale: OptionalNullable[float] = UNSET,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
@@ -165,8 +284,8 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: A text description of the desired image(s).
-        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
         :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param num_inference_steps: The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50].
         :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
         :param seed: The seed to use for image generation.
         :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
@@ -238,6 +357,125 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="dedicatedImagesGenerate",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["422", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.DedicatedImageGenerateSuccess, http_res
+            )
+        if utils.match_response(http_res, ["422", "4XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        raise models.SDKError("Unexpected response received", http_res)
+
+    async def edit(
+        self,
+        *,
+        image: Union[
+            models.DedicatedImageEditBodyImage,
+            models.DedicatedImageEditBodyImageTypedDict,
+        ],
+        prompt: str,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
+        num_inference_steps: Optional[int] = 20,
+        guidance_scale: OptionalNullable[float] = UNSET,
+        seed: OptionalNullable[int] = UNSET,
+        response_format: OptionalNullable[
+            models.DedicatedImageEditBodyResponseFormat
+        ] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DedicatedImageGenerateSuccess:
+        """Image edits
+
+        Given an image and a description, the model edits the image.
+
+        :param image: The image(s) to edit. Must be in a supported image format.
+        :param prompt: A text description of the desired image(s).
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param num_inference_steps: The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50].
+        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
+        :param seed: The seed to use for image generation.
+        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        request = models.DedicatedImagesEditRequest(
+            x_friendli_team=x_friendli_team,
+            dedicated_image_edit_body=models.DedicatedImageEditBody(
+                image=utils.get_pydantic_model(
+                    image, models.DedicatedImageEditBodyImage
+                ),
+                prompt=prompt,
+                model=model,
+                num_inference_steps=num_inference_steps,
+                guidance_scale=guidance_scale,
+                seed=seed,
+                response_format=response_format,
+            ),
+        )
+        req = self._build_request_async(
+            method="POST",
+            path="/dedicated/v1/images/edits",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.dedicated_image_edit_body,
+                False,
+                False,
+                "json",
+                models.DedicatedImageEditBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="dedicatedImagesEdit",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security

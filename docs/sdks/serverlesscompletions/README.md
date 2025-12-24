@@ -1,5 +1,4 @@
-# ServerlessCompletions
-(*serverless.completions*)
+# Serverless.Completions
 
 ## Overview
 

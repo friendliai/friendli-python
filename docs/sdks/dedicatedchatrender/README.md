@@ -1,5 +1,4 @@
-# DedicatedChatRender
-(*dedicated.chat_render*)
+# Dedicated.ChatRender
 
 ## Overview
 

@@ -1,5 +1,4 @@
-# DedicatedCompletions
-(*dedicated.completions*)
+# Dedicated.Completions
 
 ## Overview
 

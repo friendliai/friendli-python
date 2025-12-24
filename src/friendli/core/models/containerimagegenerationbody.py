@@ -10,7 +10,7 @@ from friendli.core.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import List, Literal
+from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 ContainerImageGenerationBodyResponseFormat = Literal["raw", "jpeg"]
@@ -19,12 +19,12 @@ ContainerImageGenerationBodyResponseFormat = Literal["raw", "jpeg"]
 class ContainerImageGenerationBodyTypedDict(TypedDict):
     prompt: str
     "A text description of the desired image."
-    num_inference_steps: int
-    "The number of inference steps to use during image generation. Supported range: [1, 50]."
-    guidance_scale: float
-    "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     model: NotRequired[Nullable[str]]
     "Routes the request to a specific adapter."
+    num_inference_steps: NotRequired[int]
+    "The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50]."
+    guidance_scale: NotRequired[float]
+    "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. Defaults to 0. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     seed: NotRequired[Nullable[int]]
     "The seed to use for image generation."
     response_format: NotRequired[Nullable[ContainerImageGenerationBodyResponseFormat]]
@@ -38,12 +38,12 @@ class ContainerImageGenerationBodyTypedDict(TypedDict):
 class ContainerImageGenerationBody(BaseModel):
     prompt: str
     "A text description of the desired image."
-    num_inference_steps: int
-    "The number of inference steps to use during image generation. Supported range: [1, 50]."
-    guidance_scale: float
-    "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     model: OptionalNullable[str] = UNSET
     "Routes the request to a specific adapter."
+    num_inference_steps: Optional[int] = 20
+    "The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50]."
+    guidance_scale: Optional[float] = 0
+    "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. Defaults to 0. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     seed: OptionalNullable[int] = UNSET
     "The seed to use for image generation."
     response_format: OptionalNullable[ContainerImageGenerationBodyResponseFormat] = (
@@ -59,6 +59,8 @@ class ContainerImageGenerationBody(BaseModel):
     def serialize_model(self, handler):
         optional_fields = [
             "model",
+            "num_inference_steps",
+            "guidance_scale",
             "seed",
             "response_format",
             "control_images",
