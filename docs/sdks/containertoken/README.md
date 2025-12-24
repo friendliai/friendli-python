@@ -1,5 +1,4 @@
-# ContainerToken
-(*container.token*)
+# Container.Token
 
 ## Overview
 

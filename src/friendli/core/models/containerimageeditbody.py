@@ -10,13 +10,24 @@ from friendli.core.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import List, Literal, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import List, Literal, Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
-ContainerImageGenerationBodyResponseFormat = Literal["raw", "jpeg"]
+ContainerImageEditBodyImageTypedDict = TypeAliasType(
+    "ContainerImageEditBodyImageTypedDict",
+    Union[ImageInputTypedDict, List[ImageInputTypedDict]],
+)
+"The image(s) to edit. Must be in a supported image format."
+ContainerImageEditBodyImage = TypeAliasType(
+    "ContainerImageEditBodyImage", Union[ImageInput, List[ImageInput]]
+)
+"The image(s) to edit. Must be in a supported image format."
+ContainerImageEditBodyResponseFormat = Literal["raw", "jpeg"]
 
 
-class ContainerImageGenerationBodyTypedDict(TypedDict):
+class ContainerImageEditBodyTypedDict(TypedDict):
+    image: ContainerImageEditBodyImageTypedDict
+    "The image(s) to edit. Must be in a supported image format."
     prompt: str
     "A text description of the desired image."
     model: NotRequired[Nullable[str]]
@@ -27,15 +38,13 @@ class ContainerImageGenerationBodyTypedDict(TypedDict):
     "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. Defaults to 0. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     seed: NotRequired[Nullable[int]]
     "The seed to use for image generation."
-    response_format: NotRequired[Nullable[ContainerImageGenerationBodyResponseFormat]]
+    response_format: NotRequired[Nullable[ContainerImageEditBodyResponseFormat]]
     "The format in which the generated image will be returned. One of `raw` and `jpeg`."
-    control_images: NotRequired[Nullable[List[ImageInputTypedDict]]]
-    "Optional input images used to condition or guide the generation process (e.g., for ControlNet or image editing models). This field is only applicable when using ControlNet or image editing models."
-    controlnet_weights: NotRequired[Nullable[List[float]]]
-    "A list of weights that determine the influence of each ControlNet model in the generation process. Each value must be within [0, 1], where 0 disables the corresponding ControlNet and 1 applies it fully. When multiple ControlNet models are used, the list length must match the number of control images. If omitted, all ControlNet models default to full influence (1.0). This field is only applicable when using ControlNet models."
 
 
-class ContainerImageGenerationBody(BaseModel):
+class ContainerImageEditBody(BaseModel):
+    image: ContainerImageEditBodyImage
+    "The image(s) to edit. Must be in a supported image format."
     prompt: str
     "A text description of the desired image."
     model: OptionalNullable[str] = UNSET
@@ -46,14 +55,8 @@ class ContainerImageGenerationBody(BaseModel):
     "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. Defaults to 0. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     seed: OptionalNullable[int] = UNSET
     "The seed to use for image generation."
-    response_format: OptionalNullable[ContainerImageGenerationBodyResponseFormat] = (
-        UNSET
-    )
+    response_format: OptionalNullable[ContainerImageEditBodyResponseFormat] = UNSET
     "The format in which the generated image will be returned. One of `raw` and `jpeg`."
-    control_images: OptionalNullable[List[ImageInput]] = UNSET
-    "Optional input images used to condition or guide the generation process (e.g., for ControlNet or image editing models). This field is only applicable when using ControlNet or image editing models."
-    controlnet_weights: OptionalNullable[List[float]] = UNSET
-    "A list of weights that determine the influence of each ControlNet model in the generation process. Each value must be within [0, 1], where 0 disables the corresponding ControlNet and 1 applies it fully. When multiple ControlNet models are used, the list length must match the number of control images. If omitted, all ControlNet models default to full influence (1.0). This field is only applicable when using ControlNet models."
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -63,16 +66,8 @@ class ContainerImageGenerationBody(BaseModel):
             "guidance_scale",
             "seed",
             "response_format",
-            "control_images",
-            "controlnet_weights",
         ]
-        nullable_fields = [
-            "model",
-            "seed",
-            "response_format",
-            "control_images",
-            "controlnet_weights",
-        ]
+        nullable_fields = ["model", "seed", "response_format"]
         null_default_fields = []
         serialized = handler(self)
         m = {}

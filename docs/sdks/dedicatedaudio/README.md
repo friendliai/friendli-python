@@ -1,5 +1,4 @@
-# DedicatedAudio
-(*dedicated.audio*)
+# Dedicated.Audio
 
 ## Overview
 

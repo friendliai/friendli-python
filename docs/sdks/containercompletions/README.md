@@ -1,5 +1,4 @@
-# ContainerCompletions
-(*container.completions*)
+# Container.Completions
 
 ## Overview
 

@@ -10,50 +10,53 @@ from friendli.core.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import List, Literal, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import List, Literal, Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
-DedicatedImageGenerationBodyResponseFormat = Literal["url", "raw", "png", "jpeg", "jpg"]
+DedicatedImageEditBodyImageTypedDict = TypeAliasType(
+    "DedicatedImageEditBodyImageTypedDict",
+    Union[ImageInputTypedDict, List[ImageInputTypedDict]],
+)
+"The image(s) to edit. Must be in a supported image format."
+DedicatedImageEditBodyImage = TypeAliasType(
+    "DedicatedImageEditBodyImage", Union[ImageInput, List[ImageInput]]
+)
+"The image(s) to edit. Must be in a supported image format."
+DedicatedImageEditBodyResponseFormat = Literal["url", "raw", "png", "jpeg", "jpg"]
 
 
-class DedicatedImageGenerationBodyTypedDict(TypedDict):
-    model: str
-    'ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.'
+class DedicatedImageEditBodyTypedDict(TypedDict):
+    image: DedicatedImageEditBodyImageTypedDict
+    "The image(s) to edit. Must be in a supported image format."
     prompt: str
     "A text description of the desired image(s)."
+    model: str
+    'ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.'
     num_inference_steps: NotRequired[int]
     "The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50]."
     guidance_scale: NotRequired[Nullable[float]]
     "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     seed: NotRequired[Nullable[int]]
     "The seed to use for image generation."
-    response_format: NotRequired[Nullable[DedicatedImageGenerationBodyResponseFormat]]
+    response_format: NotRequired[Nullable[DedicatedImageEditBodyResponseFormat]]
     "The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."
-    control_images: NotRequired[Nullable[List[ImageInputTypedDict]]]
-    "Optional input images used to condition or guide the generation process (e.g., for ControlNet or image editing models). This field is only applicable when using ControlNet or image editing models."
-    controlnet_weights: NotRequired[Nullable[List[float]]]
-    "A list of weights that determine the influence of each ControlNet model in the generation process. Each value must be within [0, 1], where 0 disables the corresponding ControlNet and 1 applies it fully. When multiple ControlNet models are used, the list length must match the number of control images. If omitted, all ControlNet models default to full influence (1.0). This field is only applicable when using ControlNet models."
 
 
-class DedicatedImageGenerationBody(BaseModel):
-    model: str
-    'ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.'
+class DedicatedImageEditBody(BaseModel):
+    image: DedicatedImageEditBodyImage
+    "The image(s) to edit. Must be in a supported image format."
     prompt: str
     "A text description of the desired image(s)."
+    model: str
+    'ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.'
     num_inference_steps: Optional[int] = 20
     "The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50]."
     guidance_scale: OptionalNullable[float] = UNSET
     "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     seed: OptionalNullable[int] = UNSET
     "The seed to use for image generation."
-    response_format: OptionalNullable[DedicatedImageGenerationBodyResponseFormat] = (
-        UNSET
-    )
+    response_format: OptionalNullable[DedicatedImageEditBodyResponseFormat] = UNSET
     "The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`."
-    control_images: OptionalNullable[List[ImageInput]] = UNSET
-    "Optional input images used to condition or guide the generation process (e.g., for ControlNet or image editing models). This field is only applicable when using ControlNet or image editing models."
-    controlnet_weights: OptionalNullable[List[float]] = UNSET
-    "A list of weights that determine the influence of each ControlNet model in the generation process. Each value must be within [0, 1], where 0 disables the corresponding ControlNet and 1 applies it fully. When multiple ControlNet models are used, the list length must match the number of control images. If omitted, all ControlNet models default to full influence (1.0). This field is only applicable when using ControlNet models."
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -62,16 +65,8 @@ class DedicatedImageGenerationBody(BaseModel):
             "guidance_scale",
             "seed",
             "response_format",
-            "control_images",
-            "controlnet_weights",
         ]
-        nullable_fields = [
-            "guidance_scale",
-            "seed",
-            "response_format",
-            "control_images",
-            "controlnet_weights",
-        ]
+        nullable_fields = ["guidance_scale", "seed", "response_format"]
         null_default_fields = []
         serialized = handler(self)
         m = {}

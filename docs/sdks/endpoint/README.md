@@ -1,5 +1,4 @@
-# Endpoint
-(*dedicated.endpoint*)
+# Dedicated.Endpoint
 
 ## Overview
 

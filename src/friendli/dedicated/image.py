@@ -28,8 +28,8 @@ class SyncImage:
         *,
         model: str,
         prompt: str,
-        num_inference_steps: int,
         x_friendli_team: OptionalNullable[str] = UNSET,
+        num_inference_steps: Optional[int] = 20,
         guidance_scale: OptionalNullable[float] = UNSET,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
@@ -50,8 +50,8 @@ class SyncImage:
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: A text description of the desired image(s).
-        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
         :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param num_inference_steps: The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50].
         :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
         :param seed: The seed to use for image generation.
         :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
@@ -65,13 +65,66 @@ class SyncImage:
         return self._core.dedicated.image.generate(
             model=model,
             prompt=prompt,
-            num_inference_steps=num_inference_steps,
             x_friendli_team=x_friendli_team,
+            num_inference_steps=num_inference_steps,
             guidance_scale=guidance_scale,
             seed=seed,
             response_format=response_format,
             control_images=control_images,
             controlnet_weights=controlnet_weights,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        )
+
+    def edit(
+        self,
+        *,
+        image: Union[
+            models.DedicatedImageEditBodyImage,
+            models.DedicatedImageEditBodyImageTypedDict,
+        ],
+        prompt: str,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
+        num_inference_steps: Optional[int] = 20,
+        guidance_scale: OptionalNullable[float] = UNSET,
+        seed: OptionalNullable[int] = UNSET,
+        response_format: OptionalNullable[
+            models.DedicatedImageEditBodyResponseFormat
+        ] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DedicatedImageGenerateSuccess:
+        """Image edits
+
+        Given an image and a description, the model edits the image.
+
+        :param image: The image(s) to edit. Must be in a supported image format.
+        :param prompt: A text description of the desired image(s).
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param num_inference_steps: The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50].
+        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
+        :param seed: The seed to use for image generation.
+        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        return self._core.dedicated.image.edit(
+            image=image,
+            prompt=prompt,
+            model=model,
+            x_friendli_team=x_friendli_team,
+            num_inference_steps=num_inference_steps,
+            guidance_scale=guidance_scale,
+            seed=seed,
+            response_format=response_format,
             retries=retries,
             server_url=server_url,
             timeout_ms=timeout_ms,
@@ -92,8 +145,8 @@ class AsyncImage:
         *,
         model: str,
         prompt: str,
-        num_inference_steps: int,
         x_friendli_team: OptionalNullable[str] = UNSET,
+        num_inference_steps: Optional[int] = 20,
         guidance_scale: OptionalNullable[float] = UNSET,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
@@ -114,8 +167,8 @@ class AsyncImage:
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: A text description of the desired image(s).
-        :param num_inference_steps: The number of inference steps to use during image generation. Supported range: [1, 50].
         :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param num_inference_steps: The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50].
         :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
         :param seed: The seed to use for image generation.
         :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
@@ -129,13 +182,66 @@ class AsyncImage:
         return await self._core.dedicated.image.generate(
             model=model,
             prompt=prompt,
-            num_inference_steps=num_inference_steps,
             x_friendli_team=x_friendli_team,
+            num_inference_steps=num_inference_steps,
             guidance_scale=guidance_scale,
             seed=seed,
             response_format=response_format,
             control_images=control_images,
             controlnet_weights=controlnet_weights,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        )
+
+    async def edit(
+        self,
+        *,
+        image: Union[
+            models.DedicatedImageEditBodyImage,
+            models.DedicatedImageEditBodyImageTypedDict,
+        ],
+        prompt: str,
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
+        num_inference_steps: Optional[int] = 20,
+        guidance_scale: OptionalNullable[float] = UNSET,
+        seed: OptionalNullable[int] = UNSET,
+        response_format: OptionalNullable[
+            models.DedicatedImageEditBodyResponseFormat
+        ] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DedicatedImageGenerateSuccess:
+        """Image edits
+
+        Given an image and a description, the model edits the image.
+
+        :param image: The image(s) to edit. Must be in a supported image format.
+        :param prompt: A text description of the desired image(s).
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param num_inference_steps: The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50].
+        :param guidance_scale: Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`.
+        :param seed: The seed to use for image generation.
+        :param response_format: The format in which the generated image(s) will be returned. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        return await self._core.dedicated.image.edit(
+            image=image,
+            prompt=prompt,
+            model=model,
+            x_friendli_team=x_friendli_team,
+            num_inference_steps=num_inference_steps,
+            guidance_scale=guidance_scale,
+            seed=seed,
+            response_format=response_format,
             retries=retries,
             server_url=server_url,
             timeout_ms=timeout_ms,

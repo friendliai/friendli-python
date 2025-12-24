@@ -1,5 +1,4 @@
-# DedicatedToken
-(*dedicated.token*)
+# Dedicated.Token
 
 ## Overview
 

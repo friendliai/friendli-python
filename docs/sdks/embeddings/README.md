@@ -1,5 +1,4 @@
-# Embeddings
-(*dedicated.embeddings*)
+# Dedicated.Embeddings
 
 ## Overview
 

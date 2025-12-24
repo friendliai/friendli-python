@@ -11,8 +11,7 @@ from .responseformatjsonschema import (
 )
 from .responseformatregex import ResponseFormatRegex, ResponseFormatRegexTypedDict
 from .responseformattext import ResponseFormatText, ResponseFormatTextTypedDict
-from friendli.core.utils import get_discriminator
-from pydantic import Discriminator, Tag
+from pydantic import Field
 from typing import Union
 from typing_extensions import Annotated, TypeAliasType
 
@@ -28,11 +27,11 @@ ResponseFormatTypedDict = TypeAliasType(
 "The enforced format of the model's output.\n\nNote that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.\n\nFor more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).\n\n***Important***\nYou must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).\nOtherwise, the model may result in an unending stream of whitespace or other characters.\n\n**When `response_format` is specified, `min_tokens` field is unsupported.**\n"
 ResponseFormat = Annotated[
     Union[
-        Annotated[ResponseFormatJSONObject, Tag("json_object")],
-        Annotated[ResponseFormatJSONSchema, Tag("json_schema")],
-        Annotated[ResponseFormatRegex, Tag("regex")],
-        Annotated[ResponseFormatText, Tag("text")],
+        ResponseFormatJSONObject,
+        ResponseFormatJSONSchema,
+        ResponseFormatRegex,
+        ResponseFormatText,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    Field(discriminator="TYPE"),
 ]
 "The enforced format of the model's output.\n\nNote that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.\n\nFor more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).\n\n***Important***\nYou must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).\nOtherwise, the model may result in an unending stream of whitespace or other characters.\n\n**When `response_format` is specified, `min_tokens` field is unsupported.**\n"

@@ -1,5 +1,4 @@
-# ServerlessChat
-(*serverless.chat*)
+# Serverless.Chat
 
 ## Overview
 
