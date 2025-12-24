@@ -5,8 +5,7 @@ from .audiocontent import AudioContent, AudioContentTypedDict
 from .imagecontent import ImageContent, ImageContentTypedDict
 from .textcontent import TextContent, TextContentTypedDict
 from .videocontent import VideoContent, VideoContentTypedDict
-from friendli.core.utils import get_discriminator
-from pydantic import Discriminator, Tag
+from pydantic import Field
 from typing import Union
 from typing_extensions import Annotated, TypeAliasType
 
@@ -20,11 +19,6 @@ UserMessageContentMultiModalTypedDict = TypeAliasType(
     ],
 )
 UserMessageContentMultiModal = Annotated[
-    Union[
-        Annotated[AudioContent, Tag("audio_url")],
-        Annotated[ImageContent, Tag("image_url")],
-        Annotated[TextContent, Tag("text")],
-        Annotated[VideoContent, Tag("video_url")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    Union[AudioContent, ImageContent, TextContent, VideoContent],
+    Field(discriminator="TYPE"),
 ]

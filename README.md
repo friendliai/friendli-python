@@ -303,30 +303,31 @@ with SyncFriendli(
 <details open>
 <summary>Available methods</summary>
 
-#### [container.audio](docs/sdks/containeraudio/README.md)
+### [Container.Audio](docs/sdks/containeraudio/README.md)
 
 * [transcribe](docs/sdks/containeraudio/README.md#transcribe) - Audio transcriptions
 
-#### [container.chat](docs/sdks/containerchat/README.md)
+### [Container.Chat](docs/sdks/containerchat/README.md)
 
 * [complete](docs/sdks/containerchat/README.md#complete) - Chat completions
 * [stream](docs/sdks/containerchat/README.md#stream) - Stream chat completions
 
-#### [container.completions](docs/sdks/containercompletions/README.md)
+### [Container.Completions](docs/sdks/containercompletions/README.md)
 
 * [complete](docs/sdks/containercompletions/README.md#complete) - Completions
 * [stream](docs/sdks/containercompletions/README.md#stream) - Stream completions
 
-#### [container.image](docs/sdks/containerimage/README.md)
+### [Container.Image](docs/sdks/containerimage/README.md)
 
 * [generate](docs/sdks/containerimage/README.md#generate) - Image generations
+* [edit](docs/sdks/containerimage/README.md#edit) - Image edits
 
-#### [container.token](docs/sdks/containertoken/README.md)
+### [Container.Token](docs/sdks/containertoken/README.md)
 
 * [tokenize](docs/sdks/containertoken/README.md#tokenize) - Tokenization
 * [detokenize](docs/sdks/containertoken/README.md#detokenize) - Detokenization
 
-### [dataset](docs/sdks/dataset/README.md)
+### [Dataset](docs/sdks/dataset/README.md)
 
 * [create_dataset](docs/sdks/dataset/README.md#create_dataset) - Create a new dataset
 * [list_datasets](docs/sdks/dataset/README.md#list_datasets) - List datasets
@@ -345,29 +346,29 @@ with SyncFriendli(
 * [update_samples](docs/sdks/dataset/README.md#update_samples) - Update samples
 * [delete_samples](docs/sdks/dataset/README.md#delete_samples) - Delete samples
 
-#### [dedicated.audio](docs/sdks/dedicatedaudio/README.md)
+### [Dedicated.Audio](docs/sdks/dedicatedaudio/README.md)
 
 * [transcribe](docs/sdks/dedicatedaudio/README.md#transcribe) - Audio transcriptions
 
-#### [dedicated.chat](docs/sdks/dedicatedchat/README.md)
+### [Dedicated.Chat](docs/sdks/dedicatedchat/README.md)
 
 * [complete](docs/sdks/dedicatedchat/README.md#complete) - Chat completions
 * [stream](docs/sdks/dedicatedchat/README.md#stream) - Stream chat completions
 
-#### [dedicated.chat_render](docs/sdks/dedicatedchatrender/README.md)
+### [Dedicated.ChatRender](docs/sdks/dedicatedchatrender/README.md)
 
 * [render](docs/sdks/dedicatedchatrender/README.md#render) - Chat render
 
-#### [dedicated.completions](docs/sdks/dedicatedcompletions/README.md)
+### [Dedicated.Completions](docs/sdks/dedicatedcompletions/README.md)
 
 * [complete](docs/sdks/dedicatedcompletions/README.md#complete) - Completions
 * [stream](docs/sdks/dedicatedcompletions/README.md#stream) - Stream completions
 
-#### [dedicated.embeddings](docs/sdks/embeddings/README.md)
+### [Dedicated.Embeddings](docs/sdks/embeddings/README.md)
 
 * [embeddings](docs/sdks/embeddings/README.md#embeddings) - Embeddings
 
-#### [dedicated.endpoint](docs/sdks/endpoint/README.md)
+### [Dedicated.Endpoint](docs/sdks/endpoint/README.md)
 
 * [wandb_artifact_create](docs/sdks/endpoint/README.md#wandb_artifact_create) - Create endpoint from W&B artifact
 * [create](docs/sdks/endpoint/README.md#create) - Create a new endpoint
@@ -382,50 +383,51 @@ with SyncFriendli(
 * [terminate](docs/sdks/endpoint/README.md#terminate) - Terminate endpoint
 * [restart](docs/sdks/endpoint/README.md#restart) - Restart endpoint
 
-#### [dedicated.image](docs/sdks/dedicatedimage/README.md)
+### [Dedicated.Image](docs/sdks/dedicatedimage/README.md)
 
 * [generate](docs/sdks/dedicatedimage/README.md#generate) - Image generations
+* [edit](docs/sdks/dedicatedimage/README.md#edit) - Image edits
 
-#### [dedicated.token](docs/sdks/dedicatedtoken/README.md)
+### [Dedicated.Token](docs/sdks/dedicatedtoken/README.md)
 
 * [tokenize](docs/sdks/dedicatedtoken/README.md#tokenize) - Tokenization
 * [detokenize](docs/sdks/dedicatedtoken/README.md#detokenize) - Detokenization
 
-### [file](docs/sdks/filesdk/README.md)
+### [File](docs/sdks/filesdk/README.md)
 
 * [init_upload](docs/sdks/filesdk/README.md#init_upload) - Initiate file upload
 * [complete_upload](docs/sdks/filesdk/README.md#complete_upload) - Complete file upload
 * [get_info](docs/sdks/filesdk/README.md#get_info) - Get file info
 * [get_download_url](docs/sdks/filesdk/README.md#get_download_url) - Get file download URL
 
-#### [serverless.chat](docs/sdks/serverlesschat/README.md)
+### [Serverless.Chat](docs/sdks/serverlesschat/README.md)
 
 * [complete](docs/sdks/serverlesschat/README.md#complete) - Chat completions
 * [stream](docs/sdks/serverlesschat/README.md#stream) - Stream chat completions
 
-#### [serverless.chat_render](docs/sdks/serverlesschatrender/README.md)
+### [Serverless.ChatRender](docs/sdks/serverlesschatrender/README.md)
 
 * [render](docs/sdks/serverlesschatrender/README.md#render) - Chat render
 
-#### [serverless.completions](docs/sdks/serverlesscompletions/README.md)
+### [Serverless.Completions](docs/sdks/serverlesscompletions/README.md)
 
 * [complete](docs/sdks/serverlesscompletions/README.md#complete) - Completions
 * [stream](docs/sdks/serverlesscompletions/README.md#stream) - Stream completions
 
-#### [serverless.knowledge](docs/sdks/knowledge/README.md)
+### [Serverless.Knowledge](docs/sdks/knowledge/README.md)
 
 * [retrieve](docs/sdks/knowledge/README.md#retrieve) - Retrieve contexts from chosen knowledge base
 
-#### [serverless.model](docs/sdks/model/README.md)
+### [Serverless.Model](docs/sdks/model/README.md)
 
 * [list](docs/sdks/model/README.md#list) - Retrieve serverless models
 
-#### [serverless.token](docs/sdks/serverlesstoken/README.md)
+### [Serverless.Token](docs/sdks/serverlesstoken/README.md)
 
 * [tokenize](docs/sdks/serverlesstoken/README.md#tokenize) - Tokenization
 * [detokenize](docs/sdks/serverlesstoken/README.md#detokenize) - Detokenization
 
-#### [serverless.tool_assisted_chat](docs/sdks/toolassistedchat/README.md)
+### [Serverless.ToolAssistedChat](docs/sdks/toolassistedchat/README.md)
 
 * [complete](docs/sdks/toolassistedchat/README.md#complete) - Tool assisted chat completions
 * [stream](docs/sdks/toolassistedchat/README.md#stream) - Stream tool assisted chat completions
@@ -635,7 +637,7 @@ with SyncFriendli(
 
 
 **Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 61 methods.*
+* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 63 methods.*
 * [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
