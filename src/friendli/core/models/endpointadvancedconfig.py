@@ -18,7 +18,7 @@ class EndpointAdvancedConfigTypedDict(TypedDict):
 
     tokenizer_skip_special_tokens: bool
     tokenizer_add_special_tokens: bool
-    max_batch_size: NotRequired[int]
+    max_batch_size: NotRequired[Nullable[int]]
     max_token_count: NotRequired[int]
     enable_content_logging: NotRequired[Nullable[bool]]
     max_input_length: NotRequired[Nullable[int]]
@@ -29,7 +29,7 @@ class EndpointAdvancedConfig(BaseModel):
 
     tokenizer_skip_special_tokens: bool
     tokenizer_add_special_tokens: bool
-    max_batch_size: Optional[int] = 256
+    max_batch_size: OptionalNullable[int] = UNSET
     max_token_count: Optional[int] = 2560
     enable_content_logging: OptionalNullable[bool] = UNSET
     max_input_length: OptionalNullable[int] = UNSET
@@ -42,7 +42,11 @@ class EndpointAdvancedConfig(BaseModel):
             "enable_content_logging",
             "max_input_length",
         ]
-        nullable_fields = ["enable_content_logging", "max_input_length"]
+        nullable_fields = [
+            "max_batch_size",
+            "enable_content_logging",
+            "max_input_length",
+        ]
         null_default_fields = []
         serialized = handler(self)
         m = {}
