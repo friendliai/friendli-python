@@ -1,0 +1,562 @@
+{
+  "description": "One paragraph explaining the functionality which is represented by this graph. What the main flow is and what is its purpose.",
+  "components": [
+    {
+      "name": "Friendli Client (Public API)",
+      "description": "The primary entry point for end-users, offering a high-level, consistent interface for interacting with the Friendli AI platform, supporting both synchronous and asynchronous operations.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.sdk",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/sdk.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ],
+      "assigned_files": [
+        "src/friendli/friendli.py",
+        "src/friendli/__init__.py",
+        "src/friendli_core/sdk.py"
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "SDK Core",
+      "description": "The central orchestrator managing fundamental logic for API communication, request/response processing, and integrating foundational SDK abstractions and extensibility points.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.basesdk",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/basesdk.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ],
+      "assigned_files": [
+        "src/friendli/httpclient.py",
+        "src/friendli/config.py",
+        "src/friendli_core/__init__.py",
+        "src/friendli_core/basesdk.py",
+        "src/friendli_core/httpclient.py",
+        "src/friendli_core/sdkconfiguration.py"
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Service Modules",
+      "description": "Encapsulate specific API domains (e.g., chat, completions, datasets), providing high-level, domain-specific methods that simplify interactions with particular parts of the Friendli API.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.chat",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/chat.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.completions",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/completions.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.dataset",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/dataset.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.image",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/image.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ],
+      "assigned_files": [
+        "src/friendli/container/completions.py",
+        "src/friendli/container/__init__.py",
+        "src/friendli/container/chat.py",
+        "src/friendli/container/token.py",
+        "src/friendli/dataset/__init__.py",
+        "src/friendli/dataset/dataset.py",
+        "src/friendli/file/__init__.py",
+        "src/friendli/file/file.py",
+        "src/friendli_core/completions.py",
+        "src/friendli_core/file.py",
+        "src/friendli_core/container.py",
+        "src/friendli_core/chat.py",
+        "src/friendli_core/friendlicore_image.py",
+        "src/friendli_core/friendlicore_completions.py",
+        "src/friendli_core/image.py",
+        "src/friendli_core/toolassistedchat.py",
+        "src/friendli_core/dataset.py",
+        "src/friendli_core/token.py",
+        "src/friendli_core/friendlicore_token.py",
+        "src/friendli_core/friendlicore_chat.py",
+        "src/friendli_core/knowledge.py",
+        "src/friendli_core/audio.py"
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Data Models & Error Handling",
+      "description": "Defines standardized data structures for API requests and responses, along with a comprehensive set of error types, ensuring consistent data representation and robust error reporting.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.models",
+          "reference_file": "N/A",
+          "reference_start_line": 0,
+          "reference_end_line": 0
+        }
+      ],
+      "assigned_files": [
+        "src/friendli/models.py",
+        "src/friendli/types.py",
+        "src/friendli_core/model.py",
+        "src/friendli_core/models/containerdetokenizationop.py",
+        "src/friendli_core/models/splitinfo.py",
+        "src/friendli_core/models/dedicatedgetendpointstatusop.py",
+        "src/friendli_core/models/createdatasetrequest.py",
+        "src/friendli_core/models/responseformat.py",
+        "src/friendli_core/models/serverlesstoolassistedchatcompletionstreamsuccess.py",
+        "src/friendli_core/models/toolstatusparameter.py",
+        "src/friendli_core/models/serverlesscompletionsbody.py",
+        "src/friendli_core/models/no_response_error.py",
+        "src/friendli_core/models/completionsstreambodywithtokens.py",
+        "src/friendli_core/models/__init__.py",
+        "src/friendli_core/models/containercompletionsstreamop.py",
+        "src/friendli_core/models/chatlogprobscontent.py",
+        "src/friendli_core/models/dedicatedendpointupdatebody.py",
+        "src/friendli_core/models/listsplitsresponse.py",
+        "src/friendli_core/models/textcontent.py",
+        "src/friendli_core/models/containertokenizationop.py",
+        "src/friendli_core/models/dedicatedcreateendpointop.py",
+        "src/friendli_core/models/inferencedeploymenterrorcode.py",
+        "src/friendli_core/models/dedicatedchatstreamop.py",
+        "src/friendli_core/models/containercompletionscompleteop.py",
+        "src/friendli_core/models/responseformattext.py",
+        "src/friendli_core/models/dedicatedaudiotranscriptionsop.py",
+        "src/friendli_core/models/assistantmessagetoolcallfunction.py",
+        "src/friendli_core/models/serverlesschatcompletionstreambody.py",
+        "src/friendli_core/models/completionsdedicatedbodywithprompt.py",
+        "src/friendli_core/models/completionschoice.py",
+        "src/friendli_core/models/serverlesstokenizationbody.py",
+        "src/friendli_core/models/chatusage.py",
+        "src/friendli_core/models/completionslogprobs.py",
+        "src/friendli_core/models/pricingmodel.py",
+        "src/friendli_core/models/completionsbodywithprompt.py",
+        "src/friendli_core/models/get_infoop.py",
+        "src/friendli_core/models/serverlesstoolassistedchatcompletionbody.py",
+        "src/friendli_core/models/streamedtoolcallresult.py",
+        "src/friendli_core/models/completionsdedicatedbodywithtokens.py",
+        "src/friendli_core/models/serverlesscompletionsstreamop.py",
+        "src/friendli_core/models/containercompletionsbody.py",
+        "src/friendli_core/models/functionality.py",
+        "src/friendli_core/models/serverlesscompletionscompleteop.py",
+        "src/friendli_core/models/serverlesstokenizationop.py",
+        "src/friendli_core/models/security.py",
+        "src/friendli_core/models/function.py",
+        "src/friendli_core/models/listversionsresponse.py",
+        "src/friendli_core/models/containercompletionsstreamsuccess.py",
+        "src/friendli_core/models/dedicatedcompletionsstreamop.py",
+        "src/friendli_core/models/completionsstreamdedicatedbodywithprompt.py",
+        "src/friendli_core/models/friendlicoreerror.py",
+        "src/friendli_core/models/dedicatedaudiotranscriptionsuccess.py",
+        "src/friendli_core/models/usermessage.py",
+        "src/friendli_core/models/dedicatedwakeendpointop.py",
+        "src/friendli_core/models/streamedfunctionresult.py",
+        "src/friendli_core/models/dedicatedendpointwandbartifactcreatebody.py",
+        "src/friendli_core/models/b64imageitem.py",
+        "src/friendli_core/models/containerdetokenizationbody.py",
+        "src/friendli_core/models/responseformatjsonschema.py",
+        "src/friendli_core/models/httpvalidationerror.py",
+        "src/friendli_core/models/serverlessmodellistsuccess.py",
+        "src/friendli_core/models/dedicatedendpointwandbartifactcreateop.py",
+        "src/friendli_core/models/usermessagecontentmultimodal.py",
+        "src/friendli_core/models/dedicatedupdateendpointop.py",
+        "src/friendli_core/models/acceleratorrequirement.py",
+        "src/friendli_core/models/serverlesschatstreamop.py",
+        "src/friendli_core/models/videodata.py",
+        "src/friendli_core/models/toolstatusdata.py",
+        "src/friendli_core/models/functionresult.py",
+        "src/friendli_core/models/dedicatedimagegeneratesuccess.py",
+        "src/friendli_core/models/serverlessdetokenizationbody.py",
+        "src/friendli_core/models/containerchatstreamop.py",
+        "src/friendli_core/models/responseformatjsonschemaschema.py",
+        "src/friendli_core/models/serverlessknowledgeretrievalbody.py",
+        "src/friendli_core/models/dedicateddatasetmodalitytype.py",
+        "src/friendli_core/models/dedicatedterminateendpointop.py",
+        "src/friendli_core/models/streamedtoolassistedchattoken.py",
+        "src/friendli_core/models/completionsserverlessbodywithprompt.py",
+        "src/friendli_core/models/filegetdownloadurlresponse.py",
+        "src/friendli_core/models/listdatasetsresponse.py",
+        "src/friendli_core/models/dedicatedendpointversionhistoryresponse.py",
+        "src/friendli_core/models/get_splitop.py",
+        "src/friendli_core/models/get_download_urlop.py",
+        "src/friendli_core/models/serverlesstoolassistedchatstreamop.py",
+        "src/friendli_core/models/toolcallresult.py",
+        "src/friendli_core/models/dedicateddatasetmodality.py",
+        "src/friendli_core/models/chatlogprobs.py",
+        "src/friendli_core/models/toolstatuserror.py",
+        "src/friendli_core/models/dedicatedimagegenerationbody.py",
+        "src/friendli_core/models/autoscalingpolicy.py",
+        "src/friendli_core/models/dedicatedgetendpointop.py",
+        "src/friendli_core/models/list_versionsop.py",
+        "src/friendli_core/models/completionsstreamdedicatedbodywithtokens.py",
+        "src/friendli_core/models/completionsstreamserverlessbodywithprompt.py",
+        "src/friendli_core/models/streamedcompletionschoice.py",
+        "src/friendli_core/models/get_versionop.py",
+        "src/friendli_core/models/toolassistedchattool.py",
+        "src/friendli_core/models/dedicatedtokenizationop.py",
+        "src/friendli_core/models/containercompletionssuccess.py",
+        "src/friendli_core/models/completionsstreamserverlessbodywithtokens.py",
+        "src/friendli_core/models/add_samplesop.py",
+        "src/friendli_core/models/containerchatcompletesuccess.py",
+        "src/friendli_core/models/delete_samplesop.py",
+        "src/friendli_core/models/imagecontent.py",
+        "src/friendli_core/models/audiocontent.py",
+        "src/friendli_core/models/dedicatedendpointstatus.py",
+        "src/friendli_core/models/serverlessdetokenizationsuccess.py",
+        "src/friendli_core/models/toolmessage.py",
+        "src/friendli_core/models/serverlessdetokenizationop.py",
+        "src/friendli_core/models/dedicatedcompletionsbody.py",
+        "src/friendli_core/models/usage.py",
+        "src/friendli_core/models/containertokenizationsuccess.py",
+        "src/friendli_core/models/sdkerror.py",
+        "src/friendli_core/models/serverlessknowledgeretrieveop.py",
+        "src/friendli_core/models/dedicatedchatcompletionbody.py",
+        "src/friendli_core/models/delete_versionop.py",
+        "src/friendli_core/models/inferencedeploymentstatus.py",
+        "src/friendli_core/models/serverlesstoolassistedchatcompleteop.py",
+        "src/friendli_core/models/dedicatedrestartendpointop.py",
+        "src/friendli_core/models/list_datasetsop.py",
+        "src/friendli_core/models/streamoptions.py",
+        "src/friendli_core/models/streamedtoolassistedchattoolstatus.py",
+        "src/friendli_core/models/assistantmessagetoolcall.py",
+        "src/friendli_core/models/delete_datasetop.py",
+        "src/friendli_core/models/dedicatedtokenizationbody.py",
+        "src/friendli_core/models/dedicatedgetendpointversionhistoryop.py",
+        "src/friendli_core/models/dedicatedcompletionscompleteop.py",
+        "src/friendli_core/models/imagedata.py",
+        "src/friendli_core/models/dedicatedaudiotranscriptionbody.py",
+        "src/friendli_core/models/containerchatcompletionstreambody.py",
+        "src/friendli_core/models/responseformatregex.py",
+        "src/friendli_core/models/create_versionop.py",
+        "src/friendli_core/models/knowledgeretrievedchunk.py",
+        "src/friendli_core/models/otherbuiltintool.py",
+        "src/friendli_core/models/fileinituploadrequest.py",
+        "src/friendli_core/models/dedicatedendpointcreatebody.py",
+        "src/friendli_core/models/systemmessage.py",
+        "src/friendli_core/models/streamedchatchoicedelta.py",
+        "src/friendli_core/models/serverlesscompletionsstreambody.py",
+        "src/friendli_core/models/dedicatedendpointwandbartifactcreateresponse.py",
+        "src/friendli_core/models/containerimagesgenerateop.py",
+        "src/friendli_core/models/dedicateddeleteendpointop.py",
+        "src/friendli_core/models/chatchoicemessage.py",
+        "src/friendli_core/models/chatlogprobscontenttoplogprob.py",
+        "src/friendli_core/models/tool.py",
+        "src/friendli_core/models/delete_splitop.py",
+        "src/friendli_core/models/fileinituploadresponse.py",
+        "src/friendli_core/models/urlimageitem.py",
+        "src/friendli_core/models/servervadchunkingstrategy.py",
+        "src/friendli_core/models/serverlesschatcompletionbody.py",
+        "src/friendli_core/models/create_splitop.py",
+        "src/friendli_core/models/message.py",
+        "src/friendli_core/models/filebuiltintool.py",
+        "src/friendli_core/models/chatchoice.py",
+        "src/friendli_core/models/dedicatedchatcompletionstreambody.py",
+        "src/friendli_core/models/containerchatcompletionbody.py",
+        "src/friendli_core/models/dedicatedendpointlistresponse.py",
+        "src/friendli_core/models/completionsbodywithtokens.py",
+        "src/friendli_core/models/endpointsimplescaleconfig.py",
+        "src/friendli_core/models/dedicateddetokenizationbody.py",
+        "src/friendli_core/models/containerimagegeneratesuccess.py",
+        "src/friendli_core/models/serverlesstoolassistedchatcompletionstreambody.py",
+        "src/friendli_core/models/deletesamplesresponse.py",
+        "src/friendli_core/models/chatcompletebodytoolchoicefunction.py",
+        "src/friendli_core/models/containercompletionsstreambody.py",
+        "src/friendli_core/models/containertokenizationbody.py",
+        "src/friendli_core/models/completionsstreambodywithprompt.py",
+        "src/friendli_core/models/containerimagegenerationbody.py",
+        "src/friendli_core/models/dedicateddetokenizationop.py",
+        "src/friendli_core/models/list_splitsop.py",
+        "src/friendli_core/models/serverlesstokenizationsuccess.py",
+        "src/friendli_core/models/datasetinfo.py",
+        "src/friendli_core/models/containerchatcompleteop.py",
+        "src/friendli_core/models/modelcatalogresponseitem.py",
+        "src/friendli_core/models/serverlessknowledgeretrievalsuccess.py",
+        "src/friendli_core/models/toolstatusfile.py",
+        "src/friendli_core/models/chatcompletebodytoolchoice.py",
+        "src/friendli_core/models/tokensequence.py",
+        "src/friendli_core/models/dedicatedlistendpointsop.py",
+        "src/friendli_core/models/dedicatedimagesgenerateop.py",
+        "src/friendli_core/models/addsamplesresponse.py",
+        "src/friendli_core/models/body_upload_raw_samples.py",
+        "src/friendli_core/models/dedicatedsleependpointop.py",
+        "src/friendli_core/models/list_samplesop.py",
+        "src/friendli_core/models/completionsserverlessbodywithtokens.py",
+        "src/friendli_core/models/dedicatedtokenizationsuccess.py",
+        "src/friendli_core/models/serverlesschatcompleteop.py",
+        "src/friendli_core/models/streamedchatchoice.py",
+        "src/friendli_core/models/videocontent.py",
+        "src/friendli_core/models/dedicatedchatcompleteop.py",
+        "src/friendli_core/models/containerchatcompletionstreamsuccess.py",
+        "src/friendli_core/models/listsamplesresponse.py",
+        "src/friendli_core/models/complete_uploadop.py",
+        "src/friendli_core/models/serverlesspriceunittype.py",
+        "src/friendli_core/models/versioninfo.py",
+        "src/friendli_core/models/endpointadvancedconfig.py",
+        "src/friendli_core/models/assistantmessage.py",
+        "src/friendli_core/models/dedicatedendpointspec.py",
+        "src/friendli_core/models/get_datasetop.py",
+        "src/friendli_core/models/responseformatjsonobject.py",
+        "src/friendli_core/models/responsevalidationerror.py",
+        "src/friendli_core/models/upload_raw_samplesop.py",
+        "src/friendli_core/models/dedicatedcompletionsstreambody.py",
+        "src/friendli_core/models/containerdetokenizationsuccess.py",
+        "src/friendli_core/models/accountfilestatus.py",
+        "src/friendli_core/models/audiodata.py",
+        "src/friendli_core/models/validationerror.py",
+        "src/friendli_core/models/dedicateddetokenizationsuccess.py",
+        "src/friendli_core/models/create_datasetop.py",
+        "src/friendli_core/models/init_uploadop.py",
+        "src/friendli_core/models/streamedchatdata.py",
+        "src/friendli_core/models/fileinfo.py",
+        "src/friendli_core/models/streamedcompletiondata.py",
+        "src/friendli_core/types/__init__.py",
+        "src/friendli_core/types/basemodel.py"
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Platform Abstractions",
+      "description": "Provides base structures and interfaces tailored for different operational modes or deployment types within the Friendli platform, enabling the SDK to adapt its behavior to the target environment.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.dedicated",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/dedicated.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.serverless",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/serverless.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ],
+      "assigned_files": [
+        "src/friendli/serverless/completions.py",
+        "src/friendli/serverless/__init__.py",
+        "src/friendli/serverless/chat.py",
+        "src/friendli/serverless/tool_assisted_chat.py",
+        "src/friendli/serverless/model.py",
+        "src/friendli/serverless/token.py",
+        "src/friendli/serverless/knowledge.py",
+        "src/friendli/dedicated/completions.py",
+        "src/friendli/dedicated/__init__.py",
+        "src/friendli/dedicated/chat.py",
+        "src/friendli/dedicated/endpoint.py",
+        "src/friendli/dedicated/image.py",
+        "src/friendli/dedicated/token.py",
+        "src/friendli/dedicated/audio.py",
+        "src/friendli_core/friendlicore_serverless_chat.py",
+        "src/friendli_core/dedicated.py",
+        "src/friendli_core/endpoint.py",
+        "src/friendli_core/friendlicore_serverless_token.py",
+        "src/friendli_core/serverless.py",
+        "src/friendli_core/friendlicore_serverless_completions.py"
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Hooks & Extensibility",
+      "description": "Offers an extensible mechanism for injecting custom logic at various stages of the request/response lifecycle, allowing for pre-processing, post-processing, and error handling customization.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core._hooks",
+          "reference_file": "N/A",
+          "reference_start_line": 0,
+          "reference_end_line": 0
+        }
+      ],
+      "assigned_files": [
+        "src/friendli_core/_hooks/__init__.py",
+        "src/friendli_core/_hooks/sdkhooks.py",
+        "src/friendli_core/_hooks/registration.py",
+        "src/friendli_core/_hooks/types.py"
+      ],
+      "can_expand": true
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [
+        "src/friendli/utils.py",
+        "src/friendli_core/_version.py",
+        "src/friendli_core/utils/metadata.py",
+        "src/friendli_core/utils/__init__.py",
+        "src/friendli_core/utils/forms.py",
+        "src/friendli_core/utils/queryparams.py",
+        "src/friendli_core/utils/serializers.py",
+        "src/friendli_core/utils/security.py",
+        "src/friendli_core/utils/datetimes.py",
+        "src/friendli_core/utils/requestbodies.py",
+        "src/friendli_core/utils/enums.py",
+        "src/friendli_core/utils/url.py",
+        "src/friendli_core/utils/retries.py",
+        "src/friendli_core/utils/values.py",
+        "src/friendli_core/utils/headers.py",
+        "src/friendli_core/utils/logger.py",
+        "src/friendli_core/utils/unmarshal_json_response.py",
+        "src/friendli_core/utils/eventstreaming.py",
+        "src/friendli_core/utils/annotations.py",
+        "scripts/prepare_readme.py",
+        "scripts/auto-fix.py"
+      ],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    },
+    {
+      "name": "Unclassified",
+      "description": "Component for all unclassified files and utility functions (Utility functions/External Libraries/Dependencies)",
+      "referenced_source_code": [],
+      "assigned_files": [],
+      "can_expand": false
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "delegates requests to",
+      "src_name": "Friendli Client (Public API)",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "utilizes",
+      "src_name": "SDK Core",
+      "dst_name": "Data Models & Error Handling"
+    },
+    {
+      "relation": "adapts behavior based on",
+      "src_name": "SDK Core",
+      "dst_name": "Platform Abstractions"
+    },
+    {
+      "relation": "integrates and consumes",
+      "src_name": "SDK Core",
+      "dst_name": "Hooks & Extensibility"
+    },
+    {
+      "relation": "utilize",
+      "src_name": "Service Modules",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "rely on",
+      "src_name": "Service Modules",
+      "dst_name": "Data Models & Error Handling"
+    }
+  ]
+}

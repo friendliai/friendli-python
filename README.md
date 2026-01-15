@@ -17,6 +17,9 @@ When using Friendli Python SDK, you need to provide a Friendli Token for authent
 5. Create a new Friendli Token by clicking the "Create token" button.
 6. Copy the token and save it in a safe place. You will not be able to see this token again once the page is refreshed.
 
+## Architecture & Development Onboarding
+
+For developers looking to understand the codebase architecture and get started with contributing to the Friendli Python SDK, please refer to our [Architecture Documentation](./docs/architecture/on_boarding.md).
 <!-- No Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -24,6 +27,7 @@ When using Friendli Python SDK, you need to provide a Friendli Token for authent
 <!-- $toc-max-depth=2 -->
 * [Friendli Python SDK](#friendli-python-sdk)
   * [Token Setup](#token-setup)
+  * [Architecture & Development Onboarding](#architecture--development-onboarding)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)

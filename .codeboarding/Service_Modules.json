@@ -1,0 +1,135 @@
+{
+  "description": "These components are chosen based on their fundamental architectural importance in a Client-side SDK. The `Service Modules` are the primary interface for users, encapsulating domain logic. The `Security Utility` is essential for authentication, a core cross-cutting concern. `JSON Unmarshalling Utility` and `Event Streaming Utility` are vital for handling diverse API response formats. Finally, `Hook Context Management` provides the necessary extensibility, aligning with the \"Extensibility\" principle mentioned in the project context. This set of components provides a clear, modular, and functional breakdown of the SDK's core responsibilities.",
+  "components": [
+    {
+      "name": "Service Modules",
+      "description": "These modules encapsulate the core API domain logic for specific functionalities like Chat, Completions, Dataset management, and Image processing. They provide high-level, domain-specific methods that abstract the underlying API interactions, supporting both asynchronous and synchronous operations. This component is central to the SDK's usability, offering a clear interface for developers to interact with different parts of the Friendli API.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.chat.SyncChat",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/chat.py",
+          "reference_start_line": 18,
+          "reference_end_line": 372
+        },
+        {
+          "qualified_name": "friendli_core.chat.AsyncChat",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/chat.py",
+          "reference_start_line": 375,
+          "reference_end_line": 729
+        },
+        {
+          "qualified_name": "friendli_core.completions.SyncCompletions",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/completions.py",
+          "reference_start_line": 18,
+          "reference_end_line": 194
+        },
+        {
+          "qualified_name": "friendli_core.completions.AsyncCompletions",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/completions.py",
+          "reference_start_line": 197,
+          "reference_end_line": 373
+        },
+        {
+          "qualified_name": "friendli_core.dataset.SyncDataset",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/dataset.py",
+          "reference_start_line": 19,
+          "reference_end_line": 1528
+        },
+        {
+          "qualified_name": "friendli_core.dataset.AsyncDataset",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/dataset.py",
+          "reference_start_line": 1531,
+          "reference_end_line": 3040
+        },
+        {
+          "qualified_name": "friendli_core.image.SyncImage",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/image.py",
+          "reference_start_line": 18,
+          "reference_end_line": 118
+        },
+        {
+          "qualified_name": "friendli_core.image.AsyncImage",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/image.py",
+          "reference_start_line": 121,
+          "reference_end_line": 221
+        }
+      ]
+    },
+    {
+      "name": "Security Utility",
+      "description": "Responsible for securely retrieving and managing API credentials, typically from environment variables or other configuration sources. This component ensures that API requests are properly authenticated.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.utils.security.get_security_from_env",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/utils/security.py",
+          "reference_start_line": 57,
+          "reference_end_line": 69
+        }
+      ]
+    },
+    {
+      "name": "JSON Unmarshalling Utility",
+      "description": "Handles the deserialization of JSON responses received from the Friendli API into structured Python objects. This component is crucial for converting raw API data into usable formats within the SDK.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.utils.unmarshal_json_response.unmarshal_json_response",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/utils/unmarshal_json_response.py",
+          "reference_start_line": 11,
+          "reference_end_line": 24
+        }
+      ]
+    },
+    {
+      "name": "Event Streaming Utility",
+      "description": "Provides mechanisms for processing and managing streaming responses from the API, particularly for operations that return continuous data streams (e.g., chat completions). It abstracts the complexities of handling server-sent events or similar streaming protocols.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.utils.eventstreaming.EventStream",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/utils/eventstreaming.py",
+          "reference_start_line": 19,
+          "reference_end_line": 42
+        },
+        {
+          "qualified_name": "friendli_core.utils.eventstreaming.EventStreamAsync",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/utils/eventstreaming.py",
+          "reference_start_line": 45,
+          "reference_end_line": 68
+        }
+      ]
+    },
+    {
+      "name": "Hook Context Management",
+      "description": "Manages an extensibility mechanism that allows developers to inject custom logic (hooks) at various points during the API interaction lifecycle. This component supports the SDK's extensibility, enabling custom pre-processing, post-processing, or error handling.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core._hooks.types.HookContext",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/_hooks/types.py",
+          "reference_start_line": 11,
+          "reference_end_line": 30
+        }
+      ]
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "calls",
+      "src_name": "Service Modules",
+      "dst_name": "Security Utility"
+    },
+    {
+      "relation": "invokes",
+      "src_name": "Service Modules",
+      "dst_name": "JSON Unmarshalling Utility"
+    },
+    {
+      "relation": "interacts with",
+      "src_name": "Service Modules",
+      "dst_name": "Event Streaming Utility"
+    },
+    {
+      "relation": "utilizes",
+      "src_name": "Service Modules",
+      "dst_name": "Hook Context Management"
+    }
+  ]
+}
