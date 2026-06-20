@@ -6,7 +6,7 @@ from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
-from typing import List, Mapping, Optional
+from typing import Iterable, List, Mapping, Optional
 import abc
 
 
@@ -30,7 +30,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
 
         By giving a text input, generate a tokenized output of token IDs.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param prompt: Input text prompt to tokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
@@ -96,7 +96,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -115,7 +115,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
         self,
         *,
         model: str,
-        tokens: List[int],
+        tokens: Iterable[int],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -126,7 +126,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
 
         By giving a list of tokens, generate a detokenized output text string.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param tokens: A token sequence to detokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
@@ -145,7 +145,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
         request = models.ServerlessDetokenizationRequest(
             x_friendli_team=x_friendli_team,
             serverless_detokenization_body=models.ServerlessDetokenizationBody(
-                model=model, tokens=tokens
+                model=model, tokens=utils.unmarshal(tokens, List[int])
             ),
         )
         req = self._build_request(
@@ -192,7 +192,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -224,7 +224,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
 
         By giving a text input, generate a tokenized output of token IDs.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param prompt: Input text prompt to tokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
@@ -290,7 +290,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -309,7 +309,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
         self,
         *,
         model: str,
-        tokens: List[int],
+        tokens: Iterable[int],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -320,7 +320,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
 
         By giving a list of tokens, generate a detokenized output text string.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param tokens: A token sequence to detokenize.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
@@ -339,7 +339,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
         request = models.ServerlessDetokenizationRequest(
             x_friendli_team=x_friendli_team,
             serverless_detokenization_body=models.ServerlessDetokenizationBody(
-                model=model, tokens=tokens
+                model=model, tokens=utils.unmarshal(tokens, List[int])
             ),
         )
         req = self._build_request_async(
@@ -386,7 +386,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):

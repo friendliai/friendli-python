@@ -14,8 +14,8 @@ MessageTypedDict = TypeAliasType(
     Union[
         SystemMessageTypedDict,
         UserMessageTypedDict,
-        AssistantMessageTypedDict,
         ToolMessageTypedDict,
+        AssistantMessageTypedDict,
     ],
 )
 Message = Annotated[

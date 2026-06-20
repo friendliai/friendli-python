@@ -77,7 +77,7 @@ class SyncModel(BaseModel, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -154,7 +154,7 @@ class AsyncModel(BaseModel, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):

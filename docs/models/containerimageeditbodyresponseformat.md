@@ -1,9 +1,14 @@
 # ContainerImageEditBodyResponseFormat
 
+## Example Usage
+
+```python
+from friendli_core.models import ContainerImageEditBodyResponseFormat
+value: ContainerImageEditBodyResponseFormat = "raw"
+```
+
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `RAW`  | raw    |
-| `JPEG` | jpeg   |
+- `"raw"`
+- `"jpeg"`

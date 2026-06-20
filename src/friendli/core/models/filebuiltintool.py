@@ -24,3 +24,9 @@ class FileBuiltInTool(BaseModel):
         pydantic.Field(alias="type"),
     ] = "file:text"
     "The type of the file parser tool. Only .txt and .pdf files are supported."
+
+
+try:
+    FileBuiltInTool.model_rebuild()
+except NameError:
+    pass

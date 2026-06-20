@@ -19,7 +19,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class DedicatedListEndpointsRequestTypedDict(TypedDict):
     project_id: NotRequired[Nullable[str]]
     "The ID of the project. If omitted, query all endpoints under the team."
-    cursor: NotRequired[Nullable[Union[bytes, IO[bytes], io.BufferedReader]]]
+    cursor: NotRequired[Nullable[Union[bytes, IO[bytes], io.IOBase]]]
     "Cursor for pagination"
     limit: NotRequired[Nullable[int]]
     "Limit of items per page"
@@ -34,7 +34,7 @@ class DedicatedListEndpointsRequest(BaseModel):
     ] = UNSET
     "The ID of the project. If omitted, query all endpoints under the team."
     cursor: Annotated[
-        OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]],
+        OptionalNullable[Union[bytes, IO[bytes], io.IOBase]],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
     "Cursor for pagination"
@@ -52,24 +52,21 @@ class DedicatedListEndpointsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["project_id", "cursor", "limit", "X-Friendli-Team"]
-        nullable_fields = ["project_id", "cursor", "limit", "X-Friendli-Team"]
-        null_default_fields = []
+        optional_fields = set(["project_id", "cursor", "limit", "X-Friendli-Team"])
+        nullable_fields = set(["project_id", "cursor", "limit", "X-Friendli-Team"])
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
             )
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                k not in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
         return m

@@ -1,0 +1,9 @@
+# MessagesInputMessage
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `role`                                                                                                  | [models.Role](../models/role.md)                                                                        | :heavy_check_mark:                                                                                      | Author role for this message turn. Use `user` for user input and `assistant` for prior assistant turns. |
+| `content`                                                                                               | [models.MessagesInputMessageContent](../models/messagesinputmessagecontent.md)                          | :heavy_check_mark:                                                                                      | Message payload. Supports plain string shorthand or a typed block array.                                |

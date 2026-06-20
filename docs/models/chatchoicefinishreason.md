@@ -4,11 +4,16 @@ Termination condition of the generation. `stop` means the API returned the full 
 `length` means the generation exceeded `max_tokens` or the conversation exceeded the max context length.
 `tool_calls` means the API has generated tool calls.
 
+## Example Usage
+
+```python
+from friendli_core.models import ChatChoiceFinishReason
+value: ChatChoiceFinishReason = "stop"
+```
+
 
 ## Values
 
-| Name         | Value        |
-| ------------ | ------------ |
-| `STOP`       | stop         |
-| `LENGTH`     | length       |
-| `TOOL_CALLS` | tool_calls   |
+- `"stop"`
+- `"length"`
+- `"tool_calls"`

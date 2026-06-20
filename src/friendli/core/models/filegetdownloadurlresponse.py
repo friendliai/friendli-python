@@ -26,3 +26,9 @@ class FileGetDownloadURLResponse(BaseModel):
     "S3 URI of the file."
     download_url: Annotated[str, pydantic.Field(alias="downloadUrl")]
     "Download URL of the file."
+
+
+try:
+    FileGetDownloadURLResponse.model_rebuild()
+except NameError:
+    pass

@@ -8,13 +8,13 @@ from typing_extensions import TypedDict
 
 class ServerlessDetokenizationBodyTypedDict(TypedDict):
     model: str
-    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods)."
+    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods)."
     tokens: List[int]
     "A token sequence to detokenize."
 
 
 class ServerlessDetokenizationBody(BaseModel):
     model: str
-    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods)."
+    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods)."
     tokens: List[int]
     "A token sequence to detokenize."
