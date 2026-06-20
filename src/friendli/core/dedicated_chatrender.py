@@ -6,7 +6,7 @@ from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 import abc
 
 
@@ -19,11 +19,11 @@ class SyncDedicatedChatRender(BaseDedicatedChatRender, SyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
         tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
+            Union[Iterable[models.Tool], Iterable[models.ToolTypedDict]]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -60,7 +60,9 @@ class SyncDedicatedChatRender(BaseDedicatedChatRender, SyncSDK):
             dedicated_chat_render_body=models.DedicatedChatRenderBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
                 ),
@@ -110,7 +112,7 @@ class SyncDedicatedChatRender(BaseDedicatedChatRender, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -129,11 +131,11 @@ class AsyncDedicatedChatRender(BaseDedicatedChatRender, AsyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
         tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
+            Union[Iterable[models.Tool], Iterable[models.ToolTypedDict]]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -170,7 +172,9 @@ class AsyncDedicatedChatRender(BaseDedicatedChatRender, AsyncSDK):
             dedicated_chat_render_body=models.DedicatedChatRenderBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
                 ),
@@ -220,7 +224,7 @@ class AsyncDedicatedChatRender(BaseDedicatedChatRender, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):

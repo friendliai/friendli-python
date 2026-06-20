@@ -1,0 +1,11 @@
+# StreamedAudioTranscriptionData
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `type`                                                                                       | [models.StreamedAudioTranscriptionDataType](../models/streamedaudiotranscriptiondatatype.md) | :heavy_check_mark:                                                                           | The event type, which is `transcript.text.delta` or `transcript.text.done`.                  |
+| `delta`                                                                                      | *OptionalNullable[str]*                                                                      | :heavy_minus_sign:                                                                           | The incremental transcript text.                                                             |
+| `text`                                                                                       | *OptionalNullable[str]*                                                                      | :heavy_minus_sign:                                                                           | The transcribed text.                                                                        |
+| `usage`                                                                                      | [OptionalNullable[models.AudioTranscriptionUsage]](../models/audiotranscriptionusage.md)     | :heavy_minus_sign:                                                                           | N/A                                                                                          |

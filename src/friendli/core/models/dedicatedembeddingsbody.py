@@ -12,18 +12,24 @@ from pydantic import model_serializer
 from typing import List, Literal, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
-InputTypedDict = TypeAliasType("InputTypedDict", Union[str, List[str]])
-"Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays."
-Input = TypeAliasType("Input", Union[str, List[str]])
-"Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays."
+DedicatedEmbeddingsBodyInputTypedDict = TypeAliasType(
+    "DedicatedEmbeddingsBodyInputTypedDict", Union[str, List[str]]
+)
+"Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.\n\nEither `input` or `tokens` field is required.\n"
+DedicatedEmbeddingsBodyInput = TypeAliasType(
+    "DedicatedEmbeddingsBodyInput", Union[str, List[str]]
+)
+"Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.\n\nEither `input` or `tokens` field is required.\n"
 EncodingFormat = Literal["float", "base64"]
 
 
 class DedicatedEmbeddingsBodyTypedDict(TypedDict):
     model: str
     'ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.'
-    input: InputTypedDict
-    "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays."
+    input: NotRequired[Nullable[DedicatedEmbeddingsBodyInputTypedDict]]
+    "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.\n\n    Either `input` or `tokens` field is required.\n    "
+    tokens: NotRequired[Nullable[List[int]]]
+    "The tokenized prompt (i.e., input tokens).\n\n    Either `input` or `tokens` field is required.\n    "
     encoding_format: NotRequired[Nullable[EncodingFormat]]
     "The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/)."
 
@@ -31,31 +37,30 @@ class DedicatedEmbeddingsBodyTypedDict(TypedDict):
 class DedicatedEmbeddingsBody(BaseModel):
     model: str
     'ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.'
-    input: Input
-    "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays."
+    input: OptionalNullable[DedicatedEmbeddingsBodyInput] = UNSET
+    "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.\n\n    Either `input` or `tokens` field is required.\n    "
+    tokens: OptionalNullable[List[int]] = UNSET
+    "The tokenized prompt (i.e., input tokens).\n\n    Either `input` or `tokens` field is required.\n    "
     encoding_format: OptionalNullable[EncodingFormat] = UNSET
     "The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/)."
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["encoding_format"]
-        nullable_fields = ["encoding_format"]
-        null_default_fields = []
+        optional_fields = set(["input", "tokens", "encoding_format"])
+        nullable_fields = set(["input", "tokens", "encoding_format"])
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
             )
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                k not in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
         return m

@@ -1,0 +1,11 @@
+# MessagesErrorResponse
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `type`                                                                                 | *Literal["error"]*                                                                     | :heavy_check_mark:                                                                     | Top-level response type for Messages API errors.                                       |
+| `error`                                                                                | [models.MessagesErrorObject](../models/messageserrorobject.md)                         | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `request_id`                                                                           | *OptionalNullable[str]*                                                                | :heavy_minus_sign:                                                                     | Request identifier for debugging and support. It may be omitted in some failure paths. |
+| `__pydantic_extra__`                                                                   | Dict[str, *Any*]                                                                       | :heavy_minus_sign:                                                                     | N/A                                                                                    |

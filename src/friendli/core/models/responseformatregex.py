@@ -24,3 +24,9 @@ class ResponseFormatRegex(BaseModel):
         pydantic.Field(alias="type"),
     ] = "regex"
     "The type of the response format: `regex`"
+
+
+try:
+    ResponseFormatRegex.model_rebuild()
+except NameError:
+    pass

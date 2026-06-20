@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 from .serverlesspriceunittype import ServerlessPriceUnitType
-from friendli.core.types import BaseModel
+from friendli.core.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -14,8 +21,16 @@ class PricingModelTypedDict(TypedDict):
     "Price per input token"
     output: float
     "Price per output token"
+    prompt: float
+    "Price per input token (alias of input)"
+    completion: float
+    "Price per output token (alias of output)"
+    input_cache_read: NotRequired[Nullable[float]]
+    "Price per cached input token read"
     response_time: NotRequired[float]
     "Price per response time in seconds"
+    audio_minute: NotRequired[Nullable[float]]
+    "Price per audio minute"
     unit_type: NotRequired[ServerlessPriceUnitType]
     "Serverless price unit type."
 
@@ -27,7 +42,38 @@ class PricingModel(BaseModel):
     "Price per input token"
     output: float
     "Price per output token"
+    prompt: float
+    "Price per input token (alias of input)"
+    completion: float
+    "Price per output token (alias of output)"
+    input_cache_read: OptionalNullable[float] = UNSET
+    "Price per cached input token read"
     response_time: Optional[float] = 0
     "Price per response time in seconds"
+    audio_minute: OptionalNullable[float] = UNSET
+    "Price per audio minute"
     unit_type: Optional[ServerlessPriceUnitType] = None
     "Serverless price unit type."
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["input_cache_read", "response_time", "audio_minute", "unit_type"]
+        )
+        nullable_fields = set(["input_cache_read", "audio_minute"])
+        serialized = handler(self)
+        m = {}
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
+            )
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+        return m

@@ -26,3 +26,9 @@ class VersionInfo(BaseModel):
     "Comment for the version."
     created_at: Annotated[int, pydantic.Field(alias="createdAt")]
     "Unix timestamp (in seconds) of when the version was created."
+
+
+try:
+    VersionInfo.model_rebuild()
+except NameError:
+    pass

@@ -6,7 +6,7 @@ from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import eventstreaming, get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 import abc
 
 
@@ -19,12 +19,12 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
-        eos_token: OptionalNullable[List[int]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
+        eos_token: OptionalNullable[Iterable[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
+        logit_bias: OptionalNullable[Mapping[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -32,13 +32,17 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
+        reasoning_effort: OptionalNullable[
+            models.ServerlessToolAssistedChatCompletionBodyReasoningEffort
+        ] = UNSET,
+        reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.ServerlessToolAssistedChatCompletionBodySeed,
                 models.ServerlessToolAssistedChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
+        stop: OptionalNullable[Iterable[str]] = UNSET,
         stream: Optional[bool] = False,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
@@ -59,8 +63,8 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
             Union[
-                List[models.ToolAssistedChatTool],
-                List[models.ToolAssistedChatToolTypedDict],
+                Iterable[models.ToolAssistedChatTool],
+                Iterable[models.ToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
         resume_generation: Optional[bool] = None,
@@ -73,7 +77,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
@@ -87,9 +91,11 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
+        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -113,7 +119,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         :param tools: A list of tools the model may call.
             A maximum of 128 functions is supported.
             Use this to provide a list of functions the model may generate JSON inputs for.
-            For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tool-assisted-api#built-in-tools).
+            For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/model-apis/tool-assisted-api#built-in-tools).
         :param resume_generation: Enable to continue text generation even after an error occurs during a tool call.
 
             Note that enabling this option may use more tokens, as the system generates additional content to handle errors gracefully.
@@ -140,10 +146,14 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
             serverless_tool_assisted_chat_completion_body=models.ServerlessToolAssistedChatCompletionBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
-                eos_token=eos_token,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
+                eos_token=utils.unmarshal(eos_token, OptionalNullable[List[int]]),
                 frequency_penalty=frequency_penalty,
-                logit_bias=logit_bias,
+                logit_bias=utils.unmarshal(
+                    logit_bias, OptionalNullable[Dict[str, Any]]
+                ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
                 min_p=min_p,
@@ -151,8 +161,15 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                seed=seed,
-                stop=stop,
+                reasoning_effort=reasoning_effort,
+                reasoning_budget=reasoning_budget,
+                seed=utils.unmarshal(
+                    seed,
+                    OptionalNullable[
+                        models.ServerlessToolAssistedChatCompletionBodySeed
+                    ],
+                ),
+                stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[models.StreamOptions]
@@ -219,7 +236,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -238,12 +255,12 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
-        eos_token: OptionalNullable[List[int]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
+        eos_token: OptionalNullable[Iterable[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
+        logit_bias: OptionalNullable[Mapping[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -251,13 +268,17 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
+        reasoning_effort: OptionalNullable[
+            models.ServerlessToolAssistedChatCompletionStreamBodyReasoningEffort
+        ] = UNSET,
+        reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.ServerlessToolAssistedChatCompletionStreamBodySeed,
                 models.ServerlessToolAssistedChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
+        stop: OptionalNullable[Iterable[str]] = UNSET,
         stream: Optional[bool] = True,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
@@ -278,8 +299,8 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
             Union[
-                List[models.ToolAssistedChatTool],
-                List[models.ToolAssistedChatToolTypedDict],
+                Iterable[models.ToolAssistedChatTool],
+                Iterable[models.ToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
         resume_generation: Optional[bool] = None,
@@ -294,7 +315,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
@@ -308,9 +329,11 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
+        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -334,7 +357,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         :param tools: A list of tools the model may call.
             A maximum of 128 functions is supported.
             Use this to provide a list of functions the model may generate JSON inputs for.
-            For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tool-assisted-api#built-in-tools).
+            For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/model-apis/tool-assisted-api#built-in-tools).
         :param resume_generation: Enable to continue text generation even after an error occurs during a tool call.
 
             Note that enabling this option may use more tokens, as the system generates additional content to handle errors gracefully.
@@ -361,10 +384,14 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
             serverless_tool_assisted_chat_completion_stream_body=models.ServerlessToolAssistedChatCompletionStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
-                eos_token=eos_token,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
+                eos_token=utils.unmarshal(eos_token, OptionalNullable[List[int]]),
                 frequency_penalty=frequency_penalty,
-                logit_bias=logit_bias,
+                logit_bias=utils.unmarshal(
+                    logit_bias, OptionalNullable[Dict[str, Any]]
+                ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
                 min_p=min_p,
@@ -372,8 +399,15 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                seed=seed,
-                stop=stop,
+                reasoning_effort=reasoning_effort,
+                reasoning_budget=reasoning_budget,
+                seed=utils.unmarshal(
+                    seed,
+                    OptionalNullable[
+                        models.ServerlessToolAssistedChatCompletionStreamBodySeed
+                    ],
+                ),
+                stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[models.StreamOptions]
@@ -442,7 +476,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
@@ -470,12 +504,12 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
-        eos_token: OptionalNullable[List[int]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
+        eos_token: OptionalNullable[Iterable[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
+        logit_bias: OptionalNullable[Mapping[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -483,13 +517,17 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
+        reasoning_effort: OptionalNullable[
+            models.ServerlessToolAssistedChatCompletionBodyReasoningEffort
+        ] = UNSET,
+        reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.ServerlessToolAssistedChatCompletionBodySeed,
                 models.ServerlessToolAssistedChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
+        stop: OptionalNullable[Iterable[str]] = UNSET,
         stream: Optional[bool] = False,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
@@ -510,8 +548,8 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
             Union[
-                List[models.ToolAssistedChatTool],
-                List[models.ToolAssistedChatToolTypedDict],
+                Iterable[models.ToolAssistedChatTool],
+                Iterable[models.ToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
         resume_generation: Optional[bool] = None,
@@ -524,7 +562,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
@@ -538,9 +576,11 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
+        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -564,7 +604,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         :param tools: A list of tools the model may call.
             A maximum of 128 functions is supported.
             Use this to provide a list of functions the model may generate JSON inputs for.
-            For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tool-assisted-api#built-in-tools).
+            For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/model-apis/tool-assisted-api#built-in-tools).
         :param resume_generation: Enable to continue text generation even after an error occurs during a tool call.
 
             Note that enabling this option may use more tokens, as the system generates additional content to handle errors gracefully.
@@ -591,10 +631,14 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
             serverless_tool_assisted_chat_completion_body=models.ServerlessToolAssistedChatCompletionBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
-                eos_token=eos_token,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
+                eos_token=utils.unmarshal(eos_token, OptionalNullable[List[int]]),
                 frequency_penalty=frequency_penalty,
-                logit_bias=logit_bias,
+                logit_bias=utils.unmarshal(
+                    logit_bias, OptionalNullable[Dict[str, Any]]
+                ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
                 min_p=min_p,
@@ -602,8 +646,15 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                seed=seed,
-                stop=stop,
+                reasoning_effort=reasoning_effort,
+                reasoning_budget=reasoning_budget,
+                seed=utils.unmarshal(
+                    seed,
+                    OptionalNullable[
+                        models.ServerlessToolAssistedChatCompletionBodySeed
+                    ],
+                ),
+                stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[models.StreamOptions]
@@ -670,7 +721,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -689,12 +740,12 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
-        eos_token: OptionalNullable[List[int]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
+        eos_token: OptionalNullable[Iterable[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
+        logit_bias: OptionalNullable[Mapping[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -702,13 +753,17 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
+        reasoning_effort: OptionalNullable[
+            models.ServerlessToolAssistedChatCompletionStreamBodyReasoningEffort
+        ] = UNSET,
+        reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.ServerlessToolAssistedChatCompletionStreamBodySeed,
                 models.ServerlessToolAssistedChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
+        stop: OptionalNullable[Iterable[str]] = UNSET,
         stream: Optional[bool] = True,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
@@ -729,8 +784,8 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
             Union[
-                List[models.ToolAssistedChatTool],
-                List[models.ToolAssistedChatToolTypedDict],
+                Iterable[models.ToolAssistedChatTool],
+                Iterable[models.ToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
         resume_generation: Optional[bool] = None,
@@ -745,7 +800,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
@@ -759,9 +814,11 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
+        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -785,7 +842,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         :param tools: A list of tools the model may call.
             A maximum of 128 functions is supported.
             Use this to provide a list of functions the model may generate JSON inputs for.
-            For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/tool-assisted-api#built-in-tools).
+            For more detailed information about each tool, please refer [here](https://friendli.ai/docs/guides/model-apis/tool-assisted-api#built-in-tools).
         :param resume_generation: Enable to continue text generation even after an error occurs during a tool call.
 
             Note that enabling this option may use more tokens, as the system generates additional content to handle errors gracefully.
@@ -812,10 +869,14 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
             serverless_tool_assisted_chat_completion_stream_body=models.ServerlessToolAssistedChatCompletionStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
-                eos_token=eos_token,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
+                eos_token=utils.unmarshal(eos_token, OptionalNullable[List[int]]),
                 frequency_penalty=frequency_penalty,
-                logit_bias=logit_bias,
+                logit_bias=utils.unmarshal(
+                    logit_bias, OptionalNullable[Dict[str, Any]]
+                ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
                 min_p=min_p,
@@ -823,8 +884,15 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                seed=seed,
-                stop=stop,
+                reasoning_effort=reasoning_effort,
+                reasoning_budget=reasoning_budget,
+                seed=utils.unmarshal(
+                    seed,
+                    OptionalNullable[
+                        models.ServerlessToolAssistedChatCompletionStreamBodySeed
+                    ],
+                ),
+                stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[models.StreamOptions]
@@ -893,7 +961,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )

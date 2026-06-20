@@ -19,3 +19,9 @@ class DeleteSamplesResponse(BaseModel):
 
     sample_ids: Annotated[List[str], pydantic.Field(alias="sampleIds")]
     "List of sample IDs that were deleted from the dataset."
+
+
+try:
+    DeleteSamplesResponse.model_rebuild()
+except NameError:
+    pass

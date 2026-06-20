@@ -1,9 +1,14 @@
 # ListDatasetsDirection
 
+## Example Usage
+
+```python
+from friendli_core.models import ListDatasetsDirection
+value: ListDatasetsDirection = "asc"
+```
+
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `ASC`  | asc    |
-| `DESC` | desc   |
+- `"asc"`
+- `"desc"`

@@ -74,7 +74,7 @@ class CompletionsStreamDedicatedBodyWithTokensTypedDict(TypedDict):
     stop_tokens: NotRequired[Nullable[List[TokenSequenceTypedDict]]]
     "Stop generating further tokens when generated token corresponds to any of the tokens in the sequence."
     stream: NotRequired[Nullable[bool]]
-    "Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
     temperature: NotRequired[Nullable[float]]
@@ -140,7 +140,7 @@ class CompletionsStreamDedicatedBodyWithTokens(BaseModel):
     stop_tokens: OptionalNullable[List[TokenSequence]] = UNSET
     "Stop generating further tokens when generated token corresponds to any of the tokens in the sequence."
     stream: OptionalNullable[bool] = UNSET
-    "Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: OptionalNullable[StreamOptions] = UNSET
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
     temperature: OptionalNullable[float] = UNSET
@@ -158,86 +158,87 @@ class CompletionsStreamDedicatedBodyWithTokens(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "bad_word_tokens",
-            "bad_words",
-            "embedding_to_replace",
-            "encoder_no_repeat_ngram",
-            "encoder_repetition_penalty",
-            "eos_token",
-            "forced_output_tokens",
-            "frequency_penalty",
-            "logprobs",
-            "max_tokens",
-            "max_total_tokens",
-            "min_p",
-            "min_tokens",
-            "min_total_tokens",
-            "n",
-            "no_repeat_ngram",
-            "presence_penalty",
-            "repetition_penalty",
-            "response_format",
-            "seed",
-            "stop",
-            "stop_tokens",
-            "stream",
-            "stream_options",
-            "temperature",
-            "token_index_to_replace",
-            "top_k",
-            "top_p",
-            "xtc_threshold",
-            "xtc_probability",
-        ]
-        nullable_fields = [
-            "bad_word_tokens",
-            "bad_words",
-            "embedding_to_replace",
-            "encoder_no_repeat_ngram",
-            "encoder_repetition_penalty",
-            "eos_token",
-            "forced_output_tokens",
-            "frequency_penalty",
-            "logprobs",
-            "max_tokens",
-            "max_total_tokens",
-            "min_p",
-            "min_tokens",
-            "min_total_tokens",
-            "n",
-            "no_repeat_ngram",
-            "presence_penalty",
-            "repetition_penalty",
-            "response_format",
-            "seed",
-            "stop",
-            "stop_tokens",
-            "stream",
-            "stream_options",
-            "temperature",
-            "token_index_to_replace",
-            "top_k",
-            "top_p",
-            "xtc_threshold",
-            "xtc_probability",
-        ]
-        null_default_fields = []
+        optional_fields = set(
+            [
+                "bad_word_tokens",
+                "bad_words",
+                "embedding_to_replace",
+                "encoder_no_repeat_ngram",
+                "encoder_repetition_penalty",
+                "eos_token",
+                "forced_output_tokens",
+                "frequency_penalty",
+                "logprobs",
+                "max_tokens",
+                "max_total_tokens",
+                "min_p",
+                "min_tokens",
+                "min_total_tokens",
+                "n",
+                "no_repeat_ngram",
+                "presence_penalty",
+                "repetition_penalty",
+                "response_format",
+                "seed",
+                "stop",
+                "stop_tokens",
+                "stream",
+                "stream_options",
+                "temperature",
+                "token_index_to_replace",
+                "top_k",
+                "top_p",
+                "xtc_threshold",
+                "xtc_probability",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "bad_word_tokens",
+                "bad_words",
+                "embedding_to_replace",
+                "encoder_no_repeat_ngram",
+                "encoder_repetition_penalty",
+                "eos_token",
+                "forced_output_tokens",
+                "frequency_penalty",
+                "logprobs",
+                "max_tokens",
+                "max_total_tokens",
+                "min_p",
+                "min_tokens",
+                "min_total_tokens",
+                "n",
+                "no_repeat_ngram",
+                "presence_penalty",
+                "repetition_penalty",
+                "response_format",
+                "seed",
+                "stop",
+                "stop_tokens",
+                "stream",
+                "stream_options",
+                "temperature",
+                "token_index_to_replace",
+                "top_k",
+                "top_p",
+                "xtc_threshold",
+                "xtc_probability",
+            ]
+        )
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
             )
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                k not in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
         return m

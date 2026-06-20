@@ -6,7 +6,7 @@ from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
-from typing import List, Mapping, Optional
+from typing import Iterable, List, Mapping, Optional
 import abc
 
 
@@ -85,7 +85,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -103,7 +103,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
     def detokenize(
         self,
         *,
-        tokens: List[int],
+        tokens: Iterable[int],
         model: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -129,7 +129,9 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_DETOKENIZATION_OP_SERVERS[0]
-        request = models.ContainerDetokenizationBody(model=model, tokens=tokens)
+        request = models.ContainerDetokenizationBody(
+            model=model, tokens=utils.unmarshal(tokens, List[int])
+        )
         req = self._build_request(
             method="POST",
             path="/v1/detokenize",
@@ -170,7 +172,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -257,7 +259,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -275,7 +277,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
     async def detokenize(
         self,
         *,
-        tokens: List[int],
+        tokens: Iterable[int],
         model: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -301,7 +303,9 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_DETOKENIZATION_OP_SERVERS[0]
-        request = models.ContainerDetokenizationBody(model=model, tokens=tokens)
+        request = models.ContainerDetokenizationBody(
+            model=model, tokens=utils.unmarshal(tokens, List[int])
+        )
         req = self._build_request_async(
             method="POST",
             path="/v1/detokenize",
@@ -342,7 +346,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
