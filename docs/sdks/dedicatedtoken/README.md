@@ -13,7 +13,7 @@ By giving a text input, generate a tokenized output of token IDs.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="dedicatedTokenization" method="post" path="/dedicated/v1/tokenize" -->
+<!-- UsageSnippet language="python" operationID="dedicatedTokenization" method="post" path="/dedicated/v1/tokenize" example="Example" -->
 ```python
 import os
 
@@ -55,7 +55,7 @@ By giving a list of tokens, generate a detokenized output text string.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="dedicatedDetokenization" method="post" path="/dedicated/v1/detokenize" -->
+<!-- UsageSnippet language="python" operationID="dedicatedDetokenization" method="post" path="/dedicated/v1/detokenize" example="Example" -->
 ```python
 import os
 

@@ -23,3 +23,9 @@ class VideoContent(BaseModel):
         pydantic.Field(alias="type"),
     ] = "video_url"
     "The type of the message content."
+
+
+try:
+    VideoContent.model_rebuild()
+except NameError:
+    pass

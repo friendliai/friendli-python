@@ -22,3 +22,9 @@ class ResponseFormatJSONObject(BaseModel):
         pydantic.Field(alias="type"),
     ] = "json_object"
     "The type of the response format: `json_object`"
+
+
+try:
+    ResponseFormatJSONObject.model_rebuild()
+except NameError:
+    pass

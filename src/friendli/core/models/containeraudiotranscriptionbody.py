@@ -12,9 +12,48 @@ from friendli.core.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from friendli.core.utils import FieldMetadata, MultipartFormMetadata
+import io
+import pydantic
 from pydantic import model_serializer
-from typing import Union
-from typing_extensions import NotRequired, TypeAliasType, TypedDict
+from typing import IO, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+class ContainerAudioTranscriptionBodyFileTypedDict(TypedDict):
+    file_name: str
+    content: Union[bytes, IO[bytes], io.IOBase]
+    content_type: NotRequired[str]
+
+
+class ContainerAudioTranscriptionBodyFile(BaseModel):
+    file_name: Annotated[
+        str, pydantic.Field(alias="fileName"), FieldMetadata(multipart=True)
+    ]
+    content: Annotated[
+        Union[bytes, IO[bytes], io.IOBase],
+        pydantic.Field(alias=""),
+        FieldMetadata(multipart=MultipartFormMetadata(content=True)),
+    ]
+    content_type: Annotated[
+        Optional[str],
+        pydantic.Field(alias="Content-Type"),
+        FieldMetadata(multipart=True),
+    ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["contentType"])
+        serialized = handler(self)
+        m = {}
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+        return m
+
 
 ContainerAudioTranscriptionBodyChunkingStrategyTypedDict = TypeAliasType(
     "ContainerAudioTranscriptionBodyChunkingStrategyTypedDict",
@@ -29,7 +68,7 @@ ContainerAudioTranscriptionBodyChunkingStrategy = TypeAliasType(
 
 
 class ContainerAudioTranscriptionBodyTypedDict(TypedDict):
-    file: bytes
+    file: ContainerAudioTranscriptionBodyFileTypedDict
     "The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats."
     model: NotRequired[Nullable[str]]
     "Routes the request to a specific adapter."
@@ -39,44 +78,55 @@ class ContainerAudioTranscriptionBodyTypedDict(TypedDict):
     'Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.'
     language: NotRequired[Nullable[str]]
     "The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency."
+    stream: NotRequired[Nullable[bool]]
+    "Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     temperature: NotRequired[Nullable[float]]
     "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic."
 
 
 class ContainerAudioTranscriptionBody(BaseModel):
-    file: bytes
+    file: Annotated[
+        ContainerAudioTranscriptionBodyFile,
+        FieldMetadata(multipart=MultipartFormMetadata(file=True)),
+    ]
     "The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats."
-    model: OptionalNullable[str] = UNSET
+    model: Annotated[OptionalNullable[str], FieldMetadata(multipart=True)] = UNSET
     "Routes the request to a specific adapter."
-    chunking_strategy: OptionalNullable[
-        ContainerAudioTranscriptionBodyChunkingStrategy
+    chunking_strategy: Annotated[
+        OptionalNullable[ContainerAudioTranscriptionBodyChunkingStrategy],
+        FieldMetadata(multipart=MultipartFormMetadata(json=True)),
     ] = UNSET
     'Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.'
-    language: OptionalNullable[str] = UNSET
+    language: Annotated[OptionalNullable[str], FieldMetadata(multipart=True)] = UNSET
     "The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency."
-    temperature: OptionalNullable[float] = UNSET
+    stream: Annotated[OptionalNullable[bool], FieldMetadata(multipart=True)] = UNSET
+    "Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    temperature: Annotated[OptionalNullable[float], FieldMetadata(multipart=True)] = (
+        UNSET
+    )
     "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic."
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["model", "chunking_strategy", "language", "temperature"]
-        nullable_fields = ["model", "chunking_strategy", "language", "temperature"]
-        null_default_fields = []
+        optional_fields = set(
+            ["model", "chunking_strategy", "language", "stream", "temperature"]
+        )
+        nullable_fields = set(
+            ["model", "chunking_strategy", "language", "stream", "temperature"]
+        )
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
             )
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                k not in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
         return m

@@ -6,7 +6,7 @@ from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import eventstreaming, get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 import abc
 
 
@@ -19,12 +19,12 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
-        eos_token: OptionalNullable[List[int]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
+        eos_token: OptionalNullable[Iterable[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
+        logit_bias: OptionalNullable[Mapping[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -32,13 +32,17 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
+        reasoning_effort: OptionalNullable[
+            models.DedicatedChatCompletionBodyReasoningEffort
+        ] = UNSET,
+        reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.DedicatedChatCompletionBodySeed,
                 models.DedicatedChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
+        stop: OptionalNullable[Iterable[str]] = UNSET,
         stream: OptionalNullable[bool] = UNSET,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
@@ -58,7 +62,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         xtc_threshold: OptionalNullable[float] = UNSET,
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
+            Union[Iterable[models.Tool], Iterable[models.ToolTypedDict]]
         ] = UNSET,
         min_tokens: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
@@ -87,9 +91,11 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
+        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -121,7 +127,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
 
             Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.
 
-            For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).
+            For more detailed information, please refer [here](https://friendli.ai/docs/guides/structured-outputs).
 
             ***Important***
             You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
@@ -147,10 +153,14 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
             dedicated_chat_completion_body=models.DedicatedChatCompletionBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
-                eos_token=eos_token,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
+                eos_token=utils.unmarshal(eos_token, OptionalNullable[List[int]]),
                 frequency_penalty=frequency_penalty,
-                logit_bias=logit_bias,
+                logit_bias=utils.unmarshal(
+                    logit_bias, OptionalNullable[Dict[str, Any]]
+                ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
                 min_p=min_p,
@@ -158,8 +168,12 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                seed=seed,
-                stop=stop,
+                reasoning_effort=reasoning_effort,
+                reasoning_budget=reasoning_budget,
+                seed=utils.unmarshal(
+                    seed, OptionalNullable[models.DedicatedChatCompletionBodySeed]
+                ),
+                stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[models.StreamOptions]
@@ -228,7 +242,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -247,12 +261,12 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
-        eos_token: OptionalNullable[List[int]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
+        eos_token: OptionalNullable[Iterable[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
+        logit_bias: OptionalNullable[Mapping[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -260,13 +274,17 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
+        reasoning_effort: OptionalNullable[
+            models.DedicatedChatCompletionStreamBodyReasoningEffort
+        ] = UNSET,
+        reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.DedicatedChatCompletionStreamBodySeed,
                 models.DedicatedChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
+        stop: OptionalNullable[Iterable[str]] = UNSET,
         stream: OptionalNullable[bool] = UNSET,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
@@ -286,7 +304,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         xtc_threshold: OptionalNullable[float] = UNSET,
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
+            Union[Iterable[models.Tool], Iterable[models.ToolTypedDict]]
         ] = UNSET,
         min_tokens: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
@@ -315,9 +333,11 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
+        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -349,7 +369,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
 
             Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.
 
-            For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).
+            For more detailed information, please refer [here](https://friendli.ai/docs/guides/structured-outputs).
 
             ***Important***
             You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
@@ -375,10 +395,14 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
             dedicated_chat_completion_stream_body=models.DedicatedChatCompletionStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
-                eos_token=eos_token,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
+                eos_token=utils.unmarshal(eos_token, OptionalNullable[List[int]]),
                 frequency_penalty=frequency_penalty,
-                logit_bias=logit_bias,
+                logit_bias=utils.unmarshal(
+                    logit_bias, OptionalNullable[Dict[str, Any]]
+                ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
                 min_p=min_p,
@@ -386,8 +410,12 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                seed=seed,
-                stop=stop,
+                reasoning_effort=reasoning_effort,
+                reasoning_budget=reasoning_budget,
+                seed=utils.unmarshal(
+                    seed, OptionalNullable[models.DedicatedChatCompletionStreamBodySeed]
+                ),
+                stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[models.StreamOptions]
@@ -457,7 +485,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
@@ -485,12 +513,12 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
-        eos_token: OptionalNullable[List[int]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
+        eos_token: OptionalNullable[Iterable[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
+        logit_bias: OptionalNullable[Mapping[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -498,13 +526,17 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
+        reasoning_effort: OptionalNullable[
+            models.DedicatedChatCompletionBodyReasoningEffort
+        ] = UNSET,
+        reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.DedicatedChatCompletionBodySeed,
                 models.DedicatedChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
+        stop: OptionalNullable[Iterable[str]] = UNSET,
         stream: OptionalNullable[bool] = UNSET,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
@@ -524,7 +556,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         xtc_threshold: OptionalNullable[float] = UNSET,
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
+            Union[Iterable[models.Tool], Iterable[models.ToolTypedDict]]
         ] = UNSET,
         min_tokens: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
@@ -553,9 +585,11 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
+        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -587,7 +621,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
 
             Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.
 
-            For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).
+            For more detailed information, please refer [here](https://friendli.ai/docs/guides/structured-outputs).
 
             ***Important***
             You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
@@ -613,10 +647,14 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
             dedicated_chat_completion_body=models.DedicatedChatCompletionBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
-                eos_token=eos_token,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
+                eos_token=utils.unmarshal(eos_token, OptionalNullable[List[int]]),
                 frequency_penalty=frequency_penalty,
-                logit_bias=logit_bias,
+                logit_bias=utils.unmarshal(
+                    logit_bias, OptionalNullable[Dict[str, Any]]
+                ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
                 min_p=min_p,
@@ -624,8 +662,12 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                seed=seed,
-                stop=stop,
+                reasoning_effort=reasoning_effort,
+                reasoning_budget=reasoning_budget,
+                seed=utils.unmarshal(
+                    seed, OptionalNullable[models.DedicatedChatCompletionBodySeed]
+                ),
+                stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[models.StreamOptions]
@@ -694,7 +736,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -713,12 +755,12 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
-        eos_token: OptionalNullable[List[int]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
+        eos_token: OptionalNullable[Iterable[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[Dict[str, Any]] = UNSET,
+        logit_bias: OptionalNullable[Mapping[str, Any]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         min_p: OptionalNullable[float] = UNSET,
@@ -726,13 +768,17 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
+        reasoning_effort: OptionalNullable[
+            models.DedicatedChatCompletionStreamBodyReasoningEffort
+        ] = UNSET,
+        reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
                 models.DedicatedChatCompletionStreamBodySeed,
                 models.DedicatedChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
-        stop: OptionalNullable[List[str]] = UNSET,
+        stop: OptionalNullable[Iterable[str]] = UNSET,
         stream: OptionalNullable[bool] = UNSET,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
@@ -752,7 +798,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         xtc_threshold: OptionalNullable[float] = UNSET,
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
+            Union[Iterable[models.Tool], Iterable[models.ToolTypedDict]]
         ] = UNSET,
         min_tokens: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
@@ -781,9 +827,11 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
+        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -815,7 +863,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
 
             Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.
 
-            For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).
+            For more detailed information, please refer [here](https://friendli.ai/docs/guides/structured-outputs).
 
             ***Important***
             You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
@@ -841,10 +889,14 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
             dedicated_chat_completion_stream_body=models.DedicatedChatCompletionStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
-                eos_token=eos_token,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
+                eos_token=utils.unmarshal(eos_token, OptionalNullable[List[int]]),
                 frequency_penalty=frequency_penalty,
-                logit_bias=logit_bias,
+                logit_bias=utils.unmarshal(
+                    logit_bias, OptionalNullable[Dict[str, Any]]
+                ),
                 logprobs=logprobs,
                 max_tokens=max_tokens,
                 min_p=min_p,
@@ -852,8 +904,12 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 presence_penalty=presence_penalty,
                 repetition_penalty=repetition_penalty,
-                seed=seed,
-                stop=stop,
+                reasoning_effort=reasoning_effort,
+                reasoning_budget=reasoning_budget,
+                seed=utils.unmarshal(
+                    seed, OptionalNullable[models.DedicatedChatCompletionStreamBodySeed]
+                ),
+                stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[models.StreamOptions]
@@ -923,7 +979,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )

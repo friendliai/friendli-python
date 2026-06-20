@@ -87,7 +87,7 @@ It's also possible to write a standalone Python script without needing to set up
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.9"
+# requires-python = ">=3.10"
 # dependencies = [
 #     "friendli",
 # ]
@@ -125,7 +125,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.chat.complete(
-        model="meta-llama-3.1-8b-instruct",
+        model="zai-org/GLM-5.2",
         messages=[
             {
                 "role": "system",
@@ -160,7 +160,7 @@ async def main():
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
         res = await friendli.serverless.chat.complete(
-            model="meta-llama-3.1-8b-instruct",
+            model="zai-org/GLM-5.2",
             messages=[
                 {
                     "role": "system",
@@ -196,7 +196,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.tool_assisted_chat.complete(
-        model="meta-llama-3.1-8b-instruct",
+        model="zai-org/GLM-5.2",
         messages=[
             {
                 "role": "user",
@@ -233,7 +233,7 @@ async def main():
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
         res = await friendli.serverless.tool_assisted_chat.complete(
-            model="meta-llama-3.1-8b-instruct",
+            model="zai-org/GLM-5.2",
             messages=[
                 {
                     "role": "user",
@@ -306,11 +306,16 @@ with SyncFriendli(
 ### [Container.Audio](docs/sdks/containeraudio/README.md)
 
 * [transcribe](docs/sdks/containeraudio/README.md#transcribe) - Audio transcriptions
+* [stream](docs/sdks/containeraudio/README.md#stream) - Stream audio transcriptions
 
 ### [Container.Chat](docs/sdks/containerchat/README.md)
 
 * [complete](docs/sdks/containerchat/README.md#complete) - Chat completions
 * [stream](docs/sdks/containerchat/README.md#stream) - Stream chat completions
+
+### [Container.Classification](docs/sdks/containerclassification/README.md)
+
+* [classify](docs/sdks/containerclassification/README.md#classify) - Text classification
 
 ### [Container.Completions](docs/sdks/containercompletions/README.md)
 
@@ -322,10 +327,18 @@ with SyncFriendli(
 * [generate](docs/sdks/containerimage/README.md#generate) - Image generations
 * [edit](docs/sdks/containerimage/README.md#edit) - Image edits
 
+### [Container.Messages](docs/sdks/containermessages/README.md)
+
+* [messages](docs/sdks/containermessages/README.md#messages) - Messages
+
 ### [Container.Token](docs/sdks/containertoken/README.md)
 
 * [tokenize](docs/sdks/containertoken/README.md#tokenize) - Tokenization
 * [detokenize](docs/sdks/containertoken/README.md#detokenize) - Detokenization
+
+### [Cost](docs/sdks/cost/README.md)
+
+* [get_costs](docs/sdks/cost/README.md#get_costs) - Get cost details for the team.
 
 ### [Dataset](docs/sdks/dataset/README.md)
 
@@ -349,6 +362,7 @@ with SyncFriendli(
 ### [Dedicated.Audio](docs/sdks/dedicatedaudio/README.md)
 
 * [transcribe](docs/sdks/dedicatedaudio/README.md#transcribe) - Audio transcriptions
+* [stream](docs/sdks/dedicatedaudio/README.md#stream) - Stream audio transcriptions
 
 ### [Dedicated.Chat](docs/sdks/dedicatedchat/README.md)
 
@@ -358,6 +372,10 @@ with SyncFriendli(
 ### [Dedicated.ChatRender](docs/sdks/dedicatedchatrender/README.md)
 
 * [render](docs/sdks/dedicatedchatrender/README.md#render) - Chat render
+
+### [Dedicated.Classification](docs/sdks/dedicatedclassification/README.md)
+
+* [classify](docs/sdks/dedicatedclassification/README.md#classify) - Text classification
 
 ### [Dedicated.Completions](docs/sdks/dedicatedcompletions/README.md)
 
@@ -388,6 +406,10 @@ with SyncFriendli(
 * [generate](docs/sdks/dedicatedimage/README.md#generate) - Image generations
 * [edit](docs/sdks/dedicatedimage/README.md#edit) - Image edits
 
+### [Dedicated.Messages](docs/sdks/dedicatedmessages/README.md)
+
+* [messages](docs/sdks/dedicatedmessages/README.md#messages) - Messages
+
 ### [Dedicated.Token](docs/sdks/dedicatedtoken/README.md)
 
 * [tokenize](docs/sdks/dedicatedtoken/README.md#tokenize) - Tokenization
@@ -399,6 +421,11 @@ with SyncFriendli(
 * [complete_upload](docs/sdks/filesdk/README.md#complete_upload) - Complete file upload
 * [get_info](docs/sdks/filesdk/README.md#get_info) - Get file info
 * [get_download_url](docs/sdks/filesdk/README.md#get_download_url) - Get file download URL
+
+### [Serverless.Audio](docs/sdks/serverlessaudio/README.md)
+
+* [transcribe](docs/sdks/serverlessaudio/README.md#transcribe) - Audio transcriptions
+* [stream](docs/sdks/serverlessaudio/README.md#stream) - Stream audio transcriptions
 
 ### [Serverless.Chat](docs/sdks/serverlesschat/README.md)
 
@@ -417,6 +444,10 @@ with SyncFriendli(
 ### [Serverless.Knowledge](docs/sdks/knowledge/README.md)
 
 * [retrieve](docs/sdks/knowledge/README.md#retrieve) - Retrieve contexts from chosen knowledge base
+
+### [Serverless.Messages](docs/sdks/serverlessmessages/README.md)
+
+* [messages](docs/sdks/serverlessmessages/README.md#messages) - Messages
 
 ### [Serverless.Model](docs/sdks/model/README.md)
 
@@ -499,12 +530,12 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dedicated.audio.transcribe(
-        model="(endpoint-id)",
+    res = friendli.container.audio.transcribe(
         file={
             "file_name": "example.file",
             "content": open("example.file", "rb"),
         },
+        model="(adapter-route)",
     )
 
     # Handle response
@@ -595,6 +626,7 @@ with SyncFriendli(
 ### Example
 ```python
 import os
+from typing import Literal
 
 import friendli
 from friendli import SyncFriendli, models
@@ -604,7 +636,17 @@ with SyncFriendli(
 ) as friendli:
     res = None
     try:
-        res = friendli.dedicated.endpoint.delete(endpoint_id="<id>")
+        res = friendli.container.messages.messages(
+            messages=[
+                {
+                    "role": "user",
+                    "content": "Hello, summarize what you can do in one sentence.",
+                },
+            ],
+            max_tokens=128,
+            model="zai-org/GLM-5.2",
+            additional_properties={},
+        )
 
         # Handle response
         print(res)
@@ -618,15 +660,18 @@ with SyncFriendli(
         print(e.raw_response)
 
         # Depending on the method different errors may be thrown
-        if isinstance(e, models.HTTPValidationError):
-            print(e.data.detail)  # Optional[List[friendli.ValidationError]]
+        if isinstance(e, models.MessagesErrorResponse):
+            print(e.data.type)  # Literal["error"]
+            print(e.data.error)  # friendli.MessagesErrorObject
+            print(e.data.request_id)  # OptionalNullable[str]
+            print(e.data.additional_properties)  # Optional[Dict[str, Any]]
 ```
 
 ### Error Classes
 **Primary error:**
 * [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py): The base class for HTTP error responses.
 
-<details><summary>Less common errors (6)</summary>
+<details><summary>Less common errors (7)</summary>
 
 <br />
 
@@ -637,7 +682,8 @@ with SyncFriendli(
 
 
 **Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 63 methods.*
+* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 73 methods.*
+* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 3 of 73 methods.*
 * [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -660,7 +706,8 @@ with SyncFriendli(
     server_url="https://api.friendli.ai",
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.chat.complete(
+    res = friendli.dedicated.chat.complete(
+        model="(endpoint-id)",
         messages=[
             {
                 "role": "system",
@@ -671,7 +718,6 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        model="(adapter-route)",
         max_tokens=200,
     )
 

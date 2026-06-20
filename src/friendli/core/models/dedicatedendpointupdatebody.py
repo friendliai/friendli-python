@@ -40,7 +40,7 @@ class DedicatedEndpointUpdateBodyTypedDict(TypedDict):
     new_version_comment: NotRequired[Nullable[str]]
     "Comment for the new version."
     instance_option_id: NotRequired[Nullable[str]]
-    "The ID of the instance option."
+    "The ID of the instance option.\n\n    Available options:\n    - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`\n    - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`\n    - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`\n    - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`\n    - 1x NVIDIA H100: `TwD5AqnBSVN0`\n    - 2x NVIDIA H100: `zfTutSiLn0Hq`\n    - 4x NVIDIA H100: `lfkRz5G48REc`\n    - 8x NVIDIA H100: `GUA4qYFmsYz8`\n    - 1x NVIDIA H200: `LnK1wTaKc7WO`\n    - 2x NVIDIA H200: `Tu6GjBnfHPe4`\n    - 4x NVIDIA H200: `OhTzYtZuomzI`\n    - 8x NVIDIA H200: `ahBzWtOuomsI`\n    - 1x NVIDIA B200: `8GiQTLKfJNOr`\n    - 2x NVIDIA B200: `brTZGIuYgVrs`\n    - 4x NVIDIA B200: `AFoZMFXZnAdD`\n    - 8x NVIDIA B200: `drbc6G9FxJWZ`\n    "
 
 
 class DedicatedEndpointUpdateBody(BaseModel):
@@ -71,46 +71,53 @@ class DedicatedEndpointUpdateBody(BaseModel):
     instance_option_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="instanceOptionId")
     ] = UNSET
-    "The ID of the instance option."
+    "The ID of the instance option.\n\n    Available options:\n    - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`\n    - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`\n    - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`\n    - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`\n    - 1x NVIDIA H100: `TwD5AqnBSVN0`\n    - 2x NVIDIA H100: `zfTutSiLn0Hq`\n    - 4x NVIDIA H100: `lfkRz5G48REc`\n    - 8x NVIDIA H100: `GUA4qYFmsYz8`\n    - 1x NVIDIA H200: `LnK1wTaKc7WO`\n    - 2x NVIDIA H200: `Tu6GjBnfHPe4`\n    - 4x NVIDIA H200: `OhTzYtZuomzI`\n    - 8x NVIDIA H200: `ahBzWtOuomsI`\n    - 1x NVIDIA B200: `8GiQTLKfJNOr`\n    - 2x NVIDIA B200: `brTZGIuYgVrs`\n    - 4x NVIDIA B200: `AFoZMFXZnAdD`\n    - 8x NVIDIA B200: `drbc6G9FxJWZ`\n    "
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "name",
-            "advanced",
-            "simplescale",
-            "autoscalingPolicy",
-            "hfModelRepo",
-            "hfModelRepoRevision",
-            "newVersionComment",
-            "instanceOptionId",
-        ]
-        nullable_fields = [
-            "name",
-            "advanced",
-            "simplescale",
-            "autoscalingPolicy",
-            "hfModelRepo",
-            "hfModelRepoRevision",
-            "newVersionComment",
-            "instanceOptionId",
-        ]
-        null_default_fields = []
+        optional_fields = set(
+            [
+                "name",
+                "advanced",
+                "simplescale",
+                "autoscalingPolicy",
+                "hfModelRepo",
+                "hfModelRepoRevision",
+                "newVersionComment",
+                "instanceOptionId",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "name",
+                "advanced",
+                "simplescale",
+                "autoscalingPolicy",
+                "hfModelRepo",
+                "hfModelRepoRevision",
+                "newVersionComment",
+                "instanceOptionId",
+            ]
+        )
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
             )
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                k not in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
         return m
+
+
+try:
+    DedicatedEndpointUpdateBody.model_rebuild()
+except NameError:
+    pass

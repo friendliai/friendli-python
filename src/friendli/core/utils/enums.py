@@ -2,6 +2,8 @@
 
 import enum
 import sys
+from typing import Any
+from pydantic_core import core_schema
 
 
 class OpenEnumMeta(enum.EnumMeta):
@@ -67,3 +69,55 @@ class OpenEnumMeta(enum.EnumMeta):
                 )
             except ValueError:
                 return value
+
+    def __new__(mcs, name, bases, namespace, **kwargs):
+        cls = super().__new__(mcs, name, bases, namespace, **kwargs)
+
+        def __get_pydantic_core_schema__(
+            cls_inner: Any, _source_type: Any, _handler: Any
+        ) -> core_schema.CoreSchema:
+
+            def validate_strict(v: Any) -> Any:
+                if isinstance(v, cls_inner):
+                    return v
+                return enum.EnumMeta.__call__(cls_inner, v)
+
+            def validate_lax(v: Any) -> Any:
+                if isinstance(v, cls_inner):
+                    return v
+                try:
+                    return enum.EnumMeta.__call__(cls_inner, v)
+                except ValueError:
+                    return v
+
+            is_int_enum = False
+            for base in cls_inner.__mro__:
+                if base is int:
+                    is_int_enum = True
+                    break
+                if base is str:
+                    break
+            base_schema = (
+                core_schema.int_schema() if is_int_enum else core_schema.str_schema()
+            )
+            return core_schema.lax_or_strict_schema(
+                lax_schema=core_schema.chain_schema(
+                    [
+                        base_schema,
+                        core_schema.no_info_plain_validator_function(validate_lax),
+                    ]
+                ),
+                strict_schema=core_schema.chain_schema(
+                    [
+                        base_schema,
+                        core_schema.no_info_plain_validator_function(validate_strict),
+                    ]
+                ),
+            )
+
+        setattr(
+            cls,
+            "__get_pydantic_core_schema__",
+            classmethod(__get_pydantic_core_schema__),
+        )
+        return cls

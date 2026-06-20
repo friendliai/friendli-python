@@ -1,12 +1,17 @@
 # DedicatedImageGenerationBodyResponseFormat
 
+## Example Usage
+
+```python
+from friendli_core.models import DedicatedImageGenerationBodyResponseFormat
+value: DedicatedImageGenerationBodyResponseFormat = "url"
+```
+
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `URL`  | url    |
-| `RAW`  | raw    |
-| `PNG`  | png    |
-| `JPEG` | jpeg   |
-| `JPG`  | jpg    |
+- `"url"`
+- `"raw"`
+- `"png"`
+- `"jpeg"`
+- `"jpg"`

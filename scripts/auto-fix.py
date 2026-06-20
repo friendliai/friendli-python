@@ -8,15 +8,11 @@ from pathlib import Path
 
 
 def format_markdown_files():
-    md_files = list(Path("docs").glob("**/*.md"))
-
-    excluded_path = Path("docs/models")
-    md_files = [
-        file for file in md_files if not str(file).startswith(str(excluded_path))
-    ]
-
-    additional_files = [Path("./README.md"), Path("./USAGE.md")]
-    md_files.extend(additional_files)
+    # Only the Speakeasy-generated SDK docs plus the top-level READMEs need the
+    # public-API rewrite. `docs/models` (pure model reference) and any other docs
+    # (e.g. design specs) are intentionally left untouched.
+    md_files = list(Path("docs/sdks").glob("**/*.md"))
+    md_files.extend([Path("./README.md"), Path("./USAGE.md")])
 
     if not md_files:
         print("No .md files found in the current directory.")
@@ -68,11 +64,15 @@ def format_markdown_files():
             temp_path = temp_file.name
 
         try:
-            subprocess.run(
+            # Import sorting is best-effort: a non-zero exit (e.g. unsortable
+            # snippet) must not stop `ruff format`, which is what normalizes the
+            # snippet (including stripping the blank line Speakeasy emits right
+            # after `async def main():`).
+            _ = subprocess.run(
                 ["ruff", "check", "--select", "I", "--fix", "-q", temp_path],
-                check=True,
+                check=False,
             )
-            subprocess.run(["ruff", "format", "-q", temp_path], check=True)
+            _ = subprocess.run(["ruff", "format", "-q", temp_path], check=False)
 
             with open(temp_path, "r") as formatted_file:
                 formatted_code = formatted_file.read()
@@ -82,7 +82,7 @@ def format_markdown_files():
             if not formatted_code.endswith("\n"):
                 formatted_code += "\n"
 
-        except subprocess.CalledProcessError as e:
+        except OSError as e:
             print(f"Error formatting code block: {e}")
             formatted_code = code
         finally:
@@ -113,6 +113,11 @@ def format_markdown_files():
         updated_content = re.sub("friendli_core", "friendli", updated_content)
         updated_content = re.sub("friendli-core", "friendli", updated_content)
         updated_content = re.sub(r"git\+\<UNSET\>.git", "friendli", updated_content)
+        # Speakeasy emits a blank line right after `async def main():`, which
+        # `ruff format` keeps. Drop it so the body starts under the signature.
+        updated_content = re.sub(
+            r"(async def main\(\):)\n\n", r"\1\n", updated_content
+        )
 
         if content != updated_content:
             try:
@@ -125,35 +130,5 @@ def format_markdown_files():
             print(f"No changes were needed in {md_file}")
 
 
-def replace_github_repository_name():
-    target_files = [Path("./pyproject.toml"), Path("./.speakeasy/gen.lock")]
-
-    for target_file in target_files:
-        try:
-            with open(target_file, "r", encoding="utf-8") as file:
-                content = file.read()
-        except FileNotFoundError:
-            print(f"Error: {target_file} not found.")
-            continue
-        except Exception as e:
-            print(f"Error reading {target_file}: {e}")
-            continue
-
-        updated_content = re.sub(
-            r"friendli-python-internal", r"friendli-python", content
-        )
-
-        if content != updated_content:
-            try:
-                with open(target_file, "w", encoding="utf-8") as file:
-                    file.write(updated_content)
-                print(f"Successfully replaced GitHub repository name in {target_file}")
-            except Exception as e:
-                print(f"Error writing to {target_file}: {e}")
-        else:
-            print(f"No changes were needed in {target_file}")
-
-
 if __name__ == "__main__":
     format_markdown_files()
-    replace_github_repository_name()

@@ -2,13 +2,18 @@
 
 The format of the generated image. One of `url(default)`, `raw`, `png`, `jpeg`, and `jpg`.
 
+## Example Usage
+
+```python
+from friendli_core.models import B64ImageItemResponseFormat
+value: B64ImageItemResponseFormat = "url"
+```
+
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `URL`  | url    |
-| `RAW`  | raw    |
-| `PNG`  | png    |
-| `JPEG` | jpeg   |
-| `JPG`  | jpg    |
+- `"url"`
+- `"raw"`
+- `"png"`
+- `"jpeg"`
+- `"jpg"`

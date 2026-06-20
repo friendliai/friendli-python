@@ -23,3 +23,9 @@ class StreamedToolAssistedChatToolStatus(BaseModel):
         ],
         pydantic.Field(alias="event"),
     ] = "tool_status"
+
+
+try:
+    StreamedToolAssistedChatToolStatus.model_rebuild()
+except NameError:
+    pass
