@@ -6,7 +6,7 @@ from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 import abc
 
 
@@ -19,11 +19,11 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
         tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
+            Union[Iterable[models.Tool], Iterable[models.ToolTypedDict]]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -34,7 +34,7 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
 
         Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
@@ -60,7 +60,9 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
             serverless_chat_render_body=models.ServerlessChatRenderBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
                 ),
@@ -110,7 +112,7 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -129,11 +131,11 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
         self,
         *,
         model: str,
-        messages: Union[List[models.Message], List[models.MessageTypedDict]],
+        messages: Union[Iterable[models.Message], Iterable[models.MessageTypedDict]],
         x_friendli_team: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET,
+        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
         tools: OptionalNullable[
-            Union[List[models.Tool], List[models.ToolTypedDict]]
+            Union[Iterable[models.Tool], Iterable[models.ToolTypedDict]]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -144,7 +146,7 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
 
         Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.
 
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods).
+        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param messages: A list of messages comprising the conversation so far.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
@@ -170,7 +172,9 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
             serverless_chat_render_body=models.ServerlessChatRenderBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
-                chat_template_kwargs=chat_template_kwargs,
+                chat_template_kwargs=utils.unmarshal(
+                    chat_template_kwargs, OptionalNullable[Dict[str, Any]]
+                ),
                 tools=utils.get_pydantic_model(
                     tools, OptionalNullable[List[models.Tool]]
                 ),
@@ -220,7 +224,7 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):

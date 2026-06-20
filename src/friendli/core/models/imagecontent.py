@@ -23,3 +23,9 @@ class ImageContent(BaseModel):
         pydantic.Field(alias="type"),
     ] = "image_url"
     "The type of the message content."
+
+
+try:
+    ImageContent.model_rebuild()
+except NameError:
+    pass

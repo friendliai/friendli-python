@@ -1,11 +1,16 @@
 # StreamedChatChoiceFinishReason
 
+## Example Usage
+
+```python
+from friendli_core.models import StreamedChatChoiceFinishReason
+value: StreamedChatChoiceFinishReason = "stop"
+```
+
 
 ## Values
 
-| Name         | Value        |
-| ------------ | ------------ |
-| `STOP`       | stop         |
-| `LENGTH`     | length       |
-| `TOOL_CALLS` | tool_calls   |
-| `NULL`       | null         |
+- `"stop"`
+- `"length"`
+- `"tool_calls"`
+- `"null"`

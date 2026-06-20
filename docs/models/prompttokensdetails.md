@@ -5,4 +5,4 @@
 
 | Field                                | Type                                 | Required                             | Description                          |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `cached_tokens`                      | *int*                                | :heavy_check_mark:                   | Cached tokens present in the prompt. |
+| `cached_tokens`                      | *OptionalNullable[int]*              | :heavy_minus_sign:                   | Cached tokens present in the prompt. |

@@ -1,0 +1,11 @@
+# MessagesToolUseBlock
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `type`                                                                                | *Literal["tool_use"]*                                                                 | :heavy_check_mark:                                                                    | Content block type. Must be `tool_use`.                                               |
+| `id`                                                                                  | *OptionalNullable[str]*                                                               | :heavy_minus_sign:                                                                    | Optional tool call identifier. Use this value to link follow-up `tool_result` blocks. |
+| `name`                                                                                | *str*                                                                                 | :heavy_check_mark:                                                                    | Name of the tool to invoke.                                                           |
+| `input`                                                                               | Dict[str, *Any*]                                                                      | :heavy_check_mark:                                                                    | Tool input argument object.                                                           |

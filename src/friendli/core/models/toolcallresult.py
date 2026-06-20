@@ -27,3 +27,9 @@ class ToolCallResult(BaseModel):
         pydantic.Field(alias="type"),
     ] = "function"
     "The type of the tool."
+
+
+try:
+    ToolCallResult.model_rebuild()
+except NameError:
+    pass

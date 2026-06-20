@@ -5,7 +5,7 @@ from friendli.core.types import BaseModel
 from typing import Literal
 from typing_extensions import TypedDict
 
-Type = Literal[
+FriendliBuiltInToolType = Literal[
     "math:calculator",
     "math:statistics",
     "math:calendar",
@@ -17,10 +17,10 @@ Type = Literal[
 
 
 class FriendliBuiltInToolTypedDict(TypedDict):
-    type: Type
+    type: FriendliBuiltInToolType
     "The type of the built-in tool provided by Friendli."
 
 
 class FriendliBuiltInTool(BaseModel):
-    type: Type
+    type: FriendliBuiltInToolType
     "The type of the built-in tool provided by Friendli."

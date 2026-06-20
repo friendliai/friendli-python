@@ -8,32 +8,21 @@ import asyncio
 import base64
 import binascii
 import io
-from abc import ABC, abstractmethod
 from contextlib import asynccontextmanager, contextmanager
 from typing import (
-    IO,
-    Any,
+    TYPE_CHECKING,
     AsyncIterator,
-    Generic,
     Iterator,
-    List,
-    Mapping,
     Optional,
     TypeAlias,
-    TypeVar,
-    Union,
 )
 
 import httpx
 from pydantic import AnyHttpUrl
 
-from friendli.core import (
-    AsyncFriendliCore,
-    SyncFriendliCore,
-    models,
-    utils,
-)
-from friendli.core.types import UNSET, OptionalNullable
+from friendli.core import models
+from friendli.core.dataset import AsyncDataset as _CoreAsyncDataset
+from friendli.core.dataset import SyncDataset as _CoreSyncDataset
 
 from ..config import DEFAULT_SPLIT_NAME, Config
 from ..models import (
@@ -59,6 +48,9 @@ from ..utils import (
     download_from_url,
 )
 
+if TYPE_CHECKING:
+    from .. import AsyncFriendli, SyncFriendli
+
 SAMPLE_DATA_T: TypeAlias = str
 FULL_SAMPLE_ID_T: TypeAlias = str
 """A unique identifier for a sample in a dataset, \
@@ -66,22 +58,33 @@ formatted as `{DATASET_ID}:{VERSION_ID}:{SPLIT_ID}:{SAMPLE_ID}`"""
 FULL_SAMPLE_ID_DATA_PAIR_T: TypeAlias = tuple[FULL_SAMPLE_ID_T, SAMPLE_DATA_T]
 
 
-TCore = TypeVar("TCore", SyncFriendliCore, AsyncFriendliCore)
+class _DatasetMixin:
+    """Client-side dataset state and sample-processing helpers.
 
+    Mixed into the generated core dataset SDK so that the high-level helpers below
+    (S3-backed sample uploads, multimodal processing) sit alongside the inherited,
+    auto-generated CRUD operations. The active dataset/split context is tracked per
+    instance and consumed by the high-level methods.
+    """
 
-class BaseDataset(ABC, Generic[TCore]):
-    """BaseDataset."""
+    parent_ref: object
 
-    def __init__(self, core: TCore, config: Config) -> None:
-        """Initialize the BaseDataset class."""
-        self._core = core
-        self._config = config
-
-        self._project_id: str | None = None
-        self._dataset: models.DatasetInfo | None = None
-        self._default_split: models.SplitInfo | None = None
+    def _init_dataset_state(self) -> None:
+        self._project_id: Optional[str] = None
+        self._dataset: Optional[models.DatasetInfo] = None
+        self._default_split: Optional[models.SplitInfo] = None
         self._splits: dict[str, models.SplitInfo] = {}
         """{name: SplitInfo}"""
+
+    @property
+    def _config(self) -> Config:
+        """The Config carried by the owning ``SyncFriendli`` / ``AsyncFriendli``."""
+        return self._root.config
+
+    @property
+    def _root(self) -> "SyncFriendli | AsyncFriendli":
+        """The owning top-level SDK instance (set as ``parent_ref`` on creation)."""
+        return self.parent_ref  # type: ignore[return-value]
 
     #### Helper Methods ####
     async def _process_samples(self, samples: list[Sample]) -> list[Sample]:
@@ -289,30 +292,25 @@ class BaseDataset(ABC, Generic[TCore]):
         msg = f"Invalid message type: {type(message.root)}."
         raise TypeError(msg)
 
-    @abstractmethod
-    async def _upload_to_s3(
-        self,
-        *,
-        data: bytes,
-        name: str,
-    ) -> S3Dsn:
+    async def _upload_to_s3(self, *, data: bytes, name: str) -> S3Dsn:
         """Upload content to S3 and return the S3 URI.
 
-        Args:
-            data: Content to upload
-            name: Name of the file
-
-        Returns:
-            S3Dsn: S3 URI of uploaded content
-
-        Raises:
-            RuntimeError: If upload fails
+        Implemented by the sync/async subclasses.
         """
-        ...
+        raise NotImplementedError
 
 
-class SyncDataset(BaseDataset[SyncFriendliCore]):
-    """SyncDataset."""
+class SyncDataset(_DatasetMixin, _CoreSyncDataset):
+    """Dataset SDK with high-level, S3-backed sample upload helpers (synchronous)."""
+
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        """Initialize the SyncDataset class."""
+        super().__init__(*args, **kwargs)  # type: ignore[arg-type]
+        self._init_dataset_state()
+
+    @property
+    def _root(self) -> "SyncFriendli":
+        return self.parent_ref  # type: ignore[return-value]
 
     #### High-Level Methods ####
     @contextmanager
@@ -337,7 +335,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         try:
             # Create dataset
-            self._dataset = self._core.dataset.create_dataset(
+            self._dataset = self.create_dataset(
                 modality=models.DedicatedDatasetModality(
                     input_modals=modality,
                     output_modals=[
@@ -350,7 +348,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             )
 
             # Create default split
-            self._default_split = self._core.dataset.create_split(
+            self._default_split = self.create_split(
                 dataset_id=self._dataset.id,
                 name=default_split_name,
                 **self._config.model_dump(),
@@ -380,7 +378,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
 
         try:
             # Get dataset
-            self._dataset = self._core.dataset.get_dataset(
+            self._dataset = self.get_dataset(
                 dataset_id=dataset_id,
                 **self._config.model_dump(),
             )
@@ -388,7 +386,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             # Get splits
             prev_cursor = None
             while True:
-                list_splits: models.ListSplitsResponse = self._core.dataset.list_splits(
+                list_splits: models.ListSplitsResponse = self.list_splits(
                     dataset_id=self._dataset.id,
                     cursor=None,
                     limit=None,
@@ -439,7 +437,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         if name in self._splits:
             msg = f"Split '{name}' already exists."
             raise ValueError(msg)
-        split_info = self._core.dataset.create_split(
+        split_info = self.create_split(
             dataset_id=self._dataset.id,
             name=name,
             **self._config.model_dump(),
@@ -510,7 +508,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         )
 
         # Add to the dataset
-        res: models.AddSamplesResponse = self._core.dataset.add_samples(
+        res: models.AddSamplesResponse = self.add_samples(
             dataset_id=self._dataset.id,
             split_id=self._get_or_create_split_id(name=split),
             request_body=[s.model_dump_json() for s in processed_samples],
@@ -548,7 +546,7 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
         # TODO: Batch upload
         try:
             # Initialize upload
-            init_upload: models.FileInitUploadResponse = self._core.file.init_upload(
+            init_upload: models.FileInitUploadResponse = self._root.file.init_upload(
                 digest=digest(data=data),
                 name=name,
                 project_id=self._project_id,
@@ -567,14 +565,14 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
                 ).raise_for_status()
 
             # Complete upload
-            self._core.file.complete_upload(
+            self._root.file.complete_upload(
                 file_id=init_upload.file_id,
                 **self._config.model_dump(),
             )
 
             # Get download URL
             download_url: models.FileGetDownloadURLResponse = (
-                self._core.file.get_download_url(
+                self._root.file.get_download_url(
                     file_id=init_upload.file_id,
                     **self._config.model_dump(),
                 )
@@ -586,600 +584,18 @@ class SyncDataset(BaseDataset[SyncFriendliCore]):
             msg = f"Failed to upload content to S3: {e}"
             raise RuntimeError(msg) from e
 
-    #### Low-Level Methods ####
 
-    def create_dataset(
-        self,
-        *,
-        modality: Union[
-            models.DedicatedDatasetModality, models.DedicatedDatasetModalityTypedDict
-        ],
-        name: str,
-        project_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DatasetInfo:
-        """Create a new dataset.
+class AsyncDataset(_DatasetMixin, _CoreAsyncDataset):
+    """Dataset SDK with high-level, S3-backed sample upload helpers (asynchronous)."""
 
-        Args:
-            modality: Input modality of the dataset. Note that we only support text output modality for now.
-            name: Name of the dataset.
-            project_id: ID of the project the dataset belongs to.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        """Initialize the AsyncDataset class."""
+        super().__init__(*args, **kwargs)  # type: ignore[arg-type]
+        self._init_dataset_state()
 
-        Returns:
-            DatasetInfo: Information about the created dataset.
-        """
-        return self._core.dataset.create_dataset(
-            modality=modality,
-            name=name,
-            project_id=project_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def list_datasets(
-        self,
-        *,
-        project_id: str,
-        cursor: OptionalNullable[Union[bytes, io.BufferedReader]] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        direction: OptionalNullable[models.Direction] = UNSET,
-        name_search: OptionalNullable[str] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListDatasetsResponse:
-        """List datasets accessible to the user.
-
-        Args:
-            project_id: ID of the project to list datasets from.
-            cursor: Cursor for pagination.
-            limit: Maximum number of datasets to return.
-            direction: Direction to sort results.
-            name_search: Search term to filter datasets by name.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            ListDatasetsResponse: List of datasets and pagination information.
-        """
-        return self._core.dataset.list_datasets(
-            project_id=project_id,
-            cursor=cursor,
-            limit=limit,
-            direction=direction,
-            name_search=name_search,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def get_dataset(
-        self,
-        *,
-        dataset_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DatasetInfo:
-        """Get information about a specific dataset.
-
-        Args:
-            dataset_id: ID of the dataset to retrieve.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            DatasetInfo: Information about the dataset.
-        """
-        return self._core.dataset.get_dataset(
-            dataset_id=dataset_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def delete_dataset(
-        self,
-        *,
-        dataset_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:  # noqa: ANN401
-        """Delete a specific dataset.
-
-        Args:
-            dataset_id: ID of the dataset to delete.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            Any: Response from the server.
-        """
-        return self._core.dataset.delete_dataset(
-            dataset_id=dataset_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def create_version(
-        self,
-        *,
-        dataset_id: str,
-        comment: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.VersionInfo:
-        """Create a new version of a dataset.
-
-        Args:
-            dataset_id: ID of the dataset to create a version for.
-            comment: Comment describing the version.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            VersionInfo: Information about the created version.
-        """
-        return self._core.dataset.create_version(
-            dataset_id=dataset_id,
-            comment=comment,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def list_versions(
-        self,
-        *,
-        dataset_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListVersionsResponse:
-        """List versions of a dataset.
-
-        Args:
-            dataset_id: ID of the dataset to list versions for.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            ListVersionsResponse: List of versions and pagination information.
-        """
-        return self._core.dataset.list_versions(
-            dataset_id=dataset_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def get_version(
-        self,
-        *,
-        dataset_id: str,
-        version_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.VersionInfo:
-        """Get information about a specific version of a dataset.
-
-        Args:
-            dataset_id: ID of the dataset.
-            version_id: ID of the version to get.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            VersionInfo: Information about the version.
-        """
-        return self._core.dataset.get_version(
-            dataset_id=dataset_id,
-            version_id=version_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def delete_version(
-        self,
-        *,
-        dataset_id: str,
-        version_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:  # noqa: ANN401
-        """Delete a version.
-
-        Delete a version from the dataset.
-
-        :param dataset_id: ID of the dataset.
-        :param version_id: ID of the version to delete.
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        return self._core.dataset.delete_version(
-            dataset_id=dataset_id,
-            version_id=version_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def create_split(
-        self,
-        *,
-        dataset_id: str,
-        name: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SplitInfo:
-        """Create a new split in a dataset.
-
-        Args:
-            dataset_id: ID of the dataset to create a split in.
-            name: Name of the split.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            SplitInfo: Information about the created split.
-        """
-        return self._core.dataset.create_split(
-            dataset_id=dataset_id,
-            name=name,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def list_splits(
-        self,
-        *,
-        dataset_id: str,
-        cursor: OptionalNullable[Union[bytes, io.BufferedReader]] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        direction: OptionalNullable[models.Direction] = UNSET,
-        version_id: OptionalNullable[str] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListSplitsResponse:
-        """List splits in a dataset.
-
-        Args:
-            dataset_id: ID of the dataset to list splits for.
-            cursor: Cursor for pagination.
-            limit: Maximum number of splits to return.
-            direction: Direction to sort results.
-            version_id: ID of the version to list splits for.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            ListSplitsResponse: List of splits and pagination information.
-        """
-        return self._core.dataset.list_splits(
-            dataset_id=dataset_id,
-            cursor=cursor,
-            limit=limit,
-            direction=direction,
-            version_id=version_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def get_split(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SplitInfo:
-        """Get information about a specific split in a dataset.
-
-        Args:
-            dataset_id: ID of the dataset.
-            split_id: ID of the split to get.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            SplitInfo: Information about the split.
-        """
-        return self._core.dataset.get_split(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def delete_split(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:  # noqa: ANN401
-        """Delete a specific split from a dataset.
-
-        Args:
-            dataset_id: ID of the dataset.
-            split_id: ID of the split to delete.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            Any: Response from the server.
-        """
-        return self._core.dataset.delete_split(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def add_samples(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        request_body: List[str],
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AddSamplesResponse:
-        """Add samples.
-
-        Add samples to the split.
-
-        :param dataset_id: ID of the dataset.
-        :param split_id: ID of the split.
-        :param request_body:
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        return self._core.dataset.add_samples(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            request_body=request_body,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def list_samples(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        direction: OptionalNullable[models.ListSamplesQueryParamDirection] = UNSET,
-        version_id: OptionalNullable[str] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListSamplesResponse:
-        """List samples.
-
-        List samples from the split.
-
-        :param dataset_id: ID of the dataset.
-        :param split_id: ID of the split.
-        :param cursor:
-        :param limit:
-        :param direction:
-        :param version_id:
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        return self._core.dataset.list_samples(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            cursor=cursor,
-            limit=limit,
-            direction=direction,
-            version_id=version_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def update_samples(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        file: Union[
-            models.BodyUploadRawSamplesFile, models.BodyUploadRawSamplesFileTypedDict
-        ],
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AddSamplesResponse:
-        """Update samples.
-
-        Update samples as raw file.
-
-        :param dataset_id: ID of the dataset.
-        :param split_id: ID of the split.
-        :param file: File to update samples.
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        return self._core.dataset.update_samples(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            file=file,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    def delete_samples(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        request_body: Union[
-            List[models.RequestBody], List[models.RequestBodyTypedDict]
-        ],
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DeleteSamplesResponse:
-        """Delete samples.
-
-        Delete samples from the split.
-
-        :param dataset_id: ID of the dataset.
-        :param split_id: ID of the split.
-        :param request_body:
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        return self._core.dataset.delete_samples(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            request_body=request_body,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-
-class AsyncDataset(BaseDataset[AsyncFriendliCore]):
-    """AsyncDataset."""
+    @property
+    def _root(self) -> "AsyncFriendli":
+        return self.parent_ref  # type: ignore[return-value]
 
     #### High-Level Methods ####
 
@@ -1203,7 +619,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         self._project_id = project_id
         try:
             # Create dataset
-            self._dataset = await self._core.dataset.create_dataset(
+            self._dataset = await self.create_dataset(
                 modality=models.DedicatedDatasetModality(
                     input_modals=modality,
                     output_modals=[
@@ -1216,7 +632,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             )
 
             # Create default split
-            self._default_split = await self._core.dataset.create_split(
+            self._default_split = await self.create_split(
                 dataset_id=self._dataset.id,
                 name=default_split_name,
                 **self._config.model_dump(),
@@ -1245,7 +661,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         self._project_id = project_id
         try:
             # Get dataset
-            self._dataset = await self._core.dataset.get_dataset(
+            self._dataset = await self.get_dataset(
                 dataset_id=dataset_id,
                 **self._config.model_dump(),
             )
@@ -1253,15 +669,13 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
             # Get splits
             prev_cursor = None
             while True:
-                list_splits: models.ListSplitsResponse = (
-                    await self._core.dataset.list_splits(
-                        dataset_id=self._dataset.id,
-                        cursor=None,
-                        limit=None,
-                        direction=None,
-                        version_id=None,
-                        **self._config.model_dump(),
-                    )
+                list_splits: models.ListSplitsResponse = await self.list_splits(
+                    dataset_id=self._dataset.id,
+                    cursor=None,
+                    limit=None,
+                    direction=None,
+                    version_id=None,
+                    **self._config.model_dump(),
                 )
                 self._splits.update({split.name: split for split in list_splits.data})
                 if (
@@ -1306,7 +720,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         if name in self._splits:
             msg = f"Split '{name}' already exists."
             raise ValueError(msg)
-        split_info = await self._core.dataset.create_split(
+        split_info = await self.create_split(
             dataset_id=self._dataset.id,
             name=name,
             **self._config.model_dump(),
@@ -1375,7 +789,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         processed_samples: list[Sample] = await self._process_samples(samples=samples)
 
         # Add to the dataset
-        res: models.AddSamplesResponse = await self._core.dataset.add_samples(
+        res: models.AddSamplesResponse = await self.add_samples(
             dataset_id=self._dataset.id,
             split_id=await self._get_or_create_split_id(name=split),
             request_body=[s.model_dump_json() for s in processed_samples],
@@ -1414,7 +828,7 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         try:
             # Initialize upload
             init_upload: models.FileInitUploadResponse = (
-                await self._core.file.init_upload(
+                await self._root.file.init_upload(
                     digest=digest(data=data),
                     name=name,
                     project_id=self._project_id,
@@ -1435,14 +849,14 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
                     )
 
             # Complete upload
-            await self._core.file.complete_upload(
+            await self._root.file.complete_upload(
                 file_id=init_upload.file_id,
                 **self._config.model_dump(),
             )
 
             # Get download URL
             download_url: models.FileGetDownloadURLResponse = (
-                await self._core.file.get_download_url(
+                await self._root.file.get_download_url(
                     file_id=init_upload.file_id,
                     **self._config.model_dump(),
                 )
@@ -1453,594 +867,3 @@ class AsyncDataset(BaseDataset[AsyncFriendliCore]):
         except Exception as e:
             msg = f"Failed to upload content to S3: {e}"
             raise RuntimeError(msg) from e
-
-    #### Low-Level Methods ####
-
-    async def create_dataset(
-        self,
-        *,
-        modality: Union[
-            models.DedicatedDatasetModality, models.DedicatedDatasetModalityTypedDict
-        ],
-        name: str,
-        project_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DatasetInfo:
-        """Create a new dataset.
-
-        Args:
-            modality: Input modality of the dataset. Note that we only support text output modality for now.
-            name: Name of the dataset.
-            project_id: ID of the project the dataset belongs to.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            DatasetInfo: Information about the created dataset.
-        """
-        return await self._core.dataset.create_dataset(
-            modality=modality,
-            name=name,
-            project_id=project_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def list_datasets(
-        self,
-        *,
-        project_id: str,
-        cursor: OptionalNullable[Union[bytes, io.BufferedReader]] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        direction: OptionalNullable[models.Direction] = UNSET,
-        name_search: OptionalNullable[str] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListDatasetsResponse:
-        """List datasets accessible to the user.
-
-        Args:
-            project_id: ID of the project to list datasets from.
-            cursor: Cursor for pagination.
-            limit: Maximum number of datasets to return.
-            direction: Direction to sort results.
-            name_search: Search term to filter datasets by name.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            ListDatasetsResponse: List of datasets and pagination information.
-        """
-        return await self._core.dataset.list_datasets(
-            project_id=project_id,
-            cursor=cursor,
-            limit=limit,
-            direction=direction,
-            name_search=name_search,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def get_dataset(
-        self,
-        *,
-        dataset_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DatasetInfo:
-        """Get information about a specific dataset.
-
-        Args:
-            dataset_id: ID of the dataset to retrieve.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            DatasetInfo: Information about the dataset.
-        """
-        return await self._core.dataset.get_dataset(
-            dataset_id=dataset_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def delete_dataset(
-        self,
-        *,
-        dataset_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:  # noqa: ANN401
-        """Delete a specific dataset.
-
-        Args:
-            dataset_id: ID of the dataset to delete.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            Any: Response from the server.
-        """
-        return await self._core.dataset.delete_dataset(
-            dataset_id=dataset_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def create_version(
-        self,
-        *,
-        dataset_id: str,
-        comment: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.VersionInfo:
-        """Create a new version of a dataset.
-
-        Args:
-            dataset_id: ID of the dataset to create a version for.
-            comment: Comment describing the version.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            VersionInfo: Information about the created version.
-        """
-        return await self._core.dataset.create_version(
-            dataset_id=dataset_id,
-            comment=comment,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def list_versions(
-        self,
-        *,
-        dataset_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListVersionsResponse:
-        """List versions of a dataset.
-
-        Args:
-            dataset_id: ID of the dataset to list versions for.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            ListVersionsResponse: List of versions and pagination information.
-        """
-        return await self._core.dataset.list_versions(
-            dataset_id=dataset_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def get_version(
-        self,
-        *,
-        dataset_id: str,
-        version_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.VersionInfo:
-        """Get information about a specific version of a dataset.
-
-        Args:
-            dataset_id: ID of the dataset.
-            version_id: ID of the version to get.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            VersionInfo: Information about the version.
-        """
-        return await self._core.dataset.get_version(
-            dataset_id=dataset_id,
-            version_id=version_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def delete_version(
-        self,
-        *,
-        dataset_id: str,
-        version_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:  # noqa: ANN401
-        """Delete a version.
-
-        Delete a version from the dataset.
-
-        :param dataset_id: ID of the dataset.
-        :param version_id: ID of the version to delete.
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        return await self._core.dataset.delete_version(
-            dataset_id=dataset_id,
-            version_id=version_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def create_split(
-        self,
-        *,
-        dataset_id: str,
-        name: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SplitInfo:
-        """Create a new split in a dataset.
-
-        Args:
-            dataset_id: ID of the dataset to create a split in.
-            name: Name of the split.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            SplitInfo: Information about the created split.
-        """
-        return await self._core.dataset.create_split(
-            dataset_id=dataset_id,
-            name=name,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def list_splits(
-        self,
-        *,
-        dataset_id: str,
-        cursor: OptionalNullable[Union[bytes, io.BufferedReader]] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        direction: OptionalNullable[models.Direction] = UNSET,
-        version_id: OptionalNullable[str] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListSplitsResponse:
-        """List splits in a dataset.
-
-        Args:
-            dataset_id: ID of the dataset to list splits for.
-            cursor: Cursor for pagination.
-            limit: Maximum number of splits to return.
-            direction: Direction to sort results.
-            version_id: ID of the version to list splits for.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            ListSplitsResponse: List of splits and pagination information.
-        """
-        return await self._core.dataset.list_splits(
-            dataset_id=dataset_id,
-            cursor=cursor,
-            limit=limit,
-            direction=direction,
-            version_id=version_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def get_split(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SplitInfo:
-        """Get information about a specific split in a dataset.
-
-        Args:
-            dataset_id: ID of the dataset.
-            split_id: ID of the split to get.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            SplitInfo: Information about the split.
-        """
-        return await self._core.dataset.get_split(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def delete_split(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:  # noqa: ANN401
-        """Delete a specific split from a dataset.
-
-        Args:
-            dataset_id: ID of the dataset.
-            split_id: ID of the split to delete.
-            x_friendli_team: ID of team to run requests as (optional parameter).
-            retries: Override the default retry configuration for this method.
-            server_url: Override the default server URL for this method.
-            timeout_ms: Override the default request timeout configuration for this method in milliseconds.
-            http_headers: Additional headers to set or replace on requests.
-
-        Returns:
-            Any: Response from the server.
-        """
-        return await self._core.dataset.delete_split(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def add_samples(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        request_body: List[str],
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AddSamplesResponse:
-        """Add samples.
-
-        Add samples to the split.
-
-        :param dataset_id: ID of the dataset.
-        :param split_id: ID of the split.
-        :param request_body:
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        return await self._core.dataset.add_samples(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            request_body=request_body,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def list_samples(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        direction: OptionalNullable[models.ListSamplesQueryParamDirection] = UNSET,
-        version_id: OptionalNullable[str] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListSamplesResponse:
-        """List samples.
-
-        List samples from the split.
-
-        :param dataset_id: ID of the dataset.
-        :param split_id: ID of the split.
-        :param cursor:
-        :param limit:
-        :param direction:
-        :param version_id:
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        return await self._core.dataset.list_samples(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            cursor=cursor,
-            limit=limit,
-            direction=direction,
-            version_id=version_id,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def update_samples(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        file: Union[
-            models.BodyUploadRawSamplesFile, models.BodyUploadRawSamplesFileTypedDict
-        ],
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AddSamplesResponse:
-        """Update samples.
-
-        Update samples as raw file.
-
-        :param dataset_id: ID of the dataset.
-        :param split_id: ID of the split.
-        :param file: File to update samples.
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        return await self._core.dataset.update_samples(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            file=file,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )
-
-    async def delete_samples(
-        self,
-        *,
-        dataset_id: str,
-        split_id: str,
-        request_body: Union[
-            List[models.RequestBody], List[models.RequestBodyTypedDict]
-        ],
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DeleteSamplesResponse:
-        """Delete samples.
-
-        Delete samples from the split.
-
-        :param dataset_id: ID of the dataset.
-        :param split_id: ID of the split.
-        :param request_body:
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        return await self._core.dataset.delete_samples(
-            dataset_id=dataset_id,
-            split_id=split_id,
-            request_body=request_body,
-            x_friendli_team=x_friendli_team,
-            retries=retries,
-            server_url=server_url,
-            timeout_ms=timeout_ms,
-            http_headers=http_headers,
-        )

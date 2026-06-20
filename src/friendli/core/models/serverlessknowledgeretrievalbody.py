@@ -27,3 +27,9 @@ class ServerlessKnowledgeRetrievalBody(BaseModel):
     "Maximum number of top-ranked knowledge-base entries to return in results."
     knowledge_ids: Annotated[List[str], pydantic.Field(alias="knowledgeIds")]
     "A List of knowledge-base IDs. For now, only one knowledge-base is supported."
+
+
+try:
+    ServerlessKnowledgeRetrievalBody.model_rebuild()
+except NameError:
+    pass

@@ -6,7 +6,7 @@ from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
-from typing import List, Mapping, Optional
+from typing import Iterable, List, Mapping, Optional
 import abc
 
 
@@ -96,7 +96,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -115,7 +115,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
         self,
         *,
         model: str,
-        tokens: List[int],
+        tokens: Iterable[int],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -145,7 +145,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
         request = models.DedicatedDetokenizationRequest(
             x_friendli_team=x_friendli_team,
             dedicated_detokenization_body=models.DedicatedDetokenizationBody(
-                model=model, tokens=tokens
+                model=model, tokens=utils.unmarshal(tokens, List[int])
             ),
         )
         req = self._build_request(
@@ -192,7 +192,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -290,7 +290,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -309,7 +309,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
         self,
         *,
         model: str,
-        tokens: List[int],
+        tokens: Iterable[int],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -339,7 +339,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
         request = models.DedicatedDetokenizationRequest(
             x_friendli_team=x_friendli_team,
             dedicated_detokenization_body=models.DedicatedDetokenizationBody(
-                model=model, tokens=tokens
+                model=model, tokens=utils.unmarshal(tokens, List[int])
             ),
         )
         req = self._build_request_async(
@@ -386,7 +386,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):

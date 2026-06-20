@@ -3,5 +3,5 @@
 from __future__ import annotations
 from typing import Literal
 
-ServerlessPriceUnitType = Literal["TOKEN", "SECOND"]
+ServerlessPriceUnitType = Literal["TOKEN", "SECOND", "AUDIO_MINUTE"]
 "Serverless price unit type."

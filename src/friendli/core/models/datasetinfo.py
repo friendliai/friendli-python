@@ -38,3 +38,9 @@ class DatasetInfo(BaseModel):
     "Unix timestamp (in seconds) of when the dataset was last modified."
     modality: DedicatedDatasetModality
     "Dataset modality."
+
+
+try:
+    DatasetInfo.model_rebuild()
+except NameError:
+    pass
