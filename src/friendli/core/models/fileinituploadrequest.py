@@ -30,3 +30,9 @@ class FileInitUploadRequest(BaseModel):
     "Digest of the file."
     project_id: Annotated[str, pydantic.Field(alias="projectId")]
     "ID of the project the file belongs to."
+
+
+try:
+    FileInitUploadRequest.model_rebuild()
+except NameError:
+    pass

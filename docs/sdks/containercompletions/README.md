@@ -13,7 +13,7 @@ Generate text based on the given text prompt.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="containerCompletionsComplete" method="post" path="/v1/completions" -->
+<!-- UsageSnippet language="python" operationID="containerCompletionsComplete" method="post" path="/v1/completions" example="Example" -->
 ```python
 import os
 
@@ -57,7 +57,7 @@ Generate text based on the given text prompt.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="containerCompletionsStream" method="post" path="/v1/completions#stream" -->
+<!-- UsageSnippet language="python" operationID="containerCompletionsStream" method="post" path="/v1/completions#stream" example="Example" -->
 ```python
 import os
 

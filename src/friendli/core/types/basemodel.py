@@ -2,7 +2,8 @@
 
 from pydantic import ConfigDict, model_serializer
 from pydantic import BaseModel as PydanticBaseModel
-from typing import TYPE_CHECKING, Literal, Optional, TypeVar, Union
+from pydantic_core import core_schema
+from typing import TYPE_CHECKING, Any, Literal, Optional, TypeVar, Union
 from typing_extensions import TypeAliasType, TypeAlias
 
 
@@ -32,5 +33,47 @@ else:
     OptionalNullable = TypeAliasType(
         "OptionalNullable", Union[Optional[Nullable[T]], Unset], type_params=(T,)
     )
-UnrecognizedInt: TypeAlias = int
-UnrecognizedStr: TypeAlias = str
+
+
+class UnrecognizedStr(str):
+    @classmethod
+    def __get_pydantic_core_schema__(
+        cls, _source_type: Any, _handler: Any
+    ) -> core_schema.CoreSchema:
+
+        def validate_lax(v: Any) -> "UnrecognizedStr":
+            if isinstance(v, cls):
+                return v
+            return cls(str(v))
+
+        return core_schema.lax_or_strict_schema(
+            lax_schema=core_schema.chain_schema(
+                [
+                    core_schema.str_schema(),
+                    core_schema.no_info_plain_validator_function(validate_lax),
+                ]
+            ),
+            strict_schema=core_schema.none_schema(),
+        )
+
+
+class UnrecognizedInt(int):
+    @classmethod
+    def __get_pydantic_core_schema__(
+        cls, _source_type: Any, _handler: Any
+    ) -> core_schema.CoreSchema:
+
+        def validate_lax(v: Any) -> "UnrecognizedInt":
+            if isinstance(v, cls):
+                return v
+            return cls(int(v))
+
+        return core_schema.lax_or_strict_schema(
+            lax_schema=core_schema.chain_schema(
+                [
+                    core_schema.int_schema(),
+                    core_schema.no_info_plain_validator_function(validate_lax),
+                ]
+            ),
+            strict_schema=core_schema.none_schema(),
+        )

@@ -22,3 +22,9 @@ class IntegratedBuiltInTool(BaseModel):
         pydantic.Field(alias="type"),
     ] = "linkup:search"
     "The type of the integrated third-party tool."
+
+
+try:
+    IntegratedBuiltInTool.model_rebuild()
+except NameError:
+    pass

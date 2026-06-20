@@ -4,11 +4,19 @@ from .basesdk import BaseSDK, SyncSDK, AsyncSDK
 from .sdkconfiguration import SDKConfiguration
 from friendli.core.container_audio import SyncContainerAudio, AsyncContainerAudio
 from friendli.core.container_chat import SyncContainerChat, AsyncContainerChat
+from friendli.core.container_classification import (
+    SyncContainerClassification,
+    AsyncContainerClassification,
+)
 from friendli.core.container_completions import (
     SyncContainerCompletions,
     AsyncContainerCompletions,
 )
 from friendli.core.container_image import SyncContainerImage, AsyncContainerImage
+from friendli.core.container_messages import (
+    SyncContainerMessages,
+    AsyncContainerMessages,
+)
 from friendli.core.container_token import SyncContainerToken, AsyncContainerToken
 from typing import Optional
 import abc
@@ -27,13 +35,18 @@ class BaseContainer(BaseSDK):
 
 class SyncContainer(BaseContainer, SyncSDK):
     chat: SyncContainerChat
+    messages: SyncContainerMessages
     completions: SyncContainerCompletions
     token: SyncContainerToken
     image: SyncContainerImage
     audio: SyncContainerAudio
+    classification: SyncContainerClassification
 
     def _init_sdks(self):
         self.chat = SyncContainerChat(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.messages = SyncContainerMessages(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.completions = SyncContainerCompletions(
@@ -48,17 +61,25 @@ class SyncContainer(BaseContainer, SyncSDK):
         self.audio = SyncContainerAudio(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
+        self.classification = SyncContainerClassification(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
 
 
 class AsyncContainer(BaseContainer, AsyncSDK):
     chat: AsyncContainerChat
+    messages: AsyncContainerMessages
     completions: AsyncContainerCompletions
     token: AsyncContainerToken
     image: AsyncContainerImage
     audio: AsyncContainerAudio
+    classification: AsyncContainerClassification
 
     def _init_sdks(self):
         self.chat = AsyncContainerChat(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.messages = AsyncContainerMessages(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.completions = AsyncContainerCompletions(
@@ -71,5 +92,8 @@ class AsyncContainer(BaseContainer, AsyncSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.audio = AsyncContainerAudio(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.classification = AsyncContainerClassification(
             self.sdk_configuration, parent_ref=self.parent_ref
         )

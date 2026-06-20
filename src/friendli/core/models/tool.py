@@ -23,3 +23,9 @@ class Tool(BaseModel):
         pydantic.Field(alias="type"),
     ] = "function"
     "The type of the tool. Currently, only `function` is supported."
+
+
+try:
+    Tool.model_rebuild()
+except NameError:
+    pass

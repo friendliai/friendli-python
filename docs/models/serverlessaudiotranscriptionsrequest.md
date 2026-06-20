@@ -1,0 +1,9 @@
+# ServerlessAudioTranscriptionsRequest
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              | Example                                                                                  |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `x_friendli_team`                                                                        | *OptionalNullable[str]*                                                                  | :heavy_minus_sign:                                                                       | ID of team to run requests as (optional parameter).                                      |                                                                                          |
+| `serverless_audio_transcription_body`                                                    | [models.ServerlessAudioTranscriptionBody](../models/serverlessaudiotranscriptionbody.md) | :heavy_check_mark:                                                                       | N/A                                                                                      | {<br/>"file": "@/path/to/file/audio.mp3",<br/>"model": "openai/whisper-large-v3"<br/>}   |

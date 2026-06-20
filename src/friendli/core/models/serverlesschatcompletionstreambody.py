@@ -17,9 +17,10 @@ from friendli.core.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
+ServerlessChatCompletionStreamBodyReasoningEffort = Literal["low", "medium", "high"]
 ServerlessChatCompletionStreamBodySeedTypedDict = TypeAliasType(
     "ServerlessChatCompletionStreamBodySeedTypedDict", Union[List[int], int]
 )
@@ -42,7 +43,7 @@ ServerlessChatCompletionStreamBodyToolChoice = TypeAliasType(
 
 class ServerlessChatCompletionStreamBodyTypedDict(TypedDict):
     model: str
-    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods)."
+    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods)."
     messages: List[MessageTypedDict]
     "A list of messages comprising the conversation so far."
     chat_template_kwargs: NotRequired[Nullable[Dict[str, Any]]]
@@ -67,12 +68,18 @@ class ServerlessChatCompletionStreamBodyTypedDict(TypedDict):
     "Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."
     repetition_penalty: NotRequired[Nullable[float]]
     "Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."
+    reasoning_effort: NotRequired[
+        Nullable[ServerlessChatCompletionStreamBodyReasoningEffort]
+    ]
+    "Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models."
+    reasoning_budget: NotRequired[Nullable[int]]
+    "Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models."
     seed: NotRequired[Nullable[ServerlessChatCompletionStreamBodySeedTypedDict]]
     "Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."
     stop: NotRequired[Nullable[List[str]]]
     "When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list."
     stream: NotRequired[Nullable[bool]]
-    "Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
     parse_reasoning: NotRequired[Nullable[bool]]
@@ -98,12 +105,12 @@ class ServerlessChatCompletionStreamBodyTypedDict(TypedDict):
     min_tokens: NotRequired[Nullable[int]]
     "The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.\n\n    **This field is unsupported when `tools` or `response_format` is specified.**\n    "
     response_format: NotRequired[Nullable[ResponseFormatTypedDict]]
-    "The enforced format of the model's output.\n\n    Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.\n\n    For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).\n\n    ***Important***\n    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).\n    Otherwise, the model may result in an unending stream of whitespace or other characters.\n\n    **This field is unsupported when `tools` is specified.**\n    **When `response_format` is specified, `min_tokens` field is unsupported.**\n    "
+    "The enforced format of the model's output.\n\n    Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.\n\n    For more detailed information, please refer [here](https://friendli.ai/docs/guides/structured-outputs).\n\n    ***Important***\n    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).\n    Otherwise, the model may result in an unending stream of whitespace or other characters.\n\n    **This field is unsupported when `tools` is specified.**\n    **When `response_format` is specified, `min_tokens` field is unsupported.**\n    "
 
 
 class ServerlessChatCompletionStreamBody(BaseModel):
     model: str
-    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods)."
+    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods)."
     messages: List[Message]
     "A list of messages comprising the conversation so far."
     chat_template_kwargs: OptionalNullable[Dict[str, Any]] = UNSET
@@ -128,12 +135,18 @@ class ServerlessChatCompletionStreamBody(BaseModel):
     "Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text."
     repetition_penalty: OptionalNullable[float] = UNSET
     "Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."
+    reasoning_effort: OptionalNullable[
+        ServerlessChatCompletionStreamBodyReasoningEffort
+    ] = UNSET
+    "Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models."
+    reasoning_budget: OptionalNullable[int] = UNSET
+    "Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models."
     seed: OptionalNullable[ServerlessChatCompletionStreamBodySeed] = UNSET
     "Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."
     stop: OptionalNullable[List[str]] = UNSET
     "When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list."
     stream: OptionalNullable[bool] = UNSET
-    "Whether to stream generation result. When set true, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: OptionalNullable[StreamOptions] = UNSET
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
     parse_reasoning: OptionalNullable[bool] = UNSET
@@ -159,83 +172,88 @@ class ServerlessChatCompletionStreamBody(BaseModel):
     min_tokens: OptionalNullable[int] = UNSET
     "The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.\n\n    **This field is unsupported when `tools` or `response_format` is specified.**\n    "
     response_format: OptionalNullable[ResponseFormat] = UNSET
-    "The enforced format of the model's output.\n\n    Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.\n\n    For more detailed information, please refer [here](https://friendli.ai/docs/guides/serverless_endpoints/structured-outputs).\n\n    ***Important***\n    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).\n    Otherwise, the model may result in an unending stream of whitespace or other characters.\n\n    **This field is unsupported when `tools` is specified.**\n    **When `response_format` is specified, `min_tokens` field is unsupported.**\n    "
+    "The enforced format of the model's output.\n\n    Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.\n\n    For more detailed information, please refer [here](https://friendli.ai/docs/guides/structured-outputs).\n\n    ***Important***\n    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).\n    Otherwise, the model may result in an unending stream of whitespace or other characters.\n\n    **This field is unsupported when `tools` is specified.**\n    **When `response_format` is specified, `min_tokens` field is unsupported.**\n    "
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "chat_template_kwargs",
-            "eos_token",
-            "frequency_penalty",
-            "logit_bias",
-            "logprobs",
-            "max_tokens",
-            "min_p",
-            "n",
-            "parallel_tool_calls",
-            "presence_penalty",
-            "repetition_penalty",
-            "seed",
-            "stop",
-            "stream",
-            "stream_options",
-            "parse_reasoning",
-            "include_reasoning",
-            "temperature",
-            "tool_choice",
-            "top_k",
-            "top_logprobs",
-            "top_p",
-            "xtc_threshold",
-            "xtc_probability",
-            "tools",
-            "min_tokens",
-            "response_format",
-        ]
-        nullable_fields = [
-            "chat_template_kwargs",
-            "eos_token",
-            "frequency_penalty",
-            "logit_bias",
-            "logprobs",
-            "max_tokens",
-            "min_p",
-            "n",
-            "parallel_tool_calls",
-            "presence_penalty",
-            "repetition_penalty",
-            "seed",
-            "stop",
-            "stream",
-            "stream_options",
-            "parse_reasoning",
-            "include_reasoning",
-            "temperature",
-            "top_k",
-            "top_logprobs",
-            "top_p",
-            "xtc_threshold",
-            "xtc_probability",
-            "tools",
-            "min_tokens",
-            "response_format",
-        ]
-        null_default_fields = []
+        optional_fields = set(
+            [
+                "chat_template_kwargs",
+                "eos_token",
+                "frequency_penalty",
+                "logit_bias",
+                "logprobs",
+                "max_tokens",
+                "min_p",
+                "n",
+                "parallel_tool_calls",
+                "presence_penalty",
+                "repetition_penalty",
+                "reasoning_effort",
+                "reasoning_budget",
+                "seed",
+                "stop",
+                "stream",
+                "stream_options",
+                "parse_reasoning",
+                "include_reasoning",
+                "temperature",
+                "tool_choice",
+                "top_k",
+                "top_logprobs",
+                "top_p",
+                "xtc_threshold",
+                "xtc_probability",
+                "tools",
+                "min_tokens",
+                "response_format",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "chat_template_kwargs",
+                "eos_token",
+                "frequency_penalty",
+                "logit_bias",
+                "logprobs",
+                "max_tokens",
+                "min_p",
+                "n",
+                "parallel_tool_calls",
+                "presence_penalty",
+                "repetition_penalty",
+                "reasoning_effort",
+                "reasoning_budget",
+                "seed",
+                "stop",
+                "stream",
+                "stream_options",
+                "parse_reasoning",
+                "include_reasoning",
+                "temperature",
+                "top_k",
+                "top_logprobs",
+                "top_p",
+                "xtc_threshold",
+                "xtc_probability",
+                "tools",
+                "min_tokens",
+                "response_format",
+            ]
+        )
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
             )
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                k not in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
         return m

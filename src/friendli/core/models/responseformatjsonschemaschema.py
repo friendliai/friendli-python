@@ -15,3 +15,9 @@ class ResponseFormatJSONSchemaSchemaTypedDict(TypedDict):
 class ResponseFormatJSONSchemaSchema(BaseModel):
     schema_: Annotated[Dict[str, Any], pydantic.Field(alias="schema")]
     "The schema for the response format, described as a JSON Schema object."
+
+
+try:
+    ResponseFormatJSONSchemaSchema.model_rebuild()
+except NameError:
+    pass

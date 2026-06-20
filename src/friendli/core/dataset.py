@@ -7,7 +7,7 @@ from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
 import io
-from typing import Any, IO, List, Mapping, Optional, Union
+from typing import Any, IO, Iterable, List, Mapping, Optional, Union
 import abc
 
 
@@ -105,7 +105,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -128,7 +128,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         self,
         *,
         project_id: str,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
+        cursor: OptionalNullable[Union[bytes, IO[bytes], io.IOBase]] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         direction: OptionalNullable[models.ListDatasetsDirection] = UNSET,
         name_search: OptionalNullable[str] = UNSET,
@@ -206,7 +206,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -294,7 +294,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -382,7 +382,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -472,7 +472,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -560,7 +560,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -652,7 +652,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -744,7 +744,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -834,7 +834,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -857,7 +857,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         self,
         *,
         dataset_id: str,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
+        cursor: OptionalNullable[Union[bytes, IO[bytes], io.IOBase]] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         direction: OptionalNullable[models.ListSplitsDirection] = UNSET,
         version_id: OptionalNullable[str] = UNSET,
@@ -935,7 +935,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1025,7 +1025,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1115,7 +1115,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1139,7 +1139,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         *,
         dataset_id: str,
         split_id: str,
-        request_body: List[str],
+        request_body: Iterable[str],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1171,7 +1171,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             dataset_id=dataset_id,
             split_id=split_id,
             x_friendli_team=x_friendli_team,
-            request_body=request_body,
+            request_body=utils.unmarshal(request_body, List[str]),
         )
         req = self._build_request(
             method="POST",
@@ -1213,7 +1213,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1237,7 +1237,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         *,
         dataset_id: str,
         split_id: str,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
+        cursor: OptionalNullable[Union[bytes, IO[bytes], io.IOBase]] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         direction: OptionalNullable[models.ListSamplesDirection] = UNSET,
         version_id: OptionalNullable[str] = UNSET,
@@ -1317,7 +1317,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1423,7 +1423,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1448,7 +1448,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         dataset_id: str,
         split_id: str,
         request_body: Union[
-            List[models.RequestBody], List[models.RequestBodyTypedDict]
+            Iterable[models.RequestBody], Iterable[models.RequestBodyTypedDict]
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1481,7 +1481,7 @@ class SyncDataset(BaseDataset, SyncSDK):
             dataset_id=dataset_id,
             split_id=split_id,
             x_friendli_team=x_friendli_team,
-            request_body=request_body,
+            request_body=utils.unmarshal(request_body, List[models.RequestBody]),
         )
         req = self._build_request(
             method="POST",
@@ -1523,7 +1523,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1633,7 +1633,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1656,7 +1656,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         self,
         *,
         project_id: str,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
+        cursor: OptionalNullable[Union[bytes, IO[bytes], io.IOBase]] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         direction: OptionalNullable[models.ListDatasetsDirection] = UNSET,
         name_search: OptionalNullable[str] = UNSET,
@@ -1734,7 +1734,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1822,7 +1822,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1910,7 +1910,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2000,7 +2000,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2088,7 +2088,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2180,7 +2180,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2272,7 +2272,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2362,7 +2362,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2385,7 +2385,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         self,
         *,
         dataset_id: str,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
+        cursor: OptionalNullable[Union[bytes, IO[bytes], io.IOBase]] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         direction: OptionalNullable[models.ListSplitsDirection] = UNSET,
         version_id: OptionalNullable[str] = UNSET,
@@ -2463,7 +2463,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2553,7 +2553,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2643,7 +2643,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2667,7 +2667,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         *,
         dataset_id: str,
         split_id: str,
-        request_body: List[str],
+        request_body: Iterable[str],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2699,7 +2699,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             dataset_id=dataset_id,
             split_id=split_id,
             x_friendli_team=x_friendli_team,
-            request_body=request_body,
+            request_body=utils.unmarshal(request_body, List[str]),
         )
         req = self._build_request_async(
             method="POST",
@@ -2741,7 +2741,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2765,7 +2765,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         *,
         dataset_id: str,
         split_id: str,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
+        cursor: OptionalNullable[Union[bytes, IO[bytes], io.IOBase]] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         direction: OptionalNullable[models.ListSamplesDirection] = UNSET,
         version_id: OptionalNullable[str] = UNSET,
@@ -2845,7 +2845,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2951,7 +2951,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -2976,7 +2976,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         dataset_id: str,
         split_id: str,
         request_body: Union[
-            List[models.RequestBody], List[models.RequestBodyTypedDict]
+            Iterable[models.RequestBody], Iterable[models.RequestBodyTypedDict]
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -3009,7 +3009,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
             dataset_id=dataset_id,
             split_id=split_id,
             x_friendli_team=x_friendli_team,
-            request_body=request_body,
+            request_body=utils.unmarshal(request_body, List[models.RequestBody]),
         )
         req = self._build_request_async(
             method="POST",
@@ -3051,7 +3051,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None

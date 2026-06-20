@@ -12,7 +12,7 @@ Given a list of messages forming a conversation, the API renders them into the f
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="dedicatedChatRender" method="post" path="/dedicated/v1/chat/render" -->
+<!-- UsageSnippet language="python" operationID="dedicatedChatRender" method="post" path="/dedicated/v1/chat/render" example="Example" -->
 ```python
 import os
 

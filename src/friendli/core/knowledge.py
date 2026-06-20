@@ -6,7 +6,7 @@ from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
-from typing import List, Mapping, Optional
+from typing import Iterable, List, Mapping, Optional
 import abc
 
 
@@ -20,7 +20,7 @@ class SyncKnowledge(BaseKnowledge, SyncSDK):
         *,
         query: str,
         k: int,
-        knowledge_ids: List[str],
+        knowledge_ids: Iterable[str],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -51,7 +51,9 @@ class SyncKnowledge(BaseKnowledge, SyncSDK):
         request = models.ServerlessKnowledgeRetrieveRequest(
             x_friendli_team=x_friendli_team,
             serverless_knowledge_retrieval_body=models.ServerlessKnowledgeRetrievalBody(
-                query=query, k=k, knowledge_ids=knowledge_ids
+                query=query,
+                k=k,
+                knowledge_ids=utils.unmarshal(knowledge_ids, List[str]),
             ),
         )
         req = self._build_request(
@@ -98,7 +100,7 @@ class SyncKnowledge(BaseKnowledge, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -120,7 +122,7 @@ class AsyncKnowledge(BaseKnowledge, AsyncSDK):
         *,
         query: str,
         k: int,
-        knowledge_ids: List[str],
+        knowledge_ids: Iterable[str],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -151,7 +153,9 @@ class AsyncKnowledge(BaseKnowledge, AsyncSDK):
         request = models.ServerlessKnowledgeRetrieveRequest(
             x_friendli_team=x_friendli_team,
             serverless_knowledge_retrieval_body=models.ServerlessKnowledgeRetrievalBody(
-                query=query, k=k, knowledge_ids=knowledge_ids
+                query=query,
+                k=k,
+                knowledge_ids=utils.unmarshal(knowledge_ids, List[str]),
             ),
         )
         req = self._build_request_async(
@@ -198,7 +202,7 @@ class AsyncKnowledge(BaseKnowledge, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):

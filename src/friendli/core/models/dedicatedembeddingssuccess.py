@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .embeddingobject import EmbeddingObject, EmbeddingObjectTypedDict
-from .embeddingsusage import EmbeddingsUsage, EmbeddingsUsageTypedDict
+from .textusage import TextUsage, TextUsageTypedDict
 from friendli.core.types import (
     BaseModel,
     Nullable,
@@ -23,7 +23,7 @@ class DedicatedEmbeddingsSuccessTypedDict(TypedDict):
     "A unique ID of the embeddings."
     data: List[EmbeddingObjectTypedDict]
     "A list of embedding objects."
-    usage: EmbeddingsUsageTypedDict
+    usage: TextUsageTypedDict
     created: int
     "The Unix timestamp (in seconds) for when the embeddings were created."
     model: NotRequired[Nullable[str]]
@@ -37,7 +37,7 @@ class DedicatedEmbeddingsSuccess(BaseModel):
     "A unique ID of the embeddings."
     data: List[EmbeddingObject]
     "A list of embedding objects."
-    usage: EmbeddingsUsage
+    usage: TextUsage
     created: int
     "The Unix timestamp (in seconds) for when the embeddings were created."
     model: OptionalNullable[str] = UNSET
@@ -50,24 +50,27 @@ class DedicatedEmbeddingsSuccess(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["model"]
-        nullable_fields = ["model"]
-        null_default_fields = []
+        optional_fields = set(["model"])
+        nullable_fields = set(["model"])
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
             )
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                k not in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
         return m
+
+
+try:
+    DedicatedEmbeddingsSuccess.model_rebuild()
+except NameError:
+    pass

@@ -2,12 +2,17 @@
 
 Modality type.
 
+## Example Usage
+
+```python
+from friendli_core.models import DedicatedDatasetModalityType
+value: DedicatedDatasetModalityType = "VIDEO"
+```
+
 
 ## Values
 
-| Name    | Value   |
-| ------- | ------- |
-| `VIDEO` | VIDEO   |
-| `IMAGE` | IMAGE   |
-| `AUDIO` | AUDIO   |
-| `TEXT`  | TEXT    |
+- `"VIDEO"`
+- `"IMAGE"`
+- `"AUDIO"`
+- `"TEXT"`

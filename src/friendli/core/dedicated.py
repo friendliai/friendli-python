@@ -8,11 +8,19 @@ from friendli.core.dedicated_chatrender import (
     SyncDedicatedChatRender,
     AsyncDedicatedChatRender,
 )
+from friendli.core.dedicated_classification import (
+    SyncDedicatedClassification,
+    AsyncDedicatedClassification,
+)
 from friendli.core.dedicated_completions import (
     SyncDedicatedCompletions,
     AsyncDedicatedCompletions,
 )
 from friendli.core.dedicated_image import SyncDedicatedImage, AsyncDedicatedImage
+from friendli.core.dedicated_messages import (
+    SyncDedicatedMessages,
+    AsyncDedicatedMessages,
+)
 from friendli.core.dedicated_token import SyncDedicatedToken, AsyncDedicatedToken
 from friendli.core.embeddings import SyncEmbeddings, AsyncEmbeddings
 from friendli.core.endpoint import SyncEndpoint, AsyncEndpoint
@@ -34,11 +42,13 @@ class BaseDedicated(BaseSDK):
 class SyncDedicated(BaseDedicated, SyncSDK):
     chat: SyncDedicatedChat
     chat_render: SyncDedicatedChatRender
+    messages: SyncDedicatedMessages
     completions: SyncDedicatedCompletions
     embeddings: SyncEmbeddings
     token: SyncDedicatedToken
     image: SyncDedicatedImage
     audio: SyncDedicatedAudio
+    classification: SyncDedicatedClassification
     endpoint: SyncEndpoint
 
     def _init_sdks(self):
@@ -46,6 +56,9 @@ class SyncDedicated(BaseDedicated, SyncSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.chat_render = SyncDedicatedChatRender(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.messages = SyncDedicatedMessages(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.completions = SyncDedicatedCompletions(
@@ -63,17 +76,22 @@ class SyncDedicated(BaseDedicated, SyncSDK):
         self.audio = SyncDedicatedAudio(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
+        self.classification = SyncDedicatedClassification(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
         self.endpoint = SyncEndpoint(self.sdk_configuration, parent_ref=self.parent_ref)
 
 
 class AsyncDedicated(BaseDedicated, AsyncSDK):
     chat: AsyncDedicatedChat
     chat_render: AsyncDedicatedChatRender
+    messages: AsyncDedicatedMessages
     completions: AsyncDedicatedCompletions
     embeddings: AsyncEmbeddings
     token: AsyncDedicatedToken
     image: AsyncDedicatedImage
     audio: AsyncDedicatedAudio
+    classification: AsyncDedicatedClassification
     endpoint: AsyncEndpoint
 
     def _init_sdks(self):
@@ -81,6 +99,9 @@ class AsyncDedicated(BaseDedicated, AsyncSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.chat_render = AsyncDedicatedChatRender(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.messages = AsyncDedicatedMessages(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.completions = AsyncDedicatedCompletions(
@@ -96,6 +117,9 @@ class AsyncDedicated(BaseDedicated, AsyncSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.audio = AsyncDedicatedAudio(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.classification = AsyncDedicatedClassification(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.endpoint = AsyncEndpoint(

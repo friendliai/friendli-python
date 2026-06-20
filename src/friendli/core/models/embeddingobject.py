@@ -33,3 +33,9 @@ class EmbeddingObject(BaseModel):
         pydantic.Field(alias="object"),
     ] = "embedding"
     "The object type, which is always set to `embedding`."
+
+
+try:
+    EmbeddingObject.model_rebuild()
+except NameError:
+    pass

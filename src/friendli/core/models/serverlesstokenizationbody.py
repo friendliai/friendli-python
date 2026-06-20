@@ -7,13 +7,13 @@ from typing_extensions import TypedDict
 
 class ServerlessTokenizationBodyTypedDict(TypedDict):
     model: str
-    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods)."
+    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods)."
     prompt: str
     "Input text prompt to tokenize."
 
 
 class ServerlessTokenizationBody(BaseModel):
     model: str
-    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/serverless_endpoints/pricing#billing-methods)."
+    "Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods)."
     prompt: str
     "Input text prompt to tokenize."

@@ -30,3 +30,9 @@ class CreateDatasetRequest(BaseModel):
     "ID of the project."
     modality: DedicatedDatasetModality
     "Dataset modality."
+
+
+try:
+    CreateDatasetRequest.model_rebuild()
+except NameError:
+    pass

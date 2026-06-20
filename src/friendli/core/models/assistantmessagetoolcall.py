@@ -30,3 +30,9 @@ class AssistantMessageToolCall(BaseModel):
         pydantic.Field(alias="type"),
     ] = "function"
     "The type of tool call."
+
+
+try:
+    AssistantMessageToolCall.model_rebuild()
+except NameError:
+    pass

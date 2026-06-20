@@ -20,3 +20,9 @@ class ResponseFormatText(BaseModel):
         pydantic.Field(alias="type"),
     ] = "text"
     "The type of the response format: `text`"
+
+
+try:
+    ResponseFormatText.model_rebuild()
+except NameError:
+    pass

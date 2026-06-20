@@ -4,6 +4,7 @@ from .basesdk import BaseSDK, SyncSDK, AsyncSDK
 from .sdkconfiguration import SDKConfiguration
 from friendli.core.knowledge import SyncKnowledge, AsyncKnowledge
 from friendli.core.model import SyncModel, AsyncModel
+from friendli.core.serverless_audio import SyncServerlessAudio, AsyncServerlessAudio
 from friendli.core.serverless_chat import SyncServerlessChat, AsyncServerlessChat
 from friendli.core.serverless_chatrender import (
     SyncServerlessChatRender,
@@ -12,6 +13,10 @@ from friendli.core.serverless_chatrender import (
 from friendli.core.serverless_completions import (
     SyncServerlessCompletions,
     AsyncServerlessCompletions,
+)
+from friendli.core.serverless_messages import (
+    SyncServerlessMessages,
+    AsyncServerlessMessages,
 )
 from friendli.core.serverless_token import SyncServerlessToken, AsyncServerlessToken
 from friendli.core.toolassistedchat import SyncToolAssistedChat, AsyncToolAssistedChat
@@ -32,8 +37,10 @@ class BaseServerless(BaseSDK):
 
 class SyncServerless(BaseServerless, SyncSDK):
     chat: SyncServerlessChat
+    messages: SyncServerlessMessages
     chat_render: SyncServerlessChatRender
     completions: SyncServerlessCompletions
+    audio: SyncServerlessAudio
     token: SyncServerlessToken
     tool_assisted_chat: SyncToolAssistedChat
     knowledge: SyncKnowledge
@@ -43,10 +50,16 @@ class SyncServerless(BaseServerless, SyncSDK):
         self.chat = SyncServerlessChat(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
+        self.messages = SyncServerlessMessages(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
         self.chat_render = SyncServerlessChatRender(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.completions = SyncServerlessCompletions(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.audio = SyncServerlessAudio(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.token = SyncServerlessToken(
@@ -63,8 +76,10 @@ class SyncServerless(BaseServerless, SyncSDK):
 
 class AsyncServerless(BaseServerless, AsyncSDK):
     chat: AsyncServerlessChat
+    messages: AsyncServerlessMessages
     chat_render: AsyncServerlessChatRender
     completions: AsyncServerlessCompletions
+    audio: AsyncServerlessAudio
     token: AsyncServerlessToken
     tool_assisted_chat: AsyncToolAssistedChat
     knowledge: AsyncKnowledge
@@ -74,10 +89,16 @@ class AsyncServerless(BaseServerless, AsyncSDK):
         self.chat = AsyncServerlessChat(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
+        self.messages = AsyncServerlessMessages(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
         self.chat_render = AsyncServerlessChatRender(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.completions = AsyncServerlessCompletions(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.audio = AsyncServerlessAudio(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.token = AsyncServerlessToken(

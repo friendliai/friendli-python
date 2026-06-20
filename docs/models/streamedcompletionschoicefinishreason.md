@@ -1,10 +1,15 @@
 # StreamedCompletionsChoiceFinishReason
 
+## Example Usage
+
+```python
+from friendli_core.models import StreamedCompletionsChoiceFinishReason
+value: StreamedCompletionsChoiceFinishReason = "stop"
+```
+
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `STOP`   | stop     |
-| `LENGTH` | length   |
-| `NULL`   | null     |
+- `"stop"`
+- `"length"`
+- `"null"`

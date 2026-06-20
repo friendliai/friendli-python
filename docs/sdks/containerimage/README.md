@@ -13,7 +13,7 @@ Given a description, the model generates image.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="containerImagesGenerate" method="post" path="/v1/images/generations" -->
+<!-- UsageSnippet language="python" operationID="containerImagesGenerate" method="post" path="/v1/images/generations" example="Example" -->
 ```python
 import os
 
@@ -69,7 +69,7 @@ Given an image and a description, the model edits the image.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="containerImagesEdit" method="post" path="/v1/images/edits" -->
+<!-- UsageSnippet language="python" operationID="containerImagesEdit" method="post" path="/v1/images/edits" example="Example" -->
 ```python
 import os
 

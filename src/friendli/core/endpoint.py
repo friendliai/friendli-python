@@ -118,7 +118,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -167,6 +167,24 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         :param project_id: The ID of the project that owns the endpoint.
         :param name: The name of the endpoint.
         :param instance_option_id: The ID of the instance option.
+
+            Available options:
+            - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`
+            - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`
+            - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`
+            - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`
+            - 1x NVIDIA H100: `TwD5AqnBSVN0`
+            - 2x NVIDIA H100: `zfTutSiLn0Hq`
+            - 4x NVIDIA H100: `lfkRz5G48REc`
+            - 8x NVIDIA H100: `GUA4qYFmsYz8`
+            - 1x NVIDIA H200: `LnK1wTaKc7WO`
+            - 2x NVIDIA H200: `Tu6GjBnfHPe4`
+            - 4x NVIDIA H200: `OhTzYtZuomzI`
+            - 8x NVIDIA H200: `ahBzWtOuomsI`
+            - 1x NVIDIA B200: `8GiQTLKfJNOr`
+            - 2x NVIDIA B200: `brTZGIuYgVrs`
+            - 4x NVIDIA B200: `AFoZMFXZnAdD`
+            - 8x NVIDIA B200: `drbc6G9FxJWZ`
         :param advanced: Endpoint advanced config.
         :param hf_model_repo: HF ID of the model.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -251,7 +269,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -268,7 +286,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         project_id: OptionalNullable[str] = UNSET,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
+        cursor: OptionalNullable[Union[bytes, IO[bytes], io.IOBase]] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -340,7 +358,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -424,7 +442,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -478,6 +496,24 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         :param hf_model_repo_revision: HF commit hash of the model.
         :param new_version_comment: Comment for the new version.
         :param instance_option_id: The ID of the instance option.
+
+            Available options:
+            - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`
+            - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`
+            - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`
+            - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`
+            - 1x NVIDIA H100: `TwD5AqnBSVN0`
+            - 2x NVIDIA H100: `zfTutSiLn0Hq`
+            - 4x NVIDIA H100: `lfkRz5G48REc`
+            - 8x NVIDIA H100: `GUA4qYFmsYz8`
+            - 1x NVIDIA H200: `LnK1wTaKc7WO`
+            - 2x NVIDIA H200: `Tu6GjBnfHPe4`
+            - 4x NVIDIA H200: `OhTzYtZuomzI`
+            - 8x NVIDIA H200: `ahBzWtOuomsI`
+            - 1x NVIDIA B200: `8GiQTLKfJNOr`
+            - 2x NVIDIA B200: `brTZGIuYgVrs`
+            - 4x NVIDIA B200: `AFoZMFXZnAdD`
+            - 8x NVIDIA B200: `drbc6G9FxJWZ`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -555,7 +591,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -637,7 +673,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -660,7 +696,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         endpoint_id: str,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
+        cursor: OptionalNullable[Union[bytes, IO[bytes], io.IOBase]] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -732,7 +768,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -816,7 +852,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -898,7 +934,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -980,7 +1016,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -1062,7 +1098,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -1144,7 +1180,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -1261,7 +1297,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -1310,6 +1346,24 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         :param project_id: The ID of the project that owns the endpoint.
         :param name: The name of the endpoint.
         :param instance_option_id: The ID of the instance option.
+
+            Available options:
+            - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`
+            - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`
+            - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`
+            - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`
+            - 1x NVIDIA H100: `TwD5AqnBSVN0`
+            - 2x NVIDIA H100: `zfTutSiLn0Hq`
+            - 4x NVIDIA H100: `lfkRz5G48REc`
+            - 8x NVIDIA H100: `GUA4qYFmsYz8`
+            - 1x NVIDIA H200: `LnK1wTaKc7WO`
+            - 2x NVIDIA H200: `Tu6GjBnfHPe4`
+            - 4x NVIDIA H200: `OhTzYtZuomzI`
+            - 8x NVIDIA H200: `ahBzWtOuomsI`
+            - 1x NVIDIA B200: `8GiQTLKfJNOr`
+            - 2x NVIDIA B200: `brTZGIuYgVrs`
+            - 4x NVIDIA B200: `AFoZMFXZnAdD`
+            - 8x NVIDIA B200: `drbc6G9FxJWZ`
         :param advanced: Endpoint advanced config.
         :param hf_model_repo: HF ID of the model.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -1394,7 +1448,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -1411,7 +1465,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         project_id: OptionalNullable[str] = UNSET,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
+        cursor: OptionalNullable[Union[bytes, IO[bytes], io.IOBase]] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1483,7 +1537,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -1567,7 +1621,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -1621,6 +1675,24 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         :param hf_model_repo_revision: HF commit hash of the model.
         :param new_version_comment: Comment for the new version.
         :param instance_option_id: The ID of the instance option.
+
+            Available options:
+            - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`
+            - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`
+            - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`
+            - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`
+            - 1x NVIDIA H100: `TwD5AqnBSVN0`
+            - 2x NVIDIA H100: `zfTutSiLn0Hq`
+            - 4x NVIDIA H100: `lfkRz5G48REc`
+            - 8x NVIDIA H100: `GUA4qYFmsYz8`
+            - 1x NVIDIA H200: `LnK1wTaKc7WO`
+            - 2x NVIDIA H200: `Tu6GjBnfHPe4`
+            - 4x NVIDIA H200: `OhTzYtZuomzI`
+            - 8x NVIDIA H200: `ahBzWtOuomsI`
+            - 1x NVIDIA B200: `8GiQTLKfJNOr`
+            - 2x NVIDIA B200: `brTZGIuYgVrs`
+            - 4x NVIDIA B200: `AFoZMFXZnAdD`
+            - 8x NVIDIA B200: `drbc6G9FxJWZ`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1698,7 +1770,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -1780,7 +1852,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         response_data: Any = None
@@ -1803,7 +1875,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         endpoint_id: str,
-        cursor: OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]] = UNSET,
+        cursor: OptionalNullable[Union[bytes, IO[bytes], io.IOBase]] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1875,7 +1947,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -1959,7 +2031,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -2041,7 +2113,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -2123,7 +2195,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -2205,7 +2277,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -2287,7 +2359,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):

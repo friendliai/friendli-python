@@ -3,9 +3,15 @@
 from __future__ import annotations
 from .functionality import Functionality, FunctionalityTypedDict
 from .pricingmodel import PricingModel, PricingModelTypedDict
-from friendli.core.types import BaseModel, Nullable, UNSET_SENTINEL
+from friendli.core.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
-from typing_extensions import TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class ModelCatalogResponseItemTypedDict(TypedDict):
@@ -24,6 +30,8 @@ class ModelCatalogResponseItemTypedDict(TypedDict):
     license: str
     policy: Nullable[str]
     created: int
+    deprecation_date: NotRequired[Nullable[str]]
+    "YYYY-MM-DD (UTC date)"
 
 
 class ModelCatalogResponseItem(BaseModel):
@@ -42,27 +50,26 @@ class ModelCatalogResponseItem(BaseModel):
     license: str
     policy: Nullable[str]
     created: int
+    deprecation_date: OptionalNullable[str] = UNSET
+    "YYYY-MM-DD (UTC date)"
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["policy"]
-        null_default_fields = []
+        optional_fields = set(["deprecation_date"])
+        nullable_fields = set(["policy", "deprecation_date"])
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
             )
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                k not in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
         return m

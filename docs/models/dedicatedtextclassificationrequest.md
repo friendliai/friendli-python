@@ -1,0 +1,9 @@
+# DedicatedTextClassificationRequest
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `x_friendli_team`                                                                      | *OptionalNullable[str]*                                                                | :heavy_minus_sign:                                                                     | ID of team to run requests as (optional parameter).                                    |                                                                                        |
+| `dedicated_text_classification_body`                                                   | [models.DedicatedTextClassificationBody](../models/dedicatedtextclassificationbody.md) | :heavy_check_mark:                                                                     | N/A                                                                                    | {<br/>"input": "I love programming.",<br/>"model": "(endpoint-id)"<br/>}               |

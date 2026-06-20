@@ -1,10 +1,15 @@
 # Phase
 
+## Example Usage
+
+```python
+from friendli_core.models import Phase
+value: Phase = "REQUESTING_VIRTUAL_MACHINE"
+```
+
 
 ## Values
 
-| Name                         | Value                        |
-| ---------------------------- | ---------------------------- |
-| `REQUESTING_VIRTUAL_MACHINE` | REQUESTING_VIRTUAL_MACHINE   |
-| `DOWNLOADING_MODEL`          | DOWNLOADING_MODEL            |
-| `ENGINE_INITIALIZING`        | ENGINE_INITIALIZING          |
+- `"REQUESTING_VIRTUAL_MACHINE"`
+- `"DOWNLOADING_MODEL"`
+- `"ENGINE_INITIALIZING"`

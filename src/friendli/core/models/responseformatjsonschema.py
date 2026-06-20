@@ -28,3 +28,9 @@ class ResponseFormatJSONSchema(BaseModel):
         pydantic.Field(alias="type"),
     ] = "json_schema"
     "The type of the response format: `json_schema`"
+
+
+try:
+    ResponseFormatJSONSchema.model_rebuild()
+except NameError:
+    pass

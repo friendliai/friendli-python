@@ -100,7 +100,7 @@ Get file info.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get_info" method="get" path="/beta/file/{file_id}" -->
+<!-- UsageSnippet language="python" operationID="get_info" method="get" path="/beta/file/{file_id}" example="Example" -->
 ```python
 import os
 
@@ -140,7 +140,7 @@ Get file download URL.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get_download_url" method="get" path="/beta/file/{file_id}/download_url" -->
+<!-- UsageSnippet language="python" operationID="get_download_url" method="get" path="/beta/file/{file_id}/download_url" example="Example" -->
 ```python
 import os
 

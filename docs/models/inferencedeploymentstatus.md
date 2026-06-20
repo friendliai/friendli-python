@@ -2,19 +2,24 @@
 
 Status of inference deployment.
 
+## Example Usage
+
+```python
+from friendli_core.models import InferenceDeploymentStatus
+value: InferenceDeploymentStatus = "UNKNOWN"
+```
+
 
 ## Values
 
-| Name           | Value          |
-| -------------- | -------------- |
-| `UNKNOWN`      | UNKNOWN        |
-| `INITIALIZING` | INITIALIZING   |
-| `RUNNING`      | RUNNING        |
-| `UPDATING`     | UPDATING       |
-| `SLEEPING`     | SLEEPING       |
-| `AWAKING`      | AWAKING        |
-| `FAILED`       | FAILED         |
-| `STOPPING`     | STOPPING       |
-| `TERMINATING`  | TERMINATING    |
-| `TERMINATED`   | TERMINATED     |
-| `READY`        | READY          |
+- `"UNKNOWN"`
+- `"INITIALIZING"`
+- `"RUNNING"`
+- `"UPDATING"`
+- `"SLEEPING"`
+- `"AWAKING"`
+- `"FAILED"`
+- `"STOPPING"`
+- `"TERMINATING"`
+- `"TERMINATED"`
+- `"READY"`

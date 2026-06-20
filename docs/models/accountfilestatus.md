@@ -2,12 +2,17 @@
 
 AccountFile status.
 
+## Example Usage
+
+```python
+from friendli_core.models import AccountFileStatus
+value: AccountFileStatus = "UPLOADING"
+```
+
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `UPLOADING` | UPLOADING   |
-| `UPLOADED`  | UPLOADED    |
-| `FAILED`    | FAILED      |
-| `DELETED`   | DELETED     |
+- `"UPLOADING"`
+- `"UPLOADED"`
+- `"FAILED"`
+- `"DELETED"`

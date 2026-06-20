@@ -30,3 +30,9 @@ class SplitInfo(BaseModel):
     "Unix timestamp (in seconds) of when the split was created."
     updated_at: Annotated[int, pydantic.Field(alias="updatedAt")]
     "Unix timestamp (in seconds) of when the split was last modified."
+
+
+try:
+    SplitInfo.model_rebuild()
+except NameError:
+    pass

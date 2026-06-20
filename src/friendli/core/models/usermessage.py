@@ -19,14 +19,17 @@ from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
-ContentTypedDict = TypeAliasType(
-    "ContentTypedDict", Union[str, List[UserMessageContentMultiModalTypedDict]]
+UserMessageContentTypedDict = TypeAliasType(
+    "UserMessageContentTypedDict",
+    Union[str, List[UserMessageContentMultiModalTypedDict]],
 )
-Content = TypeAliasType("Content", Union[str, List[UserMessageContentMultiModal]])
+UserMessageContent = TypeAliasType(
+    "UserMessageContent", Union[str, List[UserMessageContentMultiModal]]
+)
 
 
 class UserMessageTypedDict(TypedDict):
-    content: ContentTypedDict
+    content: UserMessageContentTypedDict
     role: Literal["user"]
     "The role of the message's author."
     name: NotRequired[Nullable[str]]
@@ -34,7 +37,7 @@ class UserMessageTypedDict(TypedDict):
 
 
 class UserMessage(BaseModel):
-    content: Content
+    content: UserMessageContent
     ROLE: Annotated[
         Annotated[Literal["user"], AfterValidator(validate_const("user"))],
         pydantic.Field(alias="role"),
@@ -45,24 +48,27 @@ class UserMessage(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["name"]
-        nullable_fields = ["name"]
-        null_default_fields = []
+        optional_fields = set(["name"])
+        nullable_fields = set(["name"])
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
             )
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                k not in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
         return m
+
+
+try:
+    UserMessage.model_rebuild()
+except NameError:
+    pass

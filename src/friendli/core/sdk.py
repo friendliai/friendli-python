@@ -17,6 +17,7 @@ import abc
 
 if TYPE_CHECKING:
     from friendli.core.container import SyncContainer, AsyncContainer
+    from friendli.core.cost import SyncCost, AsyncCost
     from friendli.core.dataset import SyncDataset, AsyncDataset
     from friendli.core.dedicated import SyncDedicated, AsyncDedicated
     from friendli.core.file_sdk import SyncFileSDK, AsyncFileSDK
@@ -32,8 +33,8 @@ class BaseFriendliCore(BaseSDK):
         self,
         token: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         server_idx: Optional[int] = None,
-        server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
+        server_url: Optional[str] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,
@@ -68,7 +69,9 @@ class BaseFriendliCore(BaseSDK):
             "The provided async_client must implement the AsyncHttpClient protocol."
         )
         security: Any = None
-        if callable(token):
+        if token is None:
+            security = None
+        elif callable(token):
             security = lambda: models.Security(token=token())
         else:
             security = models.Security(token=token)
@@ -154,12 +157,14 @@ class SyncFriendliCore(BaseFriendliCore, SyncSDK):
     serverless: "SyncServerless"
     dataset: "SyncDataset"
     file: "SyncFileSDK"
+    cost: "SyncCost"
     _sub_sdk_map = {
         "container": ("friendli.core.container", "SyncContainer"),
         "dedicated": ("friendli.core.dedicated", "SyncDedicated"),
         "serverless": ("friendli.core.serverless", "SyncServerless"),
         "dataset": ("friendli.core.dataset", "SyncDataset"),
         "file": ("friendli.core.file_sdk", "SyncFileSDK"),
+        "cost": ("friendli.core.cost", "SyncCost"),
     }
 
     def __enter__(self):
@@ -181,12 +186,14 @@ class AsyncFriendliCore(BaseFriendliCore, AsyncSDK):
     serverless: "AsyncServerless"
     dataset: "AsyncDataset"
     file: "AsyncFileSDK"
+    cost: "AsyncCost"
     _sub_sdk_map = {
         "container": ("friendli.core.container", "AsyncContainer"),
         "dedicated": ("friendli.core.dedicated", "AsyncDedicated"),
         "serverless": ("friendli.core.serverless", "AsyncServerless"),
         "dataset": ("friendli.core.dataset", "AsyncDataset"),
         "file": ("friendli.core.file_sdk", "AsyncFileSDK"),
+        "cost": ("friendli.core.cost", "AsyncCost"),
     }
 
     async def __aenter__(self):

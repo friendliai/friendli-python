@@ -2,12 +2,17 @@
 
 Indicates the current execution status of the tool.
 
+## Example Usage
+
+```python
+from friendli_core.models import Status
+value: Status = "STARTED"
+```
+
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `STARTED`  | STARTED    |
-| `UPDATING` | UPDATING   |
-| `ENDED`    | ENDED      |
-| `ERRORED`  | ERRORED    |
+- `"STARTED"`
+- `"UPDATING"`
+- `"ENDED"`
+- `"ERRORED"`

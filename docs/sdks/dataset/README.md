@@ -27,7 +27,7 @@ Create a new dataset.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="create_dataset" method="post" path="/beta/dataset" -->
+<!-- UsageSnippet language="python" operationID="create_dataset" method="post" path="/beta/dataset" example="Example" -->
 ```python
 import os
 
@@ -71,7 +71,7 @@ List datasets accessible to the user.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="list_datasets" method="get" path="/beta/dataset" -->
+<!-- UsageSnippet language="python" operationID="list_datasets" method="get" path="/beta/dataset" example="Example" -->
 ```python
 import os
 
@@ -91,7 +91,7 @@ with SyncFriendli(
 | Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | `project_id`                                                                            | *str*                                                                                   | :heavy_check_mark:                                                                      | N/A                                                                                     |
-| `cursor`                                                                                | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]*                          | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `cursor`                                                                                | *OptionalNullable[Union[bytes, IO[bytes], io.IOBase]]*                                  | :heavy_minus_sign:                                                                      | N/A                                                                                     |
 | `limit`                                                                                 | *OptionalNullable[int]*                                                                 | :heavy_minus_sign:                                                                      | N/A                                                                                     |
 | `direction`                                                                             | [OptionalNullable[models.ListDatasetsDirection]](../../models/listdatasetsdirection.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
 | `name_search`                                                                           | *OptionalNullable[str]*                                                                 | :heavy_minus_sign:                                                                      | N/A                                                                                     |
@@ -115,7 +115,7 @@ Get information about a specific dataset.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get_dataset" method="get" path="/beta/dataset/{dataset_id}" -->
+<!-- UsageSnippet language="python" operationID="get_dataset" method="get" path="/beta/dataset/{dataset_id}" example="Example" -->
 ```python
 import os
 
@@ -422,7 +422,7 @@ with SyncFriendli(
 | Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
 | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | `dataset_id`                                                                        | *str*                                                                               | :heavy_check_mark:                                                                  | ID of the dataset.                                                                  |
-| `cursor`                                                                            | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]*                      | :heavy_minus_sign:                                                                  | N/A                                                                                 |
+| `cursor`                                                                            | *OptionalNullable[Union[bytes, IO[bytes], io.IOBase]]*                              | :heavy_minus_sign:                                                                  | N/A                                                                                 |
 | `limit`                                                                             | *OptionalNullable[int]*                                                             | :heavy_minus_sign:                                                                  | N/A                                                                                 |
 | `direction`                                                                         | [OptionalNullable[models.ListSplitsDirection]](../../models/listsplitsdirection.md) | :heavy_minus_sign:                                                                  | N/A                                                                                 |
 | `version_id`                                                                        | *OptionalNullable[str]*                                                             | :heavy_minus_sign:                                                                  | N/A                                                                                 |
@@ -601,7 +601,7 @@ with SyncFriendli(
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `dataset_id`                                                                          | *str*                                                                                 | :heavy_check_mark:                                                                    | ID of the dataset.                                                                    |
 | `split_id`                                                                            | *str*                                                                                 | :heavy_check_mark:                                                                    | ID of the split.                                                                      |
-| `cursor`                                                                              | *OptionalNullable[Union[bytes, IO[bytes], io.BufferedReader]]*                        | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `cursor`                                                                              | *OptionalNullable[Union[bytes, IO[bytes], io.IOBase]]*                                | :heavy_minus_sign:                                                                    | N/A                                                                                   |
 | `limit`                                                                               | *OptionalNullable[int]*                                                               | :heavy_minus_sign:                                                                    | N/A                                                                                   |
 | `direction`                                                                           | [OptionalNullable[models.ListSamplesDirection]](../../models/listsamplesdirection.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
 | `version_id`                                                                          | *OptionalNullable[str]*                                                               | :heavy_minus_sign:                                                                    | N/A                                                                                   |

@@ -1,9 +1,14 @@
 # ContainerImageGenerationBodyResponseFormat
 
+## Example Usage
+
+```python
+from friendli_core.models import ContainerImageGenerationBodyResponseFormat
+value: ContainerImageGenerationBodyResponseFormat = "raw"
+```
+
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `RAW`  | raw    |
-| `JPEG` | jpeg   |
+- `"raw"`
+- `"jpeg"`

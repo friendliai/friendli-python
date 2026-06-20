@@ -1,0 +1,10 @@
+# MessagesToolResultBlock
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                 | *Literal["tool_result"]*                                                                               | :heavy_check_mark:                                                                                     | Content block type. Must be `tool_result`.                                                             |
+| `tool_use_id`                                                                                          | *str*                                                                                                  | :heavy_check_mark:                                                                                     | Identifier of the related `tool_use` block this result answers.                                        |
+| `content`                                                                                              | [OptionalNullable[models.MessagesToolResultBlockContent]](../models/messagestoolresultblockcontent.md) | :heavy_minus_sign:                                                                                     | Tool result payload. Can be plain text, a list of objects, or null when no body is returned.           |

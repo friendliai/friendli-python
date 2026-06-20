@@ -30,3 +30,9 @@ class KnowledgeRetrievedChunk(BaseModel):
     "ID of specific text segment."
     content_id: Annotated[str, pydantic.Field(alias="contentId")]
     "ID of content in knowledge-base."
+
+
+try:
+    KnowledgeRetrievedChunk.model_rebuild()
+except NameError:
+    pass

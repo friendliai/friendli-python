@@ -23,3 +23,9 @@ class AudioContent(BaseModel):
         pydantic.Field(alias="type"),
     ] = "audio_url"
     "The type of the message content."
+
+
+try:
+    AudioContent.model_rebuild()
+except NameError:
+    pass

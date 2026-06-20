@@ -4,7 +4,7 @@ from .basesdk import BaseSDK, SyncSDK, AsyncSDK
 from friendli.core import models, utils
 from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
-from friendli.core.utils import get_security_from_env
+from friendli.core.utils import eventstreaming, get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Mapping, Optional, Union
 import abc
@@ -31,6 +31,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
             ]
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
+        stream: OptionalNullable[bool] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -46,6 +47,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chunking_strategy: Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
         :param language: The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.
+        :param stream: Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -74,6 +76,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
                     ],
                 ),
                 language=language,
+                stream=stream,
                 temperature=temperature,
             ),
         )
@@ -121,7 +124,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -135,6 +138,137 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         raise models.SDKError("Unexpected response received", http_res)
+
+    def stream(
+        self,
+        *,
+        model: str,
+        file: Union[
+            models.DedicatedAudioTranscriptionStreamBodyFile,
+            models.DedicatedAudioTranscriptionStreamBodyFileTypedDict,
+        ],
+        x_friendli_team: OptionalNullable[str] = UNSET,
+        chunking_strategy: OptionalNullable[
+            Union[
+                models.DedicatedAudioTranscriptionStreamBodyChunkingStrategy,
+                models.DedicatedAudioTranscriptionStreamBodyChunkingStrategyTypedDict,
+            ]
+        ] = UNSET,
+        language: OptionalNullable[str] = UNSET,
+        stream: OptionalNullable[bool] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> eventstreaming.EventStream[models.ContainerAudioTranscriptionStreamSuccess]:
+        """Stream audio transcriptions
+
+        Given an audio file, the model transcribes it into text.
+
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param file: The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats.
+        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param chunking_strategy: Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
+        :param language: The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.
+        :param stream: Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        request = models.DedicatedAudioTranscriptionsStreamRequest(
+            x_friendli_team=x_friendli_team,
+            dedicated_audio_transcription_stream_body=models.DedicatedAudioTranscriptionStreamBody(
+                model=model,
+                file=utils.get_pydantic_model(
+                    file, models.DedicatedAudioTranscriptionStreamBodyFile
+                ),
+                chunking_strategy=utils.get_pydantic_model(
+                    chunking_strategy,
+                    OptionalNullable[
+                        models.DedicatedAudioTranscriptionStreamBodyChunkingStrategy
+                    ],
+                ),
+                language=language,
+                stream=stream,
+                temperature=temperature,
+            ),
+        )
+        req = self._build_request(
+            method="POST",
+            path="/dedicated/v1/audio/transcriptions#stream",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="text/event-stream",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.dedicated_audio_transcription_stream_body,
+                False,
+                False,
+                "multipart",
+                models.DedicatedAudioTranscriptionStreamBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="dedicatedAudioTranscriptionsStream",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            stream=True,
+            retry_config=retry_config,
+        )
+        if utils.match_response(http_res, "200", "text/event-stream"):
+            return eventstreaming.EventStream(
+                http_res,
+                lambda raw: utils.unmarshal_json(
+                    raw, models.ContainerAudioTranscriptionStreamSuccess
+                ),
+                sentinel="[DONE]",
+                client_ref=self,
+            )
+        if utils.match_response(http_res, ["422", "4XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        http_res_text = utils.stream_to_text(http_res)
+        raise models.SDKError("Unexpected response received", http_res, http_res_text)
 
 
 class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
@@ -154,6 +288,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
             ]
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
+        stream: OptionalNullable[bool] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -169,6 +304,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chunking_strategy: Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
         :param language: The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.
+        :param stream: Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -197,6 +333,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
                     ],
                 ),
                 language=language,
+                stream=stream,
                 temperature=temperature,
             ),
         )
@@ -244,7 +381,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -258,3 +395,136 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         raise models.SDKError("Unexpected response received", http_res)
+
+    async def stream(
+        self,
+        *,
+        model: str,
+        file: Union[
+            models.DedicatedAudioTranscriptionStreamBodyFile,
+            models.DedicatedAudioTranscriptionStreamBodyFileTypedDict,
+        ],
+        x_friendli_team: OptionalNullable[str] = UNSET,
+        chunking_strategy: OptionalNullable[
+            Union[
+                models.DedicatedAudioTranscriptionStreamBodyChunkingStrategy,
+                models.DedicatedAudioTranscriptionStreamBodyChunkingStrategyTypedDict,
+            ]
+        ] = UNSET,
+        language: OptionalNullable[str] = UNSET,
+        stream: OptionalNullable[bool] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> eventstreaming.EventStreamAsync[
+        models.ContainerAudioTranscriptionStreamSuccess
+    ]:
+        """Stream audio transcriptions
+
+        Given an audio file, the model transcribes it into text.
+
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param file: The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats.
+        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param chunking_strategy: Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
+        :param language: The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.
+        :param stream: Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        request = models.DedicatedAudioTranscriptionsStreamRequest(
+            x_friendli_team=x_friendli_team,
+            dedicated_audio_transcription_stream_body=models.DedicatedAudioTranscriptionStreamBody(
+                model=model,
+                file=utils.get_pydantic_model(
+                    file, models.DedicatedAudioTranscriptionStreamBodyFile
+                ),
+                chunking_strategy=utils.get_pydantic_model(
+                    chunking_strategy,
+                    OptionalNullable[
+                        models.DedicatedAudioTranscriptionStreamBodyChunkingStrategy
+                    ],
+                ),
+                language=language,
+                stream=stream,
+                temperature=temperature,
+            ),
+        )
+        req = self._build_request_async(
+            method="POST",
+            path="/dedicated/v1/audio/transcriptions#stream",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="text/event-stream",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.dedicated_audio_transcription_stream_body,
+                False,
+                False,
+                "multipart",
+                models.DedicatedAudioTranscriptionStreamBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="dedicatedAudioTranscriptionsStream",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            stream=True,
+            retry_config=retry_config,
+        )
+        if utils.match_response(http_res, "200", "text/event-stream"):
+            return eventstreaming.EventStreamAsync(
+                http_res,
+                lambda raw: utils.unmarshal_json(
+                    raw, models.ContainerAudioTranscriptionStreamSuccess
+                ),
+                sentinel="[DONE]",
+                client_ref=self,
+            )
+        if utils.match_response(http_res, ["422", "4XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise models.SDKError("Unexpected response received", http_res, http_res_text)

@@ -6,7 +6,7 @@ from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Mapping, Optional, Union
+from typing import Iterable, List, Mapping, Optional, Union
 import abc
 
 
@@ -19,8 +19,14 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
         self,
         *,
         model: str,
-        input_: Union[models.Input, models.InputTypedDict],
         x_friendli_team: OptionalNullable[str] = UNSET,
+        input_: OptionalNullable[
+            Union[
+                models.DedicatedEmbeddingsBodyInput,
+                models.DedicatedEmbeddingsBodyInputTypedDict,
+            ]
+        ] = UNSET,
+        tokens: OptionalNullable[Iterable[int]] = UNSET,
         encoding_format: OptionalNullable[models.EncodingFormat] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -32,8 +38,13 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
         Creates an embedding vector representing the input text.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
-        :param input: Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param input: Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.
+
+            Either `input` or `tokens` field is required.
+        :param tokens: The tokenized prompt (i.e., input tokens).
+
+            Either `input` or `tokens` field is required.
         :param encoding_format: The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -51,7 +62,12 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
         request = models.DedicatedEmbeddingsRequest(
             x_friendli_team=x_friendli_team,
             dedicated_embeddings_body=models.DedicatedEmbeddingsBody(
-                model=model, input=input_, encoding_format=encoding_format
+                model=model,
+                input=utils.unmarshal(
+                    input_, OptionalNullable[models.DedicatedEmbeddingsBodyInput]
+                ),
+                tokens=utils.unmarshal(tokens, OptionalNullable[List[int]]),
+                encoding_format=encoding_format,
             ),
         )
         req = self._build_request(
@@ -98,7 +114,7 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -117,8 +133,14 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
         self,
         *,
         model: str,
-        input_: Union[models.Input, models.InputTypedDict],
         x_friendli_team: OptionalNullable[str] = UNSET,
+        input_: OptionalNullable[
+            Union[
+                models.DedicatedEmbeddingsBodyInput,
+                models.DedicatedEmbeddingsBodyInputTypedDict,
+            ]
+        ] = UNSET,
+        tokens: OptionalNullable[Iterable[int]] = UNSET,
         encoding_format: OptionalNullable[models.EncodingFormat] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -130,8 +152,13 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
         Creates an embedding vector representing the input text.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
-        :param input: Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param input: Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.
+
+            Either `input` or `tokens` field is required.
+        :param tokens: The tokenized prompt (i.e., input tokens).
+
+            Either `input` or `tokens` field is required.
         :param encoding_format: The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -149,7 +176,12 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
         request = models.DedicatedEmbeddingsRequest(
             x_friendli_team=x_friendli_team,
             dedicated_embeddings_body=models.DedicatedEmbeddingsBody(
-                model=model, input=input_, encoding_format=encoding_format
+                model=model,
+                input=utils.unmarshal(
+                    input_, OptionalNullable[models.DedicatedEmbeddingsBodyInput]
+                ),
+                tokens=utils.unmarshal(tokens, OptionalNullable[List[int]]),
+                encoding_format=encoding_format,
             ),
         )
         req = self._build_request_async(
@@ -196,7 +228,7 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):

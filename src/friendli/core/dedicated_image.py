@@ -6,7 +6,7 @@ from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
 from friendli.core.utils import get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
-from typing import List, Mapping, Optional, Union
+from typing import Iterable, List, Mapping, Optional, Union
 import abc
 
 
@@ -28,9 +28,9 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
             models.DedicatedImageGenerationBodyResponseFormat
         ] = UNSET,
         control_images: OptionalNullable[
-            Union[List[models.ImageInput], List[models.ImageInputTypedDict]]
+            Union[Iterable[models.ImageInput], Iterable[models.ImageInputTypedDict]]
         ] = UNSET,
-        controlnet_weights: OptionalNullable[List[float]] = UNSET,
+        controlnet_weights: OptionalNullable[Iterable[float]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -74,7 +74,9 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 control_images=utils.get_pydantic_model(
                     control_images, OptionalNullable[List[models.ImageInput]]
                 ),
-                controlnet_weights=controlnet_weights,
+                controlnet_weights=utils.unmarshal(
+                    controlnet_weights, OptionalNullable[List[float]]
+                ),
             ),
         )
         req = self._build_request(
@@ -121,7 +123,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -240,7 +242,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -270,9 +272,9 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
             models.DedicatedImageGenerationBodyResponseFormat
         ] = UNSET,
         control_images: OptionalNullable[
-            Union[List[models.ImageInput], List[models.ImageInputTypedDict]]
+            Union[Iterable[models.ImageInput], Iterable[models.ImageInputTypedDict]]
         ] = UNSET,
-        controlnet_weights: OptionalNullable[List[float]] = UNSET,
+        controlnet_weights: OptionalNullable[Iterable[float]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -316,7 +318,9 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 control_images=utils.get_pydantic_model(
                     control_images, OptionalNullable[List[models.ImageInput]]
                 ),
-                controlnet_weights=controlnet_weights,
+                controlnet_weights=utils.unmarshal(
+                    controlnet_weights, OptionalNullable[List[float]]
+                ),
             ),
         )
         req = self._build_request_async(
@@ -363,7 +367,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
@@ -482,7 +486,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):

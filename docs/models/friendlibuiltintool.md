@@ -3,6 +3,6 @@
 
 ## Fields
 
-| Field                                               | Type                                                | Required                                            | Description                                         |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| `type`                                              | [models.Type](../models/type.md)                    | :heavy_check_mark:                                  | The type of the built-in tool provided by Friendli. |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `type`                                                                 | [models.FriendliBuiltInToolType](../models/friendlibuiltintooltype.md) | :heavy_check_mark:                                                     | The type of the built-in tool provided by Friendli.                    |
