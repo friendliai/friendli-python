@@ -27,8 +27,8 @@ class SyncServerlessMessages(BaseServerlessMessages, SyncSDK):
         max_tokens: OptionalNullable[int] = UNSET,
         system: OptionalNullable[
             Union[
-                models.ServerlessMessagesBodySystem,
-                models.ServerlessMessagesBodySystemTypedDict,
+                models.SyncServerlessMessagesBodySystem,
+                models.SyncServerlessMessagesBodySystemTypedDict,
             ]
         ] = UNSET,
         stream: OptionalNullable[bool] = UNSET,
@@ -58,8 +58,8 @@ class SyncServerlessMessages(BaseServerlessMessages, SyncSDK):
         metadata: OptionalNullable[Mapping[str, Any]] = UNSET,
         service_tier: OptionalNullable[
             Union[
-                models.ServerlessMessagesBodyServiceTier,
-                models.ServerlessMessagesBodyServiceTierTypedDict,
+                models.SyncServerlessMessagesBodyServiceTier,
+                models.SyncServerlessMessagesBodyServiceTierTypedDict,
             ]
         ] = UNSET,
         additional_properties: Optional[Mapping[str, Any]] = None,
@@ -67,7 +67,7 @@ class SyncServerlessMessages(BaseServerlessMessages, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessMessagesSuccess:
+    ) -> models.SyncServerlessMessagesSuccess:
         """Messages
 
         Generate responses using Anthropic Messages-style payloads.
@@ -106,16 +106,16 @@ class SyncServerlessMessages(BaseServerlessMessages, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessMessagesRequest(
+        request = models.SyncServerlessMessagesRequest(
             x_friendli_team=x_friendli_team,
-            serverless_messages_body=models.ServerlessMessagesBody(
+            serverless_messages_body=models.SyncServerlessMessagesBody(
                 messages=utils.get_pydantic_model(
                     messages, List[models.MessagesInputMessage]
                 ),
                 max_tokens=max_tokens,
                 model=model,
                 system=utils.get_pydantic_model(
-                    system, OptionalNullable[models.ServerlessMessagesBodySystem]
+                    system, OptionalNullable[models.SyncServerlessMessagesBodySystem]
                 ),
                 stream=stream,
                 temperature=temperature,
@@ -149,7 +149,7 @@ class SyncServerlessMessages(BaseServerlessMessages, SyncSDK):
                 metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, Any]]),
                 service_tier=utils.unmarshal(
                     service_tier,
-                    OptionalNullable[models.ServerlessMessagesBodyServiceTier],
+                    OptionalNullable[models.SyncServerlessMessagesBodyServiceTier],
                 ),
                 **utils.unmarshal(additional_properties, Optional[Dict[str, Any]])
                 or {},
@@ -173,7 +173,7 @@ class SyncServerlessMessages(BaseServerlessMessages, SyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessMessagesBody,
+                models.SyncServerlessMessagesBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -204,7 +204,9 @@ class SyncServerlessMessages(BaseServerlessMessages, SyncSDK):
         )
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ServerlessMessagesSuccess, http_res)
+            return unmarshal_json_response(
+                models.SyncServerlessMessagesSuccess, http_res
+            )
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 models.MessagesErrorResponseData, http_res
@@ -232,8 +234,8 @@ class AsyncServerlessMessages(BaseServerlessMessages, AsyncSDK):
         max_tokens: OptionalNullable[int] = UNSET,
         system: OptionalNullable[
             Union[
-                models.ServerlessMessagesBodySystem,
-                models.ServerlessMessagesBodySystemTypedDict,
+                models.AsyncServerlessMessagesBodySystem,
+                models.AsyncServerlessMessagesBodySystemTypedDict,
             ]
         ] = UNSET,
         stream: OptionalNullable[bool] = UNSET,
@@ -263,8 +265,8 @@ class AsyncServerlessMessages(BaseServerlessMessages, AsyncSDK):
         metadata: OptionalNullable[Mapping[str, Any]] = UNSET,
         service_tier: OptionalNullable[
             Union[
-                models.ServerlessMessagesBodyServiceTier,
-                models.ServerlessMessagesBodyServiceTierTypedDict,
+                models.AsyncServerlessMessagesBodyServiceTier,
+                models.AsyncServerlessMessagesBodyServiceTierTypedDict,
             ]
         ] = UNSET,
         additional_properties: Optional[Mapping[str, Any]] = None,
@@ -272,7 +274,7 @@ class AsyncServerlessMessages(BaseServerlessMessages, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessMessagesSuccess:
+    ) -> models.AsyncServerlessMessagesSuccess:
         """Messages
 
         Generate responses using Anthropic Messages-style payloads.
@@ -311,16 +313,16 @@ class AsyncServerlessMessages(BaseServerlessMessages, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessMessagesRequest(
+        request = models.AsyncServerlessMessagesRequest(
             x_friendli_team=x_friendli_team,
-            serverless_messages_body=models.ServerlessMessagesBody(
+            serverless_messages_body=models.AsyncServerlessMessagesBody(
                 messages=utils.get_pydantic_model(
                     messages, List[models.MessagesInputMessage]
                 ),
                 max_tokens=max_tokens,
                 model=model,
                 system=utils.get_pydantic_model(
-                    system, OptionalNullable[models.ServerlessMessagesBodySystem]
+                    system, OptionalNullable[models.AsyncServerlessMessagesBodySystem]
                 ),
                 stream=stream,
                 temperature=temperature,
@@ -354,7 +356,7 @@ class AsyncServerlessMessages(BaseServerlessMessages, AsyncSDK):
                 metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, Any]]),
                 service_tier=utils.unmarshal(
                     service_tier,
-                    OptionalNullable[models.ServerlessMessagesBodyServiceTier],
+                    OptionalNullable[models.AsyncServerlessMessagesBodyServiceTier],
                 ),
                 **utils.unmarshal(additional_properties, Optional[Dict[str, Any]])
                 or {},
@@ -378,7 +380,7 @@ class AsyncServerlessMessages(BaseServerlessMessages, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessMessagesBody,
+                models.AsyncServerlessMessagesBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -409,7 +411,9 @@ class AsyncServerlessMessages(BaseServerlessMessages, AsyncSDK):
         )
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ServerlessMessagesSuccess, http_res)
+            return unmarshal_json_response(
+                models.AsyncServerlessMessagesSuccess, http_res
+            )
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 models.MessagesErrorResponseData, http_res

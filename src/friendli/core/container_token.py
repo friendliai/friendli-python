@@ -24,7 +24,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerTokenizationSuccess:
+    ) -> models.SyncContainerTokenizationSuccess:
         """Tokenization
 
         By giving a text input, generate a tokenized output of token IDs.
@@ -44,7 +44,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_TOKENIZATION_OP_SERVERS[0]
-        request = models.ContainerTokenizationBody(model=model, prompt=prompt)
+        request = models.SyncContainerTokenizationBody(model=model, prompt=prompt)
         req = self._build_request(
             method="POST",
             path="/v1/tokenize",
@@ -59,7 +59,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerTokenizationBody
+                request, False, False, "json", models.SyncContainerTokenizationBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -90,7 +90,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerTokenizationSuccess, http_res
+                models.SyncContainerTokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -109,7 +109,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerDetokenizationSuccess:
+    ) -> models.SyncContainerDetokenizationSuccess:
         """Detokenization
 
         By giving a list of tokens, generate a detokenized output text string.
@@ -129,7 +129,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_DETOKENIZATION_OP_SERVERS[0]
-        request = models.ContainerDetokenizationBody(
+        request = models.SyncContainerDetokenizationBody(
             model=model, tokens=utils.unmarshal(tokens, List[int])
         )
         req = self._build_request(
@@ -146,7 +146,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerDetokenizationBody
+                request, False, False, "json", models.SyncContainerDetokenizationBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -177,7 +177,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerDetokenizationSuccess, http_res
+                models.SyncContainerDetokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -198,7 +198,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerTokenizationSuccess:
+    ) -> models.AsyncContainerTokenizationSuccess:
         """Tokenization
 
         By giving a text input, generate a tokenized output of token IDs.
@@ -218,7 +218,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_TOKENIZATION_OP_SERVERS[0]
-        request = models.ContainerTokenizationBody(model=model, prompt=prompt)
+        request = models.AsyncContainerTokenizationBody(model=model, prompt=prompt)
         req = self._build_request_async(
             method="POST",
             path="/v1/tokenize",
@@ -233,7 +233,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerTokenizationBody
+                request, False, False, "json", models.AsyncContainerTokenizationBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -264,7 +264,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerTokenizationSuccess, http_res
+                models.AsyncContainerTokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -283,7 +283,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerDetokenizationSuccess:
+    ) -> models.AsyncContainerDetokenizationSuccess:
         """Detokenization
 
         By giving a list of tokens, generate a detokenized output text string.
@@ -303,7 +303,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_DETOKENIZATION_OP_SERVERS[0]
-        request = models.ContainerDetokenizationBody(
+        request = models.AsyncContainerDetokenizationBody(
             model=model, tokens=utils.unmarshal(tokens, List[int])
         )
         req = self._build_request_async(
@@ -320,7 +320,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerDetokenizationBody
+                request, False, False, "json", models.AsyncContainerDetokenizationBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -351,7 +351,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerDetokenizationSuccess, http_res
+                models.AsyncContainerDetokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

@@ -25,7 +25,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessTokenizationSuccess:
+    ) -> models.SyncServerlessTokenizationSuccess:
         """Tokenization
 
         By giving a text input, generate a tokenized output of token IDs.
@@ -46,9 +46,9 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessTokenizationRequest(
+        request = models.SyncServerlessTokenizationRequest(
             x_friendli_team=x_friendli_team,
-            serverless_tokenization_body=models.ServerlessTokenizationBody(
+            serverless_tokenization_body=models.SyncServerlessTokenizationBody(
                 model=model, prompt=prompt
             ),
         )
@@ -70,7 +70,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessTokenizationBody,
+                models.SyncServerlessTokenizationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -101,7 +101,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ServerlessTokenizationSuccess, http_res
+                models.SyncServerlessTokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -121,7 +121,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessDetokenizationSuccess:
+    ) -> models.SyncServerlessDetokenizationSuccess:
         """Detokenization
 
         By giving a list of tokens, generate a detokenized output text string.
@@ -142,9 +142,9 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessDetokenizationRequest(
+        request = models.SyncServerlessDetokenizationRequest(
             x_friendli_team=x_friendli_team,
-            serverless_detokenization_body=models.ServerlessDetokenizationBody(
+            serverless_detokenization_body=models.SyncServerlessDetokenizationBody(
                 model=model, tokens=utils.unmarshal(tokens, List[int])
             ),
         )
@@ -166,7 +166,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessDetokenizationBody,
+                models.SyncServerlessDetokenizationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -197,7 +197,7 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ServerlessDetokenizationSuccess, http_res
+                models.SyncServerlessDetokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -219,7 +219,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessTokenizationSuccess:
+    ) -> models.AsyncServerlessTokenizationSuccess:
         """Tokenization
 
         By giving a text input, generate a tokenized output of token IDs.
@@ -240,9 +240,9 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessTokenizationRequest(
+        request = models.AsyncServerlessTokenizationRequest(
             x_friendli_team=x_friendli_team,
-            serverless_tokenization_body=models.ServerlessTokenizationBody(
+            serverless_tokenization_body=models.AsyncServerlessTokenizationBody(
                 model=model, prompt=prompt
             ),
         )
@@ -264,7 +264,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessTokenizationBody,
+                models.AsyncServerlessTokenizationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -295,7 +295,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ServerlessTokenizationSuccess, http_res
+                models.AsyncServerlessTokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -315,7 +315,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessDetokenizationSuccess:
+    ) -> models.AsyncServerlessDetokenizationSuccess:
         """Detokenization
 
         By giving a list of tokens, generate a detokenized output text string.
@@ -336,9 +336,9 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessDetokenizationRequest(
+        request = models.AsyncServerlessDetokenizationRequest(
             x_friendli_team=x_friendli_team,
-            serverless_detokenization_body=models.ServerlessDetokenizationBody(
+            serverless_detokenization_body=models.AsyncServerlessDetokenizationBody(
                 model=model, tokens=utils.unmarshal(tokens, List[int])
             ),
         )
@@ -360,7 +360,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessDetokenizationBody,
+                models.AsyncServerlessDetokenizationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -391,7 +391,7 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ServerlessDetokenizationSuccess, http_res
+                models.AsyncServerlessDetokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
