@@ -149,7 +149,7 @@ class SyncContainerAudio(BaseContainerAudio, SyncSDK):
             ]
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: Optional[bool] = True,
         temperature: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -396,7 +396,7 @@ class AsyncContainerAudio(BaseContainerAudio, AsyncSDK):
             ]
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: Optional[bool] = True,
         temperature: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,

@@ -285,7 +285,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: Optional[bool] = True,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
@@ -780,7 +780,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: Optional[bool] = True,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
