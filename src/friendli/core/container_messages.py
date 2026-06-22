@@ -26,8 +26,8 @@ class SyncContainerMessages(BaseContainerMessages, SyncSDK):
         model: OptionalNullable[str] = UNSET,
         system: OptionalNullable[
             Union[
-                models.ContainerMessagesBodySystem,
-                models.ContainerMessagesBodySystemTypedDict,
+                models.SyncContainerMessagesBodySystem,
+                models.SyncContainerMessagesBodySystemTypedDict,
             ]
         ] = UNSET,
         stream: OptionalNullable[bool] = UNSET,
@@ -57,8 +57,8 @@ class SyncContainerMessages(BaseContainerMessages, SyncSDK):
         metadata: OptionalNullable[Mapping[str, Any]] = UNSET,
         service_tier: OptionalNullable[
             Union[
-                models.ContainerMessagesBodyServiceTier,
-                models.ContainerMessagesBodyServiceTierTypedDict,
+                models.SyncContainerMessagesBodyServiceTier,
+                models.SyncContainerMessagesBodyServiceTierTypedDict,
             ]
         ] = UNSET,
         additional_properties: Optional[Mapping[str, Any]] = None,
@@ -66,7 +66,7 @@ class SyncContainerMessages(BaseContainerMessages, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerMessagesSuccess:
+    ) -> models.SyncContainerMessagesSuccess:
         """Messages
 
         Generate responses using Anthropic Messages-style payloads.
@@ -104,14 +104,14 @@ class SyncContainerMessages(BaseContainerMessages, SyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_MESSAGES_OP_SERVERS[0]
-        request = models.ContainerMessagesBody(
+        request = models.SyncContainerMessagesBody(
             messages=utils.get_pydantic_model(
                 messages, List[models.MessagesInputMessage]
             ),
             max_tokens=max_tokens,
             model=model,
             system=utils.get_pydantic_model(
-                system, OptionalNullable[models.ContainerMessagesBodySystem]
+                system, OptionalNullable[models.SyncContainerMessagesBodySystem]
             ),
             stream=stream,
             temperature=temperature,
@@ -142,7 +142,8 @@ class SyncContainerMessages(BaseContainerMessages, SyncSDK):
             ),
             metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, Any]]),
             service_tier=utils.unmarshal(
-                service_tier, OptionalNullable[models.ContainerMessagesBodyServiceTier]
+                service_tier,
+                OptionalNullable[models.SyncContainerMessagesBodyServiceTier],
             ),
             **utils.unmarshal(additional_properties, Optional[Dict[str, Any]]) or {},
         )
@@ -160,7 +161,7 @@ class SyncContainerMessages(BaseContainerMessages, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerMessagesBody
+                request, False, False, "json", models.SyncContainerMessagesBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -191,7 +192,9 @@ class SyncContainerMessages(BaseContainerMessages, SyncSDK):
         )
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ContainerMessagesSuccess, http_res)
+            return unmarshal_json_response(
+                models.SyncContainerMessagesSuccess, http_res
+            )
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 models.MessagesErrorResponseData, http_res
@@ -218,8 +221,8 @@ class AsyncContainerMessages(BaseContainerMessages, AsyncSDK):
         model: OptionalNullable[str] = UNSET,
         system: OptionalNullable[
             Union[
-                models.ContainerMessagesBodySystem,
-                models.ContainerMessagesBodySystemTypedDict,
+                models.AsyncContainerMessagesBodySystem,
+                models.AsyncContainerMessagesBodySystemTypedDict,
             ]
         ] = UNSET,
         stream: OptionalNullable[bool] = UNSET,
@@ -249,8 +252,8 @@ class AsyncContainerMessages(BaseContainerMessages, AsyncSDK):
         metadata: OptionalNullable[Mapping[str, Any]] = UNSET,
         service_tier: OptionalNullable[
             Union[
-                models.ContainerMessagesBodyServiceTier,
-                models.ContainerMessagesBodyServiceTierTypedDict,
+                models.AsyncContainerMessagesBodyServiceTier,
+                models.AsyncContainerMessagesBodyServiceTierTypedDict,
             ]
         ] = UNSET,
         additional_properties: Optional[Mapping[str, Any]] = None,
@@ -258,7 +261,7 @@ class AsyncContainerMessages(BaseContainerMessages, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerMessagesSuccess:
+    ) -> models.AsyncContainerMessagesSuccess:
         """Messages
 
         Generate responses using Anthropic Messages-style payloads.
@@ -296,14 +299,14 @@ class AsyncContainerMessages(BaseContainerMessages, AsyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_MESSAGES_OP_SERVERS[0]
-        request = models.ContainerMessagesBody(
+        request = models.AsyncContainerMessagesBody(
             messages=utils.get_pydantic_model(
                 messages, List[models.MessagesInputMessage]
             ),
             max_tokens=max_tokens,
             model=model,
             system=utils.get_pydantic_model(
-                system, OptionalNullable[models.ContainerMessagesBodySystem]
+                system, OptionalNullable[models.AsyncContainerMessagesBodySystem]
             ),
             stream=stream,
             temperature=temperature,
@@ -334,7 +337,8 @@ class AsyncContainerMessages(BaseContainerMessages, AsyncSDK):
             ),
             metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, Any]]),
             service_tier=utils.unmarshal(
-                service_tier, OptionalNullable[models.ContainerMessagesBodyServiceTier]
+                service_tier,
+                OptionalNullable[models.AsyncContainerMessagesBodyServiceTier],
             ),
             **utils.unmarshal(additional_properties, Optional[Dict[str, Any]]) or {},
         )
@@ -352,7 +356,7 @@ class AsyncContainerMessages(BaseContainerMessages, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerMessagesBody
+                request, False, False, "json", models.AsyncContainerMessagesBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -383,7 +387,9 @@ class AsyncContainerMessages(BaseContainerMessages, AsyncSDK):
         )
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ContainerMessagesSuccess, http_res)
+            return unmarshal_json_response(
+                models.AsyncContainerMessagesSuccess, http_res
+            )
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 models.MessagesErrorResponseData, http_res

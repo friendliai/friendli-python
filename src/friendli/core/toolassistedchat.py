@@ -33,13 +33,13 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.ServerlessToolAssistedChatCompletionBodyReasoningEffort
+            models.SyncServerlessToolAssistedChatCompletionBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatCompletionBodySeed,
-                models.ServerlessToolAssistedChatCompletionBodySeedTypedDict,
+                models.SyncServerlessToolAssistedChatCompletionBodySeed,
+                models.SyncServerlessToolAssistedChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -52,8 +52,8 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ServerlessToolAssistedChatCompletionBodyToolChoice,
-                models.ServerlessToolAssistedChatCompletionBodyToolChoiceTypedDict,
+                models.SyncServerlessToolAssistedChatCompletionBodyToolChoice,
+                models.SyncServerlessToolAssistedChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -63,8 +63,8 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
             Union[
-                Iterable[models.ToolAssistedChatTool],
-                Iterable[models.ToolAssistedChatToolTypedDict],
+                Iterable[models.SyncToolAssistedChatTool],
+                Iterable[models.SyncToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
         resume_generation: Optional[bool] = None,
@@ -72,7 +72,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerChatCompleteSuccess:
+    ) -> models.SyncContainerChatCompleteSuccess:
         """Tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
@@ -141,9 +141,9 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessToolAssistedChatCompleteRequest(
+        request = models.SyncServerlessToolAssistedChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            serverless_tool_assisted_chat_completion_body=models.ServerlessToolAssistedChatCompletionBody(
+            serverless_tool_assisted_chat_completion_body=models.SyncServerlessToolAssistedChatCompletionBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -166,7 +166,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 seed=utils.unmarshal(
                     seed,
                     OptionalNullable[
-                        models.ServerlessToolAssistedChatCompletionBodySeed
+                        models.SyncServerlessToolAssistedChatCompletionBodySeed
                     ],
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
@@ -179,7 +179,9 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 temperature=temperature,
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
-                    Optional[models.ServerlessToolAssistedChatCompletionBodyToolChoice],
+                    Optional[
+                        models.SyncServerlessToolAssistedChatCompletionBodyToolChoice
+                    ],
                 ),
                 top_k=top_k,
                 top_logprobs=top_logprobs,
@@ -187,7 +189,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 xtc_threshold=xtc_threshold,
                 xtc_probability=xtc_probability,
                 tools=utils.get_pydantic_model(
-                    tools, OptionalNullable[List[models.ToolAssistedChatTool]]
+                    tools, OptionalNullable[List[models.SyncToolAssistedChatTool]]
                 ),
                 resume_generation=resume_generation,
             ),
@@ -210,7 +212,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessToolAssistedChatCompletionBody,
+                models.SyncServerlessToolAssistedChatCompletionBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -241,7 +243,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerChatCompleteSuccess, http_res
+                models.SyncContainerChatCompleteSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -269,13 +271,13 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.ServerlessToolAssistedChatCompletionStreamBodyReasoningEffort
+            models.SyncServerlessToolAssistedChatCompletionStreamBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatCompletionStreamBodySeed,
-                models.ServerlessToolAssistedChatCompletionStreamBodySeedTypedDict,
+                models.SyncServerlessToolAssistedChatCompletionStreamBodySeed,
+                models.SyncServerlessToolAssistedChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -288,8 +290,8 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ServerlessToolAssistedChatCompletionStreamBodyToolChoice,
-                models.ServerlessToolAssistedChatCompletionStreamBodyToolChoiceTypedDict,
+                models.SyncServerlessToolAssistedChatCompletionStreamBodyToolChoice,
+                models.SyncServerlessToolAssistedChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -299,8 +301,8 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
             Union[
-                Iterable[models.ToolAssistedChatTool],
-                Iterable[models.ToolAssistedChatToolTypedDict],
+                Iterable[models.SyncToolAssistedChatTool],
+                Iterable[models.SyncToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
         resume_generation: Optional[bool] = None,
@@ -309,7 +311,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStream[
-        models.ServerlessToolAssistedChatCompletionStreamSuccess
+        models.SyncServerlessToolAssistedChatCompletionStreamSuccess
     ]:
         """Stream tool assisted chat completions
 
@@ -379,9 +381,9 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessToolAssistedChatStreamRequest(
+        request = models.SyncServerlessToolAssistedChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            serverless_tool_assisted_chat_completion_stream_body=models.ServerlessToolAssistedChatCompletionStreamBody(
+            serverless_tool_assisted_chat_completion_stream_body=models.SyncServerlessToolAssistedChatCompletionStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -404,7 +406,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 seed=utils.unmarshal(
                     seed,
                     OptionalNullable[
-                        models.ServerlessToolAssistedChatCompletionStreamBodySeed
+                        models.SyncServerlessToolAssistedChatCompletionStreamBodySeed
                     ],
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
@@ -418,7 +420,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
                     Optional[
-                        models.ServerlessToolAssistedChatCompletionStreamBodyToolChoice
+                        models.SyncServerlessToolAssistedChatCompletionStreamBodyToolChoice
                     ],
                 ),
                 top_k=top_k,
@@ -427,7 +429,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 xtc_threshold=xtc_threshold,
                 xtc_probability=xtc_probability,
                 tools=utils.get_pydantic_model(
-                    tools, OptionalNullable[List[models.ToolAssistedChatTool]]
+                    tools, OptionalNullable[List[models.SyncToolAssistedChatTool]]
                 ),
                 resume_generation=resume_generation,
             ),
@@ -450,7 +452,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessToolAssistedChatCompletionStreamBody,
+                models.SyncServerlessToolAssistedChatCompletionStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -484,7 +486,7 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.ServerlessToolAssistedChatCompletionStreamSuccess
+                    raw, models.SyncServerlessToolAssistedChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -518,13 +520,13 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.ServerlessToolAssistedChatCompletionBodyReasoningEffort
+            models.AsyncServerlessToolAssistedChatCompletionBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatCompletionBodySeed,
-                models.ServerlessToolAssistedChatCompletionBodySeedTypedDict,
+                models.AsyncServerlessToolAssistedChatCompletionBodySeed,
+                models.AsyncServerlessToolAssistedChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -537,8 +539,8 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ServerlessToolAssistedChatCompletionBodyToolChoice,
-                models.ServerlessToolAssistedChatCompletionBodyToolChoiceTypedDict,
+                models.AsyncServerlessToolAssistedChatCompletionBodyToolChoice,
+                models.AsyncServerlessToolAssistedChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -548,8 +550,8 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
             Union[
-                Iterable[models.ToolAssistedChatTool],
-                Iterable[models.ToolAssistedChatToolTypedDict],
+                Iterable[models.AsyncToolAssistedChatTool],
+                Iterable[models.AsyncToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
         resume_generation: Optional[bool] = None,
@@ -557,7 +559,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerChatCompleteSuccess:
+    ) -> models.AsyncContainerChatCompleteSuccess:
         """Tool assisted chat completions
 
         Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
@@ -626,9 +628,9 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessToolAssistedChatCompleteRequest(
+        request = models.AsyncServerlessToolAssistedChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            serverless_tool_assisted_chat_completion_body=models.ServerlessToolAssistedChatCompletionBody(
+            serverless_tool_assisted_chat_completion_body=models.AsyncServerlessToolAssistedChatCompletionBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -651,7 +653,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 seed=utils.unmarshal(
                     seed,
                     OptionalNullable[
-                        models.ServerlessToolAssistedChatCompletionBodySeed
+                        models.AsyncServerlessToolAssistedChatCompletionBodySeed
                     ],
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
@@ -664,7 +666,9 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 temperature=temperature,
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
-                    Optional[models.ServerlessToolAssistedChatCompletionBodyToolChoice],
+                    Optional[
+                        models.AsyncServerlessToolAssistedChatCompletionBodyToolChoice
+                    ],
                 ),
                 top_k=top_k,
                 top_logprobs=top_logprobs,
@@ -672,7 +676,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 xtc_threshold=xtc_threshold,
                 xtc_probability=xtc_probability,
                 tools=utils.get_pydantic_model(
-                    tools, OptionalNullable[List[models.ToolAssistedChatTool]]
+                    tools, OptionalNullable[List[models.AsyncToolAssistedChatTool]]
                 ),
                 resume_generation=resume_generation,
             ),
@@ -695,7 +699,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessToolAssistedChatCompletionBody,
+                models.AsyncServerlessToolAssistedChatCompletionBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -726,7 +730,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerChatCompleteSuccess, http_res
+                models.AsyncContainerChatCompleteSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -754,13 +758,13 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.ServerlessToolAssistedChatCompletionStreamBodyReasoningEffort
+            models.AsyncServerlessToolAssistedChatCompletionStreamBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.ServerlessToolAssistedChatCompletionStreamBodySeed,
-                models.ServerlessToolAssistedChatCompletionStreamBodySeedTypedDict,
+                models.AsyncServerlessToolAssistedChatCompletionStreamBodySeed,
+                models.AsyncServerlessToolAssistedChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -773,8 +777,8 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ServerlessToolAssistedChatCompletionStreamBodyToolChoice,
-                models.ServerlessToolAssistedChatCompletionStreamBodyToolChoiceTypedDict,
+                models.AsyncServerlessToolAssistedChatCompletionStreamBodyToolChoice,
+                models.AsyncServerlessToolAssistedChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -784,8 +788,8 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         xtc_probability: OptionalNullable[float] = UNSET,
         tools: OptionalNullable[
             Union[
-                Iterable[models.ToolAssistedChatTool],
-                Iterable[models.ToolAssistedChatToolTypedDict],
+                Iterable[models.AsyncToolAssistedChatTool],
+                Iterable[models.AsyncToolAssistedChatToolTypedDict],
             ]
         ] = UNSET,
         resume_generation: Optional[bool] = None,
@@ -794,7 +798,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStreamAsync[
-        models.ServerlessToolAssistedChatCompletionStreamSuccess
+        models.AsyncServerlessToolAssistedChatCompletionStreamSuccess
     ]:
         """Stream tool assisted chat completions
 
@@ -864,9 +868,9 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessToolAssistedChatStreamRequest(
+        request = models.AsyncServerlessToolAssistedChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            serverless_tool_assisted_chat_completion_stream_body=models.ServerlessToolAssistedChatCompletionStreamBody(
+            serverless_tool_assisted_chat_completion_stream_body=models.AsyncServerlessToolAssistedChatCompletionStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -889,7 +893,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 seed=utils.unmarshal(
                     seed,
                     OptionalNullable[
-                        models.ServerlessToolAssistedChatCompletionStreamBodySeed
+                        models.AsyncServerlessToolAssistedChatCompletionStreamBodySeed
                     ],
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
@@ -903,7 +907,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
                     Optional[
-                        models.ServerlessToolAssistedChatCompletionStreamBodyToolChoice
+                        models.AsyncServerlessToolAssistedChatCompletionStreamBodyToolChoice
                     ],
                 ),
                 top_k=top_k,
@@ -912,7 +916,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 xtc_threshold=xtc_threshold,
                 xtc_probability=xtc_probability,
                 tools=utils.get_pydantic_model(
-                    tools, OptionalNullable[List[models.ToolAssistedChatTool]]
+                    tools, OptionalNullable[List[models.AsyncToolAssistedChatTool]]
                 ),
                 resume_generation=resume_generation,
             ),
@@ -935,7 +939,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessToolAssistedChatCompletionStreamBody,
+                models.AsyncServerlessToolAssistedChatCompletionStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -969,7 +973,7 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.ServerlessToolAssistedChatCompletionStreamSuccess
+                    raw, models.AsyncServerlessToolAssistedChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

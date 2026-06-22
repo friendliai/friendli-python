@@ -34,7 +34,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointWandbArtifactCreateResponse:
+    ) -> models.SyncDedicatedEndpointWandbArtifactCreateResponse:
         """Create endpoint from W&B artifact
 
         Create an endpoint from Weights & Biases artifact. If the idempotency key is provided, the API will check if the endpoint already exists, and rollout the existing endpoint if it does. In such cases, the project id must be provided.
@@ -59,9 +59,9 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedEndpointWandbArtifactCreateRequest(
+        request = models.SyncDedicatedEndpointWandbArtifactCreateRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_endpoint_wandb_artifact_create_body=models.DedicatedEndpointWandbArtifactCreateBody(
+            dedicated_endpoint_wandb_artifact_create_body=models.SyncDedicatedEndpointWandbArtifactCreateBody(
                 wandb_artifact_version_name=wandb_artifact_version_name,
                 accelerator=utils.get_pydantic_model(
                     accelerator, OptionalNullable[models.AcceleratorRequirement]
@@ -92,7 +92,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedEndpointWandbArtifactCreateBody,
+                models.SyncDedicatedEndpointWandbArtifactCreateBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -123,7 +123,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DedicatedEndpointWandbArtifactCreateResponse, http_res
+                models.SyncDedicatedEndpointWandbArtifactCreateResponse, http_res
             )
         if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -140,14 +140,15 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         name: str,
         instance_option_id: str,
         advanced: Union[
-            models.EndpointAdvancedConfig, models.EndpointAdvancedConfigTypedDict
+            models.SyncEndpointAdvancedConfig,
+            models.SyncEndpointAdvancedConfigTypedDict,
         ],
         hf_model_repo: str,
         x_friendli_team: OptionalNullable[str] = UNSET,
         simplescale: OptionalNullable[
             Union[
-                models.EndpointSimplescaleConfig,
-                models.EndpointSimplescaleConfigTypedDict,
+                models.SyncEndpointSimplescaleConfig,
+                models.SyncEndpointSimplescaleConfigTypedDict,
             ]
         ] = UNSET,
         autoscaling_policy: OptionalNullable[
@@ -159,7 +160,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.SyncDedicatedEndpointStatus:
         """Create a new endpoint
 
         Create a new endpoint and return its status
@@ -205,17 +206,17 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedCreateEndpointRequest(
+        request = models.SyncDedicatedCreateEndpointRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_endpoint_create_body=models.DedicatedEndpointCreateBody(
+            dedicated_endpoint_create_body=models.SyncDedicatedEndpointCreateBody(
                 project_id=project_id,
                 name=name,
                 instance_option_id=instance_option_id,
                 advanced=utils.get_pydantic_model(
-                    advanced, models.EndpointAdvancedConfig
+                    advanced, models.SyncEndpointAdvancedConfig
                 ),
                 simplescale=utils.get_pydantic_model(
-                    simplescale, OptionalNullable[models.EndpointSimplescaleConfig]
+                    simplescale, OptionalNullable[models.SyncEndpointSimplescaleConfig]
                 ),
                 autoscaling_policy=utils.get_pydantic_model(
                     autoscaling_policy, OptionalNullable[models.AutoscalingPolicy]
@@ -243,7 +244,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedEndpointCreateBody,
+                models.SyncDedicatedEndpointCreateBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -273,7 +274,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(models.SyncDedicatedEndpointStatus, http_res)
         if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -293,7 +294,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointListResponse:
+    ) -> models.SyncDedicatedEndpointListResponse:
         """List all endpoints
 
         List all endpoint statuses
@@ -315,7 +316,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedListEndpointsRequest(
+        request = models.SyncDedicatedListEndpointsRequest(
             project_id=project_id,
             cursor=cursor,
             limit=limit,
@@ -363,7 +364,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DedicatedEndpointListResponse, http_res
+                models.SyncDedicatedEndpointListResponse, http_res
             )
         if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -382,7 +383,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointSpec:
+    ) -> models.SyncDedicatedEndpointSpec:
         """Get endpoint specification
 
         Get the specification of an endpoint
@@ -402,7 +403,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedGetEndpointRequest(
+        request = models.SyncDedicatedGetEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request(
@@ -446,7 +447,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointSpec, http_res)
+            return unmarshal_json_response(models.SyncDedicatedEndpointSpec, http_res)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -462,12 +463,15 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         x_friendli_team: OptionalNullable[str] = UNSET,
         name: OptionalNullable[str] = UNSET,
         advanced: OptionalNullable[
-            Union[models.EndpointAdvancedConfig, models.EndpointAdvancedConfigTypedDict]
+            Union[
+                models.SyncEndpointAdvancedConfig,
+                models.SyncEndpointAdvancedConfigTypedDict,
+            ]
         ] = UNSET,
         simplescale: OptionalNullable[
             Union[
-                models.EndpointSimplescaleConfig,
-                models.EndpointSimplescaleConfigTypedDict,
+                models.SyncEndpointSimplescaleConfig,
+                models.SyncEndpointSimplescaleConfigTypedDict,
             ]
         ] = UNSET,
         autoscaling_policy: OptionalNullable[
@@ -481,7 +485,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointSpec:
+    ) -> models.SyncDedicatedEndpointSpec:
         """Update endpoint spec
 
         Update the specification of a specific endpoint
@@ -527,16 +531,16 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedUpdateEndpointRequest(
+        request = models.SyncDedicatedUpdateEndpointRequest(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
-            dedicated_endpoint_update_body=models.DedicatedEndpointUpdateBody(
+            dedicated_endpoint_update_body=models.SyncDedicatedEndpointUpdateBody(
                 name=name,
                 advanced=utils.get_pydantic_model(
-                    advanced, OptionalNullable[models.EndpointAdvancedConfig]
+                    advanced, OptionalNullable[models.SyncEndpointAdvancedConfig]
                 ),
                 simplescale=utils.get_pydantic_model(
-                    simplescale, OptionalNullable[models.EndpointSimplescaleConfig]
+                    simplescale, OptionalNullable[models.SyncEndpointSimplescaleConfig]
                 ),
                 autoscaling_policy=utils.get_pydantic_model(
                     autoscaling_policy, OptionalNullable[models.AutoscalingPolicy]
@@ -565,7 +569,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedEndpointUpdateBody,
+                models.SyncDedicatedEndpointUpdateBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -595,7 +599,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointSpec, http_res)
+            return unmarshal_json_response(models.SyncDedicatedEndpointSpec, http_res)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -633,7 +637,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedDeleteEndpointRequest(
+        request = models.SyncDedicatedDeleteEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request(
@@ -703,7 +707,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointVersionHistoryResponse:
+    ) -> models.SyncDedicatedEndpointVersionHistoryResponse:
         """Get endpoint version history
 
         Get version history of a specific endpoint
@@ -725,7 +729,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedGetEndpointVersionHistoryRequest(
+        request = models.SyncDedicatedGetEndpointVersionHistoryRequest(
             endpoint_id=endpoint_id,
             cursor=cursor,
             limit=limit,
@@ -773,7 +777,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DedicatedEndpointVersionHistoryResponse, http_res
+                models.SyncDedicatedEndpointVersionHistoryResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -792,7 +796,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.SyncDedicatedEndpointStatus:
         """Get endpoint status
 
         Get the status of a specific endpoint
@@ -812,7 +816,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedGetEndpointStatusRequest(
+        request = models.SyncDedicatedGetEndpointStatusRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request(
@@ -856,7 +860,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(models.SyncDedicatedEndpointStatus, http_res)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -874,7 +878,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.SyncDedicatedEndpointStatus:
         """Sleep endpoint
 
         Put a specific endpoint to sleep
@@ -894,7 +898,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedSleepEndpointRequest(
+        request = models.SyncDedicatedSleepEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request(
@@ -938,7 +942,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(models.SyncDedicatedEndpointStatus, http_res)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -956,7 +960,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.SyncDedicatedEndpointStatus:
         """Wake endpoint
 
         Wake up a specific endpoint
@@ -976,7 +980,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedWakeEndpointRequest(
+        request = models.SyncDedicatedWakeEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request(
@@ -1020,7 +1024,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(models.SyncDedicatedEndpointStatus, http_res)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -1038,7 +1042,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.SyncDedicatedEndpointStatus:
         """Terminate endpoint
 
         Terminate a specific endpoint
@@ -1058,7 +1062,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedTerminateEndpointRequest(
+        request = models.SyncDedicatedTerminateEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request(
@@ -1102,7 +1106,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(models.SyncDedicatedEndpointStatus, http_res)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -1120,7 +1124,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.SyncDedicatedEndpointStatus:
         """Restart endpoint
 
         Restart a FAILED or TERMINATED endpoint
@@ -1140,7 +1144,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedRestartEndpointRequest(
+        request = models.SyncDedicatedRestartEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request(
@@ -1184,7 +1188,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(models.SyncDedicatedEndpointStatus, http_res)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -1213,7 +1217,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointWandbArtifactCreateResponse:
+    ) -> models.AsyncDedicatedEndpointWandbArtifactCreateResponse:
         """Create endpoint from W&B artifact
 
         Create an endpoint from Weights & Biases artifact. If the idempotency key is provided, the API will check if the endpoint already exists, and rollout the existing endpoint if it does. In such cases, the project id must be provided.
@@ -1238,9 +1242,9 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedEndpointWandbArtifactCreateRequest(
+        request = models.AsyncDedicatedEndpointWandbArtifactCreateRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_endpoint_wandb_artifact_create_body=models.DedicatedEndpointWandbArtifactCreateBody(
+            dedicated_endpoint_wandb_artifact_create_body=models.AsyncDedicatedEndpointWandbArtifactCreateBody(
                 wandb_artifact_version_name=wandb_artifact_version_name,
                 accelerator=utils.get_pydantic_model(
                     accelerator, OptionalNullable[models.AcceleratorRequirement]
@@ -1271,7 +1275,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedEndpointWandbArtifactCreateBody,
+                models.AsyncDedicatedEndpointWandbArtifactCreateBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1302,7 +1306,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DedicatedEndpointWandbArtifactCreateResponse, http_res
+                models.AsyncDedicatedEndpointWandbArtifactCreateResponse, http_res
             )
         if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1319,14 +1323,15 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         name: str,
         instance_option_id: str,
         advanced: Union[
-            models.EndpointAdvancedConfig, models.EndpointAdvancedConfigTypedDict
+            models.AsyncEndpointAdvancedConfig,
+            models.AsyncEndpointAdvancedConfigTypedDict,
         ],
         hf_model_repo: str,
         x_friendli_team: OptionalNullable[str] = UNSET,
         simplescale: OptionalNullable[
             Union[
-                models.EndpointSimplescaleConfig,
-                models.EndpointSimplescaleConfigTypedDict,
+                models.AsyncEndpointSimplescaleConfig,
+                models.AsyncEndpointSimplescaleConfigTypedDict,
             ]
         ] = UNSET,
         autoscaling_policy: OptionalNullable[
@@ -1338,7 +1343,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.AsyncDedicatedEndpointStatus:
         """Create a new endpoint
 
         Create a new endpoint and return its status
@@ -1384,17 +1389,17 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedCreateEndpointRequest(
+        request = models.AsyncDedicatedCreateEndpointRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_endpoint_create_body=models.DedicatedEndpointCreateBody(
+            dedicated_endpoint_create_body=models.AsyncDedicatedEndpointCreateBody(
                 project_id=project_id,
                 name=name,
                 instance_option_id=instance_option_id,
                 advanced=utils.get_pydantic_model(
-                    advanced, models.EndpointAdvancedConfig
+                    advanced, models.AsyncEndpointAdvancedConfig
                 ),
                 simplescale=utils.get_pydantic_model(
-                    simplescale, OptionalNullable[models.EndpointSimplescaleConfig]
+                    simplescale, OptionalNullable[models.AsyncEndpointSimplescaleConfig]
                 ),
                 autoscaling_policy=utils.get_pydantic_model(
                     autoscaling_policy, OptionalNullable[models.AutoscalingPolicy]
@@ -1422,7 +1427,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedEndpointCreateBody,
+                models.AsyncDedicatedEndpointCreateBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1452,7 +1457,9 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(
+                models.AsyncDedicatedEndpointStatus, http_res
+            )
         if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -1472,7 +1479,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointListResponse:
+    ) -> models.AsyncDedicatedEndpointListResponse:
         """List all endpoints
 
         List all endpoint statuses
@@ -1494,7 +1501,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedListEndpointsRequest(
+        request = models.AsyncDedicatedListEndpointsRequest(
             project_id=project_id,
             cursor=cursor,
             limit=limit,
@@ -1542,7 +1549,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DedicatedEndpointListResponse, http_res
+                models.AsyncDedicatedEndpointListResponse, http_res
             )
         if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1561,7 +1568,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointSpec:
+    ) -> models.AsyncDedicatedEndpointSpec:
         """Get endpoint specification
 
         Get the specification of an endpoint
@@ -1581,7 +1588,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedGetEndpointRequest(
+        request = models.AsyncDedicatedGetEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request_async(
@@ -1625,7 +1632,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointSpec, http_res)
+            return unmarshal_json_response(models.AsyncDedicatedEndpointSpec, http_res)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -1641,12 +1648,15 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         x_friendli_team: OptionalNullable[str] = UNSET,
         name: OptionalNullable[str] = UNSET,
         advanced: OptionalNullable[
-            Union[models.EndpointAdvancedConfig, models.EndpointAdvancedConfigTypedDict]
+            Union[
+                models.AsyncEndpointAdvancedConfig,
+                models.AsyncEndpointAdvancedConfigTypedDict,
+            ]
         ] = UNSET,
         simplescale: OptionalNullable[
             Union[
-                models.EndpointSimplescaleConfig,
-                models.EndpointSimplescaleConfigTypedDict,
+                models.AsyncEndpointSimplescaleConfig,
+                models.AsyncEndpointSimplescaleConfigTypedDict,
             ]
         ] = UNSET,
         autoscaling_policy: OptionalNullable[
@@ -1660,7 +1670,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointSpec:
+    ) -> models.AsyncDedicatedEndpointSpec:
         """Update endpoint spec
 
         Update the specification of a specific endpoint
@@ -1706,16 +1716,16 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedUpdateEndpointRequest(
+        request = models.AsyncDedicatedUpdateEndpointRequest(
             endpoint_id=endpoint_id,
             x_friendli_team=x_friendli_team,
-            dedicated_endpoint_update_body=models.DedicatedEndpointUpdateBody(
+            dedicated_endpoint_update_body=models.AsyncDedicatedEndpointUpdateBody(
                 name=name,
                 advanced=utils.get_pydantic_model(
-                    advanced, OptionalNullable[models.EndpointAdvancedConfig]
+                    advanced, OptionalNullable[models.AsyncEndpointAdvancedConfig]
                 ),
                 simplescale=utils.get_pydantic_model(
-                    simplescale, OptionalNullable[models.EndpointSimplescaleConfig]
+                    simplescale, OptionalNullable[models.AsyncEndpointSimplescaleConfig]
                 ),
                 autoscaling_policy=utils.get_pydantic_model(
                     autoscaling_policy, OptionalNullable[models.AutoscalingPolicy]
@@ -1744,7 +1754,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedEndpointUpdateBody,
+                models.AsyncDedicatedEndpointUpdateBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1774,7 +1784,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointSpec, http_res)
+            return unmarshal_json_response(models.AsyncDedicatedEndpointSpec, http_res)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -1812,7 +1822,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedDeleteEndpointRequest(
+        request = models.AsyncDedicatedDeleteEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request_async(
@@ -1882,7 +1892,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointVersionHistoryResponse:
+    ) -> models.AsyncDedicatedEndpointVersionHistoryResponse:
         """Get endpoint version history
 
         Get version history of a specific endpoint
@@ -1904,7 +1914,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedGetEndpointVersionHistoryRequest(
+        request = models.AsyncDedicatedGetEndpointVersionHistoryRequest(
             endpoint_id=endpoint_id,
             cursor=cursor,
             limit=limit,
@@ -1952,7 +1962,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DedicatedEndpointVersionHistoryResponse, http_res
+                models.AsyncDedicatedEndpointVersionHistoryResponse, http_res
             )
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1971,7 +1981,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.AsyncDedicatedEndpointStatus:
         """Get endpoint status
 
         Get the status of a specific endpoint
@@ -1991,7 +2001,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedGetEndpointStatusRequest(
+        request = models.AsyncDedicatedGetEndpointStatusRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request_async(
@@ -2035,7 +2045,9 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(
+                models.AsyncDedicatedEndpointStatus, http_res
+            )
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -2053,7 +2065,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.AsyncDedicatedEndpointStatus:
         """Sleep endpoint
 
         Put a specific endpoint to sleep
@@ -2073,7 +2085,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedSleepEndpointRequest(
+        request = models.AsyncDedicatedSleepEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request_async(
@@ -2117,7 +2129,9 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(
+                models.AsyncDedicatedEndpointStatus, http_res
+            )
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -2135,7 +2149,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.AsyncDedicatedEndpointStatus:
         """Wake endpoint
 
         Wake up a specific endpoint
@@ -2155,7 +2169,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedWakeEndpointRequest(
+        request = models.AsyncDedicatedWakeEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request_async(
@@ -2199,7 +2213,9 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(
+                models.AsyncDedicatedEndpointStatus, http_res
+            )
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -2217,7 +2233,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.AsyncDedicatedEndpointStatus:
         """Terminate endpoint
 
         Terminate a specific endpoint
@@ -2237,7 +2253,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedTerminateEndpointRequest(
+        request = models.AsyncDedicatedTerminateEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request_async(
@@ -2281,7 +2297,9 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(
+                models.AsyncDedicatedEndpointStatus, http_res
+            )
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -2299,7 +2317,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedEndpointStatus:
+    ) -> models.AsyncDedicatedEndpointStatus:
         """Restart endpoint
 
         Restart a FAILED or TERMINATED endpoint
@@ -2319,7 +2337,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedRestartEndpointRequest(
+        request = models.AsyncDedicatedRestartEndpointRequest(
             endpoint_id=endpoint_id, x_friendli_team=x_friendli_team
         )
         req = self._build_request_async(
@@ -2363,7 +2381,9 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
+            return unmarshal_json_response(
+                models.AsyncDedicatedEndpointStatus, http_res
+            )
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)

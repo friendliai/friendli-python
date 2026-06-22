@@ -27,7 +27,7 @@ class DedicatedEmbeddingsSuccessTypedDict(TypedDict):
     created: int
     "The Unix timestamp (in seconds) for when the embeddings were created."
     model: NotRequired[Nullable[str]]
-    "The model to generate the embeddings. For dedicated endpoints, it returns the endpoint id."
+    "The model to generate the embeddings. For dedicated endpoints, it returns the endpoint ID."
     object: Literal["list"]
     "The object type, which is always set to `list`."
 
@@ -41,7 +41,7 @@ class DedicatedEmbeddingsSuccess(BaseModel):
     created: int
     "The Unix timestamp (in seconds) for when the embeddings were created."
     model: OptionalNullable[str] = UNSET
-    "The model to generate the embeddings. For dedicated endpoints, it returns the endpoint id."
+    "The model to generate the embeddings. For dedicated endpoints, it returns the endpoint ID."
     OBJECT: Annotated[
         Annotated[Literal["list"], AfterValidator(validate_const("list"))],
         pydantic.Field(alias="object"),
