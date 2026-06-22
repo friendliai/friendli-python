@@ -271,7 +271,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: Optional[bool] = True,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
@@ -739,7 +739,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: Optional[bool] = True,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,

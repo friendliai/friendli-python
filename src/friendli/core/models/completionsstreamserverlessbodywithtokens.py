@@ -12,7 +12,7 @@ from friendli.core.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import List, Union
+from typing import List, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 CompletionsStreamServerlessBodyWithTokensSeedTypedDict = TypeAliasType(
@@ -73,7 +73,7 @@ class CompletionsStreamServerlessBodyWithTokensTypedDict(TypedDict):
     "When one of the stop phrases appears in the generation result, the API will stop generation.\n    The stop phrases are excluded from the result.\n    Defaults to empty list.\n    "
     stop_tokens: NotRequired[Nullable[List[TokenSequenceTypedDict]]]
     "Stop generating further tokens when generated token corresponds to any of the tokens in the sequence."
-    stream: NotRequired[Nullable[bool]]
+    stream: NotRequired[bool]
     "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
@@ -139,7 +139,7 @@ class CompletionsStreamServerlessBodyWithTokens(BaseModel):
     "When one of the stop phrases appears in the generation result, the API will stop generation.\n    The stop phrases are excluded from the result.\n    Defaults to empty list.\n    "
     stop_tokens: OptionalNullable[List[TokenSequence]] = UNSET
     "Stop generating further tokens when generated token corresponds to any of the tokens in the sequence."
-    stream: OptionalNullable[bool] = UNSET
+    stream: Optional[bool] = True
     "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: OptionalNullable[StreamOptions] = UNSET
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
@@ -216,7 +216,6 @@ class CompletionsStreamServerlessBodyWithTokens(BaseModel):
                 "seed",
                 "stop",
                 "stop_tokens",
-                "stream",
                 "stream_options",
                 "temperature",
                 "token_index_to_replace",

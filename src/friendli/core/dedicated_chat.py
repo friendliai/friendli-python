@@ -285,7 +285,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: Optional[bool] = True,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
@@ -779,7 +779,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: Optional[bool] = True,
         stream_options: OptionalNullable[
             Union[models.StreamOptions, models.StreamOptionsTypedDict]
         ] = UNSET,
