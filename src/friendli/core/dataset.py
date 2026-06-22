@@ -22,15 +22,14 @@ class SyncDataset(BaseDataset, SyncSDK):
         name: str,
         project_id: str,
         modality: Union[
-            models.SyncDedicatedDatasetModality,
-            models.SyncDedicatedDatasetModalityTypedDict,
+            models.DedicatedDatasetModality, models.DedicatedDatasetModalityTypedDict
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncDatasetInfo:
+    ) -> models.DatasetInfo:
         """Create a new dataset
 
         Create a new dataset.
@@ -58,7 +57,7 @@ class SyncDataset(BaseDataset, SyncSDK):
                 name=name,
                 project_id=project_id,
                 modality=utils.get_pydantic_model(
-                    modality, models.SyncDedicatedDatasetModality
+                    modality, models.DedicatedDatasetModality
                 ),
             ),
         )
@@ -111,7 +110,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         )
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.SyncDatasetInfo, http_res)
+            return unmarshal_json_response(models.DatasetInfo, http_res)
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 models.HTTPValidationErrorData, http_res
@@ -235,7 +234,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncDatasetInfo:
+    ) -> models.DatasetInfo:
         """Get dataset info
 
         Get information about a specific dataset.
@@ -300,7 +299,7 @@ class SyncDataset(BaseDataset, SyncSDK):
         )
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.SyncDatasetInfo, http_res)
+            return unmarshal_json_response(models.DatasetInfo, http_res)
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 models.HTTPValidationErrorData, http_res
@@ -1551,15 +1550,14 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         name: str,
         project_id: str,
         modality: Union[
-            models.AsyncDedicatedDatasetModality,
-            models.AsyncDedicatedDatasetModalityTypedDict,
+            models.DedicatedDatasetModality, models.DedicatedDatasetModalityTypedDict
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AsyncDatasetInfo:
+    ) -> models.DatasetInfo:
         """Create a new dataset
 
         Create a new dataset.
@@ -1587,7 +1585,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 name=name,
                 project_id=project_id,
                 modality=utils.get_pydantic_model(
-                    modality, models.AsyncDedicatedDatasetModality
+                    modality, models.DedicatedDatasetModality
                 ),
             ),
         )
@@ -1640,7 +1638,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         )
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.AsyncDatasetInfo, http_res)
+            return unmarshal_json_response(models.DatasetInfo, http_res)
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 models.HTTPValidationErrorData, http_res
@@ -1764,7 +1762,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AsyncDatasetInfo:
+    ) -> models.DatasetInfo:
         """Get dataset info
 
         Get information about a specific dataset.
@@ -1829,7 +1827,7 @@ class AsyncDataset(BaseDataset, AsyncSDK):
         )
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.AsyncDatasetInfo, http_res)
+            return unmarshal_json_response(models.DatasetInfo, http_res)
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 models.HTTPValidationErrorData, http_res

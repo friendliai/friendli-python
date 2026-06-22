@@ -22,8 +22,8 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
         x_friendli_team: OptionalNullable[str] = UNSET,
         input_: OptionalNullable[
             Union[
-                models.SyncDedicatedEmbeddingsBodyInput,
-                models.SyncDedicatedEmbeddingsBodyInputTypedDict,
+                models.DedicatedEmbeddingsBodyInput,
+                models.DedicatedEmbeddingsBodyInputTypedDict,
             ]
         ] = UNSET,
         tokens: OptionalNullable[Iterable[int]] = UNSET,
@@ -32,7 +32,7 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncDedicatedEmbeddingsSuccess:
+    ) -> models.DedicatedEmbeddingsSuccess:
         """SyncEmbeddings
 
         Creates an embedding vector representing the input text.
@@ -59,12 +59,12 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncDedicatedEmbeddingsRequest(
+        request = models.DedicatedEmbeddingsRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_embeddings_body=models.SyncDedicatedEmbeddingsBody(
+            dedicated_embeddings_body=models.DedicatedEmbeddingsBody(
                 model=model,
                 input=utils.unmarshal(
-                    input_, OptionalNullable[models.SyncDedicatedEmbeddingsBodyInput]
+                    input_, OptionalNullable[models.DedicatedEmbeddingsBodyInput]
                 ),
                 tokens=utils.unmarshal(tokens, OptionalNullable[List[int]]),
                 encoding_format=encoding_format,
@@ -88,7 +88,7 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncDedicatedEmbeddingsBody,
+                models.DedicatedEmbeddingsBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -118,9 +118,7 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.SyncDedicatedEmbeddingsSuccess, http_res
-            )
+            return unmarshal_json_response(models.DedicatedEmbeddingsSuccess, http_res)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -138,8 +136,8 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
         x_friendli_team: OptionalNullable[str] = UNSET,
         input_: OptionalNullable[
             Union[
-                models.AsyncDedicatedEmbeddingsBodyInput,
-                models.AsyncDedicatedEmbeddingsBodyInputTypedDict,
+                models.DedicatedEmbeddingsBodyInput,
+                models.DedicatedEmbeddingsBodyInputTypedDict,
             ]
         ] = UNSET,
         tokens: OptionalNullable[Iterable[int]] = UNSET,
@@ -148,7 +146,7 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AsyncDedicatedEmbeddingsSuccess:
+    ) -> models.DedicatedEmbeddingsSuccess:
         """AsyncEmbeddings
 
         Creates an embedding vector representing the input text.
@@ -175,12 +173,12 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncDedicatedEmbeddingsRequest(
+        request = models.DedicatedEmbeddingsRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_embeddings_body=models.AsyncDedicatedEmbeddingsBody(
+            dedicated_embeddings_body=models.DedicatedEmbeddingsBody(
                 model=model,
                 input=utils.unmarshal(
-                    input_, OptionalNullable[models.AsyncDedicatedEmbeddingsBodyInput]
+                    input_, OptionalNullable[models.DedicatedEmbeddingsBodyInput]
                 ),
                 tokens=utils.unmarshal(tokens, OptionalNullable[List[int]]),
                 encoding_format=encoding_format,
@@ -204,7 +202,7 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncDedicatedEmbeddingsBody,
+                models.DedicatedEmbeddingsBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -234,9 +232,7 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.AsyncDedicatedEmbeddingsSuccess, http_res
-            )
+            return unmarshal_json_response(models.DedicatedEmbeddingsSuccess, http_res)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
