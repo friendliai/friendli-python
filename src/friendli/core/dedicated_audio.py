@@ -155,7 +155,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
             ]
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: Optional[bool] = True,
         temperature: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -412,7 +412,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
             ]
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: Optional[bool] = True,
         temperature: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,

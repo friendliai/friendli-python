@@ -78,7 +78,7 @@ class ContainerChatCompletionStreamBodyTypedDict(TypedDict):
     "Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."
     stop: NotRequired[Nullable[List[str]]]
     "When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list."
-    stream: NotRequired[Nullable[bool]]
+    stream: NotRequired[bool]
     "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
@@ -145,7 +145,7 @@ class ContainerChatCompletionStreamBody(BaseModel):
     "Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations."
     stop: OptionalNullable[List[str]] = UNSET
     "When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list."
-    stream: OptionalNullable[bool] = UNSET
+    stream: Optional[bool] = True
     "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: OptionalNullable[StreamOptions] = UNSET
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
@@ -228,7 +228,6 @@ class ContainerChatCompletionStreamBody(BaseModel):
                 "reasoning_budget",
                 "seed",
                 "stop",
-                "stream",
                 "stream_options",
                 "parse_reasoning",
                 "include_reasoning",
