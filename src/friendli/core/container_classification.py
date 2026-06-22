@@ -21,8 +21,8 @@ class SyncContainerClassification(BaseContainerClassification, SyncSDK):
         model: OptionalNullable[str] = UNSET,
         input_: OptionalNullable[
             Union[
-                models.ContainerTextClassificationBodyInput,
-                models.ContainerTextClassificationBodyInputTypedDict,
+                models.SyncContainerTextClassificationBodyInput,
+                models.SyncContainerTextClassificationBodyInputTypedDict,
             ]
         ] = UNSET,
         tokens: OptionalNullable[Iterable[int]] = UNSET,
@@ -30,7 +30,7 @@ class SyncContainerClassification(BaseContainerClassification, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerTextClassificationSuccess:
+    ) -> models.SyncContainerTextClassificationSuccess:
         """Text classification
 
         Given a text input, the model classifies it into categories.
@@ -55,10 +55,11 @@ class SyncContainerClassification(BaseContainerClassification, SyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_TEXT_CLASSIFICATION_OP_SERVERS[0]
-        request = models.ContainerTextClassificationBody(
+        request = models.SyncContainerTextClassificationBody(
             model=model,
             input=utils.unmarshal(
-                input_, OptionalNullable[models.ContainerTextClassificationBodyInput]
+                input_,
+                OptionalNullable[models.SyncContainerTextClassificationBodyInput],
             ),
             tokens=utils.unmarshal(tokens, OptionalNullable[List[int]]),
         )
@@ -76,7 +77,11 @@ class SyncContainerClassification(BaseContainerClassification, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerTextClassificationBody
+                request,
+                False,
+                False,
+                "json",
+                models.SyncContainerTextClassificationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -107,7 +112,7 @@ class SyncContainerClassification(BaseContainerClassification, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerTextClassificationSuccess, http_res
+                models.SyncContainerTextClassificationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -125,8 +130,8 @@ class AsyncContainerClassification(BaseContainerClassification, AsyncSDK):
         model: OptionalNullable[str] = UNSET,
         input_: OptionalNullable[
             Union[
-                models.ContainerTextClassificationBodyInput,
-                models.ContainerTextClassificationBodyInputTypedDict,
+                models.AsyncContainerTextClassificationBodyInput,
+                models.AsyncContainerTextClassificationBodyInputTypedDict,
             ]
         ] = UNSET,
         tokens: OptionalNullable[Iterable[int]] = UNSET,
@@ -134,7 +139,7 @@ class AsyncContainerClassification(BaseContainerClassification, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerTextClassificationSuccess:
+    ) -> models.AsyncContainerTextClassificationSuccess:
         """Text classification
 
         Given a text input, the model classifies it into categories.
@@ -159,10 +164,11 @@ class AsyncContainerClassification(BaseContainerClassification, AsyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_TEXT_CLASSIFICATION_OP_SERVERS[0]
-        request = models.ContainerTextClassificationBody(
+        request = models.AsyncContainerTextClassificationBody(
             model=model,
             input=utils.unmarshal(
-                input_, OptionalNullable[models.ContainerTextClassificationBodyInput]
+                input_,
+                OptionalNullable[models.AsyncContainerTextClassificationBodyInput],
             ),
             tokens=utils.unmarshal(tokens, OptionalNullable[List[int]]),
         )
@@ -180,7 +186,11 @@ class AsyncContainerClassification(BaseContainerClassification, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerTextClassificationBody
+                request,
+                False,
+                False,
+                "json",
+                models.AsyncContainerTextClassificationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -211,7 +221,7 @@ class AsyncContainerClassification(BaseContainerClassification, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerTextClassificationSuccess, http_res
+                models.AsyncContainerTextClassificationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

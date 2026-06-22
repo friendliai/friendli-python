@@ -613,7 +613,6 @@ if TYPE_CHECKING:
         FriendliBuiltInToolTypedDict,
     )
     from .function import Function, FunctionTypedDict
-    from .functionality import Functionality, FunctionalityTypedDict
     from .functionresult import FunctionResult, FunctionResultTypedDict
     from .get_datasetop import GetDatasetRequest, GetDatasetRequestTypedDict
     from .get_download_urlop import (
@@ -634,10 +633,6 @@ if TYPE_CHECKING:
     from .integratedbuiltintool import (
         IntegratedBuiltInTool,
         IntegratedBuiltInToolTypedDict,
-    )
-    from .knowledgeretrievedchunk import (
-        KnowledgeRetrievedChunk,
-        KnowledgeRetrievedChunkTypedDict,
     )
     from .list_datasetsop import (
         ListDatasetsDirection,
@@ -753,12 +748,7 @@ if TYPE_CHECKING:
         MessagesURLImageSourceTypedDict,
     )
     from .messagesusage import MessagesUsage, MessagesUsageTypedDict
-    from .modelcatalogresponseitem import (
-        ModelCatalogResponseItem,
-        ModelCatalogResponseItemTypedDict,
-    )
     from .no_response_error import NoResponseError
-    from .pricingmodel import PricingModel, PricingModelTypedDict
     from .prompttokensdetails import PromptTokensDetails, PromptTokensDetailsTypedDict
     from .responseformat import ResponseFormat, ResponseFormatTypedDict
     from .responseformatjsonobject import (
@@ -868,18 +858,6 @@ if TYPE_CHECKING:
         ServerlessDetokenizationSuccess,
         ServerlessDetokenizationSuccessTypedDict,
     )
-    from .serverlessknowledgeretrievalbody import (
-        ServerlessKnowledgeRetrievalBody,
-        ServerlessKnowledgeRetrievalBodyTypedDict,
-    )
-    from .serverlessknowledgeretrievalsuccess import (
-        ServerlessKnowledgeRetrievalSuccess,
-        ServerlessKnowledgeRetrievalSuccessTypedDict,
-    )
-    from .serverlessknowledgeretrieveop import (
-        ServerlessKnowledgeRetrieveRequest,
-        ServerlessKnowledgeRetrieveRequestTypedDict,
-    )
     from .serverlessmessagesbody import (
         ServerlessMessagesBody,
         ServerlessMessagesBodyServiceTier,
@@ -897,11 +875,6 @@ if TYPE_CHECKING:
         ServerlessMessagesSuccessStopReason,
         ServerlessMessagesSuccessTypedDict,
     )
-    from .serverlessmodellistsuccess import (
-        ServerlessModelListSuccess,
-        ServerlessModelListSuccessTypedDict,
-    )
-    from .serverlesspriceunittype import ServerlessPriceUnitType
     from .serverlesstokenizationbody import (
         ServerlessTokenizationBody,
         ServerlessTokenizationBodyTypedDict,
@@ -1441,8 +1414,6 @@ __all__ = [
     "FunctionResult",
     "FunctionResultTypedDict",
     "FunctionTypedDict",
-    "Functionality",
-    "FunctionalityTypedDict",
     "GetCostsRequest",
     "GetCostsRequestTypedDict",
     "GetDatasetRequest",
@@ -1469,8 +1440,6 @@ __all__ = [
     "InitUploadRequestTypedDict",
     "IntegratedBuiltInTool",
     "IntegratedBuiltInToolTypedDict",
-    "KnowledgeRetrievedChunk",
-    "KnowledgeRetrievedChunkTypedDict",
     "ListDatasetsDirection",
     "ListDatasetsRequest",
     "ListDatasetsRequestTypedDict",
@@ -1549,13 +1518,9 @@ __all__ = [
     "MessagesURLImageSourceTypedDict",
     "MessagesUsage",
     "MessagesUsageTypedDict",
-    "ModelCatalogResponseItem",
-    "ModelCatalogResponseItemTypedDict",
     "Name",
     "NoResponseError",
     "Phase",
-    "PricingModel",
-    "PricingModelTypedDict",
     "PromptTokensDetails",
     "PromptTokensDetailsTypedDict",
     "RequestBody",
@@ -1633,12 +1598,6 @@ __all__ = [
     "ServerlessDetokenizationRequestTypedDict",
     "ServerlessDetokenizationSuccess",
     "ServerlessDetokenizationSuccessTypedDict",
-    "ServerlessKnowledgeRetrievalBody",
-    "ServerlessKnowledgeRetrievalBodyTypedDict",
-    "ServerlessKnowledgeRetrievalSuccess",
-    "ServerlessKnowledgeRetrievalSuccessTypedDict",
-    "ServerlessKnowledgeRetrieveRequest",
-    "ServerlessKnowledgeRetrieveRequestTypedDict",
     "ServerlessMessagesBody",
     "ServerlessMessagesBodyServiceTier",
     "ServerlessMessagesBodyServiceTierTypedDict",
@@ -1650,9 +1609,6 @@ __all__ = [
     "ServerlessMessagesSuccess",
     "ServerlessMessagesSuccessStopReason",
     "ServerlessMessagesSuccessTypedDict",
-    "ServerlessModelListSuccess",
-    "ServerlessModelListSuccessTypedDict",
-    "ServerlessPriceUnitType",
     "ServerlessTokenizationBody",
     "ServerlessTokenizationBodyTypedDict",
     "ServerlessTokenizationRequest",
@@ -2156,8 +2112,6 @@ _dynamic_imports: dict[str, str] = {
     "FriendliBuiltInToolTypedDict": ".friendlibuiltintool",
     "Function": ".function",
     "FunctionTypedDict": ".function",
-    "Functionality": ".functionality",
-    "FunctionalityTypedDict": ".functionality",
     "FunctionResult": ".functionresult",
     "FunctionResultTypedDict": ".functionresult",
     "GetDatasetRequest": ".get_datasetop",
@@ -2186,8 +2140,6 @@ _dynamic_imports: dict[str, str] = {
     "InitUploadRequestTypedDict": ".init_uploadop",
     "IntegratedBuiltInTool": ".integratedbuiltintool",
     "IntegratedBuiltInToolTypedDict": ".integratedbuiltintool",
-    "KnowledgeRetrievedChunk": ".knowledgeretrievedchunk",
-    "KnowledgeRetrievedChunkTypedDict": ".knowledgeretrievedchunk",
     "ListDatasetsDirection": ".list_datasetsop",
     "ListDatasetsRequest": ".list_datasetsop",
     "ListDatasetsRequestTypedDict": ".list_datasetsop",
@@ -2266,11 +2218,7 @@ _dynamic_imports: dict[str, str] = {
     "MessagesURLImageSourceTypedDict": ".messagesurlimagesource",
     "MessagesUsage": ".messagesusage",
     "MessagesUsageTypedDict": ".messagesusage",
-    "ModelCatalogResponseItem": ".modelcatalogresponseitem",
-    "ModelCatalogResponseItemTypedDict": ".modelcatalogresponseitem",
     "NoResponseError": ".no_response_error",
-    "PricingModel": ".pricingmodel",
-    "PricingModelTypedDict": ".pricingmodel",
     "PromptTokensDetails": ".prompttokensdetails",
     "PromptTokensDetailsTypedDict": ".prompttokensdetails",
     "ResponseFormat": ".responseformat",
@@ -2343,12 +2291,6 @@ _dynamic_imports: dict[str, str] = {
     "ServerlessDetokenizationRequestTypedDict": ".serverlessdetokenizationop",
     "ServerlessDetokenizationSuccess": ".serverlessdetokenizationsuccess",
     "ServerlessDetokenizationSuccessTypedDict": ".serverlessdetokenizationsuccess",
-    "ServerlessKnowledgeRetrievalBody": ".serverlessknowledgeretrievalbody",
-    "ServerlessKnowledgeRetrievalBodyTypedDict": ".serverlessknowledgeretrievalbody",
-    "ServerlessKnowledgeRetrievalSuccess": ".serverlessknowledgeretrievalsuccess",
-    "ServerlessKnowledgeRetrievalSuccessTypedDict": ".serverlessknowledgeretrievalsuccess",
-    "ServerlessKnowledgeRetrieveRequest": ".serverlessknowledgeretrieveop",
-    "ServerlessKnowledgeRetrieveRequestTypedDict": ".serverlessknowledgeretrieveop",
     "ServerlessMessagesBody": ".serverlessmessagesbody",
     "ServerlessMessagesBodyServiceTier": ".serverlessmessagesbody",
     "ServerlessMessagesBodyServiceTierTypedDict": ".serverlessmessagesbody",
@@ -2360,9 +2302,6 @@ _dynamic_imports: dict[str, str] = {
     "ServerlessMessagesSuccess": ".serverlessmessagessuccess",
     "ServerlessMessagesSuccessStopReason": ".serverlessmessagessuccess",
     "ServerlessMessagesSuccessTypedDict": ".serverlessmessagessuccess",
-    "ServerlessModelListSuccess": ".serverlessmodellistsuccess",
-    "ServerlessModelListSuccessTypedDict": ".serverlessmodellistsuccess",
-    "ServerlessPriceUnitType": ".serverlesspriceunittype",
     "ServerlessTokenizationBody": ".serverlesstokenizationbody",
     "ServerlessTokenizationBodyTypedDict": ".serverlesstokenizationbody",
     "ServerlessTokenizationRequest": ".serverlesstokenizationop",

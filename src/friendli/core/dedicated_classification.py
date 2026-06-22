@@ -22,8 +22,8 @@ class SyncDedicatedClassification(BaseDedicatedClassification, SyncSDK):
         x_friendli_team: OptionalNullable[str] = UNSET,
         input_: OptionalNullable[
             Union[
-                models.DedicatedTextClassificationBodyInput,
-                models.DedicatedTextClassificationBodyInputTypedDict,
+                models.SyncDedicatedTextClassificationBodyInput,
+                models.SyncDedicatedTextClassificationBodyInputTypedDict,
             ]
         ] = UNSET,
         tokens: OptionalNullable[Iterable[int]] = UNSET,
@@ -31,7 +31,7 @@ class SyncDedicatedClassification(BaseDedicatedClassification, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerTextClassificationSuccess:
+    ) -> models.SyncContainerTextClassificationSuccess:
         """Text classification
 
         Given a text input, the model classifies it into categories.
@@ -57,13 +57,13 @@ class SyncDedicatedClassification(BaseDedicatedClassification, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedTextClassificationRequest(
+        request = models.SyncDedicatedTextClassificationRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_text_classification_body=models.DedicatedTextClassificationBody(
+            dedicated_text_classification_body=models.SyncDedicatedTextClassificationBody(
                 model=model,
                 input=utils.unmarshal(
                     input_,
-                    OptionalNullable[models.DedicatedTextClassificationBodyInput],
+                    OptionalNullable[models.SyncDedicatedTextClassificationBodyInput],
                 ),
                 tokens=utils.unmarshal(tokens, OptionalNullable[List[int]]),
             ),
@@ -86,7 +86,7 @@ class SyncDedicatedClassification(BaseDedicatedClassification, SyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedTextClassificationBody,
+                models.SyncDedicatedTextClassificationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -117,7 +117,7 @@ class SyncDedicatedClassification(BaseDedicatedClassification, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerTextClassificationSuccess, http_res
+                models.SyncContainerTextClassificationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -136,8 +136,8 @@ class AsyncDedicatedClassification(BaseDedicatedClassification, AsyncSDK):
         x_friendli_team: OptionalNullable[str] = UNSET,
         input_: OptionalNullable[
             Union[
-                models.DedicatedTextClassificationBodyInput,
-                models.DedicatedTextClassificationBodyInputTypedDict,
+                models.AsyncDedicatedTextClassificationBodyInput,
+                models.AsyncDedicatedTextClassificationBodyInputTypedDict,
             ]
         ] = UNSET,
         tokens: OptionalNullable[Iterable[int]] = UNSET,
@@ -145,7 +145,7 @@ class AsyncDedicatedClassification(BaseDedicatedClassification, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerTextClassificationSuccess:
+    ) -> models.AsyncContainerTextClassificationSuccess:
         """Text classification
 
         Given a text input, the model classifies it into categories.
@@ -171,13 +171,13 @@ class AsyncDedicatedClassification(BaseDedicatedClassification, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedTextClassificationRequest(
+        request = models.AsyncDedicatedTextClassificationRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_text_classification_body=models.DedicatedTextClassificationBody(
+            dedicated_text_classification_body=models.AsyncDedicatedTextClassificationBody(
                 model=model,
                 input=utils.unmarshal(
                     input_,
-                    OptionalNullable[models.DedicatedTextClassificationBodyInput],
+                    OptionalNullable[models.AsyncDedicatedTextClassificationBodyInput],
                 ),
                 tokens=utils.unmarshal(tokens, OptionalNullable[List[int]]),
             ),
@@ -200,7 +200,7 @@ class AsyncDedicatedClassification(BaseDedicatedClassification, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedTextClassificationBody,
+                models.AsyncDedicatedTextClassificationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -231,7 +231,7 @@ class AsyncDedicatedClassification(BaseDedicatedClassification, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerTextClassificationSuccess, http_res
+                models.AsyncContainerTextClassificationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

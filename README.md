@@ -136,7 +136,6 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        max_tokens=200,
     )
 
     # Handle response
@@ -171,82 +170,6 @@ async def main():
                     "content": "Hello!",
                 },
             ],
-            max_tokens=200,
-        )
-
-        # Handle response
-        print(res)
-
-
-asyncio.run(main())
-```
-
-### Tool assisted chat completions
-
-Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.
-
-```python
-# Synchronous Example
-
-import os
-
-from friendli import SyncFriendli
-
-with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.tool_assisted_chat.complete(
-        model="zai-org/GLM-5.2",
-        messages=[
-            {
-                "role": "user",
-                "content": "What is 3 + 6?",
-            },
-        ],
-        max_tokens=200,
-        stream=False,
-        tools=[
-            {
-                "type": "math:calculator",
-            },
-        ],
-    )
-
-    # Handle response
-    print(res)
-```
-
-</br>
-
-The same SDK client can also be used to make asynchronous requests by importing asyncio.
-
-```python
-# Asynchronous Example
-import asyncio
-import os
-
-from friendli import AsyncFriendli
-
-
-async def main():
-    async with AsyncFriendli(
-        token=os.getenv("FRIENDLI_TOKEN", ""),
-    ) as friendli:
-        res = await friendli.serverless.tool_assisted_chat.complete(
-            model="zai-org/GLM-5.2",
-            messages=[
-                {
-                    "role": "user",
-                    "content": "What is 3 + 6?",
-                },
-            ],
-            max_tokens=200,
-            stream=False,
-            tools=[
-                {
-                    "type": "math:calculator",
-                },
-            ],
         )
 
         # Handle response
@@ -277,7 +200,8 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.chat.complete(
+    res = friendli.serverless.chat.complete(
+        model="zai-org/GLM-5.2",
         messages=[
             {
                 "role": "system",
@@ -288,8 +212,6 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        model="(adapter-route)",
-        max_tokens=200,
     )
 
     # Handle response
@@ -441,17 +363,9 @@ with SyncFriendli(
 * [complete](docs/sdks/serverlesscompletions/README.md#complete) - Completions
 * [stream](docs/sdks/serverlesscompletions/README.md#stream) - Stream completions
 
-### [Serverless.Knowledge](docs/sdks/knowledge/README.md)
-
-* [retrieve](docs/sdks/knowledge/README.md#retrieve) - Retrieve contexts from chosen knowledge base
-
 ### [Serverless.Messages](docs/sdks/serverlessmessages/README.md)
 
 * [messages](docs/sdks/serverlessmessages/README.md#messages) - Messages
-
-### [Serverless.Model](docs/sdks/model/README.md)
-
-* [list](docs/sdks/model/README.md#list) - Retrieve serverless models
 
 ### [Serverless.Token](docs/sdks/serverlesstoken/README.md)
 
@@ -486,8 +400,8 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dedicated.chat.stream(
-        model="(endpoint-id)",
+    res = friendli.serverless.chat.stream(
+        model="zai-org/GLM-5.2",
         messages=[
             {
                 "role": "system",
@@ -498,7 +412,6 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        max_tokens=200,
     )
 
     with res as event_stream:
@@ -530,12 +443,12 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.audio.transcribe(
+    res = friendli.serverless.audio.transcribe(
+        model="openai/whisper-large-v3",
         file={
             "file_name": "example.file",
             "content": open("example.file", "rb"),
         },
-        model="(adapter-route)",
     )
 
     # Handle response
@@ -558,7 +471,8 @@ from friendli.utils import BackoffStrategy, RetryConfig
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.chat.complete(
+    res = friendli.serverless.chat.complete(
+        model="zai-org/GLM-5.2",
         messages=[
             {
                 "role": "system",
@@ -569,8 +483,6 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        model="(adapter-route)",
-        max_tokens=200,
         retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     )
 
@@ -589,7 +501,8 @@ with SyncFriendli(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.container.chat.complete(
+    res = friendli.serverless.chat.complete(
+        model="zai-org/GLM-5.2",
         messages=[
             {
                 "role": "system",
@@ -600,8 +513,6 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        model="(adapter-route)",
-        max_tokens=200,
     )
 
     # Handle response
@@ -636,14 +547,13 @@ with SyncFriendli(
 ) as friendli:
     res = None
     try:
-        res = friendli.container.messages.messages(
+        res = friendli.serverless.messages.messages(
             messages=[
                 {
                     "role": "user",
                     "content": "Hello, summarize what you can do in one sentence.",
                 },
             ],
-            max_tokens=128,
             model="zai-org/GLM-5.2",
             additional_properties={},
         )
@@ -682,8 +592,8 @@ with SyncFriendli(
 
 
 **Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 73 methods.*
-* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 3 of 73 methods.*
+* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 71 methods.*
+* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 3 of 71 methods.*
 * [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -706,8 +616,8 @@ with SyncFriendli(
     server_url="https://api.friendli.ai",
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.dedicated.chat.complete(
-        model="(endpoint-id)",
+    res = friendli.serverless.chat.complete(
+        model="zai-org/GLM-5.2",
         messages=[
             {
                 "role": "system",
@@ -718,7 +628,6 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        max_tokens=200,
     )
 
     # Handle response
@@ -748,7 +657,6 @@ with SyncFriendli(
             },
         ],
         model="(adapter-route)",
-        max_tokens=200,
         server_url="http://localhost:8000",
     )
 

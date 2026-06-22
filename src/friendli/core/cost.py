@@ -21,16 +21,16 @@ class SyncCost(BaseCost, SyncSDK):
         *,
         start_time: datetime,
         end_time: datetime,
-        bucket_width: OptionalNullable[models.CostBucketWidth] = UNSET,
+        bucket_width: OptionalNullable[models.SyncCostBucketWidth] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         page: OptionalNullable[str] = UNSET,
-        group_by: OptionalNullable[models.CostGroupBy] = UNSET,
+        group_by: OptionalNullable[models.SyncCostGroupBy] = UNSET,
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CostResponse:
+    ) -> models.SyncCostResponse:
         """Get cost details for the team.
 
         :param start_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-01T00:00:00Z). Must be no earlier than one year ago.
@@ -103,7 +103,7 @@ class SyncCost(BaseCost, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.CostResponse, http_res)
+            return unmarshal_json_response(models.SyncCostResponse, http_res)
         if utils.match_response(http_res, ["422", "429", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -119,16 +119,16 @@ class AsyncCost(BaseCost, AsyncSDK):
         *,
         start_time: datetime,
         end_time: datetime,
-        bucket_width: OptionalNullable[models.CostBucketWidth] = UNSET,
+        bucket_width: OptionalNullable[models.AsyncCostBucketWidth] = UNSET,
         limit: OptionalNullable[int] = UNSET,
         page: OptionalNullable[str] = UNSET,
-        group_by: OptionalNullable[models.CostGroupBy] = UNSET,
+        group_by: OptionalNullable[models.AsyncCostGroupBy] = UNSET,
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CostResponse:
+    ) -> models.AsyncCostResponse:
         """Get cost details for the team.
 
         :param start_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-01T00:00:00Z). Must be no earlier than one year ago.
@@ -201,7 +201,7 @@ class AsyncCost(BaseCost, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.CostResponse, http_res)
+            return unmarshal_json_response(models.AsyncCostResponse, http_res)
         if utils.match_response(http_res, ["422", "429", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)

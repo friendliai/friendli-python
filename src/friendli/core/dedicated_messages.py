@@ -27,8 +27,8 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
         max_tokens: OptionalNullable[int] = UNSET,
         system: OptionalNullable[
             Union[
-                models.DedicatedMessagesBodySystem,
-                models.DedicatedMessagesBodySystemTypedDict,
+                models.SyncDedicatedMessagesBodySystem,
+                models.SyncDedicatedMessagesBodySystemTypedDict,
             ]
         ] = UNSET,
         stream: OptionalNullable[bool] = UNSET,
@@ -58,8 +58,8 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
         metadata: OptionalNullable[Mapping[str, Any]] = UNSET,
         service_tier: OptionalNullable[
             Union[
-                models.DedicatedMessagesBodyServiceTier,
-                models.DedicatedMessagesBodyServiceTierTypedDict,
+                models.SyncDedicatedMessagesBodyServiceTier,
+                models.SyncDedicatedMessagesBodyServiceTierTypedDict,
             ]
         ] = UNSET,
         additional_properties: Optional[Mapping[str, Any]] = None,
@@ -67,7 +67,7 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedMessagesSuccess:
+    ) -> models.SyncDedicatedMessagesSuccess:
         """Messages
 
         Generate responses using Anthropic Messages-style payloads.
@@ -106,16 +106,16 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedMessagesRequest(
+        request = models.SyncDedicatedMessagesRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_messages_body=models.DedicatedMessagesBody(
+            dedicated_messages_body=models.SyncDedicatedMessagesBody(
                 messages=utils.get_pydantic_model(
                     messages, List[models.MessagesInputMessage]
                 ),
                 max_tokens=max_tokens,
                 model=model,
                 system=utils.get_pydantic_model(
-                    system, OptionalNullable[models.DedicatedMessagesBodySystem]
+                    system, OptionalNullable[models.SyncDedicatedMessagesBodySystem]
                 ),
                 stream=stream,
                 temperature=temperature,
@@ -149,7 +149,7 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
                 metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, Any]]),
                 service_tier=utils.unmarshal(
                     service_tier,
-                    OptionalNullable[models.DedicatedMessagesBodyServiceTier],
+                    OptionalNullable[models.SyncDedicatedMessagesBodyServiceTier],
                 ),
                 **utils.unmarshal(additional_properties, Optional[Dict[str, Any]])
                 or {},
@@ -173,7 +173,7 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedMessagesBody,
+                models.SyncDedicatedMessagesBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -204,7 +204,9 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
         )
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedMessagesSuccess, http_res)
+            return unmarshal_json_response(
+                models.SyncDedicatedMessagesSuccess, http_res
+            )
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 models.MessagesErrorResponseData, http_res
@@ -232,8 +234,8 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
         max_tokens: OptionalNullable[int] = UNSET,
         system: OptionalNullable[
             Union[
-                models.DedicatedMessagesBodySystem,
-                models.DedicatedMessagesBodySystemTypedDict,
+                models.AsyncDedicatedMessagesBodySystem,
+                models.AsyncDedicatedMessagesBodySystemTypedDict,
             ]
         ] = UNSET,
         stream: OptionalNullable[bool] = UNSET,
@@ -263,8 +265,8 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
         metadata: OptionalNullable[Mapping[str, Any]] = UNSET,
         service_tier: OptionalNullable[
             Union[
-                models.DedicatedMessagesBodyServiceTier,
-                models.DedicatedMessagesBodyServiceTierTypedDict,
+                models.AsyncDedicatedMessagesBodyServiceTier,
+                models.AsyncDedicatedMessagesBodyServiceTierTypedDict,
             ]
         ] = UNSET,
         additional_properties: Optional[Mapping[str, Any]] = None,
@@ -272,7 +274,7 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedMessagesSuccess:
+    ) -> models.AsyncDedicatedMessagesSuccess:
         """Messages
 
         Generate responses using Anthropic Messages-style payloads.
@@ -311,16 +313,16 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedMessagesRequest(
+        request = models.AsyncDedicatedMessagesRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_messages_body=models.DedicatedMessagesBody(
+            dedicated_messages_body=models.AsyncDedicatedMessagesBody(
                 messages=utils.get_pydantic_model(
                     messages, List[models.MessagesInputMessage]
                 ),
                 max_tokens=max_tokens,
                 model=model,
                 system=utils.get_pydantic_model(
-                    system, OptionalNullable[models.DedicatedMessagesBodySystem]
+                    system, OptionalNullable[models.AsyncDedicatedMessagesBodySystem]
                 ),
                 stream=stream,
                 temperature=temperature,
@@ -354,7 +356,7 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
                 metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, Any]]),
                 service_tier=utils.unmarshal(
                     service_tier,
-                    OptionalNullable[models.DedicatedMessagesBodyServiceTier],
+                    OptionalNullable[models.AsyncDedicatedMessagesBodyServiceTier],
                 ),
                 **utils.unmarshal(additional_properties, Optional[Dict[str, Any]])
                 or {},
@@ -378,7 +380,7 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedMessagesBody,
+                models.AsyncDedicatedMessagesBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -409,7 +411,9 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
         )
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.DedicatedMessagesSuccess, http_res)
+            return unmarshal_json_response(
+                models.AsyncDedicatedMessagesSuccess, http_res
+            )
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 models.MessagesErrorResponseData, http_res

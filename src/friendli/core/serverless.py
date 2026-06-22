@@ -2,8 +2,6 @@
 
 from .basesdk import BaseSDK, SyncSDK, AsyncSDK
 from .sdkconfiguration import SDKConfiguration
-from friendli.core.knowledge import SyncKnowledge, AsyncKnowledge
-from friendli.core.model import SyncModel, AsyncModel
 from friendli.core.serverless_audio import SyncServerlessAudio, AsyncServerlessAudio
 from friendli.core.serverless_chat import SyncServerlessChat, AsyncServerlessChat
 from friendli.core.serverless_chatrender import (
@@ -43,8 +41,6 @@ class SyncServerless(BaseServerless, SyncSDK):
     audio: SyncServerlessAudio
     token: SyncServerlessToken
     tool_assisted_chat: SyncToolAssistedChat
-    knowledge: SyncKnowledge
-    model: SyncModel
 
     def _init_sdks(self):
         self.chat = SyncServerlessChat(
@@ -68,10 +64,6 @@ class SyncServerless(BaseServerless, SyncSDK):
         self.tool_assisted_chat = SyncToolAssistedChat(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.knowledge = SyncKnowledge(
-            self.sdk_configuration, parent_ref=self.parent_ref
-        )
-        self.model = SyncModel(self.sdk_configuration, parent_ref=self.parent_ref)
 
 
 class AsyncServerless(BaseServerless, AsyncSDK):
@@ -82,8 +74,6 @@ class AsyncServerless(BaseServerless, AsyncSDK):
     audio: AsyncServerlessAudio
     token: AsyncServerlessToken
     tool_assisted_chat: AsyncToolAssistedChat
-    knowledge: AsyncKnowledge
-    model: AsyncModel
 
     def _init_sdks(self):
         self.chat = AsyncServerlessChat(
@@ -107,7 +97,3 @@ class AsyncServerless(BaseServerless, AsyncSDK):
         self.tool_assisted_chat = AsyncToolAssistedChat(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.knowledge = AsyncKnowledge(
-            self.sdk_configuration, parent_ref=self.parent_ref
-        )
-        self.model = AsyncModel(self.sdk_configuration, parent_ref=self.parent_ref)

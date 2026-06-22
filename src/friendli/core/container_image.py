@@ -24,7 +24,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
         guidance_scale: Optional[float] = 0,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
-            models.ContainerImageGenerationBodyResponseFormat
+            models.SyncContainerImageGenerationBodyResponseFormat
         ] = UNSET,
         control_images: OptionalNullable[
             Union[Iterable[models.ImageInput], Iterable[models.ImageInputTypedDict]]
@@ -34,7 +34,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerImageGenerateSuccess:
+    ) -> models.SyncContainerImageGenerateSuccess:
         """Image generations
 
         Given a description, the model generates image.
@@ -60,7 +60,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_IMAGES_GENERATE_OP_SERVERS[0]
-        request = models.ContainerImageGenerationBody(
+        request = models.SyncContainerImageGenerationBody(
             model=model,
             prompt=prompt,
             num_inference_steps=num_inference_steps,
@@ -88,7 +88,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerImageGenerationBody
+                request, False, False, "json", models.SyncContainerImageGenerationBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -119,7 +119,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerImageGenerateSuccess, http_res
+                models.SyncContainerImageGenerateSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -133,8 +133,8 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
         self,
         *,
         image: Union[
-            models.ContainerImageEditBodyImage,
-            models.ContainerImageEditBodyImageTypedDict,
+            models.SyncContainerImageEditBodyImage,
+            models.SyncContainerImageEditBodyImageTypedDict,
         ],
         prompt: str,
         model: OptionalNullable[str] = UNSET,
@@ -142,13 +142,13 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
         guidance_scale: Optional[float] = 0,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
-            models.ContainerImageEditBodyResponseFormat
+            models.SyncContainerImageEditBodyResponseFormat
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerImageGenerateSuccess:
+    ) -> models.SyncContainerImageGenerateSuccess:
         """Image edits
 
         Given an image and a description, the model edits the image.
@@ -173,8 +173,10 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_IMAGES_EDIT_OP_SERVERS[0]
-        request = models.ContainerImageEditBody(
-            image=utils.get_pydantic_model(image, models.ContainerImageEditBodyImage),
+        request = models.SyncContainerImageEditBody(
+            image=utils.get_pydantic_model(
+                image, models.SyncContainerImageEditBodyImage
+            ),
             prompt=prompt,
             model=model,
             num_inference_steps=num_inference_steps,
@@ -196,7 +198,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerImageEditBody
+                request, False, False, "json", models.SyncContainerImageEditBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -227,7 +229,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerImageGenerateSuccess, http_res
+                models.SyncContainerImageGenerateSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -248,7 +250,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
         guidance_scale: Optional[float] = 0,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
-            models.ContainerImageGenerationBodyResponseFormat
+            models.AsyncContainerImageGenerationBodyResponseFormat
         ] = UNSET,
         control_images: OptionalNullable[
             Union[Iterable[models.ImageInput], Iterable[models.ImageInputTypedDict]]
@@ -258,7 +260,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerImageGenerateSuccess:
+    ) -> models.AsyncContainerImageGenerateSuccess:
         """Image generations
 
         Given a description, the model generates image.
@@ -284,7 +286,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_IMAGES_GENERATE_OP_SERVERS[0]
-        request = models.ContainerImageGenerationBody(
+        request = models.AsyncContainerImageGenerationBody(
             model=model,
             prompt=prompt,
             num_inference_steps=num_inference_steps,
@@ -312,7 +314,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerImageGenerationBody
+                request, False, False, "json", models.AsyncContainerImageGenerationBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -343,7 +345,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerImageGenerateSuccess, http_res
+                models.AsyncContainerImageGenerateSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -357,8 +359,8 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
         self,
         *,
         image: Union[
-            models.ContainerImageEditBodyImage,
-            models.ContainerImageEditBodyImageTypedDict,
+            models.AsyncContainerImageEditBodyImage,
+            models.AsyncContainerImageEditBodyImageTypedDict,
         ],
         prompt: str,
         model: OptionalNullable[str] = UNSET,
@@ -366,13 +368,13 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
         guidance_scale: Optional[float] = 0,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
-            models.ContainerImageEditBodyResponseFormat
+            models.AsyncContainerImageEditBodyResponseFormat
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerImageGenerateSuccess:
+    ) -> models.AsyncContainerImageGenerateSuccess:
         """Image edits
 
         Given an image and a description, the model edits the image.
@@ -397,8 +399,10 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_IMAGES_EDIT_OP_SERVERS[0]
-        request = models.ContainerImageEditBody(
-            image=utils.get_pydantic_model(image, models.ContainerImageEditBodyImage),
+        request = models.AsyncContainerImageEditBody(
+            image=utils.get_pydantic_model(
+                image, models.AsyncContainerImageEditBodyImage
+            ),
             prompt=prompt,
             model=model,
             num_inference_steps=num_inference_steps,
@@ -420,7 +424,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerImageEditBody
+                request, False, False, "json", models.AsyncContainerImageEditBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -451,7 +455,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerImageGenerateSuccess, http_res
+                models.AsyncContainerImageGenerateSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

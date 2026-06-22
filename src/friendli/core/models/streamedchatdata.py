@@ -23,12 +23,12 @@ class StreamedChatDataTypedDict(TypedDict):
     "A unique ID of the chat completion."
     choices: List[StreamedChatChoiceTypedDict]
     created: int
-    "The Unix timestamp (in seconds) for when the token sampled."
+    "The Unix timestamp (in seconds) for when the token is sampled."
     usage: NotRequired[Nullable[ChatUsageTypedDict]]
     object: Literal["chat.completion.chunk"]
     "The object type, which is always set to `chat.completion.chunk`."
     model: NotRequired[Nullable[str]]
-    "The model to generate the completion. For dedicated endpoints, it returns the endpoint id."
+    "The model to generate the completion. For dedicated endpoints, it returns the endpoint ID."
 
 
 class StreamedChatData(BaseModel):
@@ -36,7 +36,7 @@ class StreamedChatData(BaseModel):
     "A unique ID of the chat completion."
     choices: List[StreamedChatChoice]
     created: int
-    "The Unix timestamp (in seconds) for when the token sampled."
+    "The Unix timestamp (in seconds) for when the token is sampled."
     usage: OptionalNullable[ChatUsage] = UNSET
     OBJECT: Annotated[
         Annotated[
@@ -47,7 +47,7 @@ class StreamedChatData(BaseModel):
     ] = "chat.completion.chunk"
     "The object type, which is always set to `chat.completion.chunk`."
     model: OptionalNullable[str] = UNSET
-    "The model to generate the completion. For dedicated endpoints, it returns the endpoint id."
+    "The model to generate the completion. For dedicated endpoints, it returns the endpoint ID."
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

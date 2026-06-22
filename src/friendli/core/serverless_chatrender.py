@@ -29,7 +29,7 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessChatRenderSuccess:
+    ) -> models.SyncServerlessChatRenderSuccess:
         """Chat render
 
         Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.
@@ -55,9 +55,9 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessChatRenderRequest(
+        request = models.SyncServerlessChatRenderRequest(
             x_friendli_team=x_friendli_team,
-            serverless_chat_render_body=models.ServerlessChatRenderBody(
+            serverless_chat_render_body=models.SyncServerlessChatRenderBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -86,7 +86,7 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessChatRenderBody,
+                models.SyncServerlessChatRenderBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -116,7 +116,9 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ServerlessChatRenderSuccess, http_res)
+            return unmarshal_json_response(
+                models.SyncServerlessChatRenderSuccess, http_res
+            )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -141,7 +143,7 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ServerlessChatRenderSuccess:
+    ) -> models.AsyncServerlessChatRenderSuccess:
         """Chat render
 
         Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.
@@ -167,9 +169,9 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessChatRenderRequest(
+        request = models.AsyncServerlessChatRenderRequest(
             x_friendli_team=x_friendli_team,
-            serverless_chat_render_body=models.ServerlessChatRenderBody(
+            serverless_chat_render_body=models.AsyncServerlessChatRenderBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -198,7 +200,7 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.ServerlessChatRenderBody,
+                models.AsyncServerlessChatRenderBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -228,7 +230,9 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ServerlessChatRenderSuccess, http_res)
+            return unmarshal_json_response(
+                models.AsyncServerlessChatRenderSuccess, http_res
+            )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)

@@ -28,7 +28,7 @@ class ContainerChatCompleteSuccessTypedDict(TypedDict):
     object: Literal["chat.completion"]
     "The object type, which is always set to `chat.completion`."
     model: NotRequired[Nullable[str]]
-    "The model to generate the completion. For dedicated endpoints, it returns the endpoint id."
+    "The model to generate the completion. For dedicated endpoints, it returns the endpoint ID."
 
 
 class ContainerChatCompleteSuccess(BaseModel):
@@ -47,7 +47,7 @@ class ContainerChatCompleteSuccess(BaseModel):
     ] = "chat.completion"
     "The object type, which is always set to `chat.completion`."
     model: OptionalNullable[str] = UNSET
-    "The model to generate the completion. For dedicated endpoints, it returns the endpoint id."
+    "The model to generate the completion. For dedicated endpoints, it returns the endpoint ID."
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

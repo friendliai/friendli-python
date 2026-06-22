@@ -20,14 +20,14 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
         *,
         model: str,
         file: Union[
-            models.DedicatedAudioTranscriptionBodyFile,
-            models.DedicatedAudioTranscriptionBodyFileTypedDict,
+            models.SyncDedicatedAudioTranscriptionBodyFile,
+            models.SyncDedicatedAudioTranscriptionBodyFileTypedDict,
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         chunking_strategy: OptionalNullable[
             Union[
-                models.DedicatedAudioTranscriptionBodyChunkingStrategy,
-                models.DedicatedAudioTranscriptionBodyChunkingStrategyTypedDict,
+                models.SyncDedicatedAudioTranscriptionBodyChunkingStrategy,
+                models.SyncDedicatedAudioTranscriptionBodyChunkingStrategyTypedDict,
             ]
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
@@ -37,7 +37,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerAudioTranscriptionSuccess:
+    ) -> models.SyncContainerAudioTranscriptionSuccess:
         """Audio transcriptions
 
         Given an audio file, the model transcribes it into text.
@@ -62,17 +62,17 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedAudioTranscriptionsRequest(
+        request = models.SyncDedicatedAudioTranscriptionsRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_audio_transcription_body=models.DedicatedAudioTranscriptionBody(
+            dedicated_audio_transcription_body=models.SyncDedicatedAudioTranscriptionBody(
                 model=model,
                 file=utils.get_pydantic_model(
-                    file, models.DedicatedAudioTranscriptionBodyFile
+                    file, models.SyncDedicatedAudioTranscriptionBodyFile
                 ),
                 chunking_strategy=utils.get_pydantic_model(
                     chunking_strategy,
                     OptionalNullable[
-                        models.DedicatedAudioTranscriptionBodyChunkingStrategy
+                        models.SyncDedicatedAudioTranscriptionBodyChunkingStrategy
                     ],
                 ),
                 language=language,
@@ -98,7 +98,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
                 False,
                 False,
                 "multipart",
-                models.DedicatedAudioTranscriptionBody,
+                models.SyncDedicatedAudioTranscriptionBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -129,7 +129,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerAudioTranscriptionSuccess, http_res
+                models.SyncContainerAudioTranscriptionSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -144,14 +144,14 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
         *,
         model: str,
         file: Union[
-            models.DedicatedAudioTranscriptionStreamBodyFile,
-            models.DedicatedAudioTranscriptionStreamBodyFileTypedDict,
+            models.SyncDedicatedAudioTranscriptionStreamBodyFile,
+            models.SyncDedicatedAudioTranscriptionStreamBodyFileTypedDict,
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         chunking_strategy: OptionalNullable[
             Union[
-                models.DedicatedAudioTranscriptionStreamBodyChunkingStrategy,
-                models.DedicatedAudioTranscriptionStreamBodyChunkingStrategyTypedDict,
+                models.SyncDedicatedAudioTranscriptionStreamBodyChunkingStrategy,
+                models.SyncDedicatedAudioTranscriptionStreamBodyChunkingStrategyTypedDict,
             ]
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
@@ -161,7 +161,9 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.ContainerAudioTranscriptionStreamSuccess]:
+    ) -> eventstreaming.EventStream[
+        models.SyncContainerAudioTranscriptionStreamSuccess
+    ]:
         """Stream audio transcriptions
 
         Given an audio file, the model transcribes it into text.
@@ -186,17 +188,17 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedAudioTranscriptionsStreamRequest(
+        request = models.SyncDedicatedAudioTranscriptionsStreamRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_audio_transcription_stream_body=models.DedicatedAudioTranscriptionStreamBody(
+            dedicated_audio_transcription_stream_body=models.SyncDedicatedAudioTranscriptionStreamBody(
                 model=model,
                 file=utils.get_pydantic_model(
-                    file, models.DedicatedAudioTranscriptionStreamBodyFile
+                    file, models.SyncDedicatedAudioTranscriptionStreamBodyFile
                 ),
                 chunking_strategy=utils.get_pydantic_model(
                     chunking_strategy,
                     OptionalNullable[
-                        models.DedicatedAudioTranscriptionStreamBodyChunkingStrategy
+                        models.SyncDedicatedAudioTranscriptionStreamBodyChunkingStrategy
                     ],
                 ),
                 language=language,
@@ -222,7 +224,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
                 False,
                 False,
                 "multipart",
-                models.DedicatedAudioTranscriptionStreamBody,
+                models.SyncDedicatedAudioTranscriptionStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -256,7 +258,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerAudioTranscriptionStreamSuccess
+                    raw, models.SyncContainerAudioTranscriptionStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -277,14 +279,14 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
         *,
         model: str,
         file: Union[
-            models.DedicatedAudioTranscriptionBodyFile,
-            models.DedicatedAudioTranscriptionBodyFileTypedDict,
+            models.AsyncDedicatedAudioTranscriptionBodyFile,
+            models.AsyncDedicatedAudioTranscriptionBodyFileTypedDict,
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         chunking_strategy: OptionalNullable[
             Union[
-                models.DedicatedAudioTranscriptionBodyChunkingStrategy,
-                models.DedicatedAudioTranscriptionBodyChunkingStrategyTypedDict,
+                models.AsyncDedicatedAudioTranscriptionBodyChunkingStrategy,
+                models.AsyncDedicatedAudioTranscriptionBodyChunkingStrategyTypedDict,
             ]
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
@@ -294,7 +296,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerAudioTranscriptionSuccess:
+    ) -> models.AsyncContainerAudioTranscriptionSuccess:
         """Audio transcriptions
 
         Given an audio file, the model transcribes it into text.
@@ -319,17 +321,17 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedAudioTranscriptionsRequest(
+        request = models.AsyncDedicatedAudioTranscriptionsRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_audio_transcription_body=models.DedicatedAudioTranscriptionBody(
+            dedicated_audio_transcription_body=models.AsyncDedicatedAudioTranscriptionBody(
                 model=model,
                 file=utils.get_pydantic_model(
-                    file, models.DedicatedAudioTranscriptionBodyFile
+                    file, models.AsyncDedicatedAudioTranscriptionBodyFile
                 ),
                 chunking_strategy=utils.get_pydantic_model(
                     chunking_strategy,
                     OptionalNullable[
-                        models.DedicatedAudioTranscriptionBodyChunkingStrategy
+                        models.AsyncDedicatedAudioTranscriptionBodyChunkingStrategy
                     ],
                 ),
                 language=language,
@@ -355,7 +357,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
                 False,
                 False,
                 "multipart",
-                models.DedicatedAudioTranscriptionBody,
+                models.AsyncDedicatedAudioTranscriptionBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -386,7 +388,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerAudioTranscriptionSuccess, http_res
+                models.AsyncContainerAudioTranscriptionSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -401,14 +403,14 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
         *,
         model: str,
         file: Union[
-            models.DedicatedAudioTranscriptionStreamBodyFile,
-            models.DedicatedAudioTranscriptionStreamBodyFileTypedDict,
+            models.AsyncDedicatedAudioTranscriptionStreamBodyFile,
+            models.AsyncDedicatedAudioTranscriptionStreamBodyFileTypedDict,
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         chunking_strategy: OptionalNullable[
             Union[
-                models.DedicatedAudioTranscriptionStreamBodyChunkingStrategy,
-                models.DedicatedAudioTranscriptionStreamBodyChunkingStrategyTypedDict,
+                models.AsyncDedicatedAudioTranscriptionStreamBodyChunkingStrategy,
+                models.AsyncDedicatedAudioTranscriptionStreamBodyChunkingStrategyTypedDict,
             ]
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
@@ -419,7 +421,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStreamAsync[
-        models.ContainerAudioTranscriptionStreamSuccess
+        models.AsyncContainerAudioTranscriptionStreamSuccess
     ]:
         """Stream audio transcriptions
 
@@ -445,17 +447,17 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedAudioTranscriptionsStreamRequest(
+        request = models.AsyncDedicatedAudioTranscriptionsStreamRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_audio_transcription_stream_body=models.DedicatedAudioTranscriptionStreamBody(
+            dedicated_audio_transcription_stream_body=models.AsyncDedicatedAudioTranscriptionStreamBody(
                 model=model,
                 file=utils.get_pydantic_model(
-                    file, models.DedicatedAudioTranscriptionStreamBodyFile
+                    file, models.AsyncDedicatedAudioTranscriptionStreamBodyFile
                 ),
                 chunking_strategy=utils.get_pydantic_model(
                     chunking_strategy,
                     OptionalNullable[
-                        models.DedicatedAudioTranscriptionStreamBodyChunkingStrategy
+                        models.AsyncDedicatedAudioTranscriptionStreamBodyChunkingStrategy
                     ],
                 ),
                 language=language,
@@ -481,7 +483,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
                 False,
                 False,
                 "multipart",
-                models.DedicatedAudioTranscriptionStreamBody,
+                models.AsyncDedicatedAudioTranscriptionStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -515,7 +517,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerAudioTranscriptionStreamSuccess
+                    raw, models.AsyncContainerAudioTranscriptionStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
