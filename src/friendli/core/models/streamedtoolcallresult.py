@@ -22,7 +22,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class StreamedToolCallResultTypedDict(TypedDict):
     index: int
-    "The index of tool call being generated."
+    "The index of the tool call being generated."
     function: StreamedFunctionResultTypedDict
     type: Literal["function"]
     "The type of the tool."
@@ -32,7 +32,7 @@ class StreamedToolCallResultTypedDict(TypedDict):
 
 class StreamedToolCallResult(BaseModel):
     index: int
-    "The index of tool call being generated."
+    "The index of the tool call being generated."
     function: StreamedFunctionResult
     TYPE: Annotated[
         Annotated[Literal["function"], AfterValidator(validate_const("function"))],

@@ -25,7 +25,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
         guidance_scale: OptionalNullable[float] = UNSET,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
-            models.DedicatedImageGenerationBodyResponseFormat
+            models.SyncDedicatedImageGenerationBodyResponseFormat
         ] = UNSET,
         control_images: OptionalNullable[
             Union[Iterable[models.ImageInput], Iterable[models.ImageInputTypedDict]]
@@ -35,7 +35,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedImageGenerateSuccess:
+    ) -> models.SyncDedicatedImageGenerateSuccess:
         """Image generations
 
         Given a description, the model generates image(s).
@@ -62,9 +62,9 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedImagesGenerateRequest(
+        request = models.SyncDedicatedImagesGenerateRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_image_generation_body=models.DedicatedImageGenerationBody(
+            dedicated_image_generation_body=models.SyncDedicatedImageGenerationBody(
                 model=model,
                 prompt=prompt,
                 num_inference_steps=num_inference_steps,
@@ -97,7 +97,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedImageGenerationBody,
+                models.SyncDedicatedImageGenerationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -128,7 +128,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DedicatedImageGenerateSuccess, http_res
+                models.SyncDedicatedImageGenerateSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -142,8 +142,8 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
         self,
         *,
         image: Union[
-            models.DedicatedImageEditBodyImage,
-            models.DedicatedImageEditBodyImageTypedDict,
+            models.SyncDedicatedImageEditBodyImage,
+            models.SyncDedicatedImageEditBodyImageTypedDict,
         ],
         prompt: str,
         model: str,
@@ -152,13 +152,13 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
         guidance_scale: OptionalNullable[float] = UNSET,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
-            models.DedicatedImageEditBodyResponseFormat
+            models.SyncDedicatedImageEditBodyResponseFormat
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedImageGenerateSuccess:
+    ) -> models.SyncDedicatedImageGenerateSuccess:
         """Image edits
 
         Given an image and a description, the model edits the image.
@@ -184,11 +184,11 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedImagesEditRequest(
+        request = models.SyncDedicatedImagesEditRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_image_edit_body=models.DedicatedImageEditBody(
+            dedicated_image_edit_body=models.SyncDedicatedImageEditBody(
                 image=utils.get_pydantic_model(
-                    image, models.DedicatedImageEditBodyImage
+                    image, models.SyncDedicatedImageEditBodyImage
                 ),
                 prompt=prompt,
                 model=model,
@@ -216,7 +216,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedImageEditBody,
+                models.SyncDedicatedImageEditBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -247,7 +247,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DedicatedImageGenerateSuccess, http_res
+                models.SyncDedicatedImageGenerateSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -269,7 +269,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
         guidance_scale: OptionalNullable[float] = UNSET,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
-            models.DedicatedImageGenerationBodyResponseFormat
+            models.AsyncDedicatedImageGenerationBodyResponseFormat
         ] = UNSET,
         control_images: OptionalNullable[
             Union[Iterable[models.ImageInput], Iterable[models.ImageInputTypedDict]]
@@ -279,7 +279,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedImageGenerateSuccess:
+    ) -> models.AsyncDedicatedImageGenerateSuccess:
         """Image generations
 
         Given a description, the model generates image(s).
@@ -306,9 +306,9 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedImagesGenerateRequest(
+        request = models.AsyncDedicatedImagesGenerateRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_image_generation_body=models.DedicatedImageGenerationBody(
+            dedicated_image_generation_body=models.AsyncDedicatedImageGenerationBody(
                 model=model,
                 prompt=prompt,
                 num_inference_steps=num_inference_steps,
@@ -341,7 +341,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedImageGenerationBody,
+                models.AsyncDedicatedImageGenerationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -372,7 +372,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DedicatedImageGenerateSuccess, http_res
+                models.AsyncDedicatedImageGenerateSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -386,8 +386,8 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
         self,
         *,
         image: Union[
-            models.DedicatedImageEditBodyImage,
-            models.DedicatedImageEditBodyImageTypedDict,
+            models.AsyncDedicatedImageEditBodyImage,
+            models.AsyncDedicatedImageEditBodyImageTypedDict,
         ],
         prompt: str,
         model: str,
@@ -396,13 +396,13 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
         guidance_scale: OptionalNullable[float] = UNSET,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
-            models.DedicatedImageEditBodyResponseFormat
+            models.AsyncDedicatedImageEditBodyResponseFormat
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DedicatedImageGenerateSuccess:
+    ) -> models.AsyncDedicatedImageGenerateSuccess:
         """Image edits
 
         Given an image and a description, the model edits the image.
@@ -428,11 +428,11 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.DedicatedImagesEditRequest(
+        request = models.AsyncDedicatedImagesEditRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_image_edit_body=models.DedicatedImageEditBody(
+            dedicated_image_edit_body=models.AsyncDedicatedImageEditBody(
                 image=utils.get_pydantic_model(
-                    image, models.DedicatedImageEditBodyImage
+                    image, models.AsyncDedicatedImageEditBodyImage
                 ),
                 prompt=prompt,
                 model=model,
@@ -460,7 +460,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.DedicatedImageEditBody,
+                models.AsyncDedicatedImageEditBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -491,7 +491,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.DedicatedImageGenerateSuccess, http_res
+                models.AsyncDedicatedImageGenerateSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

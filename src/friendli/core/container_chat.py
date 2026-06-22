@@ -32,13 +32,13 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.ContainerChatCompletionBodyReasoningEffort
+            models.SyncContainerChatCompletionBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.ContainerChatCompletionBodySeed,
-                models.ContainerChatCompletionBodySeedTypedDict,
+                models.SyncContainerChatCompletionBodySeed,
+                models.SyncContainerChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -51,8 +51,8 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ContainerChatCompletionBodyToolChoice,
-                models.ContainerChatCompletionBodyToolChoiceTypedDict,
+                models.SyncContainerChatCompletionBodyToolChoice,
+                models.SyncContainerChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -71,7 +71,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerChatCompleteSuccess:
+    ) -> models.SyncContainerChatCompleteSuccess:
         """Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -146,7 +146,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_CHAT_COMPLETE_OP_SERVERS[0]
-        request = models.ContainerChatCompletionBody(
+        request = models.SyncContainerChatCompletionBody(
             model=model,
             messages=utils.get_pydantic_model(messages, List[models.Message]),
             chat_template_kwargs=utils.unmarshal(
@@ -165,7 +165,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             reasoning_effort=reasoning_effort,
             reasoning_budget=reasoning_budget,
             seed=utils.unmarshal(
-                seed, OptionalNullable[models.ContainerChatCompletionBodySeed]
+                seed, OptionalNullable[models.SyncContainerChatCompletionBodySeed]
             ),
             stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
             stream=stream,
@@ -176,7 +176,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             include_reasoning=include_reasoning,
             temperature=temperature,
             tool_choice=utils.get_pydantic_model(
-                tool_choice, Optional[models.ContainerChatCompletionBodyToolChoice]
+                tool_choice, Optional[models.SyncContainerChatCompletionBodyToolChoice]
             ),
             top_k=top_k,
             top_logprobs=top_logprobs,
@@ -203,7 +203,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerChatCompletionBody
+                request, False, False, "json", models.SyncContainerChatCompletionBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -234,7 +234,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerChatCompleteSuccess, http_res
+                models.SyncContainerChatCompleteSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -261,13 +261,13 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.ContainerChatCompletionStreamBodyReasoningEffort
+            models.SyncContainerChatCompletionStreamBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.ContainerChatCompletionStreamBodySeed,
-                models.ContainerChatCompletionStreamBodySeedTypedDict,
+                models.SyncContainerChatCompletionStreamBodySeed,
+                models.SyncContainerChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -280,8 +280,8 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ContainerChatCompletionStreamBodyToolChoice,
-                models.ContainerChatCompletionStreamBodyToolChoiceTypedDict,
+                models.SyncContainerChatCompletionStreamBodyToolChoice,
+                models.SyncContainerChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -300,7 +300,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.ContainerChatCompletionStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.SyncContainerChatCompletionStreamSuccess]:
         """Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -375,7 +375,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_CHAT_STREAM_OP_SERVERS[0]
-        request = models.ContainerChatCompletionStreamBody(
+        request = models.SyncContainerChatCompletionStreamBody(
             model=model,
             messages=utils.get_pydantic_model(messages, List[models.Message]),
             chat_template_kwargs=utils.unmarshal(
@@ -394,7 +394,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             reasoning_effort=reasoning_effort,
             reasoning_budget=reasoning_budget,
             seed=utils.unmarshal(
-                seed, OptionalNullable[models.ContainerChatCompletionStreamBodySeed]
+                seed, OptionalNullable[models.SyncContainerChatCompletionStreamBodySeed]
             ),
             stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
             stream=stream,
@@ -406,7 +406,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             temperature=temperature,
             tool_choice=utils.get_pydantic_model(
                 tool_choice,
-                Optional[models.ContainerChatCompletionStreamBodyToolChoice],
+                Optional[models.SyncContainerChatCompletionStreamBodyToolChoice],
             ),
             top_k=top_k,
             top_logprobs=top_logprobs,
@@ -433,7 +433,11 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerChatCompletionStreamBody
+                request,
+                False,
+                False,
+                "json",
+                models.SyncContainerChatCompletionStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -467,7 +471,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerChatCompletionStreamSuccess
+                    raw, models.SyncContainerChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -500,13 +504,13 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.ContainerChatCompletionBodyReasoningEffort
+            models.AsyncContainerChatCompletionBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.ContainerChatCompletionBodySeed,
-                models.ContainerChatCompletionBodySeedTypedDict,
+                models.AsyncContainerChatCompletionBodySeed,
+                models.AsyncContainerChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -519,8 +523,8 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ContainerChatCompletionBodyToolChoice,
-                models.ContainerChatCompletionBodyToolChoiceTypedDict,
+                models.AsyncContainerChatCompletionBodyToolChoice,
+                models.AsyncContainerChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -539,7 +543,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerChatCompleteSuccess:
+    ) -> models.AsyncContainerChatCompleteSuccess:
         """Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -614,7 +618,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_CHAT_COMPLETE_OP_SERVERS[0]
-        request = models.ContainerChatCompletionBody(
+        request = models.AsyncContainerChatCompletionBody(
             model=model,
             messages=utils.get_pydantic_model(messages, List[models.Message]),
             chat_template_kwargs=utils.unmarshal(
@@ -633,7 +637,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             reasoning_effort=reasoning_effort,
             reasoning_budget=reasoning_budget,
             seed=utils.unmarshal(
-                seed, OptionalNullable[models.ContainerChatCompletionBodySeed]
+                seed, OptionalNullable[models.AsyncContainerChatCompletionBodySeed]
             ),
             stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
             stream=stream,
@@ -644,7 +648,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             include_reasoning=include_reasoning,
             temperature=temperature,
             tool_choice=utils.get_pydantic_model(
-                tool_choice, Optional[models.ContainerChatCompletionBodyToolChoice]
+                tool_choice, Optional[models.AsyncContainerChatCompletionBodyToolChoice]
             ),
             top_k=top_k,
             top_logprobs=top_logprobs,
@@ -671,7 +675,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerChatCompletionBody
+                request, False, False, "json", models.AsyncContainerChatCompletionBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -702,7 +706,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerChatCompleteSuccess, http_res
+                models.AsyncContainerChatCompleteSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -729,13 +733,13 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.ContainerChatCompletionStreamBodyReasoningEffort
+            models.AsyncContainerChatCompletionStreamBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.ContainerChatCompletionStreamBodySeed,
-                models.ContainerChatCompletionStreamBodySeedTypedDict,
+                models.AsyncContainerChatCompletionStreamBodySeed,
+                models.AsyncContainerChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -748,8 +752,8 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.ContainerChatCompletionStreamBodyToolChoice,
-                models.ContainerChatCompletionStreamBodyToolChoiceTypedDict,
+                models.AsyncContainerChatCompletionStreamBodyToolChoice,
+                models.AsyncContainerChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -768,7 +772,9 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.ContainerChatCompletionStreamSuccess]:
+    ) -> eventstreaming.EventStreamAsync[
+        models.AsyncContainerChatCompletionStreamSuccess
+    ]:
         """Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -843,7 +849,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             base_url = server_url
         else:
             base_url = models.CONTAINER_CHAT_STREAM_OP_SERVERS[0]
-        request = models.ContainerChatCompletionStreamBody(
+        request = models.AsyncContainerChatCompletionStreamBody(
             model=model,
             messages=utils.get_pydantic_model(messages, List[models.Message]),
             chat_template_kwargs=utils.unmarshal(
@@ -862,7 +868,8 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             reasoning_effort=reasoning_effort,
             reasoning_budget=reasoning_budget,
             seed=utils.unmarshal(
-                seed, OptionalNullable[models.ContainerChatCompletionStreamBodySeed]
+                seed,
+                OptionalNullable[models.AsyncContainerChatCompletionStreamBodySeed],
             ),
             stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
             stream=stream,
@@ -874,7 +881,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             temperature=temperature,
             tool_choice=utils.get_pydantic_model(
                 tool_choice,
-                Optional[models.ContainerChatCompletionStreamBodyToolChoice],
+                Optional[models.AsyncContainerChatCompletionStreamBodyToolChoice],
             ),
             top_k=top_k,
             top_logprobs=top_logprobs,
@@ -901,7 +908,11 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerChatCompletionStreamBody
+                request,
+                False,
+                False,
+                "json",
+                models.AsyncContainerChatCompletionStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -935,7 +946,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerChatCompletionStreamSuccess
+                    raw, models.AsyncContainerChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
