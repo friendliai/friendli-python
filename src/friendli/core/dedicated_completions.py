@@ -19,15 +19,14 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
         self,
         *,
         dedicated_completions_body: Union[
-            models.SyncDedicatedCompletionsBody,
-            models.SyncDedicatedCompletionsBodyTypedDict,
+            models.DedicatedCompletionsBody, models.DedicatedCompletionsBodyTypedDict
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncContainerCompletionsSuccess:
+    ) -> models.ContainerCompletionsSuccess:
         """Completions
 
         Generate text based on the given text prompt.
@@ -47,10 +46,10 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncDedicatedCompletionsCompleteRequest(
+        request = models.DedicatedCompletionsCompleteRequest(
             x_friendli_team=x_friendli_team,
             dedicated_completions_body=utils.get_pydantic_model(
-                dedicated_completions_body, models.SyncDedicatedCompletionsBody
+                dedicated_completions_body, models.DedicatedCompletionsBody
             ),
         )
         req = self._build_request(
@@ -71,7 +70,7 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncDedicatedCompletionsBody,
+                models.DedicatedCompletionsBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -101,9 +100,7 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.SyncContainerCompletionsSuccess, http_res
-            )
+            return unmarshal_json_response(models.ContainerCompletionsSuccess, http_res)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -116,15 +113,15 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
         self,
         *,
         dedicated_completions_stream_body: Union[
-            models.SyncDedicatedCompletionsStreamBody,
-            models.SyncDedicatedCompletionsStreamBodyTypedDict,
+            models.DedicatedCompletionsStreamBody,
+            models.DedicatedCompletionsStreamBodyTypedDict,
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.SyncContainerCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ContainerCompletionsStreamSuccess]:
         """Stream completions
 
         Generate text based on the given text prompt.
@@ -144,11 +141,10 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncDedicatedCompletionsStreamRequest(
+        request = models.DedicatedCompletionsStreamRequest(
             x_friendli_team=x_friendli_team,
             dedicated_completions_stream_body=utils.get_pydantic_model(
-                dedicated_completions_stream_body,
-                models.SyncDedicatedCompletionsStreamBody,
+                dedicated_completions_stream_body, models.DedicatedCompletionsStreamBody
             ),
         )
         req = self._build_request(
@@ -169,7 +165,7 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncDedicatedCompletionsStreamBody,
+                models.DedicatedCompletionsStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -203,7 +199,7 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.SyncContainerCompletionsStreamSuccess
+                    raw, models.ContainerCompletionsStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -223,15 +219,14 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
         self,
         *,
         dedicated_completions_body: Union[
-            models.AsyncDedicatedCompletionsBody,
-            models.AsyncDedicatedCompletionsBodyTypedDict,
+            models.DedicatedCompletionsBody, models.DedicatedCompletionsBodyTypedDict
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AsyncContainerCompletionsSuccess:
+    ) -> models.ContainerCompletionsSuccess:
         """Completions
 
         Generate text based on the given text prompt.
@@ -251,10 +246,10 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncDedicatedCompletionsCompleteRequest(
+        request = models.DedicatedCompletionsCompleteRequest(
             x_friendli_team=x_friendli_team,
             dedicated_completions_body=utils.get_pydantic_model(
-                dedicated_completions_body, models.AsyncDedicatedCompletionsBody
+                dedicated_completions_body, models.DedicatedCompletionsBody
             ),
         )
         req = self._build_request_async(
@@ -275,7 +270,7 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncDedicatedCompletionsBody,
+                models.DedicatedCompletionsBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -305,9 +300,7 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.AsyncContainerCompletionsSuccess, http_res
-            )
+            return unmarshal_json_response(models.ContainerCompletionsSuccess, http_res)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -320,15 +313,15 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
         self,
         *,
         dedicated_completions_stream_body: Union[
-            models.AsyncDedicatedCompletionsStreamBody,
-            models.AsyncDedicatedCompletionsStreamBodyTypedDict,
+            models.DedicatedCompletionsStreamBody,
+            models.DedicatedCompletionsStreamBodyTypedDict,
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.AsyncContainerCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStreamAsync[models.ContainerCompletionsStreamSuccess]:
         """Stream completions
 
         Generate text based on the given text prompt.
@@ -348,11 +341,10 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncDedicatedCompletionsStreamRequest(
+        request = models.DedicatedCompletionsStreamRequest(
             x_friendli_team=x_friendli_team,
             dedicated_completions_stream_body=utils.get_pydantic_model(
-                dedicated_completions_stream_body,
-                models.AsyncDedicatedCompletionsStreamBody,
+                dedicated_completions_stream_body, models.DedicatedCompletionsStreamBody
             ),
         )
         req = self._build_request_async(
@@ -373,7 +365,7 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncDedicatedCompletionsStreamBody,
+                models.DedicatedCompletionsStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -407,7 +399,7 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.AsyncContainerCompletionsStreamSuccess
+                    raw, models.ContainerCompletionsStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

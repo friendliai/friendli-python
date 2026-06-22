@@ -25,7 +25,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncDedicatedTokenizationSuccess:
+    ) -> models.DedicatedTokenizationSuccess:
         """Tokenization
 
         By giving a text input, generate a tokenized output of token IDs.
@@ -46,9 +46,9 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncDedicatedTokenizationRequest(
+        request = models.DedicatedTokenizationRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_tokenization_body=models.SyncDedicatedTokenizationBody(
+            dedicated_tokenization_body=models.DedicatedTokenizationBody(
                 model=model, prompt=prompt
             ),
         )
@@ -70,7 +70,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncDedicatedTokenizationBody,
+                models.DedicatedTokenizationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -101,7 +101,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.SyncDedicatedTokenizationSuccess, http_res
+                models.DedicatedTokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -121,7 +121,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncDedicatedDetokenizationSuccess:
+    ) -> models.DedicatedDetokenizationSuccess:
         """Detokenization
 
         By giving a list of tokens, generate a detokenized output text string.
@@ -142,9 +142,9 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncDedicatedDetokenizationRequest(
+        request = models.DedicatedDetokenizationRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_detokenization_body=models.SyncDedicatedDetokenizationBody(
+            dedicated_detokenization_body=models.DedicatedDetokenizationBody(
                 model=model, tokens=utils.unmarshal(tokens, List[int])
             ),
         )
@@ -166,7 +166,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncDedicatedDetokenizationBody,
+                models.DedicatedDetokenizationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -197,7 +197,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.SyncDedicatedDetokenizationSuccess, http_res
+                models.DedicatedDetokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -219,7 +219,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AsyncDedicatedTokenizationSuccess:
+    ) -> models.DedicatedTokenizationSuccess:
         """Tokenization
 
         By giving a text input, generate a tokenized output of token IDs.
@@ -240,9 +240,9 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncDedicatedTokenizationRequest(
+        request = models.DedicatedTokenizationRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_tokenization_body=models.AsyncDedicatedTokenizationBody(
+            dedicated_tokenization_body=models.DedicatedTokenizationBody(
                 model=model, prompt=prompt
             ),
         )
@@ -264,7 +264,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncDedicatedTokenizationBody,
+                models.DedicatedTokenizationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -295,7 +295,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.AsyncDedicatedTokenizationSuccess, http_res
+                models.DedicatedTokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -315,7 +315,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AsyncDedicatedDetokenizationSuccess:
+    ) -> models.DedicatedDetokenizationSuccess:
         """Detokenization
 
         By giving a list of tokens, generate a detokenized output text string.
@@ -336,9 +336,9 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncDedicatedDetokenizationRequest(
+        request = models.DedicatedDetokenizationRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_detokenization_body=models.AsyncDedicatedDetokenizationBody(
+            dedicated_detokenization_body=models.DedicatedDetokenizationBody(
                 model=model, tokens=utils.unmarshal(tokens, List[int])
             ),
         )
@@ -360,7 +360,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncDedicatedDetokenizationBody,
+                models.DedicatedDetokenizationBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -391,7 +391,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.AsyncDedicatedDetokenizationSuccess, http_res
+                models.DedicatedDetokenizationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

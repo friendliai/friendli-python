@@ -19,14 +19,13 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
         self,
         *,
         request: Union[
-            models.SyncContainerCompletionsBody,
-            models.SyncContainerCompletionsBodyTypedDict,
+            models.ContainerCompletionsBody, models.ContainerCompletionsBodyTypedDict
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncContainerCompletionsSuccess:
+    ) -> models.ContainerCompletionsSuccess:
         """Completions
 
         Generate text based on the given text prompt.
@@ -46,8 +45,8 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
         else:
             base_url = models.CONTAINER_COMPLETIONS_COMPLETE_OP_SERVERS[0]
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.SyncContainerCompletionsBody)
-        request = cast(models.SyncContainerCompletionsBody, request)
+            request = utils.unmarshal(request, models.ContainerCompletionsBody)
+        request = cast(models.ContainerCompletionsBody, request)
         req = self._build_request(
             method="POST",
             path="/v1/completions",
@@ -62,7 +61,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.SyncContainerCompletionsBody
+                request, False, False, "json", models.ContainerCompletionsBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -92,9 +91,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.SyncContainerCompletionsSuccess, http_res
-            )
+            return unmarshal_json_response(models.ContainerCompletionsSuccess, http_res)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -107,14 +104,14 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
         self,
         *,
         request: Union[
-            models.SyncContainerCompletionsStreamBody,
-            models.SyncContainerCompletionsStreamBodyTypedDict,
+            models.ContainerCompletionsStreamBody,
+            models.ContainerCompletionsStreamBodyTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.SyncContainerCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ContainerCompletionsStreamSuccess]:
         """Stream completions
 
         Generate text based on the given text prompt.
@@ -134,10 +131,8 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
         else:
             base_url = models.CONTAINER_COMPLETIONS_STREAM_OP_SERVERS[0]
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, models.SyncContainerCompletionsStreamBody
-            )
-        request = cast(models.SyncContainerCompletionsStreamBody, request)
+            request = utils.unmarshal(request, models.ContainerCompletionsStreamBody)
+        request = cast(models.ContainerCompletionsStreamBody, request)
         req = self._build_request(
             method="POST",
             path="/v1/completions#stream",
@@ -152,7 +147,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.SyncContainerCompletionsStreamBody
+                request, False, False, "json", models.ContainerCompletionsStreamBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -186,7 +181,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.SyncContainerCompletionsStreamSuccess
+                    raw, models.ContainerCompletionsStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -206,14 +201,13 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
         self,
         *,
         request: Union[
-            models.AsyncContainerCompletionsBody,
-            models.AsyncContainerCompletionsBodyTypedDict,
+            models.ContainerCompletionsBody, models.ContainerCompletionsBodyTypedDict
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AsyncContainerCompletionsSuccess:
+    ) -> models.ContainerCompletionsSuccess:
         """Completions
 
         Generate text based on the given text prompt.
@@ -233,8 +227,8 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
         else:
             base_url = models.CONTAINER_COMPLETIONS_COMPLETE_OP_SERVERS[0]
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.AsyncContainerCompletionsBody)
-        request = cast(models.AsyncContainerCompletionsBody, request)
+            request = utils.unmarshal(request, models.ContainerCompletionsBody)
+        request = cast(models.ContainerCompletionsBody, request)
         req = self._build_request_async(
             method="POST",
             path="/v1/completions",
@@ -249,7 +243,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.AsyncContainerCompletionsBody
+                request, False, False, "json", models.ContainerCompletionsBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -279,9 +273,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.AsyncContainerCompletionsSuccess, http_res
-            )
+            return unmarshal_json_response(models.ContainerCompletionsSuccess, http_res)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -294,14 +286,14 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
         self,
         *,
         request: Union[
-            models.AsyncContainerCompletionsStreamBody,
-            models.AsyncContainerCompletionsStreamBodyTypedDict,
+            models.ContainerCompletionsStreamBody,
+            models.ContainerCompletionsStreamBodyTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.AsyncContainerCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStreamAsync[models.ContainerCompletionsStreamSuccess]:
         """Stream completions
 
         Generate text based on the given text prompt.
@@ -321,10 +313,8 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
         else:
             base_url = models.CONTAINER_COMPLETIONS_STREAM_OP_SERVERS[0]
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, models.AsyncContainerCompletionsStreamBody
-            )
-        request = cast(models.AsyncContainerCompletionsStreamBody, request)
+            request = utils.unmarshal(request, models.ContainerCompletionsStreamBody)
+        request = cast(models.ContainerCompletionsStreamBody, request)
         req = self._build_request_async(
             method="POST",
             path="/v1/completions#stream",
@@ -339,11 +329,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.AsyncContainerCompletionsStreamBody,
+                request, False, False, "json", models.ContainerCompletionsStreamBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -377,7 +363,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.AsyncContainerCompletionsStreamSuccess
+                    raw, models.ContainerCompletionsStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

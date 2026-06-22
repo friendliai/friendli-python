@@ -19,15 +19,14 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
         self,
         *,
         serverless_completions_body: Union[
-            models.SyncServerlessCompletionsBody,
-            models.SyncServerlessCompletionsBodyTypedDict,
+            models.ServerlessCompletionsBody, models.ServerlessCompletionsBodyTypedDict
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncContainerCompletionsSuccess:
+    ) -> models.ContainerCompletionsSuccess:
         """Completions
 
         Generate text based on the given text prompt.
@@ -47,10 +46,10 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncServerlessCompletionsCompleteRequest(
+        request = models.ServerlessCompletionsCompleteRequest(
             x_friendli_team=x_friendli_team,
             serverless_completions_body=utils.get_pydantic_model(
-                serverless_completions_body, models.SyncServerlessCompletionsBody
+                serverless_completions_body, models.ServerlessCompletionsBody
             ),
         )
         req = self._build_request(
@@ -71,7 +70,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncServerlessCompletionsBody,
+                models.ServerlessCompletionsBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -101,9 +100,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.SyncContainerCompletionsSuccess, http_res
-            )
+            return unmarshal_json_response(models.ContainerCompletionsSuccess, http_res)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -116,15 +113,15 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
         self,
         *,
         serverless_completions_stream_body: Union[
-            models.SyncServerlessCompletionsStreamBody,
-            models.SyncServerlessCompletionsStreamBodyTypedDict,
+            models.ServerlessCompletionsStreamBody,
+            models.ServerlessCompletionsStreamBodyTypedDict,
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.SyncContainerCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ContainerCompletionsStreamSuccess]:
         """Stream completions
 
         Generate text based on the given text prompt.
@@ -144,11 +141,11 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncServerlessCompletionsStreamRequest(
+        request = models.ServerlessCompletionsStreamRequest(
             x_friendli_team=x_friendli_team,
             serverless_completions_stream_body=utils.get_pydantic_model(
                 serverless_completions_stream_body,
-                models.SyncServerlessCompletionsStreamBody,
+                models.ServerlessCompletionsStreamBody,
             ),
         )
         req = self._build_request(
@@ -169,7 +166,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncServerlessCompletionsStreamBody,
+                models.ServerlessCompletionsStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -203,7 +200,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.SyncContainerCompletionsStreamSuccess
+                    raw, models.ContainerCompletionsStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -223,15 +220,14 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
         self,
         *,
         serverless_completions_body: Union[
-            models.AsyncServerlessCompletionsBody,
-            models.AsyncServerlessCompletionsBodyTypedDict,
+            models.ServerlessCompletionsBody, models.ServerlessCompletionsBodyTypedDict
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AsyncContainerCompletionsSuccess:
+    ) -> models.ContainerCompletionsSuccess:
         """Completions
 
         Generate text based on the given text prompt.
@@ -251,10 +247,10 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncServerlessCompletionsCompleteRequest(
+        request = models.ServerlessCompletionsCompleteRequest(
             x_friendli_team=x_friendli_team,
             serverless_completions_body=utils.get_pydantic_model(
-                serverless_completions_body, models.AsyncServerlessCompletionsBody
+                serverless_completions_body, models.ServerlessCompletionsBody
             ),
         )
         req = self._build_request_async(
@@ -275,7 +271,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncServerlessCompletionsBody,
+                models.ServerlessCompletionsBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -305,9 +301,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.AsyncContainerCompletionsSuccess, http_res
-            )
+            return unmarshal_json_response(models.ContainerCompletionsSuccess, http_res)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -320,15 +314,15 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
         self,
         *,
         serverless_completions_stream_body: Union[
-            models.AsyncServerlessCompletionsStreamBody,
-            models.AsyncServerlessCompletionsStreamBodyTypedDict,
+            models.ServerlessCompletionsStreamBody,
+            models.ServerlessCompletionsStreamBodyTypedDict,
         ],
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.AsyncContainerCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStreamAsync[models.ContainerCompletionsStreamSuccess]:
         """Stream completions
 
         Generate text based on the given text prompt.
@@ -348,11 +342,11 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncServerlessCompletionsStreamRequest(
+        request = models.ServerlessCompletionsStreamRequest(
             x_friendli_team=x_friendli_team,
             serverless_completions_stream_body=utils.get_pydantic_model(
                 serverless_completions_stream_body,
-                models.AsyncServerlessCompletionsStreamBody,
+                models.ServerlessCompletionsStreamBody,
             ),
         )
         req = self._build_request_async(
@@ -373,7 +367,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncServerlessCompletionsStreamBody,
+                models.ServerlessCompletionsStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -407,7 +401,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.AsyncContainerCompletionsStreamSuccess
+                    raw, models.ContainerCompletionsStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
