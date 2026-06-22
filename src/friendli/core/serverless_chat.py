@@ -33,13 +33,13 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.SyncServerlessChatCompletionBodyReasoningEffort
+            models.ServerlessChatCompletionBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.SyncServerlessChatCompletionBodySeed,
-                models.SyncServerlessChatCompletionBodySeedTypedDict,
+                models.ServerlessChatCompletionBodySeed,
+                models.ServerlessChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -52,8 +52,8 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.SyncServerlessChatCompletionBodyToolChoice,
-                models.SyncServerlessChatCompletionBodyToolChoiceTypedDict,
+                models.ServerlessChatCompletionBodyToolChoice,
+                models.ServerlessChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -72,7 +72,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncContainerChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteSuccess:
         """Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -148,9 +148,9 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncServerlessChatCompleteRequest(
+        request = models.ServerlessChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            serverless_chat_completion_body=models.SyncServerlessChatCompletionBody(
+            serverless_chat_completion_body=models.ServerlessChatCompletionBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -171,7 +171,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
                 reasoning_effort=reasoning_effort,
                 reasoning_budget=reasoning_budget,
                 seed=utils.unmarshal(
-                    seed, OptionalNullable[models.SyncServerlessChatCompletionBodySeed]
+                    seed, OptionalNullable[models.ServerlessChatCompletionBodySeed]
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
@@ -182,8 +182,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
                 include_reasoning=include_reasoning,
                 temperature=temperature,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice,
-                    Optional[models.SyncServerlessChatCompletionBodyToolChoice],
+                    tool_choice, Optional[models.ServerlessChatCompletionBodyToolChoice]
                 ),
                 top_k=top_k,
                 top_logprobs=top_logprobs,
@@ -217,7 +216,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncServerlessChatCompletionBody,
+                models.ServerlessChatCompletionBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -248,7 +247,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.SyncContainerChatCompleteSuccess, http_res
+                models.ContainerChatCompleteSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -276,13 +275,13 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.SyncServerlessChatCompletionStreamBodyReasoningEffort
+            models.ServerlessChatCompletionStreamBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.SyncServerlessChatCompletionStreamBodySeed,
-                models.SyncServerlessChatCompletionStreamBodySeedTypedDict,
+                models.ServerlessChatCompletionStreamBodySeed,
+                models.ServerlessChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -295,8 +294,8 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.SyncServerlessChatCompletionStreamBodyToolChoice,
-                models.SyncServerlessChatCompletionStreamBodyToolChoiceTypedDict,
+                models.ServerlessChatCompletionStreamBodyToolChoice,
+                models.ServerlessChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -315,7 +314,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.SyncContainerChatCompletionStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ContainerChatCompletionStreamSuccess]:
         """Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -391,9 +390,9 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncServerlessChatStreamRequest(
+        request = models.ServerlessChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            serverless_chat_completion_stream_body=models.SyncServerlessChatCompletionStreamBody(
+            serverless_chat_completion_stream_body=models.ServerlessChatCompletionStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -415,7 +414,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
                 reasoning_budget=reasoning_budget,
                 seed=utils.unmarshal(
                     seed,
-                    OptionalNullable[models.SyncServerlessChatCompletionStreamBodySeed],
+                    OptionalNullable[models.ServerlessChatCompletionStreamBodySeed],
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
@@ -427,7 +426,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
                 temperature=temperature,
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
-                    Optional[models.SyncServerlessChatCompletionStreamBodyToolChoice],
+                    Optional[models.ServerlessChatCompletionStreamBodyToolChoice],
                 ),
                 top_k=top_k,
                 top_logprobs=top_logprobs,
@@ -461,7 +460,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncServerlessChatCompletionStreamBody,
+                models.ServerlessChatCompletionStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -495,7 +494,7 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.SyncContainerChatCompletionStreamSuccess
+                    raw, models.ContainerChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -529,13 +528,13 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.AsyncServerlessChatCompletionBodyReasoningEffort
+            models.ServerlessChatCompletionBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.AsyncServerlessChatCompletionBodySeed,
-                models.AsyncServerlessChatCompletionBodySeedTypedDict,
+                models.ServerlessChatCompletionBodySeed,
+                models.ServerlessChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -548,8 +547,8 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.AsyncServerlessChatCompletionBodyToolChoice,
-                models.AsyncServerlessChatCompletionBodyToolChoiceTypedDict,
+                models.ServerlessChatCompletionBodyToolChoice,
+                models.ServerlessChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -568,7 +567,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AsyncContainerChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteSuccess:
         """Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -644,9 +643,9 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncServerlessChatCompleteRequest(
+        request = models.ServerlessChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            serverless_chat_completion_body=models.AsyncServerlessChatCompletionBody(
+            serverless_chat_completion_body=models.ServerlessChatCompletionBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -667,7 +666,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
                 reasoning_effort=reasoning_effort,
                 reasoning_budget=reasoning_budget,
                 seed=utils.unmarshal(
-                    seed, OptionalNullable[models.AsyncServerlessChatCompletionBodySeed]
+                    seed, OptionalNullable[models.ServerlessChatCompletionBodySeed]
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
@@ -678,8 +677,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
                 include_reasoning=include_reasoning,
                 temperature=temperature,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice,
-                    Optional[models.AsyncServerlessChatCompletionBodyToolChoice],
+                    tool_choice, Optional[models.ServerlessChatCompletionBodyToolChoice]
                 ),
                 top_k=top_k,
                 top_logprobs=top_logprobs,
@@ -713,7 +711,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncServerlessChatCompletionBody,
+                models.ServerlessChatCompletionBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -744,7 +742,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.AsyncContainerChatCompleteSuccess, http_res
+                models.ContainerChatCompleteSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -772,13 +770,13 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.AsyncServerlessChatCompletionStreamBodyReasoningEffort
+            models.ServerlessChatCompletionStreamBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.AsyncServerlessChatCompletionStreamBodySeed,
-                models.AsyncServerlessChatCompletionStreamBodySeedTypedDict,
+                models.ServerlessChatCompletionStreamBodySeed,
+                models.ServerlessChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -791,8 +789,8 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.AsyncServerlessChatCompletionStreamBodyToolChoice,
-                models.AsyncServerlessChatCompletionStreamBodyToolChoiceTypedDict,
+                models.ServerlessChatCompletionStreamBodyToolChoice,
+                models.ServerlessChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -811,9 +809,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[
-        models.AsyncContainerChatCompletionStreamSuccess
-    ]:
+    ) -> eventstreaming.EventStreamAsync[models.ContainerChatCompletionStreamSuccess]:
         """Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -889,9 +885,9 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncServerlessChatStreamRequest(
+        request = models.ServerlessChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            serverless_chat_completion_stream_body=models.AsyncServerlessChatCompletionStreamBody(
+            serverless_chat_completion_stream_body=models.ServerlessChatCompletionStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -913,9 +909,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
                 reasoning_budget=reasoning_budget,
                 seed=utils.unmarshal(
                     seed,
-                    OptionalNullable[
-                        models.AsyncServerlessChatCompletionStreamBodySeed
-                    ],
+                    OptionalNullable[models.ServerlessChatCompletionStreamBodySeed],
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
@@ -927,7 +921,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
                 temperature=temperature,
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
-                    Optional[models.AsyncServerlessChatCompletionStreamBodyToolChoice],
+                    Optional[models.ServerlessChatCompletionStreamBodyToolChoice],
                 ),
                 top_k=top_k,
                 top_logprobs=top_logprobs,
@@ -961,7 +955,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncServerlessChatCompletionStreamBody,
+                models.ServerlessChatCompletionStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -995,7 +989,7 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.AsyncContainerChatCompletionStreamSuccess
+                    raw, models.ContainerChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

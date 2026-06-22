@@ -33,13 +33,13 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.SyncDedicatedChatCompletionBodyReasoningEffort
+            models.DedicatedChatCompletionBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.SyncDedicatedChatCompletionBodySeed,
-                models.SyncDedicatedChatCompletionBodySeedTypedDict,
+                models.DedicatedChatCompletionBodySeed,
+                models.DedicatedChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -52,8 +52,8 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.SyncDedicatedChatCompletionBodyToolChoice,
-                models.SyncDedicatedChatCompletionBodyToolChoiceTypedDict,
+                models.DedicatedChatCompletionBodyToolChoice,
+                models.DedicatedChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -72,7 +72,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SyncContainerChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteSuccess:
         """Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -148,9 +148,9 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncDedicatedChatCompleteRequest(
+        request = models.DedicatedChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_chat_completion_body=models.SyncDedicatedChatCompletionBody(
+            dedicated_chat_completion_body=models.DedicatedChatCompletionBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -171,7 +171,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 reasoning_effort=reasoning_effort,
                 reasoning_budget=reasoning_budget,
                 seed=utils.unmarshal(
-                    seed, OptionalNullable[models.SyncDedicatedChatCompletionBodySeed]
+                    seed, OptionalNullable[models.DedicatedChatCompletionBodySeed]
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
@@ -182,8 +182,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 include_reasoning=include_reasoning,
                 temperature=temperature,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice,
-                    Optional[models.SyncDedicatedChatCompletionBodyToolChoice],
+                    tool_choice, Optional[models.DedicatedChatCompletionBodyToolChoice]
                 ),
                 top_k=top_k,
                 top_logprobs=top_logprobs,
@@ -217,7 +216,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncDedicatedChatCompletionBody,
+                models.DedicatedChatCompletionBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -248,7 +247,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.SyncContainerChatCompleteSuccess, http_res
+                models.ContainerChatCompleteSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -276,13 +275,13 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.SyncDedicatedChatCompletionStreamBodyReasoningEffort
+            models.DedicatedChatCompletionStreamBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.SyncDedicatedChatCompletionStreamBodySeed,
-                models.SyncDedicatedChatCompletionStreamBodySeedTypedDict,
+                models.DedicatedChatCompletionStreamBodySeed,
+                models.DedicatedChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -295,8 +294,8 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.SyncDedicatedChatCompletionStreamBodyToolChoice,
-                models.SyncDedicatedChatCompletionStreamBodyToolChoiceTypedDict,
+                models.DedicatedChatCompletionStreamBodyToolChoice,
+                models.DedicatedChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -315,7 +314,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.SyncContainerChatCompletionStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ContainerChatCompletionStreamSuccess]:
         """Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -391,9 +390,9 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.SyncDedicatedChatStreamRequest(
+        request = models.DedicatedChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_chat_completion_stream_body=models.SyncDedicatedChatCompletionStreamBody(
+            dedicated_chat_completion_stream_body=models.DedicatedChatCompletionStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -414,8 +413,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 reasoning_effort=reasoning_effort,
                 reasoning_budget=reasoning_budget,
                 seed=utils.unmarshal(
-                    seed,
-                    OptionalNullable[models.SyncDedicatedChatCompletionStreamBodySeed],
+                    seed, OptionalNullable[models.DedicatedChatCompletionStreamBodySeed]
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
@@ -427,7 +425,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 temperature=temperature,
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
-                    Optional[models.SyncDedicatedChatCompletionStreamBodyToolChoice],
+                    Optional[models.DedicatedChatCompletionStreamBodyToolChoice],
                 ),
                 top_k=top_k,
                 top_logprobs=top_logprobs,
@@ -461,7 +459,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 False,
                 False,
                 "json",
-                models.SyncDedicatedChatCompletionStreamBody,
+                models.DedicatedChatCompletionStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -495,7 +493,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.SyncContainerChatCompletionStreamSuccess
+                    raw, models.ContainerChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -529,13 +527,13 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.AsyncDedicatedChatCompletionBodyReasoningEffort
+            models.DedicatedChatCompletionBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.AsyncDedicatedChatCompletionBodySeed,
-                models.AsyncDedicatedChatCompletionBodySeedTypedDict,
+                models.DedicatedChatCompletionBodySeed,
+                models.DedicatedChatCompletionBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -548,8 +546,8 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.AsyncDedicatedChatCompletionBodyToolChoice,
-                models.AsyncDedicatedChatCompletionBodyToolChoiceTypedDict,
+                models.DedicatedChatCompletionBodyToolChoice,
+                models.DedicatedChatCompletionBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -568,7 +566,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AsyncContainerChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteSuccess:
         """Chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -644,9 +642,9 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncDedicatedChatCompleteRequest(
+        request = models.DedicatedChatCompleteRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_chat_completion_body=models.AsyncDedicatedChatCompletionBody(
+            dedicated_chat_completion_body=models.DedicatedChatCompletionBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -667,7 +665,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 reasoning_effort=reasoning_effort,
                 reasoning_budget=reasoning_budget,
                 seed=utils.unmarshal(
-                    seed, OptionalNullable[models.AsyncDedicatedChatCompletionBodySeed]
+                    seed, OptionalNullable[models.DedicatedChatCompletionBodySeed]
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
@@ -678,8 +676,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 include_reasoning=include_reasoning,
                 temperature=temperature,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice,
-                    Optional[models.AsyncDedicatedChatCompletionBodyToolChoice],
+                    tool_choice, Optional[models.DedicatedChatCompletionBodyToolChoice]
                 ),
                 top_k=top_k,
                 top_logprobs=top_logprobs,
@@ -713,7 +710,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncDedicatedChatCompletionBody,
+                models.DedicatedChatCompletionBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -744,7 +741,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.AsyncContainerChatCompleteSuccess, http_res
+                models.ContainerChatCompleteSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -772,13 +769,13 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         presence_penalty: OptionalNullable[float] = UNSET,
         repetition_penalty: OptionalNullable[float] = UNSET,
         reasoning_effort: OptionalNullable[
-            models.AsyncDedicatedChatCompletionStreamBodyReasoningEffort
+            models.DedicatedChatCompletionStreamBodyReasoningEffort
         ] = UNSET,
         reasoning_budget: OptionalNullable[int] = UNSET,
         seed: OptionalNullable[
             Union[
-                models.AsyncDedicatedChatCompletionStreamBodySeed,
-                models.AsyncDedicatedChatCompletionStreamBodySeedTypedDict,
+                models.DedicatedChatCompletionStreamBodySeed,
+                models.DedicatedChatCompletionStreamBodySeedTypedDict,
             ]
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
@@ -791,8 +788,8 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
             Union[
-                models.AsyncDedicatedChatCompletionStreamBodyToolChoice,
-                models.AsyncDedicatedChatCompletionStreamBodyToolChoiceTypedDict,
+                models.DedicatedChatCompletionStreamBodyToolChoice,
+                models.DedicatedChatCompletionStreamBodyToolChoiceTypedDict,
             ]
         ] = None,
         top_k: OptionalNullable[int] = UNSET,
@@ -811,9 +808,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[
-        models.AsyncContainerChatCompletionStreamSuccess
-    ]:
+    ) -> eventstreaming.EventStreamAsync[models.ContainerChatCompletionStreamSuccess]:
         """Stream chat completions
 
         Given a list of messages forming a conversation, the model generates a response.
@@ -889,9 +884,9 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.AsyncDedicatedChatStreamRequest(
+        request = models.DedicatedChatStreamRequest(
             x_friendli_team=x_friendli_team,
-            dedicated_chat_completion_stream_body=models.AsyncDedicatedChatCompletionStreamBody(
+            dedicated_chat_completion_stream_body=models.DedicatedChatCompletionStreamBody(
                 model=model,
                 messages=utils.get_pydantic_model(messages, List[models.Message]),
                 chat_template_kwargs=utils.unmarshal(
@@ -912,8 +907,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 reasoning_effort=reasoning_effort,
                 reasoning_budget=reasoning_budget,
                 seed=utils.unmarshal(
-                    seed,
-                    OptionalNullable[models.AsyncDedicatedChatCompletionStreamBodySeed],
+                    seed, OptionalNullable[models.DedicatedChatCompletionStreamBodySeed]
                 ),
                 stop=utils.unmarshal(stop, OptionalNullable[List[str]]),
                 stream=stream,
@@ -925,7 +919,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 temperature=temperature,
                 tool_choice=utils.get_pydantic_model(
                     tool_choice,
-                    Optional[models.AsyncDedicatedChatCompletionStreamBodyToolChoice],
+                    Optional[models.DedicatedChatCompletionStreamBodyToolChoice],
                 ),
                 top_k=top_k,
                 top_logprobs=top_logprobs,
@@ -959,7 +953,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 False,
                 False,
                 "json",
-                models.AsyncDedicatedChatCompletionStreamBody,
+                models.DedicatedChatCompletionStreamBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -993,7 +987,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, models.AsyncContainerChatCompletionStreamSuccess
+                    raw, models.ContainerChatCompletionStreamSuccess
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
