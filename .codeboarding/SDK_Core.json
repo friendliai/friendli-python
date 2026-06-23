@@ -1,0 +1,199 @@
+{
+  "description": "This section synthesizes the architectural components of the Friendli AI Python SDK, focusing on the `SDK Core` and its interactions within a client-side SDK pattern.",
+  "components": [
+    {
+      "name": "SDK Core",
+      "description": "The foundational layer and central orchestrator of the SDK. It encapsulates the fundamental logic for API communication, request/response processing, and integrates core SDK abstractions. It provides the base classes (`BaseSDK`, `AsyncSDK`, `SyncSDK`) from which other service modules inherit, ensuring consistent interaction patterns and extensibility. It also manages global settings and extensibility points.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.basesdk",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/basesdk.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ]
+    },
+    {
+      "name": "Service Modules",
+      "description": "These modules encapsulate specific API functionalities (e.g., Chat, Completions, Image, Dataset). They extend the `SDK Core`'s base classes to provide high-level, domain-specific methods for interacting with different parts of the Friendli AI platform.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.chat",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/chat.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        },
+        {
+          "qualified_name": "friendli_core.completions",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/completions.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ]
+    },
+    {
+      "name": "Data Models",
+      "description": "Defines the structured data objects (e.g., request bodies, response objects) used for communication with the Friendli AI platform. These models ensure type safety, consistency, and ease of use when exchanging data with the API.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.models",
+          "reference_file": "friendli_core/models.py",
+          "reference_start_line": 0,
+          "reference_end_line": 0
+        }
+      ]
+    },
+    {
+      "name": "Error Handling",
+      "description": "Manages and standardizes error responses originating from the API or internal SDK operations. It provides custom exceptions and robust error handling mechanisms, allowing developers to gracefully manage and respond to issues.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.errors",
+          "reference_file": "friendli_core/errors.py",
+          "reference_start_line": 0,
+          "reference_end_line": 0
+        }
+      ]
+    },
+    {
+      "name": "SDK Configuration",
+      "description": "Manages global settings and parameters for the SDK, such as API keys, base URLs, timeouts, and other configurable options. It provides a centralized mechanism for developers to customize the SDK's behavior.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.config",
+          "reference_file": "friendli_core/config.py",
+          "reference_start_line": 0,
+          "reference_end_line": 0
+        }
+      ]
+    },
+    {
+      "name": "Utility Functions",
+      "description": "Provides a collection of helper functions for common tasks that support the SDK's overall functionality. This includes operations like authentication, data serialization/deserialization, and other general-purpose utilities.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.utils",
+          "reference_file": "friendli_core/utils.py",
+          "reference_start_line": 0,
+          "reference_end_line": 0
+        }
+      ]
+    },
+    {
+      "name": "Asynchronous/Synchronous Adapters",
+      "description": "Provides distinct interfaces and implementations for both asynchronous (non-blocking) and synchronous (blocking) API calls. This allows developers to choose the appropriate execution model based on their application's architecture and performance requirements.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.basesdk",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/basesdk.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ]
+    },
+    {
+      "name": "Extensibility (Hooks)",
+      "description": "Offers mechanisms for extending SDK behavior through hooks or context objects (e.g., `HookContext`). This allows developers to inject custom logic at various points in the request/response lifecycle without altering the core SDK code.",
+      "referenced_source_code": [
+        {
+          "qualified_name": "friendli_core.basesdk",
+          "reference_file": "/mnt/e/StartUp/friendli-python/src/friendli_core/basesdk.py",
+          "reference_start_line": null,
+          "reference_end_line": null
+        }
+      ]
+    }
+  ],
+  "components_relations": [
+    {
+      "relation": "provides base classes to",
+      "src_name": "SDK Core",
+      "dst_name": "Service Modules"
+    },
+    {
+      "relation": "utilizes",
+      "src_name": "Service Modules",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "serializes/deserializes",
+      "src_name": "SDK Core",
+      "dst_name": "Data Models"
+    },
+    {
+      "relation": "defines format for",
+      "src_name": "Data Models",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "raises exceptions from",
+      "src_name": "SDK Core",
+      "dst_name": "Error Handling"
+    },
+    {
+      "relation": "defines exceptions for",
+      "src_name": "Error Handling",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "consumes settings from",
+      "src_name": "SDK Core",
+      "dst_name": "SDK Configuration"
+    },
+    {
+      "relation": "provides parameters to",
+      "src_name": "SDK Configuration",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "defines interface for",
+      "src_name": "SDK Core",
+      "dst_name": "Asynchronous/Synchronous Adapters"
+    },
+    {
+      "relation": "provides execution paths for",
+      "src_name": "Asynchronous/Synchronous Adapters",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "invokes",
+      "src_name": "SDK Core",
+      "dst_name": "Extensibility (Hooks)"
+    },
+    {
+      "relation": "modifies behavior of",
+      "src_name": "Extensibility (Hooks)",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "constructs requests with",
+      "src_name": "Service Modules",
+      "dst_name": "Data Models"
+    },
+    {
+      "relation": "returns responses as",
+      "src_name": "Service Modules",
+      "dst_name": "Data Models"
+    },
+    {
+      "relation": "handles exceptions from",
+      "src_name": "Service Modules",
+      "dst_name": "Error Handling"
+    },
+    {
+      "relation": "defines error types for",
+      "src_name": "Error Handling",
+      "dst_name": "Service Modules"
+    },
+    {
+      "relation": "provides helpers to",
+      "src_name": "Utility Functions",
+      "dst_name": "SDK Core"
+    },
+    {
+      "relation": "provides helpers to",
+      "src_name": "Utility Functions",
+      "dst_name": "Service Modules"
+    }
+  ]
+}
