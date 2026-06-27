@@ -10,7 +10,7 @@ dependencies = [
     "httpx >=0.28.1",
     "pydantic >=2.11.2",
 ]
-license = { text = "Copyright (c) 2025-present, FriendliAI Inc. All rights reserved." }
+license = { text = "Copyright (c) 2025-present, FriendliAI Corp. All rights reserved." }
 
 urls.repository = "https://github.com/friendliai/friendli-python.git"
 
