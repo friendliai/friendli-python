@@ -94,6 +94,20 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncServerless.Token"],
+                extensions={
+                    "x-mint": {
+                        "content": "By giving a text input, generate a tokenized output of token IDs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/model-apis/tokenization",
+                        "metadata": {
+                            "description": "Tokenize text into token IDs using Friendli Model APIs. Useful for counting tokens before sending inference requests to the model.",
+                            "og:description": "Tokenize text into token IDs using Friendli Model APIs. Useful for counting tokens before sending inference requests to the model.",
+                            "og:title": "Model APIs Tokenization",
+                            "sidebarTitle": "Tokenization",
+                            "title": "Model APIs Tokenization",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -190,6 +204,20 @@ class SyncServerlessToken(BaseServerlessToken, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncServerless.Token"],
+                extensions={
+                    "x-mint": {
+                        "content": "By giving a list of tokens, generate a detokenized output text string.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/model-apis/detokenization",
+                        "metadata": {
+                            "description": "Convert token IDs back to text using Friendli Model APIs. Decode tokenized output into a human-readable string for post-processing.",
+                            "og:description": "Convert token IDs back to text using Friendli Model APIs. Decode tokenized output into a human-readable string for post-processing.",
+                            "og:title": "Model APIs Detokenization",
+                            "sidebarTitle": "Detokenization",
+                            "title": "Model APIs Detokenization",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -288,6 +316,20 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncServerless.Token"],
+                extensions={
+                    "x-mint": {
+                        "content": "By giving a text input, generate a tokenized output of token IDs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/model-apis/tokenization",
+                        "metadata": {
+                            "description": "Tokenize text into token IDs using Friendli Model APIs. Useful for counting tokens before sending inference requests to the model.",
+                            "og:description": "Tokenize text into token IDs using Friendli Model APIs. Useful for counting tokens before sending inference requests to the model.",
+                            "og:title": "Model APIs Tokenization",
+                            "sidebarTitle": "Tokenization",
+                            "title": "Model APIs Tokenization",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -384,6 +426,20 @@ class AsyncServerlessToken(BaseServerlessToken, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncServerless.Token"],
+                extensions={
+                    "x-mint": {
+                        "content": "By giving a list of tokens, generate a detokenized output text string.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/model-apis/detokenization",
+                        "metadata": {
+                            "description": "Convert token IDs back to text using Friendli Model APIs. Decode tokenized output into a human-readable string for post-processing.",
+                            "og:description": "Convert token IDs back to text using Friendli Model APIs. Decode tokenized output into a human-readable string for post-processing.",
+                            "og:title": "Model APIs Detokenization",
+                            "sidebarTitle": "Detokenization",
+                            "title": "Model APIs Detokenization",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

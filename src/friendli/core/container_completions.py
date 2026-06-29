@@ -85,6 +85,20 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncContainer.Completions"],
+                extensions={
+                    "x-mint": {
+                        "content": "Generate text based on the given text prompt.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
+                        "href": "/openapi/container/completions",
+                        "metadata": {
+                            "description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "og:description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "og:title": "SyncContainer Completions",
+                            "sidebarTitle": "Completions",
+                            "title": "SyncContainer Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -171,6 +185,19 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncContainer.Completions"],
+                extensions={
+                    "x-mint": {
+                        "content": "Generate text based on the given text prompt.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
+                        "metadata": {
+                            "description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "og:description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "og:title": "SyncContainer Stream Completions",
+                            "sidebarTitle": "Stream Completions",
+                            "title": "SyncContainer Stream Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -180,8 +207,8 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerCompletionsStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerCompletionsStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -267,6 +294,20 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncContainer.Completions"],
+                extensions={
+                    "x-mint": {
+                        "content": "Generate text based on the given text prompt.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
+                        "href": "/openapi/container/completions",
+                        "metadata": {
+                            "description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "og:description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "og:title": "AsyncContainer Completions",
+                            "sidebarTitle": "Completions",
+                            "title": "AsyncContainer Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -353,6 +394,19 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncContainer.Completions"],
+                extensions={
+                    "x-mint": {
+                        "content": "Generate text based on the given text prompt.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
+                        "metadata": {
+                            "description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "og:description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "og:title": "AsyncContainer Stream Completions",
+                            "sidebarTitle": "Stream Completions",
+                            "title": "AsyncContainer Stream Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -362,8 +416,8 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerCompletionsStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerCompletionsStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

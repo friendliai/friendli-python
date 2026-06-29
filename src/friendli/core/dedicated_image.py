@@ -121,6 +121,20 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Image"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a description, the model generates image(s).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/inference/image-generations",
+                        "metadata": {
+                            "description": "Generate images from text descriptions using your Friendli Dedicated Endpoint. Supports configurable image size, count, and generation parameters.",
+                            "og:description": "Generate images from text descriptions using your Friendli Dedicated Endpoint. Supports configurable image size, count, and generation parameters.",
+                            "og:title": "SyncDedicated Image Generations",
+                            "sidebarTitle": "Image Generations",
+                            "title": "SyncDedicated Image Generations",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -240,6 +254,20 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Image"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an image and a description, the model edits the image.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/inference/image-edits",
+                        "metadata": {
+                            "description": "Edit images with text prompts using your Friendli Dedicated Endpoint. Upload an image and describe the desired modifications for the model to apply.",
+                            "og:description": "Edit images with text prompts using your Friendli Dedicated Endpoint. Upload an image and describe the desired modifications for the model to apply.",
+                            "og:title": "SyncDedicated Image Edits",
+                            "sidebarTitle": "Image Edits",
+                            "title": "SyncDedicated Image Edits",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -365,6 +393,20 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Image"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a description, the model generates image(s).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/inference/image-generations",
+                        "metadata": {
+                            "description": "Generate images from text descriptions using your Friendli Dedicated Endpoint. Supports configurable image size, count, and generation parameters.",
+                            "og:description": "Generate images from text descriptions using your Friendli Dedicated Endpoint. Supports configurable image size, count, and generation parameters.",
+                            "og:title": "AsyncDedicated Image Generations",
+                            "sidebarTitle": "Image Generations",
+                            "title": "AsyncDedicated Image Generations",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -484,6 +526,20 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Image"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an image and a description, the model edits the image.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/inference/image-edits",
+                        "metadata": {
+                            "description": "Edit images with text prompts using your Friendli Dedicated Endpoint. Upload an image and describe the desired modifications for the model to apply.",
+                            "og:description": "Edit images with text prompts using your Friendli Dedicated Endpoint. Upload an image and describe the desired modifications for the model to apply.",
+                            "og:title": "AsyncDedicated Image Edits",
+                            "sidebarTitle": "Image Edits",
+                            "title": "AsyncDedicated Image Edits",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

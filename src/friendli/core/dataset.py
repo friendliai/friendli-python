@@ -103,6 +103,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Create a new dataset.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/create-a-new-dataset",
+                        "metadata": {
+                            "description": "Create a new dataset in Friendli Suite via the API. Initialize a dataset resource to organize training and evaluation data with splits and versions.",
+                            "og:description": "Create a new dataset in Friendli Suite via the API. Initialize a dataset resource to organize training and evaluation data with splits and versions.",
+                            "og:title": "Create a New Dataset",
+                            "sidebarTitle": "Create a New Dataset",
+                            "title": "Create a New Dataset",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -204,6 +218,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "List datasets.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/list-datasets",
+                        "metadata": {
+                            "description": "List all datasets in your Friendli Suite project via the API. Returns dataset IDs, names, split counts, and creation timestamps for each entry.",
+                            "og:description": "List all datasets in your Friendli Suite project via the API. Returns dataset IDs, names, split counts, and creation timestamps for each entry.",
+                            "og:title": "List Datasets",
+                            "sidebarTitle": "List Datasets",
+                            "title": "List Datasets",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -292,6 +320,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get dataset info.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/get-dataset-info",
+                        "metadata": {
+                            "description": "Retrieve metadata for a Friendli dataset by ID via the API. Returns the dataset name, modality, and creation and update timestamps.",
+                            "og:description": "Retrieve metadata for a Friendli dataset by ID via the API. Returns the dataset name, modality, and creation and update timestamps.",
+                            "og:title": "Get Dataset Info",
+                            "sidebarTitle": "Get Dataset Info",
+                            "title": "Get Dataset Info",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -380,6 +422,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Delete a dataset.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/delete-dataset",
+                        "metadata": {
+                            "description": "Permanently delete a Friendli dataset by ID via the API. Removes the dataset along with all its splits, versions, and sample data.",
+                            "og:description": "Permanently delete a Friendli dataset by ID via the API. Removes the dataset along with all its splits, versions, and sample data.",
+                            "og:title": "Delete a Dataset",
+                            "sidebarTitle": "Delete a Dataset",
+                            "title": "Delete a Dataset",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -470,6 +526,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Create a new version.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/create-a-version",
+                        "metadata": {
+                            "description": "Create a new version of a Friendli dataset via the API. Snapshot your current dataset state to track changes and enable reproducible training runs.",
+                            "og:description": "Create a new version of a Friendli dataset via the API. Snapshot your current dataset state to track changes and enable reproducible training runs.",
+                            "og:title": "Create a New Version",
+                            "sidebarTitle": "Create a New Version",
+                            "title": "Create a New Version",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -558,6 +628,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "List versions.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/list-versions",
+                        "metadata": {
+                            "description": "List all versions of a Friendli dataset via the API. Returns version IDs, tags, and creation timestamps to track your dataset's revision history.",
+                            "og:description": "List all versions of a Friendli dataset via the API. Returns version IDs, tags, and creation timestamps to track your dataset's revision history.",
+                            "og:title": "List Versions",
+                            "sidebarTitle": "List Versions",
+                            "title": "List Versions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -650,6 +734,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get version info.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/get-version-info",
+                        "metadata": {
+                            "description": "Retrieve metadata for a specific version of a Friendli dataset via the API. Returns the version tag, creation date, and snapshot details.",
+                            "og:description": "Retrieve metadata for a specific version of a Friendli dataset via the API. Returns the version tag, creation date, and snapshot details.",
+                            "og:title": "Get Version Info",
+                            "sidebarTitle": "Get Version Info",
+                            "title": "Get Version Info",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -742,6 +840,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Delete a version.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/delete-a-version",
+                        "metadata": {
+                            "description": "Delete a specific version of a Friendli dataset by ID via the API. Permanently removes the version snapshot and its associated metadata.",
+                            "og:description": "Delete a specific version of a Friendli dataset by ID via the API. Permanently removes the version snapshot and its associated metadata.",
+                            "og:title": "Delete a Version",
+                            "sidebarTitle": "Delete a Version",
+                            "title": "Delete a Version",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -832,6 +944,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Create a new split.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/create-a-split",
+                        "metadata": {
+                            "description": "Create a new split within a Friendli dataset via the API. Use splits to organize data into training, validation, and test partitions.",
+                            "og:description": "Create a new split within a Friendli dataset via the API. Use splits to organize data into training, validation, and test partitions.",
+                            "og:title": "Create a New Split",
+                            "sidebarTitle": "Create a New Split",
+                            "title": "Create a New Split",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -933,6 +1059,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "List splits.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/list-splits",
+                        "metadata": {
+                            "description": "List all splits within a Friendli dataset via the API. Returns split IDs, names, and sample counts for training, validation, and test partitions.",
+                            "og:description": "List all splits within a Friendli dataset via the API. Returns split IDs, names, and sample counts for training, validation, and test partitions.",
+                            "og:title": "List Splits",
+                            "sidebarTitle": "List Splits",
+                            "title": "List Splits",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1023,6 +1163,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get split info.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/get-split-info",
+                        "metadata": {
+                            "description": "Retrieve metadata for a specific split within a Friendli dataset via the API. Returns the split name, sample count, and creation timestamp.",
+                            "og:description": "Retrieve metadata for a specific split within a Friendli dataset via the API. Returns the split name, sample count, and creation timestamp.",
+                            "og:title": "Get Split Info",
+                            "sidebarTitle": "Get Split Info",
+                            "title": "Get Split Info",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1113,6 +1267,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Delete a split.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/delete-split",
+                        "metadata": {
+                            "description": "Delete a split from a Friendli dataset by ID via the API. Permanently removes the split and all sample data it contains from the dataset.",
+                            "og:description": "Delete a split from a Friendli dataset by ID via the API. Permanently removes the split and all sample data it contains from the dataset.",
+                            "og:title": "Delete a Split",
+                            "sidebarTitle": "Delete a Split",
+                            "title": "Delete a Split",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1211,6 +1379,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Add samples to dataset.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/add-samples",
+                        "metadata": {
+                            "description": "Add new data samples to an existing Friendli dataset split via the API. Append training or evaluation data entries to your dataset programmatically.",
+                            "og:description": "Add new data samples to an existing Friendli dataset split via the API. Append training or evaluation data entries to your dataset programmatically.",
+                            "og:title": "Add Samples",
+                            "sidebarTitle": "Add Samples",
+                            "title": "Add Samples",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1315,6 +1497,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "List samples.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/list-samples",
+                        "metadata": {
+                            "description": "List data samples in a Friendli dataset split via the API. Paginate through training or evaluation entries with sample IDs and content previews.",
+                            "og:description": "List data samples in a Friendli dataset split via the API. Paginate through training or evaluation entries with sample IDs and content previews.",
+                            "og:title": "List Samples",
+                            "sidebarTitle": "List Samples",
+                            "title": "List Samples",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1421,6 +1617,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Update samples.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/update-samples",
+                        "metadata": {
+                            "description": "Update existing data samples in a Friendli dataset split via the API. Modify sample content by ID without deleting and re-adding entries.",
+                            "og:description": "Update existing data samples in a Friendli dataset split via the API. Modify sample content by ID without deleting and re-adding entries.",
+                            "og:title": "Update Samples",
+                            "sidebarTitle": "Update Samples",
+                            "title": "Update Samples",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1521,6 +1731,20 @@ class SyncDataset(BaseDataset, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Delete samples.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/delete-samples",
+                        "metadata": {
+                            "description": "Delete specific data samples from a Friendli dataset split via the API. Remove individual entries by sample ID from your training or evaluation data.",
+                            "og:description": "Delete specific data samples from a Friendli dataset split via the API. Remove individual entries by sample ID from your training or evaluation data.",
+                            "og:title": "Delete Samples",
+                            "sidebarTitle": "Delete Samples",
+                            "title": "Delete Samples",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1631,6 +1855,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Create a new dataset.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/create-a-new-dataset",
+                        "metadata": {
+                            "description": "Create a new dataset in Friendli Suite via the API. Initialize a dataset resource to organize training and evaluation data with splits and versions.",
+                            "og:description": "Create a new dataset in Friendli Suite via the API. Initialize a dataset resource to organize training and evaluation data with splits and versions.",
+                            "og:title": "Create a New Dataset",
+                            "sidebarTitle": "Create a New Dataset",
+                            "title": "Create a New Dataset",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1732,6 +1970,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "List datasets.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/list-datasets",
+                        "metadata": {
+                            "description": "List all datasets in your Friendli Suite project via the API. Returns dataset IDs, names, split counts, and creation timestamps for each entry.",
+                            "og:description": "List all datasets in your Friendli Suite project via the API. Returns dataset IDs, names, split counts, and creation timestamps for each entry.",
+                            "og:title": "List Datasets",
+                            "sidebarTitle": "List Datasets",
+                            "title": "List Datasets",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1820,6 +2072,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get dataset info.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/get-dataset-info",
+                        "metadata": {
+                            "description": "Retrieve metadata for a Friendli dataset by ID via the API. Returns the dataset name, modality, and creation and update timestamps.",
+                            "og:description": "Retrieve metadata for a Friendli dataset by ID via the API. Returns the dataset name, modality, and creation and update timestamps.",
+                            "og:title": "Get Dataset Info",
+                            "sidebarTitle": "Get Dataset Info",
+                            "title": "Get Dataset Info",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1908,6 +2174,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Delete a dataset.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/delete-dataset",
+                        "metadata": {
+                            "description": "Permanently delete a Friendli dataset by ID via the API. Removes the dataset along with all its splits, versions, and sample data.",
+                            "og:description": "Permanently delete a Friendli dataset by ID via the API. Removes the dataset along with all its splits, versions, and sample data.",
+                            "og:title": "Delete a Dataset",
+                            "sidebarTitle": "Delete a Dataset",
+                            "title": "Delete a Dataset",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1998,6 +2278,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Create a new version.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/create-a-version",
+                        "metadata": {
+                            "description": "Create a new version of a Friendli dataset via the API. Snapshot your current dataset state to track changes and enable reproducible training runs.",
+                            "og:description": "Create a new version of a Friendli dataset via the API. Snapshot your current dataset state to track changes and enable reproducible training runs.",
+                            "og:title": "Create a New Version",
+                            "sidebarTitle": "Create a New Version",
+                            "title": "Create a New Version",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2086,6 +2380,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "List versions.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/list-versions",
+                        "metadata": {
+                            "description": "List all versions of a Friendli dataset via the API. Returns version IDs, tags, and creation timestamps to track your dataset's revision history.",
+                            "og:description": "List all versions of a Friendli dataset via the API. Returns version IDs, tags, and creation timestamps to track your dataset's revision history.",
+                            "og:title": "List Versions",
+                            "sidebarTitle": "List Versions",
+                            "title": "List Versions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2178,6 +2486,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get version info.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/get-version-info",
+                        "metadata": {
+                            "description": "Retrieve metadata for a specific version of a Friendli dataset via the API. Returns the version tag, creation date, and snapshot details.",
+                            "og:description": "Retrieve metadata for a specific version of a Friendli dataset via the API. Returns the version tag, creation date, and snapshot details.",
+                            "og:title": "Get Version Info",
+                            "sidebarTitle": "Get Version Info",
+                            "title": "Get Version Info",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2270,6 +2592,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Delete a version.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/delete-a-version",
+                        "metadata": {
+                            "description": "Delete a specific version of a Friendli dataset by ID via the API. Permanently removes the version snapshot and its associated metadata.",
+                            "og:description": "Delete a specific version of a Friendli dataset by ID via the API. Permanently removes the version snapshot and its associated metadata.",
+                            "og:title": "Delete a Version",
+                            "sidebarTitle": "Delete a Version",
+                            "title": "Delete a Version",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2360,6 +2696,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Create a new split.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/create-a-split",
+                        "metadata": {
+                            "description": "Create a new split within a Friendli dataset via the API. Use splits to organize data into training, validation, and test partitions.",
+                            "og:description": "Create a new split within a Friendli dataset via the API. Use splits to organize data into training, validation, and test partitions.",
+                            "og:title": "Create a New Split",
+                            "sidebarTitle": "Create a New Split",
+                            "title": "Create a New Split",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2461,6 +2811,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "List splits.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/list-splits",
+                        "metadata": {
+                            "description": "List all splits within a Friendli dataset via the API. Returns split IDs, names, and sample counts for training, validation, and test partitions.",
+                            "og:description": "List all splits within a Friendli dataset via the API. Returns split IDs, names, and sample counts for training, validation, and test partitions.",
+                            "og:title": "List Splits",
+                            "sidebarTitle": "List Splits",
+                            "title": "List Splits",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2551,6 +2915,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get split info.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/get-split-info",
+                        "metadata": {
+                            "description": "Retrieve metadata for a specific split within a Friendli dataset via the API. Returns the split name, sample count, and creation timestamp.",
+                            "og:description": "Retrieve metadata for a specific split within a Friendli dataset via the API. Returns the split name, sample count, and creation timestamp.",
+                            "og:title": "Get Split Info",
+                            "sidebarTitle": "Get Split Info",
+                            "title": "Get Split Info",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2641,6 +3019,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Delete a split.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/delete-split",
+                        "metadata": {
+                            "description": "Delete a split from a Friendli dataset by ID via the API. Permanently removes the split and all sample data it contains from the dataset.",
+                            "og:description": "Delete a split from a Friendli dataset by ID via the API. Permanently removes the split and all sample data it contains from the dataset.",
+                            "og:title": "Delete a Split",
+                            "sidebarTitle": "Delete a Split",
+                            "title": "Delete a Split",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2739,6 +3131,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Add samples to dataset.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/add-samples",
+                        "metadata": {
+                            "description": "Add new data samples to an existing Friendli dataset split via the API. Append training or evaluation data entries to your dataset programmatically.",
+                            "og:description": "Add new data samples to an existing Friendli dataset split via the API. Append training or evaluation data entries to your dataset programmatically.",
+                            "og:title": "Add Samples",
+                            "sidebarTitle": "Add Samples",
+                            "title": "Add Samples",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2843,6 +3249,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "List samples.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/list-samples",
+                        "metadata": {
+                            "description": "List data samples in a Friendli dataset split via the API. Paginate through training or evaluation entries with sample IDs and content previews.",
+                            "og:description": "List data samples in a Friendli dataset split via the API. Paginate through training or evaluation entries with sample IDs and content previews.",
+                            "og:title": "List Samples",
+                            "sidebarTitle": "List Samples",
+                            "title": "List Samples",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2949,6 +3369,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Update samples.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/update-samples",
+                        "metadata": {
+                            "description": "Update existing data samples in a Friendli dataset split via the API. Modify sample content by ID without deleting and re-adding entries.",
+                            "og:description": "Update existing data samples in a Friendli dataset split via the API. Modify sample content by ID without deleting and re-adding entries.",
+                            "og:title": "Update Samples",
+                            "sidebarTitle": "Update Samples",
+                            "title": "Update Samples",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3049,6 +3483,20 @@ class AsyncDataset(BaseDataset, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDataset"],
+                extensions={
+                    "x-mint": {
+                        "content": "Delete samples.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dataset/delete-samples",
+                        "metadata": {
+                            "description": "Delete specific data samples from a Friendli dataset split via the API. Remove individual entries by sample ID from your training or evaluation data.",
+                            "og:description": "Delete specific data samples from a Friendli dataset split via the API. Remove individual entries by sample ID from your training or evaluation data.",
+                            "og:title": "Delete Samples",
+                            "sidebarTitle": "Delete Samples",
+                            "title": "Delete Samples",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

@@ -112,6 +112,20 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Embeddings"],
+                extensions={
+                    "x-mint": {
+                        "content": "Creates an embedding vector representing the input text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/inference/embeddings",
+                        "metadata": {
+                            "description": "Generate text embedding vectors using your Friendli Dedicated Endpoint. Convert text into dense vector representations for search and similarity.",
+                            "og:description": "Generate text embedding vectors using your Friendli Dedicated Endpoint. Convert text into dense vector representations for search and similarity.",
+                            "og:title": "SyncDedicated Embeddings",
+                            "sidebarTitle": "SyncEmbeddings",
+                            "title": "SyncDedicated Embeddings",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -226,6 +240,20 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Embeddings"],
+                extensions={
+                    "x-mint": {
+                        "content": "Creates an embedding vector representing the input text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/inference/embeddings",
+                        "metadata": {
+                            "description": "Generate text embedding vectors using your Friendli Dedicated Endpoint. Convert text into dense vector representations for search and similarity.",
+                            "og:description": "Generate text embedding vectors using your Friendli Dedicated Endpoint. Convert text into dense vector representations for search and similarity.",
+                            "og:title": "AsyncDedicated Embeddings",
+                            "sidebarTitle": "AsyncEmbeddings",
+                            "title": "AsyncDedicated Embeddings",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

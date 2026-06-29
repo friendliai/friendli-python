@@ -1,4 +1,4 @@
-# Copyright (c) 2025-present, FriendliAI Inc. All rights reserved.
+# Copyright (c) 2025-present, FriendliAI Corp. All rights reserved.
 
 """Friendli Python SDK Utils."""
 

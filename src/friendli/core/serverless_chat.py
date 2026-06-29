@@ -240,6 +240,20 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncServerless.Chat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/chat-completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "href": "/openapi/model-apis/chat-completions",
+                        "metadata": {
+                            "description": "Send a conversation to Friendli Model APIs and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:description": "Send a conversation to Friendli Model APIs and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:title": "Model APIs Chat Completions",
+                            "sidebarTitle": "Chat Completions",
+                            "title": "Model APIs Chat Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -484,6 +498,19 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncServerless.Chat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/chat-completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "metadata": {
+                            "description": "Send a conversation to Friendli Model APIs and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:description": "Send a conversation to Friendli Model APIs and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:title": "Model APIs Chat Stream Completions",
+                            "sidebarTitle": "Stream Chat Completions",
+                            "title": "Model APIs Chat Stream Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -493,8 +520,8 @@ class SyncServerlessChat(BaseServerlessChat, SyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerChatCompletionStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerChatCompletionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -735,6 +762,20 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncServerless.Chat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/chat-completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "href": "/openapi/model-apis/chat-completions",
+                        "metadata": {
+                            "description": "Send a conversation to Friendli Model APIs and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:description": "Send a conversation to Friendli Model APIs and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:title": "Model APIs Chat Completions",
+                            "sidebarTitle": "Chat Completions",
+                            "title": "Model APIs Chat Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -979,6 +1020,19 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncServerless.Chat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/chat-completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "metadata": {
+                            "description": "Send a conversation to Friendli Model APIs and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:description": "Send a conversation to Friendli Model APIs and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:title": "Model APIs Chat Stream Completions",
+                            "sidebarTitle": "Stream Chat Completions",
+                            "title": "Model APIs Chat Stream Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -988,8 +1042,8 @@ class AsyncServerlessChat(BaseServerlessChat, AsyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerChatCompletionStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerChatCompletionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

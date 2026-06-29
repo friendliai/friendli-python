@@ -110,6 +110,20 @@ class SyncDedicatedClassification(BaseDedicatedClassification, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Classification"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a text input, the model classifies it into categories.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/inference/text-classification",
+                        "metadata": {
+                            "description": "Classify text into categories using your Friendli Dedicated Endpoint. Send text input and receive predicted labels with per-class probabilities.",
+                            "og:description": "Classify text into categories using your Friendli Dedicated Endpoint. Send text input and receive predicted labels with per-class probabilities.",
+                            "og:title": "SyncDedicated Text Classification",
+                            "sidebarTitle": "Text Classification",
+                            "title": "SyncDedicated Text Classification",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -224,6 +238,20 @@ class AsyncDedicatedClassification(BaseDedicatedClassification, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Classification"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a text input, the model classifies it into categories.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/inference/text-classification",
+                        "metadata": {
+                            "description": "Classify text into categories using your Friendli Dedicated Endpoint. Send text input and receive predicted labels with per-class probabilities.",
+                            "og:description": "Classify text into categories using your Friendli Dedicated Endpoint. Send text input and receive predicted labels with per-class probabilities.",
+                            "og:title": "AsyncDedicated Text Classification",
+                            "sidebarTitle": "Text Classification",
+                            "title": "AsyncDedicated Text Classification",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

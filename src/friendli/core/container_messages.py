@@ -184,6 +184,21 @@ class SyncContainerMessages(BaseContainerMessages, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncContainer.Messages"],
+                extensions={
+                    "x-mint": {
+                        "content": "Send Anthropic Messages-style JSON.\nDetailed request/response field descriptions are provided in the OpenAPI schema below on this page.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/messages-chunk-object).\n\n<Warning>Server-side tools are not supported in the Messages API. In `tools`, only custom/client function tools are used; non-`custom` tool types are ignored.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/container/messages",
+                        "metadata": {
+                            "description": "Use the Anthropic Messages-style API with Friendli Container. Send structured message payloads to your self-hosted model and receive responses.",
+                            "og:description": "Use the Anthropic Messages-style API with Friendli Container. Send structured message payloads to your self-hosted model and receive responses.",
+                            "og:title": "SyncContainer Messages",
+                            "sidebarTitle": "Messages",
+                            "tag": "Beta",
+                            "title": "SyncContainer Messages",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -376,6 +391,21 @@ class AsyncContainerMessages(BaseContainerMessages, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncContainer.Messages"],
+                extensions={
+                    "x-mint": {
+                        "content": "Send Anthropic Messages-style JSON.\nDetailed request/response field descriptions are provided in the OpenAPI schema below on this page.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/messages-chunk-object).\n\n<Warning>Server-side tools are not supported in the Messages API. In `tools`, only custom/client function tools are used; non-`custom` tool types are ignored.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/container/messages",
+                        "metadata": {
+                            "description": "Use the Anthropic Messages-style API with Friendli Container. Send structured message payloads to your self-hosted model and receive responses.",
+                            "og:description": "Use the Anthropic Messages-style API with Friendli Container. Send structured message payloads to your self-hosted model and receive responses.",
+                            "og:title": "AsyncContainer Messages",
+                            "sidebarTitle": "Messages",
+                            "tag": "Beta",
+                            "title": "AsyncContainer Messages",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

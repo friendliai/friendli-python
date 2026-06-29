@@ -100,6 +100,20 @@ class SyncContainerClassification(BaseContainerClassification, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncContainer.Classification"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a text input, the model classifies it into categories.",
+                        "href": "/openapi/container/text-classification",
+                        "metadata": {
+                            "description": "Classify text into categories using Friendli Container. Run text classification models on your own infrastructure with full data control and privacy.",
+                            "og:description": "Classify text into categories using Friendli Container. Run text classification models on your own infrastructure with full data control and privacy.",
+                            "og:title": "SyncContainer Text Classification",
+                            "sidebarTitle": "Text Classification",
+                            "title": "SyncContainer Text Classification",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -204,6 +218,20 @@ class AsyncContainerClassification(BaseContainerClassification, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncContainer.Classification"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a text input, the model classifies it into categories.",
+                        "href": "/openapi/container/text-classification",
+                        "metadata": {
+                            "description": "Classify text into categories using Friendli Container. Run text classification models on your own infrastructure with full data control and privacy.",
+                            "og:description": "Classify text into categories using Friendli Container. Run text classification models on your own infrastructure with full data control and privacy.",
+                            "og:title": "AsyncContainer Text Classification",
+                            "sidebarTitle": "Text Classification",
+                            "title": "AsyncContainer Text Classification",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

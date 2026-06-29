@@ -16,7 +16,7 @@ class BaseCost(BaseSDK):
 
 
 class SyncCost(BaseCost, SyncSDK):
-    def get_costs(
+    def get_cost(
         self,
         *,
         start_time: datetime,
@@ -53,7 +53,7 @@ class SyncCost(BaseCost, SyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.GetCostsRequest(
+        request = models.GetCostRequest(
             start_time=start_time,
             bucket_width=bucket_width,
             end_time=end_time,
@@ -92,11 +92,25 @@ class SyncCost(BaseCost, SyncSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getCosts",
+                operation_id="getCost",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncCost"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get cost details for the team.\n\nIf `X-Friendli-Team` is omitted, this endpoint uses the default team configured in Friendli Suite.\n\nThere may be a slight delay between usage and when it shows up in cost. If you need to call this endpoint repeatedly, wait at least 5 minutes between calls.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/administration/usage/cost",
+                        "metadata": {
+                            "description": "Get cost details for the team.",
+                            "og:description": "Get cost details for the team.",
+                            "og:title": "SyncCost",
+                            "sidebarTitle": "SyncCost",
+                            "title": "SyncCost",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -114,7 +128,7 @@ class SyncCost(BaseCost, SyncSDK):
 
 
 class AsyncCost(BaseCost, AsyncSDK):
-    async def get_costs(
+    async def get_cost(
         self,
         *,
         start_time: datetime,
@@ -151,7 +165,7 @@ class AsyncCost(BaseCost, AsyncSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-        request = models.GetCostsRequest(
+        request = models.GetCostRequest(
             start_time=start_time,
             bucket_width=bucket_width,
             end_time=end_time,
@@ -190,11 +204,25 @@ class AsyncCost(BaseCost, AsyncSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getCosts",
+                operation_id="getCost",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncCost"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get cost details for the team.\n\nIf `X-Friendli-Team` is omitted, this endpoint uses the default team configured in Friendli Suite.\n\nThere may be a slight delay between usage and when it shows up in cost. If you need to call this endpoint repeatedly, wait at least 5 minutes between calls.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/administration/usage/cost",
+                        "metadata": {
+                            "description": "Get cost details for the team.",
+                            "og:description": "Get cost details for the team.",
+                            "og:title": "AsyncCost",
+                            "sidebarTitle": "AsyncCost",
+                            "title": "AsyncCost",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

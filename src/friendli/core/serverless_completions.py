@@ -94,6 +94,20 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncServerless.Completions"],
+                extensions={
+                    "x-mint": {
+                        "content": "Generate text based on the given text prompt.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "href": "/openapi/model-apis/completions",
+                        "metadata": {
+                            "description": "Generate text completions from a prompt using Friendli Model APIs. Supports streaming, token limits, temperature, and stop sequences.",
+                            "og:description": "Generate text completions from a prompt using Friendli Model APIs. Supports streaming, token limits, temperature, and stop sequences.",
+                            "og:title": "Model APIs Completions",
+                            "sidebarTitle": "Completions",
+                            "title": "Model APIs Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -190,6 +204,19 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncServerless.Completions"],
+                extensions={
+                    "x-mint": {
+                        "content": "Generate text based on the given text prompt.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "metadata": {
+                            "description": "Generate text completions from a prompt using Friendli Model APIs. Supports streaming, token limits, temperature, and stop sequences.",
+                            "og:description": "Generate text completions from a prompt using Friendli Model APIs. Supports streaming, token limits, temperature, and stop sequences.",
+                            "og:title": "Model APIs Stream Completions",
+                            "sidebarTitle": "Stream Completions",
+                            "title": "Model APIs Stream Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -199,8 +226,8 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerCompletionsStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerCompletionsStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -295,6 +322,20 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncServerless.Completions"],
+                extensions={
+                    "x-mint": {
+                        "content": "Generate text based on the given text prompt.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "href": "/openapi/model-apis/completions",
+                        "metadata": {
+                            "description": "Generate text completions from a prompt using Friendli Model APIs. Supports streaming, token limits, temperature, and stop sequences.",
+                            "og:description": "Generate text completions from a prompt using Friendli Model APIs. Supports streaming, token limits, temperature, and stop sequences.",
+                            "og:title": "Model APIs Completions",
+                            "sidebarTitle": "Completions",
+                            "title": "Model APIs Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -391,6 +432,19 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncServerless.Completions"],
+                extensions={
+                    "x-mint": {
+                        "content": "Generate text based on the given text prompt.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "metadata": {
+                            "description": "Generate text completions from a prompt using Friendli Model APIs. Supports streaming, token limits, temperature, and stop sequences.",
+                            "og:description": "Generate text completions from a prompt using Friendli Model APIs. Supports streaming, token limits, temperature, and stop sequences.",
+                            "og:title": "Model APIs Stream Completions",
+                            "sidebarTitle": "Stream Completions",
+                            "title": "Model APIs Stream Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -400,8 +454,8 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerCompletionsStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerCompletionsStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

@@ -622,7 +622,7 @@ if TYPE_CHECKING:
     from .get_infoop import GetInfoRequest, GetInfoRequestTypedDict
     from .get_splitop import GetSplitRequest, GetSplitRequestTypedDict
     from .get_versionop import GetVersionRequest, GetVersionRequestTypedDict
-    from .getcostsop import GetCostsRequest, GetCostsRequestTypedDict
+    from .getcostop import GetCostRequest, GetCostRequestTypedDict
     from .httpvalidationerror import HTTPValidationError, HTTPValidationErrorData
     from .imagecontent import ImageContent, ImageContentTypedDict
     from .imagedata import ImageData, ImageDataTypedDict
@@ -1414,8 +1414,8 @@ __all__ = [
     "FunctionResult",
     "FunctionResultTypedDict",
     "FunctionTypedDict",
-    "GetCostsRequest",
-    "GetCostsRequestTypedDict",
+    "GetCostRequest",
+    "GetCostRequestTypedDict",
     "GetDatasetRequest",
     "GetDatasetRequestTypedDict",
     "GetDownloadURLRequest",
@@ -2124,8 +2124,8 @@ _dynamic_imports: dict[str, str] = {
     "GetSplitRequestTypedDict": ".get_splitop",
     "GetVersionRequest": ".get_versionop",
     "GetVersionRequestTypedDict": ".get_versionop",
-    "GetCostsRequest": ".getcostsop",
-    "GetCostsRequestTypedDict": ".getcostsop",
+    "GetCostRequest": ".getcostop",
+    "GetCostRequestTypedDict": ".getcostop",
     "HTTPValidationError": ".httpvalidationerror",
     "HTTPValidationErrorData": ".httpvalidationerror",
     "ImageContent": ".imagecontent",

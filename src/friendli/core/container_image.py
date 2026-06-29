@@ -112,6 +112,20 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncContainer.Image"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a description, the model generates image.",
+                        "href": "/openapi/container/image-generations",
+                        "metadata": {
+                            "description": "Generate images from text descriptions using Friendli Container. Run image generation models locally with configurable size and output parameters.",
+                            "og:description": "Generate images from text descriptions using Friendli Container. Run image generation models locally with configurable size and output parameters.",
+                            "og:title": "SyncContainer Image Generations",
+                            "sidebarTitle": "Image Generations",
+                            "title": "SyncContainer Image Generations",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -220,6 +234,20 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncContainer.Image"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an image and a description, the model edits the image.",
+                        "href": "/openapi/container/image-edits",
+                        "metadata": {
+                            "description": "Edit images with text prompts using Friendli Container. Upload an image and describe desired modifications to the self-hosted model on your GPUs.",
+                            "og:description": "Edit images with text prompts using Friendli Container. Upload an image and describe desired modifications to the self-hosted model on your GPUs.",
+                            "og:title": "SyncContainer Image Edits",
+                            "sidebarTitle": "Image Edits",
+                            "title": "SyncContainer Image Edits",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -336,6 +364,20 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncContainer.Image"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a description, the model generates image.",
+                        "href": "/openapi/container/image-generations",
+                        "metadata": {
+                            "description": "Generate images from text descriptions using Friendli Container. Run image generation models locally with configurable size and output parameters.",
+                            "og:description": "Generate images from text descriptions using Friendli Container. Run image generation models locally with configurable size and output parameters.",
+                            "og:title": "AsyncContainer Image Generations",
+                            "sidebarTitle": "Image Generations",
+                            "title": "AsyncContainer Image Generations",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -444,6 +486,20 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncContainer.Image"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an image and a description, the model edits the image.",
+                        "href": "/openapi/container/image-edits",
+                        "metadata": {
+                            "description": "Edit images with text prompts using Friendli Container. Upload an image and describe desired modifications to the self-hosted model on your GPUs.",
+                            "og:description": "Edit images with text prompts using Friendli Container. Upload an image and describe desired modifications to the self-hosted model on your GPUs.",
+                            "og:title": "AsyncContainer Image Edits",
+                            "sidebarTitle": "Image Edits",
+                            "title": "AsyncContainer Image Edits",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

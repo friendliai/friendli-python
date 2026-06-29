@@ -122,6 +122,20 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Audio"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an audio file, the model transcribes it into text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/inference/audio-transcriptions",
+                        "metadata": {
+                            "description": "Transcribe audio files to text using your Friendli Dedicated Endpoint. Upload an audio file and receive a text transcription from the deployed model.",
+                            "og:description": "Transcribe audio files to text using your Friendli Dedicated Endpoint. Upload an audio file and receive a text transcription from the deployed model.",
+                            "og:title": "SyncDedicated Audio Transcriptions",
+                            "sidebarTitle": "Audio Transcriptions",
+                            "title": "SyncDedicated Audio Transcriptions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -246,6 +260,19 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Audio"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an audio file, the model transcribes it into text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/audio-transcriptions-chunk-object).",
+                        "metadata": {
+                            "description": "Transcribe audio files to text using your Friendli Dedicated Endpoint. Upload an audio file and receive a text transcription from the deployed model.",
+                            "og:description": "Transcribe audio files to text using your Friendli Dedicated Endpoint. Upload an audio file and receive a text transcription from the deployed model.",
+                            "og:title": "SyncDedicated Audio Transcriptions (Stream)",
+                            "sidebarTitle": "Stream Audio Transcriptions",
+                            "title": "SyncDedicated Audio Transcriptions (Stream)",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -255,8 +282,8 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerAudioTranscriptionStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerAudioTranscriptionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -379,6 +406,20 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Audio"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an audio file, the model transcribes it into text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/inference/audio-transcriptions",
+                        "metadata": {
+                            "description": "Transcribe audio files to text using your Friendli Dedicated Endpoint. Upload an audio file and receive a text transcription from the deployed model.",
+                            "og:description": "Transcribe audio files to text using your Friendli Dedicated Endpoint. Upload an audio file and receive a text transcription from the deployed model.",
+                            "og:title": "AsyncDedicated Audio Transcriptions",
+                            "sidebarTitle": "Audio Transcriptions",
+                            "title": "AsyncDedicated Audio Transcriptions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -505,6 +546,19 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Audio"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an audio file, the model transcribes it into text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/audio-transcriptions-chunk-object).",
+                        "metadata": {
+                            "description": "Transcribe audio files to text using your Friendli Dedicated Endpoint. Upload an audio file and receive a text transcription from the deployed model.",
+                            "og:description": "Transcribe audio files to text using your Friendli Dedicated Endpoint. Upload an audio file and receive a text transcription from the deployed model.",
+                            "og:title": "AsyncDedicated Audio Transcriptions (Stream)",
+                            "sidebarTitle": "Stream Audio Transcriptions",
+                            "title": "AsyncDedicated Audio Transcriptions (Stream)",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -514,8 +568,8 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerAudioTranscriptionStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerAudioTranscriptionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

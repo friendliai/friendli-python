@@ -116,6 +116,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Create an endpoint from Weights & Biases artifact.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/endpoint/wandb-artifact-create",
+                        "metadata": {
+                            "description": "Create a Friendli Dedicated Endpoint from a Weights & Biases artifact via the API. Deploy W&B-managed models directly to dedicated GPU hardware.",
+                            "og:description": "Create a Friendli Dedicated Endpoint from a Weights & Biases artifact via the API. Deploy W&B-managed models directly to dedicated GPU hardware.",
+                            "og:title": "SyncDedicated Create Endpoint from W&B Artifact",
+                            "sidebarTitle": "Create Endpoint from W&B Artifact",
+                            "title": "SyncDedicated Create Endpoint from W&B Artifact",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -267,6 +281,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Create a Dedicated Endpoint deployment for a Hugging Face model.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/create",
+                        "metadata": {
+                            "description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face model via the API. Specify GPU type, replica count, and model configuration.",
+                            "og:description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face model via the API. Specify GPU type, replica count, and model configuration.",
+                            "og:title": "SyncDedicated Create Endpoint",
+                            "sidebarTitle": "Create an Endpoint with Hugging Face Model",
+                            "title": "SyncDedicated Create Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -356,6 +384,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "List Dedicated Endpoint deployments.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/list",
+                        "metadata": {
+                            "description": "List all Friendli Dedicated Endpoint deployments in your project. Returns endpoint IDs, statuses, model names, and GPU configurations.",
+                            "og:description": "List all Friendli Dedicated Endpoint deployments in your project. Returns endpoint IDs, statuses, model names, and GPU configurations.",
+                            "og:title": "SyncDedicated List Endpoints",
+                            "sidebarTitle": "List Endpoints",
+                            "title": "SyncDedicated List Endpoints",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -440,6 +482,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an endpoint ID, return its specification.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/get-spec",
+                        "metadata": {
+                            "description": "Retrieve the full specification of a Friendli Dedicated Endpoint by ID, including model config, GPU type, replica count, and deployment settings.",
+                            "og:description": "Retrieve the full specification of a Friendli Dedicated Endpoint by ID, including model config, GPU type, replica count, and deployment settings.",
+                            "og:title": "SyncDedicated Get Endpoint",
+                            "sidebarTitle": "Retrieve an Endpoint Specification",
+                            "title": "SyncDedicated Get Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -589,6 +645,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Update a Dedicated Endpoint deployment with new configuration.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/update",
+                        "metadata": {
+                            "description": "Update a Friendli Dedicated Endpoint with a new model, GPU type, or replica count. Changes are applied as a new version in the deployment history.",
+                            "og:description": "Update a Friendli Dedicated Endpoint with a new model, GPU type, or replica count. Changes are applied as a new version in the deployment history.",
+                            "og:title": "SyncDedicated Update Endpoint",
+                            "sidebarTitle": "Update an Endpoint with New Configuration",
+                            "title": "SyncDedicated Update Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -671,6 +741,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Delete an endpoint.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/delete",
+                        "metadata": {
+                            "description": "Permanently delete a Friendli Dedicated Endpoint deployment by ID. This stops the endpoint and releases all associated GPU resources immediately.",
+                            "og:description": "Permanently delete a Friendli Dedicated Endpoint deployment by ID. This stops the endpoint and releases all associated GPU resources immediately.",
+                            "og:title": "SyncDedicated Delete Endpoint",
+                            "sidebarTitle": "Delete an Endpoint",
+                            "title": "SyncDedicated Delete Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -766,6 +850,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an endpoint ID, return its version history.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/get-version",
+                        "metadata": {
+                            "description": "Retrieve the version history of a Friendli Dedicated Endpoint by ID. View past configurations and rollback points for deployment tracking.",
+                            "og:description": "Retrieve the version history of a Friendli Dedicated Endpoint by ID. View past configurations and rollback points for deployment tracking.",
+                            "og:title": "SyncDedicated Get Endpoint Version",
+                            "sidebarTitle": "Retrieve Endpoint Version History",
+                            "title": "SyncDedicated Get Endpoint Version",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -850,6 +948,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an endpoint ID, return its current status.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/get-status",
+                        "metadata": {
+                            "description": "Check the current status of a Friendli Dedicated Endpoint by ID. Returns the lifecycle state such as running, sleeping, initializing, or terminated.",
+                            "og:description": "Check the current status of a Friendli Dedicated Endpoint by ID. Returns the lifecycle state such as running, sleeping, initializing, or terminated.",
+                            "og:title": "SyncDedicated Get Endpoint Status",
+                            "sidebarTitle": "Retrieve an Endpoint Status",
+                            "title": "SyncDedicated Get Endpoint Status",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -932,6 +1044,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Put a Dedicated Endpoint to sleep mode.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/sleep",
+                        "metadata": {
+                            "description": "Put a Friendli Dedicated Endpoint into sleep mode by ID. The endpoint stops serving but retains its configuration for quick wake-up later.",
+                            "og:description": "Put a Friendli Dedicated Endpoint into sleep mode by ID. The endpoint stops serving but retains its configuration for quick wake-up later.",
+                            "og:title": "SyncDedicated Sleep Endpoint",
+                            "sidebarTitle": "Sleep an Endpoint",
+                            "title": "SyncDedicated Sleep Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1014,6 +1140,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Wake up a sleeping Dedicated Endpoint.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/wake",
+                        "metadata": {
+                            "description": "Wake up a sleeping Friendli Dedicated Endpoint by ID. The endpoint resumes serving with its previous model and GPU configuration intact.",
+                            "og:description": "Wake up a sleeping Friendli Dedicated Endpoint by ID. The endpoint resumes serving with its previous model and GPU configuration intact.",
+                            "og:title": "SyncDedicated Wake Endpoint",
+                            "sidebarTitle": "Wake Up an Endpoint",
+                            "title": "SyncDedicated Wake Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1096,6 +1236,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Terminate an endpoint.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/terminate",
+                        "metadata": {
+                            "description": "Terminate a running Friendli Dedicated Endpoint by ID. Stops all inference and releases GPU resources while preserving the endpoint configuration.",
+                            "og:description": "Terminate a running Friendli Dedicated Endpoint by ID. Stops all inference and releases GPU resources while preserving the endpoint configuration.",
+                            "og:title": "SyncDedicated Terminate Endpoint",
+                            "sidebarTitle": "Terminate an Endpoint",
+                            "title": "SyncDedicated Terminate Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1178,6 +1332,20 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Restart a failed or terminated Dedicated Endpoint.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/restart",
+                        "metadata": {
+                            "description": "Restart a failed or terminated Friendli Dedicated Endpoint by ID. The endpoint re-initializes with the same model and GPU configuration.",
+                            "og:description": "Restart a failed or terminated Friendli Dedicated Endpoint by ID. The endpoint re-initializes with the same model and GPU configuration.",
+                            "og:title": "SyncDedicated Restart Endpoint",
+                            "sidebarTitle": "Restart an Endpoint",
+                            "title": "SyncDedicated Restart Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1295,6 +1463,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Create an endpoint from Weights & Biases artifact.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/dedicated/endpoint/wandb-artifact-create",
+                        "metadata": {
+                            "description": "Create a Friendli Dedicated Endpoint from a Weights & Biases artifact via the API. Deploy W&B-managed models directly to dedicated GPU hardware.",
+                            "og:description": "Create a Friendli Dedicated Endpoint from a Weights & Biases artifact via the API. Deploy W&B-managed models directly to dedicated GPU hardware.",
+                            "og:title": "AsyncDedicated Create Endpoint from W&B Artifact",
+                            "sidebarTitle": "Create Endpoint from W&B Artifact",
+                            "title": "AsyncDedicated Create Endpoint from W&B Artifact",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1446,6 +1628,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Create a Dedicated Endpoint deployment for a Hugging Face model.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/create",
+                        "metadata": {
+                            "description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face model via the API. Specify GPU type, replica count, and model configuration.",
+                            "og:description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face model via the API. Specify GPU type, replica count, and model configuration.",
+                            "og:title": "AsyncDedicated Create Endpoint",
+                            "sidebarTitle": "Create an Endpoint with Hugging Face Model",
+                            "title": "AsyncDedicated Create Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1535,6 +1731,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "List Dedicated Endpoint deployments.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/list",
+                        "metadata": {
+                            "description": "List all Friendli Dedicated Endpoint deployments in your project. Returns endpoint IDs, statuses, model names, and GPU configurations.",
+                            "og:description": "List all Friendli Dedicated Endpoint deployments in your project. Returns endpoint IDs, statuses, model names, and GPU configurations.",
+                            "og:title": "AsyncDedicated List Endpoints",
+                            "sidebarTitle": "List Endpoints",
+                            "title": "AsyncDedicated List Endpoints",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1619,6 +1829,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an endpoint ID, return its specification.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/get-spec",
+                        "metadata": {
+                            "description": "Retrieve the full specification of a Friendli Dedicated Endpoint by ID, including model config, GPU type, replica count, and deployment settings.",
+                            "og:description": "Retrieve the full specification of a Friendli Dedicated Endpoint by ID, including model config, GPU type, replica count, and deployment settings.",
+                            "og:title": "AsyncDedicated Get Endpoint",
+                            "sidebarTitle": "Retrieve an Endpoint Specification",
+                            "title": "AsyncDedicated Get Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1768,6 +1992,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Update a Dedicated Endpoint deployment with new configuration.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/update",
+                        "metadata": {
+                            "description": "Update a Friendli Dedicated Endpoint with a new model, GPU type, or replica count. Changes are applied as a new version in the deployment history.",
+                            "og:description": "Update a Friendli Dedicated Endpoint with a new model, GPU type, or replica count. Changes are applied as a new version in the deployment history.",
+                            "og:title": "AsyncDedicated Update Endpoint",
+                            "sidebarTitle": "Update an Endpoint with New Configuration",
+                            "title": "AsyncDedicated Update Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1850,6 +2088,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Delete an endpoint.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/delete",
+                        "metadata": {
+                            "description": "Permanently delete a Friendli Dedicated Endpoint deployment by ID. This stops the endpoint and releases all associated GPU resources immediately.",
+                            "og:description": "Permanently delete a Friendli Dedicated Endpoint deployment by ID. This stops the endpoint and releases all associated GPU resources immediately.",
+                            "og:title": "AsyncDedicated Delete Endpoint",
+                            "sidebarTitle": "Delete an Endpoint",
+                            "title": "AsyncDedicated Delete Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1945,6 +2197,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an endpoint ID, return its version history.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/get-version",
+                        "metadata": {
+                            "description": "Retrieve the version history of a Friendli Dedicated Endpoint by ID. View past configurations and rollback points for deployment tracking.",
+                            "og:description": "Retrieve the version history of a Friendli Dedicated Endpoint by ID. View past configurations and rollback points for deployment tracking.",
+                            "og:title": "AsyncDedicated Get Endpoint Version",
+                            "sidebarTitle": "Retrieve Endpoint Version History",
+                            "title": "AsyncDedicated Get Endpoint Version",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2029,6 +2295,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an endpoint ID, return its current status.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/get-status",
+                        "metadata": {
+                            "description": "Check the current status of a Friendli Dedicated Endpoint by ID. Returns the lifecycle state such as running, sleeping, initializing, or terminated.",
+                            "og:description": "Check the current status of a Friendli Dedicated Endpoint by ID. Returns the lifecycle state such as running, sleeping, initializing, or terminated.",
+                            "og:title": "AsyncDedicated Get Endpoint Status",
+                            "sidebarTitle": "Retrieve an Endpoint Status",
+                            "title": "AsyncDedicated Get Endpoint Status",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2111,6 +2391,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Put a Dedicated Endpoint to sleep mode.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/sleep",
+                        "metadata": {
+                            "description": "Put a Friendli Dedicated Endpoint into sleep mode by ID. The endpoint stops serving but retains its configuration for quick wake-up later.",
+                            "og:description": "Put a Friendli Dedicated Endpoint into sleep mode by ID. The endpoint stops serving but retains its configuration for quick wake-up later.",
+                            "og:title": "AsyncDedicated Sleep Endpoint",
+                            "sidebarTitle": "Sleep an Endpoint",
+                            "title": "AsyncDedicated Sleep Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2193,6 +2487,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Wake up a sleeping Dedicated Endpoint.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/wake",
+                        "metadata": {
+                            "description": "Wake up a sleeping Friendli Dedicated Endpoint by ID. The endpoint resumes serving with its previous model and GPU configuration intact.",
+                            "og:description": "Wake up a sleeping Friendli Dedicated Endpoint by ID. The endpoint resumes serving with its previous model and GPU configuration intact.",
+                            "og:title": "AsyncDedicated Wake Endpoint",
+                            "sidebarTitle": "Wake Up an Endpoint",
+                            "title": "AsyncDedicated Wake Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2275,6 +2583,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Terminate an endpoint.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/terminate",
+                        "metadata": {
+                            "description": "Terminate a running Friendli Dedicated Endpoint by ID. Stops all inference and releases GPU resources while preserving the endpoint configuration.",
+                            "og:description": "Terminate a running Friendli Dedicated Endpoint by ID. Stops all inference and releases GPU resources while preserving the endpoint configuration.",
+                            "og:title": "AsyncDedicated Terminate Endpoint",
+                            "sidebarTitle": "Terminate an Endpoint",
+                            "title": "AsyncDedicated Terminate Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2357,6 +2679,20 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Endpoint"],
+                extensions={
+                    "x-mint": {
+                        "content": "Restart a failed or terminated Dedicated Endpoint.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/endpoint/restart",
+                        "metadata": {
+                            "description": "Restart a failed or terminated Friendli Dedicated Endpoint by ID. The endpoint re-initializes with the same model and GPU configuration.",
+                            "og:description": "Restart a failed or terminated Friendli Dedicated Endpoint by ID. The endpoint re-initializes with the same model and GPU configuration.",
+                            "og:title": "AsyncDedicated Restart Endpoint",
+                            "sidebarTitle": "Restart an Endpoint",
+                            "title": "AsyncDedicated Restart Endpoint",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

@@ -197,6 +197,21 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Messages"],
+                extensions={
+                    "x-mint": {
+                        "content": "Send Anthropic Messages-style JSON.\nDetailed request/response field descriptions are provided in the OpenAPI schema below on this page.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/messages-chunk-object).\n\n<Warning>Server-side tools are not supported in the Messages API. In `tools`, only custom/client function tools are used; non-`custom` tool types are ignored.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/inference/messages",
+                        "metadata": {
+                            "description": "Use the Anthropic Messages-style API on your Friendli Dedicated Endpoint. Send structured message payloads and receive assistant responses.",
+                            "og:description": "Use the Anthropic Messages-style API on your Friendli Dedicated Endpoint. Send structured message payloads and receive assistant responses.",
+                            "og:title": "SyncDedicated Messages",
+                            "sidebarTitle": "Messages",
+                            "tag": "Beta",
+                            "title": "SyncDedicated Messages",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -402,6 +417,21 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Messages"],
+                extensions={
+                    "x-mint": {
+                        "content": "Send Anthropic Messages-style JSON.\nDetailed request/response field descriptions are provided in the OpenAPI schema below on this page.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/messages-chunk-object).\n\n<Warning>Server-side tools are not supported in the Messages API. In `tools`, only custom/client function tools are used; non-`custom` tool types are ignored.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/inference/messages",
+                        "metadata": {
+                            "description": "Use the Anthropic Messages-style API on your Friendli Dedicated Endpoint. Send structured message payloads and receive assistant responses.",
+                            "og:description": "Use the Anthropic Messages-style API on your Friendli Dedicated Endpoint. Send structured message payloads and receive assistant responses.",
+                            "og:title": "AsyncDedicated Messages",
+                            "sidebarTitle": "Messages",
+                            "tag": "Beta",
+                            "title": "AsyncDedicated Messages",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
