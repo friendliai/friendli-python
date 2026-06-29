@@ -1,4 +1,4 @@
-# GetCostsRequest
+# GetCostRequest
 
 
 ## Fields

@@ -240,6 +240,20 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Chat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
+                        "href": "/openapi/dedicated/inference/chat-completions",
+                        "metadata": {
+                            "description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:title": "SyncDedicated Chat Completions",
+                            "sidebarTitle": "Chat Completions",
+                            "title": "SyncDedicated Chat Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -483,6 +497,19 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncDedicated.Chat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
+                        "metadata": {
+                            "description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:title": "SyncDedicated Chat Stream Completions",
+                            "sidebarTitle": "Stream Chat Completions",
+                            "title": "SyncDedicated Chat Stream Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -492,8 +519,8 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerChatCompletionStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerChatCompletionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -734,6 +761,20 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Chat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
+                        "href": "/openapi/dedicated/inference/chat-completions",
+                        "metadata": {
+                            "description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:title": "AsyncDedicated Chat Completions",
+                            "sidebarTitle": "Chat Completions",
+                            "title": "AsyncDedicated Chat Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -977,6 +1018,19 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncDedicated.Chat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
+                        "metadata": {
+                            "description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "og:title": "AsyncDedicated Chat Stream Completions",
+                            "sidebarTitle": "Stream Chat Completions",
+                            "title": "AsyncDedicated Chat Stream Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -986,8 +1040,8 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerChatCompletionStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerChatCompletionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

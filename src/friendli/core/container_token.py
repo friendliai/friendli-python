@@ -83,6 +83,20 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncContainer.Token"],
+                extensions={
+                    "x-mint": {
+                        "content": "By giving a text input, generate a tokenized output of token IDs.",
+                        "href": "/openapi/container/tokenization",
+                        "metadata": {
+                            "description": "Tokenize text into token IDs using Friendli Container. Run tokenization locally on your own infrastructure for pre-processing and token counting.",
+                            "og:description": "Tokenize text into token IDs using Friendli Container. Run tokenization locally on your own infrastructure for pre-processing and token counting.",
+                            "og:title": "SyncContainer Tokenization",
+                            "sidebarTitle": "Tokenization",
+                            "title": "SyncContainer Tokenization",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -170,6 +184,20 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncContainer.Token"],
+                extensions={
+                    "x-mint": {
+                        "content": "By giving a list of tokens, generate a detokenized output text string.",
+                        "href": "/openapi/container/detokenization",
+                        "metadata": {
+                            "description": "Convert token IDs back to text using Friendli Container. Decode tokenized model output into readable strings on your own infrastructure.",
+                            "og:description": "Convert token IDs back to text using Friendli Container. Decode tokenized model output into readable strings on your own infrastructure.",
+                            "og:title": "SyncContainer Detokenization",
+                            "sidebarTitle": "Detokenization",
+                            "title": "SyncContainer Detokenization",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -257,6 +285,20 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncContainer.Token"],
+                extensions={
+                    "x-mint": {
+                        "content": "By giving a text input, generate a tokenized output of token IDs.",
+                        "href": "/openapi/container/tokenization",
+                        "metadata": {
+                            "description": "Tokenize text into token IDs using Friendli Container. Run tokenization locally on your own infrastructure for pre-processing and token counting.",
+                            "og:description": "Tokenize text into token IDs using Friendli Container. Run tokenization locally on your own infrastructure for pre-processing and token counting.",
+                            "og:title": "AsyncContainer Tokenization",
+                            "sidebarTitle": "Tokenization",
+                            "title": "AsyncContainer Tokenization",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -344,6 +386,20 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncContainer.Token"],
+                extensions={
+                    "x-mint": {
+                        "content": "By giving a list of tokens, generate a detokenized output text string.",
+                        "href": "/openapi/container/detokenization",
+                        "metadata": {
+                            "description": "Convert token IDs back to text using Friendli Container. Decode tokenized model output into readable strings on your own infrastructure.",
+                            "og:description": "Convert token IDs back to text using Friendli Container. Decode tokenized model output into readable strings on your own infrastructure.",
+                            "og:title": "AsyncContainer Detokenization",
+                            "sidebarTitle": "Detokenization",
+                            "title": "AsyncContainer Detokenization",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

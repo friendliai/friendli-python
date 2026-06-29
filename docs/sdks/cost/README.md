@@ -4,15 +4,15 @@
 
 ### Available Operations
 
-* [get_costs](#get_costs) - Get cost details for the team.
+* [get_cost](#get_cost) - Get cost details for the team.
 
-## get_costs
+## get_cost
 
 Get cost details for the team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getCosts" method="get" path="/v1/team/cost" -->
+<!-- UsageSnippet language="python" operationID="getCost" method="get" path="/v1/team/cost" -->
 ```python
 import os
 
@@ -22,9 +22,9 @@ from friendli.utils import parse_datetime
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.cost.get_costs(
-        start_time=parse_datetime("2025-11-15T17:37:03.985Z"),
-        end_time=parse_datetime("2024-07-27T03:54:55.930Z"),
+    res = friendli.cost.get_cost(
+        start_time=parse_datetime("2025-01-05T13:58:42.964Z"),
+        end_time=parse_datetime("2024-11-16T21:03:55.862Z"),
     )
 
     # Handle response

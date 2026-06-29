@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
-  docChecksum: a4a3f48d91f58c6f7ffc323ac3e26d57
+  docChecksum: c982b4099c95d0850349787eb7ea744f
   docVersion: 0.1.0
-  speakeasyVersion: 1.784.0
-  generationVersion: 2.911.0
-  releaseVersion: 0.13.2
-  configChecksum: f219451a5601db35410d33bece3bdd6b
+  speakeasyVersion: 1.786.1
+  generationVersion: 2.913.3
+  releaseVersion: 0.14.0
+  configChecksum: 6bdba0d2c6410071e766c1d2a2a9c44d
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
 persistentEdits:
-  generation_id: 5a6b8055-d239-45c7-be9c-be26f5a9a1a5
-  pristine_commit_hash: bd8e6e77a08432e505b539ca611f7db637d86d66
-  pristine_tree_hash: a02f687e1d9a5ac0bc262e341231d5322e20527d
+  generation_id: 29bcea5f-3a0d-4705-a26d-90927bc26fb1
+  pristine_commit_hash: 22eefbf8d0af15ed1d04a3ae2918d1cdfedbe334
+  pristine_tree_hash: 614ab51b67ada236c8c97dfd08bd68b9011b63a0
 features:
   python:
     additionalDependencies: 1.1.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.7
-    core: 6.0.30
+    core: 6.0.32
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.1
     envVarSecurityUsage: 0.3.3
@@ -38,10 +38,10 @@ features:
     nullables: 1.0.2
     responseFormat: 1.1.0
     retries: 3.0.7
-    sdkHooks: 1.2.2
+    sdkHooks: 1.3.0
     serverEvents: 1.1.1
     serverEventsSentinels: 0.1.0
-    unions: 3.1.6
+    unions: 3.1.7
     uploadStreams: 1.0.3
 trackedFiles:
   .gitattributes:
@@ -470,12 +470,12 @@ trackedFiles:
     pristine_git_object: a1351b1e6f2e7555644d98f2d849403ed0b82ddc
   docs/models/costresponse.md:
     id: 1dec13877138
-    last_write_checksum: sha1:4582934a108393e4947b55c71af78733a5b0a434
-    pristine_git_object: 33f73c5dd4ee1da4bf39e5005b59c8b54dadb605
+    last_write_checksum: sha1:ec25c642ef5ded84b58477374add48ae5b0167af
+    pristine_git_object: 8990a079fcd0e6d91940429b5fcf8e659478c60a
   docs/models/costresult.md:
     id: 443936c08086
-    last_write_checksum: sha1:3edacaea2acd9889e6448d9173a62159f58b196d
-    pristine_git_object: 41e2f6a20e3b2826dd1605723bb4d3ee8d9f7c01
+    last_write_checksum: sha1:d4b56dcce7d3e0e740244fe592fb58095a72d067
+    pristine_git_object: f2f5a8bf389ae82a23d09d2a1ba05ebf564bfc20
   docs/models/createdatasetrequest.md:
     id: ff55db5edd8c
     last_write_checksum: sha1:930df71d9ef228658528199b0edd05a36adcafa7
@@ -876,10 +876,10 @@ trackedFiles:
     id: b12e8956244b
     last_write_checksum: sha1:75f2428fbb543cda96ee6108fad176c984bb0f77
     pristine_git_object: 1f61b5997aa6a5c3aa9d1aa7fb3b8e11b55f9d09
-  docs/models/getcostsrequest.md:
-    id: adad0a83f8d5
-    last_write_checksum: sha1:7b0abc52e349a8932bc00fe0e80f8bc8af92ddd6
-    pristine_git_object: 854a8ba817f78f305d68853564e0a0ccebca7ad0
+  docs/models/getcostrequest.md:
+    id: 21ebc75ec3f1
+    last_write_checksum: sha1:12661b3c50d9178a48c667366f6b0a9ba3509ba4
+    pristine_git_object: de1c481bec2ec3829a98fb830dce13dff603cab3
   docs/models/getdatasetrequest.md:
     id: a05e76bcdffc
     last_write_checksum: sha1:f7d6aacf5c28d1606f7b5bfdac200732af207e0e
@@ -1534,8 +1534,8 @@ trackedFiles:
     pristine_git_object: 947ef03c770666672a5d8c4fe907a106a409248f
   docs/sdks/cost/README.md:
     id: ac8758df1c10
-    last_write_checksum: sha1:d9ccdf258f789432013079e57121ec6e3e5063e4
-    pristine_git_object: c3f3362d5766545326839f29db29eb7ca250df75
+    last_write_checksum: sha1:5962068cda97b92e7e38a68853f59915dd9c9fc2
+    pristine_git_object: 9c592f1afa6039f326b4e049224cc0e2f774ccf0
   docs/sdks/dataset/README.md:
     id: 500cff374f02
     last_write_checksum: sha1:cc913ad8c47eeb491afa584b56ed6ddd7702340e
@@ -1634,12 +1634,12 @@ trackedFiles:
     pristine_git_object: 970afe14899e97c1b218fabaeef2b7a78ee54956
   src/friendli_core/_hooks/types.py:
     id: a1ae43d53f73
-    last_write_checksum: sha1:718aa816b76c9cf8d93bbe05d474635e5972e1d9
-    pristine_git_object: 87167a1bbb77d4db640c513b24d3517681fb80d3
+    last_write_checksum: sha1:6a2a068729d5a21fea38f4ecd29a857bcc28c4d4
+    pristine_git_object: 9f34572c5bbbd5dc42e57412b0c83917d3c2c9d7
   src/friendli_core/_version.py:
     id: 0b237f54276c
-    last_write_checksum: sha1:8dd70ac7f151c15b1cb857ea223a31730da8bc98
-    pristine_git_object: a6bd9f42985331d75fc057b75577dae571ddab22
+    last_write_checksum: sha1:1095fbe0a442201e11e88d6c7eb3ade25595aea7
+    pristine_git_object: 58e4906b19dd0bc9220d44207d2ee63ee48c4956
   src/friendli_core/basesdk.py:
     id: 879235d6bd9e
     last_write_checksum: sha1:a69c546b688c53422613c2625df0ff020c380940
@@ -1650,96 +1650,96 @@ trackedFiles:
     pristine_git_object: c0ea7a44400821f76f2ec04237aa0c12a5f3d7d2
   src/friendli_core/container_audio.py:
     id: e95e9ef5ffc8
-    last_write_checksum: sha1:1a6991053f224cb893e2e6520c3c8dff1ec8c5cc
-    pristine_git_object: 56f8f37706b79cc1b11f0f6f973f9325629efb58
+    last_write_checksum: sha1:90891f894fc5abdc2b443031b16611108bbf8acc
+    pristine_git_object: 06805ef77550e0ea379819cd61e90fc996c86283
   src/friendli_core/container_chat.py:
     id: 68f62c529620
-    last_write_checksum: sha1:18b23d4ece5939ccdc5384e5dfdccf3cfa8f25b9
-    pristine_git_object: 6239cae729eb1d1182b1eb151d02c0a273bd6800
+    last_write_checksum: sha1:75ffffbd237e28375cfcd63577a51c1b787ad9d3
+    pristine_git_object: da1790a7362aa478ef6f1f605290496edadcfa29
   src/friendli_core/container_classification.py:
     id: e8afbb2cedab
-    last_write_checksum: sha1:8706bdfe00581b9939e0132b41f4b473cb6432fe
-    pristine_git_object: a9cd3b20054d56aff30ca2e384099fad3b721b46
+    last_write_checksum: sha1:253b9392b68f1b7372ca6ecdcc6080e91dd2d982
+    pristine_git_object: 1c8fe90e28c8e4406fa99d044b5389c19bf9e2c0
   src/friendli_core/container_completions.py:
     id: 3bf041d7c0ce
-    last_write_checksum: sha1:76ae300bf48b86df5162f48ffd196cc3faa4f08b
-    pristine_git_object: 8e74b3b9783c662f48e1cdf52201071bef00ee25
+    last_write_checksum: sha1:8d782c969996bc0769497f220f29690e9104a6ed
+    pristine_git_object: 85d3bcd3f02c943903213b0456917eaac286a193
   src/friendli_core/container_image.py:
     id: 97a88d2019e7
-    last_write_checksum: sha1:fc7615a19a7b7aed7dc3f47a5dd79112a4bec6a5
-    pristine_git_object: 7f77c796772ce2c2b3479bef712e6edfab4d7aca
+    last_write_checksum: sha1:772025fea8f90af80910e1d50fd60a3212ecc8a7
+    pristine_git_object: 7729551f8a91c352e78daf10700740a25f6af1b8
   src/friendli_core/container_messages.py:
     id: af3376b16587
-    last_write_checksum: sha1:69e85149ec21fa40f50b2d09b0e968ed8282c1de
-    pristine_git_object: b68bf24ef266aa208ad5fd4b7b377d005e5dce84
+    last_write_checksum: sha1:54ffd807c5ca04f7a3e9c0e57ec4a986e14141b6
+    pristine_git_object: c6d282ee9755d72eef5891adccf8175a7539301e
   src/friendli_core/container_token.py:
     id: d2149f780b0d
-    last_write_checksum: sha1:44907fc9f5ea04fb21763a2549d3051a775dfedd
-    pristine_git_object: 6f20786bcd5d5ff2f29c48e7c840a86a971d9d2a
+    last_write_checksum: sha1:4ad6955938c72a8d67436924f191fca596c4418d
+    pristine_git_object: ab08f26cded5663dcdddb91a6cc35a7666caead3
   src/friendli_core/cost.py:
     id: 351c82e2c891
-    last_write_checksum: sha1:58e2e46af1d64fd19abe10e13902f5586df0fba9
-    pristine_git_object: 14bfd58932958e415613f872be9f0c6d5ceeb8a7
+    last_write_checksum: sha1:c732460a960c72f3ade301533a599a1df4ea8854
+    pristine_git_object: 9f893d6915c1b6b875f597d07d813b5134655aaf
   src/friendli_core/dataset.py:
     id: 448404b84f76
-    last_write_checksum: sha1:312f2376f2771acad09f121e25be46dc9f510f9e
-    pristine_git_object: fc725c203d8c1cb69cc13eebd4843ca929546212
+    last_write_checksum: sha1:55559f559e3792c071a2d14d58fb476e37c70b2a
+    pristine_git_object: 7ec2f44a91e53c95975e4dcb0e33526de545ecea
   src/friendli_core/dedicated.py:
     id: 8ba62a432b8b
     last_write_checksum: sha1:f730e62a380971cb036a7c96a8777d5a7783975b
     pristine_git_object: e1a0b08fbe8de940c4453f579df0b391a7249cff
   src/friendli_core/dedicated_audio.py:
     id: 1ce1f34033eb
-    last_write_checksum: sha1:d7fbf40dedab97bcc580b76fb0e0ac03b76b7301
-    pristine_git_object: 9cf6679bb713d379c42852b04be4610be99c46a7
+    last_write_checksum: sha1:894da2976411e63dab9d8083e543d5371b111473
+    pristine_git_object: c560a0aca61b9dcb636ab69af6340cffb8bf5d3d
   src/friendli_core/dedicated_chat.py:
     id: 4fadfdc81749
-    last_write_checksum: sha1:abd0997054445126d4bf2332a3f096cd60e66a75
-    pristine_git_object: 013af598692794242eb6440fd85b25c77040f820
+    last_write_checksum: sha1:0d317653d2d2b010d632b0d8b19819baa69bbcec
+    pristine_git_object: be21b57a25cb4835520a1de5c48e6746abbbd2bd
   src/friendli_core/dedicated_chatrender.py:
     id: 43205922c241
-    last_write_checksum: sha1:f74bec5aa10abaf69ce85bb638807273e5e47292
-    pristine_git_object: 0c4815e535130d0f98ef7d5aa8d9bb381b46d8a9
+    last_write_checksum: sha1:49a414c6eb88b97d4adebf8b6d10abcdca72495a
+    pristine_git_object: 1597043452d01fe1824c77ef6e0d4586a704adaf
   src/friendli_core/dedicated_classification.py:
     id: 3b6bbbbf9775
-    last_write_checksum: sha1:8878642bb4573f19eb02cd00d0a2bd7aadf65dc5
-    pristine_git_object: f41f0fea025d27a797df162609a543f7dd6abdc8
+    last_write_checksum: sha1:c3573dad46f25239d9761325f3cb74010c1b3132
+    pristine_git_object: 471a1032ee7f6459a23dee591ca1398d68918a74
   src/friendli_core/dedicated_completions.py:
     id: b46d983a0b3b
-    last_write_checksum: sha1:6aa39baa23fa321002eb511b882aabc27c995bdd
-    pristine_git_object: 67730cf2270f128a85ad2f0b9ccdea0675c9a4a3
+    last_write_checksum: sha1:0590d4fe5acb18bd3dd24e9de6d15b47f89d0cfe
+    pristine_git_object: 551fb7f8aa2d192ea854d1d6c0da0a011f8a50d0
   src/friendli_core/dedicated_image.py:
     id: 19da209e641f
-    last_write_checksum: sha1:b9c1b07120179e7cc2bc0da3df083323037f5985
-    pristine_git_object: 0f4f4cc4573d116320915fcd3bf3ea18d2ca4824
+    last_write_checksum: sha1:24c618380a98c676042c2de416d31a34fbb927a5
+    pristine_git_object: d826e5bcd810d6771bddd172e54287063d35ba30
   src/friendli_core/dedicated_messages.py:
     id: 62a94da11a9f
-    last_write_checksum: sha1:88aab0c1ff1c8cc24a45be4551549cb9114e23c3
-    pristine_git_object: 1c72f70a85d68e7dfb1e05c941a3b5e7035ba71b
+    last_write_checksum: sha1:92ca3b73d937a702f40a5d9edfd60fb87ec6f925
+    pristine_git_object: 8e995c1827327a2a22f14f1e34b83bc391e2401f
   src/friendli_core/dedicated_token.py:
     id: 75e8b0ffe895
-    last_write_checksum: sha1:c2841cae27e49755162172428769730b021a5714
-    pristine_git_object: 4d341998d6b4836d8a740477c11576a3d2ffe7af
+    last_write_checksum: sha1:7e004424ec2a50bf6beae4fab62f80f726b4632d
+    pristine_git_object: 5a7f6dccfef1d0ff4097c95e39a1311733801168
   src/friendli_core/embeddings.py:
     id: cfcbeab2a38e
-    last_write_checksum: sha1:b1feab730dab853705eea3ddc3873197c1b0fc37
-    pristine_git_object: 71216e5f60a0d7165085459db128184490d843c4
+    last_write_checksum: sha1:fa5177509c0d03bce6e1c42f74c16c929b3afdd0
+    pristine_git_object: 5332a6aacb710f0690e75db07ee0a3a2fea8806c
   src/friendli_core/endpoint.py:
     id: a036e98714cb
-    last_write_checksum: sha1:85fc51130be768363ea8a63fbe9e4b2d1c805d18
-    pristine_git_object: d9dae12ebdea2ccc3d63d0cc319d0cbb3929fe65
+    last_write_checksum: sha1:aa7e1ae429db387b7513d1875a28a6d2e649803e
+    pristine_git_object: fa8ded78ebae683690febf7a32708e8a592e2685
   src/friendli_core/file_sdk.py:
     id: ef3366125840
-    last_write_checksum: sha1:5f91e3eb5bb2192851354cdf2f3c2581135a65ad
-    pristine_git_object: aaa54403777a0e7bd5e9278c8675a67b68c1607b
+    last_write_checksum: sha1:749cc2db864f03efccc05db9db820842fcc8fa6e
+    pristine_git_object: 511cf62a3543c636d82640d373e3082dbb27e46f
   src/friendli_core/httpclient.py:
     id: 1654f0b5eaa1
     last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
     pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
   src/friendli_core/models/__init__.py:
     id: f55997085cf3
-    last_write_checksum: sha1:895d094eb1bb4918deb66f5765dac0efbc2883e7
-    pristine_git_object: 1c5839669c0eca425a24152c9aa5aa1417e3464d
+    last_write_checksum: sha1:a337fd18d2ae831c2fdd88ef61001f04464014d0
+    pristine_git_object: 330e1802b38f6bdf6e3a6dfa648d3b4eeb4ed949
   src/friendli_core/models/acceleratorrequirement.py:
     id: 87e0bc641d25
     last_write_checksum: sha1:e4a2d7a6572c749da8cae78e99df797b46cab57d
@@ -2050,8 +2050,8 @@ trackedFiles:
     pristine_git_object: f7b16128c2ddd7d6720d21459dc123233fe5c8d9
   src/friendli_core/models/costresult.py:
     id: 494e1802545c
-    last_write_checksum: sha1:48d6f6c1ed0ccf2a5a4e02dabc140783df75433a
-    pristine_git_object: 1d541612629f50ba356874c9685e7c046baa2250
+    last_write_checksum: sha1:911e6002c668c81b4374d1f024f0da57f5f3f654
+    pristine_git_object: e86e5494bd05586d685b4f5d4d7e108df3be0c95
   src/friendli_core/models/create_datasetop.py:
     id: ae15ce5b11b9
     last_write_checksum: sha1:5030f2f5fb0441d7f0dc2e7ca80a3dd286765245
@@ -2384,10 +2384,10 @@ trackedFiles:
     id: 084a47dcceb9
     last_write_checksum: sha1:caaba19bad7ad2bed3731bdb167edcafbecf64c8
     pristine_git_object: 07c5a2a4e564451c53a9824b3dfe2cfb087f5875
-  src/friendli_core/models/getcostsop.py:
-    id: b9b607db6ab9
-    last_write_checksum: sha1:fd48f2f99de2efe45db70e496f0f7164f09b2c1b
-    pristine_git_object: fb50ebeec5a630802c9de5bb8b3b08c08fbd2402
+  src/friendli_core/models/getcostop.py:
+    id: 2d15f5f5f3aa
+    last_write_checksum: sha1:48769e082d616d335c3c1becb8136d6f1d707e82
+    pristine_git_object: 48a752bf311d303bb5a27fa39ca498358eac8262
   src/friendli_core/models/httpvalidationerror.py:
     id: e197198ab3a2
     last_write_checksum: sha1:dcf67bdd6ae91761b56e761e88849351a09ad23b
@@ -2866,32 +2866,32 @@ trackedFiles:
     pristine_git_object: 199b6dced7ecadd70e283016e440e60c52bcba0f
   src/friendli_core/serverless_audio.py:
     id: 98cd784385a3
-    last_write_checksum: sha1:755ac887e82a4f06fabd5e9307513e07fee61b0f
-    pristine_git_object: cb5eeb80ba5d9f33a089ddf59ef36d7d466fef7a
+    last_write_checksum: sha1:d61bdbcfe8cec235dbe2e838b778a30a2f347e1d
+    pristine_git_object: bfc9bc865c96a820836faad41b4a4b80239edbc4
   src/friendli_core/serverless_chat.py:
     id: 7054b9420f3a
-    last_write_checksum: sha1:99f5311b429d470478156f593ad504ff2a0ec9ee
-    pristine_git_object: 2f2e4898904994ffc24da6e3ab89b86abe57af8e
+    last_write_checksum: sha1:2849ddeca1c39f9f57635fc7087840ed4464584d
+    pristine_git_object: b0b58fffdd39669d1f61f1f8ff7fae36f00583f3
   src/friendli_core/serverless_chatrender.py:
     id: 5c8b218f1609
-    last_write_checksum: sha1:83e44bd0dc25b4dd4b59a5a77cd865a2f909d968
-    pristine_git_object: 848f345cfc6022cd0ed671d2de464ff5733ffba5
+    last_write_checksum: sha1:8323b817d2d54cf25e727c092c53c3826047572d
+    pristine_git_object: c0993f74b5f2187cdc12c71e397a275f539f8961
   src/friendli_core/serverless_completions.py:
     id: ea0008652f99
-    last_write_checksum: sha1:a7f478cd210d9157ff2210fc939aa6711bb74a2b
-    pristine_git_object: d0e6ece88ca47c21bd90ff8a4a7378f06bbea8da
+    last_write_checksum: sha1:b1b074570d7d90ff969650458dc99decf5c22b20
+    pristine_git_object: 055bd280ced9cb43de6115702a16489f4b7aada0
   src/friendli_core/serverless_messages.py:
     id: ddfb7926b2f5
-    last_write_checksum: sha1:b5aa14548c3c1e134cdd065ef1c02c655334eb6f
-    pristine_git_object: 5456d1686d4f5be3a699a4b819eaa92aedddb8c8
+    last_write_checksum: sha1:4181e9637da65032c417ec093bd3852574e98dc6
+    pristine_git_object: ce7b2c8b08b7ee8047b76f27e7e7a3b8de752096
   src/friendli_core/serverless_token.py:
     id: d2b4b22fd624
-    last_write_checksum: sha1:4cd33d23f770bbc21d50190cfb61b3e0f65c9b7e
-    pristine_git_object: 3c24c4a8ce566c2ce217335794886a4d0a33a98d
+    last_write_checksum: sha1:6cecc71474f19eecb88763a9b5a5f92cd79830b5
+    pristine_git_object: f88feee5d384fa11b76ea6ec64c86927f01c2102
   src/friendli_core/toolassistedchat.py:
     id: d9ecb6fa4f5c
-    last_write_checksum: sha1:f62c6c3eb0c83a09a4872fe39a57e28d2efd3f1f
-    pristine_git_object: a6d4071af8abfaf54a85c78b0da3a2d76755606d
+    last_write_checksum: sha1:11167efa423e008541a58d26f4a7c83534a7dd9e
+    pristine_git_object: b24997055e213813b0b1d4e72fc8c54ec398c5b6
   src/friendli_core/types/__init__.py:
     id: b206481695af
     last_write_checksum: sha1:f9ad14217f832e74f594285960125add50324be9
@@ -3680,19 +3680,21 @@ examples:
       responses:
         "200":
           application/json: {"has_more": true, "data": [{"start_time": "2024-04-01T06:16:19.342Z", "end_time": "2026-03-30T07:23:24.308Z", "results": []}]}
+  getCost:
+    speakeasy-default-get-cost:
+      parameters:
+        query:
+          start_time: "2025-01-05T13:58:42.964Z"
+          end_time: "2024-11-16T21:03:55.862Z"
+      responses:
+        "200":
+          application/json: {"has_more": false, "data": [{"start_time": "2024-05-01T01:35:19.261Z", "end_time": "2026-08-15T23:49:24.537Z", "results": [{"total": 2.709083, "quantity": 0.934167, "unit_price": 290, "line_item": "h100, gpu_time"}]}]}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Python SDK Changes:
-  * `friendli_core.container.chat.stream()`:  `request.stream` **Changed** (Breaking ⚠️)
-  * `friendli_core.container.completions.stream()`:  `request` **Changed** (Breaking ⚠️)
-  * `friendli_core.container.audio.stream()`:  `request.stream` **Changed** (Breaking ⚠️)
-  * `friendli_core.dedicated.chat.stream()`:  `request.stream` **Changed** (Breaking ⚠️)
-  * `friendli_core.dedicated.completions.stream()`:  `request.dedicated_completions_stream_body` **Changed** (Breaking ⚠️)
-  * `friendli_core.dedicated.audio.stream()`:  `request.stream` **Changed** (Breaking ⚠️)
-  * `friendli_core.serverless.chat.stream()`:  `request.stream` **Changed** (Breaking ⚠️)
-  * `friendli_core.serverless.completions.stream()`:  `request.serverless_completions_stream_body` **Changed** (Breaking ⚠️)
-  * `friendli_core.serverless.audio.stream()`:  `request.stream` **Changed** (Breaking ⚠️)
+  * `friendli_core.cost.get_cost()`: **Added**
+  * `friendli_core.cost.get_costs()`: **Removed** (Breaking ⚠️)
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json

@@ -13,22 +13,22 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class CostResultTypedDict(TypedDict):
-    total: str
+    total: float
     "The numeric value of the cost. In USD."
-    quantity: NotRequired[Nullable[str]]
+    quantity: NotRequired[Nullable[float]]
     "When `group_by=line_item`, this field provides quantity of the line item."
-    unit_price: NotRequired[Nullable[str]]
+    unit_price: NotRequired[Nullable[float]]
     "When `group_by=line_item`, this field provides unit price of the line item in USD Cents."
     line_item: NotRequired[Nullable[str]]
     "When `group_by=line_item`, this field provides line item name of the grouped costs result."
 
 
 class CostResult(BaseModel):
-    total: str
+    total: float
     "The numeric value of the cost. In USD."
-    quantity: OptionalNullable[str] = UNSET
+    quantity: OptionalNullable[float] = UNSET
     "When `group_by=line_item`, this field provides quantity of the line item."
-    unit_price: OptionalNullable[str] = UNSET
+    unit_price: OptionalNullable[float] = UNSET
     "When `group_by=line_item`, this field provides unit price of the line item in USD Cents."
     line_item: OptionalNullable[str] = UNSET
     "When `group_by=line_item`, this field provides line item name of the grouped costs result."
