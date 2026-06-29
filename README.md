@@ -260,7 +260,7 @@ with SyncFriendli(
 
 ### [Cost](docs/sdks/cost/README.md)
 
-* [get_costs](docs/sdks/cost/README.md#get_costs) - Get cost details for the team.
+* [get_cost](docs/sdks/cost/README.md#get_cost) - Get cost details for the team.
 
 ### [Dataset](docs/sdks/dataset/README.md)
 

@@ -98,6 +98,20 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["File"],
+                extensions={
+                    "x-mint": {
+                        "content": "Initiate file upload.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/file/init-file-upload",
+                        "metadata": {
+                            "description": "Start a new file upload to Friendli Suite via the API. Returns a file ID and pre-signed upload URL to begin transferring your file data.",
+                            "og:description": "Start a new file upload to Friendli Suite via the API. Returns a file ID and pre-signed upload URL to begin transferring your file data.",
+                            "og:title": "Initiate File Upload",
+                            "sidebarTitle": "Initiate File Upload",
+                            "title": "Initiate File Upload",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -186,6 +200,20 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["File"],
+                extensions={
+                    "x-mint": {
+                        "content": "Complete file upload.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/file/complete-file-upload",
+                        "metadata": {
+                            "description": "Finalize a multipart file upload to Friendli Suite via the API. Call this endpoint after all file parts have been uploaded to mark the file as ready.",
+                            "og:description": "Finalize a multipart file upload to Friendli Suite via the API. Call this endpoint after all file parts have been uploaded to mark the file as ready.",
+                            "og:title": "Complete File Upload",
+                            "sidebarTitle": "Complete File Upload",
+                            "title": "Complete File Upload",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -274,6 +302,20 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["File"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get file info.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/file/get-file-info",
+                        "metadata": {
+                            "description": "Retrieve metadata for a file stored in Friendli Suite by file ID via the API. Returns filename, size, upload status, and creation timestamp.",
+                            "og:description": "Retrieve metadata for a file stored in Friendli Suite by file ID via the API. Returns filename, size, upload status, and creation timestamp.",
+                            "og:title": "Get File Info",
+                            "sidebarTitle": "Get File Info",
+                            "title": "Get File Info",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -362,6 +404,20 @@ class SyncFileSDK(BaseFileSDK, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["File"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get file download URL.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/file/get-file-download-url",
+                        "metadata": {
+                            "description": "Get a pre-signed download URL for a file stored in Friendli Suite via the API. Use the returned URL to download the file with standard HTTP clients.",
+                            "og:description": "Get a pre-signed download URL for a file stored in Friendli Suite via the API. Use the returned URL to download the file with standard HTTP clients.",
+                            "og:title": "Get File Download URL",
+                            "sidebarTitle": "Get File Download URL",
+                            "title": "Get File Download URL",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -468,6 +524,20 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["File"],
+                extensions={
+                    "x-mint": {
+                        "content": "Initiate file upload.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/file/init-file-upload",
+                        "metadata": {
+                            "description": "Start a new file upload to Friendli Suite via the API. Returns a file ID and pre-signed upload URL to begin transferring your file data.",
+                            "og:description": "Start a new file upload to Friendli Suite via the API. Returns a file ID and pre-signed upload URL to begin transferring your file data.",
+                            "og:title": "Initiate File Upload",
+                            "sidebarTitle": "Initiate File Upload",
+                            "title": "Initiate File Upload",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -556,6 +626,20 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["File"],
+                extensions={
+                    "x-mint": {
+                        "content": "Complete file upload.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/file/complete-file-upload",
+                        "metadata": {
+                            "description": "Finalize a multipart file upload to Friendli Suite via the API. Call this endpoint after all file parts have been uploaded to mark the file as ready.",
+                            "og:description": "Finalize a multipart file upload to Friendli Suite via the API. Call this endpoint after all file parts have been uploaded to mark the file as ready.",
+                            "og:title": "Complete File Upload",
+                            "sidebarTitle": "Complete File Upload",
+                            "title": "Complete File Upload",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -644,6 +728,20 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["File"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get file info.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/file/get-file-info",
+                        "metadata": {
+                            "description": "Retrieve metadata for a file stored in Friendli Suite by file ID via the API. Returns filename, size, upload status, and creation timestamp.",
+                            "og:description": "Retrieve metadata for a file stored in Friendli Suite by file ID via the API. Returns filename, size, upload status, and creation timestamp.",
+                            "og:title": "Get File Info",
+                            "sidebarTitle": "Get File Info",
+                            "title": "Get File Info",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -732,6 +830,20 @@ class AsyncFileSDK(BaseFileSDK, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["File"],
+                extensions={
+                    "x-mint": {
+                        "content": "Get file download URL.\n\nTo request successfully, it is required to enter a **Personal API Key** (e.g. flp_XXX) in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn more and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/file/get-file-download-url",
+                        "metadata": {
+                            "description": "Get a pre-signed download URL for a file stored in Friendli Suite via the API. Use the returned URL to download the file with standard HTTP clients.",
+                            "og:description": "Get a pre-signed download URL for a file stored in Friendli Suite via the API. Use the returned URL to download the file with standard HTTP clients.",
+                            "og:title": "Get File Download URL",
+                            "sidebarTitle": "Get File Download URL",
+                            "title": "Get File Download URL",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

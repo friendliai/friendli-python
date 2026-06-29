@@ -117,6 +117,20 @@ class SyncContainerAudio(BaseContainerAudio, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncContainer.Audio"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an audio file, the model transcribes it into text.",
+                        "href": "/openapi/container/audio-transcriptions",
+                        "metadata": {
+                            "description": "Transcribe audio files to text using Friendli Container. Run speech-to-text models locally on your own GPU hardware with full data privacy.",
+                            "og:description": "Transcribe audio files to text using Friendli Container. Run speech-to-text models locally on your own GPU hardware with full data privacy.",
+                            "og:title": "SyncContainer Audio Transcriptions",
+                            "sidebarTitle": "Audio Transcriptions",
+                            "title": "SyncContainer Audio Transcriptions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -236,6 +250,19 @@ class SyncContainerAudio(BaseContainerAudio, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncContainer.Audio"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an audio file, the model transcribes it into text.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/audio-transcriptions-chunk-object).",
+                        "metadata": {
+                            "description": "Transcribe audio files to text using Friendli Container. Run speech-to-text models locally on your own GPU hardware with full data privacy.",
+                            "og:description": "Transcribe audio files to text using Friendli Container. Run speech-to-text models locally on your own GPU hardware with full data privacy.",
+                            "og:title": "SyncContainer Audio Transcriptions (Stream)",
+                            "sidebarTitle": "Stream Audio Transcriptions",
+                            "title": "SyncContainer Audio Transcriptions (Stream)",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -245,8 +272,8 @@ class SyncContainerAudio(BaseContainerAudio, SyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerAudioTranscriptionStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerAudioTranscriptionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -364,6 +391,20 @@ class AsyncContainerAudio(BaseContainerAudio, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncContainer.Audio"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an audio file, the model transcribes it into text.",
+                        "href": "/openapi/container/audio-transcriptions",
+                        "metadata": {
+                            "description": "Transcribe audio files to text using Friendli Container. Run speech-to-text models locally on your own GPU hardware with full data privacy.",
+                            "og:description": "Transcribe audio files to text using Friendli Container. Run speech-to-text models locally on your own GPU hardware with full data privacy.",
+                            "og:title": "AsyncContainer Audio Transcriptions",
+                            "sidebarTitle": "Audio Transcriptions",
+                            "title": "AsyncContainer Audio Transcriptions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -485,6 +526,19 @@ class AsyncContainerAudio(BaseContainerAudio, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncContainer.Audio"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given an audio file, the model transcribes it into text.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/audio-transcriptions-chunk-object).",
+                        "metadata": {
+                            "description": "Transcribe audio files to text using Friendli Container. Run speech-to-text models locally on your own GPU hardware with full data privacy.",
+                            "og:description": "Transcribe audio files to text using Friendli Container. Run speech-to-text models locally on your own GPU hardware with full data privacy.",
+                            "og:title": "AsyncContainer Audio Transcriptions (Stream)",
+                            "sidebarTitle": "Stream Audio Transcriptions",
+                            "title": "AsyncContainer Audio Transcriptions (Stream)",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -494,8 +548,8 @@ class AsyncContainerAudio(BaseContainerAudio, AsyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ContainerAudioTranscriptionStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ContainerAudioTranscriptionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

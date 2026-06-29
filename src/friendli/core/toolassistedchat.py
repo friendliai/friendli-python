@@ -234,6 +234,21 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncServerless.ToolAssistedChat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/tool-assisted-chat-completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>\n\n<Warning>Tool assisted chat completions does not fully support parallel tool calls now.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/model-apis/tool-assisted-chat-completions",
+                        "metadata": {
+                            "description": "Chat completions with built-in tool calling on Friendli Model APIs. The model automatically invokes tools like web search during generation.",
+                            "og:description": "Chat completions with built-in tool calling on Friendli Model APIs. The model automatically invokes tools like web search during generation.",
+                            "og:title": "Model APIs Tool Assisted Chat Completions",
+                            "sidebarTitle": "Tool Assisted Chat Completions",
+                            "tag": "Beta",
+                            "title": "Model APIs Tool Assisted Chat Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -474,6 +489,20 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncServerless.ToolAssistedChat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/tool-assisted-chat-completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>\n\n<Warning>Tool assisted chat completions does not fully support parallel tool calls now.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "metadata": {
+                            "description": "Chat completions with built-in tool calling on Friendli Model APIs. The model automatically invokes tools like web search during generation.",
+                            "og:description": "Chat completions with built-in tool calling on Friendli Model APIs. The model automatically invokes tools like web search during generation.",
+                            "og:title": "Model APIs Tool Assisted Chat Stream Completions",
+                            "sidebarTitle": "Stream Tool Assisted Chat Completions",
+                            "tag": "Beta",
+                            "title": "Model APIs Tool Assisted Chat Stream Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -483,8 +512,10 @@ class SyncToolAssistedChat(BaseToolAssistedChat, SyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ServerlessToolAssistedChatCompletionStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ServerlessToolAssistedChatCompletionStreamSuccess,
+                    http_res,
+                    raw,
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -719,6 +750,21 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncServerless.ToolAssistedChat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/tool-assisted-chat-completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>\n\n<Warning>Tool assisted chat completions does not fully support parallel tool calls now.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/model-apis/tool-assisted-chat-completions",
+                        "metadata": {
+                            "description": "Chat completions with built-in tool calling on Friendli Model APIs. The model automatically invokes tools like web search during generation.",
+                            "og:description": "Chat completions with built-in tool calling on Friendli Model APIs. The model automatically invokes tools like web search during generation.",
+                            "og:title": "Model APIs Tool Assisted Chat Completions",
+                            "sidebarTitle": "Tool Assisted Chat Completions",
+                            "tag": "Beta",
+                            "title": "Model APIs Tool Assisted Chat Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -959,6 +1005,20 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncServerless.ToolAssistedChat"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the model generates a response. Additionally, the model can utilize built-in tools for tool calls, enhancing its capability to provide more comprehensive and actionable responses.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/tool-assisted-chat-completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>\n\n<Warning>Tool assisted chat completions does not fully support parallel tool calls now.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "metadata": {
+                            "description": "Chat completions with built-in tool calling on Friendli Model APIs. The model automatically invokes tools like web search during generation.",
+                            "og:description": "Chat completions with built-in tool calling on Friendli Model APIs. The model automatically invokes tools like web search during generation.",
+                            "og:title": "Model APIs Tool Assisted Chat Stream Completions",
+                            "sidebarTitle": "Stream Tool Assisted Chat Completions",
+                            "tag": "Beta",
+                            "title": "Model APIs Tool Assisted Chat Stream Completions",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -968,8 +1028,10 @@ class AsyncToolAssistedChat(BaseToolAssistedChat, AsyncSDK):
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
-                lambda raw: utils.unmarshal_json(
-                    raw, models.ServerlessToolAssistedChatCompletionStreamSuccess
+                lambda raw: unmarshal_json_response(
+                    models.ServerlessToolAssistedChatCompletionStreamSuccess,
+                    http_res,
+                    raw,
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

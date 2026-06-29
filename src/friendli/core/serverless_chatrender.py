@@ -110,6 +110,20 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SyncServerless.ChatRender"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/model-apis/chat-render",
+                        "metadata": {
+                            "description": "Preview the final prompt text that Friendli Model APIs will send to the model. Useful for debugging chat templates and token usage.",
+                            "og:description": "Preview the final prompt text that Friendli Model APIs will send to the model. Useful for debugging chat templates and token usage.",
+                            "og:title": "Model APIs Chat Render",
+                            "sidebarTitle": "Chat Render",
+                            "title": "Model APIs Chat Render",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -222,6 +236,20 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["AsyncServerless.ChatRender"],
+                extensions={
+                    "x-mint": {
+                        "content": "Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "href": "/openapi/model-apis/chat-render",
+                        "metadata": {
+                            "description": "Preview the final prompt text that Friendli Model APIs will send to the model. Useful for debugging chat templates and token usage.",
+                            "og:description": "Preview the final prompt text that Friendli Model APIs will send to the model. Useful for debugging chat templates and token usage.",
+                            "og:title": "Model APIs Chat Render",
+                            "sidebarTitle": "Chat Render",
+                            "title": "Model APIs Chat Render",
+                        },
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
