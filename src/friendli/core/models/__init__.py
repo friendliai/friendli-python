@@ -593,7 +593,6 @@ if TYPE_CHECKING:
         EndpointSimplescaleConfig,
         EndpointSimplescaleConfigTypedDict,
     )
-    from .filebuiltintool import FileBuiltInTool, FileBuiltInToolTypedDict
     from .filegetdownloadurlresponse import (
         FileGetDownloadURLResponse,
         FileGetDownloadURLResponseTypedDict,
@@ -606,11 +605,6 @@ if TYPE_CHECKING:
     from .fileinituploadresponse import (
         FileInitUploadResponse,
         FileInitUploadResponseTypedDict,
-    )
-    from .friendlibuiltintool import (
-        FriendliBuiltInTool,
-        FriendliBuiltInToolType,
-        FriendliBuiltInToolTypedDict,
     )
     from .function import Function, FunctionTypedDict
     from .functionresult import FunctionResult, FunctionResultTypedDict
@@ -630,10 +624,6 @@ if TYPE_CHECKING:
     from .inferencedeploymenterrorcode import InferenceDeploymentErrorCode
     from .inferencedeploymentstatus import InferenceDeploymentStatus
     from .init_uploadop import InitUploadRequest, InitUploadRequestTypedDict
-    from .integratedbuiltintool import (
-        IntegratedBuiltInTool,
-        IntegratedBuiltInToolTypedDict,
-    )
     from .list_datasetsop import (
         ListDatasetsDirection,
         ListDatasetsRequest,
@@ -750,6 +740,7 @@ if TYPE_CHECKING:
     from .messagesusage import MessagesUsage, MessagesUsageTypedDict
     from .no_response_error import NoResponseError
     from .prompttokensdetails import PromptTokensDetails, PromptTokensDetailsTypedDict
+    from .queuebackpressuremetrickind import QueueBackpressureMetricKind
     from .responseformat import ResponseFormat, ResponseFormatTypedDict
     from .responseformatjsonobject import (
         ResponseFormatJSONObject,
@@ -887,36 +878,6 @@ if TYPE_CHECKING:
         ServerlessTokenizationSuccess,
         ServerlessTokenizationSuccessTypedDict,
     )
-    from .serverlesstoolassistedchatcompleteop import (
-        ServerlessToolAssistedChatCompleteRequest,
-        ServerlessToolAssistedChatCompleteRequestTypedDict,
-    )
-    from .serverlesstoolassistedchatcompletionbody import (
-        ServerlessToolAssistedChatCompletionBody,
-        ServerlessToolAssistedChatCompletionBodyReasoningEffort,
-        ServerlessToolAssistedChatCompletionBodySeed,
-        ServerlessToolAssistedChatCompletionBodySeedTypedDict,
-        ServerlessToolAssistedChatCompletionBodyToolChoice,
-        ServerlessToolAssistedChatCompletionBodyToolChoiceTypedDict,
-        ServerlessToolAssistedChatCompletionBodyTypedDict,
-    )
-    from .serverlesstoolassistedchatcompletionstreambody import (
-        ServerlessToolAssistedChatCompletionStreamBody,
-        ServerlessToolAssistedChatCompletionStreamBodyReasoningEffort,
-        ServerlessToolAssistedChatCompletionStreamBodySeed,
-        ServerlessToolAssistedChatCompletionStreamBodySeedTypedDict,
-        ServerlessToolAssistedChatCompletionStreamBodyToolChoice,
-        ServerlessToolAssistedChatCompletionStreamBodyToolChoiceTypedDict,
-        ServerlessToolAssistedChatCompletionStreamBodyTypedDict,
-    )
-    from .serverlesstoolassistedchatcompletionstreamsuccess import (
-        ServerlessToolAssistedChatCompletionStreamSuccess,
-        ServerlessToolAssistedChatCompletionStreamSuccessTypedDict,
-    )
-    from .serverlesstoolassistedchatstreamop import (
-        ServerlessToolAssistedChatStreamRequest,
-        ServerlessToolAssistedChatStreamRequestTypedDict,
-    )
     from .servervadchunkingstrategy import (
         ServerVadChunkingStrategy,
         ServerVadChunkingStrategyTypedDict,
@@ -950,14 +911,6 @@ if TYPE_CHECKING:
         StreamedFunctionResult,
         StreamedFunctionResultTypedDict,
     )
-    from .streamedtoolassistedchattoken import (
-        StreamedToolAssistedChatToken,
-        StreamedToolAssistedChatTokenTypedDict,
-    )
-    from .streamedtoolassistedchattoolstatus import (
-        StreamedToolAssistedChatToolStatus,
-        StreamedToolAssistedChatToolStatusTypedDict,
-    )
     from .streamedtoolcallresult import (
         StreamedToolCallResult,
         StreamedToolCallResultTypedDict,
@@ -972,16 +925,8 @@ if TYPE_CHECKING:
     from .textusage import TextUsage, TextUsageTypedDict
     from .tokensequence import TokenSequence, TokenSequenceTypedDict
     from .tool import Tool, ToolTypedDict
-    from .toolassistedchattool import (
-        ToolAssistedChatTool,
-        ToolAssistedChatToolTypedDict,
-    )
     from .toolcallresult import ToolCallResult, ToolCallResultTypedDict
     from .toolmessage import ToolMessage, ToolMessageTypedDict
-    from .toolstatusdata import Name, Status, ToolStatusData, ToolStatusDataTypedDict
-    from .toolstatuserror import ToolStatusError, ToolStatusErrorTypedDict
-    from .toolstatusfile import ToolStatusFile, ToolStatusFileTypedDict
-    from .toolstatusparameter import ToolStatusParameter, ToolStatusParameterTypedDict
     from .upload_raw_samplesop import (
         UploadRawSamplesRequest,
         UploadRawSamplesRequestTypedDict,
@@ -1396,8 +1341,6 @@ __all__ = [
     "EndpointAdvancedConfigTypedDict",
     "EndpointSimplescaleConfig",
     "EndpointSimplescaleConfigTypedDict",
-    "FileBuiltInTool",
-    "FileBuiltInToolTypedDict",
     "FileGetDownloadURLResponse",
     "FileGetDownloadURLResponseTypedDict",
     "FileInfo",
@@ -1406,9 +1349,6 @@ __all__ = [
     "FileInitUploadRequestTypedDict",
     "FileInitUploadResponse",
     "FileInitUploadResponseTypedDict",
-    "FriendliBuiltInTool",
-    "FriendliBuiltInToolType",
-    "FriendliBuiltInToolTypedDict",
     "FriendliCoreError",
     "Function",
     "FunctionResult",
@@ -1438,8 +1378,6 @@ __all__ = [
     "InferenceDeploymentStatus",
     "InitUploadRequest",
     "InitUploadRequestTypedDict",
-    "IntegratedBuiltInTool",
-    "IntegratedBuiltInToolTypedDict",
     "ListDatasetsDirection",
     "ListDatasetsRequest",
     "ListDatasetsRequestTypedDict",
@@ -1518,11 +1456,11 @@ __all__ = [
     "MessagesURLImageSourceTypedDict",
     "MessagesUsage",
     "MessagesUsageTypedDict",
-    "Name",
     "NoResponseError",
     "Phase",
     "PromptTokensDetails",
     "PromptTokensDetailsTypedDict",
+    "QueueBackpressureMetricKind",
     "RequestBody",
     "RequestBodyTypedDict",
     "ResponseFormat",
@@ -1615,29 +1553,8 @@ __all__ = [
     "ServerlessTokenizationRequestTypedDict",
     "ServerlessTokenizationSuccess",
     "ServerlessTokenizationSuccessTypedDict",
-    "ServerlessToolAssistedChatCompleteRequest",
-    "ServerlessToolAssistedChatCompleteRequestTypedDict",
-    "ServerlessToolAssistedChatCompletionBody",
-    "ServerlessToolAssistedChatCompletionBodyReasoningEffort",
-    "ServerlessToolAssistedChatCompletionBodySeed",
-    "ServerlessToolAssistedChatCompletionBodySeedTypedDict",
-    "ServerlessToolAssistedChatCompletionBodyToolChoice",
-    "ServerlessToolAssistedChatCompletionBodyToolChoiceTypedDict",
-    "ServerlessToolAssistedChatCompletionBodyTypedDict",
-    "ServerlessToolAssistedChatCompletionStreamBody",
-    "ServerlessToolAssistedChatCompletionStreamBodyReasoningEffort",
-    "ServerlessToolAssistedChatCompletionStreamBodySeed",
-    "ServerlessToolAssistedChatCompletionStreamBodySeedTypedDict",
-    "ServerlessToolAssistedChatCompletionStreamBodyToolChoice",
-    "ServerlessToolAssistedChatCompletionStreamBodyToolChoiceTypedDict",
-    "ServerlessToolAssistedChatCompletionStreamBodyTypedDict",
-    "ServerlessToolAssistedChatCompletionStreamSuccess",
-    "ServerlessToolAssistedChatCompletionStreamSuccessTypedDict",
-    "ServerlessToolAssistedChatStreamRequest",
-    "ServerlessToolAssistedChatStreamRequestTypedDict",
     "SplitInfo",
     "SplitInfoTypedDict",
-    "Status",
     "StreamOptions",
     "StreamOptionsTypedDict",
     "StreamedAudioTranscriptionData",
@@ -1657,10 +1574,6 @@ __all__ = [
     "StreamedCompletionsChoiceTypedDict",
     "StreamedFunctionResult",
     "StreamedFunctionResultTypedDict",
-    "StreamedToolAssistedChatToken",
-    "StreamedToolAssistedChatTokenTypedDict",
-    "StreamedToolAssistedChatToolStatus",
-    "StreamedToolAssistedChatToolStatusTypedDict",
     "StreamedToolCallResult",
     "StreamedToolCallResultTypedDict",
     "SystemMessage",
@@ -1674,20 +1587,10 @@ __all__ = [
     "TokenSequence",
     "TokenSequenceTypedDict",
     "Tool",
-    "ToolAssistedChatTool",
-    "ToolAssistedChatToolTypedDict",
     "ToolCallResult",
     "ToolCallResultTypedDict",
     "ToolMessage",
     "ToolMessageTypedDict",
-    "ToolStatusData",
-    "ToolStatusDataTypedDict",
-    "ToolStatusError",
-    "ToolStatusErrorTypedDict",
-    "ToolStatusFile",
-    "ToolStatusFileTypedDict",
-    "ToolStatusParameter",
-    "ToolStatusParameterTypedDict",
     "ToolTypedDict",
     "URLImageItem",
     "URLImageItemResponseFormat",
@@ -2097,8 +2000,6 @@ _dynamic_imports: dict[str, str] = {
     "EndpointAdvancedConfigTypedDict": ".endpointadvancedconfig",
     "EndpointSimplescaleConfig": ".endpointsimplescaleconfig",
     "EndpointSimplescaleConfigTypedDict": ".endpointsimplescaleconfig",
-    "FileBuiltInTool": ".filebuiltintool",
-    "FileBuiltInToolTypedDict": ".filebuiltintool",
     "FileGetDownloadURLResponse": ".filegetdownloadurlresponse",
     "FileGetDownloadURLResponseTypedDict": ".filegetdownloadurlresponse",
     "FileInfo": ".fileinfo",
@@ -2107,9 +2008,6 @@ _dynamic_imports: dict[str, str] = {
     "FileInitUploadRequestTypedDict": ".fileinituploadrequest",
     "FileInitUploadResponse": ".fileinituploadresponse",
     "FileInitUploadResponseTypedDict": ".fileinituploadresponse",
-    "FriendliBuiltInTool": ".friendlibuiltintool",
-    "FriendliBuiltInToolType": ".friendlibuiltintool",
-    "FriendliBuiltInToolTypedDict": ".friendlibuiltintool",
     "Function": ".function",
     "FunctionTypedDict": ".function",
     "FunctionResult": ".functionresult",
@@ -2138,8 +2036,6 @@ _dynamic_imports: dict[str, str] = {
     "InferenceDeploymentStatus": ".inferencedeploymentstatus",
     "InitUploadRequest": ".init_uploadop",
     "InitUploadRequestTypedDict": ".init_uploadop",
-    "IntegratedBuiltInTool": ".integratedbuiltintool",
-    "IntegratedBuiltInToolTypedDict": ".integratedbuiltintool",
     "ListDatasetsDirection": ".list_datasetsop",
     "ListDatasetsRequest": ".list_datasetsop",
     "ListDatasetsRequestTypedDict": ".list_datasetsop",
@@ -2221,6 +2117,7 @@ _dynamic_imports: dict[str, str] = {
     "NoResponseError": ".no_response_error",
     "PromptTokensDetails": ".prompttokensdetails",
     "PromptTokensDetailsTypedDict": ".prompttokensdetails",
+    "QueueBackpressureMetricKind": ".queuebackpressuremetrickind",
     "ResponseFormat": ".responseformat",
     "ResponseFormatTypedDict": ".responseformat",
     "ResponseFormatJSONObject": ".responseformatjsonobject",
@@ -2308,26 +2205,6 @@ _dynamic_imports: dict[str, str] = {
     "ServerlessTokenizationRequestTypedDict": ".serverlesstokenizationop",
     "ServerlessTokenizationSuccess": ".serverlesstokenizationsuccess",
     "ServerlessTokenizationSuccessTypedDict": ".serverlesstokenizationsuccess",
-    "ServerlessToolAssistedChatCompleteRequest": ".serverlesstoolassistedchatcompleteop",
-    "ServerlessToolAssistedChatCompleteRequestTypedDict": ".serverlesstoolassistedchatcompleteop",
-    "ServerlessToolAssistedChatCompletionBody": ".serverlesstoolassistedchatcompletionbody",
-    "ServerlessToolAssistedChatCompletionBodyReasoningEffort": ".serverlesstoolassistedchatcompletionbody",
-    "ServerlessToolAssistedChatCompletionBodySeed": ".serverlesstoolassistedchatcompletionbody",
-    "ServerlessToolAssistedChatCompletionBodySeedTypedDict": ".serverlesstoolassistedchatcompletionbody",
-    "ServerlessToolAssistedChatCompletionBodyToolChoice": ".serverlesstoolassistedchatcompletionbody",
-    "ServerlessToolAssistedChatCompletionBodyToolChoiceTypedDict": ".serverlesstoolassistedchatcompletionbody",
-    "ServerlessToolAssistedChatCompletionBodyTypedDict": ".serverlesstoolassistedchatcompletionbody",
-    "ServerlessToolAssistedChatCompletionStreamBody": ".serverlesstoolassistedchatcompletionstreambody",
-    "ServerlessToolAssistedChatCompletionStreamBodyReasoningEffort": ".serverlesstoolassistedchatcompletionstreambody",
-    "ServerlessToolAssistedChatCompletionStreamBodySeed": ".serverlesstoolassistedchatcompletionstreambody",
-    "ServerlessToolAssistedChatCompletionStreamBodySeedTypedDict": ".serverlesstoolassistedchatcompletionstreambody",
-    "ServerlessToolAssistedChatCompletionStreamBodyToolChoice": ".serverlesstoolassistedchatcompletionstreambody",
-    "ServerlessToolAssistedChatCompletionStreamBodyToolChoiceTypedDict": ".serverlesstoolassistedchatcompletionstreambody",
-    "ServerlessToolAssistedChatCompletionStreamBodyTypedDict": ".serverlesstoolassistedchatcompletionstreambody",
-    "ServerlessToolAssistedChatCompletionStreamSuccess": ".serverlesstoolassistedchatcompletionstreamsuccess",
-    "ServerlessToolAssistedChatCompletionStreamSuccessTypedDict": ".serverlesstoolassistedchatcompletionstreamsuccess",
-    "ServerlessToolAssistedChatStreamRequest": ".serverlesstoolassistedchatstreamop",
-    "ServerlessToolAssistedChatStreamRequestTypedDict": ".serverlesstoolassistedchatstreamop",
     "ServerVadChunkingStrategy": ".servervadchunkingstrategy",
     "ServerVadChunkingStrategyTypedDict": ".servervadchunkingstrategy",
     "SplitInfo": ".splitinfo",
@@ -2349,10 +2226,6 @@ _dynamic_imports: dict[str, str] = {
     "StreamedCompletionsChoiceTypedDict": ".streamedcompletionschoice",
     "StreamedFunctionResult": ".streamedfunctionresult",
     "StreamedFunctionResultTypedDict": ".streamedfunctionresult",
-    "StreamedToolAssistedChatToken": ".streamedtoolassistedchattoken",
-    "StreamedToolAssistedChatTokenTypedDict": ".streamedtoolassistedchattoken",
-    "StreamedToolAssistedChatToolStatus": ".streamedtoolassistedchattoolstatus",
-    "StreamedToolAssistedChatToolStatusTypedDict": ".streamedtoolassistedchattoolstatus",
     "StreamedToolCallResult": ".streamedtoolcallresult",
     "StreamedToolCallResultTypedDict": ".streamedtoolcallresult",
     "StreamOptions": ".streamoptions",
@@ -2369,22 +2242,10 @@ _dynamic_imports: dict[str, str] = {
     "TokenSequenceTypedDict": ".tokensequence",
     "Tool": ".tool",
     "ToolTypedDict": ".tool",
-    "ToolAssistedChatTool": ".toolassistedchattool",
-    "ToolAssistedChatToolTypedDict": ".toolassistedchattool",
     "ToolCallResult": ".toolcallresult",
     "ToolCallResultTypedDict": ".toolcallresult",
     "ToolMessage": ".toolmessage",
     "ToolMessageTypedDict": ".toolmessage",
-    "Name": ".toolstatusdata",
-    "Status": ".toolstatusdata",
-    "ToolStatusData": ".toolstatusdata",
-    "ToolStatusDataTypedDict": ".toolstatusdata",
-    "ToolStatusError": ".toolstatuserror",
-    "ToolStatusErrorTypedDict": ".toolstatuserror",
-    "ToolStatusFile": ".toolstatusfile",
-    "ToolStatusFileTypedDict": ".toolstatusfile",
-    "ToolStatusParameter": ".toolstatusparameter",
-    "ToolStatusParameterTypedDict": ".toolstatusparameter",
     "UploadRawSamplesRequest": ".upload_raw_samplesop",
     "UploadRawSamplesRequestTypedDict": ".upload_raw_samplesop",
     "URLImageItem": ".urlimageitem",
