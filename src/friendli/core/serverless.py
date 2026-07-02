@@ -17,7 +17,6 @@ from friendli.core.serverless_messages import (
     AsyncServerlessMessages,
 )
 from friendli.core.serverless_token import SyncServerlessToken, AsyncServerlessToken
-from friendli.core.toolassistedchat import SyncToolAssistedChat, AsyncToolAssistedChat
 from typing import Optional
 import abc
 
@@ -40,7 +39,6 @@ class SyncServerless(BaseServerless, SyncSDK):
     completions: SyncServerlessCompletions
     audio: SyncServerlessAudio
     token: SyncServerlessToken
-    tool_assisted_chat: SyncToolAssistedChat
 
     def _init_sdks(self):
         self.chat = SyncServerlessChat(
@@ -61,9 +59,6 @@ class SyncServerless(BaseServerless, SyncSDK):
         self.token = SyncServerlessToken(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.tool_assisted_chat = SyncToolAssistedChat(
-            self.sdk_configuration, parent_ref=self.parent_ref
-        )
 
 
 class AsyncServerless(BaseServerless, AsyncSDK):
@@ -73,7 +68,6 @@ class AsyncServerless(BaseServerless, AsyncSDK):
     completions: AsyncServerlessCompletions
     audio: AsyncServerlessAudio
     token: AsyncServerlessToken
-    tool_assisted_chat: AsyncToolAssistedChat
 
     def _init_sdks(self):
         self.chat = AsyncServerlessChat(
@@ -92,8 +86,5 @@ class AsyncServerless(BaseServerless, AsyncSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.token = AsyncServerlessToken(
-            self.sdk_configuration, parent_ref=self.parent_ref
-        )
-        self.tool_assisted_chat = AsyncToolAssistedChat(
             self.sdk_configuration, parent_ref=self.parent_ref
         )

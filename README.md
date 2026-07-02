@@ -372,11 +372,6 @@ with SyncFriendli(
 * [tokenize](docs/sdks/serverlesstoken/README.md#tokenize) - Tokenization
 * [detokenize](docs/sdks/serverlesstoken/README.md#detokenize) - Detokenization
 
-### [Serverless.ToolAssistedChat](docs/sdks/toolassistedchat/README.md)
-
-* [complete](docs/sdks/toolassistedchat/README.md#complete) - Tool assisted chat completions
-* [stream](docs/sdks/toolassistedchat/README.md#stream) - Stream tool assisted chat completions
-
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
@@ -593,8 +588,8 @@ with SyncFriendli(
 
 
 **Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 71 methods.*
-* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 3 of 71 methods.*
+* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 69 methods.*
+* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 3 of 69 methods.*
 * [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
