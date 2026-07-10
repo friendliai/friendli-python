@@ -37,17 +37,17 @@ class SyncServerlessAudio(BaseServerlessAudio, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerAudioTranscriptionSuccess:
+    ) -> models.ServerlessAudioTranscriptionSuccess:
         """Audio transcriptions
 
-        Given an audio file, the model transcribes it into text.
+        Transcribe an audio file into text.
 
         :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param file: The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chunking_strategy: Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
         :param language: The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.
-        :param stream: Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the transcription result. When set to `true`, the transcription is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -125,11 +125,11 @@ class SyncServerlessAudio(BaseServerlessAudio, SyncSDK):
                 tags=["SyncServerless.Audio"],
                 extensions={
                     "x-mint": {
-                        "content": "Given an audio file, the model transcribes it into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/audio-transcriptions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "content": "Transcribe an audio file into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/audio-transcriptions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
                         "href": "/openapi/model-apis/audio-transcriptions",
                         "metadata": {
-                            "description": "Transcribe audio files to text using Friendli Model APIs. Supports multiple audio formats with streaming and non-streaming responses.",
-                            "og:description": "Transcribe audio files to text using Friendli Model APIs. Supports multiple audio formats with streaming and non-streaming responses.",
+                            "description": "Transcribe an audio file into text.",
+                            "og:description": "Transcribe an audio file into text.",
                             "og:title": "Model APIs Audio Transcriptions",
                             "sidebarTitle": "Audio Transcriptions",
                             "title": "Model APIs Audio Transcriptions",
@@ -143,7 +143,7 @@ class SyncServerlessAudio(BaseServerlessAudio, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerAudioTranscriptionSuccess, http_res
+                models.ServerlessAudioTranscriptionSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -175,17 +175,17 @@ class SyncServerlessAudio(BaseServerlessAudio, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.ContainerAudioTranscriptionStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ServerlessAudioTranscriptionStreamSuccess]:
         """Stream audio transcriptions
 
-        Given an audio file, the model transcribes it into text.
+        Transcribe an audio file into text.
 
         :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param file: The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chunking_strategy: Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
         :param language: The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.
-        :param stream: Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the transcription result. When set to `true`, the transcription is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -263,13 +263,13 @@ class SyncServerlessAudio(BaseServerlessAudio, SyncSDK):
                 tags=["SyncServerless.Audio"],
                 extensions={
                     "x-mint": {
-                        "content": "Given an audio file, the model transcribes it into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/audio-transcriptions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "content": "Transcribe an audio file into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/audio-transcriptions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
                         "metadata": {
-                            "description": "Transcribe audio files to text using Friendli Model APIs. Supports multiple audio formats with streaming and non-streaming responses.",
-                            "og:description": "Transcribe audio files to text using Friendli Model APIs. Supports multiple audio formats with streaming and non-streaming responses.",
-                            "og:title": "Model APIs Audio Transcriptions (Stream)",
+                            "description": "Transcribe an audio file into text.",
+                            "og:description": "Transcribe an audio file into text.",
+                            "og:title": "Model APIs Stream Audio Transcriptions",
                             "sidebarTitle": "Stream Audio Transcriptions",
-                            "title": "Model APIs Audio Transcriptions (Stream)",
+                            "title": "Model APIs Stream Audio Transcriptions",
                         },
                     }
                 },
@@ -283,7 +283,7 @@ class SyncServerlessAudio(BaseServerlessAudio, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ContainerAudioTranscriptionStreamSuccess, http_res, raw
+                    models.ServerlessAudioTranscriptionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -321,17 +321,17 @@ class AsyncServerlessAudio(BaseServerlessAudio, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerAudioTranscriptionSuccess:
+    ) -> models.ServerlessAudioTranscriptionSuccess:
         """Audio transcriptions
 
-        Given an audio file, the model transcribes it into text.
+        Transcribe an audio file into text.
 
         :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param file: The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chunking_strategy: Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
         :param language: The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.
-        :param stream: Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the transcription result. When set to `true`, the transcription is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -409,11 +409,11 @@ class AsyncServerlessAudio(BaseServerlessAudio, AsyncSDK):
                 tags=["AsyncServerless.Audio"],
                 extensions={
                     "x-mint": {
-                        "content": "Given an audio file, the model transcribes it into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/audio-transcriptions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "content": "Transcribe an audio file into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/audio-transcriptions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
                         "href": "/openapi/model-apis/audio-transcriptions",
                         "metadata": {
-                            "description": "Transcribe audio files to text using Friendli Model APIs. Supports multiple audio formats with streaming and non-streaming responses.",
-                            "og:description": "Transcribe audio files to text using Friendli Model APIs. Supports multiple audio formats with streaming and non-streaming responses.",
+                            "description": "Transcribe an audio file into text.",
+                            "og:description": "Transcribe an audio file into text.",
                             "og:title": "Model APIs Audio Transcriptions",
                             "sidebarTitle": "Audio Transcriptions",
                             "title": "Model APIs Audio Transcriptions",
@@ -427,7 +427,7 @@ class AsyncServerlessAudio(BaseServerlessAudio, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerAudioTranscriptionSuccess, http_res
+                models.ServerlessAudioTranscriptionSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -460,18 +460,18 @@ class AsyncServerlessAudio(BaseServerlessAudio, AsyncSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStreamAsync[
-        models.ContainerAudioTranscriptionStreamSuccess
+        models.ServerlessAudioTranscriptionStreamSuccess
     ]:
         """Stream audio transcriptions
 
-        Given an audio file, the model transcribes it into text.
+        Transcribe an audio file into text.
 
         :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param file: The audio file object (not file name) to transcribe, in one of these formats: mp3, wav, flac, ogg, and many other standard audio formats.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param chunking_strategy: Controls how the audio is cut into chunks. When set to `\\"auto\\"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
         :param language: The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.
-        :param stream: Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the transcription result. When set to `true`, the transcription is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -549,13 +549,13 @@ class AsyncServerlessAudio(BaseServerlessAudio, AsyncSDK):
                 tags=["AsyncServerless.Audio"],
                 extensions={
                     "x-mint": {
-                        "content": "Given an audio file, the model transcribes it into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/audio-transcriptions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "content": "Transcribe an audio file into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/audio-transcriptions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
                         "metadata": {
-                            "description": "Transcribe audio files to text using Friendli Model APIs. Supports multiple audio formats with streaming and non-streaming responses.",
-                            "og:description": "Transcribe audio files to text using Friendli Model APIs. Supports multiple audio formats with streaming and non-streaming responses.",
-                            "og:title": "Model APIs Audio Transcriptions (Stream)",
+                            "description": "Transcribe an audio file into text.",
+                            "og:description": "Transcribe an audio file into text.",
+                            "og:title": "Model APIs Stream Audio Transcriptions",
                             "sidebarTitle": "Stream Audio Transcriptions",
-                            "title": "Model APIs Audio Transcriptions (Stream)",
+                            "title": "Model APIs Stream Audio Transcriptions",
                         },
                     }
                 },
@@ -569,7 +569,7 @@ class AsyncServerlessAudio(BaseServerlessAudio, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ContainerAudioTranscriptionStreamSuccess, http_res, raw
+                    models.ServerlessAudioTranscriptionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

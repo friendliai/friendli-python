@@ -57,7 +57,7 @@ class DedicatedMessagesBodyTypedDict(TypedDict):
     system: NotRequired[Nullable[DedicatedMessagesBodySystemTypedDict]]
     "Optional top-level system instruction applied before conversation turns. Supports a plain string or an array of text blocks."
     stream: NotRequired[Nullable[bool]]
-    "Whether to stream output as server-sent events (`text/event-stream`). When false or omitted, returns a single JSON response."
+    "Whether to stream the response. When set to `true`, events are sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     temperature: NotRequired[Nullable[float]]
     "Sampling temperature. Lower values make outputs more deterministic; higher values increase diversity."
     top_p: NotRequired[Nullable[float]]
@@ -102,7 +102,7 @@ class DedicatedMessagesBody(BaseModel):
     system: OptionalNullable[DedicatedMessagesBodySystem] = UNSET
     "Optional top-level system instruction applied before conversation turns. Supports a plain string or an array of text blocks."
     stream: OptionalNullable[bool] = UNSET
-    "Whether to stream output as server-sent events (`text/event-stream`). When false or omitted, returns a single JSON response."
+    "Whether to stream the response. When set to `true`, events are sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     temperature: OptionalNullable[float] = UNSET
     "Sampling temperature. Lower values make outputs more deterministic; higher values increase diversity."
     top_p: OptionalNullable[float] = UNSET

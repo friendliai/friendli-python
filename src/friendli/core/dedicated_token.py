@@ -28,7 +28,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
     ) -> models.DedicatedTokenizationSuccess:
         """Tokenization
 
-        By giving a text input, generate a tokenized output of token IDs.
+        Convert text input into token IDs.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: Input text prompt to tokenize.
@@ -97,11 +97,11 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
                 tags=["SyncDedicated.Token"],
                 extensions={
                     "x-mint": {
-                        "content": "By giving a text input, generate a tokenized output of token IDs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Convert text input into token IDs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/tokenization",
                         "metadata": {
-                            "description": "Tokenize text into token IDs using your Friendli Dedicated Endpoint. Useful for counting tokens and validating input length before inference.",
-                            "og:description": "Tokenize text into token IDs using your Friendli Dedicated Endpoint. Useful for counting tokens and validating input length before inference.",
+                            "description": "Convert text input into token IDs.",
+                            "og:description": "Convert text input into token IDs.",
                             "og:title": "SyncDedicated Tokenization",
                             "sidebarTitle": "Tokenization",
                             "title": "SyncDedicated Tokenization",
@@ -138,7 +138,7 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
     ) -> models.DedicatedDetokenizationSuccess:
         """Detokenization
 
-        By giving a list of tokens, generate a detokenized output text string.
+        Convert a list of token IDs back into text.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param tokens: A token sequence to detokenize.
@@ -207,11 +207,11 @@ class SyncDedicatedToken(BaseDedicatedToken, SyncSDK):
                 tags=["SyncDedicated.Token"],
                 extensions={
                     "x-mint": {
-                        "content": "By giving a list of tokens, generate a detokenized output text string.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Convert a list of token IDs back into text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/detokenization",
                         "metadata": {
-                            "description": "Convert token IDs back to text using your Friendli Dedicated Endpoint. Decode tokenized output into a human-readable string for analysis.",
-                            "og:description": "Convert token IDs back to text using your Friendli Dedicated Endpoint. Decode tokenized output into a human-readable string for analysis.",
+                            "description": "Convert a list of token IDs back into text.",
+                            "og:description": "Convert a list of token IDs back into text.",
                             "og:title": "SyncDedicated Detokenization",
                             "sidebarTitle": "Detokenization",
                             "title": "SyncDedicated Detokenization",
@@ -250,7 +250,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
     ) -> models.DedicatedTokenizationSuccess:
         """Tokenization
 
-        By giving a text input, generate a tokenized output of token IDs.
+        Convert text input into token IDs.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: Input text prompt to tokenize.
@@ -319,11 +319,11 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
                 tags=["AsyncDedicated.Token"],
                 extensions={
                     "x-mint": {
-                        "content": "By giving a text input, generate a tokenized output of token IDs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Convert text input into token IDs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/tokenization",
                         "metadata": {
-                            "description": "Tokenize text into token IDs using your Friendli Dedicated Endpoint. Useful for counting tokens and validating input length before inference.",
-                            "og:description": "Tokenize text into token IDs using your Friendli Dedicated Endpoint. Useful for counting tokens and validating input length before inference.",
+                            "description": "Convert text input into token IDs.",
+                            "og:description": "Convert text input into token IDs.",
                             "og:title": "AsyncDedicated Tokenization",
                             "sidebarTitle": "Tokenization",
                             "title": "AsyncDedicated Tokenization",
@@ -360,7 +360,7 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
     ) -> models.DedicatedDetokenizationSuccess:
         """Detokenization
 
-        By giving a list of tokens, generate a detokenized output text string.
+        Convert a list of token IDs back into text.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param tokens: A token sequence to detokenize.
@@ -429,11 +429,11 @@ class AsyncDedicatedToken(BaseDedicatedToken, AsyncSDK):
                 tags=["AsyncDedicated.Token"],
                 extensions={
                     "x-mint": {
-                        "content": "By giving a list of tokens, generate a detokenized output text string.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Convert a list of token IDs back into text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/detokenization",
                         "metadata": {
-                            "description": "Convert token IDs back to text using your Friendli Dedicated Endpoint. Decode tokenized output into a human-readable string for analysis.",
-                            "og:description": "Convert token IDs back to text using your Friendli Dedicated Endpoint. Decode tokenized output into a human-readable string for analysis.",
+                            "description": "Convert a list of token IDs back into text.",
+                            "og:description": "Convert a list of token IDs back into text.",
                             "og:title": "AsyncDedicated Detokenization",
                             "sidebarTitle": "Detokenization",
                             "title": "AsyncDedicated Detokenization",

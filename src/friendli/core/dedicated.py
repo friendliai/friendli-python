@@ -21,6 +21,10 @@ from friendli.core.dedicated_messages import (
     SyncDedicatedMessages,
     AsyncDedicatedMessages,
 )
+from friendli.core.dedicated_responses import (
+    SyncDedicatedResponses,
+    AsyncDedicatedResponses,
+)
 from friendli.core.dedicated_token import SyncDedicatedToken, AsyncDedicatedToken
 from friendli.core.embeddings import SyncEmbeddings, AsyncEmbeddings
 from friendli.core.endpoint import SyncEndpoint, AsyncEndpoint
@@ -41,6 +45,7 @@ class BaseDedicated(BaseSDK):
 
 class SyncDedicated(BaseDedicated, SyncSDK):
     chat: SyncDedicatedChat
+    responses: SyncDedicatedResponses
     chat_render: SyncDedicatedChatRender
     messages: SyncDedicatedMessages
     completions: SyncDedicatedCompletions
@@ -53,6 +58,9 @@ class SyncDedicated(BaseDedicated, SyncSDK):
 
     def _init_sdks(self):
         self.chat = SyncDedicatedChat(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.responses = SyncDedicatedResponses(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.chat_render = SyncDedicatedChatRender(
@@ -84,6 +92,7 @@ class SyncDedicated(BaseDedicated, SyncSDK):
 
 class AsyncDedicated(BaseDedicated, AsyncSDK):
     chat: AsyncDedicatedChat
+    responses: AsyncDedicatedResponses
     chat_render: AsyncDedicatedChatRender
     messages: AsyncDedicatedMessages
     completions: AsyncDedicatedCompletions
@@ -96,6 +105,9 @@ class AsyncDedicated(BaseDedicated, AsyncSDK):
 
     def _init_sdks(self):
         self.chat = AsyncDedicatedChat(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.responses = AsyncDedicatedResponses(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.chat_render = AsyncDedicatedChatRender(

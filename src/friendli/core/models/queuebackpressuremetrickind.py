@@ -3,5 +3,11 @@
 from __future__ import annotations
 from typing import Literal
 
-QueueBackpressureMetricKind = Literal["TPOT_MS", "TTFT_MS", "REQUEST_COUNT"]
+QueueBackpressureMetricKind = Literal[
+    "TPOT_MS",
+    "TTFT_MS",
+    "REQUEST_COUNT",
+    "WORKSPACE_UTILIZATION",
+    "QUEUED_PREFILL_TOKENS",
+]
 "Queue backpressure metric kind."

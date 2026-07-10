@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 from friendli.core.types import BaseModel
-import pydantic
-from pydantic import ConfigDict
-from typing import Any, Dict
 from typing_extensions import TypedDict
 
 
@@ -16,19 +13,7 @@ class MessagesErrorObjectTypedDict(TypedDict):
 
 
 class MessagesErrorObject(BaseModel):
-    model_config = ConfigDict(
-        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
-    )
-    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
     type: str
     "Error category. For HTTP 422 in Messages API, this is `invalid_request_error`."
     message: str
     "Human-readable error message."
-
-    @property
-    def additional_properties(self):
-        return self.__pydantic_extra__
-
-    @additional_properties.setter
-    def additional_properties(self, value):
-        self.__pydantic_extra__ = value

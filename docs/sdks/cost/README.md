@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [get_cost](#get_cost) - Get cost details for the team.
+* [get_cost](#get_cost) - Cost
 
 ## get_cost
 

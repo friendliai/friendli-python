@@ -9,7 +9,7 @@
 
 ## tokenize
 
-By giving a text input, generate a tokenized output of token IDs.
+Convert text input into token IDs.
 
 ### Example Usage
 
@@ -51,7 +51,7 @@ with SyncFriendli(
 
 ## detokenize
 
-By giving a list of tokens, generate a detokenized output text string.
+Convert a list of token IDs back into text.
 
 ### Example Usage
 

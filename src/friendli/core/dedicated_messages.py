@@ -4,7 +4,7 @@ from .basesdk import BaseSDK, SyncSDK, AsyncSDK
 from friendli.core import models, utils
 from friendli.core._hooks import HookContext
 from friendli.core.types import OptionalNullable, UNSET
-from friendli.core.utils import get_security_from_env
+from friendli.core.utils import eventstreaming, get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 import abc
@@ -70,14 +70,14 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
     ) -> models.DedicatedMessagesSuccess:
         """Messages
 
-        Generate responses using Anthropic Messages-style payloads.
+        Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.
 
         :param messages: A list of conversation messages ordered from oldest to newest. Must contain at least one item.
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param max_tokens: Maximum number of tokens to generate for the assistant response. Must be greater than 0 when provided.
         :param system: Optional top-level system instruction applied before conversation turns. Supports a plain string or an array of text blocks.
-        :param stream: Whether to stream output as server-sent events (`text/event-stream`). When false or omitted, returns a single JSON response.
+        :param stream: Whether to stream the response. When set to `true`, events are sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param temperature: Sampling temperature. Lower values make outputs more deterministic; higher values increase diversity.
         :param top_p: Nucleus sampling parameter. The model samples from the smallest token set whose cumulative probability reaches `top_p`.
         :param top_k: Limits sampling to the `k` most likely tokens at each decoding step.
@@ -200,11 +200,11 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
                 tags=["SyncDedicated.Messages"],
                 extensions={
                     "x-mint": {
-                        "content": "Send Anthropic Messages-style JSON.\nDetailed request/response field descriptions are provided in the OpenAPI schema below on this page.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/messages-chunk-object).\n\n<Warning>Server-side tools are not supported in the Messages API. In `tools`, only custom/client function tools are used; non-`custom` tool types are ignored.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "content": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/messages-chunk-object).\n\n<Warning>Server-side tools are not supported in the Messages API. In `tools`, only custom/client function tools are used; non-`custom` tool types are ignored.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
                         "href": "/openapi/dedicated/inference/messages",
                         "metadata": {
-                            "description": "Use the Anthropic Messages-style API on your Friendli Dedicated Endpoint. Send structured message payloads and receive assistant responses.",
-                            "og:description": "Use the Anthropic Messages-style API on your Friendli Dedicated Endpoint. Send structured message payloads and receive assistant responses.",
+                            "description": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.",
+                            "og:description": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.",
                             "og:title": "SyncDedicated Messages",
                             "sidebarTitle": "Messages",
                             "tag": "Beta",
@@ -232,6 +232,233 @@ class SyncDedicatedMessages(BaseDedicatedMessages, SyncSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         raise models.SDKError("Unexpected response received", http_res)
+
+    def stream(
+        self,
+        *,
+        messages: Union[
+            Iterable[models.MessagesInputMessage],
+            Iterable[models.MessagesInputMessageTypedDict],
+        ],
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
+        max_tokens: OptionalNullable[int] = UNSET,
+        system: OptionalNullable[
+            Union[
+                models.DedicatedMessagesStreamBodySystem,
+                models.DedicatedMessagesStreamBodySystemTypedDict,
+            ]
+        ] = UNSET,
+        stream: Optional[bool] = True,
+        temperature: OptionalNullable[float] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        top_k: OptionalNullable[int] = UNSET,
+        stop_sequences: OptionalNullable[Iterable[str]] = UNSET,
+        tools: OptionalNullable[
+            Union[
+                Iterable[models.MessagesToolDefinition],
+                Iterable[models.MessagesToolDefinitionTypedDict],
+            ]
+        ] = UNSET,
+        tool_choice: OptionalNullable[
+            Union[models.MessagesToolChoice, models.MessagesToolChoiceTypedDict]
+        ] = UNSET,
+        thinking: OptionalNullable[
+            Union[models.MessagesThinkingConfig, models.MessagesThinkingConfigTypedDict]
+        ] = UNSET,
+        output_config: OptionalNullable[
+            Union[models.MessagesOutputConfig, models.MessagesOutputConfigTypedDict]
+        ] = UNSET,
+        cache_control: OptionalNullable[Mapping[str, Any]] = UNSET,
+        container: OptionalNullable[Mapping[str, Any]] = UNSET,
+        context_manager: OptionalNullable[Mapping[str, Any]] = UNSET,
+        inference_geo: OptionalNullable[Mapping[str, Any]] = UNSET,
+        metadata: OptionalNullable[Mapping[str, Any]] = UNSET,
+        service_tier: OptionalNullable[
+            Union[
+                models.DedicatedMessagesStreamBodyServiceTier,
+                models.DedicatedMessagesStreamBodyServiceTierTypedDict,
+            ]
+        ] = UNSET,
+        additional_properties: Optional[Mapping[str, Any]] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> eventstreaming.EventStream[models.DedicatedMessagesStreamSuccess]:
+        """Stream messages
+
+        Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.
+
+        :param messages: A list of conversation messages ordered from oldest to newest. Must contain at least one item.
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param max_tokens: Maximum number of tokens to generate for the assistant response. Must be greater than 0 when provided.
+        :param system: Optional top-level system instruction applied before conversation turns. Supports a plain string or an array of text blocks.
+        :param stream: Whether to stream the response. When set to `true`, events are sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param temperature: Sampling temperature. Lower values make outputs more deterministic; higher values increase diversity.
+        :param top_p: Nucleus sampling parameter. The model samples from the smallest token set whose cumulative probability reaches `top_p`.
+        :param top_k: Limits sampling to the `k` most likely tokens at each decoding step.
+        :param stop_sequences: Stop strings that terminate generation when matched in output. The matched value is returned in `stop_sequence` when applicable.
+        :param tools: Tool definitions available to the model. Use this to allow tool calls with structured arguments.
+        :param tool_choice: Controls tool-calling behavior (`auto`, `any`, `tool`, `none`) and optional parallel-call behavior.
+        :param thinking: Controls reasoning behavior with mode (`enabled`, `disabled`, `adaptive`). `enabled` requires `budget_tokens`; `disabled` and `adaptive` must not include it.
+        :param output_config: Output generation options including effort level and structured output format settings.
+        :param cache_control: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param container: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param context_manager: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param inference_geo: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param metadata: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param service_tier: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param additional_properties:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        request = models.DedicatedMessagesStreamRequest(
+            x_friendli_team=x_friendli_team,
+            dedicated_messages_stream_body=models.DedicatedMessagesStreamBody(
+                messages=utils.get_pydantic_model(
+                    messages, List[models.MessagesInputMessage]
+                ),
+                max_tokens=max_tokens,
+                model=model,
+                system=utils.get_pydantic_model(
+                    system, OptionalNullable[models.DedicatedMessagesStreamBodySystem]
+                ),
+                stream=stream,
+                temperature=temperature,
+                top_p=top_p,
+                top_k=top_k,
+                stop_sequences=utils.unmarshal(
+                    stop_sequences, OptionalNullable[List[str]]
+                ),
+                tools=utils.get_pydantic_model(
+                    tools, OptionalNullable[List[models.MessagesToolDefinition]]
+                ),
+                tool_choice=utils.get_pydantic_model(
+                    tool_choice, OptionalNullable[models.MessagesToolChoice]
+                ),
+                thinking=utils.get_pydantic_model(
+                    thinking, OptionalNullable[models.MessagesThinkingConfig]
+                ),
+                output_config=utils.get_pydantic_model(
+                    output_config, OptionalNullable[models.MessagesOutputConfig]
+                ),
+                cache_control=utils.unmarshal(
+                    cache_control, OptionalNullable[Dict[str, Any]]
+                ),
+                container=utils.unmarshal(container, OptionalNullable[Dict[str, Any]]),
+                context_manager=utils.unmarshal(
+                    context_manager, OptionalNullable[Dict[str, Any]]
+                ),
+                inference_geo=utils.unmarshal(
+                    inference_geo, OptionalNullable[Dict[str, Any]]
+                ),
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, Any]]),
+                service_tier=utils.unmarshal(
+                    service_tier,
+                    OptionalNullable[models.DedicatedMessagesStreamBodyServiceTier],
+                ),
+                **utils.unmarshal(additional_properties, Optional[Dict[str, Any]])
+                or {},
+            ),
+        )
+        req = self._build_request(
+            method="POST",
+            path="/dedicated/v1/messages#stream",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="text/event-stream",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.dedicated_messages_stream_body,
+                False,
+                False,
+                "json",
+                models.DedicatedMessagesStreamBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="dedicatedMessagesStream",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["SyncDedicated.Messages"],
+                extensions={
+                    "x-mint": {
+                        "content": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/messages-chunk-object).\n\n<Warning>Server-side tools are not supported in the Messages API. In `tools`, only custom/client function tools are used; non-`custom` tool types are ignored.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/inference/messages",
+                        "metadata": {
+                            "description": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.",
+                            "og:description": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.",
+                            "og:title": "SyncDedicated Stream Messages",
+                            "sidebarTitle": "Stream Messages",
+                            "tag": "Beta",
+                            "title": "SyncDedicated Stream Messages",
+                        },
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            stream=True,
+            retry_config=retry_config,
+        )
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "text/event-stream"):
+            return eventstreaming.EventStream(
+                http_res,
+                lambda raw: unmarshal_json_response(
+                    models.DedicatedMessagesStreamSuccess, http_res, raw
+                ),
+                client_ref=self,
+            )
+        if utils.match_response(http_res, "422", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                models.MessagesErrorResponseData, http_res, http_res_text
+            )
+            raise models.MessagesErrorResponse(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        http_res_text = utils.stream_to_text(http_res)
+        raise models.SDKError("Unexpected response received", http_res, http_res_text)
 
 
 class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
@@ -290,14 +517,14 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
     ) -> models.DedicatedMessagesSuccess:
         """Messages
 
-        Generate responses using Anthropic Messages-style payloads.
+        Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.
 
         :param messages: A list of conversation messages ordered from oldest to newest. Must contain at least one item.
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param max_tokens: Maximum number of tokens to generate for the assistant response. Must be greater than 0 when provided.
         :param system: Optional top-level system instruction applied before conversation turns. Supports a plain string or an array of text blocks.
-        :param stream: Whether to stream output as server-sent events (`text/event-stream`). When false or omitted, returns a single JSON response.
+        :param stream: Whether to stream the response. When set to `true`, events are sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param temperature: Sampling temperature. Lower values make outputs more deterministic; higher values increase diversity.
         :param top_p: Nucleus sampling parameter. The model samples from the smallest token set whose cumulative probability reaches `top_p`.
         :param top_k: Limits sampling to the `k` most likely tokens at each decoding step.
@@ -420,11 +647,11 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
                 tags=["AsyncDedicated.Messages"],
                 extensions={
                     "x-mint": {
-                        "content": "Send Anthropic Messages-style JSON.\nDetailed request/response field descriptions are provided in the OpenAPI schema below on this page.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/messages-chunk-object).\n\n<Warning>Server-side tools are not supported in the Messages API. In `tools`, only custom/client function tools are used; non-`custom` tool types are ignored.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "content": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/messages-chunk-object).\n\n<Warning>Server-side tools are not supported in the Messages API. In `tools`, only custom/client function tools are used; non-`custom` tool types are ignored.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
                         "href": "/openapi/dedicated/inference/messages",
                         "metadata": {
-                            "description": "Use the Anthropic Messages-style API on your Friendli Dedicated Endpoint. Send structured message payloads and receive assistant responses.",
-                            "og:description": "Use the Anthropic Messages-style API on your Friendli Dedicated Endpoint. Send structured message payloads and receive assistant responses.",
+                            "description": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.",
+                            "og:description": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.",
                             "og:title": "AsyncDedicated Messages",
                             "sidebarTitle": "Messages",
                             "tag": "Beta",
@@ -452,3 +679,230 @@ class AsyncDedicatedMessages(BaseDedicatedMessages, AsyncSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         raise models.SDKError("Unexpected response received", http_res)
+
+    async def stream(
+        self,
+        *,
+        messages: Union[
+            Iterable[models.MessagesInputMessage],
+            Iterable[models.MessagesInputMessageTypedDict],
+        ],
+        model: str,
+        x_friendli_team: OptionalNullable[str] = UNSET,
+        max_tokens: OptionalNullable[int] = UNSET,
+        system: OptionalNullable[
+            Union[
+                models.DedicatedMessagesStreamBodySystem,
+                models.DedicatedMessagesStreamBodySystemTypedDict,
+            ]
+        ] = UNSET,
+        stream: Optional[bool] = True,
+        temperature: OptionalNullable[float] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        top_k: OptionalNullable[int] = UNSET,
+        stop_sequences: OptionalNullable[Iterable[str]] = UNSET,
+        tools: OptionalNullable[
+            Union[
+                Iterable[models.MessagesToolDefinition],
+                Iterable[models.MessagesToolDefinitionTypedDict],
+            ]
+        ] = UNSET,
+        tool_choice: OptionalNullable[
+            Union[models.MessagesToolChoice, models.MessagesToolChoiceTypedDict]
+        ] = UNSET,
+        thinking: OptionalNullable[
+            Union[models.MessagesThinkingConfig, models.MessagesThinkingConfigTypedDict]
+        ] = UNSET,
+        output_config: OptionalNullable[
+            Union[models.MessagesOutputConfig, models.MessagesOutputConfigTypedDict]
+        ] = UNSET,
+        cache_control: OptionalNullable[Mapping[str, Any]] = UNSET,
+        container: OptionalNullable[Mapping[str, Any]] = UNSET,
+        context_manager: OptionalNullable[Mapping[str, Any]] = UNSET,
+        inference_geo: OptionalNullable[Mapping[str, Any]] = UNSET,
+        metadata: OptionalNullable[Mapping[str, Any]] = UNSET,
+        service_tier: OptionalNullable[
+            Union[
+                models.DedicatedMessagesStreamBodyServiceTier,
+                models.DedicatedMessagesStreamBodyServiceTierTypedDict,
+            ]
+        ] = UNSET,
+        additional_properties: Optional[Mapping[str, Any]] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> eventstreaming.EventStreamAsync[models.DedicatedMessagesStreamSuccess]:
+        """Stream messages
+
+        Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.
+
+        :param messages: A list of conversation messages ordered from oldest to newest. Must contain at least one item.
+        :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
+        :param x_friendli_team: ID of team to run requests as (optional parameter).
+        :param max_tokens: Maximum number of tokens to generate for the assistant response. Must be greater than 0 when provided.
+        :param system: Optional top-level system instruction applied before conversation turns. Supports a plain string or an array of text blocks.
+        :param stream: Whether to stream the response. When set to `true`, events are sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param temperature: Sampling temperature. Lower values make outputs more deterministic; higher values increase diversity.
+        :param top_p: Nucleus sampling parameter. The model samples from the smallest token set whose cumulative probability reaches `top_p`.
+        :param top_k: Limits sampling to the `k` most likely tokens at each decoding step.
+        :param stop_sequences: Stop strings that terminate generation when matched in output. The matched value is returned in `stop_sequence` when applicable.
+        :param tools: Tool definitions available to the model. Use this to allow tool calls with structured arguments.
+        :param tool_choice: Controls tool-calling behavior (`auto`, `any`, `tool`, `none`) and optional parallel-call behavior.
+        :param thinking: Controls reasoning behavior with mode (`enabled`, `disabled`, `adaptive`). `enabled` requires `budget_tokens`; `disabled` and `adaptive` must not include it.
+        :param output_config: Output generation options including effort level and structured output format settings.
+        :param cache_control: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param container: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param context_manager: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param inference_geo: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param metadata: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param service_tier: Compatibility field accepted for request portability. Parsed but not used for generation.
+        :param additional_properties:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        request = models.DedicatedMessagesStreamRequest(
+            x_friendli_team=x_friendli_team,
+            dedicated_messages_stream_body=models.DedicatedMessagesStreamBody(
+                messages=utils.get_pydantic_model(
+                    messages, List[models.MessagesInputMessage]
+                ),
+                max_tokens=max_tokens,
+                model=model,
+                system=utils.get_pydantic_model(
+                    system, OptionalNullable[models.DedicatedMessagesStreamBodySystem]
+                ),
+                stream=stream,
+                temperature=temperature,
+                top_p=top_p,
+                top_k=top_k,
+                stop_sequences=utils.unmarshal(
+                    stop_sequences, OptionalNullable[List[str]]
+                ),
+                tools=utils.get_pydantic_model(
+                    tools, OptionalNullable[List[models.MessagesToolDefinition]]
+                ),
+                tool_choice=utils.get_pydantic_model(
+                    tool_choice, OptionalNullable[models.MessagesToolChoice]
+                ),
+                thinking=utils.get_pydantic_model(
+                    thinking, OptionalNullable[models.MessagesThinkingConfig]
+                ),
+                output_config=utils.get_pydantic_model(
+                    output_config, OptionalNullable[models.MessagesOutputConfig]
+                ),
+                cache_control=utils.unmarshal(
+                    cache_control, OptionalNullable[Dict[str, Any]]
+                ),
+                container=utils.unmarshal(container, OptionalNullable[Dict[str, Any]]),
+                context_manager=utils.unmarshal(
+                    context_manager, OptionalNullable[Dict[str, Any]]
+                ),
+                inference_geo=utils.unmarshal(
+                    inference_geo, OptionalNullable[Dict[str, Any]]
+                ),
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, Any]]),
+                service_tier=utils.unmarshal(
+                    service_tier,
+                    OptionalNullable[models.DedicatedMessagesStreamBodyServiceTier],
+                ),
+                **utils.unmarshal(additional_properties, Optional[Dict[str, Any]])
+                or {},
+            ),
+        )
+        req = self._build_request_async(
+            method="POST",
+            path="/dedicated/v1/messages#stream",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="text/event-stream",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.dedicated_messages_stream_body,
+                False,
+                False,
+                "json",
+                models.DedicatedMessagesStreamBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="dedicatedMessagesStream",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["AsyncDedicated.Messages"],
+                extensions={
+                    "x-mint": {
+                        "content": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/messages-chunk-object).\n\n<Warning>Server-side tools are not supported in the Messages API. In `tools`, only custom/client function tools are used; non-`custom` tool types are ignored.</Warning>\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "href": "/openapi/dedicated/inference/messages",
+                        "metadata": {
+                            "description": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.",
+                            "og:description": "Generate a model response from a conversation using the Anthropic Messages API format. Supports streaming, function tool calls, and extended thinking.",
+                            "og:title": "AsyncDedicated Stream Messages",
+                            "sidebarTitle": "Stream Messages",
+                            "tag": "Beta",
+                            "title": "AsyncDedicated Stream Messages",
+                        },
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            stream=True,
+            retry_config=retry_config,
+        )
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "text/event-stream"):
+            return eventstreaming.EventStreamAsync(
+                http_res,
+                lambda raw: unmarshal_json_response(
+                    models.DedicatedMessagesStreamSuccess, http_res, raw
+                ),
+                client_ref=self,
+            )
+        if utils.match_response(http_res, "422", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                models.MessagesErrorResponseData, http_res, http_res_text
+            )
+            raise models.MessagesErrorResponse(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.SDKError("API error occurred", http_res, http_res_text)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise models.SDKError("Unexpected response received", http_res, http_res_text)

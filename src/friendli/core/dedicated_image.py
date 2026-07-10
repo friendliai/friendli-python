@@ -38,7 +38,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
     ) -> models.DedicatedImageGenerateSuccess:
         """Image generations
 
-        Given a description, the model generates image(s).
+        Generate an image from a text prompt.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: A text description of the desired image(s).
@@ -124,11 +124,11 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 tags=["SyncDedicated.Image"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a description, the model generates image(s).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Generate an image from a text prompt.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/image-generations",
                         "metadata": {
-                            "description": "Generate images from text descriptions using your Friendli Dedicated Endpoint. Supports configurable image size, count, and generation parameters.",
-                            "og:description": "Generate images from text descriptions using your Friendli Dedicated Endpoint. Supports configurable image size, count, and generation parameters.",
+                            "description": "Generate an image from a text prompt.",
+                            "og:description": "Generate an image from a text prompt.",
                             "og:title": "SyncDedicated Image Generations",
                             "sidebarTitle": "Image Generations",
                             "title": "SyncDedicated Image Generations",
@@ -175,7 +175,7 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
     ) -> models.DedicatedImageGenerateSuccess:
         """Image edits
 
-        Given an image and a description, the model edits the image.
+        Edit an image based on a text prompt.
 
         :param image: The image(s) to edit. Must be in a supported image format.
         :param prompt: A text description of the desired image(s).
@@ -257,11 +257,11 @@ class SyncDedicatedImage(BaseDedicatedImage, SyncSDK):
                 tags=["SyncDedicated.Image"],
                 extensions={
                     "x-mint": {
-                        "content": "Given an image and a description, the model edits the image.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Edit an image based on a text prompt.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/image-edits",
                         "metadata": {
-                            "description": "Edit images with text prompts using your Friendli Dedicated Endpoint. Upload an image and describe the desired modifications for the model to apply.",
-                            "og:description": "Edit images with text prompts using your Friendli Dedicated Endpoint. Upload an image and describe the desired modifications for the model to apply.",
+                            "description": "Edit an image based on a text prompt.",
+                            "og:description": "Edit an image based on a text prompt.",
                             "og:title": "SyncDedicated Image Edits",
                             "sidebarTitle": "Image Edits",
                             "title": "SyncDedicated Image Edits",
@@ -310,7 +310,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
     ) -> models.DedicatedImageGenerateSuccess:
         """Image generations
 
-        Given a description, the model generates image(s).
+        Generate an image from a text prompt.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param prompt: A text description of the desired image(s).
@@ -396,11 +396,11 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 tags=["AsyncDedicated.Image"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a description, the model generates image(s).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Generate an image from a text prompt.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/image-generations",
                         "metadata": {
-                            "description": "Generate images from text descriptions using your Friendli Dedicated Endpoint. Supports configurable image size, count, and generation parameters.",
-                            "og:description": "Generate images from text descriptions using your Friendli Dedicated Endpoint. Supports configurable image size, count, and generation parameters.",
+                            "description": "Generate an image from a text prompt.",
+                            "og:description": "Generate an image from a text prompt.",
                             "og:title": "AsyncDedicated Image Generations",
                             "sidebarTitle": "Image Generations",
                             "title": "AsyncDedicated Image Generations",
@@ -447,7 +447,7 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
     ) -> models.DedicatedImageGenerateSuccess:
         """Image edits
 
-        Given an image and a description, the model edits the image.
+        Edit an image based on a text prompt.
 
         :param image: The image(s) to edit. Must be in a supported image format.
         :param prompt: A text description of the desired image(s).
@@ -529,11 +529,11 @@ class AsyncDedicatedImage(BaseDedicatedImage, AsyncSDK):
                 tags=["AsyncDedicated.Image"],
                 extensions={
                     "x-mint": {
-                        "content": "Given an image and a description, the model edits the image.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Edit an image based on a text prompt.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/image-edits",
                         "metadata": {
-                            "description": "Edit images with text prompts using your Friendli Dedicated Endpoint. Upload an image and describe the desired modifications for the model to apply.",
-                            "og:description": "Edit images with text prompts using your Friendli Dedicated Endpoint. Upload an image and describe the desired modifications for the model to apply.",
+                            "description": "Edit an image based on a text prompt.",
+                            "og:description": "Edit an image based on a text prompt.",
                             "og:title": "AsyncDedicated Image Edits",
                             "sidebarTitle": "Image Edits",
                             "title": "AsyncDedicated Image Edits",
