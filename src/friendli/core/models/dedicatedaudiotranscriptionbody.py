@@ -79,7 +79,7 @@ class DedicatedAudioTranscriptionBodyTypedDict(TypedDict):
     language: NotRequired[Nullable[str]]
     "The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency."
     stream: NotRequired[Nullable[bool]]
-    "Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    "Whether to stream the transcription result. When set to `true`, the transcription is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     temperature: NotRequired[Nullable[float]]
     "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic."
 
@@ -100,7 +100,7 @@ class DedicatedAudioTranscriptionBody(BaseModel):
     language: Annotated[OptionalNullable[str], FieldMetadata(multipart=True)] = UNSET
     "The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency."
     stream: Annotated[OptionalNullable[bool], FieldMetadata(multipart=True)] = UNSET
-    "Whether to stream the transcription result. When set to `true`, the transcription result will be streamed as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    "Whether to stream the transcription result. When set to `true`, the transcription is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     temperature: Annotated[OptionalNullable[float], FieldMetadata(multipart=True)] = (
         UNSET
     )

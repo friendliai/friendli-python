@@ -37,7 +37,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
     ) -> models.ContainerImageGenerateSuccess:
         """Image generations
 
-        Given a description, the model generates image.
+        Generate an image from a text prompt.
 
         :param prompt: A text description of the desired image.
         :param model: Routes the request to a specific adapter.
@@ -115,11 +115,11 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
                 tags=["SyncContainer.Image"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a description, the model generates image.",
+                        "content": "Generate an image from a text prompt.",
                         "href": "/openapi/container/image-generations",
                         "metadata": {
-                            "description": "Generate images from text descriptions using Friendli Container. Run image generation models locally with configurable size and output parameters.",
-                            "og:description": "Generate images from text descriptions using Friendli Container. Run image generation models locally with configurable size and output parameters.",
+                            "description": "Generate an image from a text prompt.",
+                            "og:description": "Generate an image from a text prompt.",
                             "og:title": "SyncContainer Image Generations",
                             "sidebarTitle": "Image Generations",
                             "title": "SyncContainer Image Generations",
@@ -165,7 +165,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
     ) -> models.ContainerImageGenerateSuccess:
         """Image edits
 
-        Given an image and a description, the model edits the image.
+        Edit an image based on a text prompt.
 
         :param image: The image(s) to edit. Must be in a supported image format.
         :param prompt: A text description of the desired image.
@@ -237,11 +237,11 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
                 tags=["SyncContainer.Image"],
                 extensions={
                     "x-mint": {
-                        "content": "Given an image and a description, the model edits the image.",
+                        "content": "Edit an image based on a text prompt.",
                         "href": "/openapi/container/image-edits",
                         "metadata": {
-                            "description": "Edit images with text prompts using Friendli Container. Upload an image and describe desired modifications to the self-hosted model on your GPUs.",
-                            "og:description": "Edit images with text prompts using Friendli Container. Upload an image and describe desired modifications to the self-hosted model on your GPUs.",
+                            "description": "Edit an image based on a text prompt.",
+                            "og:description": "Edit an image based on a text prompt.",
                             "og:title": "SyncContainer Image Edits",
                             "sidebarTitle": "Image Edits",
                             "title": "SyncContainer Image Edits",
@@ -289,7 +289,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
     ) -> models.ContainerImageGenerateSuccess:
         """Image generations
 
-        Given a description, the model generates image.
+        Generate an image from a text prompt.
 
         :param prompt: A text description of the desired image.
         :param model: Routes the request to a specific adapter.
@@ -367,11 +367,11 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
                 tags=["AsyncContainer.Image"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a description, the model generates image.",
+                        "content": "Generate an image from a text prompt.",
                         "href": "/openapi/container/image-generations",
                         "metadata": {
-                            "description": "Generate images from text descriptions using Friendli Container. Run image generation models locally with configurable size and output parameters.",
-                            "og:description": "Generate images from text descriptions using Friendli Container. Run image generation models locally with configurable size and output parameters.",
+                            "description": "Generate an image from a text prompt.",
+                            "og:description": "Generate an image from a text prompt.",
                             "og:title": "AsyncContainer Image Generations",
                             "sidebarTitle": "Image Generations",
                             "title": "AsyncContainer Image Generations",
@@ -417,7 +417,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
     ) -> models.ContainerImageGenerateSuccess:
         """Image edits
 
-        Given an image and a description, the model edits the image.
+        Edit an image based on a text prompt.
 
         :param image: The image(s) to edit. Must be in a supported image format.
         :param prompt: A text description of the desired image.
@@ -489,11 +489,11 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
                 tags=["AsyncContainer.Image"],
                 extensions={
                     "x-mint": {
-                        "content": "Given an image and a description, the model edits the image.",
+                        "content": "Edit an image based on a text prompt.",
                         "href": "/openapi/container/image-edits",
                         "metadata": {
-                            "description": "Edit images with text prompts using Friendli Container. Upload an image and describe desired modifications to the self-hosted model on your GPUs.",
-                            "og:description": "Edit images with text prompts using Friendli Container. Upload an image and describe desired modifications to the self-hosted model on your GPUs.",
+                            "description": "Edit an image based on a text prompt.",
+                            "og:description": "Edit an image based on a text prompt.",
                             "og:title": "AsyncContainer Image Edits",
                             "sidebarTitle": "Image Edits",
                             "title": "AsyncContainer Image Edits",

@@ -31,10 +31,10 @@ class SyncDedicatedClassification(BaseDedicatedClassification, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerTextClassificationSuccess:
+    ) -> models.DedicatedTextClassificationSuccess:
         """Text classification
 
-        Given a text input, the model classifies it into categories.
+        Classify text input into categories with per-class probabilities.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -113,11 +113,11 @@ class SyncDedicatedClassification(BaseDedicatedClassification, SyncSDK):
                 tags=["SyncDedicated.Classification"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a text input, the model classifies it into categories.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Classify text input into categories with per-class probabilities.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/text-classification",
                         "metadata": {
-                            "description": "Classify text into categories using your Friendli Dedicated Endpoint. Send text input and receive predicted labels with per-class probabilities.",
-                            "og:description": "Classify text into categories using your Friendli Dedicated Endpoint. Send text input and receive predicted labels with per-class probabilities.",
+                            "description": "Classify text input into categories with per-class probabilities.",
+                            "og:description": "Classify text input into categories with per-class probabilities.",
                             "og:title": "SyncDedicated Text Classification",
                             "sidebarTitle": "Text Classification",
                             "title": "SyncDedicated Text Classification",
@@ -131,7 +131,7 @@ class SyncDedicatedClassification(BaseDedicatedClassification, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerTextClassificationSuccess, http_res
+                models.DedicatedTextClassificationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -159,10 +159,10 @@ class AsyncDedicatedClassification(BaseDedicatedClassification, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerTextClassificationSuccess:
+    ) -> models.DedicatedTextClassificationSuccess:
         """Text classification
 
-        Given a text input, the model classifies it into categories.
+        Classify text input into categories with per-class probabilities.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -241,11 +241,11 @@ class AsyncDedicatedClassification(BaseDedicatedClassification, AsyncSDK):
                 tags=["AsyncDedicated.Classification"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a text input, the model classifies it into categories.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Classify text input into categories with per-class probabilities.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/text-classification",
                         "metadata": {
-                            "description": "Classify text into categories using your Friendli Dedicated Endpoint. Send text input and receive predicted labels with per-class probabilities.",
-                            "og:description": "Classify text into categories using your Friendli Dedicated Endpoint. Send text input and receive predicted labels with per-class probabilities.",
+                            "description": "Classify text input into categories with per-class probabilities.",
+                            "og:description": "Classify text input into categories with per-class probabilities.",
                             "og:title": "AsyncDedicated Text Classification",
                             "sidebarTitle": "Text Classification",
                             "title": "AsyncDedicated Text Classification",
@@ -259,7 +259,7 @@ class AsyncDedicatedClassification(BaseDedicatedClassification, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerTextClassificationSuccess, http_res
+                models.DedicatedTextClassificationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

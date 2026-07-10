@@ -27,7 +27,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
     ) -> models.ContainerTokenizationSuccess:
         """Tokenization
 
-        By giving a text input, generate a tokenized output of token IDs.
+        Convert text input into token IDs.
 
         :param prompt: Input text prompt to tokenize.
         :param model: Routes the request to a specific adapter.
@@ -86,11 +86,11 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
                 tags=["SyncContainer.Token"],
                 extensions={
                     "x-mint": {
-                        "content": "By giving a text input, generate a tokenized output of token IDs.",
+                        "content": "Convert text input into token IDs.",
                         "href": "/openapi/container/tokenization",
                         "metadata": {
-                            "description": "Tokenize text into token IDs using Friendli Container. Run tokenization locally on your own infrastructure for pre-processing and token counting.",
-                            "og:description": "Tokenize text into token IDs using Friendli Container. Run tokenization locally on your own infrastructure for pre-processing and token counting.",
+                            "description": "Convert text input into token IDs.",
+                            "og:description": "Convert text input into token IDs.",
                             "og:title": "SyncContainer Tokenization",
                             "sidebarTitle": "Tokenization",
                             "title": "SyncContainer Tokenization",
@@ -126,7 +126,7 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
     ) -> models.ContainerDetokenizationSuccess:
         """Detokenization
 
-        By giving a list of tokens, generate a detokenized output text string.
+        Convert a list of token IDs back into text.
 
         :param tokens: A token sequence to detokenize.
         :param model: Routes the request to a specific adapter.
@@ -187,11 +187,11 @@ class SyncContainerToken(BaseContainerToken, SyncSDK):
                 tags=["SyncContainer.Token"],
                 extensions={
                     "x-mint": {
-                        "content": "By giving a list of tokens, generate a detokenized output text string.",
+                        "content": "Convert a list of token IDs back into text.",
                         "href": "/openapi/container/detokenization",
                         "metadata": {
-                            "description": "Convert token IDs back to text using Friendli Container. Decode tokenized model output into readable strings on your own infrastructure.",
-                            "og:description": "Convert token IDs back to text using Friendli Container. Decode tokenized model output into readable strings on your own infrastructure.",
+                            "description": "Convert a list of token IDs back into text.",
+                            "og:description": "Convert a list of token IDs back into text.",
                             "og:title": "SyncContainer Detokenization",
                             "sidebarTitle": "Detokenization",
                             "title": "SyncContainer Detokenization",
@@ -229,7 +229,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
     ) -> models.ContainerTokenizationSuccess:
         """Tokenization
 
-        By giving a text input, generate a tokenized output of token IDs.
+        Convert text input into token IDs.
 
         :param prompt: Input text prompt to tokenize.
         :param model: Routes the request to a specific adapter.
@@ -288,11 +288,11 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
                 tags=["AsyncContainer.Token"],
                 extensions={
                     "x-mint": {
-                        "content": "By giving a text input, generate a tokenized output of token IDs.",
+                        "content": "Convert text input into token IDs.",
                         "href": "/openapi/container/tokenization",
                         "metadata": {
-                            "description": "Tokenize text into token IDs using Friendli Container. Run tokenization locally on your own infrastructure for pre-processing and token counting.",
-                            "og:description": "Tokenize text into token IDs using Friendli Container. Run tokenization locally on your own infrastructure for pre-processing and token counting.",
+                            "description": "Convert text input into token IDs.",
+                            "og:description": "Convert text input into token IDs.",
                             "og:title": "AsyncContainer Tokenization",
                             "sidebarTitle": "Tokenization",
                             "title": "AsyncContainer Tokenization",
@@ -328,7 +328,7 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
     ) -> models.ContainerDetokenizationSuccess:
         """Detokenization
 
-        By giving a list of tokens, generate a detokenized output text string.
+        Convert a list of token IDs back into text.
 
         :param tokens: A token sequence to detokenize.
         :param model: Routes the request to a specific adapter.
@@ -389,11 +389,11 @@ class AsyncContainerToken(BaseContainerToken, AsyncSDK):
                 tags=["AsyncContainer.Token"],
                 extensions={
                     "x-mint": {
-                        "content": "By giving a list of tokens, generate a detokenized output text string.",
+                        "content": "Convert a list of token IDs back into text.",
                         "href": "/openapi/container/detokenization",
                         "metadata": {
-                            "description": "Convert token IDs back to text using Friendli Container. Decode tokenized model output into readable strings on your own infrastructure.",
-                            "og:description": "Convert token IDs back to text using Friendli Container. Decode tokenized model output into readable strings on your own infrastructure.",
+                            "description": "Convert a list of token IDs back into text.",
+                            "og:description": "Convert a list of token IDs back into text.",
                             "og:title": "AsyncContainer Detokenization",
                             "sidebarTitle": "Detokenization",
                             "title": "AsyncContainer Detokenization",

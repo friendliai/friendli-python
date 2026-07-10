@@ -17,6 +17,10 @@ from friendli.core.container_messages import (
     SyncContainerMessages,
     AsyncContainerMessages,
 )
+from friendli.core.container_responses import (
+    SyncContainerResponses,
+    AsyncContainerResponses,
+)
 from friendli.core.container_token import SyncContainerToken, AsyncContainerToken
 from typing import Optional
 import abc
@@ -35,6 +39,7 @@ class BaseContainer(BaseSDK):
 
 class SyncContainer(BaseContainer, SyncSDK):
     chat: SyncContainerChat
+    responses: SyncContainerResponses
     messages: SyncContainerMessages
     completions: SyncContainerCompletions
     token: SyncContainerToken
@@ -44,6 +49,9 @@ class SyncContainer(BaseContainer, SyncSDK):
 
     def _init_sdks(self):
         self.chat = SyncContainerChat(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.responses = SyncContainerResponses(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.messages = SyncContainerMessages(
@@ -68,6 +76,7 @@ class SyncContainer(BaseContainer, SyncSDK):
 
 class AsyncContainer(BaseContainer, AsyncSDK):
     chat: AsyncContainerChat
+    responses: AsyncContainerResponses
     messages: AsyncContainerMessages
     completions: AsyncContainerCompletions
     token: AsyncContainerToken
@@ -77,6 +86,9 @@ class AsyncContainer(BaseContainer, AsyncSDK):
 
     def _init_sdks(self):
         self.chat = AsyncContainerChat(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.responses = AsyncContainerResponses(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.messages = AsyncContainerMessages(

@@ -9,7 +9,7 @@ from friendli.core.utils import validate_const
 import httpx
 import pydantic
 from pydantic.functional_validators import AfterValidator
-from typing import Any, Dict, Literal, Optional
+from typing import Literal, Optional
 from typing_extensions import Annotated
 
 
@@ -22,9 +22,6 @@ class MessagesErrorResponseData(BaseModel):
     "Top-level response type for Messages API errors."
     request_id: OptionalNullable[str] = UNSET
     "Request identifier for debugging and support. It may be omitted in some failure paths."
-    additional_properties: Annotated[
-        Optional[Dict[str, Any]], pydantic.Field(exclude=True)
-    ] = None
 
 
 @dataclass(unsafe_hash=True)

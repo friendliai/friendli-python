@@ -35,7 +35,7 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
     ) -> models.DedicatedEmbeddingsSuccess:
         """SyncEmbeddings
 
-        Creates an embedding vector representing the input text.
+        Generate an embedding vector from input text or token sequence.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -115,11 +115,11 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
                 tags=["SyncDedicated.Embeddings"],
                 extensions={
                     "x-mint": {
-                        "content": "Creates an embedding vector representing the input text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Generate an embedding vector from input text or token sequence.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/embeddings",
                         "metadata": {
-                            "description": "Generate text embedding vectors using your Friendli Dedicated Endpoint. Convert text into dense vector representations for search and similarity.",
-                            "og:description": "Generate text embedding vectors using your Friendli Dedicated Endpoint. Convert text into dense vector representations for search and similarity.",
+                            "description": "Generate an embedding vector from input text or token sequence.",
+                            "og:description": "Generate an embedding vector from input text or token sequence.",
                             "og:title": "SyncDedicated Embeddings",
                             "sidebarTitle": "SyncEmbeddings",
                             "title": "SyncDedicated Embeddings",
@@ -163,7 +163,7 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
     ) -> models.DedicatedEmbeddingsSuccess:
         """AsyncEmbeddings
 
-        Creates an embedding vector representing the input text.
+        Generate an embedding vector from input text or token sequence.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -243,11 +243,11 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
                 tags=["AsyncDedicated.Embeddings"],
                 extensions={
                     "x-mint": {
-                        "content": "Creates an embedding vector representing the input text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Generate an embedding vector from input text or token sequence.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/embeddings",
                         "metadata": {
-                            "description": "Generate text embedding vectors using your Friendli Dedicated Endpoint. Convert text into dense vector representations for search and similarity.",
-                            "og:description": "Generate text embedding vectors using your Friendli Dedicated Endpoint. Convert text into dense vector representations for search and similarity.",
+                            "description": "Generate an embedding vector from input text or token sequence.",
+                            "og:description": "Generate an embedding vector from input text or token sequence.",
                             "og:title": "AsyncDedicated Embeddings",
                             "sidebarTitle": "AsyncEmbeddings",
                             "title": "AsyncDedicated Embeddings",

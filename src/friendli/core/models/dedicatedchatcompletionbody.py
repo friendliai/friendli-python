@@ -20,7 +20,9 @@ from pydantic import model_serializer
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
-DedicatedChatCompletionBodyReasoningEffort = Literal["low", "medium", "high"]
+DedicatedChatCompletionBodyReasoningEffort = Literal[
+    "minimal", "low", "medium", "high", "xhigh", "max", "ultracode"
+]
 DedicatedChatCompletionBodySeedTypedDict = TypeAliasType(
     "DedicatedChatCompletionBodySeedTypedDict", Union[List[int], int]
 )
@@ -68,7 +70,7 @@ class DedicatedChatCompletionBodyTypedDict(TypedDict):
     repetition_penalty: NotRequired[Nullable[float]]
     "Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument."
     reasoning_effort: NotRequired[Nullable[DedicatedChatCompletionBodyReasoningEffort]]
-    "Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models."
+    "Sets how much reasoning the model does before answering. Higher values give more thorough responses but take longer. This affects reasoning models only, and the available options depend on the model."
     reasoning_budget: NotRequired[Nullable[int]]
     "Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models."
     seed: NotRequired[Nullable[DedicatedChatCompletionBodySeedTypedDict]]
@@ -76,7 +78,7 @@ class DedicatedChatCompletionBodyTypedDict(TypedDict):
     stop: NotRequired[Nullable[List[str]]]
     "When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list."
     stream: NotRequired[Nullable[bool]]
-    "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    "Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
     parse_reasoning: NotRequired[Nullable[bool]]
@@ -135,7 +137,7 @@ class DedicatedChatCompletionBody(BaseModel):
     reasoning_effort: OptionalNullable[DedicatedChatCompletionBodyReasoningEffort] = (
         UNSET
     )
-    "Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models."
+    "Sets how much reasoning the model does before answering. Higher values give more thorough responses but take longer. This affects reasoning models only, and the available options depend on the model."
     reasoning_budget: OptionalNullable[int] = UNSET
     "Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models."
     seed: OptionalNullable[DedicatedChatCompletionBodySeed] = UNSET
@@ -143,7 +145,7 @@ class DedicatedChatCompletionBody(BaseModel):
     stop: OptionalNullable[List[str]] = UNSET
     "When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list."
     stream: OptionalNullable[bool] = UNSET
-    "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    "Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: OptionalNullable[StreamOptions] = UNSET
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
     parse_reasoning: OptionalNullable[bool] = UNSET

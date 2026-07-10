@@ -112,7 +112,7 @@ Once that is saved to a file, you can run it with `uv run script.py` where
 
 ### Chat completions
 
-Given a list of messages forming a conversation, the model generates a response.
+Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.
 
 ```python
 # Synchronous Example
@@ -252,6 +252,12 @@ with SyncFriendli(
 ### [Container.Messages](docs/sdks/containermessages/README.md)
 
 * [messages](docs/sdks/containermessages/README.md#messages) - Messages
+* [stream](docs/sdks/containermessages/README.md#stream) - Stream messages
+
+### [Container.Responses](docs/sdks/containerresponses/README.md)
+
+* [responses](docs/sdks/containerresponses/README.md#responses) - Responses
+* [stream](docs/sdks/containerresponses/README.md#stream) - Stream responses
 
 ### [Container.Token](docs/sdks/containertoken/README.md)
 
@@ -260,7 +266,7 @@ with SyncFriendli(
 
 ### [Cost](docs/sdks/cost/README.md)
 
-* [get_cost](docs/sdks/cost/README.md#get_cost) - Get cost details for the team.
+* [get_cost](docs/sdks/cost/README.md#get_cost) - Cost
 
 ### [Dataset](docs/sdks/dataset/README.md)
 
@@ -331,6 +337,12 @@ with SyncFriendli(
 ### [Dedicated.Messages](docs/sdks/dedicatedmessages/README.md)
 
 * [messages](docs/sdks/dedicatedmessages/README.md#messages) - Messages
+* [stream](docs/sdks/dedicatedmessages/README.md#stream) - Stream messages
+
+### [Dedicated.Responses](docs/sdks/dedicatedresponses/README.md)
+
+* [responses](docs/sdks/dedicatedresponses/README.md#responses) - Responses
+* [stream](docs/sdks/dedicatedresponses/README.md#stream) - Stream responses
 
 ### [Dedicated.Token](docs/sdks/dedicatedtoken/README.md)
 
@@ -366,6 +378,12 @@ with SyncFriendli(
 ### [Serverless.Messages](docs/sdks/serverlessmessages/README.md)
 
 * [messages](docs/sdks/serverlessmessages/README.md#messages) - Messages
+* [stream](docs/sdks/serverlessmessages/README.md#stream) - Stream messages
+
+### [Serverless.Responses](docs/sdks/serverlessresponses/README.md)
+
+* [responses](docs/sdks/serverlessresponses/README.md#responses) - Responses
+* [stream](docs/sdks/serverlessresponses/README.md#stream) - Stream responses
 
 ### [Serverless.Token](docs/sdks/serverlesstoken/README.md)
 
@@ -570,7 +588,6 @@ with SyncFriendli(
             print(e.data.type)  # Literal["error"]
             print(e.data.error)  # friendli.MessagesErrorObject
             print(e.data.request_id)  # OptionalNullable[str]
-            print(e.data.additional_properties)  # Optional[Dict[str, Any]]
 ```
 
 ### Error Classes
@@ -588,8 +605,8 @@ with SyncFriendli(
 
 
 **Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 69 methods.*
-* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 3 of 69 methods.*
+* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 78 methods.*
+* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 6 of 78 methods.*
 * [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

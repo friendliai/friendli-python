@@ -1,7 +1,7 @@
 <!-- Start SDK Example Usage [usage] -->
 ### Chat completions
 
-Given a list of messages forming a conversation, the model generates a response.
+Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.
 
 ```python
 # Synchronous Example
