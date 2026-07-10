@@ -8,7 +8,7 @@
 
 ## embeddings
 
-Creates an embedding vector representing the input text.
+Generate an embedding vector from input text or token sequence.
 
 ### Example Usage
 

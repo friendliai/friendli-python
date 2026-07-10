@@ -1,0 +1,10 @@
+# MessagesStreamContentBlockStart
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `type`                                                                                               | *Literal["content_block_start"]*                                                                     | :heavy_check_mark:                                                                                   | The type of the event.                                                                               |
+| `index`                                                                                              | *int*                                                                                                | :heavy_check_mark:                                                                                   | Index of the content block in the response `content` array.                                          |
+| `content_block`                                                                                      | [models.MessagesStreamContentBlockStartPayload](../models/messagesstreamcontentblockstartpayload.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

@@ -26,10 +26,10 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerCompletionsSuccess:
+    ) -> models.ServerlessCompletionsSuccess:
         """Completions
 
-        Generate text based on the given text prompt.
+        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
 
         :param dedicated_completions_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -97,11 +97,11 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
                 tags=["SyncDedicated.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate text based on the given text prompt.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/completions-chunk-object).",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/completions-chunk-object).",
                         "href": "/openapi/dedicated/inference/completions",
                         "metadata": {
-                            "description": "Generate text completions from a prompt using your Friendli Dedicated Endpoint. Supports streaming, token limits, temperature, and stop sequences.",
-                            "og:description": "Generate text completions from a prompt using your Friendli Dedicated Endpoint. Supports streaming, token limits, temperature, and stop sequences.",
+                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
+                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
                             "og:title": "SyncDedicated Completions",
                             "sidebarTitle": "Completions",
                             "title": "SyncDedicated Completions",
@@ -114,7 +114,9 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ContainerCompletionsSuccess, http_res)
+            return unmarshal_json_response(
+                models.ServerlessCompletionsSuccess, http_res
+            )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -135,10 +137,10 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.ContainerCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ServerlessCompletionsStreamSuccess]:
         """Stream completions
 
-        Generate text based on the given text prompt.
+        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
 
         :param dedicated_completions_stream_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -206,10 +208,10 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
                 tags=["SyncDedicated.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate text based on the given text prompt.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/completions-chunk-object).",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/completions-chunk-object).",
                         "metadata": {
-                            "description": "Generate text completions from a prompt using your Friendli Dedicated Endpoint. Supports streaming, token limits, temperature, and stop sequences.",
-                            "og:description": "Generate text completions from a prompt using your Friendli Dedicated Endpoint. Supports streaming, token limits, temperature, and stop sequences.",
+                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
+                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
                             "og:title": "SyncDedicated Stream Completions",
                             "sidebarTitle": "Stream Completions",
                             "title": "SyncDedicated Stream Completions",
@@ -226,7 +228,7 @@ class SyncDedicatedCompletions(BaseDedicatedCompletions, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ContainerCompletionsStreamSuccess, http_res, raw
+                    models.ServerlessCompletionsStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -253,10 +255,10 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerCompletionsSuccess:
+    ) -> models.ServerlessCompletionsSuccess:
         """Completions
 
-        Generate text based on the given text prompt.
+        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
 
         :param dedicated_completions_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -324,11 +326,11 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
                 tags=["AsyncDedicated.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate text based on the given text prompt.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/completions-chunk-object).",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/completions-chunk-object).",
                         "href": "/openapi/dedicated/inference/completions",
                         "metadata": {
-                            "description": "Generate text completions from a prompt using your Friendli Dedicated Endpoint. Supports streaming, token limits, temperature, and stop sequences.",
-                            "og:description": "Generate text completions from a prompt using your Friendli Dedicated Endpoint. Supports streaming, token limits, temperature, and stop sequences.",
+                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
+                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
                             "og:title": "AsyncDedicated Completions",
                             "sidebarTitle": "Completions",
                             "title": "AsyncDedicated Completions",
@@ -341,7 +343,9 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ContainerCompletionsSuccess, http_res)
+            return unmarshal_json_response(
+                models.ServerlessCompletionsSuccess, http_res
+            )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -362,10 +366,10 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.ContainerCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStreamAsync[models.ServerlessCompletionsStreamSuccess]:
         """Stream completions
 
-        Generate text based on the given text prompt.
+        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
 
         :param dedicated_completions_stream_body:
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -433,10 +437,10 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
                 tags=["AsyncDedicated.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate text based on the given text prompt.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/completions-chunk-object).",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/completions-chunk-object).",
                         "metadata": {
-                            "description": "Generate text completions from a prompt using your Friendli Dedicated Endpoint. Supports streaming, token limits, temperature, and stop sequences.",
-                            "og:description": "Generate text completions from a prompt using your Friendli Dedicated Endpoint. Supports streaming, token limits, temperature, and stop sequences.",
+                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
+                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
                             "og:title": "AsyncDedicated Stream Completions",
                             "sidebarTitle": "Stream Completions",
                             "title": "AsyncDedicated Stream Completions",
@@ -453,7 +457,7 @@ class AsyncDedicatedCompletions(BaseDedicatedCompletions, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ContainerCompletionsStreamSuccess, http_res, raw
+                    models.ServerlessCompletionsStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

@@ -32,7 +32,7 @@ class SyncDedicatedChatRender(BaseDedicatedChatRender, SyncSDK):
     ) -> models.DedicatedChatRenderSuccess:
         """Chat render
 
-        Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.
+        Render a list of chat messages into the prompt text sent to the model.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param messages: A list of messages comprising the conversation so far.
@@ -113,11 +113,11 @@ class SyncDedicatedChatRender(BaseDedicatedChatRender, SyncSDK):
                 tags=["SyncDedicated.ChatRender"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Render a list of chat messages into the prompt text sent to the model.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/chat-render",
                         "metadata": {
-                            "description": "Preview the final prompt text that your Friendli Dedicated Endpoint will send to the model. Useful for debugging chat templates and token counts.",
-                            "og:description": "Preview the final prompt text that your Friendli Dedicated Endpoint will send to the model. Useful for debugging chat templates and token counts.",
+                            "description": "Render a list of chat messages into the prompt text sent to the model.",
+                            "og:description": "Render a list of chat messages into the prompt text sent to the model.",
                             "og:title": "SyncDedicated Chat Render",
                             "sidebarTitle": "Chat Render",
                             "title": "SyncDedicated Chat Render",
@@ -158,7 +158,7 @@ class AsyncDedicatedChatRender(BaseDedicatedChatRender, AsyncSDK):
     ) -> models.DedicatedChatRenderSuccess:
         """Chat render
 
-        Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.
+        Render a list of chat messages into the prompt text sent to the model.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param messages: A list of messages comprising the conversation so far.
@@ -239,11 +239,11 @@ class AsyncDedicatedChatRender(BaseDedicatedChatRender, AsyncSDK):
                 tags=["AsyncDedicated.ChatRender"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Render a list of chat messages into the prompt text sent to the model.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/chat-render",
                         "metadata": {
-                            "description": "Preview the final prompt text that your Friendli Dedicated Endpoint will send to the model. Useful for debugging chat templates and token counts.",
-                            "og:description": "Preview the final prompt text that your Friendli Dedicated Endpoint will send to the model. Useful for debugging chat templates and token counts.",
+                            "description": "Render a list of chat messages into the prompt text sent to the model.",
+                            "og:description": "Render a list of chat messages into the prompt text sent to the model.",
                             "og:title": "AsyncDedicated Chat Render",
                             "sidebarTitle": "Chat Render",
                             "title": "AsyncDedicated Chat Render",

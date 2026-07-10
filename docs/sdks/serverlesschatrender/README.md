@@ -8,7 +8,7 @@
 
 ## render
 
-Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.
+Render a list of chat messages into the prompt text sent to the model.
 
 ### Example Usage
 

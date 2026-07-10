@@ -9,7 +9,7 @@
 
 ## complete
 
-Generate text based on the given text prompt.
+Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
 
 ### Example Usage
 
@@ -44,7 +44,7 @@ with SyncFriendli(
 
 ### Response
 
-**[models.ContainerCompletionsSuccess](../../models/containercompletionssuccess.md)**
+**[models.ServerlessCompletionsSuccess](../../models/serverlesscompletionssuccess.md)**
 
 ### Errors
 
@@ -54,7 +54,7 @@ with SyncFriendli(
 
 ## stream
 
-Generate text based on the given text prompt.
+Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
 
 ### Example Usage
 
@@ -91,7 +91,7 @@ with SyncFriendli(
 
 ### Response
 
-**[Union[eventstreaming.EventStream[models.ContainerCompletionsStreamSuccess], eventstreaming.EventStreamAsync[models.ContainerCompletionsStreamSuccess]]](../../models/.md)**
+**[Union[eventstreaming.EventStream[models.ServerlessCompletionsStreamSuccess], eventstreaming.EventStreamAsync[models.ServerlessCompletionsStreamSuccess]]](../../models/.md)**
 
 ### Errors
 

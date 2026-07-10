@@ -25,10 +25,10 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerCompletionsSuccess:
+    ) -> models.ServerlessCompletionsSuccess:
         """Completions
 
-        Generate text based on the given text prompt.
+        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -88,11 +88,11 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
                 tags=["SyncContainer.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate text based on the given text prompt.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
                         "href": "/openapi/container/completions",
                         "metadata": {
-                            "description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
-                            "og:description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
+                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
                             "og:title": "SyncContainer Completions",
                             "sidebarTitle": "Completions",
                             "title": "SyncContainer Completions",
@@ -105,7 +105,9 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ContainerCompletionsSuccess, http_res)
+            return unmarshal_json_response(
+                models.ServerlessCompletionsSuccess, http_res
+            )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -125,10 +127,10 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.ContainerCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ServerlessCompletionsStreamSuccess]:
         """Stream completions
 
-        Generate text based on the given text prompt.
+        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -188,10 +190,10 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
                 tags=["SyncContainer.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate text based on the given text prompt.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
                         "metadata": {
-                            "description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
-                            "og:description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
+                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
                             "og:title": "SyncContainer Stream Completions",
                             "sidebarTitle": "Stream Completions",
                             "title": "SyncContainer Stream Completions",
@@ -208,7 +210,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ContainerCompletionsStreamSuccess, http_res, raw
+                    models.ServerlessCompletionsStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -234,10 +236,10 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerCompletionsSuccess:
+    ) -> models.ServerlessCompletionsSuccess:
         """Completions
 
-        Generate text based on the given text prompt.
+        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -297,11 +299,11 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
                 tags=["AsyncContainer.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate text based on the given text prompt.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
                         "href": "/openapi/container/completions",
                         "metadata": {
-                            "description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
-                            "og:description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
+                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
                             "og:title": "AsyncContainer Completions",
                             "sidebarTitle": "Completions",
                             "title": "AsyncContainer Completions",
@@ -314,7 +316,9 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
             retry_config=retry_config,
         )
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ContainerCompletionsSuccess, http_res)
+            return unmarshal_json_response(
+                models.ServerlessCompletionsSuccess, http_res
+            )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
@@ -334,10 +338,10 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.ContainerCompletionsStreamSuccess]:
+    ) -> eventstreaming.EventStreamAsync[models.ServerlessCompletionsStreamSuccess]:
         """Stream completions
 
-        Generate text based on the given text prompt.
+        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -397,10 +401,10 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
                 tags=["AsyncContainer.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate text based on the given text prompt.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
                         "metadata": {
-                            "description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
-                            "og:description": "Generate text completions from a prompt using Friendli Container. Run on your own hardware with full control over streaming and generation settings.",
+                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
+                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
                             "og:title": "AsyncContainer Stream Completions",
                             "sidebarTitle": "Stream Completions",
                             "title": "AsyncContainer Stream Completions",
@@ -417,7 +421,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ContainerCompletionsStreamSuccess, http_res, raw
+                    models.ServerlessCompletionsStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

@@ -31,7 +31,9 @@ class SyncCost(BaseCost, SyncSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CostResponse:
-        """Get cost details for the team.
+        """SyncCost
+
+        Get cost details for the team.
 
         :param start_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-01T00:00:00Z). Must be no earlier than one year ago.
         :param end_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z).
@@ -143,7 +145,9 @@ class AsyncCost(BaseCost, AsyncSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CostResponse:
-        """Get cost details for the team.
+        """AsyncCost
+
+        Get cost details for the team.
 
         :param start_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-01T00:00:00Z). Must be no earlier than one year ago.
         :param end_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z).

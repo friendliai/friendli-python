@@ -32,7 +32,7 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
     ) -> models.ServerlessChatRenderSuccess:
         """Chat render
 
-        Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.
+        Render a list of chat messages into the prompt text sent to the model.
 
         :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param messages: A list of messages comprising the conversation so far.
@@ -113,11 +113,11 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
                 tags=["SyncServerless.ChatRender"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Render a list of chat messages into the prompt text sent to the model.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/model-apis/chat-render",
                         "metadata": {
-                            "description": "Preview the final prompt text that Friendli Model APIs will send to the model. Useful for debugging chat templates and token usage.",
-                            "og:description": "Preview the final prompt text that Friendli Model APIs will send to the model. Useful for debugging chat templates and token usage.",
+                            "description": "Render a list of chat messages into the prompt text sent to the model.",
+                            "og:description": "Render a list of chat messages into the prompt text sent to the model.",
                             "og:title": "Model APIs Chat Render",
                             "sidebarTitle": "Chat Render",
                             "title": "Model APIs Chat Render",
@@ -158,7 +158,7 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
     ) -> models.ServerlessChatRenderSuccess:
         """Chat render
 
-        Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.
+        Render a list of chat messages into the prompt text sent to the model.
 
         :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param messages: A list of messages comprising the conversation so far.
@@ -239,11 +239,11 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
                 tags=["AsyncServerless.ChatRender"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a list of messages forming a conversation, the API renders them into the final prompt text that will be sent to the model.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
+                        "content": "Render a list of chat messages into the prompt text sent to the model.\n\nSee available models at [this pricing table](/guides/model-apis/pricing#billing-methods).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/model-apis/chat-render",
                         "metadata": {
-                            "description": "Preview the final prompt text that Friendli Model APIs will send to the model. Useful for debugging chat templates and token usage.",
-                            "og:description": "Preview the final prompt text that Friendli Model APIs will send to the model. Useful for debugging chat templates and token usage.",
+                            "description": "Render a list of chat messages into the prompt text sent to the model.",
+                            "og:description": "Render a list of chat messages into the prompt text sent to the model.",
                             "og:title": "Model APIs Chat Render",
                             "sidebarTitle": "Chat Render",
                             "title": "Model APIs Chat Render",

@@ -14,19 +14,21 @@ from pydantic import model_serializer
 from typing import Literal
 from typing_extensions import Annotated, NotRequired, TypedDict
 
-Effort = Literal["low", "medium", "high", "max"]
+MessagesOutputConfigEffort = Literal[
+    "minimal", "low", "medium", "high", "xhigh", "max", "ultracode"
+]
 
 
 class MessagesOutputConfigTypedDict(TypedDict):
-    effort: NotRequired[Nullable[Effort]]
-    "Relative generation effort level (`low`, `medium`, `high`, `max`). Higher effort can improve quality on harder prompts at the cost of additional compute."
+    effort: NotRequired[Nullable[MessagesOutputConfigEffort]]
+    "Relative generation effort level. Higher effort can improve quality on harder prompts at the cost of additional compute."
     format_: NotRequired[Nullable[MessagesOutputFormatTypedDict]]
     "Structured output settings. Currently supports only `json_schema`."
 
 
 class MessagesOutputConfig(BaseModel):
-    effort: OptionalNullable[Effort] = UNSET
-    "Relative generation effort level (`low`, `medium`, `high`, `max`). Higher effort can improve quality on harder prompts at the cost of additional compute."
+    effort: OptionalNullable[MessagesOutputConfigEffort] = UNSET
+    "Relative generation effort level. Higher effort can improve quality on harder prompts at the cost of additional compute."
     format_: Annotated[
         OptionalNullable[MessagesOutputFormat], pydantic.Field(alias="format")
     ] = UNSET

@@ -74,7 +74,7 @@ class CompletionsBodyWithTokensTypedDict(TypedDict):
     stop_tokens: NotRequired[Nullable[List[TokenSequenceTypedDict]]]
     "Stop generating further tokens when generated token corresponds to any of the tokens in the sequence."
     stream: NotRequired[Nullable[bool]]
-    "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    "Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
     temperature: NotRequired[Nullable[float]]
@@ -140,7 +140,7 @@ class CompletionsBodyWithTokens(BaseModel):
     stop_tokens: OptionalNullable[List[TokenSequence]] = UNSET
     "Stop generating further tokens when generated token corresponds to any of the tokens in the sequence."
     stream: OptionalNullable[bool] = UNSET
-    "Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
+    "Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: OptionalNullable[StreamOptions] = UNSET
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
     temperature: OptionalNullable[float] = UNSET

@@ -72,10 +72,10 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerChatCompleteSuccess:
+    ) -> models.ServerlessChatCompleteSuccess:
         """Chat completions
 
-        Given a list of messages forming a conversation, the model generates a response.
+        Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param messages: A list of messages comprising the conversation so far.
@@ -91,11 +91,11 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_effort: Sets how much reasoning the model does before answering. Higher values give more thorough responses but take longer. This affects reasoning models only, and the available options depend on the model.
         :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -243,11 +243,11 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 tags=["SyncDedicated.Chat"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
+                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
                         "href": "/openapi/dedicated/inference/chat-completions",
                         "metadata": {
-                            "description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
-                            "og:description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
+                            "og:description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
                             "og:title": "SyncDedicated Chat Completions",
                             "sidebarTitle": "Chat Completions",
                             "title": "SyncDedicated Chat Completions",
@@ -261,7 +261,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerChatCompleteSuccess, http_res
+                models.ServerlessChatCompleteSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -328,10 +328,10 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.ContainerChatCompletionStreamSuccess]:
+    ) -> eventstreaming.EventStream[models.ServerlessChatCompletionStreamSuccess]:
         """Stream chat completions
 
-        Given a list of messages forming a conversation, the model generates a response.
+        Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param messages: A list of messages comprising the conversation so far.
@@ -347,11 +347,11 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_effort: Sets how much reasoning the model does before answering. Higher values give more thorough responses but take longer. This affects reasoning models only, and the available options depend on the model.
         :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -500,13 +500,13 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 tags=["SyncDedicated.Chat"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
+                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
                         "metadata": {
-                            "description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
-                            "og:description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
-                            "og:title": "SyncDedicated Chat Stream Completions",
+                            "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
+                            "og:description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
+                            "og:title": "SyncDedicated Stream Chat Completions",
                             "sidebarTitle": "Stream Chat Completions",
-                            "title": "SyncDedicated Chat Stream Completions",
+                            "title": "SyncDedicated Stream Chat Completions",
                         },
                     }
                 },
@@ -520,7 +520,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ContainerChatCompletionStreamSuccess, http_res, raw
+                    models.ServerlessChatCompletionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -593,10 +593,10 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerChatCompleteSuccess:
+    ) -> models.ServerlessChatCompleteSuccess:
         """Chat completions
 
-        Given a list of messages forming a conversation, the model generates a response.
+        Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param messages: A list of messages comprising the conversation so far.
@@ -612,11 +612,11 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_effort: Sets how much reasoning the model does before answering. Higher values give more thorough responses but take longer. This affects reasoning models only, and the available options depend on the model.
         :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -764,11 +764,11 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 tags=["AsyncDedicated.Chat"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
+                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
                         "href": "/openapi/dedicated/inference/chat-completions",
                         "metadata": {
-                            "description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
-                            "og:description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
+                            "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
+                            "og:description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
                             "og:title": "AsyncDedicated Chat Completions",
                             "sidebarTitle": "Chat Completions",
                             "title": "AsyncDedicated Chat Completions",
@@ -782,7 +782,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerChatCompleteSuccess, http_res
+                models.ServerlessChatCompleteSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -849,10 +849,10 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.ContainerChatCompletionStreamSuccess]:
+    ) -> eventstreaming.EventStreamAsync[models.ServerlessChatCompletionStreamSuccess]:
         """Stream chat completions
 
-        Given a list of messages forming a conversation, the model generates a response.
+        Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param messages: A list of messages comprising the conversation so far.
@@ -868,11 +868,11 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling.
         :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
         :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be positive value (1.0 means no penalty). See [keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param reasoning_effort: Determines the amount of reasoning effort the model applies when generating a response. Higher values may produce more detailed and thoughtful outputs, but can increase response time. This parameter is only effective for reasoning models.
+        :param reasoning_effort: Sets how much reasoning the model does before answering. Higher values give more thorough responses but take longer. This affects reasoning models only, and the available options depend on the model.
         :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
         :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
         :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream the generation result. When set to `true`, each token will be sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
+        :param stream: Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
         :param stream_options: Options related to stream.
             It can only be used when `stream: true`.
         :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
@@ -1021,13 +1021,13 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 tags=["AsyncDedicated.Chat"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a list of messages forming a conversation, the model generates a response.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
+                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/dedicated/inference/chat-completions-chunk-object).",
                         "metadata": {
-                            "description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
-                            "og:description": "Send a conversation to your Friendli Dedicated Endpoint and receive a chat completion response. Supports streaming, tool calls, and JSON mode.",
-                            "og:title": "AsyncDedicated Chat Stream Completions",
+                            "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
+                            "og:description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
+                            "og:title": "AsyncDedicated Stream Chat Completions",
                             "sidebarTitle": "Stream Chat Completions",
-                            "title": "AsyncDedicated Chat Stream Completions",
+                            "title": "AsyncDedicated Stream Chat Completions",
                         },
                     }
                 },
@@ -1041,7 +1041,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ContainerChatCompletionStreamSuccess, http_res, raw
+                    models.ServerlessChatCompletionStreamSuccess, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

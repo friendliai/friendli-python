@@ -15,3 +15,5 @@ value: QueueBackpressureMetricKind = "TPOT_MS"
 - `"TPOT_MS"`
 - `"TTFT_MS"`
 - `"REQUEST_COUNT"`
+- `"WORKSPACE_UTILIZATION"`
+- `"QUEUED_PREFILL_TOKENS"`

@@ -9,7 +9,7 @@
 
 ## generate
 
-Given a description, the model generates image(s).
+Generate an image from a text prompt.
 
 ### Example Usage
 
@@ -64,7 +64,7 @@ with SyncFriendli(
 
 ## edit
 
-Given an image and a description, the model edits the image.
+Edit an image based on a text prompt.
 
 ### Example Usage
 

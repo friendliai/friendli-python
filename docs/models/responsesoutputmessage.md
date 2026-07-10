@@ -1,0 +1,12 @@
+# ResponsesOutputMessage
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `type`                                                                           | *Literal["message"]*                                                             | :heavy_check_mark:                                                               | The type of the output message. Always `message`.                                |
+| `id`                                                                             | *str*                                                                            | :heavy_check_mark:                                                               | The unique ID of the output message.                                             |
+| `role`                                                                           | *Literal["assistant"]*                                                           | :heavy_check_mark:                                                               | The role of the output message. Always `assistant`.                              |
+| `status`                                                                         | [models.ResponsesOutputMessageStatus](../models/responsesoutputmessagestatus.md) | :heavy_check_mark:                                                               | The status of the message. One of `in_progress`, `completed`, or `incomplete`.   |
+| `content`                                                                        | List[[models.ResponsesOutputText](../models/responsesoutputtext.md)]             | :heavy_check_mark:                                                               | The content of the output message.                                               |

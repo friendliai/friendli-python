@@ -16,6 +16,10 @@ from friendli.core.serverless_messages import (
     SyncServerlessMessages,
     AsyncServerlessMessages,
 )
+from friendli.core.serverless_responses import (
+    SyncServerlessResponses,
+    AsyncServerlessResponses,
+)
 from friendli.core.serverless_token import SyncServerlessToken, AsyncServerlessToken
 from typing import Optional
 import abc
@@ -34,6 +38,7 @@ class BaseServerless(BaseSDK):
 
 class SyncServerless(BaseServerless, SyncSDK):
     chat: SyncServerlessChat
+    responses: SyncServerlessResponses
     messages: SyncServerlessMessages
     chat_render: SyncServerlessChatRender
     completions: SyncServerlessCompletions
@@ -42,6 +47,9 @@ class SyncServerless(BaseServerless, SyncSDK):
 
     def _init_sdks(self):
         self.chat = SyncServerlessChat(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.responses = SyncServerlessResponses(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.messages = SyncServerlessMessages(
@@ -63,6 +71,7 @@ class SyncServerless(BaseServerless, SyncSDK):
 
 class AsyncServerless(BaseServerless, AsyncSDK):
     chat: AsyncServerlessChat
+    responses: AsyncServerlessResponses
     messages: AsyncServerlessMessages
     chat_render: AsyncServerlessChatRender
     completions: AsyncServerlessCompletions
@@ -71,6 +80,9 @@ class AsyncServerless(BaseServerless, AsyncSDK):
 
     def _init_sdks(self):
         self.chat = AsyncServerlessChat(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.responses = AsyncServerlessResponses(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.messages = AsyncServerlessMessages(

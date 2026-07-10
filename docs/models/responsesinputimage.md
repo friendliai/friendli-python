@@ -1,0 +1,9 @@
+# ResponsesInputImage
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                     | *Literal["input_image"]*                                                                                   | :heavy_check_mark:                                                                                         | The type of the input item. Always `input_image`.                                                          |
+| `image_url`                                                                                                | *str*                                                                                                      | :heavy_check_mark:                                                                                         | The URL of the image to be sent to the model. A fully qualified URL or base64 encoded image in a data URL. |

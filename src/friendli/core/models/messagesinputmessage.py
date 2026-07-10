@@ -6,7 +6,7 @@ from friendli.core.types import BaseModel
 from typing import List, Literal, Union
 from typing_extensions import TypeAliasType, TypedDict
 
-Role = Literal["user", "assistant"]
+MessagesInputMessageRole = Literal["user", "assistant"]
 "Author role for this message turn. Use `user` for user input and `assistant` for prior assistant turns."
 MessagesInputMessageContentTypedDict = TypeAliasType(
     "MessagesInputMessageContentTypedDict",
@@ -20,14 +20,14 @@ MessagesInputMessageContent = TypeAliasType(
 
 
 class MessagesInputMessageTypedDict(TypedDict):
-    role: Role
+    role: MessagesInputMessageRole
     "Author role for this message turn. Use `user` for user input and `assistant` for prior assistant turns."
     content: MessagesInputMessageContentTypedDict
     "Message payload. Supports plain string shorthand or a typed block array."
 
 
 class MessagesInputMessage(BaseModel):
-    role: Role
+    role: MessagesInputMessageRole
     "Author role for this message turn. Use `user` for user input and `assistant` for prior assistant turns."
     content: MessagesInputMessageContent
     "Message payload. Supports plain string shorthand or a typed block array."

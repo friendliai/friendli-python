@@ -8,7 +8,7 @@
 
 ## classify
 
-Given a text input, the model classifies it into categories.
+Classify text input into categories with per-class probabilities.
 
 ### Example Usage
 
@@ -41,7 +41,7 @@ with SyncFriendli(
 
 ### Response
 
-**[models.ContainerTextClassificationSuccess](../../models/containertextclassificationsuccess.md)**
+**[models.DedicatedTextClassificationSuccess](../../models/dedicatedtextclassificationsuccess.md)**
 
 ### Errors
 

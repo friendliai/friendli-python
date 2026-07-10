@@ -30,10 +30,10 @@ class SyncContainerClassification(BaseContainerClassification, SyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerTextClassificationSuccess:
+    ) -> models.DedicatedTextClassificationSuccess:
         """Text classification
 
-        Given a text input, the model classifies it into categories.
+        Classify text input into categories with per-class probabilities.
 
         :param model: Routes the request to a specific adapter.
         :param input: Input text to classify, encoded as a string or array of strings. To classify multiple inputs in a single request, pass an array of strings.
@@ -103,11 +103,11 @@ class SyncContainerClassification(BaseContainerClassification, SyncSDK):
                 tags=["SyncContainer.Classification"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a text input, the model classifies it into categories.",
+                        "content": "Classify text input into categories with per-class probabilities.",
                         "href": "/openapi/container/text-classification",
                         "metadata": {
-                            "description": "Classify text into categories using Friendli Container. Run text classification models on your own infrastructure with full data control and privacy.",
-                            "og:description": "Classify text into categories using Friendli Container. Run text classification models on your own infrastructure with full data control and privacy.",
+                            "description": "Classify text input into categories with per-class probabilities.",
+                            "og:description": "Classify text input into categories with per-class probabilities.",
                             "og:title": "SyncContainer Text Classification",
                             "sidebarTitle": "Text Classification",
                             "title": "SyncContainer Text Classification",
@@ -121,7 +121,7 @@ class SyncContainerClassification(BaseContainerClassification, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerTextClassificationSuccess, http_res
+                models.DedicatedTextClassificationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -148,10 +148,10 @@ class AsyncContainerClassification(BaseContainerClassification, AsyncSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ContainerTextClassificationSuccess:
+    ) -> models.DedicatedTextClassificationSuccess:
         """Text classification
 
-        Given a text input, the model classifies it into categories.
+        Classify text input into categories with per-class probabilities.
 
         :param model: Routes the request to a specific adapter.
         :param input: Input text to classify, encoded as a string or array of strings. To classify multiple inputs in a single request, pass an array of strings.
@@ -221,11 +221,11 @@ class AsyncContainerClassification(BaseContainerClassification, AsyncSDK):
                 tags=["AsyncContainer.Classification"],
                 extensions={
                     "x-mint": {
-                        "content": "Given a text input, the model classifies it into categories.",
+                        "content": "Classify text input into categories with per-class probabilities.",
                         "href": "/openapi/container/text-classification",
                         "metadata": {
-                            "description": "Classify text into categories using Friendli Container. Run text classification models on your own infrastructure with full data control and privacy.",
-                            "og:description": "Classify text into categories using Friendli Container. Run text classification models on your own infrastructure with full data control and privacy.",
+                            "description": "Classify text input into categories with per-class probabilities.",
+                            "og:description": "Classify text input into categories with per-class probabilities.",
                             "og:title": "AsyncContainer Text Classification",
                             "sidebarTitle": "Text Classification",
                             "title": "AsyncContainer Text Classification",
@@ -239,7 +239,7 @@ class AsyncContainerClassification(BaseContainerClassification, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.ContainerTextClassificationSuccess, http_res
+                models.DedicatedTextClassificationSuccess, http_res
             )
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

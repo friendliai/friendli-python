@@ -4,12 +4,16 @@
 
 ```python
 from friendli_core.models import ServerlessChatCompletionStreamBodyReasoningEffort
-value: ServerlessChatCompletionStreamBodyReasoningEffort = "low"
+value: ServerlessChatCompletionStreamBodyReasoningEffort = "minimal"
 ```
 
 
 ## Values
 
+- `"minimal"`
 - `"low"`
 - `"medium"`
 - `"high"`
+- `"xhigh"`
+- `"max"`
+- `"ultracode"`
