@@ -79,3 +79,13 @@ Based on:
 - [python v0.14.3] .
 ### Releases
 - [PyPI v0.14.3] https://pypi.org/project/friendli-core/0.14.3 - .
+
+## 2026-07-14 06:21:40
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.790.0 (2.917.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v0.14.4] .
+### Releases
+- [PyPI v0.14.4] https://pypi.org/project/friendli-core/0.14.4 - .
