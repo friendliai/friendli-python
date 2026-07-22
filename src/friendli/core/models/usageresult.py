@@ -15,45 +15,45 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class UsageResultTypedDict(TypedDict):
-    num_model_requests: int
-    "The count of requests made."
-    input_tokens: int
-    "The aggregated number of input tokens used, including cached tokens."
-    input_cached_tokens: int
-    "The aggregated number of input tokens that has been cached."
-    output_tokens: int
-    "The aggregated number of text output tokens used."
     product_type: NotRequired[Nullable[ProductType]]
     "When `group_by=product_type`, this field provides the product type of the grouped usage result. Supported values are `model_apis` and `dedicated_endpoints`."
     model: NotRequired[Nullable[str]]
     "When `group_by=model`, this field provides the model ID of the grouped usage result. For Model APIs usage, this is the model ID. For Dedicated Endpoints usage, this is the endpoint ID."
     user_id: NotRequired[Nullable[str]]
     "When `group_by=user_id`, this field provides the user ID of the grouped usage result."
+    num_model_requests: NotRequired[Nullable[int]]
+    "The count of requests made."
+    input_tokens: NotRequired[Nullable[int]]
+    "The aggregated number of input tokens used, including cached tokens."
+    input_cached_tokens: NotRequired[Nullable[int]]
+    "The aggregated number of input tokens that has been cached."
+    output_tokens: NotRequired[Nullable[int]]
+    "The aggregated number of text output tokens used."
     gpu_usage: NotRequired[Nullable[Dict[str, int]]]
-    "The GPU time in seconds, keyed by GPU type. Present when a bucket includes Dedicated Endpoints usage. When `group_by=user_id`, this is attributed to the bucket of the user who created the endpoint."
+    "The GPU time in seconds, keyed by GPU type. When `group_by=user_id`, this is attributed to the bucket of the user who created the endpoint. When the `gpu_types` filter is set, only Dedicated Endpoints usage is returned, and only GPU time is provided — per-GPU-type token usage is not yet supported."
     processed_audio_length_ms: NotRequired[Nullable[int]]
-    "The number of processed audio length in milliseconds. Present when bucket includes audio processing usage."
+    "The number of processed audio length in milliseconds. Zero when there is no audio usage."
 
 
 class UsageResult(BaseModel):
-    num_model_requests: int
-    "The count of requests made."
-    input_tokens: int
-    "The aggregated number of input tokens used, including cached tokens."
-    input_cached_tokens: int
-    "The aggregated number of input tokens that has been cached."
-    output_tokens: int
-    "The aggregated number of text output tokens used."
     product_type: OptionalNullable[ProductType] = UNSET
     "When `group_by=product_type`, this field provides the product type of the grouped usage result. Supported values are `model_apis` and `dedicated_endpoints`."
     model: OptionalNullable[str] = UNSET
     "When `group_by=model`, this field provides the model ID of the grouped usage result. For Model APIs usage, this is the model ID. For Dedicated Endpoints usage, this is the endpoint ID."
     user_id: OptionalNullable[str] = UNSET
     "When `group_by=user_id`, this field provides the user ID of the grouped usage result."
+    num_model_requests: OptionalNullable[int] = UNSET
+    "The count of requests made."
+    input_tokens: OptionalNullable[int] = UNSET
+    "The aggregated number of input tokens used, including cached tokens."
+    input_cached_tokens: OptionalNullable[int] = UNSET
+    "The aggregated number of input tokens that has been cached."
+    output_tokens: OptionalNullable[int] = UNSET
+    "The aggregated number of text output tokens used."
     gpu_usage: OptionalNullable[Dict[str, int]] = UNSET
-    "The GPU time in seconds, keyed by GPU type. Present when a bucket includes Dedicated Endpoints usage. When `group_by=user_id`, this is attributed to the bucket of the user who created the endpoint."
+    "The GPU time in seconds, keyed by GPU type. When `group_by=user_id`, this is attributed to the bucket of the user who created the endpoint. When the `gpu_types` filter is set, only Dedicated Endpoints usage is returned, and only GPU time is provided — per-GPU-type token usage is not yet supported."
     processed_audio_length_ms: OptionalNullable[int] = UNSET
-    "The number of processed audio length in milliseconds. Present when bucket includes audio processing usage."
+    "The number of processed audio length in milliseconds. Zero when there is no audio usage."
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -62,6 +62,10 @@ class UsageResult(BaseModel):
                 "product_type",
                 "model",
                 "user_id",
+                "num_model_requests",
+                "input_tokens",
+                "input_cached_tokens",
+                "output_tokens",
                 "gpu_usage",
                 "processed_audio_length_ms",
             ]
@@ -71,6 +75,10 @@ class UsageResult(BaseModel):
                 "product_type",
                 "model",
                 "user_id",
+                "num_model_requests",
+                "input_tokens",
+                "input_cached_tokens",
+                "output_tokens",
                 "gpu_usage",
                 "processed_audio_length_ms",
             ]

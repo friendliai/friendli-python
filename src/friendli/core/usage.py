@@ -49,7 +49,7 @@ class SyncUsage(BaseUsage, SyncSDK):
         :param models: Return only usage for the listed Model APIs and Dedicated Endpoints. Values are model IDs, endpoint IDs, or a mix.
         :param user_ids: Return only usage for these users.
         :param product_types: Return only usage for the specified product types. Supported fields include `model_apis`, `dedicated_endpoints` and any combination of them.
-        :param gpu_types: Return only usage for the specified GPU types. When this filter is applied, product_types is implicitly set to `dedicated_endpoints`.
+        :param gpu_types: Return only usage for the specified GPU types. When this filter is given, only 'gpu_usage' will be provided. Combining `gpu_types` with 'product_types=model_apis` is rejected with HTTP 400.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -180,7 +180,7 @@ class AsyncUsage(BaseUsage, AsyncSDK):
         :param models: Return only usage for the listed Model APIs and Dedicated Endpoints. Values are model IDs, endpoint IDs, or a mix.
         :param user_ids: Return only usage for these users.
         :param product_types: Return only usage for the specified product types. Supported fields include `model_apis`, `dedicated_endpoints` and any combination of them.
-        :param gpu_types: Return only usage for the specified GPU types. When this filter is applied, product_types is implicitly set to `dedicated_endpoints`.
+        :param gpu_types: Return only usage for the specified GPU types. When this filter is given, only 'gpu_usage' will be provided. Combining `gpu_types` with 'product_types=model_apis` is rejected with HTTP 400.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
