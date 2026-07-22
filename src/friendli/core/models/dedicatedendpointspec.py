@@ -44,6 +44,8 @@ class DedicatedEndpointSpecTypedDict(TypedDict):
     "The ID of the instance."
     max_input_length: NotRequired[Nullable[int]]
     "The maximum allowed input length."
+    max_context_length: NotRequired[Nullable[int]]
+    "The maximum context length (input + output tokens) to serve with."
     curr_replica_cnt: NotRequired[Nullable[int]]
     "The current number of replicas."
     desired_replica_cnt: NotRequired[Nullable[int]]
@@ -91,6 +93,10 @@ class DedicatedEndpointSpec(BaseModel):
         OptionalNullable[int], pydantic.Field(alias="maxInputLength")
     ] = UNSET
     "The maximum allowed input length."
+    max_context_length: Annotated[
+        OptionalNullable[int], pydantic.Field(alias="maxContextLength")
+    ] = UNSET
+    "The maximum context length (input + output tokens) to serve with."
     curr_replica_cnt: Annotated[
         OptionalNullable[int], pydantic.Field(alias="currReplicaCnt")
     ] = UNSET
@@ -110,6 +116,7 @@ class DedicatedEndpointSpec(BaseModel):
             [
                 "instanceId",
                 "maxInputLength",
+                "maxContextLength",
                 "currReplicaCnt",
                 "desiredReplicaCnt",
                 "updatedReplicaCnt",
@@ -119,6 +126,7 @@ class DedicatedEndpointSpec(BaseModel):
             [
                 "instanceId",
                 "maxInputLength",
+                "maxContextLength",
                 "currReplicaCnt",
                 "desiredReplicaCnt",
                 "updatedReplicaCnt",

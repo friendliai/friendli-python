@@ -686,6 +686,7 @@ if TYPE_CHECKING:
     from .get_splitop import GetSplitRequest, GetSplitRequestTypedDict
     from .get_versionop import GetVersionRequest, GetVersionRequestTypedDict
     from .getcostop import GetCostRequest, GetCostRequestTypedDict
+    from .getusageop import GetUsageRequest, GetUsageRequestTypedDict
     from .httpvalidationerror import HTTPValidationError, HTTPValidationErrorData
     from .imagecontent import ImageContent, ImageContentTypedDict
     from .imagedata import ImageData, ImageDataTypedDict
@@ -891,6 +892,7 @@ if TYPE_CHECKING:
     )
     from .messagesusage import MessagesUsage, MessagesUsageTypedDict
     from .no_response_error import NoResponseError
+    from .producttype import ProductType
     from .prompttokensdetails import PromptTokensDetails, PromptTokensDetailsTypedDict
     from .queuebackpressuremetrickind import QueueBackpressureMetricKind
     from .responseformat import ResponseFormat, ResponseFormatTypedDict
@@ -1333,6 +1335,11 @@ if TYPE_CHECKING:
         URLImageItemResponseFormat,
         URLImageItemTypedDict,
     )
+    from .usagebucket import UsageBucket, UsageBucketTypedDict
+    from .usagebucketwidth import UsageBucketWidth
+    from .usagegroupby import UsageGroupBy
+    from .usageresponse import UsageResponse, UsageResponseTypedDict
+    from .usageresult import UsageResult, UsageResultTypedDict
     from .usermessage import (
         UserMessage,
         UserMessageContent,
@@ -1812,6 +1819,8 @@ __all__ = [
     "GetInfoRequestTypedDict",
     "GetSplitRequest",
     "GetSplitRequestTypedDict",
+    "GetUsageRequest",
+    "GetUsageRequestTypedDict",
     "GetVersionRequest",
     "GetVersionRequestTypedDict",
     "HTTPValidationError",
@@ -1952,6 +1961,7 @@ __all__ = [
     "MessagesUsageTypedDict",
     "NoResponseError",
     "Phase",
+    "ProductType",
     "PromptTokensDetails",
     "PromptTokensDetailsTypedDict",
     "QueueBackpressureMetricKind",
@@ -2245,6 +2255,14 @@ __all__ = [
     "URLImageItemTypedDict",
     "UploadRawSamplesRequest",
     "UploadRawSamplesRequestTypedDict",
+    "UsageBucket",
+    "UsageBucketTypedDict",
+    "UsageBucketWidth",
+    "UsageGroupBy",
+    "UsageResponse",
+    "UsageResponseTypedDict",
+    "UsageResult",
+    "UsageResultTypedDict",
     "UserMessage",
     "UserMessageContent",
     "UserMessageContentMultiModal",
@@ -2723,6 +2741,8 @@ _dynamic_imports: dict[str, str] = {
     "GetVersionRequestTypedDict": ".get_versionop",
     "GetCostRequest": ".getcostop",
     "GetCostRequestTypedDict": ".getcostop",
+    "GetUsageRequest": ".getusageop",
+    "GetUsageRequestTypedDict": ".getusageop",
     "HTTPValidationError": ".httpvalidationerror",
     "HTTPValidationErrorData": ".httpvalidationerror",
     "ImageContent": ".imagecontent",
@@ -2858,6 +2878,7 @@ _dynamic_imports: dict[str, str] = {
     "MessagesUsage": ".messagesusage",
     "MessagesUsageTypedDict": ".messagesusage",
     "NoResponseError": ".no_response_error",
+    "ProductType": ".producttype",
     "PromptTokensDetails": ".prompttokensdetails",
     "PromptTokensDetailsTypedDict": ".prompttokensdetails",
     "QueueBackpressureMetricKind": ".queuebackpressuremetrickind",
@@ -3150,6 +3171,14 @@ _dynamic_imports: dict[str, str] = {
     "URLImageItem": ".urlimageitem",
     "URLImageItemResponseFormat": ".urlimageitem",
     "URLImageItemTypedDict": ".urlimageitem",
+    "UsageBucket": ".usagebucket",
+    "UsageBucketTypedDict": ".usagebucket",
+    "UsageBucketWidth": ".usagebucketwidth",
+    "UsageGroupBy": ".usagegroupby",
+    "UsageResponse": ".usageresponse",
+    "UsageResponseTypedDict": ".usageresponse",
+    "UsageResult": ".usageresult",
+    "UsageResultTypedDict": ".usageresult",
     "UserMessage": ".usermessage",
     "UserMessageContent": ".usermessage",
     "UserMessageContentTypedDict": ".usermessage",

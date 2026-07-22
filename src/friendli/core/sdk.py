@@ -22,6 +22,7 @@ if TYPE_CHECKING:
     from friendli.core.dedicated import SyncDedicated, AsyncDedicated
     from friendli.core.file_sdk import SyncFileSDK, AsyncFileSDK
     from friendli.core.serverless import SyncServerless, AsyncServerless
+    from friendli.core.usage import SyncUsage, AsyncUsage
 
 
 class BaseFriendliCore(BaseSDK):
@@ -156,6 +157,7 @@ class SyncFriendliCore(BaseFriendliCore, SyncSDK):
     dedicated: "SyncDedicated"
     container: "SyncContainer"
     cost: "SyncCost"
+    usage: "SyncUsage"
     dataset: "SyncDataset"
     file: "SyncFileSDK"
     _sub_sdk_map = {
@@ -163,6 +165,7 @@ class SyncFriendliCore(BaseFriendliCore, SyncSDK):
         "dedicated": ("friendli.core.dedicated", "SyncDedicated"),
         "container": ("friendli.core.container", "SyncContainer"),
         "cost": ("friendli.core.cost", "SyncCost"),
+        "usage": ("friendli.core.usage", "SyncUsage"),
         "dataset": ("friendli.core.dataset", "SyncDataset"),
         "file": ("friendli.core.file_sdk", "SyncFileSDK"),
     }
@@ -185,6 +188,7 @@ class AsyncFriendliCore(BaseFriendliCore, AsyncSDK):
     dedicated: "AsyncDedicated"
     container: "AsyncContainer"
     cost: "AsyncCost"
+    usage: "AsyncUsage"
     dataset: "AsyncDataset"
     file: "AsyncFileSDK"
     _sub_sdk_map = {
@@ -192,6 +196,7 @@ class AsyncFriendliCore(BaseFriendliCore, AsyncSDK):
         "dedicated": ("friendli.core.dedicated", "AsyncDedicated"),
         "container": ("friendli.core.container", "AsyncContainer"),
         "cost": ("friendli.core.cost", "AsyncCost"),
+        "usage": ("friendli.core.usage", "AsyncUsage"),
         "dataset": ("friendli.core.dataset", "AsyncDataset"),
         "file": ("friendli.core.file_sdk", "AsyncFileSDK"),
     }

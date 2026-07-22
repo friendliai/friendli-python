@@ -23,6 +23,7 @@ class EndpointAdvancedConfigTypedDict(TypedDict):
     max_token_count: NotRequired[int]
     enable_content_logging: NotRequired[Nullable[bool]]
     max_input_length: NotRequired[Nullable[int]]
+    max_context_length: NotRequired[Nullable[int]]
     queue_timeout_ms: NotRequired[Nullable[int]]
     queue_backpressure_metric_kind: NotRequired[Nullable[QueueBackpressureMetricKind]]
     queue_backpressure_metric_threshold: NotRequired[Nullable[float]]
@@ -37,6 +38,7 @@ class EndpointAdvancedConfig(BaseModel):
     max_token_count: Optional[int] = 2560
     enable_content_logging: OptionalNullable[bool] = UNSET
     max_input_length: OptionalNullable[int] = UNSET
+    max_context_length: OptionalNullable[int] = UNSET
     queue_timeout_ms: OptionalNullable[int] = UNSET
     queue_backpressure_metric_kind: OptionalNullable[QueueBackpressureMetricKind] = (
         UNSET
@@ -51,6 +53,7 @@ class EndpointAdvancedConfig(BaseModel):
                 "max_token_count",
                 "enable_content_logging",
                 "max_input_length",
+                "max_context_length",
                 "queue_timeout_ms",
                 "queue_backpressure_metric_kind",
                 "queue_backpressure_metric_threshold",
@@ -61,6 +64,7 @@ class EndpointAdvancedConfig(BaseModel):
                 "max_batch_size",
                 "enable_content_logging",
                 "max_input_length",
+                "max_context_length",
                 "queue_timeout_ms",
                 "queue_backpressure_metric_kind",
                 "queue_backpressure_metric_threshold",
