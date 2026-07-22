@@ -21,7 +21,7 @@ class GetCostRequestTypedDict(TypedDict):
     start_time: datetime
     "RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-01T00:00:00Z). Must be no earlier than one year ago."
     end_time: datetime
-    "RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z)."
+    "RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z). Must not be later than midnight UTC of the next day."
     bucket_width: NotRequired[Nullable[CostBucketWidth]]
     "Width of each time bucket in response. Currently only `1d` is supported, default to `1d`."
     limit: NotRequired[Nullable[int]]
@@ -42,7 +42,7 @@ class GetCostRequest(BaseModel):
     end_time: Annotated[
         datetime, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
     ]
-    "RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z)."
+    "RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z). Must not be later than midnight UTC of the next day."
     bucket_width: Annotated[
         OptionalNullable[CostBucketWidth],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
