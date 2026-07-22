@@ -39,7 +39,7 @@ class GetUsageRequestTypedDict(TypedDict):
     product_types: NotRequired[Nullable[List[ProductType]]]
     "Return only usage for the specified product types. Supported fields include `model_apis`, `dedicated_endpoints` and any combination of them."
     gpu_types: NotRequired[Nullable[List[str]]]
-    "Return only usage for the specified GPU types. When this filter is applied, product_types is implicitly set to `dedicated_endpoints`."
+    "Return only usage for the specified GPU types. When this filter is given, only 'gpu_usage' will be provided. Combining `gpu_types` with 'product_types=model_apis` is rejected with HTTP 400."
     x_friendli_team: NotRequired[Nullable[str]]
     "ID of team to run requests as (optional parameter)."
 
@@ -92,7 +92,7 @@ class GetUsageRequest(BaseModel):
         OptionalNullable[List[str]],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    "Return only usage for the specified GPU types. When this filter is applied, product_types is implicitly set to `dedicated_endpoints`."
+    "Return only usage for the specified GPU types. When this filter is given, only 'gpu_usage' will be provided. Combining `gpu_types` with 'product_types=model_apis` is rejected with HTTP 400."
     x_friendli_team: Annotated[
         OptionalNullable[str],
         pydantic.Field(alias="X-Friendli-Team"),
