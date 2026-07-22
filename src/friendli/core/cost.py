@@ -36,7 +36,7 @@ class SyncCost(BaseCost, SyncSDK):
         Get cost details for the team.
 
         :param start_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-01T00:00:00Z). Must be no earlier than one year ago.
-        :param end_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z).
+        :param end_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z). Must not be later than midnight UTC of the next day.
         :param bucket_width: Width of each time bucket in response. Currently only `1d` is supported, default to `1d`.
         :param limit: A limit on the number of buckets to be returned. Limit can range between 1 and 35, and the default is 7.
         :param page: A cursor for use in pagination. Corresponding to the `next_page` field from the previous response.
@@ -103,7 +103,7 @@ class SyncCost(BaseCost, SyncSDK):
                 extensions={
                     "x-mint": {
                         "content": "Get cost details for the team.\n\nIf `X-Friendli-Team` is omitted, this endpoint uses the default team configured in Friendli Suite.\n\nThere may be a slight delay between usage and when it shows up in cost. If you need to call this endpoint repeatedly, wait at least 5 minutes between calls.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
-                        "href": "/openapi/administration/usage/cost",
+                        "href": "/openapi/administration/cost",
                         "metadata": {
                             "description": "Get cost details for the team.",
                             "og:description": "Get cost details for the team.",
@@ -150,7 +150,7 @@ class AsyncCost(BaseCost, AsyncSDK):
         Get cost details for the team.
 
         :param start_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-01T00:00:00Z). Must be no earlier than one year ago.
-        :param end_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z).
+        :param end_time: RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z). Must not be later than midnight UTC of the next day.
         :param bucket_width: Width of each time bucket in response. Currently only `1d` is supported, default to `1d`.
         :param limit: A limit on the number of buckets to be returned. Limit can range between 1 and 35, and the default is 7.
         :param page: A cursor for use in pagination. Corresponding to the `next_page` field from the previous response.
@@ -217,7 +217,7 @@ class AsyncCost(BaseCost, AsyncSDK):
                 extensions={
                     "x-mint": {
                         "content": "Get cost details for the team.\n\nIf `X-Friendli-Team` is omitted, this endpoint uses the default team configured in Friendli Suite.\n\nThere may be a slight delay between usage and when it shows up in cost. If you need to call this endpoint repeatedly, wait at least 5 minutes between calls.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
-                        "href": "/openapi/administration/usage/cost",
+                        "href": "/openapi/administration/cost",
                         "metadata": {
                             "description": "Get cost details for the team.",
                             "og:description": "Get cost details for the team.",
