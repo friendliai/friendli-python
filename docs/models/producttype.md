@@ -1,5 +1,7 @@
 # ProductType
 
+Product type.
+
 ## Example Usage
 
 ```python

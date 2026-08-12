@@ -1,5 +1,7 @@
 # CostGroupBy
 
+Cost group-by option.
+
 ## Example Usage
 
 ```python

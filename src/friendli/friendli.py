@@ -37,7 +37,7 @@ class SyncFriendli(SyncFriendliCore):
 
     def __init__(
         self,
-        token: Union[None, str, Callable[[], Optional[str]]] = None,
+        token: Union[str, Callable[[], Optional[str]], None] = None,
         server_idx: Optional[int] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
@@ -86,7 +86,7 @@ class AsyncFriendli(AsyncFriendliCore):
 
     def __init__(
         self,
-        token: Union[None, str, Callable[[], Optional[str]]] = None,
+        token: Union[str, Callable[[], Optional[str]], None] = None,
         server_idx: Optional[int] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,

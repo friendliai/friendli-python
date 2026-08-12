@@ -6,6 +6,7 @@ import time
 from datetime import datetime
 from email.utils import parsedate_to_datetime
 from typing import List, Optional
+
 import httpx
 
 
@@ -16,7 +17,7 @@ class BackoffStrategy:
     max_interval: int
     exponent: float
     max_elapsed_time: int
-    jitter_ms: Optional[int]
+    jitter_ms: int | None
 
     def __init__(
         self,
@@ -24,7 +25,7 @@ class BackoffStrategy:
         max_interval: int,
         exponent: float,
         max_elapsed_time: int,
-        jitter_ms: Optional[int] = None,
+        jitter_ms: int | None = None,
     ):
         """Initialize a backoff strategy.
 
@@ -59,14 +60,14 @@ class RetryConfig:
     strategy: str
     backoff: BackoffStrategy
     retry_connection_errors: bool
-    status_codes_override: Optional[List[str]]
+    status_codes_override: list[str] | None
 
     def __init__(
         self,
         strategy: str,
         backoff: BackoffStrategy,
         retry_connection_errors: bool,
-        status_codes_override: Optional[List[str]] = None,
+        status_codes_override: list[str] | None = None,
     ):
         """Initialize a retry configuration.
 
@@ -85,16 +86,16 @@ class RetryConfig:
 
 class Retries:
     config: RetryConfig
-    status_codes: List[str]
+    status_codes: list[str]
 
-    def __init__(self, config: RetryConfig, status_codes: List[str]):
+    def __init__(self, config: RetryConfig, status_codes: list[str]):
         self.config = config
         self.status_codes = config.status_codes_override or status_codes
 
 
 class TemporaryError(Exception):
     response: httpx.Response
-    retry_after: Optional[int]
+    retry_after: int | None
 
     def __init__(self, response: httpx.Response):
         self.response = response
@@ -108,7 +109,7 @@ class PermanentError(Exception):
         self.inner = inner
 
 
-def _parse_retry_after_header(response: httpx.Response) -> Optional[int]:
+def _parse_retry_after_header(response: httpx.Response) -> int | None:
     """Parse Retry-After header from response.
 
     Returns:
@@ -131,7 +132,7 @@ def _parse_retry_after_header(response: httpx.Response) -> Optional[int]:
     return None
 
 
-def _parse_retry_after_ms_header(response: httpx.Response) -> Optional[int]:
+def _parse_retry_after_ms_header(response: httpx.Response) -> int | None:
     retry_after_ms_header = response.headers.get("retry-after-ms")
     if not retry_after_ms_header:
         return None
@@ -150,7 +151,7 @@ def _get_sleep_interval(
     max_interval: int,
     exponent: float,
     retries: int,
-    jitter_ms: Optional[int] = None,
+    jitter_ms: int | None = None,
 ) -> float:
     """Get sleep interval for retry with exponential backoff.
 

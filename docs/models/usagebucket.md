@@ -1,5 +1,7 @@
 # UsageBucket
 
+Usage bucket for a time window.
+
 
 ## Fields
 
