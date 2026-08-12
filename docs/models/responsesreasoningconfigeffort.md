@@ -4,13 +4,12 @@
 
 ```python
 from friendli_core.models import ResponsesReasoningConfigEffort
-value: ResponsesReasoningConfigEffort = "none"
+value: ResponsesReasoningConfigEffort = "minimal"
 ```
 
 
 ## Values
 
-- `"none"`
 - `"minimal"`
 - `"low"`
 - `"medium"`

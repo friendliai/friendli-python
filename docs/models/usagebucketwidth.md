@@ -1,5 +1,7 @@
 # UsageBucketWidth
 
+Usage bucket width.
+
 ## Example Usage
 
 ```python

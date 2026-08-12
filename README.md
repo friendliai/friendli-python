@@ -380,6 +380,10 @@ with SyncFriendli(
 * [messages](docs/sdks/serverlessmessages/README.md#messages) - Messages
 * [stream](docs/sdks/serverlessmessages/README.md#stream) - Stream messages
 
+### [Serverless.Model](docs/sdks/model/README.md)
+
+* [models](docs/sdks/model/README.md#models) - List Models
+
 ### [Serverless.Responses](docs/sdks/serverlessresponses/README.md)
 
 * [responses](docs/sdks/serverlessresponses/README.md#responses) - Responses
@@ -609,8 +613,8 @@ with SyncFriendli(
 
 
 **Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 79 methods.*
-* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 6 of 79 methods.*
+* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 80 methods.*
+* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 6 of 80 methods.*
 * [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
