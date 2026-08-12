@@ -20,21 +20,19 @@ class SyncAudio(BaseAudio, SyncSDK):
     def transcribe(
         self,
         *,
-        file: Union[
-            models.DedicatedAudioTranscriptionBodyFile,
-            models.DedicatedAudioTranscriptionBodyFileTypedDict,
-        ],
+        file: models.DedicatedAudioTranscriptionBodyFile
+        | models.DedicatedAudioTranscriptionBodyFileTypedDict,
         model: str,
         x_friendli_team: OptionalNullable[str] = UNSET,
         chunking_strategy: OptionalNullable[
-            Union[models.ChunkingStrategy, models.ChunkingStrategyTypedDict]
+            models.ChunkingStrategy | models.ChunkingStrategyTypedDict
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
+        server_url: str | None = None,
+        timeout_ms: int | None = None,
+        http_headers: Mapping[str, str] | None = None,
     ) -> models.DedicatedAudioTranscriptionSuccess:
         r"""SyncAudio transcriptions.
 
@@ -142,21 +140,19 @@ class AsyncAudio(BaseAudio, AsyncSDK):
     async def transcribe(
         self,
         *,
-        file: Union[
-            models.DedicatedAudioTranscriptionBodyFile,
-            models.DedicatedAudioTranscriptionBodyFileTypedDict,
-        ],
+        file: models.DedicatedAudioTranscriptionBodyFile
+        | models.DedicatedAudioTranscriptionBodyFileTypedDict,
         model: str,
         x_friendli_team: OptionalNullable[str] = UNSET,
         chunking_strategy: OptionalNullable[
-            Union[models.ChunkingStrategy, models.ChunkingStrategyTypedDict]
+            models.ChunkingStrategy | models.ChunkingStrategyTypedDict
         ] = UNSET,
         language: OptionalNullable[str] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
+        server_url: str | None = None,
+        timeout_ms: int | None = None,
+        http_headers: Mapping[str, str] | None = None,
     ) -> models.DedicatedAudioTranscriptionSuccess:
         r"""AsyncAudio transcriptions.
 

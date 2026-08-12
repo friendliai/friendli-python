@@ -28,6 +28,8 @@ with SyncFriendli(
         name="<value>", size=830650, digest="<value>", project_id="<id>"
     )
 
+    assert res is not None
+
     # Handle response
     print(res)
 ```
@@ -79,7 +81,7 @@ with SyncFriendli(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `file_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | File ID                                                             |
+| `file_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | File ID.                                                            |
 | `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
@@ -119,7 +121,7 @@ with SyncFriendli(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `file_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | File ID                                                             |
+| `file_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | File ID.                                                            |
 | `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
@@ -159,7 +161,7 @@ with SyncFriendli(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `file_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | File ID                                                             |
+| `file_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | File ID.                                                            |
 | `x_friendli_team`                                                   | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | ID of team to run requests as (optional parameter).                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 

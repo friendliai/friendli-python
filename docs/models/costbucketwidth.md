@@ -1,5 +1,7 @@
 # CostBucketWidth
 
+Cost bucket width.
+
 ## Example Usage
 
 ```python

@@ -4,15 +4,17 @@ from decimal import Decimal
 from typing import (
     Any,
     Dict,
-    get_type_hints,
     List,
     Optional,
     Union,
     get_args,
     get_origin,
+    get_type_hints,
 )
+
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
+
 from .metadata import PathParamMetadata, find_field_metadata
 from .values import (
     _get_serialized_params,
@@ -23,9 +25,9 @@ from .values import (
 
 
 def generate_url(
-    server_url: str, path: str, path_params: Any, gbls: Optional[Any] = None
+    server_url: str, path: str, path_params: Any, gbls: Any | None = None
 ) -> str:
-    path_param_values: Dict[str, str] = {}
+    path_param_values: dict[str, str] = {}
     globals_already_populated = _populate_path_params(
         path_params, gbls, path_param_values, []
     )
@@ -39,13 +41,13 @@ def generate_url(
 def _populate_path_params(
     path_params: Any,
     gbls: Any,
-    path_param_values: Dict[str, str],
-    skip_fields: List[str],
-) -> List[str]:
-    globals_already_populated: List[str] = []
+    path_param_values: dict[str, str],
+    skip_fields: list[str],
+) -> list[str]:
+    globals_already_populated: list[str] = []
     if not isinstance(path_params, BaseModel):
         return globals_already_populated
-    path_param_fields: Dict[str, FieldInfo] = path_params.__class__.model_fields
+    path_param_fields: dict[str, FieldInfo] = path_params.__class__.model_fields
     path_param_field_types = get_type_hints(path_params.__class__)
     for name in path_param_fields:
         if name in skip_fields:
@@ -71,15 +73,15 @@ def _populate_path_params(
             for key, value in serialized_params.items():
                 path_param_values[key] = value
         else:
-            pp_vals: List[str] = []
+            pp_vals: list[str] = []
             if param_metadata.style == "simple":
-                if isinstance(param, List):
+                if isinstance(param, list):
                     for pp_val in param:
                         if not _is_set(pp_val):
                             continue
                         pp_vals.append(_val_to_string(pp_val))
                     path_param_values[f_name] = ",".join(pp_vals)
-                elif isinstance(param, Dict):
+                elif isinstance(param, dict):
                     for pp_key in param:
                         if not _is_set(param[pp_key]):
                             continue
@@ -89,7 +91,7 @@ def _populate_path_params(
                             pp_vals.append(f"{pp_key},{_val_to_string(param[pp_key])}")
                     path_param_values[f_name] = ",".join(pp_vals)
                 elif not isinstance(param, (str, int, float, complex, bool, Decimal)):
-                    param_fields: Dict[str, FieldInfo] = param.__class__.model_fields
+                    param_fields: dict[str, FieldInfo] = param.__class__.model_fields
                     for name in param_fields:
                         param_field = param_fields[name]
                         param_value_metadata = find_field_metadata(
@@ -121,7 +123,7 @@ def is_optional(field):
     return get_origin(field) is Union and type(None) in get_args(field)
 
 
-def template_url(url_with_params: str, params: Dict[str, str]) -> str:
+def template_url(url_with_params: str, params: dict[str, str]) -> str:
     for key, value in params.items():
         url_with_params = url_with_params.replace("{" + key + "}", value)
     return url_with_params

@@ -1,5 +1,7 @@
 # UsageGroupBy
 
+Usage group-by option.
+
 ## Example Usage
 
 ```python
