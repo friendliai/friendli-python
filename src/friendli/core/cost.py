@@ -123,7 +123,7 @@ class SyncCost(BaseCost, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.CostResponse, http_res)
-        if utils.match_response(http_res, ["422", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["403", "422", "429", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -237,7 +237,7 @@ class AsyncCost(BaseCost, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.CostResponse, http_res)
-        if utils.match_response(http_res, ["422", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["403", "422", "429", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):

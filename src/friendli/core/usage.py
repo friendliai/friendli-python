@@ -141,7 +141,7 @@ class SyncUsage(BaseUsage, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models_.UsageResponse, http_res)
-        if utils.match_response(http_res, ["400", "422", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["400", "403", "422", "429", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models_.SDKError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -272,7 +272,7 @@ class AsyncUsage(BaseUsage, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models_.UsageResponse, http_res)
-        if utils.match_response(http_res, ["400", "422", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["400", "403", "422", "429", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models_.SDKError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
