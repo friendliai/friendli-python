@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 37076cef-26b6-4da9-bb49-e710061cab77
 management:
-  docChecksum: 4e75f821c2e3bf51cb5e6c71f01147ee
+  docChecksum: 9c2f0451e17ddc43be44f3f2c00ff4f2
   docVersion: 0.1.0
-  speakeasyVersion: 1.793.1
-  generationVersion: 2.928.0
-  releaseVersion: 0.14.7
-  configChecksum: a7fd25a6672c3adf54e14da99a2b179b
+  speakeasyVersion: 1.796.0
+  generationVersion: 2.932.15
+  releaseVersion: 0.15.0
+  configChecksum: 865fe66a1aa2d7b372341df6c3bbf44a
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
 persistentEdits:
-  generation_id: fd4deb47-48f2-4e4b-a018-695eca07a3f5
-  pristine_commit_hash: ba923eb361f9d62d0f04b74844ba6b15897bcfb7
-  pristine_tree_hash: 1ec98b746f5e095ae485c82ae29c6b92ae4c0e27
+  generation_id: 2a4abfbd-bacb-414a-91dd-11c4ab41b80f
+  pristine_commit_hash: d7a75f2e74bfe7b70820cc81dffa816eaf0443ad
+  pristine_tree_hash: 908e2b17561835eb44d4b3357b05b54e1c093f7f
 features:
   python:
     additionalDependencies: 1.1.0
     additionalProperties: 1.0.2
     constsAndDefaults: 1.0.7
-    core: 6.0.35
+    core: 6.1.2
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.1
     envVarSecurityUsage: 0.3.3
@@ -37,11 +37,11 @@ features:
     nameOverrides: 3.0.3
     nullables: 1.0.2
     responseFormat: 1.1.0
-    retries: 3.0.7
+    retries: 3.1.1
     sdkHooks: 1.3.0
     serverEvents: 1.1.1
     serverEventsSentinels: 0.1.0
-    unions: 3.1.8
+    unions: 3.1.9
     uploadStreams: 1.0.3
 trackedFiles:
   .gitattributes:
@@ -2182,8 +2182,8 @@ trackedFiles:
     pristine_git_object: 9f34572c5bbbd5dc42e57412b0c83917d3c2c9d7
   src/friendli_core/_version.py:
     id: 0b237f54276c
-    last_write_checksum: sha1:2aea6957e16ba242f29345a18c98c396fe4fe943
-    pristine_git_object: 042fa51d7a816979f2965f81fdbd97ff7bac4989
+    last_write_checksum: sha1:93b517849b86d6d09bfda5e0a4f57d7cb47f1610
+    pristine_git_object: d27fb661c800c727a81f04b60526a5da52ef628a
   src/friendli_core/basesdk.py:
     id: 879235d6bd9e
     last_write_checksum: sha1:a69c546b688c53422613c2625df0ff020c380940
@@ -2226,8 +2226,8 @@ trackedFiles:
     pristine_git_object: 7881465db0f5ff488c67b6cbc2710fb8f329e65c
   src/friendli_core/cost.py:
     id: 351c82e2c891
-    last_write_checksum: sha1:6529779e930176c2d495a69fc5e1de25ef7e1574
-    pristine_git_object: 4529a399d7cc17138330d769953f92dfe6d11c8f
+    last_write_checksum: sha1:f2423ab43235e30f2f795f0e2f06e931010d0582
+    pristine_git_object: a8b32b0ac8cce06fb517a136eeea6a08525c8bdd
   src/friendli_core/dataset.py:
     id: 448404b84f76
     last_write_checksum: sha1:55559f559e3792c071a2d14d58fb476e37c70b2a
@@ -3866,8 +3866,8 @@ trackedFiles:
     pristine_git_object: a9a640a1a7048736383f96c67c6290c86bf536ee
   src/friendli_core/usage.py:
     id: 3eb6a8288193
-    last_write_checksum: sha1:501654971937506dd9b0dc2af1fc99d16c8190e8
-    pristine_git_object: 7c88dd760917e10c4283fde51586c62943050a49
+    last_write_checksum: sha1:7430b2e55e31563c2f793e1aa8c908bcabab79aa
+    pristine_git_object: b5502cabdd9018fe9831c3a79b36c27dc07b7251
   src/friendli_core/utils/__init__.py:
     id: f6d02e430eef
     last_write_checksum: sha1:527db7a6c93948ecdec6a33f56b6551ae44f0180
@@ -3918,8 +3918,8 @@ trackedFiles:
     pristine_git_object: 591415af8e64baa410627b507d2740afb5387d13
   src/friendli_core/utils/retries.py:
     id: 8fbe45ab931f
-    last_write_checksum: sha1:3585b891142f30a597fbf7a2f0340700babef8e4
-    pristine_git_object: ca7b59efebbbd9545744d0207ef42725c4cc5143
+    last_write_checksum: sha1:251e4dd969bb6c06025afe1bad1b5035e94c2060
+    pristine_git_object: 406c1e7c36c7a4fa4fb48bb567d254e2803e1792
   src/friendli_core/utils/security.py:
     id: b3d7494ba58c
     last_write_checksum: sha1:e3bb3cb9e160f134c425334c3e267ea217f70d5d
@@ -3938,8 +3938,8 @@ trackedFiles:
     pristine_git_object: c78ccbae426ce6d385709d97ce0b1c2813ea2418
   src/friendli_core/utils/values.py:
     id: 69d9a63e7d79
-    last_write_checksum: sha1:acaa178a7c41ddd000f58cc691e4632d925b2553
-    pristine_git_object: dae01a44384ac3bc13ae07453a053bf6c898ebe3
+    last_write_checksum: sha1:65e1ee8607767a4fc1ae7a55c74d77a23ab3cef1
+    pristine_git_object: ac217f473c5d52a454a2979b3eb35e66175d365c
 examples:
   containerChatComplete:
     Example:
@@ -4751,7 +4751,10 @@ examples:
           application/json: {"data": [{"id": "zai-org/GLM-5.2", "name": "zai-org/GLM-5.2", "created": 1781491205, "context_length": 1048576, "max_completion_tokens": 1048576, "pricing": {"input": "0.0000014", "output": "0.0000044", "prompt": "0.0000014", "completion": "0.0000044", "input_cache_read": "0.00000026", "cache_write": "<value>", "audio_minute": "<value>"}, "functionality": {"tool_call": true, "parallel_tool_call": true, "structured_output": true, "tool_choice": true, "system_messages": true}, "description": "Open flagship GLM for long-horizon coding agents and million-token context work", "deprecation_date": "<value>", "reasoning": true, "reasoning_options": [{"type": "toggle"}, {"type": "effort", "values": ["high", "max"]}, {"type": "budget_tokens", "min": -1, "max": 1048576}], "input_modalities": ["text"], "output_modalities": ["text"], "interleaved": "reasoning_content", "base_model": "zhipuai/glm-5.2", "mode": "chat", "default_params": {"repetition_penalty": 1, "temperature": 1, "top_p": 1, "min_p": 0, "top_k": 0}}]}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `friendli_core.serverless.responses.responses()`: \n  *  `request.reasoning.effort.enum(none)` **Removed** (Breaking ⚠️)\n* `friendli_core.serverless.responses.stream()`: \n  *  `request.reasoning.effort.enum(none)` **Removed** (Breaking ⚠️)\n* `friendli_core.dedicated.responses.responses()`: \n  *  `request.reasoning.effort.enum(none)` **Removed** (Breaking ⚠️)\n* `friendli_core.dedicated.responses.stream()`: \n  *  `request.reasoning.effort.enum(none)` **Removed** (Breaking ⚠️)\n* `friendli_core.container.responses.responses()`: \n  *  `request.reasoning.effort.enum(none)` **Removed** (Breaking ⚠️)\n* `friendli_core.container.responses.stream()`: \n  *  `request.reasoning.effort.enum(none)` **Removed** (Breaking ⚠️)\n* `friendli_core.cost.get_cost()`: \n  *  `request.limit` **Changed** (Breaking ⚠️)\n  *  `response.data[].results` **Changed** (Breaking ⚠️)\n* `friendli_core.file.init_upload()`:  `response.status[202]` **Removed** (Breaking ⚠️)\n* `friendli_core.serverless.model.models()`: **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `friendli_core.cost.get_cost()`:  `error.status[403]` **Added**
+  * `friendli_core.usage.get_usage()`:  `error.status[403]` **Added**
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
