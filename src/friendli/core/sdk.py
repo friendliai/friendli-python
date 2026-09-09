@@ -22,9 +22,7 @@ from .utils.retries import RetryConfig
 if TYPE_CHECKING:
     from friendli.core.container import AsyncContainer, SyncContainer
     from friendli.core.cost import AsyncCost, SyncCost
-    from friendli.core.dataset import AsyncDataset, SyncDataset
     from friendli.core.dedicated import AsyncDedicated, SyncDedicated
-    from friendli.core.file_sdk import AsyncFileSDK, SyncFileSDK
     from friendli.core.serverless import AsyncServerless, SyncServerless
     from friendli.core.usage import AsyncUsage, SyncUsage
 
@@ -162,16 +160,12 @@ class SyncFriendliCore(BaseFriendliCore, SyncSDK):
     container: "SyncContainer"
     cost: "SyncCost"
     usage: "SyncUsage"
-    dataset: "SyncDataset"
-    file: "SyncFileSDK"
     _sub_sdk_map = {
         "serverless": ("friendli.core.serverless", "SyncServerless"),
         "dedicated": ("friendli.core.dedicated", "SyncDedicated"),
         "container": ("friendli.core.container", "SyncContainer"),
         "cost": ("friendli.core.cost", "SyncCost"),
         "usage": ("friendli.core.usage", "SyncUsage"),
-        "dataset": ("friendli.core.dataset", "SyncDataset"),
-        "file": ("friendli.core.file_sdk", "SyncFileSDK"),
     }
 
     def __enter__(self):
@@ -193,16 +187,12 @@ class AsyncFriendliCore(BaseFriendliCore, AsyncSDK):
     container: "AsyncContainer"
     cost: "AsyncCost"
     usage: "AsyncUsage"
-    dataset: "AsyncDataset"
-    file: "AsyncFileSDK"
     _sub_sdk_map = {
         "serverless": ("friendli.core.serverless", "AsyncServerless"),
         "dedicated": ("friendli.core.dedicated", "AsyncDedicated"),
         "container": ("friendli.core.container", "AsyncContainer"),
         "cost": ("friendli.core.cost", "AsyncCost"),
         "usage": ("friendli.core.usage", "AsyncUsage"),
-        "dataset": ("friendli.core.dataset", "AsyncDataset"),
-        "file": ("friendli.core.file_sdk", "AsyncFileSDK"),
     }
 
     async def __aenter__(self):

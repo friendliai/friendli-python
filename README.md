@@ -125,7 +125,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.2",
+        model="zai-org/GLM-5.3",
         messages=[
             {
                 "role": "system",
@@ -159,7 +159,7 @@ async def main():
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
         res = await friendli.serverless.chat.complete(
-            model="zai-org/GLM-5.2",
+            model="zai-org/GLM-5.3",
             messages=[
                 {
                     "role": "system",
@@ -201,7 +201,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.2",
+        model="zai-org/GLM-5.3",
         messages=[
             {
                 "role": "system",
@@ -268,25 +268,6 @@ with SyncFriendli(
 
 * [get_cost](docs/sdks/cost/README.md#get_cost) - Cost
 
-### [Dataset](docs/sdks/dataset/README.md)
-
-* [create_dataset](docs/sdks/dataset/README.md#create_dataset) - Create a new dataset
-* [list_datasets](docs/sdks/dataset/README.md#list_datasets) - List datasets
-* [get_dataset](docs/sdks/dataset/README.md#get_dataset) - Get dataset info
-* [delete_dataset](docs/sdks/dataset/README.md#delete_dataset) - Delete dataset
-* [create_version](docs/sdks/dataset/README.md#create_version) - Create a version
-* [list_versions](docs/sdks/dataset/README.md#list_versions) - List versions
-* [get_version](docs/sdks/dataset/README.md#get_version) - Get version info
-* [delete_version](docs/sdks/dataset/README.md#delete_version) - Delete a version
-* [create_split](docs/sdks/dataset/README.md#create_split) - Create a split
-* [list_splits](docs/sdks/dataset/README.md#list_splits) - List splits
-* [get_split](docs/sdks/dataset/README.md#get_split) - Get split info
-* [delete_split](docs/sdks/dataset/README.md#delete_split) - Delete split
-* [add_samples](docs/sdks/dataset/README.md#add_samples) - Add samples
-* [list_samples](docs/sdks/dataset/README.md#list_samples) - List samples
-* [update_samples](docs/sdks/dataset/README.md#update_samples) - Update samples
-* [delete_samples](docs/sdks/dataset/README.md#delete_samples) - Delete samples
-
 ### [Dedicated.Audio](docs/sdks/dedicatedaudio/README.md)
 
 * [transcribe](docs/sdks/dedicatedaudio/README.md#transcribe) - Audio transcriptions
@@ -348,13 +329,6 @@ with SyncFriendli(
 
 * [tokenize](docs/sdks/dedicatedtoken/README.md#tokenize) - Tokenization
 * [detokenize](docs/sdks/dedicatedtoken/README.md#detokenize) - Detokenization
-
-### [File](docs/sdks/filesdk/README.md)
-
-* [init_upload](docs/sdks/filesdk/README.md#init_upload) - Initiate file upload
-* [complete_upload](docs/sdks/filesdk/README.md#complete_upload) - Complete file upload
-* [get_info](docs/sdks/filesdk/README.md#get_info) - Get file info
-* [get_download_url](docs/sdks/filesdk/README.md#get_download_url) - Get file download URL
 
 ### [Serverless.Audio](docs/sdks/serverlessaudio/README.md)
 
@@ -422,7 +396,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.chat.stream(
-        model="zai-org/GLM-5.2",
+        model="zai-org/GLM-5.3",
         messages=[
             {
                 "role": "system",
@@ -494,7 +468,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.2",
+        model="zai-org/GLM-5.3",
         messages=[
             {
                 "role": "system",
@@ -524,7 +498,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.2",
+        model="zai-org/GLM-5.3",
         messages=[
             {
                 "role": "system",
@@ -576,7 +550,7 @@ with SyncFriendli(
                     "content": "Hello, summarize what you can do in one sentence.",
                 },
             ],
-            model="zai-org/GLM-5.2",
+            model="zai-org/GLM-5.3",
             additional_properties={},
         )
 
@@ -613,8 +587,8 @@ with SyncFriendli(
 
 
 **Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 21 of 80 methods.*
-* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 6 of 80 methods.*
+* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 6 of 60 methods.*
+* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 1 of 60 methods.*
 * [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -638,7 +612,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.2",
+        model="zai-org/GLM-5.3",
         messages=[
             {
                 "role": "system",

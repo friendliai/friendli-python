@@ -14,7 +14,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.2",
+        model="zai-org/GLM-5.3",
         messages=[
             {
                 "role": "system",
@@ -48,7 +48,7 @@ async def main():
         token=os.getenv("FRIENDLI_TOKEN", ""),
     ) as friendli:
         res = await friendli.serverless.chat.complete(
-            model="zai-org/GLM-5.2",
+            model="zai-org/GLM-5.3",
             messages=[
                 {
                     "role": "system",
