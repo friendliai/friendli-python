@@ -67,7 +67,7 @@ class ModelCatalogResponseItemTypedDict(TypedDict):
     interleaved: InterleavedTypedDict
     "`false` means reasoning stays in `content` and cannot be separated. A string (`reasoning_content` or `reasoning_details`) means the model can parse reasoning into a top-level field of that name via `parse_reasoning`."
     base_model: Nullable[str]
-    "Canonical model identifier from models.dev (e.g. `zhipuai/glm-5.2`)."
+    "Canonical model identifier from models.dev (e.g. `zhipuai/glm-5.3`)."
     mode: Mode
     "Primary API endpoint type for this model.\n\n    ``chat`` routes requests to ``/v1/chat/completions``,\n    ``completion`` to ``/v1/completions``, and\n    ``embedding`` to ``/v1/embeddings``.\n    "
     default_params: Nullable[DefaultSamplingParamsTypedDict]
@@ -106,7 +106,7 @@ class ModelCatalogResponseItem(BaseModel):
     interleaved: Interleaved
     "`false` means reasoning stays in `content` and cannot be separated. A string (`reasoning_content` or `reasoning_details`) means the model can parse reasoning into a top-level field of that name via `parse_reasoning`."
     base_model: Nullable[str]
-    "Canonical model identifier from models.dev (e.g. `zhipuai/glm-5.2`)."
+    "Canonical model identifier from models.dev (e.g. `zhipuai/glm-5.3`)."
     mode: Mode
     "Primary API endpoint type for this model.\n\n    ``chat`` routes requests to ``/v1/chat/completions``,\n    ``completion`` to ``/v1/completions``, and\n    ``embedding`` to ``/v1/embeddings``.\n    "
     default_params: Nullable[DefaultSamplingParams]

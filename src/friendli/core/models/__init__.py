@@ -11,9 +11,6 @@ if TYPE_CHECKING:
         AcceleratorRequirement,
         AcceleratorRequirementTypedDict,
     )
-    from .accountfilestatus import AccountFileStatus
-    from .add_samplesop import AddSamplesRequest, AddSamplesRequestTypedDict
-    from .addsamplesresponse import AddSamplesResponse, AddSamplesResponseTypedDict
     from .assistantmessage import AssistantMessage, AssistantMessageTypedDict
     from .assistantmessagetoolcall import (
         AssistantMessageToolCall,
@@ -43,12 +40,6 @@ if TYPE_CHECKING:
         BaseClassificationData,
         BaseClassificationDataTypedDict,
     )
-    from .body_upload_raw_samples import (
-        BodyUploadRawSamples,
-        BodyUploadRawSamplesFile,
-        BodyUploadRawSamplesFileTypedDict,
-        BodyUploadRawSamplesTypedDict,
-    )
     from .chatchoice import ChatChoice, ChatChoiceFinishReason, ChatChoiceTypedDict
     from .chatchoicemessage import ChatChoiceMessage, ChatChoiceMessageTypedDict
     from .chatcompletebodytoolchoice import (
@@ -66,7 +57,6 @@ if TYPE_CHECKING:
         ChatLogprobsContentTopLogprobTypedDict,
     )
     from .chatusage import ChatUsage, ChatUsageTypedDict
-    from .complete_uploadop import CompleteUploadRequest, CompleteUploadRequestTypedDict
     from .completionsbodywithprompt import (
         CompletionsBodyWithPrompt,
         CompletionsBodyWithPromptPrompt,
@@ -315,17 +305,6 @@ if TYPE_CHECKING:
     from .costgroupby import CostGroupBy
     from .costresponse import CostResponse, CostResponseTypedDict
     from .costresult import CostResult, CostResultTypedDict
-    from .create_datasetop import (
-        CreateDatasetRequestRequest,
-        CreateDatasetRequestRequestTypedDict,
-    )
-    from .create_splitop import CreateSplitRequest, CreateSplitRequestTypedDict
-    from .create_versionop import CreateVersionRequest, CreateVersionRequestTypedDict
-    from .createdatasetrequest import (
-        CreateDatasetRequest,
-        CreateDatasetRequestTypedDict,
-    )
-    from .datasetinfo import DatasetInfo, DatasetInfoTypedDict
     from .dedicatedaudiotranscriptionbody import (
         DedicatedAudioTranscriptionBody,
         DedicatedAudioTranscriptionBodyChunkingStrategy,
@@ -408,11 +387,6 @@ if TYPE_CHECKING:
         DedicatedCreateEndpointRequest,
         DedicatedCreateEndpointRequestTypedDict,
     )
-    from .dedicateddatasetmodality import (
-        DedicatedDatasetModality,
-        DedicatedDatasetModalityTypedDict,
-    )
-    from .dedicateddatasetmodalitytype import DedicatedDatasetModalityType
     from .dedicateddeleteendpointop import (
         DedicatedDeleteEndpointRequest,
         DedicatedDeleteEndpointRequestTypedDict,
@@ -641,19 +615,6 @@ if TYPE_CHECKING:
         DefaultSamplingParams,
         DefaultSamplingParamsTypedDict,
     )
-    from .delete_datasetop import DeleteDatasetRequest, DeleteDatasetRequestTypedDict
-    from .delete_samplesop import (
-        DeleteSamplesRequest,
-        DeleteSamplesRequestTypedDict,
-        RequestBody,
-        RequestBodyTypedDict,
-    )
-    from .delete_splitop import DeleteSplitRequest, DeleteSplitRequestTypedDict
-    from .delete_versionop import DeleteVersionRequest, DeleteVersionRequestTypedDict
-    from .deletesamplesresponse import (
-        DeleteSamplesResponse,
-        DeleteSamplesResponseTypedDict,
-    )
     from .embeddingobject import (
         Embedding,
         EmbeddingObject,
@@ -668,30 +629,9 @@ if TYPE_CHECKING:
         EndpointSimplescaleConfig,
         EndpointSimplescaleConfigTypedDict,
     )
-    from .filegetdownloadurlresponse import (
-        FileGetDownloadURLResponse,
-        FileGetDownloadURLResponseTypedDict,
-    )
-    from .fileinfo import FileInfo, FileInfoTypedDict
-    from .fileinituploadrequest import (
-        FileInitUploadRequest,
-        FileInitUploadRequestTypedDict,
-    )
-    from .fileinituploadresponse import (
-        FileInitUploadResponse,
-        FileInitUploadResponseTypedDict,
-    )
     from .function import Function, FunctionTypedDict
     from .functionality import Functionality, FunctionalityTypedDict
     from .functionresult import FunctionResult, FunctionResultTypedDict
-    from .get_datasetop import GetDatasetRequest, GetDatasetRequestTypedDict
-    from .get_download_urlop import (
-        GetDownloadURLRequest,
-        GetDownloadURLRequestTypedDict,
-    )
-    from .get_infoop import GetInfoRequest, GetInfoRequestTypedDict
-    from .get_splitop import GetSplitRequest, GetSplitRequestTypedDict
-    from .get_versionop import GetVersionRequest, GetVersionRequestTypedDict
     from .getcostop import GetCostRequest, GetCostRequestTypedDict
     from .getusageop import GetUsageRequest, GetUsageRequestTypedDict
     from .httpvalidationerror import HTTPValidationError, HTTPValidationErrorData
@@ -700,34 +640,7 @@ if TYPE_CHECKING:
     from .imageinput import ImageInput, ImageInputTypedDict
     from .inferencedeploymenterrorcode import InferenceDeploymentErrorCode
     from .inferencedeploymentstatus import InferenceDeploymentStatus
-    from .init_uploadop import InitUploadRequest, InitUploadRequestTypedDict
     from .interleavedfield import InterleavedField
-    from .list_datasetsop import (
-        ListDatasetsDirection,
-        ListDatasetsRequest,
-        ListDatasetsRequestTypedDict,
-    )
-    from .list_samplesop import (
-        ListSamplesDirection,
-        ListSamplesRequest,
-        ListSamplesRequestTypedDict,
-    )
-    from .list_splitsop import (
-        ListSplitsDirection,
-        ListSplitsRequest,
-        ListSplitsRequestTypedDict,
-    )
-    from .list_versionsop import ListVersionsRequest, ListVersionsRequestTypedDict
-    from .listdatasetsresponse import (
-        ListDatasetsResponse,
-        ListDatasetsResponseTypedDict,
-    )
-    from .listsamplesresponse import ListSamplesResponse, ListSamplesResponseTypedDict
-    from .listsplitsresponse import ListSplitsResponse, ListSplitsResponseTypedDict
-    from .listversionsresponse import (
-        ListVersionsResponse,
-        ListVersionsResponseTypedDict,
-    )
     from .message import Message, MessageTypedDict
     from .messagesbase64imagesource import (
         MessagesBase64ImageSource,
@@ -1314,7 +1227,6 @@ if TYPE_CHECKING:
         ServerVadChunkingStrategy,
         ServerVadChunkingStrategyTypedDict,
     )
-    from .splitinfo import SplitInfo, SplitInfoTypedDict
     from .streamedaudiotranscriptiondata import (
         StreamedAudioTranscriptionData,
         StreamedAudioTranscriptionDataType,
@@ -1359,10 +1271,6 @@ if TYPE_CHECKING:
     from .tool import Tool, ToolTypedDict
     from .toolcallresult import ToolCallResult, ToolCallResultTypedDict
     from .toolmessage import ToolMessage, ToolMessageTypedDict
-    from .upload_raw_samplesop import (
-        UploadRawSamplesRequest,
-        UploadRawSamplesRequestTypedDict,
-    )
     from .urlimageitem import (
         URLImageItem,
         URLImageItemResponseFormat,
@@ -1389,7 +1297,6 @@ if TYPE_CHECKING:
         ValidationError,
         ValidationErrorTypedDict,
     )
-    from .versioninfo import VersionInfo, VersionInfoTypedDict
     from .videocontent import VideoContent, VideoContentTypedDict
     from .videodata import VideoData, VideoDataTypedDict
 __all__ = [
@@ -1410,11 +1317,6 @@ __all__ = [
     "CONTAINER_TOKENIZATION_OP_SERVERS",
     "AcceleratorRequirement",
     "AcceleratorRequirementTypedDict",
-    "AccountFileStatus",
-    "AddSamplesRequest",
-    "AddSamplesRequestTypedDict",
-    "AddSamplesResponse",
-    "AddSamplesResponseTypedDict",
     "AssistantMessage",
     "AssistantMessageToolCall",
     "AssistantMessageToolCallFunction",
@@ -1436,10 +1338,6 @@ __all__ = [
     "B64ImageItemTypedDict",
     "BaseClassificationData",
     "BaseClassificationDataTypedDict",
-    "BodyUploadRawSamples",
-    "BodyUploadRawSamplesFile",
-    "BodyUploadRawSamplesFileTypedDict",
-    "BodyUploadRawSamplesTypedDict",
     "ChatChoice",
     "ChatChoiceFinishReason",
     "ChatChoiceMessage",
@@ -1458,8 +1356,6 @@ __all__ = [
     "ChatUsage",
     "ChatUsageTypedDict",
     "Code",
-    "CompleteUploadRequest",
-    "CompleteUploadRequestTypedDict",
     "CompletionsBodyWithPrompt",
     "CompletionsBodyWithPromptPrompt",
     "CompletionsBodyWithPromptPromptTypedDict",
@@ -1621,18 +1517,8 @@ __all__ = [
     "CostResponseTypedDict",
     "CostResult",
     "CostResultTypedDict",
-    "CreateDatasetRequest",
-    "CreateDatasetRequestRequest",
-    "CreateDatasetRequestRequestTypedDict",
-    "CreateDatasetRequestTypedDict",
-    "CreateSplitRequest",
-    "CreateSplitRequestTypedDict",
-    "CreateVersionRequest",
-    "CreateVersionRequestTypedDict",
     "Data",
     "DataTypedDict",
-    "DatasetInfo",
-    "DatasetInfoTypedDict",
     "DedicatedAudioTranscriptionBody",
     "DedicatedAudioTranscriptionBodyChunkingStrategy",
     "DedicatedAudioTranscriptionBodyChunkingStrategyTypedDict",
@@ -1683,9 +1569,6 @@ __all__ = [
     "DedicatedCompletionsStreamRequestTypedDict",
     "DedicatedCreateEndpointRequest",
     "DedicatedCreateEndpointRequestTypedDict",
-    "DedicatedDatasetModality",
-    "DedicatedDatasetModalityType",
-    "DedicatedDatasetModalityTypedDict",
     "DedicatedDeleteEndpointRequest",
     "DedicatedDeleteEndpointRequestTypedDict",
     "DedicatedDetokenizationBody",
@@ -1812,16 +1695,6 @@ __all__ = [
     "DedicatedWakeEndpointRequestTypedDict",
     "DefaultSamplingParams",
     "DefaultSamplingParamsTypedDict",
-    "DeleteDatasetRequest",
-    "DeleteDatasetRequestTypedDict",
-    "DeleteSamplesRequest",
-    "DeleteSamplesRequestTypedDict",
-    "DeleteSamplesResponse",
-    "DeleteSamplesResponseTypedDict",
-    "DeleteSplitRequest",
-    "DeleteSplitRequestTypedDict",
-    "DeleteVersionRequest",
-    "DeleteVersionRequestTypedDict",
     "Embedding",
     "EmbeddingObject",
     "EmbeddingObjectTypedDict",
@@ -1831,14 +1704,6 @@ __all__ = [
     "EndpointAdvancedConfigTypedDict",
     "EndpointSimplescaleConfig",
     "EndpointSimplescaleConfigTypedDict",
-    "FileGetDownloadURLResponse",
-    "FileGetDownloadURLResponseTypedDict",
-    "FileInfo",
-    "FileInfoTypedDict",
-    "FileInitUploadRequest",
-    "FileInitUploadRequestTypedDict",
-    "FileInitUploadResponse",
-    "FileInitUploadResponseTypedDict",
     "FriendliCoreError",
     "Function",
     "FunctionResult",
@@ -1848,18 +1713,8 @@ __all__ = [
     "FunctionalityTypedDict",
     "GetCostRequest",
     "GetCostRequestTypedDict",
-    "GetDatasetRequest",
-    "GetDatasetRequestTypedDict",
-    "GetDownloadURLRequest",
-    "GetDownloadURLRequestTypedDict",
-    "GetInfoRequest",
-    "GetInfoRequestTypedDict",
-    "GetSplitRequest",
-    "GetSplitRequestTypedDict",
     "GetUsageRequest",
     "GetUsageRequestTypedDict",
-    "GetVersionRequest",
-    "GetVersionRequestTypedDict",
     "HTTPValidationError",
     "HTTPValidationErrorData",
     "ImageContent",
@@ -1870,30 +1725,9 @@ __all__ = [
     "ImageInputTypedDict",
     "InferenceDeploymentErrorCode",
     "InferenceDeploymentStatus",
-    "InitUploadRequest",
-    "InitUploadRequestTypedDict",
     "Interleaved",
     "InterleavedField",
     "InterleavedTypedDict",
-    "ListDatasetsDirection",
-    "ListDatasetsRequest",
-    "ListDatasetsRequestTypedDict",
-    "ListDatasetsResponse",
-    "ListDatasetsResponseTypedDict",
-    "ListSamplesDirection",
-    "ListSamplesRequest",
-    "ListSamplesRequestTypedDict",
-    "ListSamplesResponse",
-    "ListSamplesResponseTypedDict",
-    "ListSplitsDirection",
-    "ListSplitsRequest",
-    "ListSplitsRequestTypedDict",
-    "ListSplitsResponse",
-    "ListSplitsResponseTypedDict",
-    "ListVersionsRequest",
-    "ListVersionsRequestTypedDict",
-    "ListVersionsResponse",
-    "ListVersionsResponseTypedDict",
     "Loc",
     "LocTypedDict",
     "Message",
@@ -2020,8 +1854,6 @@ __all__ = [
     "ReasoningOptionTypedDict",
     "ReasoningToggle",
     "ReasoningToggleTypedDict",
-    "RequestBody",
-    "RequestBodyTypedDict",
     "ResponseFormat",
     "ResponseFormatJSONObject",
     "ResponseFormatJSONObjectTypedDict",
@@ -2268,8 +2100,6 @@ __all__ = [
     "ServerlessTokenizationRequestTypedDict",
     "ServerlessTokenizationSuccess",
     "ServerlessTokenizationSuccessTypedDict",
-    "SplitInfo",
-    "SplitInfoTypedDict",
     "StreamOptions",
     "StreamOptionsTypedDict",
     "StreamedAudioTranscriptionData",
@@ -2310,8 +2140,6 @@ __all__ = [
     "URLImageItem",
     "URLImageItemResponseFormat",
     "URLImageItemTypedDict",
-    "UploadRawSamplesRequest",
-    "UploadRawSamplesRequestTypedDict",
     "UsageBucket",
     "UsageBucketTypedDict",
     "UsageBucketWidth",
@@ -2328,8 +2156,6 @@ __all__ = [
     "UserMessageTypedDict",
     "ValidationError",
     "ValidationErrorTypedDict",
-    "VersionInfo",
-    "VersionInfoTypedDict",
     "VideoContent",
     "VideoContentTypedDict",
     "VideoData",
@@ -2338,11 +2164,6 @@ __all__ = [
 _dynamic_imports: dict[str, str] = {
     "AcceleratorRequirement": ".acceleratorrequirement",
     "AcceleratorRequirementTypedDict": ".acceleratorrequirement",
-    "AccountFileStatus": ".accountfilestatus",
-    "AddSamplesRequest": ".add_samplesop",
-    "AddSamplesRequestTypedDict": ".add_samplesop",
-    "AddSamplesResponse": ".addsamplesresponse",
-    "AddSamplesResponseTypedDict": ".addsamplesresponse",
     "AssistantMessage": ".assistantmessage",
     "AssistantMessageTypedDict": ".assistantmessage",
     "AssistantMessageToolCall": ".assistantmessagetoolcall",
@@ -2364,10 +2185,6 @@ _dynamic_imports: dict[str, str] = {
     "B64ImageItemTypedDict": ".b64imageitem",
     "BaseClassificationData": ".baseclassificationdata",
     "BaseClassificationDataTypedDict": ".baseclassificationdata",
-    "BodyUploadRawSamples": ".body_upload_raw_samples",
-    "BodyUploadRawSamplesFile": ".body_upload_raw_samples",
-    "BodyUploadRawSamplesFileTypedDict": ".body_upload_raw_samples",
-    "BodyUploadRawSamplesTypedDict": ".body_upload_raw_samples",
     "ChatChoice": ".chatchoice",
     "ChatChoiceFinishReason": ".chatchoice",
     "ChatChoiceTypedDict": ".chatchoice",
@@ -2385,8 +2202,6 @@ _dynamic_imports: dict[str, str] = {
     "ChatLogprobsContentTopLogprobTypedDict": ".chatlogprobscontenttoplogprob",
     "ChatUsage": ".chatusage",
     "ChatUsageTypedDict": ".chatusage",
-    "CompleteUploadRequest": ".complete_uploadop",
-    "CompleteUploadRequestTypedDict": ".complete_uploadop",
     "CompletionsBodyWithPrompt": ".completionsbodywithprompt",
     "CompletionsBodyWithPromptPrompt": ".completionsbodywithprompt",
     "CompletionsBodyWithPromptPromptTypedDict": ".completionsbodywithprompt",
@@ -2563,16 +2378,6 @@ _dynamic_imports: dict[str, str] = {
     "CostResponseTypedDict": ".costresponse",
     "CostResult": ".costresult",
     "CostResultTypedDict": ".costresult",
-    "CreateDatasetRequestRequest": ".create_datasetop",
-    "CreateDatasetRequestRequestTypedDict": ".create_datasetop",
-    "CreateSplitRequest": ".create_splitop",
-    "CreateSplitRequestTypedDict": ".create_splitop",
-    "CreateVersionRequest": ".create_versionop",
-    "CreateVersionRequestTypedDict": ".create_versionop",
-    "CreateDatasetRequest": ".createdatasetrequest",
-    "CreateDatasetRequestTypedDict": ".createdatasetrequest",
-    "DatasetInfo": ".datasetinfo",
-    "DatasetInfoTypedDict": ".datasetinfo",
     "DedicatedAudioTranscriptionBody": ".dedicatedaudiotranscriptionbody",
     "DedicatedAudioTranscriptionBodyChunkingStrategy": ".dedicatedaudiotranscriptionbody",
     "DedicatedAudioTranscriptionBodyChunkingStrategyTypedDict": ".dedicatedaudiotranscriptionbody",
@@ -2623,9 +2428,6 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedCompletionsStreamRequestTypedDict": ".dedicatedcompletionsstreamop",
     "DedicatedCreateEndpointRequest": ".dedicatedcreateendpointop",
     "DedicatedCreateEndpointRequestTypedDict": ".dedicatedcreateendpointop",
-    "DedicatedDatasetModality": ".dedicateddatasetmodality",
-    "DedicatedDatasetModalityTypedDict": ".dedicateddatasetmodality",
-    "DedicatedDatasetModalityType": ".dedicateddatasetmodalitytype",
     "DedicatedDeleteEndpointRequest": ".dedicateddeleteendpointop",
     "DedicatedDeleteEndpointRequestTypedDict": ".dedicateddeleteendpointop",
     "DedicatedDetokenizationBody": ".dedicateddetokenizationbody",
@@ -2756,18 +2558,6 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedWakeEndpointRequestTypedDict": ".dedicatedwakeendpointop",
     "DefaultSamplingParams": ".defaultsamplingparams",
     "DefaultSamplingParamsTypedDict": ".defaultsamplingparams",
-    "DeleteDatasetRequest": ".delete_datasetop",
-    "DeleteDatasetRequestTypedDict": ".delete_datasetop",
-    "DeleteSamplesRequest": ".delete_samplesop",
-    "DeleteSamplesRequestTypedDict": ".delete_samplesop",
-    "RequestBody": ".delete_samplesop",
-    "RequestBodyTypedDict": ".delete_samplesop",
-    "DeleteSplitRequest": ".delete_splitop",
-    "DeleteSplitRequestTypedDict": ".delete_splitop",
-    "DeleteVersionRequest": ".delete_versionop",
-    "DeleteVersionRequestTypedDict": ".delete_versionop",
-    "DeleteSamplesResponse": ".deletesamplesresponse",
-    "DeleteSamplesResponseTypedDict": ".deletesamplesresponse",
     "Embedding": ".embeddingobject",
     "EmbeddingObject": ".embeddingobject",
     "EmbeddingObjectTypedDict": ".embeddingobject",
@@ -2776,30 +2566,12 @@ _dynamic_imports: dict[str, str] = {
     "EndpointAdvancedConfigTypedDict": ".endpointadvancedconfig",
     "EndpointSimplescaleConfig": ".endpointsimplescaleconfig",
     "EndpointSimplescaleConfigTypedDict": ".endpointsimplescaleconfig",
-    "FileGetDownloadURLResponse": ".filegetdownloadurlresponse",
-    "FileGetDownloadURLResponseTypedDict": ".filegetdownloadurlresponse",
-    "FileInfo": ".fileinfo",
-    "FileInfoTypedDict": ".fileinfo",
-    "FileInitUploadRequest": ".fileinituploadrequest",
-    "FileInitUploadRequestTypedDict": ".fileinituploadrequest",
-    "FileInitUploadResponse": ".fileinituploadresponse",
-    "FileInitUploadResponseTypedDict": ".fileinituploadresponse",
     "Function": ".function",
     "FunctionTypedDict": ".function",
     "Functionality": ".functionality",
     "FunctionalityTypedDict": ".functionality",
     "FunctionResult": ".functionresult",
     "FunctionResultTypedDict": ".functionresult",
-    "GetDatasetRequest": ".get_datasetop",
-    "GetDatasetRequestTypedDict": ".get_datasetop",
-    "GetDownloadURLRequest": ".get_download_urlop",
-    "GetDownloadURLRequestTypedDict": ".get_download_urlop",
-    "GetInfoRequest": ".get_infoop",
-    "GetInfoRequestTypedDict": ".get_infoop",
-    "GetSplitRequest": ".get_splitop",
-    "GetSplitRequestTypedDict": ".get_splitop",
-    "GetVersionRequest": ".get_versionop",
-    "GetVersionRequestTypedDict": ".get_versionop",
     "GetCostRequest": ".getcostop",
     "GetCostRequestTypedDict": ".getcostop",
     "GetUsageRequest": ".getusageop",
@@ -2814,28 +2586,7 @@ _dynamic_imports: dict[str, str] = {
     "ImageInputTypedDict": ".imageinput",
     "InferenceDeploymentErrorCode": ".inferencedeploymenterrorcode",
     "InferenceDeploymentStatus": ".inferencedeploymentstatus",
-    "InitUploadRequest": ".init_uploadop",
-    "InitUploadRequestTypedDict": ".init_uploadop",
     "InterleavedField": ".interleavedfield",
-    "ListDatasetsDirection": ".list_datasetsop",
-    "ListDatasetsRequest": ".list_datasetsop",
-    "ListDatasetsRequestTypedDict": ".list_datasetsop",
-    "ListSamplesDirection": ".list_samplesop",
-    "ListSamplesRequest": ".list_samplesop",
-    "ListSamplesRequestTypedDict": ".list_samplesop",
-    "ListSplitsDirection": ".list_splitsop",
-    "ListSplitsRequest": ".list_splitsop",
-    "ListSplitsRequestTypedDict": ".list_splitsop",
-    "ListVersionsRequest": ".list_versionsop",
-    "ListVersionsRequestTypedDict": ".list_versionsop",
-    "ListDatasetsResponse": ".listdatasetsresponse",
-    "ListDatasetsResponseTypedDict": ".listdatasetsresponse",
-    "ListSamplesResponse": ".listsamplesresponse",
-    "ListSamplesResponseTypedDict": ".listsamplesresponse",
-    "ListSplitsResponse": ".listsplitsresponse",
-    "ListSplitsResponseTypedDict": ".listsplitsresponse",
-    "ListVersionsResponse": ".listversionsresponse",
-    "ListVersionsResponseTypedDict": ".listversionsresponse",
     "Message": ".message",
     "MessageTypedDict": ".message",
     "MessagesBase64ImageSource": ".messagesbase64imagesource",
@@ -3208,8 +2959,6 @@ _dynamic_imports: dict[str, str] = {
     "ServerlessTokenizationSuccessTypedDict": ".serverlesstokenizationsuccess",
     "ServerVadChunkingStrategy": ".servervadchunkingstrategy",
     "ServerVadChunkingStrategyTypedDict": ".servervadchunkingstrategy",
-    "SplitInfo": ".splitinfo",
-    "SplitInfoTypedDict": ".splitinfo",
     "StreamedAudioTranscriptionData": ".streamedaudiotranscriptiondata",
     "StreamedAudioTranscriptionDataType": ".streamedaudiotranscriptiondata",
     "StreamedAudioTranscriptionDataTypedDict": ".streamedaudiotranscriptiondata",
@@ -3247,8 +2996,6 @@ _dynamic_imports: dict[str, str] = {
     "ToolCallResultTypedDict": ".toolcallresult",
     "ToolMessage": ".toolmessage",
     "ToolMessageTypedDict": ".toolmessage",
-    "UploadRawSamplesRequest": ".upload_raw_samplesop",
-    "UploadRawSamplesRequestTypedDict": ".upload_raw_samplesop",
     "URLImageItem": ".urlimageitem",
     "URLImageItemResponseFormat": ".urlimageitem",
     "URLImageItemTypedDict": ".urlimageitem",
@@ -3270,8 +3017,6 @@ _dynamic_imports: dict[str, str] = {
     "LocTypedDict": ".validationerror",
     "ValidationError": ".validationerror",
     "ValidationErrorTypedDict": ".validationerror",
-    "VersionInfo": ".versioninfo",
-    "VersionInfoTypedDict": ".versioninfo",
     "VideoContent": ".videocontent",
     "VideoContentTypedDict": ".videocontent",
     "VideoData": ".videodata",
