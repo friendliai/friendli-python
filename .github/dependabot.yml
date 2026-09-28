@@ -21,6 +21,9 @@ updates:
       day: "monday"
       time: "09:00"
       timezone: "Asia/Seoul"
+    ignore:
+      # Private actions are unreachable from the public mirror (friendliai/friendli-python)
+      - dependency-name: "friendliai/*"
     groups:
       github-actions:
         patterns:
