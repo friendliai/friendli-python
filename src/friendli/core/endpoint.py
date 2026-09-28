@@ -198,6 +198,10 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             - 2x NVIDIA B200: `brTZGIuYgVrs`
             - 4x NVIDIA B200: `AFoZMFXZnAdD`
             - 8x NVIDIA B200: `drbc6G9FxJWZ`
+            - 1x NVIDIA B300: `b300x1`
+            - 2x NVIDIA B300: `b300x2`
+            - 4x NVIDIA B300: `b300x4`
+            - 8x NVIDIA B300: `b300x8`
         :param advanced: Endpoint advanced config.
         :param hf_model_repo: HF ID of the model.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -565,7 +569,11 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             - 1x NVIDIA B200: `8GiQTLKfJNOr`
             - 2x NVIDIA B200: `brTZGIuYgVrs`
             - 4x NVIDIA B200: `AFoZMFXZnAdD`
-            - 8x NVIDIA B200: `drbc6G9FxJWZ`
+            - 8x NVIDIA B200: `drbc6G9FxJWZ
+            `- 1x NVIDIA B300: `b300x1`
+            - 2x NVIDIA B300: `b300x2`
+            - 4x NVIDIA B300: `b300x4`
+            - 8x NVIDIA B300: `b300x8`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1538,6 +1546,10 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             - 2x NVIDIA B200: `brTZGIuYgVrs`
             - 4x NVIDIA B200: `AFoZMFXZnAdD`
             - 8x NVIDIA B200: `drbc6G9FxJWZ`
+            - 1x NVIDIA B300: `b300x1`
+            - 2x NVIDIA B300: `b300x2`
+            - 4x NVIDIA B300: `b300x4`
+            - 8x NVIDIA B300: `b300x8`
         :param advanced: Endpoint advanced config.
         :param hf_model_repo: HF ID of the model.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
@@ -1905,7 +1917,11 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             - 1x NVIDIA B200: `8GiQTLKfJNOr`
             - 2x NVIDIA B200: `brTZGIuYgVrs`
             - 4x NVIDIA B200: `AFoZMFXZnAdD`
-            - 8x NVIDIA B200: `drbc6G9FxJWZ`
+            - 8x NVIDIA B200: `drbc6G9FxJWZ
+            `- 1x NVIDIA B300: `b300x1`
+            - 2x NVIDIA B300: `b300x2`
+            - 4x NVIDIA B300: `b300x4`
+            - 8x NVIDIA B300: `b300x8`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

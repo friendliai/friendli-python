@@ -24,7 +24,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
         prompt: str,
         model: OptionalNullable[str] = UNSET,
         num_inference_steps: int | None = 20,
-        guidance_scale: float | None = 0,
+        guidance_scale: float | None = 0.0,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
             models.ContainerImageGenerationBodyResponseFormat
@@ -154,7 +154,7 @@ class SyncContainerImage(BaseContainerImage, SyncSDK):
         prompt: str,
         model: OptionalNullable[str] = UNSET,
         num_inference_steps: int | None = 20,
-        guidance_scale: float | None = 0,
+        guidance_scale: float | None = 0.0,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
             models.ContainerImageEditBodyResponseFormat
@@ -274,7 +274,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
         prompt: str,
         model: OptionalNullable[str] = UNSET,
         num_inference_steps: int | None = 20,
-        guidance_scale: float | None = 0,
+        guidance_scale: float | None = 0.0,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
             models.ContainerImageGenerationBodyResponseFormat
@@ -404,7 +404,7 @@ class AsyncContainerImage(BaseContainerImage, AsyncSDK):
         prompt: str,
         model: OptionalNullable[str] = UNSET,
         num_inference_steps: int | None = 20,
-        guidance_scale: float | None = 0,
+        guidance_scale: float | None = 0.0,
         seed: OptionalNullable[int] = UNSET,
         response_format: OptionalNullable[
             models.ContainerImageEditBodyResponseFormat

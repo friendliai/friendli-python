@@ -55,7 +55,7 @@ class ContainerImageEditBody(BaseModel):
     "Routes the request to a specific adapter."
     num_inference_steps: int | None = 20
     "The number of inference steps to use during image generation. Defaults to 20. Supported range: [1, 50]."
-    guidance_scale: float | None = 0
+    guidance_scale: float | None = 0.0
     "Adjusts the alignment of the generated image with the input prompt. Higher values (e.g., 8-10) make the output more faithful to the prompt, while lower values (e.g., 1-5) encourage more creative freedom. Defaults to 0. This parameter may be irrelevant for certain models, such as `FLUX.Schnell`."
     seed: OptionalNullable[int] = UNSET
     "The seed to use for image generation."
