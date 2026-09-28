@@ -99,11 +99,22 @@ def validate_const(v):
     return validate
 
 
+ALLOW_UNKNOWN_UNION_VARIANTS = "speakeasy_allow_unknown_union_variants"
+"Validation-context key enabling the Unknown fallback on open discriminated\nunions. The SDK sets it when deserializing server responses; validation\nwithout it (e.g. of user-constructed request payloads) stays strict. Pass\n``context={ALLOW_UNKNOWN_UNION_VARIANTS: True}`` to ``model_validate`` to\nopt in when parsing response payloads manually."
+
+
 def unmarshal_json(raw, typ: Any) -> Any:
-    return unmarshal(from_json(raw), typ, coerce_iterables=False)
+    return unmarshal(
+        from_json(raw), typ, coerce_iterables=False, allow_unknown_union_variants=True
+    )
 
 
-def unmarshal(val, typ: Any, coerce_iterables: bool = True) -> Any:
+def unmarshal(
+    val,
+    typ: Any,
+    coerce_iterables: bool = True,
+    allow_unknown_union_variants: bool = False,
+) -> Any:
     if coerce_iterables:
         val = _coerce_iterables_for_type(val, typ)
     unmarshaller = create_model(
@@ -111,7 +122,12 @@ def unmarshal(val, typ: Any, coerce_iterables: bool = True) -> Any:
         body=(typ, ...),
         __config__=ConfigDict(populate_by_name=True, arbitrary_types_allowed=True),
     )
-    m = unmarshaller(body=val)
+    if allow_unknown_union_variants:
+        m = unmarshaller.model_validate(
+            {"body": val}, context={ALLOW_UNKNOWN_UNION_VARIANTS: True}
+        )
+    else:
+        m = unmarshaller(body=val)
     return m.body
 
 

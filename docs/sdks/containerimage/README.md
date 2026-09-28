@@ -87,7 +87,7 @@ with SyncFriendli(
         prompt="Add a red sports car in the foreground.",
         model="(adapter-route)",
         num_inference_steps=20,
-        guidance_scale=0,
+        guidance_scale=0.0,
     )
 
     # Handle response
