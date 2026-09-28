@@ -1,0 +1,22 @@
+name: Release code to public repo
+on:
+  release:
+  workflow_dispatch:
+jobs:
+  repo-migration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Run Repo Migrator
+        uses: friendliai/actions/repo-migrator@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+        with:
+          target-repo: friendliai/friendli-python
+          target-branch: main
+          excludes: |
+            .vscode
+            transpiler.py
+            scripts/build.sh
+            scripts/auto-fix.py

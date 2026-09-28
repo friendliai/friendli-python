@@ -1,0 +1,68 @@
+name: Auto fix
+on:
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    if: github.actor == 'speakeasy-github[bot]'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.WEB_GITHUB_TOKEN }}
+          submodules: recursive
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Create virtual environment
+        run: uv venv --python 3.13
+
+      - name: Install dependencies
+        run: uv sync --group dev
+
+      - name: Lint Python code blocks in Markdown files
+        run: uv run scripts/auto-fix.py
+
+      - name: Install sdk-transpiler
+        run: uv pip install git+https://${{ secrets.WEB_GITHUB_TOKEN }}@github.com/friendliai/sdk-transpiler.git
+
+      - name: Transpile SDK to separate sync/async
+        run: uv run python -m sdk_transpiler --config pyproject.toml --log-level DEBUG
+
+      - name: Ruff
+        run: |
+          uvx ruff check --fix-only src/
+          uvx ruff format src/
+
+      - name: Restore manually maintained files
+        run: git restore src/friendli/core/utils/annotations.py
+
+      - name: Clean up
+        run: rm -rf src/friendli_core
+
+      - name: Sync package version
+        run: |
+          VERSION=$(uv run python -c "
+          with open('src/friendli/core/_version.py') as f:
+              for line in f:
+                  if line.startswith('__version__'):
+                      print(line.split('=')[1].strip().strip('\"'))
+                      break
+          ")
+          uv version "$VERSION"
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "chore: Transpile SDK and fix Markdown code blocks"
+          branch: ${{ github.head_ref }}
+          file_pattern: "."
+          commit_options: "--no-verify"
