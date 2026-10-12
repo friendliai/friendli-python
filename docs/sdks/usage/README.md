@@ -14,21 +14,20 @@ Get usage details for the team.
 
 <!-- UsageSnippet language="python" operationID="getUsage" method="get" path="/v1/team/usage" -->
 ```python
+from friendli_core import FriendliCore
+from friendli_core.utils import parse_datetime
 import os
 
-from friendli import SyncFriendli
-from friendli.utils import parse_datetime
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.usage.get_usage(
-        start_time=parse_datetime("2026-10-24T22:14:33.446Z"),
-        end_time=parse_datetime("2024-09-25T19:40:35.742Z"),
-    )
+) as fc_client:
+
+    res = fc_client.usage.get_usage(start_time=parse_datetime("2026-10-24T22:14:33.446Z"), end_time=parse_datetime("2024-09-25T19:40:35.742Z"))
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters

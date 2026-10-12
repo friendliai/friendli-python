@@ -14,17 +14,19 @@ Lists the currently available models, and provides basic information about each 
 
 <!-- UsageSnippet language="python" operationID="serverlessModels" method="get" path="/serverless/v1/models" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.model.models()
+) as fc_client:
+
+    res = fc_client.serverless.model.models()
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters

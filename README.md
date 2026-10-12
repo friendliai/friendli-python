@@ -55,7 +55,7 @@ The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
 *uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
 
 ```bash
-uv add friendli
+uv add friendli-core
 ```
 
 ### PIP
@@ -63,7 +63,7 @@ uv add friendli
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install friendli
+pip install friendli-core
 ```
 
 ### Poetry
@@ -71,7 +71,7 @@ pip install friendli
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add friendli
+poetry add friendli-core
 ```
 
 ### Shell and script usage with `uv`
@@ -79,7 +79,7 @@ poetry add friendli
 You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
 
 ```shell
-uvx --from friendli python
+uvx --from friendli-core python
 ```
 
 It's also possible to write a standalone Python script without needing to set up a whole project like so:
@@ -87,17 +87,16 @@ It's also possible to write a standalone Python script without needing to set up
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.11"
+# requires-python = ">=3.10"
 # dependencies = [
-#     "friendli",
+#     "friendli-core",
 # ]
 # ///
 
+from friendli_core import FriendliCore
 
-from friendli import SyncFriendli
-
-sdk = SyncFriendli(
-    # SDK arguments
+sdk = FriendliCore(
+  # SDK arguments
 )
 
 # Rest of script here...
@@ -116,27 +115,24 @@ Generate a model response from a list of messages comprising a conversation. Com
 
 ```python
 # Synchronous Example
-
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.3",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-    )
+) as fc_client:
+
+    res = fc_client.serverless.chat.complete(model="zai-org/GLM-5.3", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ])
 
     # Handle response
     print(res)
@@ -149,32 +145,28 @@ The same SDK client can also be used to make asynchronous requests by importing 
 ```python
 # Asynchronous Example
 import asyncio
+from friendli_core import FriendliCore
 import os
 
-from friendli import AsyncFriendli
-
-
 async def main():
-    async with AsyncFriendli(
+
+    async with FriendliCore(
         token=os.getenv("FRIENDLI_TOKEN", ""),
-    ) as friendli:
-        res = await friendli.serverless.chat.complete(
-            model="zai-org/GLM-5.3",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are a helpful assistant.",
-                },
-                {
-                    "role": "user",
-                    "content": "Hello!",
-                },
-            ],
-        )
+    ) as fc_client:
+
+        res = await fc_client.serverless.chat.complete_async(model="zai-org/GLM-5.3", messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": "Hello!",
+            },
+        ])
 
         # Handle response
         print(res)
-
 
 asyncio.run(main())
 ```
@@ -193,29 +185,28 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `token` parameter must be set when initializing the SDK client instance. For example:
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.3",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-    )
+) as fc_client:
+
+    res = fc_client.serverless.chat.complete(model="zai-org/GLM-5.3", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ])
 
     # Handle response
     print(res)
+
 ```
 <!-- End Authentication [security] -->
 
@@ -388,32 +379,30 @@ The stream is also a [Context Manager][context-manager] and can be used with the
 underlying connection when the context is exited.
 
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.chat.stream(
-        model="zai-org/GLM-5.3",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-        stream=True,
-    )
+) as fc_client:
+
+    res = fc_client.serverless.chat.stream(model="zai-org/GLM-5.3", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ], stream=True)
 
     with res as event_stream:
         for event in event_stream:
             # handle event
             print(event, flush=True)
+
 ```
 
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
@@ -432,23 +421,22 @@ Certain SDK methods accept file objects as part of a request body or multi-part 
 >
 
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.audio.transcribe(
-        model="openai/whisper-large-v3",
-        file={
-            "file_name": "example.file",
-            "content": open("example.file", "rb"),
-        },
-    )
+) as fc_client:
+
+    res = fc_client.serverless.audio.transcribe(model="openai/whisper-large-v3", file={
+        "file_name": "example.file",
+        "content": open("example.file", "rb"),
+    })
 
     # Handle response
     print(res)
+
 ```
 <!-- End File uploads [file-upload] -->
 
@@ -459,67 +447,65 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
+from friendli_core import FriendliCore
+from friendli_core.utils import BackoffStrategy, RetryConfig
 import os
 
-from friendli import SyncFriendli
-from friendli.utils import BackoffStrategy, RetryConfig
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.3",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-        retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    )
+) as fc_client:
+
+    res = fc_client.serverless.chat.complete(model="zai-org/GLM-5.3", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ],
+        RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
     print(res)
+
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
+from friendli_core import FriendliCore
+from friendli_core.utils import BackoffStrategy, RetryConfig
 import os
 
-from friendli import SyncFriendli
-from friendli.utils import BackoffStrategy, RetryConfig
 
-with SyncFriendli(
+with FriendliCore(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.3",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-    )
+) as fc_client:
+
+    res = fc_client.serverless.chat.complete(model="zai-org/GLM-5.3", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ])
 
     # Handle response
     print(res)
+
 ```
 <!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py) is the base class for all HTTP error responses. It has the following properties:
+[`FriendliCoreError`](./src/friendli_core/models/friendlicoreerror.py) is the base class for all HTTP error responses. It has the following properties:
 
 | Property           | Type             | Description                                                                             |
 | ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
@@ -532,30 +518,30 @@ with SyncFriendli(
 
 ### Example
 ```python
+import friendli_core
+from friendli_core import FriendliCore, models
 import os
 from typing import Literal
 
-import friendli
-from friendli import SyncFriendli, models
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
+) as fc_client:
     res = None
     try:
-        res = friendli.serverless.messages.messages(
-            messages=[
-                {
-                    "role": "user",
-                    "content": "Hello, summarize what you can do in one sentence.",
-                },
-            ],
-            model="zai-org/GLM-5.3",
-            additional_properties={},
-        )
+
+        res = fc_client.serverless.messages.messages(messages=[
+            {
+                "role": "user",
+                "content": "Hello, summarize what you can do in one sentence.",
+            },
+        ], model="zai-org/GLM-5.3", additional_properties={
+
+        })
 
         # Handle response
         print(res)
+
 
     except models.FriendliCoreError as e:
         # The base class for HTTP error responses
@@ -568,13 +554,13 @@ with SyncFriendli(
         # Depending on the method different errors may be thrown
         if isinstance(e, models.MessagesErrorResponse):
             print(e.data.type)  # Literal["error"]
-            print(e.data.error)  # friendli.MessagesErrorObject
+            print(e.data.error)  # friendli_core.MessagesErrorObject
             print(e.data.request_id)  # OptionalNullable[str]
 ```
 
 ### Error Classes
 **Primary error:**
-* [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py): The base class for HTTP error responses.
+* [`FriendliCoreError`](./src/friendli_core/models/friendlicoreerror.py): The base class for HTTP error responses.
 
 <details><summary>Less common errors (7)</summary>
 
@@ -586,10 +572,10 @@ with SyncFriendli(
     * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
 
 
-**Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 6 of 60 methods.*
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 1 of 60 methods.*
-* [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+**Inherit from [`FriendliCoreError`](./src/friendli_core/models/friendlicoreerror.py)**:
+* [`MessagesErrorResponse`](./src/friendli_core/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 6 of 60 methods.*
+* [`HTTPValidationError`](./src/friendli_core/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 1 of 60 methods.*
+* [`ResponseValidationError`](./src/friendli_core/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
 
@@ -603,60 +589,57 @@ with SyncFriendli(
 
 The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     server_url="https://api.friendli.ai",
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.3",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-    )
+) as fc_client:
+
+    res = fc_client.serverless.chat.complete(model="zai-org/GLM-5.3", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ])
 
     # Handle response
     print(res)
+
 ```
 
 ### Override Server URL Per-Operation
 
 The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.chat.complete(
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-        model="(adapter-route)",
-        server_url="http://localhost:8000",
-    )
+) as fc_client:
+
+    res = fc_client.container.chat.complete(messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ], model="(adapter-route)", server_url="http://localhost:8000")
 
     # Handle response
     print(res)
+
 ```
 <!-- End Server Selection [server] -->
 
@@ -669,23 +652,18 @@ This allows you to wrap the client with your own custom logic, such as adding cu
 
 For example, you could specify a header for every request that this sdk makes as follows:
 ```python
+from friendli_core import FriendliCore
 import httpx
 
-from friendli import SyncFriendli
-
 http_client = httpx.Client(headers={"x-custom-header": "someValue"})
-s = SyncFriendli(client=http_client)
+s = FriendliCore(client=http_client)
 ```
 
 or you could wrap the client with your own custom logic:
 ```python
-from typing import Any, Optional, Union
-
+from friendli_core import FriendliCore
+from friendli_core.httpclient import AsyncHttpClient
 import httpx
-
-from friendli import AsyncFriendli
-from friendli.httpclient import AsyncHttpClient
-
 
 class CustomClient(AsyncHttpClient):
     client: AsyncHttpClient
@@ -742,8 +720,7 @@ class CustomClient(AsyncHttpClient):
             extensions=extensions,
         )
 
-
-s = AsyncFriendli(async_client=CustomClient(httpx.AsyncClient()))
+s = FriendliCore(async_client=CustomClient(httpx.AsyncClient()))
 ```
 ### httpx2 (Pydantic's httpx fork)
 
@@ -753,10 +730,9 @@ import httpx2
 
 httpx2.alias_httpx()
 
+from friendli_core import FriendliCore
 
-from friendli import SyncFriendli
-
-s = SyncFriendli()
+s = FriendliCore()
 ```
 
 An SDK can also be generated against httpx2 directly, so it depends on the fork instead of `httpx`, by setting `python.httpClientLibrary: httpx2` in `gen.yaml`.
@@ -794,12 +770,11 @@ You can setup your SDK to emit debug logs for SDK requests and responses.
 
 You can pass your own logger class directly into your SDK.
 ```python
+from friendli_core import FriendliCore
 import logging
 
-from friendli import SyncFriendli
-
 logging.basicConfig(level=logging.DEBUG)
-s = SyncFriendli(debug_logger=logging.getLogger("friendli"))
+s = FriendliCore(debug_logger=logging.getLogger("friendli_core"))
 ```
 
 You can also enable a default debug logger by setting an environment variable `FRIENDLI_DEBUG` to true.

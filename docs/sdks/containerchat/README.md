@@ -15,29 +15,28 @@ Generate a model response from a list of messages comprising a conversation. Com
 
 <!-- UsageSnippet language="python" operationID="containerChatComplete" method="post" path="/v1/chat/completions" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.chat.complete(
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-        model="(adapter-route)",
-    )
+) as fc_client:
+
+    res = fc_client.container.chat.complete(messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ], model="(adapter-route)")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -96,32 +95,30 @@ Generate a model response from a list of messages comprising a conversation. Com
 
 <!-- UsageSnippet language="python" operationID="containerChatStream" method="post" path="/v1/chat/completions#stream" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.chat.stream(
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-        model="(adapter-route)",
-        stream=True,
-    )
+) as fc_client:
+
+    res = fc_client.container.chat.stream(messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ], model="(adapter-route)", stream=True)
 
     with res as event_stream:
         for event in event_stream:
             # handle event
             print(event, flush=True)
+
 ```
 
 ### Parameters

@@ -14,22 +14,20 @@ Get cost details for the team.
 
 <!-- UsageSnippet language="python" operationID="getCost" method="get" path="/v1/team/cost" -->
 ```python
+from friendli_core import FriendliCore
+from friendli_core.utils import parse_datetime
 import os
 
-from friendli import SyncFriendli
-from friendli.utils import parse_datetime
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.cost.get_cost(
-        start_time=parse_datetime("2025-01-05T13:58:42.964Z"),
-        end_time=parse_datetime("2024-11-16T21:03:55.862Z"),
-        limit=7,
-    )
+) as fc_client:
+
+    res = fc_client.cost.get_cost(start_time=parse_datetime("2025-01-05T13:58:42.964Z"), end_time=parse_datetime("2024-11-16T21:03:55.862Z"), limit=7)
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters

@@ -15,23 +15,23 @@ Generate a text completion from a prompt or token sequence. Supports streaming a
 
 <!-- UsageSnippet language="python" operationID="serverlessCompletionsComplete" method="post" path="/serverless/v1/completions" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.completions.complete(
-        serverless_completions_body={
-            "model": "meta-llama-3.1-8b-instruct",
-            "stream": False,
-            "prompt": "Say this is a test!",
-        }
-    )
+) as fc_client:
+
+    res = fc_client.serverless.completions.complete(serverless_completions_body={
+        "model": "meta-llama-3.1-8b-instruct",
+        "stream": False,
+        "prompt": "Say this is a test!",
+    })
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -60,25 +60,25 @@ Generate a text completion from a prompt or token sequence. Supports streaming a
 
 <!-- UsageSnippet language="python" operationID="serverlessCompletionsStream" method="post" path="/serverless/v1/completions#stream" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.completions.stream(
-        serverless_completions_stream_body={
-            "model": "meta-llama-3.1-8b-instruct",
-            "stream": True,
-            "prompt": "Say this is a test!",
-        }
-    )
+) as fc_client:
+
+    res = fc_client.serverless.completions.stream(serverless_completions_stream_body={
+        "model": "meta-llama-3.1-8b-instruct",
+        "stream": True,
+        "prompt": "Say this is a test!",
+    })
 
     with res as event_stream:
         for event in event_stream:
             # handle event
             print(event, flush=True)
+
 ```
 
 ### Parameters

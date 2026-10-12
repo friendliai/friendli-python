@@ -15,19 +15,19 @@ Convert text input into token IDs.
 
 <!-- UsageSnippet language="python" operationID="dedicatedTokenization" method="post" path="/dedicated/v1/tokenize" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.token.tokenize(
-        model="(endpoint-id)", prompt="What is generative AI?"
-    )
+) as fc_client:
+
+    res = fc_client.dedicated.token.tokenize(model="(endpoint-id)", prompt="What is generative AI?")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -57,28 +57,27 @@ Convert a list of token IDs back into text.
 
 <!-- UsageSnippet language="python" operationID="dedicatedDetokenization" method="post" path="/dedicated/v1/detokenize" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.token.detokenize(
-        model="(endpoint-id)",
-        tokens=[
-            128000,
-            3923,
-            374,
-            1803,
-            1413,
-            15592,
-            30,
-        ],
-    )
+) as fc_client:
+
+    res = fc_client.dedicated.token.detokenize(model="(endpoint-id)", tokens=[
+        128000,
+        3923,
+        374,
+        1803,
+        1413,
+        15592,
+        30,
+    ])
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
