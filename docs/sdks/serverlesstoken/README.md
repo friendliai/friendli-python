@@ -15,19 +15,19 @@ Convert text input into token IDs.
 
 <!-- UsageSnippet language="python" operationID="serverlessTokenization" method="post" path="/serverless/v1/tokenize" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.token.tokenize(
-        model="zai-org/GLM-5.3", prompt="What is generative AI?"
-    )
+) as fc_client:
+
+    res = fc_client.serverless.token.tokenize(model="zai-org/GLM-5.3", prompt="What is generative AI?")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -57,28 +57,27 @@ Convert a list of token IDs back into text.
 
 <!-- UsageSnippet language="python" operationID="serverlessDetokenization" method="post" path="/serverless/v1/detokenize" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.token.detokenize(
-        model="zai-org/GLM-5.3",
-        tokens=[
-            128000,
-            3923,
-            374,
-            1803,
-            1413,
-            15592,
-            30,
-        ],
-    )
+) as fc_client:
+
+    res = fc_client.serverless.token.detokenize(model="zai-org/GLM-5.3", tokens=[
+        128000,
+        3923,
+        374,
+        1803,
+        1413,
+        15592,
+        30,
+    ])
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters

@@ -15,27 +15,23 @@ Generate an image from a text prompt.
 
 <!-- UsageSnippet language="python" operationID="containerImagesGenerate" method="post" path="/v1/images/generations" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.image.generate(
-        prompt="An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.",
-        model="(adapter-route)",
-        num_inference_steps=10,
-        guidance_scale=3.5,
-        control_images=[
-            {
-                "image": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png",
-            },
-        ],
-    )
+) as fc_client:
+
+    res = fc_client.container.image.generate(prompt="An orange Lamborghini driving down a hill road at night with a beautiful ocean view in the background.", model="(adapter-route)", num_inference_steps=10, guidance_scale=3.5, control_images=[
+        {
+            "image": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png",
+        },
+    ])
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -71,27 +67,23 @@ Edit an image based on a text prompt.
 
 <!-- UsageSnippet language="python" operationID="containerImagesEdit" method="post" path="/v1/images/edits" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.image.edit(
-        image=[
-            {
-                "image": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png",
-            },
-        ],
-        prompt="Add a red sports car in the foreground.",
-        model="(adapter-route)",
-        num_inference_steps=20,
-        guidance_scale=0.0,
-    )
+) as fc_client:
+
+    res = fc_client.container.image.edit(image=[
+        {
+            "image": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/cat.png",
+        },
+    ], prompt="Add a red sports car in the foreground.", model="(adapter-route)", num_inference_steps=20, guidance_scale=0.0)
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters

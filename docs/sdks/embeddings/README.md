@@ -14,21 +14,19 @@ Generate an embedding vector from input text or token sequence.
 
 <!-- UsageSnippet language="python" operationID="dedicatedEmbeddings" method="post" path="/dedicated/v1/embeddings" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.embeddings.embeddings(
-        model="(endpoint-id)",
-        input_="The food was delicious and the waiter...",
-        encoding_format="float",
-    )
+) as fc_client:
+
+    res = fc_client.dedicated.embeddings.embeddings(model="(endpoint-id)", input_="The food was delicious and the waiter...", encoding_format="float")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters

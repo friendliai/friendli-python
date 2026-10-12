@@ -15,19 +15,21 @@ Generate a model response from text or image inputs. Follows the OpenAI Response
 
 <!-- UsageSnippet language="python" operationID="serverlessResponses" method="post" path="/serverless/v1/responses" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.responses.responses(
-        input_="Hello!", model="zai-org/GLM-5.3", additional_properties={}
-    )
+) as fc_client:
+
+    res = fc_client.serverless.responses.responses(input_="Hello!", model="zai-org/GLM-5.3", additional_properties={
+
+    })
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -68,21 +70,23 @@ Generate a model response from text or image inputs. Follows the OpenAI Response
 
 <!-- UsageSnippet language="python" operationID="serverlessResponsesStream" method="post" path="/serverless/v1/responses#stream" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.responses.stream(
-        input_="Hello!", model="zai-org/GLM-5.3", stream=True, additional_properties={}
-    )
+) as fc_client:
+
+    res = fc_client.serverless.responses.stream(input_="Hello!", model="zai-org/GLM-5.3", stream=True, additional_properties={
+
+    })
 
     with res as event_stream:
         for event in event_stream:
             # handle event
             print(event, flush=True)
+
 ```
 
 ### Parameters

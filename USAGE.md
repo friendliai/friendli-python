@@ -5,27 +5,24 @@ Generate a model response from a list of messages comprising a conversation. Com
 
 ```python
 # Synchronous Example
-
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.chat.complete(
-        model="zai-org/GLM-5.3",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-    )
+) as fc_client:
+
+    res = fc_client.serverless.chat.complete(model="zai-org/GLM-5.3", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ])
 
     # Handle response
     print(res)
@@ -38,32 +35,28 @@ The same SDK client can also be used to make asynchronous requests by importing 
 ```python
 # Asynchronous Example
 import asyncio
+from friendli_core import FriendliCore
 import os
 
-from friendli import AsyncFriendli
-
-
 async def main():
-    async with AsyncFriendli(
+
+    async with FriendliCore(
         token=os.getenv("FRIENDLI_TOKEN", ""),
-    ) as friendli:
-        res = await friendli.serverless.chat.complete(
-            model="zai-org/GLM-5.3",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are a helpful assistant.",
-                },
-                {
-                    "role": "user",
-                    "content": "Hello!",
-                },
-            ],
-        )
+    ) as fc_client:
+
+        res = await fc_client.serverless.chat.complete_async(model="zai-org/GLM-5.3", messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant.",
+            },
+            {
+                "role": "user",
+                "content": "Hello!",
+            },
+        ])
 
         # Handle response
         print(res)
-
 
 asyncio.run(main())
 ```

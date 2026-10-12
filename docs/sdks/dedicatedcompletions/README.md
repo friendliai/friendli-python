@@ -15,23 +15,23 @@ Generate a text completion from a prompt or token sequence. Supports streaming a
 
 <!-- UsageSnippet language="python" operationID="dedicatedCompletionsComplete" method="post" path="/dedicated/v1/completions" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.completions.complete(
-        dedicated_completions_body={
-            "model": "(endpoint-id)",
-            "stream": False,
-            "prompt": "Say this is a test!",
-        }
-    )
+) as fc_client:
+
+    res = fc_client.dedicated.completions.complete(dedicated_completions_body={
+        "model": "(endpoint-id)",
+        "stream": False,
+        "prompt": "Say this is a test!",
+    })
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -60,25 +60,25 @@ Generate a text completion from a prompt or token sequence. Supports streaming a
 
 <!-- UsageSnippet language="python" operationID="dedicatedCompletionsStream" method="post" path="/dedicated/v1/completions#stream" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.completions.stream(
-        dedicated_completions_stream_body={
-            "model": "(endpoint-id)",
-            "stream": True,
-            "prompt": "Say this is a test!",
-        }
-    )
+) as fc_client:
+
+    res = fc_client.dedicated.completions.stream(dedicated_completions_stream_body={
+        "model": "(endpoint-id)",
+        "stream": True,
+        "prompt": "Say this is a test!",
+    })
 
     with res as event_stream:
         for event in event_stream:
             # handle event
             print(event, flush=True)
+
 ```
 
 ### Parameters

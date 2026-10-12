@@ -14,19 +14,19 @@ Classify text input into categories with per-class probabilities.
 
 <!-- UsageSnippet language="python" operationID="dedicatedTextClassification" method="post" path="/dedicated/classify" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.classification.classify(
-        model="(endpoint-id)", input_="I love programming."
-    )
+) as fc_client:
+
+    res = fc_client.dedicated.classification.classify(model="(endpoint-id)", input_="I love programming.")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
