@@ -2,7 +2,7 @@
 
 import os
 from collections.abc import Callable
-from datetime import datetime
+from datetime import datetime, timedelta
 from email.message import Message
 from enum import Enum
 from functools import partial
@@ -13,6 +13,7 @@ from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 
 from ..types.basemodel import Unset
+from .datetimes import format_duration
 from .metadata import ParamMetadata, find_field_metadata
 from .serializers import marshal_json
 
@@ -102,6 +103,8 @@ def _val_to_string(val) -> str:
         return str(val).lower()
     if isinstance(val, datetime):
         return str(val.isoformat().replace("+00:00", "Z"))
+    if isinstance(val, timedelta):
+        return format_duration(val)
     if isinstance(val, Enum):
         return str(val.value)
     return str(val)
