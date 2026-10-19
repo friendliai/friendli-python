@@ -15,29 +15,28 @@ Generate a model response from a list of messages comprising a conversation. Com
 
 <!-- UsageSnippet language="python" operationID="dedicatedChatComplete" method="post" path="/dedicated/v1/chat/completions" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.chat.complete(
-        model="(endpoint-id)",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-    )
+) as fc_client:
+
+    res = fc_client.dedicated.chat.complete(model="(endpoint-id)", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ])
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -96,32 +95,30 @@ Generate a model response from a list of messages comprising a conversation. Com
 
 <!-- UsageSnippet language="python" operationID="dedicatedChatStream" method="post" path="/dedicated/v1/chat/completions#stream" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.chat.stream(
-        model="(endpoint-id)",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-        stream=True,
-    )
+) as fc_client:
+
+    res = fc_client.dedicated.chat.stream(model="(endpoint-id)", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ], stream=True)
 
     with res as event_stream:
         for event in event_stream:
             # handle event
             print(event, flush=True)
+
 ```
 
 ### Parameters

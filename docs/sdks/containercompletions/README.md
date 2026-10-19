@@ -15,22 +15,22 @@ Generate a text completion from a prompt or token sequence. Supports streaming a
 
 <!-- UsageSnippet language="python" operationID="containerCompletionsComplete" method="post" path="/v1/completions" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.completions.complete(
-        request={
-            "stream": False,
-            "prompt": "Say this is a test!",
-        }
-    )
+) as fc_client:
+
+    res = fc_client.container.completions.complete(request={
+        "stream": False,
+        "prompt": "Say this is a test!",
+    })
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -59,24 +59,24 @@ Generate a text completion from a prompt or token sequence. Supports streaming a
 
 <!-- UsageSnippet language="python" operationID="containerCompletionsStream" method="post" path="/v1/completions#stream" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.completions.stream(
-        request={
-            "stream": True,
-            "prompt": "Say this is a test!",
-        }
-    )
+) as fc_client:
+
+    res = fc_client.container.completions.stream(request={
+        "stream": True,
+        "prompt": "Say this is a test!",
+    })
 
     with res as event_stream:
         for event in event_stream:
             # handle event
             print(event, flush=True)
+
 ```
 
 ### Parameters

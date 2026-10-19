@@ -25,19 +25,19 @@ Create an endpoint from Weights & Biases artifact. If the idempotency key is pro
 
 <!-- UsageSnippet language="python" operationID="dedicatedEndpointWandbArtifactCreate" method="post" path="/dedicated/endpoint/wandb-artifact-create" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.wandb_artifact_create(
-        wandb_artifact_version_name="org/registry/name:v0"
-    )
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.wandb_artifact_create(wandb_artifact_version_name="org/registry/name:v0")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -71,26 +71,22 @@ Create a new endpoint and return its status
 
 <!-- UsageSnippet language="python" operationID="dedicatedCreateEndpoint" method="post" path="/dedicated/beta/endpoint" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.create(
-        project_id="<id>",
-        name="<value>",
-        instance_option_id="<id>",
-        advanced={
-            "tokenizer_skip_special_tokens": False,
-            "tokenizer_add_special_tokens": False,
-        },
-        hf_model_repo="<value>",
-    )
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.create(project_id="<id>", name="<value>", instance_option_id="<id>", advanced={
+        "tokenizer_skip_special_tokens": False,
+        "tokenizer_add_special_tokens": False,
+    }, hf_model_repo="<value>")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -127,17 +123,19 @@ List all endpoint statuses
 
 <!-- UsageSnippet language="python" operationID="dedicatedListEndpoints" method="get" path="/dedicated/beta/endpoint" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.list(project_id="", limit=20)
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.list(project_id="", limit=20)
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -168,17 +166,19 @@ Get the specification of an endpoint
 
 <!-- UsageSnippet language="python" operationID="dedicatedGetEndpoint" method="get" path="/dedicated/beta/endpoint/{endpoint_id}" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.get_spec(endpoint_id="<id>")
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.get_spec(endpoint_id="<id>")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -207,17 +207,19 @@ Update the specification of a specific endpoint
 
 <!-- UsageSnippet language="python" operationID="dedicatedUpdateEndpoint" method="put" path="/dedicated/beta/endpoint/{endpoint_id}" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.update(endpoint_id="<id>")
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.update(endpoint_id="<id>")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -233,7 +235,7 @@ with SyncFriendli(
 | `hf_model_repo`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | *OptionalNullable[str]*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | HF ID of the model.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `hf_model_repo_revision`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | *OptionalNullable[str]*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | HF commit hash of the model.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `new_version_comment`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | *OptionalNullable[str]*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Comment for the new version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `instance_option_id`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | *OptionalNullable[str]*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | The ID of the instance option.<br/><br/>Available options:<br/>- 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`<br/>- 2x NVIDIA A100 80GB: `mrAHuYt7T40o`<br/>- 4x NVIDIA A100 80GB: `JkNob0NMdoF3`<br/>- 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`<br/>- 1x NVIDIA H100: `TwD5AqnBSVN0`<br/>- 2x NVIDIA H100: `zfTutSiLn0Hq`<br/>- 4x NVIDIA H100: `lfkRz5G48REc`<br/>- 8x NVIDIA H100: `GUA4qYFmsYz8`<br/>- 1x NVIDIA H200: `LnK1wTaKc7WO`<br/>- 2x NVIDIA H200: `Tu6GjBnfHPe4`<br/>- 4x NVIDIA H200: `OhTzYtZuomzI`<br/>- 8x NVIDIA H200: `ahBzWtOuomsI`<br/>- 1x NVIDIA B200: `8GiQTLKfJNOr`<br/>- 2x NVIDIA B200: `brTZGIuYgVrs`<br/>- 4x NVIDIA B200: `AFoZMFXZnAdD`<br/>- 8x NVIDIA B200: `drbc6G9FxJWZ<br/>`- 1x NVIDIA B300: `b300x1`<br/>- 2x NVIDIA B300: `b300x2`<br/>- 4x NVIDIA B300: `b300x4`<br/>- 8x NVIDIA B300: `b300x8` |
+| `instance_option_id`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | *OptionalNullable[str]*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | The ID of the instance option.<br/><br/>Available options:<br/>- 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`<br/>- 2x NVIDIA A100 80GB: `mrAHuYt7T40o`<br/>- 4x NVIDIA A100 80GB: `JkNob0NMdoF3`<br/>- 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`<br/>- 1x NVIDIA H100: `TwD5AqnBSVN0`<br/>- 2x NVIDIA H100: `zfTutSiLn0Hq`<br/>- 4x NVIDIA H100: `lfkRz5G48REc`<br/>- 8x NVIDIA H100: `GUA4qYFmsYz8`<br/>- 1x NVIDIA H200: `LnK1wTaKc7WO`<br/>- 2x NVIDIA H200: `Tu6GjBnfHPe4`<br/>- 4x NVIDIA H200: `OhTzYtZuomzI`<br/>- 8x NVIDIA H200: `ahBzWtOuomsI`<br/>- 1x NVIDIA B200: `8GiQTLKfJNOr`<br/>- 2x NVIDIA B200: `brTZGIuYgVrs`<br/>- 4x NVIDIA B200: `AFoZMFXZnAdD`<br/>- 8x NVIDIA B200: `drbc6G9FxJWZ`<br/>- 1x NVIDIA B300: `b300x1`<br/>- 2x NVIDIA B300: `b300x2`<br/>- 4x NVIDIA B300: `b300x4`<br/>- 8x NVIDIA B300: `b300x8` |
 | `retries`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 ### Response
@@ -254,17 +256,19 @@ Delete a specific endpoint
 
 <!-- UsageSnippet language="python" operationID="dedicatedDeleteEndpoint" method="delete" path="/dedicated/beta/endpoint/{endpoint_id}" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.delete(endpoint_id="<id>")
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.delete(endpoint_id="<id>")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -294,17 +298,19 @@ Get version history of a specific endpoint
 
 <!-- UsageSnippet language="python" operationID="dedicatedGetEndpointVersionHistory" method="get" path="/dedicated/beta/endpoint/{endpoint_id}/version" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.get_version_history(endpoint_id="<id>", limit=20)
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.get_version_history(endpoint_id="<id>", limit=20)
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -335,17 +341,19 @@ Get the status of a specific endpoint
 
 <!-- UsageSnippet language="python" operationID="dedicatedGetEndpointStatus" method="get" path="/dedicated/beta/endpoint/{endpoint_id}/status" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.get_status(endpoint_id="<id>")
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.get_status(endpoint_id="<id>")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -374,17 +382,19 @@ Put a specific endpoint to sleep
 
 <!-- UsageSnippet language="python" operationID="dedicatedSleepEndpoint" method="put" path="/dedicated/beta/endpoint/{endpoint_id}/sleep" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.sleep(endpoint_id="<id>")
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.sleep(endpoint_id="<id>")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -413,17 +423,19 @@ Wake up a specific endpoint
 
 <!-- UsageSnippet language="python" operationID="dedicatedWakeEndpoint" method="put" path="/dedicated/beta/endpoint/{endpoint_id}/wake" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.wake(endpoint_id="<id>")
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.wake(endpoint_id="<id>")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -452,17 +464,19 @@ Terminate a specific endpoint
 
 <!-- UsageSnippet language="python" operationID="dedicatedTerminateEndpoint" method="put" path="/dedicated/beta/endpoint/{endpoint_id}/terminate" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.terminate(endpoint_id="<id>")
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.terminate(endpoint_id="<id>")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -491,17 +505,19 @@ Restart a FAILED or TERMINATED endpoint
 
 <!-- UsageSnippet language="python" operationID="dedicatedRestartEndpoint" method="put" path="/dedicated/beta/endpoint/{endpoint_id}/restart" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.dedicated.endpoint.restart(endpoint_id="<id>")
+) as fc_client:
+
+    res = fc_client.dedicated.endpoint.restart(endpoint_id="<id>")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters

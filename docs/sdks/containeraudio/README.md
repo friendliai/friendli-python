@@ -15,23 +15,22 @@ Transcribe an audio file into text.
 
 <!-- UsageSnippet language="python" operationID="containerAudioTranscriptions" method="post" path="/v1/audio/transcriptions" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.audio.transcribe(
-        file={
-            "file_name": "example.file",
-            "content": open("example.file", "rb"),
-        },
-        model="(adapter-route)",
-    )
+) as fc_client:
+
+    res = fc_client.container.audio.transcribe(file={
+        "file_name": "example.file",
+        "content": open("example.file", "rb"),
+    }, model="(adapter-route)")
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -65,26 +64,24 @@ Transcribe an audio file into text.
 
 <!-- UsageSnippet language="python" operationID="containerAudioTranscriptionsStream" method="post" path="/v1/audio/transcriptions#stream" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.audio.stream(
-        file={
-            "file_name": "example.file",
-            "content": open("example.file", "rb"),
-        },
-        model="(adapter-route)",
-        stream=True,
-    )
+) as fc_client:
+
+    res = fc_client.container.audio.stream(file={
+        "file_name": "example.file",
+        "content": open("example.file", "rb"),
+    }, model="(adapter-route)", stream=True)
 
     with res as event_stream:
         for event in event_stream:
             # handle event
             print(event, flush=True)
+
 ```
 
 ### Parameters

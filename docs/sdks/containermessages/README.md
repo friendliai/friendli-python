@@ -15,51 +15,51 @@ Generate a model response from a conversation using the Anthropic Messages API f
 
 <!-- UsageSnippet language="python" operationID="containerMessages" method="post" path="/v1/messages" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.messages.messages(
-        messages=[
-            {
-                "role": "user",
-                "content": "Hello, summarize what you can do in one sentence.",
-            },
-        ],
-        model="zai-org/GLM-5.3",
-        additional_properties={},
-    )
+) as fc_client:
+
+    res = fc_client.container.messages.messages(messages=[
+        {
+            "role": "user",
+            "content": "Hello, summarize what you can do in one sentence.",
+        },
+    ], model="zai-org/GLM-5.3", additional_properties={
+
+    })
 
     # Handle response
     print(res)
+
 ```
 ### Example Usage: Invalid request error
 
 <!-- UsageSnippet language="python" operationID="containerMessages" method="post" path="/v1/messages" example="Invalid request error" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.messages.messages(
-        messages=[
-            {
-                "role": "user",
-                "content": "Hello, summarize what you can do in one sentence.",
-            },
-        ],
-        model="zai-org/GLM-5.3",
-        additional_properties={},
-    )
+) as fc_client:
+
+    res = fc_client.container.messages.messages(messages=[
+        {
+            "role": "user",
+            "content": "Hello, summarize what you can do in one sentence.",
+        },
+    ], model="zai-org/GLM-5.3", additional_properties={
+
+    })
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
@@ -108,57 +108,55 @@ Generate a model response from a conversation using the Anthropic Messages API f
 
 <!-- UsageSnippet language="python" operationID="containerMessagesStream" method="post" path="/v1/messages#stream" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.messages.stream(
-        messages=[
-            {
-                "role": "user",
-                "content": "Hello, summarize what you can do in one sentence.",
-            },
-        ],
-        model="zai-org/GLM-5.3",
-        stream=True,
-        additional_properties={},
-    )
+) as fc_client:
+
+    res = fc_client.container.messages.stream(messages=[
+        {
+            "role": "user",
+            "content": "Hello, summarize what you can do in one sentence.",
+        },
+    ], model="zai-org/GLM-5.3", stream=True, additional_properties={
+
+    })
 
     with res as event_stream:
         for event in event_stream:
             # handle event
             print(event, flush=True)
+
 ```
 ### Example Usage: Invalid request error
 
 <!-- UsageSnippet language="python" operationID="containerMessagesStream" method="post" path="/v1/messages#stream" example="Invalid request error" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.container.messages.stream(
-        messages=[
-            {
-                "role": "user",
-                "content": "Hello, summarize what you can do in one sentence.",
-            },
-        ],
-        model="zai-org/GLM-5.3",
-        stream=True,
-        additional_properties={},
-    )
+) as fc_client:
+
+    res = fc_client.container.messages.stream(messages=[
+        {
+            "role": "user",
+            "content": "Hello, summarize what you can do in one sentence.",
+        },
+    ], model="zai-org/GLM-5.3", stream=True, additional_properties={
+
+    })
 
     with res as event_stream:
         for event in event_stream:
             # handle event
             print(event, flush=True)
+
 ```
 
 ### Parameters

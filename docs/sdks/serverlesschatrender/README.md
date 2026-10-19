@@ -14,29 +14,28 @@ Render a list of chat messages into the prompt text sent to the model.
 
 <!-- UsageSnippet language="python" operationID="serverlessChatRender" method="post" path="/serverless/v1/chat/render" example="Example" -->
 ```python
+from friendli_core import FriendliCore
 import os
 
-from friendli import SyncFriendli
 
-with SyncFriendli(
+with FriendliCore(
     token=os.getenv("FRIENDLI_TOKEN", ""),
-) as friendli:
-    res = friendli.serverless.chat_render.render(
-        model="zai-org/GLM-5.3",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant.",
-            },
-            {
-                "role": "user",
-                "content": "Hello!",
-            },
-        ],
-    )
+) as fc_client:
+
+    res = fc_client.serverless.chat_render.render(model="zai-org/GLM-5.3", messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant.",
+        },
+        {
+            "role": "user",
+            "content": "Hello!",
+        },
+    ])
 
     # Handle response
     print(res)
+
 ```
 
 ### Parameters
