@@ -11,6 +11,7 @@ on:
   workflow_dispatch:
 jobs:
   publish:
+    if: github.repository == 'friendliai/friendli-python'
     uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15
     with:
       target: friendli
