@@ -22,16 +22,22 @@ class CostResponseTypedDict(TypedDict):
     """Cost response."""
 
     data: list[CostBucketTypedDict]
+    "The items in this page."
     has_more: bool
+    "Whether more items are available beyond this page."
     next_page: NotRequired[Nullable[str]]
+    "A cursor to fetch the next page. Null when there are no more results."
 
 
 class CostResponse(BaseModel):
     """Cost response."""
 
     data: list[CostBucket]
+    "The items in this page."
     has_more: bool
+    "Whether more items are available beyond this page."
     next_page: OptionalNullable[str] = UNSET
+    "A cursor to fetch the next page. Null when there are no more results."
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

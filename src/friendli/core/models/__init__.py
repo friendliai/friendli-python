@@ -40,6 +40,7 @@ if TYPE_CHECKING:
         BaseClassificationData,
         BaseClassificationDataTypedDict,
     )
+    from .capacitytype import CapacityType
     from .chatchoice import ChatChoice, ChatChoiceFinishReason, ChatChoiceTypedDict
     from .chatchoicemessage import ChatChoiceMessage, ChatChoiceMessageTypedDict
     from .chatcompletebodytoolchoice import (
@@ -1338,6 +1339,7 @@ __all__ = [
     "B64ImageItemTypedDict",
     "BaseClassificationData",
     "BaseClassificationDataTypedDict",
+    "CapacityType",
     "ChatChoice",
     "ChatChoiceFinishReason",
     "ChatChoiceMessage",
@@ -2185,6 +2187,7 @@ _dynamic_imports: dict[str, str] = {
     "B64ImageItemTypedDict": ".b64imageitem",
     "BaseClassificationData": ".baseclassificationdata",
     "BaseClassificationDataTypedDict": ".baseclassificationdata",
+    "CapacityType": ".capacitytype",
     "ChatChoice": ".chatchoice",
     "ChatChoiceFinishReason": ".chatchoice",
     "ChatChoiceTypedDict": ".chatchoice",

@@ -142,7 +142,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             return unmarshal_json_response(
                 models.DedicatedEndpointWandbArtifactCreateResponse, http_res
             )
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -158,7 +158,6 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         instance_option_id: str,
         advanced: models.EndpointAdvancedConfig
         | models.EndpointAdvancedConfigTypedDict,
-        hf_model_repo: str,
         x_friendli_team: OptionalNullable[str] = UNSET,
         simplescale: OptionalNullable[
             models.EndpointSimplescaleConfig | models.EndpointSimplescaleConfigTypedDict
@@ -166,7 +165,9 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         autoscaling_policy: OptionalNullable[
             models.AutoscalingPolicy | models.AutoscalingPolicyTypedDict
         ] = UNSET,
+        hf_model_repo: OptionalNullable[str] = UNSET,
         hf_model_repo_revision: OptionalNullable[str] = UNSET,
+        uploaded_model_id: OptionalNullable[str] = UNSET,
         initial_version_comment: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
@@ -203,11 +204,12 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             - 4x NVIDIA B300: `b300x4`
             - 8x NVIDIA B300: `b300x8`
         :param advanced: Endpoint advanced config.
-        :param hf_model_repo: HF ID of the model.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param simplescale: The simple scaling configuration of the endpoint.
         :param autoscaling_policy: The auto scaling configuration of the endpoint.
-        :param hf_model_repo_revision: HF commit hash of the model.
+        :param hf_model_repo: Hugging Face model ID (e.g. meta-llama/Llama-3.1-8B-Instruct).
+        :param hf_model_repo_revision: HF commit hash or revision of the model (e.g. main). Can only be used when `hfModelRepo` is provided.
+        :param uploaded_model_id: ID of an uploaded model. Cannot be used when `hfModelRepo` is provided.
         :param initial_version_comment: The comment for the initial version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -239,6 +241,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
                 hf_model_repo=hf_model_repo,
                 hf_model_repo_revision=hf_model_repo_revision,
+                uploaded_model_id=uploaded_model_id,
                 initial_version_comment=initial_version_comment,
             ),
         )
@@ -287,13 +290,13 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 tags=["SyncDedicated.Endpoint"],
                 extensions={
                     "x-mint": {
-                        "content": "Create a Dedicated Endpoint deployment for a Hugging Face model.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "content": "Create a Dedicated Endpoint deployment for a Hugging Face or uploaded model.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
                         "href": "/openapi/dedicated/endpoint/create",
                         "metadata": {
-                            "description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face model via the API. Specify GPU type, replica count, and model configuration.",
-                            "og:description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face model via the API. Specify GPU type, replica count, and model configuration.",
+                            "description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face or uploaded model via the API. Specify GPU type, replica count, and model configuration.",
+                            "og:description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face or uploaded model via the API. Specify GPU type, replica count, and model configuration.",
                             "og:title": "SyncDedicated Create Endpoint",
-                            "sidebarTitle": "Create an Endpoint with Hugging Face Model",
+                            "sidebarTitle": "Create an Endpoint",
                             "title": "SyncDedicated Create Endpoint",
                         },
                     }
@@ -305,7 +308,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, ["500", "5XX"], "*"):
@@ -531,6 +534,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         ] = UNSET,
         hf_model_repo: OptionalNullable[str] = UNSET,
         hf_model_repo_revision: OptionalNullable[str] = UNSET,
+        uploaded_model_id: OptionalNullable[str] = UNSET,
         new_version_comment: OptionalNullable[str] = UNSET,
         instance_option_id: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -548,8 +552,9 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         :param advanced: The advanced configuration of the endpoint.
         :param simplescale: The simple scaling configuration of the endpoint.
         :param autoscaling_policy: The auto scaling configuration of the endpoint.
-        :param hf_model_repo: HF ID of the model.
-        :param hf_model_repo_revision: HF commit hash of the model.
+        :param hf_model_repo: Hugging Face model ID (e.g. meta-llama/Llama-3.1-8B-Instruct).
+        :param hf_model_repo_revision: HF commit hash or revision of the model (e.g. main). Can only be used when `hfModelRepo` is provided.
+        :param uploaded_model_id: ID of an uploaded model. Cannot be used when `hfModelRepo` is provided.
         :param new_version_comment: Comment for the new version.
         :param instance_option_id: The ID of the instance option.
 
@@ -569,8 +574,8 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
             - 1x NVIDIA B200: `8GiQTLKfJNOr`
             - 2x NVIDIA B200: `brTZGIuYgVrs`
             - 4x NVIDIA B200: `AFoZMFXZnAdD`
-            - 8x NVIDIA B200: `drbc6G9FxJWZ
-            `- 1x NVIDIA B300: `b300x1`
+            - 8x NVIDIA B200: `drbc6G9FxJWZ`
+            - 1x NVIDIA B300: `b300x1`
             - 2x NVIDIA B300: `b300x2`
             - 4x NVIDIA B300: `b300x4`
             - 8x NVIDIA B300: `b300x8`
@@ -603,6 +608,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
                 ),
                 hf_model_repo=hf_model_repo,
                 hf_model_repo_revision=hf_model_repo_revision,
+                uploaded_model_id=uploaded_model_id,
                 new_version_comment=new_version_comment,
                 instance_option_id=instance_option_id,
             ),
@@ -673,7 +679,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
+        if utils.match_response(http_res, ["500", "5XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         raise models.SDKError("Unexpected response received", http_res)
@@ -1490,7 +1496,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             return unmarshal_json_response(
                 models.DedicatedEndpointWandbArtifactCreateResponse, http_res
             )
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1506,7 +1512,6 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         instance_option_id: str,
         advanced: models.EndpointAdvancedConfig
         | models.EndpointAdvancedConfigTypedDict,
-        hf_model_repo: str,
         x_friendli_team: OptionalNullable[str] = UNSET,
         simplescale: OptionalNullable[
             models.EndpointSimplescaleConfig | models.EndpointSimplescaleConfigTypedDict
@@ -1514,7 +1519,9 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         autoscaling_policy: OptionalNullable[
             models.AutoscalingPolicy | models.AutoscalingPolicyTypedDict
         ] = UNSET,
+        hf_model_repo: OptionalNullable[str] = UNSET,
         hf_model_repo_revision: OptionalNullable[str] = UNSET,
+        uploaded_model_id: OptionalNullable[str] = UNSET,
         initial_version_comment: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
@@ -1551,11 +1558,12 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             - 4x NVIDIA B300: `b300x4`
             - 8x NVIDIA B300: `b300x8`
         :param advanced: Endpoint advanced config.
-        :param hf_model_repo: HF ID of the model.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param simplescale: The simple scaling configuration of the endpoint.
         :param autoscaling_policy: The auto scaling configuration of the endpoint.
-        :param hf_model_repo_revision: HF commit hash of the model.
+        :param hf_model_repo: Hugging Face model ID (e.g. meta-llama/Llama-3.1-8B-Instruct).
+        :param hf_model_repo_revision: HF commit hash or revision of the model (e.g. main). Can only be used when `hfModelRepo` is provided.
+        :param uploaded_model_id: ID of an uploaded model. Cannot be used when `hfModelRepo` is provided.
         :param initial_version_comment: The comment for the initial version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1587,6 +1595,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
                 hf_model_repo=hf_model_repo,
                 hf_model_repo_revision=hf_model_repo_revision,
+                uploaded_model_id=uploaded_model_id,
                 initial_version_comment=initial_version_comment,
             ),
         )
@@ -1635,13 +1644,13 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 tags=["AsyncDedicated.Endpoint"],
                 extensions={
                     "x-mint": {
-                        "content": "Create a Dedicated Endpoint deployment for a Hugging Face model.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "content": "Create a Dedicated Endpoint deployment for a Hugging Face or uploaded model.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
                         "href": "/openapi/dedicated/endpoint/create",
                         "metadata": {
-                            "description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face model via the API. Specify GPU type, replica count, and model configuration.",
-                            "og:description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face model via the API. Specify GPU type, replica count, and model configuration.",
+                            "description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face or uploaded model via the API. Specify GPU type, replica count, and model configuration.",
+                            "og:description": "Create a Friendli Dedicated Endpoint deployment for a Hugging Face or uploaded model via the API. Specify GPU type, replica count, and model configuration.",
                             "og:title": "AsyncDedicated Create Endpoint",
-                            "sidebarTitle": "Create an Endpoint with Hugging Face Model",
+                            "sidebarTitle": "Create an Endpoint",
                             "title": "AsyncDedicated Create Endpoint",
                         },
                     }
@@ -1653,7 +1662,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         )
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.DedicatedEndpointStatus, http_res)
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, ["500", "5XX"], "*"):
@@ -1879,6 +1888,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         ] = UNSET,
         hf_model_repo: OptionalNullable[str] = UNSET,
         hf_model_repo_revision: OptionalNullable[str] = UNSET,
+        uploaded_model_id: OptionalNullable[str] = UNSET,
         new_version_comment: OptionalNullable[str] = UNSET,
         instance_option_id: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1896,8 +1906,9 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         :param advanced: The advanced configuration of the endpoint.
         :param simplescale: The simple scaling configuration of the endpoint.
         :param autoscaling_policy: The auto scaling configuration of the endpoint.
-        :param hf_model_repo: HF ID of the model.
-        :param hf_model_repo_revision: HF commit hash of the model.
+        :param hf_model_repo: Hugging Face model ID (e.g. meta-llama/Llama-3.1-8B-Instruct).
+        :param hf_model_repo_revision: HF commit hash or revision of the model (e.g. main). Can only be used when `hfModelRepo` is provided.
+        :param uploaded_model_id: ID of an uploaded model. Cannot be used when `hfModelRepo` is provided.
         :param new_version_comment: Comment for the new version.
         :param instance_option_id: The ID of the instance option.
 
@@ -1917,8 +1928,8 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
             - 1x NVIDIA B200: `8GiQTLKfJNOr`
             - 2x NVIDIA B200: `brTZGIuYgVrs`
             - 4x NVIDIA B200: `AFoZMFXZnAdD`
-            - 8x NVIDIA B200: `drbc6G9FxJWZ
-            `- 1x NVIDIA B300: `b300x1`
+            - 8x NVIDIA B200: `drbc6G9FxJWZ`
+            - 1x NVIDIA B300: `b300x1`
             - 2x NVIDIA B300: `b300x2`
             - 4x NVIDIA B300: `b300x4`
             - 8x NVIDIA B300: `b300x8`
@@ -1951,6 +1962,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
                 ),
                 hf_model_repo=hf_model_repo,
                 hf_model_repo_revision=hf_model_repo_revision,
+                uploaded_model_id=uploaded_model_id,
                 new_version_comment=new_version_comment,
                 instance_option_id=instance_option_id,
             ),
@@ -2021,7 +2033,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
+        if utils.match_response(http_res, ["500", "5XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.SDKError("API error occurred", http_res, http_res_text)
         raise models.SDKError("Unexpected response received", http_res)

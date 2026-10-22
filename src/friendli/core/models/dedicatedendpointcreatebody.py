@@ -38,14 +38,16 @@ class DedicatedEndpointCreateBodyTypedDict(TypedDict):
     "The ID of the instance option.\n\n    Available options:\n    - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`\n    - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`\n    - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`\n    - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`\n    - 1x NVIDIA H100: `TwD5AqnBSVN0`\n    - 2x NVIDIA H100: `zfTutSiLn0Hq`\n    - 4x NVIDIA H100: `lfkRz5G48REc`\n    - 8x NVIDIA H100: `GUA4qYFmsYz8`\n    - 1x NVIDIA H200: `LnK1wTaKc7WO`\n    - 2x NVIDIA H200: `Tu6GjBnfHPe4`\n    - 4x NVIDIA H200: `OhTzYtZuomzI`\n    - 8x NVIDIA H200: `ahBzWtOuomsI`\n    - 1x NVIDIA B200: `8GiQTLKfJNOr`\n    - 2x NVIDIA B200: `brTZGIuYgVrs`\n    - 4x NVIDIA B200: `AFoZMFXZnAdD`\n    - 8x NVIDIA B200: `drbc6G9FxJWZ`\n    - 1x NVIDIA B300: `b300x1`\n    - 2x NVIDIA B300: `b300x2`\n    - 4x NVIDIA B300: `b300x4`\n    - 8x NVIDIA B300: `b300x8`\n    "
     advanced: EndpointAdvancedConfigTypedDict
     "Endpoint advanced config."
-    hf_model_repo: str
-    "HF ID of the model."
     simplescale: NotRequired[Nullable[EndpointSimplescaleConfigTypedDict]]
     "The simple scaling configuration of the endpoint."
     autoscaling_policy: NotRequired[Nullable[AutoscalingPolicyTypedDict]]
     "The auto scaling configuration of the endpoint."
+    hf_model_repo: NotRequired[Nullable[str]]
+    "Hugging Face model ID (e.g. meta-llama/Llama-3.1-8B-Instruct)."
     hf_model_repo_revision: NotRequired[Nullable[str]]
-    "HF commit hash of the model."
+    "HF commit hash or revision of the model (e.g. main). Can only be used when `hfModelRepo` is provided."
+    uploaded_model_id: NotRequired[Nullable[str]]
+    "ID of an uploaded model. Cannot be used when `hfModelRepo` is provided."
     initial_version_comment: NotRequired[Nullable[str]]
     "The comment for the initial version."
 
@@ -61,18 +63,24 @@ class DedicatedEndpointCreateBody(BaseModel):
     "The ID of the instance option.\n\n    Available options:\n    - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`\n    - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`\n    - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`\n    - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`\n    - 1x NVIDIA H100: `TwD5AqnBSVN0`\n    - 2x NVIDIA H100: `zfTutSiLn0Hq`\n    - 4x NVIDIA H100: `lfkRz5G48REc`\n    - 8x NVIDIA H100: `GUA4qYFmsYz8`\n    - 1x NVIDIA H200: `LnK1wTaKc7WO`\n    - 2x NVIDIA H200: `Tu6GjBnfHPe4`\n    - 4x NVIDIA H200: `OhTzYtZuomzI`\n    - 8x NVIDIA H200: `ahBzWtOuomsI`\n    - 1x NVIDIA B200: `8GiQTLKfJNOr`\n    - 2x NVIDIA B200: `brTZGIuYgVrs`\n    - 4x NVIDIA B200: `AFoZMFXZnAdD`\n    - 8x NVIDIA B200: `drbc6G9FxJWZ`\n    - 1x NVIDIA B300: `b300x1`\n    - 2x NVIDIA B300: `b300x2`\n    - 4x NVIDIA B300: `b300x4`\n    - 8x NVIDIA B300: `b300x8`\n    "
     advanced: EndpointAdvancedConfig
     "Endpoint advanced config."
-    hf_model_repo: Annotated[str, pydantic.Field(alias="hfModelRepo")]
-    "HF ID of the model."
     simplescale: OptionalNullable[EndpointSimplescaleConfig] = UNSET
     "The simple scaling configuration of the endpoint."
     autoscaling_policy: Annotated[
         OptionalNullable[AutoscalingPolicy], pydantic.Field(alias="autoscalingPolicy")
     ] = UNSET
     "The auto scaling configuration of the endpoint."
+    hf_model_repo: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="hfModelRepo")
+    ] = UNSET
+    "Hugging Face model ID (e.g. meta-llama/Llama-3.1-8B-Instruct)."
     hf_model_repo_revision: Annotated[
         OptionalNullable[str], pydantic.Field(alias="hfModelRepoRevision")
     ] = UNSET
-    "HF commit hash of the model."
+    "HF commit hash or revision of the model (e.g. main). Can only be used when `hfModelRepo` is provided."
+    uploaded_model_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="uploadedModelId")
+    ] = UNSET
+    "ID of an uploaded model. Cannot be used when `hfModelRepo` is provided."
     initial_version_comment: Annotated[
         OptionalNullable[str], pydantic.Field(alias="initialVersionComment")
     ] = UNSET
@@ -84,7 +92,9 @@ class DedicatedEndpointCreateBody(BaseModel):
             [
                 "simplescale",
                 "autoscalingPolicy",
+                "hfModelRepo",
                 "hfModelRepoRevision",
+                "uploadedModelId",
                 "initialVersionComment",
             ]
         )
@@ -92,7 +102,9 @@ class DedicatedEndpointCreateBody(BaseModel):
             [
                 "simplescale",
                 "autoscalingPolicy",
+                "hfModelRepo",
                 "hfModelRepoRevision",
+                "uploadedModelId",
                 "initialVersionComment",
             ]
         )

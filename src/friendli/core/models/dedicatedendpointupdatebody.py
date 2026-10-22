@@ -39,13 +39,15 @@ class DedicatedEndpointUpdateBodyTypedDict(TypedDict):
     autoscaling_policy: NotRequired[Nullable[AutoscalingPolicyTypedDict]]
     "The auto scaling configuration of the endpoint."
     hf_model_repo: NotRequired[Nullable[str]]
-    "HF ID of the model."
+    "Hugging Face model ID (e.g. meta-llama/Llama-3.1-8B-Instruct)."
     hf_model_repo_revision: NotRequired[Nullable[str]]
-    "HF commit hash of the model."
+    "HF commit hash or revision of the model (e.g. main). Can only be used when `hfModelRepo` is provided."
+    uploaded_model_id: NotRequired[Nullable[str]]
+    "ID of an uploaded model. Cannot be used when `hfModelRepo` is provided."
     new_version_comment: NotRequired[Nullable[str]]
     "Comment for the new version."
     instance_option_id: NotRequired[Nullable[str]]
-    "The ID of the instance option.\n\n    Available options:\n    - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`\n    - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`\n    - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`\n    - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`\n    - 1x NVIDIA H100: `TwD5AqnBSVN0`\n    - 2x NVIDIA H100: `zfTutSiLn0Hq`\n    - 4x NVIDIA H100: `lfkRz5G48REc`\n    - 8x NVIDIA H100: `GUA4qYFmsYz8`\n    - 1x NVIDIA H200: `LnK1wTaKc7WO`\n    - 2x NVIDIA H200: `Tu6GjBnfHPe4`\n    - 4x NVIDIA H200: `OhTzYtZuomzI`\n    - 8x NVIDIA H200: `ahBzWtOuomsI`\n    - 1x NVIDIA B200: `8GiQTLKfJNOr`\n    - 2x NVIDIA B200: `brTZGIuYgVrs`\n    - 4x NVIDIA B200: `AFoZMFXZnAdD`\n    - 8x NVIDIA B200: `drbc6G9FxJWZ\n    `- 1x NVIDIA B300: `b300x1`\n    - 2x NVIDIA B300: `b300x2`\n    - 4x NVIDIA B300: `b300x4`\n    - 8x NVIDIA B300: `b300x8`\n    "
+    "The ID of the instance option.\n\n    Available options:\n    - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`\n    - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`\n    - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`\n    - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`\n    - 1x NVIDIA H100: `TwD5AqnBSVN0`\n    - 2x NVIDIA H100: `zfTutSiLn0Hq`\n    - 4x NVIDIA H100: `lfkRz5G48REc`\n    - 8x NVIDIA H100: `GUA4qYFmsYz8`\n    - 1x NVIDIA H200: `LnK1wTaKc7WO`\n    - 2x NVIDIA H200: `Tu6GjBnfHPe4`\n    - 4x NVIDIA H200: `OhTzYtZuomzI`\n    - 8x NVIDIA H200: `ahBzWtOuomsI`\n    - 1x NVIDIA B200: `8GiQTLKfJNOr`\n    - 2x NVIDIA B200: `brTZGIuYgVrs`\n    - 4x NVIDIA B200: `AFoZMFXZnAdD`\n    - 8x NVIDIA B200: `drbc6G9FxJWZ`\n    - 1x NVIDIA B300: `b300x1`\n    - 2x NVIDIA B300: `b300x2`\n    - 4x NVIDIA B300: `b300x4`\n    - 8x NVIDIA B300: `b300x8`\n    "
 
 
 class DedicatedEndpointUpdateBody(BaseModel):
@@ -64,11 +66,15 @@ class DedicatedEndpointUpdateBody(BaseModel):
     hf_model_repo: Annotated[
         OptionalNullable[str], pydantic.Field(alias="hfModelRepo")
     ] = UNSET
-    "HF ID of the model."
+    "Hugging Face model ID (e.g. meta-llama/Llama-3.1-8B-Instruct)."
     hf_model_repo_revision: Annotated[
         OptionalNullable[str], pydantic.Field(alias="hfModelRepoRevision")
     ] = UNSET
-    "HF commit hash of the model."
+    "HF commit hash or revision of the model (e.g. main). Can only be used when `hfModelRepo` is provided."
+    uploaded_model_id: Annotated[
+        OptionalNullable[str], pydantic.Field(alias="uploadedModelId")
+    ] = UNSET
+    "ID of an uploaded model. Cannot be used when `hfModelRepo` is provided."
     new_version_comment: Annotated[
         OptionalNullable[str], pydantic.Field(alias="newVersionComment")
     ] = UNSET
@@ -76,7 +82,7 @@ class DedicatedEndpointUpdateBody(BaseModel):
     instance_option_id: Annotated[
         OptionalNullable[str], pydantic.Field(alias="instanceOptionId")
     ] = UNSET
-    "The ID of the instance option.\n\n    Available options:\n    - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`\n    - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`\n    - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`\n    - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`\n    - 1x NVIDIA H100: `TwD5AqnBSVN0`\n    - 2x NVIDIA H100: `zfTutSiLn0Hq`\n    - 4x NVIDIA H100: `lfkRz5G48REc`\n    - 8x NVIDIA H100: `GUA4qYFmsYz8`\n    - 1x NVIDIA H200: `LnK1wTaKc7WO`\n    - 2x NVIDIA H200: `Tu6GjBnfHPe4`\n    - 4x NVIDIA H200: `OhTzYtZuomzI`\n    - 8x NVIDIA H200: `ahBzWtOuomsI`\n    - 1x NVIDIA B200: `8GiQTLKfJNOr`\n    - 2x NVIDIA B200: `brTZGIuYgVrs`\n    - 4x NVIDIA B200: `AFoZMFXZnAdD`\n    - 8x NVIDIA B200: `drbc6G9FxJWZ\n    `- 1x NVIDIA B300: `b300x1`\n    - 2x NVIDIA B300: `b300x2`\n    - 4x NVIDIA B300: `b300x4`\n    - 8x NVIDIA B300: `b300x8`\n    "
+    "The ID of the instance option.\n\n    Available options:\n    - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`\n    - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`\n    - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`\n    - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`\n    - 1x NVIDIA H100: `TwD5AqnBSVN0`\n    - 2x NVIDIA H100: `zfTutSiLn0Hq`\n    - 4x NVIDIA H100: `lfkRz5G48REc`\n    - 8x NVIDIA H100: `GUA4qYFmsYz8`\n    - 1x NVIDIA H200: `LnK1wTaKc7WO`\n    - 2x NVIDIA H200: `Tu6GjBnfHPe4`\n    - 4x NVIDIA H200: `OhTzYtZuomzI`\n    - 8x NVIDIA H200: `ahBzWtOuomsI`\n    - 1x NVIDIA B200: `8GiQTLKfJNOr`\n    - 2x NVIDIA B200: `brTZGIuYgVrs`\n    - 4x NVIDIA B200: `AFoZMFXZnAdD`\n    - 8x NVIDIA B200: `drbc6G9FxJWZ`\n    - 1x NVIDIA B300: `b300x1`\n    - 2x NVIDIA B300: `b300x2`\n    - 4x NVIDIA B300: `b300x4`\n    - 8x NVIDIA B300: `b300x8`\n    "
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -88,6 +94,7 @@ class DedicatedEndpointUpdateBody(BaseModel):
                 "autoscalingPolicy",
                 "hfModelRepo",
                 "hfModelRepoRevision",
+                "uploadedModelId",
                 "newVersionComment",
                 "instanceOptionId",
             ]
@@ -100,6 +107,7 @@ class DedicatedEndpointUpdateBody(BaseModel):
                 "autoscalingPolicy",
                 "hfModelRepo",
                 "hfModelRepoRevision",
+                "uploadedModelId",
                 "newVersionComment",
                 "instanceOptionId",
             ]
