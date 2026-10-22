@@ -36,7 +36,9 @@ class UsageResultTypedDict(TypedDict):
     output_tokens: NotRequired[Nullable[int]]
     "The aggregated number of text output tokens used."
     gpu_usage: NotRequired[Nullable[dict[str, int]]]
-    "The GPU time in seconds, keyed by GPU type. When `group_by=user_id`, this is attributed to the bucket of the user who created the endpoint. When the `gpu_types` filter is set, only Dedicated Endpoints usage is returned, and only GPU time is provided."
+    "Total GPU time in seconds by GPU type, across both on-demand and reserved capacity. Missing keys mean zero. With `group_by=user_id`, usage is attributed to the user who created the endpoint."
+    reserved_gpu_usage: NotRequired[Nullable[dict[str, int]]]
+    "Reserved GPU time in seconds by GPU type, covered by your reservation during the reservation period. Included in `gpu_usage`; do not add them together. Missing keys mean zero. Usage is reported per endpoint, but which endpoints consume reserved GPU time is determined automatically and cannot be configured. With group_by=user_id, usage is attributed to the user who created the endpoint."
     processed_audio_length_ms: NotRequired[Nullable[int]]
     "The number of processed audio length in milliseconds. Zero when there is no audio usage."
 
@@ -59,7 +61,9 @@ class UsageResult(BaseModel):
     output_tokens: OptionalNullable[int] = UNSET
     "The aggregated number of text output tokens used."
     gpu_usage: OptionalNullable[dict[str, int]] = UNSET
-    "The GPU time in seconds, keyed by GPU type. When `group_by=user_id`, this is attributed to the bucket of the user who created the endpoint. When the `gpu_types` filter is set, only Dedicated Endpoints usage is returned, and only GPU time is provided."
+    "Total GPU time in seconds by GPU type, across both on-demand and reserved capacity. Missing keys mean zero. With `group_by=user_id`, usage is attributed to the user who created the endpoint."
+    reserved_gpu_usage: OptionalNullable[dict[str, int]] = UNSET
+    "Reserved GPU time in seconds by GPU type, covered by your reservation during the reservation period. Included in `gpu_usage`; do not add them together. Missing keys mean zero. Usage is reported per endpoint, but which endpoints consume reserved GPU time is determined automatically and cannot be configured. With group_by=user_id, usage is attributed to the user who created the endpoint."
     processed_audio_length_ms: OptionalNullable[int] = UNSET
     "The number of processed audio length in milliseconds. Zero when there is no audio usage."
 
@@ -75,6 +79,7 @@ class UsageResult(BaseModel):
                 "input_cached_tokens",
                 "output_tokens",
                 "gpu_usage",
+                "reserved_gpu_usage",
                 "processed_audio_length_ms",
             ]
         )
@@ -88,6 +93,7 @@ class UsageResult(BaseModel):
                 "input_cached_tokens",
                 "output_tokens",
                 "gpu_usage",
+                "reserved_gpu_usage",
                 "processed_audio_length_ms",
             ]
         )

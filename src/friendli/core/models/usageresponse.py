@@ -22,16 +22,22 @@ class UsageResponseTypedDict(TypedDict):
     """Usage response."""
 
     data: list[UsageBucketTypedDict]
+    "The items in this page."
     has_more: bool
+    "Whether more items are available beyond this page."
     next_page: NotRequired[Nullable[str]]
+    "A cursor to fetch the next page. Null when there are no more results."
 
 
 class UsageResponse(BaseModel):
     """Usage response."""
 
     data: list[UsageBucket]
+    "The items in this page."
     has_more: bool
+    "Whether more items are available beyond this page."
     next_page: OptionalNullable[str] = UNSET
+    "A cursor to fetch the next page. Null when there are no more results."
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -18,6 +18,7 @@ from friendli.core.types import (
 )
 from friendli.core.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 
+from .capacitytype import CapacityType
 from .producttype import ProductType
 from .usagebucketwidth import UsageBucketWidth
 from .usagegroupby import UsageGroupBy
@@ -25,13 +26,13 @@ from .usagegroupby import UsageGroupBy
 
 class GetUsageRequestTypedDict(TypedDict):
     start_time: datetime
-    "RFC 3339 timestamp in UTC. Must fall on a 5-minute boundary (e.g., 2026-01-01T10:05:00Z). It must be no earlier than one year ago. When `bucket_width=1h`, it must align to an hour boundary (e.g., `10:00:00Z`); when `bucket_width=1d`, it must align to a day boundary (e.g., `00:00:00Z`)."
+    "RFC 3339 timestamp in UTC. Must be within the past 365 days and align with the selected `bucket_width` (e.g., 11:05:00Z for 5m, 11:00:00Z for 1h)."
     end_time: datetime
-    "RFC 3339 timestamp in UTC. Must fall on a 5-minute boundary (e.g., 2026-01-01T10:05:00Z), and its minute value must match `start_time`'s. It must obey the same hour/day alignment as `start_time` when `bucket_width=1h` or `1d`."
+    "RFC 3339 timestamp in UTC. Must be later than `start_time` and align with the selected `bucket_width` (e.g., 11:10:00Z for 5m, 12:00:00Z for 1h)."
     bucket_width: NotRequired[Nullable[UsageBucketWidth]]
-    "Width of each time bucket in response. Currently `1d`, `1h`, and `5m` are supported, default to `1d`."
+    "Width of each time bucket. Must be selected based on the query duration (end_time - start_time) and must not exceed the query duration."
     limit: NotRequired[Nullable[int]]
-    "Specifies the number of buckets to return.\n    - `bucket_width=1d`: default limit = 7, max limit = 31\n    - `bucket_width=1h`: default limit = 24, max limit = 168\n    - `bucket_width=5m`: default limit = 12, max limit = 288\n    "
+    "Specifies the number of buckets to return.\n\n    - `bucket_width=1d`: default 7, max 31\n    - `bucket_width=12h`: default 2, max 14\n    - `bucket_width=6h`: default 4, max 28\n    - `bucket_width=1h`: default 24, max 168\n    - `bucket_width=45m`: default 2, max 32\n    - `bucket_width=30m`: default 2, max 48\n    - `bucket_width=15m`: default 4, max 96\n    - `bucket_width=5m`: default 12, max 288\n\n    "
     page: NotRequired[Nullable[str]]
     "A cursor for use in pagination. Corresponding to the `next_page` field from the previous response."
     group_by: NotRequired[Nullable[list[UsageGroupBy]]]
@@ -43,7 +44,9 @@ class GetUsageRequestTypedDict(TypedDict):
     product_types: NotRequired[Nullable[list[ProductType]]]
     "Return only usage for the specified product types. Supported fields include `model_apis`, `dedicated_endpoints` and any combination of them."
     gpu_types: NotRequired[Nullable[list[str]]]
-    "Return only usage for the specified GPU types. When this filter is given, only 'gpu_usage' will be provided. Combining `gpu_types` with 'product_types=model_apis` is rejected with HTTP 400."
+    "Return only usage for the specified GPU types. When this filter is given, `gpu_usage` and `reserved_gpu_usage` will be provided if present; request, token, and audio usage fields are omitted. Combining `gpu_types` with `product_types=model_apis` is rejected with HTTP 400."
+    capacity_types: NotRequired[Nullable[list[CapacityType]]]
+    "Return only usage for the specified capacity types. Supported fields include `reservation` only. When this filter is given, only `reserved_gpu_usage` will be provided; `gpu_usage`, request, token, and audio usage fields are omitted. Combining `capacity_types` with `product_types=model_apis` is rejected with HTTP 400."
     x_friendli_team: NotRequired[Nullable[str]]
     "ID of team to run requests as (optional parameter)."
 
@@ -52,21 +55,21 @@ class GetUsageRequest(BaseModel):
     start_time: Annotated[
         datetime, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
     ]
-    "RFC 3339 timestamp in UTC. Must fall on a 5-minute boundary (e.g., 2026-01-01T10:05:00Z). It must be no earlier than one year ago. When `bucket_width=1h`, it must align to an hour boundary (e.g., `10:00:00Z`); when `bucket_width=1d`, it must align to a day boundary (e.g., `00:00:00Z`)."
+    "RFC 3339 timestamp in UTC. Must be within the past 365 days and align with the selected `bucket_width` (e.g., 11:05:00Z for 5m, 11:00:00Z for 1h)."
     end_time: Annotated[
         datetime, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
     ]
-    "RFC 3339 timestamp in UTC. Must fall on a 5-minute boundary (e.g., 2026-01-01T10:05:00Z), and its minute value must match `start_time`'s. It must obey the same hour/day alignment as `start_time` when `bucket_width=1h` or `1d`."
+    "RFC 3339 timestamp in UTC. Must be later than `start_time` and align with the selected `bucket_width` (e.g., 11:10:00Z for 5m, 12:00:00Z for 1h)."
     bucket_width: Annotated[
         OptionalNullable[UsageBucketWidth],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    "Width of each time bucket in response. Currently `1d`, `1h`, and `5m` are supported, default to `1d`."
+    "Width of each time bucket. Must be selected based on the query duration (end_time - start_time) and must not exceed the query duration."
     limit: Annotated[
         OptionalNullable[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    "Specifies the number of buckets to return.\n    - `bucket_width=1d`: default limit = 7, max limit = 31\n    - `bucket_width=1h`: default limit = 24, max limit = 168\n    - `bucket_width=5m`: default limit = 12, max limit = 288\n    "
+    "Specifies the number of buckets to return.\n\n    - `bucket_width=1d`: default 7, max 31\n    - `bucket_width=12h`: default 2, max 14\n    - `bucket_width=6h`: default 4, max 28\n    - `bucket_width=1h`: default 24, max 168\n    - `bucket_width=45m`: default 2, max 32\n    - `bucket_width=30m`: default 2, max 48\n    - `bucket_width=15m`: default 4, max 96\n    - `bucket_width=5m`: default 12, max 288\n\n    "
     page: Annotated[
         OptionalNullable[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -96,7 +99,12 @@ class GetUsageRequest(BaseModel):
         OptionalNullable[list[str]],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    "Return only usage for the specified GPU types. When this filter is given, only 'gpu_usage' will be provided. Combining `gpu_types` with 'product_types=model_apis` is rejected with HTTP 400."
+    "Return only usage for the specified GPU types. When this filter is given, `gpu_usage` and `reserved_gpu_usage` will be provided if present; request, token, and audio usage fields are omitted. Combining `gpu_types` with `product_types=model_apis` is rejected with HTTP 400."
+    capacity_types: Annotated[
+        OptionalNullable[list[CapacityType]],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    "Return only usage for the specified capacity types. Supported fields include `reservation` only. When this filter is given, only `reserved_gpu_usage` will be provided; `gpu_usage`, request, token, and audio usage fields are omitted. Combining `capacity_types` with `product_types=model_apis` is rejected with HTTP 400."
     x_friendli_team: Annotated[
         OptionalNullable[str],
         pydantic.Field(alias="X-Friendli-Team"),
@@ -116,6 +124,7 @@ class GetUsageRequest(BaseModel):
                 "user_ids",
                 "product_types",
                 "gpu_types",
+                "capacity_types",
                 "X-Friendli-Team",
             ]
         )
@@ -129,6 +138,7 @@ class GetUsageRequest(BaseModel):
                 "user_ids",
                 "product_types",
                 "gpu_types",
+                "capacity_types",
                 "X-Friendli-Team",
             ]
         )

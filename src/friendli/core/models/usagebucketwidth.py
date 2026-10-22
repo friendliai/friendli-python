@@ -4,5 +4,5 @@ from __future__ import annotations
 
 from typing import Literal
 
-UsageBucketWidth = Literal["1d", "1h", "5m"]
+UsageBucketWidth = Literal["5m", "15m", "30m", "45m", "1h", "6h", "12h", "1d"]
 "Usage bucket width."

@@ -33,6 +33,7 @@ class SyncUsage(BaseUsage, SyncSDK):
         user_ids: OptionalNullable[Iterable[str]] = UNSET,
         product_types: OptionalNullable[Iterable[models_.ProductType]] = UNSET,
         gpu_types: OptionalNullable[Iterable[str]] = UNSET,
+        capacity_types: OptionalNullable[Iterable[models_.CapacityType]] = UNSET,
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
@@ -41,19 +42,27 @@ class SyncUsage(BaseUsage, SyncSDK):
     ) -> models_.UsageResponse:
         """Get usage details for the team.
 
-        :param start_time: RFC 3339 timestamp in UTC. Must fall on a 5-minute boundary (e.g., 2026-01-01T10:05:00Z). It must be no earlier than one year ago. When `bucket_width=1h`, it must align to an hour boundary (e.g., `10:00:00Z`); when `bucket_width=1d`, it must align to a day boundary (e.g., `00:00:00Z`).
-        :param end_time: RFC 3339 timestamp in UTC. Must fall on a 5-minute boundary (e.g., 2026-01-01T10:05:00Z), and its minute value must match `start_time`'s. It must obey the same hour/day alignment as `start_time` when `bucket_width=1h` or `1d`.
-        :param bucket_width: Width of each time bucket in response. Currently `1d`, `1h`, and `5m` are supported, default to `1d`.
+        :param start_time: RFC 3339 timestamp in UTC. Must be within the past 365 days and align with the selected `bucket_width` (e.g., 11:05:00Z for 5m, 11:00:00Z for 1h).
+        :param end_time: RFC 3339 timestamp in UTC. Must be later than `start_time` and align with the selected `bucket_width` (e.g., 11:10:00Z for 5m, 12:00:00Z for 1h).
+        :param bucket_width: Width of each time bucket. Must be selected based on the query duration (end_time - start_time) and must not exceed the query duration.
         :param limit: Specifies the number of buckets to return.
-            - `bucket_width=1d`: default limit = 7, max limit = 31
-            - `bucket_width=1h`: default limit = 24, max limit = 168
-            - `bucket_width=5m`: default limit = 12, max limit = 288
+
+            - `bucket_width=1d`: default 7, max 31
+            - `bucket_width=12h`: default 2, max 14
+            - `bucket_width=6h`: default 4, max 28
+            - `bucket_width=1h`: default 24, max 168
+            - `bucket_width=45m`: default 2, max 32
+            - `bucket_width=30m`: default 2, max 48
+            - `bucket_width=15m`: default 4, max 96
+            - `bucket_width=5m`: default 12, max 288
+
         :param page: A cursor for use in pagination. Corresponding to the `next_page` field from the previous response.
         :param group_by: Group the usage by the specified fields. Support fields include `model`, `product_type`, `user_id` and any combination of them.
         :param models: Return only usage for the listed Model APIs and Dedicated Endpoints. Values are model IDs, endpoint IDs, or a mix.
         :param user_ids: Return only usage for these users.
         :param product_types: Return only usage for the specified product types. Supported fields include `model_apis`, `dedicated_endpoints` and any combination of them.
-        :param gpu_types: Return only usage for the specified GPU types. When this filter is given, only 'gpu_usage' will be provided. Combining `gpu_types` with 'product_types=model_apis` is rejected with HTTP 400.
+        :param gpu_types: Return only usage for the specified GPU types. When this filter is given, `gpu_usage` and `reserved_gpu_usage` will be provided if present; request, token, and audio usage fields are omitted. Combining `gpu_types` with `product_types=model_apis` is rejected with HTTP 400.
+        :param capacity_types: Return only usage for the specified capacity types. Supported fields include `reservation` only. When this filter is given, only `reserved_gpu_usage` will be provided; `gpu_usage`, request, token, and audio usage fields are omitted. Combining `capacity_types` with `product_types=model_apis` is rejected with HTTP 400.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -83,6 +92,9 @@ class SyncUsage(BaseUsage, SyncSDK):
                 product_types, OptionalNullable[list[models_.ProductType]]
             ),
             gpu_types=utils.unmarshal(gpu_types, OptionalNullable[list[str]]),
+            capacity_types=utils.unmarshal(
+                capacity_types, OptionalNullable[list[models_.CapacityType]]
+            ),
             x_friendli_team=x_friendli_team,
         )
         req = self._build_request(
@@ -164,6 +176,7 @@ class AsyncUsage(BaseUsage, AsyncSDK):
         user_ids: OptionalNullable[Iterable[str]] = UNSET,
         product_types: OptionalNullable[Iterable[models_.ProductType]] = UNSET,
         gpu_types: OptionalNullable[Iterable[str]] = UNSET,
+        capacity_types: OptionalNullable[Iterable[models_.CapacityType]] = UNSET,
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
@@ -172,19 +185,27 @@ class AsyncUsage(BaseUsage, AsyncSDK):
     ) -> models_.UsageResponse:
         """Get usage details for the team.
 
-        :param start_time: RFC 3339 timestamp in UTC. Must fall on a 5-minute boundary (e.g., 2026-01-01T10:05:00Z). It must be no earlier than one year ago. When `bucket_width=1h`, it must align to an hour boundary (e.g., `10:00:00Z`); when `bucket_width=1d`, it must align to a day boundary (e.g., `00:00:00Z`).
-        :param end_time: RFC 3339 timestamp in UTC. Must fall on a 5-minute boundary (e.g., 2026-01-01T10:05:00Z), and its minute value must match `start_time`'s. It must obey the same hour/day alignment as `start_time` when `bucket_width=1h` or `1d`.
-        :param bucket_width: Width of each time bucket in response. Currently `1d`, `1h`, and `5m` are supported, default to `1d`.
+        :param start_time: RFC 3339 timestamp in UTC. Must be within the past 365 days and align with the selected `bucket_width` (e.g., 11:05:00Z for 5m, 11:00:00Z for 1h).
+        :param end_time: RFC 3339 timestamp in UTC. Must be later than `start_time` and align with the selected `bucket_width` (e.g., 11:10:00Z for 5m, 12:00:00Z for 1h).
+        :param bucket_width: Width of each time bucket. Must be selected based on the query duration (end_time - start_time) and must not exceed the query duration.
         :param limit: Specifies the number of buckets to return.
-            - `bucket_width=1d`: default limit = 7, max limit = 31
-            - `bucket_width=1h`: default limit = 24, max limit = 168
-            - `bucket_width=5m`: default limit = 12, max limit = 288
+
+            - `bucket_width=1d`: default 7, max 31
+            - `bucket_width=12h`: default 2, max 14
+            - `bucket_width=6h`: default 4, max 28
+            - `bucket_width=1h`: default 24, max 168
+            - `bucket_width=45m`: default 2, max 32
+            - `bucket_width=30m`: default 2, max 48
+            - `bucket_width=15m`: default 4, max 96
+            - `bucket_width=5m`: default 12, max 288
+
         :param page: A cursor for use in pagination. Corresponding to the `next_page` field from the previous response.
         :param group_by: Group the usage by the specified fields. Support fields include `model`, `product_type`, `user_id` and any combination of them.
         :param models: Return only usage for the listed Model APIs and Dedicated Endpoints. Values are model IDs, endpoint IDs, or a mix.
         :param user_ids: Return only usage for these users.
         :param product_types: Return only usage for the specified product types. Supported fields include `model_apis`, `dedicated_endpoints` and any combination of them.
-        :param gpu_types: Return only usage for the specified GPU types. When this filter is given, only 'gpu_usage' will be provided. Combining `gpu_types` with 'product_types=model_apis` is rejected with HTTP 400.
+        :param gpu_types: Return only usage for the specified GPU types. When this filter is given, `gpu_usage` and `reserved_gpu_usage` will be provided if present; request, token, and audio usage fields are omitted. Combining `gpu_types` with `product_types=model_apis` is rejected with HTTP 400.
+        :param capacity_types: Return only usage for the specified capacity types. Supported fields include `reservation` only. When this filter is given, only `reserved_gpu_usage` will be provided; `gpu_usage`, request, token, and audio usage fields are omitted. Combining `capacity_types` with `product_types=model_apis` is rejected with HTTP 400.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -214,6 +235,9 @@ class AsyncUsage(BaseUsage, AsyncSDK):
                 product_types, OptionalNullable[list[models_.ProductType]]
             ),
             gpu_types=utils.unmarshal(gpu_types, OptionalNullable[list[str]]),
+            capacity_types=utils.unmarshal(
+                capacity_types, OptionalNullable[list[models_.CapacityType]]
+            ),
             x_friendli_team=x_friendli_team,
         )
         req = self._build_request_async(
