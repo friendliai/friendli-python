@@ -13,7 +13,7 @@ targets:
         sourceRevisionDigest: sha256:5b9a95983f1905a668981a4edd93dd3f3699b099983a4c16532bf7e7a9180f8f
         sourceBlobDigest: sha256:ce66c5ea58f763c1dd653f5ecb1b2e09d11376effb3621d239bb0c14e6e1a622
         codeSamplesNamespace: friendli-api-schema-code-samples
-        codeSamplesRevisionDigest: sha256:b4e5eb79e6f79a39f9be964ce9919515d074e4db1c4ddb6f87e7c1687137f993
+        codeSamplesRevisionDigest: sha256:22400f0e917cddf35e8b986956f8a7b721e0eb729c2b24d67e6f1c477a61c77c
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

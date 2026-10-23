@@ -522,7 +522,7 @@ with SyncFriendli(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py) is the base class for all HTTP error responses. It has the following properties:
+[`FriendliCoreError`](./src/friendli/core/models/friendlicoreerror.py) is the base class for all HTTP error responses. It has the following properties:
 
 | Property           | Type             | Description                                                                             |
 | ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
@@ -580,7 +580,7 @@ with SyncFriendli(
 
 ### Error Classes
 **Primary error:**
-* [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py): The base class for HTTP error responses.
+* [`FriendliCoreError`](./src/friendli/core/models/friendlicoreerror.py): The base class for HTTP error responses.
 
 <details><summary>Less common errors (7)</summary>
 
@@ -592,10 +592,10 @@ with SyncFriendli(
     * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
 
 
-**Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 3 of 45 methods.*
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 1 of 45 methods.*
-* [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+**Inherit from [`FriendliCoreError`](./src/friendli/core/models/friendlicoreerror.py)**:
+* [`MessagesErrorResponse`](./src/friendli/core/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 3 of 45 methods.*
+* [`HTTPValidationError`](./src/friendli/core/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 1 of 45 methods.*
+* [`ResponseValidationError`](./src/friendli/core/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
 
