@@ -2,4 +2,28 @@
 
 from __future__ import annotations
 
+from typing import Union
+
+from typing_extensions import TypeAliasType
+
+from friendli.core.utils import eventstreaming
+
+from .serverlesschatcompletesuccess import (
+    ServerlessChatCompleteSuccess,
+    ServerlessChatCompleteSuccessTypedDict,
+)
+from .streamedchatresult import StreamedChatResult, StreamedChatResultTypedDict
+
 CONTAINER_CHAT_COMPLETE_OP_SERVERS = ["http://localhost:8000"]
+ContainerChatCompleteResponseTypedDict = TypeAliasType(
+    "ContainerChatCompleteResponseTypedDict",
+    ServerlessChatCompleteSuccessTypedDict
+    | eventstreaming.EventStream[StreamedChatResultTypedDict]
+    | eventstreaming.EventStreamAsync[StreamedChatResultTypedDict],
+)
+ContainerChatCompleteResponse = TypeAliasType(
+    "ContainerChatCompleteResponse",
+    ServerlessChatCompleteSuccess
+    | eventstreaming.EventStream[StreamedChatResult]
+    | eventstreaming.EventStreamAsync[StreamedChatResult],
+)

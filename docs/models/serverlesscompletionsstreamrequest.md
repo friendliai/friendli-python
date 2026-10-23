@@ -1,9 +1,0 @@
-# ServerlessCompletionsStreamRequest
-
-
-## Fields
-
-| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `x_friendli_team`                                                                      | *OptionalNullable[str]*                                                                | :heavy_minus_sign:                                                                     | ID of team to run requests as (optional parameter).                                    |
-| `serverless_completions_stream_body`                                                   | [models.ServerlessCompletionsStreamBody](../models/serverlesscompletionsstreambody.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |

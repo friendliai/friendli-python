@@ -2,6 +2,7 @@
 
 import abc
 from collections.abc import Iterable, Mapping
+from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
 from friendli.core import models, utils
@@ -11,6 +12,11 @@ from friendli.core.utils import eventstreaming, get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
 
 from .basesdk import AsyncSDK, BaseSDK, SyncSDK
+
+
+class ResponsesAcceptEnum(str, Enum):
+    APPLICATION_JSON = "application/json"
+    TEXT_EVENT_STREAM = "text/event-stream"
 
 
 class BaseServerlessResponses(BaseSDK):
@@ -43,13 +49,14 @@ class SyncServerlessResponses(BaseServerlessResponses, SyncSDK):
         reasoning: OptionalNullable[
             models.ResponsesReasoningConfig | models.ResponsesReasoningConfigTypedDict
         ] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: bool | None = False,
         additional_properties: Mapping[str, Any] | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
+        accept_header_override: ResponsesAcceptEnum | None = None,
         timeout_ms: int | None = None,
         http_headers: Mapping[str, str] | None = None,
-    ) -> models.ServerlessResponsesSuccess:
+    ) -> models.ServerlessResponsesResponse:
         """Responses
 
         Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.
@@ -71,6 +78,7 @@ class SyncServerlessResponses(BaseServerlessResponses, SyncSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -121,7 +129,9 @@ class SyncServerlessResponses(BaseServerlessResponses, SyncSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, text/event-stream;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -156,7 +166,7 @@ class SyncServerlessResponses(BaseServerlessResponses, SyncSDK):
                 tags=["SyncServerless.Responses"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\n<Note>\nThe Responses API may not be supported by all models available on Model APIs.\n</Note>\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/responses-chunk-object).\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "content": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\n<Note>\nThe Responses API may not be supported by all models available on Model APIs.\n</Note>\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
                         "href": "/openapi/model-apis/responses",
                         "metadata": {
                             "description": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.",
@@ -171,180 +181,19 @@ class SyncServerlessResponses(BaseServerlessResponses, SyncSDK):
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ServerlessResponsesSuccess, http_res)
-        if utils.match_response(http_res, ["422", "4XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        raise models.SDKError("Unexpected response received", http_res)
-
-    def stream(
-        self,
-        *,
-        input_: models.ServerlessResponsesStreamBodyInput
-        | models.ServerlessResponsesStreamBodyInputTypedDict,
-        model: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        instructions: OptionalNullable[str] = UNSET,
-        max_output_tokens: OptionalNullable[int] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        top_p: OptionalNullable[float] = UNSET,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
-        tools: OptionalNullable[
-            Iterable[models.ResponsesTool] | Iterable[models.ResponsesToolTypedDict]
-        ] = UNSET,
-        tool_choice: OptionalNullable[
-            models.ServerlessResponsesStreamBodyToolChoiceUnion
-            | models.ServerlessResponsesStreamBodyToolChoiceUnionTypedDict
-        ] = UNSET,
-        text: OptionalNullable[
-            models.ResponsesTextConfig | models.ResponsesTextConfigTypedDict
-        ] = UNSET,
-        reasoning: OptionalNullable[
-            models.ResponsesReasoningConfig | models.ResponsesReasoningConfigTypedDict
-        ] = UNSET,
-        stream: bool | None = True,
-        additional_properties: Mapping[str, Any] | None = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: str | None = None,
-        timeout_ms: int | None = None,
-        http_headers: Mapping[str, str] | None = None,
-    ) -> eventstreaming.EventStream[models.ServerlessResponsesStreamSuccess]:
-        """Stream responses
-
-        Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.
-
-        :param input: Text or image inputs to the model, used to generate a response.
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param instructions: A system (or developer) message inserted into the model's context.
-        :param max_output_tokens: An upper bound for the number of tokens that can be generated for a response, including visible output tokens and reasoning tokens.
-        :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both.
-        :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or `temperature` but not both.
-        :param parallel_tool_calls: Whether to allow the model to run tool calls in parallel.
-        :param tools: An array of tools the model may call while generating a response. You can specify which tool to use by setting the `tool_choice` parameter.
-        :param tool_choice: How the model should select which tool (or tools) to use when generating a response. See the `tools` parameter to see how to specify which tools the model can call.
-        :param text: Configuration options for a text response from the model. Can be plain text or structured JSON data.
-        :param reasoning: Configuration options for reasoning models.
-        :param stream: Whether to stream the generation result. When set to `true`, the response is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
-        :param additional_properties:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessResponsesStreamRequest(
-            x_friendli_team=x_friendli_team,
-            serverless_responses_stream_body=models.ServerlessResponsesStreamBody(
-                input=utils.get_pydantic_model(
-                    input_, models.ServerlessResponsesStreamBodyInput
-                ),
-                instructions=instructions,
-                max_output_tokens=max_output_tokens,
-                temperature=temperature,
-                top_p=top_p,
-                parallel_tool_calls=parallel_tool_calls,
-                tools=utils.get_pydantic_model(
-                    tools, OptionalNullable[list[models.ResponsesTool]]
-                ),
-                tool_choice=utils.get_pydantic_model(
-                    tool_choice,
-                    OptionalNullable[
-                        models.ServerlessResponsesStreamBodyToolChoiceUnion
-                    ],
-                ),
-                text=utils.get_pydantic_model(
-                    text, OptionalNullable[models.ResponsesTextConfig]
-                ),
-                reasoning=utils.get_pydantic_model(
-                    reasoning, OptionalNullable[models.ResponsesReasoningConfig]
-                ),
-                stream=stream,
-                model=model,
-                **utils.unmarshal(additional_properties, Optional[dict[str, Any]])
-                or {},
-            ),
-        )
-        req = self._build_request(
-            method="POST",
-            path="/serverless/v1/responses#stream",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="text/event-stream",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_responses_stream_body,
-                False,
-                False,
-                "json",
-                models.ServerlessResponsesStreamBody,
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
-                )
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="serverlessResponsesStream",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-                tags=["SyncServerless.Responses"],
-                extensions={
-                    "x-mint": {
-                        "content": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\n<Note>\nThe Responses API may not be supported by all models available on Model APIs.\n</Note>\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/responses-chunk-object).\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
-                        "metadata": {
-                            "description": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.",
-                            "og:description": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.",
-                            "og:title": "SyncModel APIs Stream Responses",
-                            "sidebarTitle": "Stream Responses",
-                            "tag": "Beta",
-                            "title": "SyncModel APIs Stream Responses",
-                        },
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
+        if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            return unmarshal_json_response(
+                models.ServerlessResponsesSuccess, http_res, http_res_text
+            )
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ServerlessResponsesStreamSuccess, http_res, raw
+                    models.ResponsesStream, http_res, raw
                 ),
                 client_ref=self,
             )
@@ -384,13 +233,14 @@ class AsyncServerlessResponses(BaseServerlessResponses, AsyncSDK):
         reasoning: OptionalNullable[
             models.ResponsesReasoningConfig | models.ResponsesReasoningConfigTypedDict
         ] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: bool | None = False,
         additional_properties: Mapping[str, Any] | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
+        accept_header_override: ResponsesAcceptEnum | None = None,
         timeout_ms: int | None = None,
         http_headers: Mapping[str, str] | None = None,
-    ) -> models.ServerlessResponsesSuccess:
+    ) -> models.ServerlessResponsesResponse:
         """Responses
 
         Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.
@@ -412,6 +262,7 @@ class AsyncServerlessResponses(BaseServerlessResponses, AsyncSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -462,7 +313,9 @@ class AsyncServerlessResponses(BaseServerlessResponses, AsyncSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, text/event-stream;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -497,7 +350,7 @@ class AsyncServerlessResponses(BaseServerlessResponses, AsyncSDK):
                 tags=["AsyncServerless.Responses"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\n<Note>\nThe Responses API may not be supported by all models available on Model APIs.\n</Note>\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/responses-chunk-object).\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "content": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\n<Note>\nThe Responses API may not be supported by all models available on Model APIs.\n</Note>\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
                         "href": "/openapi/model-apis/responses",
                         "metadata": {
                             "description": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.",
@@ -512,180 +365,19 @@ class AsyncServerlessResponses(BaseServerlessResponses, AsyncSDK):
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ServerlessResponsesSuccess, http_res)
-        if utils.match_response(http_res, ["422", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        raise models.SDKError("Unexpected response received", http_res)
-
-    async def stream(
-        self,
-        *,
-        input_: models.ServerlessResponsesStreamBodyInput
-        | models.ServerlessResponsesStreamBodyInputTypedDict,
-        model: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        instructions: OptionalNullable[str] = UNSET,
-        max_output_tokens: OptionalNullable[int] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        top_p: OptionalNullable[float] = UNSET,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
-        tools: OptionalNullable[
-            Iterable[models.ResponsesTool] | Iterable[models.ResponsesToolTypedDict]
-        ] = UNSET,
-        tool_choice: OptionalNullable[
-            models.ServerlessResponsesStreamBodyToolChoiceUnion
-            | models.ServerlessResponsesStreamBodyToolChoiceUnionTypedDict
-        ] = UNSET,
-        text: OptionalNullable[
-            models.ResponsesTextConfig | models.ResponsesTextConfigTypedDict
-        ] = UNSET,
-        reasoning: OptionalNullable[
-            models.ResponsesReasoningConfig | models.ResponsesReasoningConfigTypedDict
-        ] = UNSET,
-        stream: bool | None = True,
-        additional_properties: Mapping[str, Any] | None = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: str | None = None,
-        timeout_ms: int | None = None,
-        http_headers: Mapping[str, str] | None = None,
-    ) -> eventstreaming.EventStreamAsync[models.ServerlessResponsesStreamSuccess]:
-        """Stream responses
-
-        Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.
-
-        :param input: Text or image inputs to the model, used to generate a response.
-        :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param instructions: A system (or developer) message inserted into the model's context.
-        :param max_output_tokens: An upper bound for the number of tokens that can be generated for a response, including visible output tokens and reasoning tokens.
-        :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both.
-        :param top_p: An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or `temperature` but not both.
-        :param parallel_tool_calls: Whether to allow the model to run tool calls in parallel.
-        :param tools: An array of tools the model may call while generating a response. You can specify which tool to use by setting the `tool_choice` parameter.
-        :param tool_choice: How the model should select which tool (or tools) to use when generating a response. See the `tools` parameter to see how to specify which tools the model can call.
-        :param text: Configuration options for a text response from the model. Can be plain text or structured JSON data.
-        :param reasoning: Configuration options for reasoning models.
-        :param stream: Whether to stream the generation result. When set to `true`, the response is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
-        :param additional_properties:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessResponsesStreamRequest(
-            x_friendli_team=x_friendli_team,
-            serverless_responses_stream_body=models.ServerlessResponsesStreamBody(
-                input=utils.get_pydantic_model(
-                    input_, models.ServerlessResponsesStreamBodyInput
-                ),
-                instructions=instructions,
-                max_output_tokens=max_output_tokens,
-                temperature=temperature,
-                top_p=top_p,
-                parallel_tool_calls=parallel_tool_calls,
-                tools=utils.get_pydantic_model(
-                    tools, OptionalNullable[list[models.ResponsesTool]]
-                ),
-                tool_choice=utils.get_pydantic_model(
-                    tool_choice,
-                    OptionalNullable[
-                        models.ServerlessResponsesStreamBodyToolChoiceUnion
-                    ],
-                ),
-                text=utils.get_pydantic_model(
-                    text, OptionalNullable[models.ResponsesTextConfig]
-                ),
-                reasoning=utils.get_pydantic_model(
-                    reasoning, OptionalNullable[models.ResponsesReasoningConfig]
-                ),
-                stream=stream,
-                model=model,
-                **utils.unmarshal(additional_properties, Optional[dict[str, Any]])
-                or {},
-            ),
-        )
-        req = self._build_request_async(
-            method="POST",
-            path="/serverless/v1/responses#stream",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="text/event-stream",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_responses_stream_body,
-                False,
-                False,
-                "json",
-                models.ServerlessResponsesStreamBody,
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
-                )
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="serverlessResponsesStream",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-                tags=["AsyncServerless.Responses"],
-                extensions={
-                    "x-mint": {
-                        "content": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\n<Note>\nThe Responses API may not be supported by all models available on Model APIs.\n</Note>\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/responses-chunk-object).\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
-                        "metadata": {
-                            "description": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.",
-                            "og:description": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.",
-                            "og:title": "AsyncModel APIs Stream Responses",
-                            "sidebarTitle": "Stream Responses",
-                            "tag": "Beta",
-                            "title": "AsyncModel APIs Stream Responses",
-                        },
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
+        if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            return unmarshal_json_response(
+                models.ServerlessResponsesSuccess, http_res, http_res_text
+            )
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ServerlessResponsesStreamSuccess, http_res, raw
+                    models.ResponsesStream, http_res, raw
                 ),
                 client_ref=self,
             )

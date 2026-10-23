@@ -2,4 +2,31 @@
 
 from __future__ import annotations
 
+from typing import Union
+
+from typing_extensions import TypeAliasType
+
+from friendli.core.utils import eventstreaming
+
+from .serverlessaudiotranscriptionsuccess import (
+    ServerlessAudioTranscriptionSuccess,
+    ServerlessAudioTranscriptionSuccessTypedDict,
+)
+from .streamedaudiotranscriptionresult import (
+    StreamedAudioTranscriptionResult,
+    StreamedAudioTranscriptionResultTypedDict,
+)
+
 CONTAINER_AUDIO_TRANSCRIPTIONS_OP_SERVERS = ["http://localhost:8000"]
+ContainerAudioTranscriptionsResponseTypedDict = TypeAliasType(
+    "ContainerAudioTranscriptionsResponseTypedDict",
+    ServerlessAudioTranscriptionSuccessTypedDict
+    | eventstreaming.EventStream[StreamedAudioTranscriptionResultTypedDict]
+    | eventstreaming.EventStreamAsync[StreamedAudioTranscriptionResultTypedDict],
+)
+ContainerAudioTranscriptionsResponse = TypeAliasType(
+    "ContainerAudioTranscriptionsResponse",
+    ServerlessAudioTranscriptionSuccess
+    | eventstreaming.EventStream[StreamedAudioTranscriptionResult]
+    | eventstreaming.EventStreamAsync[StreamedAudioTranscriptionResult],
+)

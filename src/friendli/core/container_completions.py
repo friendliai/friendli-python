@@ -2,6 +2,7 @@
 
 import abc
 from collections.abc import Mapping
+from enum import Enum
 from typing import Optional, Union, cast
 
 from friendli.core import models, utils
@@ -11,6 +12,11 @@ from friendli.core.utils import eventstreaming, get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
 
 from .basesdk import AsyncSDK, BaseSDK, SyncSDK
+
+
+class CompleteAcceptEnum(str, Enum):
+    APPLICATION_JSON = "application/json"
+    TEXT_EVENT_STREAM = "text/event-stream"
 
 
 class BaseContainerCompletions(BaseSDK):
@@ -25,9 +31,10 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
         | models.ContainerCompletionsBodyTypedDict,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
+        accept_header_override: CompleteAcceptEnum | None = None,
         timeout_ms: int | None = None,
         http_headers: Mapping[str, str] | None = None,
-    ) -> models.ServerlessCompletionsSuccess:
+    ) -> models.ContainerCompletionsCompleteResponse:
         """Completions
 
         Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
@@ -36,6 +43,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -59,7 +67,9 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, text/event-stream;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -90,7 +100,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
                 tags=["SyncContainer.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
                         "href": "/openapi/container/completions",
                         "metadata": {
                             "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
@@ -104,113 +114,19 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.ServerlessCompletionsSuccess, http_res
-            )
-        if utils.match_response(http_res, ["422", "4XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        raise models.SDKError("Unexpected response received", http_res)
-
-    def stream(
-        self,
-        *,
-        request: models.ContainerCompletionsStreamBody
-        | models.ContainerCompletionsStreamBodyTypedDict,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: str | None = None,
-        timeout_ms: int | None = None,
-        http_headers: Mapping[str, str] | None = None,
-    ) -> eventstreaming.EventStream[models.ServerlessCompletionsStreamSuccess]:
-        """Stream completions
-
-        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
-
-        :param request: The request object to send.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = models.CONTAINER_COMPLETIONS_STREAM_OP_SERVERS[0]
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.ContainerCompletionsStreamBody)
-        request = cast(models.ContainerCompletionsStreamBody, request)
-        req = self._build_request(
-            method="POST",
-            path="/v1/completions#stream",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="text/event-stream",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerCompletionsStreamBody
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
-                )
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="containerCompletionsStream",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-                tags=["SyncContainer.Completions"],
-                extensions={
-                    "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
-                        "metadata": {
-                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
-                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
-                            "og:title": "SyncContainer Stream Completions",
-                            "sidebarTitle": "Stream Completions",
-                            "title": "SyncContainer Stream Completions",
-                        },
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
+        if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            return unmarshal_json_response(
+                models.ServerlessCompletionsSuccess, http_res, http_res_text
+            )
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ServerlessCompletionsStreamSuccess, http_res, raw
+                    models.StreamedCompletionsResult, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -233,9 +149,10 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
         | models.ContainerCompletionsBodyTypedDict,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
+        accept_header_override: CompleteAcceptEnum | None = None,
         timeout_ms: int | None = None,
         http_headers: Mapping[str, str] | None = None,
-    ) -> models.ServerlessCompletionsSuccess:
+    ) -> models.ContainerCompletionsCompleteResponse:
         """Completions
 
         Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
@@ -244,6 +161,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -267,7 +185,9 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, text/event-stream;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -298,7 +218,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
                 tags=["AsyncContainer.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
                         "href": "/openapi/container/completions",
                         "metadata": {
                             "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
@@ -312,113 +232,19 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.ServerlessCompletionsSuccess, http_res
-            )
-        if utils.match_response(http_res, ["422", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        raise models.SDKError("Unexpected response received", http_res)
-
-    async def stream(
-        self,
-        *,
-        request: models.ContainerCompletionsStreamBody
-        | models.ContainerCompletionsStreamBodyTypedDict,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: str | None = None,
-        timeout_ms: int | None = None,
-        http_headers: Mapping[str, str] | None = None,
-    ) -> eventstreaming.EventStreamAsync[models.ServerlessCompletionsStreamSuccess]:
-        """Stream completions
-
-        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
-
-        :param request: The request object to send.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = models.CONTAINER_COMPLETIONS_STREAM_OP_SERVERS[0]
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.ContainerCompletionsStreamBody)
-        request = cast(models.ContainerCompletionsStreamBody, request)
-        req = self._build_request_async(
-            method="POST",
-            path="/v1/completions#stream",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="text/event-stream",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerCompletionsStreamBody
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
-                )
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="containerCompletionsStream",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-                tags=["AsyncContainer.Completions"],
-                extensions={
-                    "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/completions-chunk-object).",
-                        "metadata": {
-                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
-                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
-                            "og:title": "AsyncContainer Stream Completions",
-                            "sidebarTitle": "Stream Completions",
-                            "title": "AsyncContainer Stream Completions",
-                        },
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
+        if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            return unmarshal_json_response(
+                models.ServerlessCompletionsSuccess, http_res, http_res_text
+            )
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ServerlessCompletionsStreamSuccess, http_res, raw
+                    models.StreamedCompletionsResult, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

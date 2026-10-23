@@ -2,4 +2,28 @@
 
 from __future__ import annotations
 
+from typing import Union
+
+from typing_extensions import TypeAliasType
+
+from friendli.core.utils import eventstreaming
+
+from .containermessagessuccess import (
+    ContainerMessagesSuccess,
+    ContainerMessagesSuccessTypedDict,
+)
+from .messagesstream import MessagesStream, MessagesStreamTypedDict
+
 CONTAINER_MESSAGES_OP_SERVERS = ["http://localhost:8000"]
+ContainerMessagesResponseTypedDict = TypeAliasType(
+    "ContainerMessagesResponseTypedDict",
+    ContainerMessagesSuccessTypedDict
+    | eventstreaming.EventStream[MessagesStreamTypedDict]
+    | eventstreaming.EventStreamAsync[MessagesStreamTypedDict],
+)
+ContainerMessagesResponse = TypeAliasType(
+    "ContainerMessagesResponse",
+    ContainerMessagesSuccess
+    | eventstreaming.EventStream[MessagesStream]
+    | eventstreaming.EventStreamAsync[MessagesStream],
+)

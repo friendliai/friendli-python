@@ -2,6 +2,7 @@
 
 import abc
 from collections.abc import Iterable, Mapping
+from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
 from friendli.core import models, utils
@@ -11,6 +12,11 @@ from friendli.core.utils import eventstreaming, get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
 
 from .basesdk import AsyncSDK, BaseSDK, SyncSDK
+
+
+class CompleteAcceptEnum(str, Enum):
+    APPLICATION_JSON = "application/json"
+    TEXT_EVENT_STREAM = "text/event-stream"
 
 
 class BaseContainerChat(BaseSDK):
@@ -43,7 +49,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             | models.ContainerChatCompletionBodySeedTypedDict
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: bool | None = False,
         stream_options: OptionalNullable[
             models.StreamOptions | models.StreamOptionsTypedDict
         ] = UNSET,
@@ -67,9 +73,10 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
+        accept_header_override: CompleteAcceptEnum | None = None,
         timeout_ms: int | None = None,
         http_headers: Mapping[str, str] | None = None,
-    ) -> models.ServerlessChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteResponse:
         """Chat completions
 
         Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.
@@ -134,6 +141,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -197,7 +205,9 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, text/event-stream;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -228,7 +238,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
                 tags=["SyncContainer.Chat"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/chat-completions-chunk-object).",
+                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
                         "href": "/openapi/container/chat-completions",
                         "metadata": {
                             "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
@@ -242,252 +252,19 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.ServerlessChatCompleteSuccess, http_res
-            )
-        if utils.match_response(http_res, ["422", "4XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        raise models.SDKError("Unexpected response received", http_res)
-
-    def stream(
-        self,
-        *,
-        messages: Iterable[models.Message] | Iterable[models.MessageTypedDict],
-        model: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
-        eos_token: OptionalNullable[Iterable[int]] = UNSET,
-        frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[Mapping[str, Any]] = UNSET,
-        logprobs: OptionalNullable[bool] = UNSET,
-        max_tokens: OptionalNullable[int] = UNSET,
-        min_p: OptionalNullable[float] = UNSET,
-        n: OptionalNullable[int] = UNSET,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
-        presence_penalty: OptionalNullable[float] = UNSET,
-        repetition_penalty: OptionalNullable[float] = UNSET,
-        reasoning_effort: OptionalNullable[
-            models.ContainerChatCompletionStreamBodyReasoningEffort
-        ] = UNSET,
-        reasoning_budget: OptionalNullable[int] = UNSET,
-        seed: OptionalNullable[
-            models.ContainerChatCompletionStreamBodySeed
-            | models.ContainerChatCompletionStreamBodySeedTypedDict
-        ] = UNSET,
-        stop: OptionalNullable[Iterable[str]] = UNSET,
-        stream: bool | None = True,
-        stream_options: OptionalNullable[
-            models.StreamOptions | models.StreamOptionsTypedDict
-        ] = UNSET,
-        parse_reasoning: OptionalNullable[bool] = UNSET,
-        include_reasoning: OptionalNullable[bool] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        tool_choice: models.ContainerChatCompletionStreamBodyToolChoice
-        | models.ContainerChatCompletionStreamBodyToolChoiceTypedDict
-        | None = None,
-        top_k: OptionalNullable[int] = UNSET,
-        top_logprobs: OptionalNullable[int] = UNSET,
-        top_p: OptionalNullable[float] = UNSET,
-        xtc_threshold: OptionalNullable[float] = UNSET,
-        xtc_probability: OptionalNullable[float] = UNSET,
-        tools: OptionalNullable[
-            Iterable[models.Tool] | Iterable[models.ToolTypedDict]
-        ] = UNSET,
-        min_tokens: OptionalNullable[int] = UNSET,
-        response_format: OptionalNullable[
-            models.ResponseFormat | models.ResponseFormatTypedDict
-        ] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: str | None = None,
-        timeout_ms: int | None = None,
-        http_headers: Mapping[str, str] | None = None,
-    ) -> eventstreaming.EventStream[models.ServerlessChatCompletionStreamSuccess]:
-        """Stream chat completions
-
-        Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.
-
-        :param messages: A list of messages comprising the conversation so far.
-        :param model: Routes the request to a specific adapter.
-        :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
-        :param eos_token: A list of endpoint sentence tokens.
-        :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
-        :param logit_bias: Accepts a JSON object that maps tokens to an associated bias value. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model.
-        :param logprobs: Whether to return log probabilities of the output tokens or not.
-        :param max_tokens: The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument.
-        :param min_p: A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling.
-        :param n: The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
-        :param parallel_tool_calls: Whether to enable parallel function calling.
-        :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
-        :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be a positive value (1.0 means no penalty and is the default). See [Keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param reasoning_effort: Sets how much reasoning the model does before answering. Higher values give more thorough responses but take longer. This affects reasoning models only, and the available options depend on the model.
-        :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
-        :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
-        :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
-        :param stream_options: Options related to stream.
-            It can only be used when `stream: true`.
-        :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
-
-            For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
-        :param include_reasoning: When `parse_reasoning=true`, include parsed reasoning (`reasoning_content`). Defaults to true.
-
-            For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
-        :param temperature: Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument.
-        :param tool_choice: Determines the tool calling behavior of the model.
-            When set to `none`, the model will bypass tool execution and generate a response directly.
-            In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.
-            Alternatively, setting `required` ensures that the model invokes at least one tool before responding to the user.
-            You can also specify a particular tool by `{\\"type\\": \\"function\\", \\"function\\": {\\"name\\": \\"my_function\\"}}`.
-
-        :param top_k: Limits sampling to the top k tokens with the highest probabilities. Values range from 0 (no filtering) to the model's vocabulary size (inclusive). The default value of 0 applies no filtering, allowing all tokens.
-        :param top_logprobs: The number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to true if this parameter is used.
-        :param top_p: Keeps only the smallest set of tokens whose cumulative probabilities reach `top_p` or higher. Values range from 0.0 to 1.0 (inclusive). The default value of 1.0 includes all tokens, allowing maximum diversity.
-        :param xtc_threshold: A probability threshold used to identify “top choice” tokens for exclusion in XTC (Exclude Top Choices) sampling. Tokens with probabilities at or above this threshold are considered viable candidates, and all but the least likely viable token are excluded from sampling. This option reduces the dominance of highly probable tokens while preserving some diversity by keeping the least confident “top choice.” Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values make the filtering more selective by requiring higher probabilities to trigger exclusion, while lower values apply filtering more broadly. The default value of 0.0 disables XTC filtering entirely.
-        :param xtc_probability: The probability that XTC (Exclude Top Choices) filtering will be applied for each sampling decision. When XTC is triggered, high-probability tokens above the `xtc_threshold` are excluded except for the least likely viable token. This stochastic activation allows for a balance between standard sampling and creativity-boosting exclusion filtering. Values range from 0.0 (inclusive) to 1.0 (inclusive), where 0.0 means XTC is never applied, 1.0 means XTC is always applied when viable tokens exist, and intermediate values provide probabilistic activation. The default value of 0.0 disables XTC filtering.
-        :param tools: A list of tools the model may call.
-            Use this to provide a list of functions the model may generate JSON inputs for.
-
-            **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
-        :param min_tokens: The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
-
-            **This field is unsupported when `tools` or `response_format` is specified.**
-        :param response_format: The enforced format of the model's output.
-
-            Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.
-
-            For more detailed information, please refer [here](https://friendli.ai/docs/guides/structured-outputs).
-
-            ***Important***
-            You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
-            Otherwise, the model may result in an unending stream of whitespace or other characters.
-
-            **This field is unsupported when `tools` is specified.**
-            **When `response_format` is specified, `min_tokens` field is unsupported.**
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = models.CONTAINER_CHAT_STREAM_OP_SERVERS[0]
-        request = models.ContainerChatCompletionStreamBody(
-            model=model,
-            messages=utils.get_pydantic_model(messages, list[models.Message]),
-            chat_template_kwargs=utils.unmarshal(
-                chat_template_kwargs, OptionalNullable[dict[str, Any]]
-            ),
-            eos_token=utils.unmarshal(eos_token, OptionalNullable[list[int]]),
-            frequency_penalty=frequency_penalty,
-            logit_bias=utils.unmarshal(logit_bias, OptionalNullable[dict[str, Any]]),
-            logprobs=logprobs,
-            max_tokens=max_tokens,
-            min_p=min_p,
-            n=n,
-            parallel_tool_calls=parallel_tool_calls,
-            presence_penalty=presence_penalty,
-            repetition_penalty=repetition_penalty,
-            reasoning_effort=reasoning_effort,
-            reasoning_budget=reasoning_budget,
-            seed=utils.unmarshal(
-                seed, OptionalNullable[models.ContainerChatCompletionStreamBodySeed]
-            ),
-            stop=utils.unmarshal(stop, OptionalNullable[list[str]]),
-            stream=stream,
-            stream_options=utils.get_pydantic_model(
-                stream_options, OptionalNullable[models.StreamOptions]
-            ),
-            parse_reasoning=parse_reasoning,
-            include_reasoning=include_reasoning,
-            temperature=temperature,
-            tool_choice=utils.get_pydantic_model(
-                tool_choice,
-                Optional[models.ContainerChatCompletionStreamBodyToolChoice],
-            ),
-            top_k=top_k,
-            top_logprobs=top_logprobs,
-            top_p=top_p,
-            xtc_threshold=xtc_threshold,
-            xtc_probability=xtc_probability,
-            tools=utils.get_pydantic_model(tools, OptionalNullable[list[models.Tool]]),
-            min_tokens=min_tokens,
-            response_format=utils.get_pydantic_model(
-                response_format, OptionalNullable[models.ResponseFormat]
-            ),
-        )
-        req = self._build_request(
-            method="POST",
-            path="/v1/chat/completions#stream",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="text/event-stream",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerChatCompletionStreamBody
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
-                )
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="containerChatStream",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-                tags=["SyncContainer.Chat"],
-                extensions={
-                    "x-mint": {
-                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/chat-completions-chunk-object).",
-                        "metadata": {
-                            "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
-                            "og:description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
-                            "og:title": "SyncContainer Stream Chat Completions",
-                            "sidebarTitle": "Stream Chat Completions",
-                            "title": "SyncContainer Stream Chat Completions",
-                        },
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
+        if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            return unmarshal_json_response(
+                models.ServerlessChatCompleteSuccess, http_res, http_res_text
+            )
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ServerlessChatCompletionStreamSuccess, http_res, raw
+                    models.StreamedChatResult, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -528,7 +305,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             | models.ContainerChatCompletionBodySeedTypedDict
         ] = UNSET,
         stop: OptionalNullable[Iterable[str]] = UNSET,
-        stream: OptionalNullable[bool] = UNSET,
+        stream: bool | None = False,
         stream_options: OptionalNullable[
             models.StreamOptions | models.StreamOptionsTypedDict
         ] = UNSET,
@@ -552,9 +329,10 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
+        accept_header_override: CompleteAcceptEnum | None = None,
         timeout_ms: int | None = None,
         http_headers: Mapping[str, str] | None = None,
-    ) -> models.ServerlessChatCompleteSuccess:
+    ) -> models.ContainerChatCompleteResponse:
         """Chat completions
 
         Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.
@@ -619,6 +397,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -682,7 +461,9 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, text/event-stream;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -713,7 +494,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
                 tags=["AsyncContainer.Chat"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/chat-completions-chunk-object).",
+                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
                         "href": "/openapi/container/chat-completions",
                         "metadata": {
                             "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
@@ -727,252 +508,19 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.ServerlessChatCompleteSuccess, http_res
-            )
-        if utils.match_response(http_res, ["422", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        raise models.SDKError("Unexpected response received", http_res)
-
-    async def stream(
-        self,
-        *,
-        messages: Iterable[models.Message] | Iterable[models.MessageTypedDict],
-        model: OptionalNullable[str] = UNSET,
-        chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
-        eos_token: OptionalNullable[Iterable[int]] = UNSET,
-        frequency_penalty: OptionalNullable[float] = UNSET,
-        logit_bias: OptionalNullable[Mapping[str, Any]] = UNSET,
-        logprobs: OptionalNullable[bool] = UNSET,
-        max_tokens: OptionalNullable[int] = UNSET,
-        min_p: OptionalNullable[float] = UNSET,
-        n: OptionalNullable[int] = UNSET,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
-        presence_penalty: OptionalNullable[float] = UNSET,
-        repetition_penalty: OptionalNullable[float] = UNSET,
-        reasoning_effort: OptionalNullable[
-            models.ContainerChatCompletionStreamBodyReasoningEffort
-        ] = UNSET,
-        reasoning_budget: OptionalNullable[int] = UNSET,
-        seed: OptionalNullable[
-            models.ContainerChatCompletionStreamBodySeed
-            | models.ContainerChatCompletionStreamBodySeedTypedDict
-        ] = UNSET,
-        stop: OptionalNullable[Iterable[str]] = UNSET,
-        stream: bool | None = True,
-        stream_options: OptionalNullable[
-            models.StreamOptions | models.StreamOptionsTypedDict
-        ] = UNSET,
-        parse_reasoning: OptionalNullable[bool] = UNSET,
-        include_reasoning: OptionalNullable[bool] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        tool_choice: models.ContainerChatCompletionStreamBodyToolChoice
-        | models.ContainerChatCompletionStreamBodyToolChoiceTypedDict
-        | None = None,
-        top_k: OptionalNullable[int] = UNSET,
-        top_logprobs: OptionalNullable[int] = UNSET,
-        top_p: OptionalNullable[float] = UNSET,
-        xtc_threshold: OptionalNullable[float] = UNSET,
-        xtc_probability: OptionalNullable[float] = UNSET,
-        tools: OptionalNullable[
-            Iterable[models.Tool] | Iterable[models.ToolTypedDict]
-        ] = UNSET,
-        min_tokens: OptionalNullable[int] = UNSET,
-        response_format: OptionalNullable[
-            models.ResponseFormat | models.ResponseFormatTypedDict
-        ] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: str | None = None,
-        timeout_ms: int | None = None,
-        http_headers: Mapping[str, str] | None = None,
-    ) -> eventstreaming.EventStreamAsync[models.ServerlessChatCompletionStreamSuccess]:
-        """Stream chat completions
-
-        Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.
-
-        :param messages: A list of messages comprising the conversation so far.
-        :param model: Routes the request to a specific adapter.
-        :param chat_template_kwargs: Additional keyword arguments supplied to the template renderer. These parameters will be available for use within the chat template.
-        :param eos_token: A list of endpoint sentence tokens.
-        :param frequency_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled, taking into account their frequency in the preceding text. This penalization diminishes the model's tendency to reproduce identical lines verbatim.
-        :param logit_bias: Accepts a JSON object that maps tokens to an associated bias value. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model.
-        :param logprobs: Whether to return log probabilities of the output tokens or not.
-        :param max_tokens: The maximum number of tokens to generate. For decoder-only models like GPT, the length of your input tokens plus `max_tokens` should not exceed the model's maximum length (e.g., 2048 for OpenAI GPT-3). For encoder-decoder models like T5 or BlenderBot, `max_tokens` should not exceed the model's maximum output length. This is similar to Hugging Face's [`max_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.max_new_tokens) argument.
-        :param min_p: A scaling factor used to determine the minimum token probability threshold. This threshold is calculated as `min_p` multiplied by the probability of the most likely token. Tokens with probabilities below this scaled threshold are excluded from sampling. Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values result in stricter filtering, while lower values allow for greater diversity. The default value of 0.0 disables filtering, allowing all tokens to be considered for sampling.
-        :param n: The number of independently generated results for the prompt. Defaults to 1. This is similar to Hugging Face's [`num_return_sequences`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.GenerationConfig.num_return_sequences) argument.
-        :param parallel_tool_calls: Whether to enable parallel function calling.
-        :param presence_penalty: Number between -2.0 and 2.0. Positive values penalizes tokens that have been sampled at least once in the existing text.
-        :param repetition_penalty: Penalizes tokens that have already appeared in the generated result (plus the input tokens for decoder-only models). Should be a positive value (1.0 means no penalty and is the default). See [Keskar et al., 2019](https://arxiv.org/abs/1909.05858) for more details. This is similar to Hugging Face's [`repetition_penalty`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.repetition_penalty) argument.
-        :param reasoning_effort: Sets how much reasoning the model does before answering. Higher values give more thorough responses but take longer. This affects reasoning models only, and the available options depend on the model.
-        :param reasoning_budget: Specifies a positive integer that defines a limit on the number of tokens used for internal reasoning tokens. This parameter is only effective for reasoning models.
-        :param seed: Seed to control random procedure. If nothing is given, random seed is used for sampling, and return the seed along with the generated result. When using the `n` argument, you can pass a list of seed values to control all of the independent generations.
-        :param stop: When one of the stop phrases appears in the generation result, the API will stop generation. The stop phrases are excluded from the result. Defaults to empty list.
-        :param stream: Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated.
-        :param stream_options: Options related to stream.
-            It can only be used when `stream: true`.
-        :param parse_reasoning: Parses model reasoning into `reasoning_content` while keeping the answer in `content`. Default value may vary between endpoints.
-
-            For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
-        :param include_reasoning: When `parse_reasoning=true`, include parsed reasoning (`reasoning_content`). Defaults to true.
-
-            For more detailed information, please refer [here](https://friendli.ai/docs/guides/reasoning#reasoning-parsing-with-friendli).
-        :param temperature: Sampling temperature. Smaller temperature makes the generation result closer to greedy, argmax (i.e., `top_k = 1`) sampling. Defaults to 1.0. This is similar to Hugging Face's [`temperature`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.temperature) argument.
-        :param tool_choice: Determines the tool calling behavior of the model.
-            When set to `none`, the model will bypass tool execution and generate a response directly.
-            In `auto` mode (the default), the model dynamically decides whether to call a tool or respond with a message.
-            Alternatively, setting `required` ensures that the model invokes at least one tool before responding to the user.
-            You can also specify a particular tool by `{\\"type\\": \\"function\\", \\"function\\": {\\"name\\": \\"my_function\\"}}`.
-
-        :param top_k: Limits sampling to the top k tokens with the highest probabilities. Values range from 0 (no filtering) to the model's vocabulary size (inclusive). The default value of 0 applies no filtering, allowing all tokens.
-        :param top_logprobs: The number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to true if this parameter is used.
-        :param top_p: Keeps only the smallest set of tokens whose cumulative probabilities reach `top_p` or higher. Values range from 0.0 to 1.0 (inclusive). The default value of 1.0 includes all tokens, allowing maximum diversity.
-        :param xtc_threshold: A probability threshold used to identify “top choice” tokens for exclusion in XTC (Exclude Top Choices) sampling. Tokens with probabilities at or above this threshold are considered viable candidates, and all but the least likely viable token are excluded from sampling. This option reduces the dominance of highly probable tokens while preserving some diversity by keeping the least confident “top choice.” Values range from 0.0 (inclusive) to 1.0 (inclusive). Higher values make the filtering more selective by requiring higher probabilities to trigger exclusion, while lower values apply filtering more broadly. The default value of 0.0 disables XTC filtering entirely.
-        :param xtc_probability: The probability that XTC (Exclude Top Choices) filtering will be applied for each sampling decision. When XTC is triggered, high-probability tokens above the `xtc_threshold` are excluded except for the least likely viable token. This stochastic activation allows for a balance between standard sampling and creativity-boosting exclusion filtering. Values range from 0.0 (inclusive) to 1.0 (inclusive), where 0.0 means XTC is never applied, 1.0 means XTC is always applied when viable tokens exist, and intermediate values provide probabilistic activation. The default value of 0.0 disables XTC filtering.
-        :param tools: A list of tools the model may call.
-            Use this to provide a list of functions the model may generate JSON inputs for.
-
-            **When `tools` is specified, `min_tokens` and `response_format` fields are unsupported.**
-        :param min_tokens: The minimum number of tokens to generate. Default value is 0. This is similar to Hugging Face's [`min_new_tokens`](https://huggingface.co/docs/transformers/v4.26.0/en/main_classes/text_generation#transformers.generationconfig.min_new_tokens) argument.
-
-            **This field is unsupported when `tools` or `response_format` is specified.**
-        :param response_format: The enforced format of the model's output.
-
-            Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.
-
-            For more detailed information, please refer [here](https://friendli.ai/docs/guides/structured-outputs).
-
-            ***Important***
-            You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).
-            Otherwise, the model may result in an unending stream of whitespace or other characters.
-
-            **This field is unsupported when `tools` is specified.**
-            **When `response_format` is specified, `min_tokens` field is unsupported.**
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = models.CONTAINER_CHAT_STREAM_OP_SERVERS[0]
-        request = models.ContainerChatCompletionStreamBody(
-            model=model,
-            messages=utils.get_pydantic_model(messages, list[models.Message]),
-            chat_template_kwargs=utils.unmarshal(
-                chat_template_kwargs, OptionalNullable[dict[str, Any]]
-            ),
-            eos_token=utils.unmarshal(eos_token, OptionalNullable[list[int]]),
-            frequency_penalty=frequency_penalty,
-            logit_bias=utils.unmarshal(logit_bias, OptionalNullable[dict[str, Any]]),
-            logprobs=logprobs,
-            max_tokens=max_tokens,
-            min_p=min_p,
-            n=n,
-            parallel_tool_calls=parallel_tool_calls,
-            presence_penalty=presence_penalty,
-            repetition_penalty=repetition_penalty,
-            reasoning_effort=reasoning_effort,
-            reasoning_budget=reasoning_budget,
-            seed=utils.unmarshal(
-                seed, OptionalNullable[models.ContainerChatCompletionStreamBodySeed]
-            ),
-            stop=utils.unmarshal(stop, OptionalNullable[list[str]]),
-            stream=stream,
-            stream_options=utils.get_pydantic_model(
-                stream_options, OptionalNullable[models.StreamOptions]
-            ),
-            parse_reasoning=parse_reasoning,
-            include_reasoning=include_reasoning,
-            temperature=temperature,
-            tool_choice=utils.get_pydantic_model(
-                tool_choice,
-                Optional[models.ContainerChatCompletionStreamBodyToolChoice],
-            ),
-            top_k=top_k,
-            top_logprobs=top_logprobs,
-            top_p=top_p,
-            xtc_threshold=xtc_threshold,
-            xtc_probability=xtc_probability,
-            tools=utils.get_pydantic_model(tools, OptionalNullable[list[models.Tool]]),
-            min_tokens=min_tokens,
-            response_format=utils.get_pydantic_model(
-                response_format, OptionalNullable[models.ResponseFormat]
-            ),
-        )
-        req = self._build_request_async(
-            method="POST",
-            path="/v1/chat/completions#stream",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="text/event-stream",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.ContainerChatCompletionStreamBody
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
-                )
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="containerChatStream",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-                tags=["AsyncContainer.Chat"],
-                extensions={
-                    "x-mint": {
-                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/container/chat-completions-chunk-object).",
-                        "metadata": {
-                            "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
-                            "og:description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
-                            "og:title": "AsyncContainer Stream Chat Completions",
-                            "sidebarTitle": "Stream Chat Completions",
-                            "title": "AsyncContainer Stream Chat Completions",
-                        },
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
+        if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            return unmarshal_json_response(
+                models.ServerlessChatCompleteSuccess, http_res, http_res_text
+            )
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ServerlessChatCompletionStreamSuccess, http_res, raw
+                    models.StreamedChatResult, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

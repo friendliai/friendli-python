@@ -25,10 +25,13 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
+        stream=False,
     )
 
-    # Handle response
-    print(res)
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
 ```
 
 </br>
@@ -59,10 +62,13 @@ async def main():
                     "content": "Hello!",
                 },
             ],
+            stream=False,
         )
 
-        # Handle response
-        print(res)
+        async with res as event_stream:
+            async for event in event_stream:
+                # handle event
+                print(event, flush=True)
 
 
 asyncio.run(main())

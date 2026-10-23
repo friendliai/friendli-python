@@ -51,7 +51,8 @@ if TYPE_CHECKING:
         ChatCompleteBodyToolChoiceFunction,
         ChatCompleteBodyToolChoiceFunctionTypedDict,
     )
-    from .chatlogprobs import ChatLogprobs, ChatLogprobsTypedDict
+    from .chatlogprobs_input import ChatLogprobsInput, ChatLogprobsInputTypedDict
+    from .chatlogprobs_output import ChatLogprobsOutput, ChatLogprobsOutputTypedDict
     from .chatlogprobscontent import ChatLogprobsContent, ChatLogprobsContentTypedDict
     from .chatlogprobscontenttoplogprob import (
         ChatLogprobsContentTopLogprob,
@@ -106,48 +107,6 @@ if TYPE_CHECKING:
         CompletionsServerlessBodyWithTokensSeedTypedDict,
         CompletionsServerlessBodyWithTokensTypedDict,
     )
-    from .completionsstreambodywithprompt import (
-        CompletionsStreamBodyWithPrompt,
-        CompletionsStreamBodyWithPromptPrompt,
-        CompletionsStreamBodyWithPromptPromptTypedDict,
-        CompletionsStreamBodyWithPromptSeed,
-        CompletionsStreamBodyWithPromptSeedTypedDict,
-        CompletionsStreamBodyWithPromptTypedDict,
-    )
-    from .completionsstreambodywithtokens import (
-        CompletionsStreamBodyWithTokens,
-        CompletionsStreamBodyWithTokensSeed,
-        CompletionsStreamBodyWithTokensSeedTypedDict,
-        CompletionsStreamBodyWithTokensTypedDict,
-    )
-    from .completionsstreamdedicatedbodywithprompt import (
-        CompletionsStreamDedicatedBodyWithPrompt,
-        CompletionsStreamDedicatedBodyWithPromptPrompt,
-        CompletionsStreamDedicatedBodyWithPromptPromptTypedDict,
-        CompletionsStreamDedicatedBodyWithPromptSeed,
-        CompletionsStreamDedicatedBodyWithPromptSeedTypedDict,
-        CompletionsStreamDedicatedBodyWithPromptTypedDict,
-    )
-    from .completionsstreamdedicatedbodywithtokens import (
-        CompletionsStreamDedicatedBodyWithTokens,
-        CompletionsStreamDedicatedBodyWithTokensSeed,
-        CompletionsStreamDedicatedBodyWithTokensSeedTypedDict,
-        CompletionsStreamDedicatedBodyWithTokensTypedDict,
-    )
-    from .completionsstreamserverlessbodywithprompt import (
-        CompletionsStreamServerlessBodyWithPrompt,
-        CompletionsStreamServerlessBodyWithPromptPrompt,
-        CompletionsStreamServerlessBodyWithPromptPromptTypedDict,
-        CompletionsStreamServerlessBodyWithPromptSeed,
-        CompletionsStreamServerlessBodyWithPromptSeedTypedDict,
-        CompletionsStreamServerlessBodyWithPromptTypedDict,
-    )
-    from .completionsstreamserverlessbodywithtokens import (
-        CompletionsStreamServerlessBodyWithTokens,
-        CompletionsStreamServerlessBodyWithTokensSeed,
-        CompletionsStreamServerlessBodyWithTokensSeedTypedDict,
-        CompletionsStreamServerlessBodyWithTokensTypedDict,
-    )
     from .containeraudiotranscriptionbody import (
         ContainerAudioTranscriptionBody,
         ContainerAudioTranscriptionBodyChunkingStrategy,
@@ -158,19 +117,14 @@ if TYPE_CHECKING:
     )
     from .containeraudiotranscriptionsop import (
         CONTAINER_AUDIO_TRANSCRIPTIONS_OP_SERVERS,
+        ContainerAudioTranscriptionsResponse,
+        ContainerAudioTranscriptionsResponseTypedDict,
     )
-    from .containeraudiotranscriptionsstreamop import (
-        CONTAINER_AUDIO_TRANSCRIPTIONS_STREAM_OP_SERVERS,
+    from .containerchatcompleteop import (
+        CONTAINER_CHAT_COMPLETE_OP_SERVERS,
+        ContainerChatCompleteResponse,
+        ContainerChatCompleteResponseTypedDict,
     )
-    from .containeraudiotranscriptionstreambody import (
-        ContainerAudioTranscriptionStreamBody,
-        ContainerAudioTranscriptionStreamBodyChunkingStrategy,
-        ContainerAudioTranscriptionStreamBodyChunkingStrategyTypedDict,
-        ContainerAudioTranscriptionStreamBodyFile,
-        ContainerAudioTranscriptionStreamBodyFileTypedDict,
-        ContainerAudioTranscriptionStreamBodyTypedDict,
-    )
-    from .containerchatcompleteop import CONTAINER_CHAT_COMPLETE_OP_SERVERS
     from .containerchatcompletionbody import (
         ContainerChatCompletionBody,
         ContainerChatCompletionBodyReasoningEffort,
@@ -180,28 +134,15 @@ if TYPE_CHECKING:
         ContainerChatCompletionBodyToolChoiceTypedDict,
         ContainerChatCompletionBodyTypedDict,
     )
-    from .containerchatcompletionstreambody import (
-        ContainerChatCompletionStreamBody,
-        ContainerChatCompletionStreamBodyReasoningEffort,
-        ContainerChatCompletionStreamBodySeed,
-        ContainerChatCompletionStreamBodySeedTypedDict,
-        ContainerChatCompletionStreamBodyToolChoice,
-        ContainerChatCompletionStreamBodyToolChoiceTypedDict,
-        ContainerChatCompletionStreamBodyTypedDict,
-    )
-    from .containerchatstreamop import CONTAINER_CHAT_STREAM_OP_SERVERS
     from .containercompletionsbody import (
         ContainerCompletionsBody,
         ContainerCompletionsBodyTypedDict,
     )
     from .containercompletionscompleteop import (
         CONTAINER_COMPLETIONS_COMPLETE_OP_SERVERS,
+        ContainerCompletionsCompleteResponse,
+        ContainerCompletionsCompleteResponseTypedDict,
     )
-    from .containercompletionsstreambody import (
-        ContainerCompletionsStreamBody,
-        ContainerCompletionsStreamBodyTypedDict,
-    )
-    from .containercompletionsstreamop import CONTAINER_COMPLETIONS_STREAM_OP_SERVERS
     from .containerdetokenizationbody import (
         ContainerDetokenizationBody,
         ContainerDetokenizationBodyTypedDict,
@@ -237,19 +178,10 @@ if TYPE_CHECKING:
         ContainerMessagesBodySystemTypedDict,
         ContainerMessagesBodyTypedDict,
     )
-    from .containermessagesop import CONTAINER_MESSAGES_OP_SERVERS
-    from .containermessagesstreambody import (
-        ContainerMessagesStreamBody,
-        ContainerMessagesStreamBodyServiceTier,
-        ContainerMessagesStreamBodyServiceTierTypedDict,
-        ContainerMessagesStreamBodySystem,
-        ContainerMessagesStreamBodySystemTypedDict,
-        ContainerMessagesStreamBodyTypedDict,
-    )
-    from .containermessagesstreamop import CONTAINER_MESSAGES_STREAM_OP_SERVERS
-    from .containermessagesstreamsuccess import (
-        ContainerMessagesStreamSuccess,
-        ContainerMessagesStreamSuccessTypedDict,
+    from .containermessagesop import (
+        CONTAINER_MESSAGES_OP_SERVERS,
+        ContainerMessagesResponse,
+        ContainerMessagesResponseTypedDict,
     )
     from .containermessagessuccess import (
         ContainerMessagesSuccess,
@@ -265,20 +197,10 @@ if TYPE_CHECKING:
         ContainerResponsesBodyToolChoiceUnionTypedDict,
         ContainerResponsesBodyTypedDict,
     )
-    from .containerresponsesop import CONTAINER_RESPONSES_OP_SERVERS
-    from .containerresponsesstreambody import (
-        ContainerResponsesStreamBody,
-        ContainerResponsesStreamBodyInput,
-        ContainerResponsesStreamBodyInputTypedDict,
-        ContainerResponsesStreamBodyToolChoiceEnum,
-        ContainerResponsesStreamBodyToolChoiceUnion,
-        ContainerResponsesStreamBodyToolChoiceUnionTypedDict,
-        ContainerResponsesStreamBodyTypedDict,
-    )
-    from .containerresponsesstreamop import CONTAINER_RESPONSES_STREAM_OP_SERVERS
-    from .containerresponsesstreamsuccess import (
-        ContainerResponsesStreamSuccess,
-        ContainerResponsesStreamSuccessTypedDict,
+    from .containerresponsesop import (
+        CONTAINER_RESPONSES_OP_SERVERS,
+        ContainerResponsesResponse,
+        ContainerResponsesResponseTypedDict,
     )
     from .containerresponsessuccess import (
         ContainerResponsesSuccess,
@@ -317,22 +239,14 @@ if TYPE_CHECKING:
     from .dedicatedaudiotranscriptionsop import (
         DedicatedAudioTranscriptionsRequest,
         DedicatedAudioTranscriptionsRequestTypedDict,
-    )
-    from .dedicatedaudiotranscriptionsstreamop import (
-        DedicatedAudioTranscriptionsStreamRequest,
-        DedicatedAudioTranscriptionsStreamRequestTypedDict,
-    )
-    from .dedicatedaudiotranscriptionstreambody import (
-        DedicatedAudioTranscriptionStreamBody,
-        DedicatedAudioTranscriptionStreamBodyChunkingStrategy,
-        DedicatedAudioTranscriptionStreamBodyChunkingStrategyTypedDict,
-        DedicatedAudioTranscriptionStreamBodyFile,
-        DedicatedAudioTranscriptionStreamBodyFileTypedDict,
-        DedicatedAudioTranscriptionStreamBodyTypedDict,
+        DedicatedAudioTranscriptionsResponse,
+        DedicatedAudioTranscriptionsResponseTypedDict,
     )
     from .dedicatedchatcompleteop import (
         DedicatedChatCompleteRequest,
         DedicatedChatCompleteRequestTypedDict,
+        DedicatedChatCompleteResponse,
+        DedicatedChatCompleteResponseTypedDict,
     )
     from .dedicatedchatcompletionbody import (
         DedicatedChatCompletionBody,
@@ -342,15 +256,6 @@ if TYPE_CHECKING:
         DedicatedChatCompletionBodyToolChoice,
         DedicatedChatCompletionBodyToolChoiceTypedDict,
         DedicatedChatCompletionBodyTypedDict,
-    )
-    from .dedicatedchatcompletionstreambody import (
-        DedicatedChatCompletionStreamBody,
-        DedicatedChatCompletionStreamBodyReasoningEffort,
-        DedicatedChatCompletionStreamBodySeed,
-        DedicatedChatCompletionStreamBodySeedTypedDict,
-        DedicatedChatCompletionStreamBodyToolChoice,
-        DedicatedChatCompletionStreamBodyToolChoiceTypedDict,
-        DedicatedChatCompletionStreamBodyTypedDict,
     )
     from .dedicatedchatrenderbody import (
         DedicatedChatRenderBody,
@@ -364,10 +269,6 @@ if TYPE_CHECKING:
         DedicatedChatRenderSuccess,
         DedicatedChatRenderSuccessTypedDict,
     )
-    from .dedicatedchatstreamop import (
-        DedicatedChatStreamRequest,
-        DedicatedChatStreamRequestTypedDict,
-    )
     from .dedicatedcompletionsbody import (
         DedicatedCompletionsBody,
         DedicatedCompletionsBodyTypedDict,
@@ -375,14 +276,8 @@ if TYPE_CHECKING:
     from .dedicatedcompletionscompleteop import (
         DedicatedCompletionsCompleteRequest,
         DedicatedCompletionsCompleteRequestTypedDict,
-    )
-    from .dedicatedcompletionsstreambody import (
-        DedicatedCompletionsStreamBody,
-        DedicatedCompletionsStreamBodyTypedDict,
-    )
-    from .dedicatedcompletionsstreamop import (
-        DedicatedCompletionsStreamRequest,
-        DedicatedCompletionsStreamRequestTypedDict,
+        DedicatedCompletionsCompleteResponse,
+        DedicatedCompletionsCompleteResponseTypedDict,
     )
     from .dedicatedcreateendpointop import (
         DedicatedCreateEndpointRequest,
@@ -509,22 +404,8 @@ if TYPE_CHECKING:
     from .dedicatedmessagesop import (
         DedicatedMessagesRequest,
         DedicatedMessagesRequestTypedDict,
-    )
-    from .dedicatedmessagesstreambody import (
-        DedicatedMessagesStreamBody,
-        DedicatedMessagesStreamBodyServiceTier,
-        DedicatedMessagesStreamBodyServiceTierTypedDict,
-        DedicatedMessagesStreamBodySystem,
-        DedicatedMessagesStreamBodySystemTypedDict,
-        DedicatedMessagesStreamBodyTypedDict,
-    )
-    from .dedicatedmessagesstreamop import (
-        DedicatedMessagesStreamRequest,
-        DedicatedMessagesStreamRequestTypedDict,
-    )
-    from .dedicatedmessagesstreamsuccess import (
-        DedicatedMessagesStreamSuccess,
-        DedicatedMessagesStreamSuccessTypedDict,
+        DedicatedMessagesResponse,
+        DedicatedMessagesResponseTypedDict,
     )
     from .dedicatedmessagessuccess import (
         DedicatedMessagesSuccess,
@@ -543,23 +424,8 @@ if TYPE_CHECKING:
     from .dedicatedresponsesop import (
         DedicatedResponsesRequest,
         DedicatedResponsesRequestTypedDict,
-    )
-    from .dedicatedresponsesstreambody import (
-        DedicatedResponsesStreamBody,
-        DedicatedResponsesStreamBodyInput,
-        DedicatedResponsesStreamBodyInputTypedDict,
-        DedicatedResponsesStreamBodyToolChoiceEnum,
-        DedicatedResponsesStreamBodyToolChoiceUnion,
-        DedicatedResponsesStreamBodyToolChoiceUnionTypedDict,
-        DedicatedResponsesStreamBodyTypedDict,
-    )
-    from .dedicatedresponsesstreamop import (
-        DedicatedResponsesStreamRequest,
-        DedicatedResponsesStreamRequestTypedDict,
-    )
-    from .dedicatedresponsesstreamsuccess import (
-        DedicatedResponsesStreamSuccess,
-        DedicatedResponsesStreamSuccessTypedDict,
+        DedicatedResponsesResponse,
+        DedicatedResponsesResponseTypedDict,
     )
     from .dedicatedresponsessuccess import (
         DedicatedResponsesSuccess,
@@ -692,6 +558,7 @@ if TYPE_CHECKING:
         MessagesResponseToolUseBlock,
         MessagesResponseToolUseBlockTypedDict,
     )
+    from .messagesstream import MessagesStream, MessagesStreamTypedDict
     from .messagesstreamcontentblockdelta import (
         MessagesStreamContentBlockDelta,
         MessagesStreamContentBlockDeltaTypedDict,
@@ -720,7 +587,6 @@ if TYPE_CHECKING:
         MessagesStreamErrorEvent,
         MessagesStreamErrorEventTypedDict,
     )
-    from .messagesstreamevent import MessagesStreamEvent, MessagesStreamEventTypedDict
     from .messagesstreaminputjsondelta import (
         MessagesStreamInputJSONDelta,
         MessagesStreamInputJSONDeltaTypedDict,
@@ -754,6 +620,34 @@ if TYPE_CHECKING:
     from .messagesstreamsignaturedelta import (
         MessagesStreamSignatureDelta,
         MessagesStreamSignatureDeltaTypedDict,
+    )
+    from .messagesstreamssecontentblockdelta import (
+        MessagesStreamSseContentBlockDelta,
+        MessagesStreamSseContentBlockDeltaTypedDict,
+    )
+    from .messagesstreamssecontentblockstart import (
+        MessagesStreamSseContentBlockStart,
+        MessagesStreamSseContentBlockStartTypedDict,
+    )
+    from .messagesstreamssecontentblockstop import (
+        MessagesStreamSseContentBlockStop,
+        MessagesStreamSseContentBlockStopTypedDict,
+    )
+    from .messagesstreamsseerror import (
+        MessagesStreamSseError,
+        MessagesStreamSseErrorTypedDict,
+    )
+    from .messagesstreamssemessagedelta import (
+        MessagesStreamSseMessageDelta,
+        MessagesStreamSseMessageDeltaTypedDict,
+    )
+    from .messagesstreamssemessagestart import (
+        MessagesStreamSseMessageStart,
+        MessagesStreamSseMessageStartTypedDict,
+    )
+    from .messagesstreamssemessagestop import (
+        MessagesStreamSseMessageStop,
+        MessagesStreamSseMessageStopTypedDict,
     )
     from .messagesstreamstarttextblock import (
         MessagesStreamStartTextBlock,
@@ -915,7 +809,14 @@ if TYPE_CHECKING:
         ResponsesInputTokensDetails,
         ResponsesInputTokensDetailsTypedDict,
     )
-    from .responsesoutputitem import ResponsesOutputItem, ResponsesOutputItemTypedDict
+    from .responsesoutputitem_input import (
+        ResponsesOutputItemInput,
+        ResponsesOutputItemInputTypedDict,
+    )
+    from .responsesoutputitem_output import (
+        ResponsesOutputItemOutput,
+        ResponsesOutputItemOutputTypedDict,
+    )
     from .responsesoutputmessage import (
         ResponsesOutputMessage,
         ResponsesOutputMessageStatus,
@@ -945,6 +846,7 @@ if TYPE_CHECKING:
         ResponsesReasoningTextTypedDict,
     )
     from .responsesrefusal import ResponsesRefusal, ResponsesRefusalTypedDict
+    from .responsesstream import ResponsesStream, ResponsesStreamTypedDict
     from .responsesstreamcontentpartadded import (
         ResponsesStreamContentPartAdded,
         ResponsesStreamContentPartAddedTypedDict,
@@ -952,10 +854,6 @@ if TYPE_CHECKING:
     from .responsesstreamcontentpartdone import (
         ResponsesStreamContentPartDone,
         ResponsesStreamContentPartDoneTypedDict,
-    )
-    from .responsesstreamevent import (
-        ResponsesStreamEvent,
-        ResponsesStreamEventTypedDict,
     )
     from .responsesstreamfunctioncallargumentsdelta import (
         ResponsesStreamFunctionCallArgumentsDelta,
@@ -989,10 +887,85 @@ if TYPE_CHECKING:
         ResponsesStreamReasoningTextDone,
         ResponsesStreamReasoningTextDoneTypedDict,
     )
-    from .responsesstreamresponseevent import (
-        ResponsesStreamResponseEvent,
-        ResponsesStreamResponseEventType,
-        ResponsesStreamResponseEventTypedDict,
+    from .responsesstreamresponsecompleted import (
+        ResponsesStreamResponseCompleted,
+        ResponsesStreamResponseCompletedTypedDict,
+    )
+    from .responsesstreamresponsecreated import (
+        ResponsesStreamResponseCreated,
+        ResponsesStreamResponseCreatedTypedDict,
+    )
+    from .responsesstreamresponsefailed import (
+        ResponsesStreamResponseFailed,
+        ResponsesStreamResponseFailedTypedDict,
+    )
+    from .responsesstreamresponseincomplete import (
+        ResponsesStreamResponseIncomplete,
+        ResponsesStreamResponseIncompleteTypedDict,
+    )
+    from .responsesstreamresponseinprogress import (
+        ResponsesStreamResponseInProgress,
+        ResponsesStreamResponseInProgressTypedDict,
+    )
+    from .responsesstreamssecompleted import (
+        ResponsesStreamSseCompleted,
+        ResponsesStreamSseCompletedTypedDict,
+    )
+    from .responsesstreamssecontentpartadded import (
+        ResponsesStreamSseContentPartAdded,
+        ResponsesStreamSseContentPartAddedTypedDict,
+    )
+    from .responsesstreamssecontentpartdone import (
+        ResponsesStreamSseContentPartDone,
+        ResponsesStreamSseContentPartDoneTypedDict,
+    )
+    from .responsesstreamssecreated import (
+        ResponsesStreamSseCreated,
+        ResponsesStreamSseCreatedTypedDict,
+    )
+    from .responsesstreamssefailed import (
+        ResponsesStreamSseFailed,
+        ResponsesStreamSseFailedTypedDict,
+    )
+    from .responsesstreamssefunctioncallargumentsdelta import (
+        ResponsesStreamSseFunctionCallArgumentsDelta,
+        ResponsesStreamSseFunctionCallArgumentsDeltaTypedDict,
+    )
+    from .responsesstreamssefunctioncallargumentsdone import (
+        ResponsesStreamSseFunctionCallArgumentsDone,
+        ResponsesStreamSseFunctionCallArgumentsDoneTypedDict,
+    )
+    from .responsesstreamsseincomplete import (
+        ResponsesStreamSseIncomplete,
+        ResponsesStreamSseIncompleteTypedDict,
+    )
+    from .responsesstreamsseinprogress import (
+        ResponsesStreamSseInProgress,
+        ResponsesStreamSseInProgressTypedDict,
+    )
+    from .responsesstreamsseoutputitemadded import (
+        ResponsesStreamSseOutputItemAdded,
+        ResponsesStreamSseOutputItemAddedTypedDict,
+    )
+    from .responsesstreamsseoutputitemdone import (
+        ResponsesStreamSseOutputItemDone,
+        ResponsesStreamSseOutputItemDoneTypedDict,
+    )
+    from .responsesstreamsseoutputtextdelta import (
+        ResponsesStreamSseOutputTextDelta,
+        ResponsesStreamSseOutputTextDeltaTypedDict,
+    )
+    from .responsesstreamsseoutputtextdone import (
+        ResponsesStreamSseOutputTextDone,
+        ResponsesStreamSseOutputTextDoneTypedDict,
+    )
+    from .responsesstreamssereasoningtextdelta import (
+        ResponsesStreamSseReasoningTextDelta,
+        ResponsesStreamSseReasoningTextDeltaTypedDict,
+    )
+    from .responsesstreamssereasoningtextdone import (
+        ResponsesStreamSseReasoningTextDone,
+        ResponsesStreamSseReasoningTextDoneTypedDict,
     )
     from .responsessuccess import (
         ResponsesSuccess,
@@ -1037,22 +1010,8 @@ if TYPE_CHECKING:
     from .serverlessaudiotranscriptionsop import (
         ServerlessAudioTranscriptionsRequest,
         ServerlessAudioTranscriptionsRequestTypedDict,
-    )
-    from .serverlessaudiotranscriptionsstreamop import (
-        ServerlessAudioTranscriptionsStreamRequest,
-        ServerlessAudioTranscriptionsStreamRequestTypedDict,
-    )
-    from .serverlessaudiotranscriptionstreambody import (
-        ServerlessAudioTranscriptionStreamBody,
-        ServerlessAudioTranscriptionStreamBodyChunkingStrategy,
-        ServerlessAudioTranscriptionStreamBodyChunkingStrategyTypedDict,
-        ServerlessAudioTranscriptionStreamBodyFile,
-        ServerlessAudioTranscriptionStreamBodyFileTypedDict,
-        ServerlessAudioTranscriptionStreamBodyTypedDict,
-    )
-    from .serverlessaudiotranscriptionstreamsuccess import (
-        ServerlessAudioTranscriptionStreamSuccess,
-        ServerlessAudioTranscriptionStreamSuccessTypedDict,
+        ServerlessAudioTranscriptionsResponse,
+        ServerlessAudioTranscriptionsResponseTypedDict,
     )
     from .serverlessaudiotranscriptionsuccess import (
         ServerlessAudioTranscriptionSuccess,
@@ -1061,6 +1020,8 @@ if TYPE_CHECKING:
     from .serverlesschatcompleteop import (
         ServerlessChatCompleteRequest,
         ServerlessChatCompleteRequestTypedDict,
+        ServerlessChatCompleteResponse,
+        ServerlessChatCompleteResponseTypedDict,
     )
     from .serverlesschatcompletesuccess import (
         ServerlessChatCompleteSuccess,
@@ -1075,19 +1036,6 @@ if TYPE_CHECKING:
         ServerlessChatCompletionBodyToolChoiceTypedDict,
         ServerlessChatCompletionBodyTypedDict,
     )
-    from .serverlesschatcompletionstreambody import (
-        ServerlessChatCompletionStreamBody,
-        ServerlessChatCompletionStreamBodyReasoningEffort,
-        ServerlessChatCompletionStreamBodySeed,
-        ServerlessChatCompletionStreamBodySeedTypedDict,
-        ServerlessChatCompletionStreamBodyToolChoice,
-        ServerlessChatCompletionStreamBodyToolChoiceTypedDict,
-        ServerlessChatCompletionStreamBodyTypedDict,
-    )
-    from .serverlesschatcompletionstreamsuccess import (
-        ServerlessChatCompletionStreamSuccess,
-        ServerlessChatCompletionStreamSuccessTypedDict,
-    )
     from .serverlesschatrenderbody import (
         ServerlessChatRenderBody,
         ServerlessChatRenderBodyTypedDict,
@@ -1100,10 +1048,6 @@ if TYPE_CHECKING:
         ServerlessChatRenderSuccess,
         ServerlessChatRenderSuccessTypedDict,
     )
-    from .serverlesschatstreamop import (
-        ServerlessChatStreamRequest,
-        ServerlessChatStreamRequestTypedDict,
-    )
     from .serverlesscompletionsbody import (
         ServerlessCompletionsBody,
         ServerlessCompletionsBodyTypedDict,
@@ -1111,18 +1055,8 @@ if TYPE_CHECKING:
     from .serverlesscompletionscompleteop import (
         ServerlessCompletionsCompleteRequest,
         ServerlessCompletionsCompleteRequestTypedDict,
-    )
-    from .serverlesscompletionsstreambody import (
-        ServerlessCompletionsStreamBody,
-        ServerlessCompletionsStreamBodyTypedDict,
-    )
-    from .serverlesscompletionsstreamop import (
-        ServerlessCompletionsStreamRequest,
-        ServerlessCompletionsStreamRequestTypedDict,
-    )
-    from .serverlesscompletionsstreamsuccess import (
-        ServerlessCompletionsStreamSuccess,
-        ServerlessCompletionsStreamSuccessTypedDict,
+        ServerlessCompletionsCompleteResponse,
+        ServerlessCompletionsCompleteResponseTypedDict,
     )
     from .serverlesscompletionssuccess import (
         ServerlessCompletionsSuccess,
@@ -1151,22 +1085,8 @@ if TYPE_CHECKING:
     from .serverlessmessagesop import (
         ServerlessMessagesRequest,
         ServerlessMessagesRequestTypedDict,
-    )
-    from .serverlessmessagesstreambody import (
-        ServerlessMessagesStreamBody,
-        ServerlessMessagesStreamBodyServiceTier,
-        ServerlessMessagesStreamBodyServiceTierTypedDict,
-        ServerlessMessagesStreamBodySystem,
-        ServerlessMessagesStreamBodySystemTypedDict,
-        ServerlessMessagesStreamBodyTypedDict,
-    )
-    from .serverlessmessagesstreamop import (
-        ServerlessMessagesStreamRequest,
-        ServerlessMessagesStreamRequestTypedDict,
-    )
-    from .serverlessmessagesstreamsuccess import (
-        ServerlessMessagesStreamSuccess,
-        ServerlessMessagesStreamSuccessTypedDict,
+        ServerlessMessagesResponse,
+        ServerlessMessagesResponseTypedDict,
     )
     from .serverlessmessagessuccess import (
         ServerlessMessagesSuccess,
@@ -1189,23 +1109,8 @@ if TYPE_CHECKING:
     from .serverlessresponsesop import (
         ServerlessResponsesRequest,
         ServerlessResponsesRequestTypedDict,
-    )
-    from .serverlessresponsesstreambody import (
-        ServerlessResponsesStreamBody,
-        ServerlessResponsesStreamBodyInput,
-        ServerlessResponsesStreamBodyInputTypedDict,
-        ServerlessResponsesStreamBodyToolChoiceEnum,
-        ServerlessResponsesStreamBodyToolChoiceUnion,
-        ServerlessResponsesStreamBodyToolChoiceUnionTypedDict,
-        ServerlessResponsesStreamBodyTypedDict,
-    )
-    from .serverlessresponsesstreamop import (
-        ServerlessResponsesStreamRequest,
-        ServerlessResponsesStreamRequestTypedDict,
-    )
-    from .serverlessresponsesstreamsuccess import (
-        ServerlessResponsesStreamSuccess,
-        ServerlessResponsesStreamSuccessTypedDict,
+        ServerlessResponsesResponse,
+        ServerlessResponsesResponseTypedDict,
     )
     from .serverlessresponsessuccess import (
         ServerlessResponsesSuccess,
@@ -1233,6 +1138,10 @@ if TYPE_CHECKING:
         StreamedAudioTranscriptionDataType,
         StreamedAudioTranscriptionDataTypedDict,
     )
+    from .streamedaudiotranscriptionresult import (
+        StreamedAudioTranscriptionResult,
+        StreamedAudioTranscriptionResultTypedDict,
+    )
     from .streamedchatchoice import (
         StreamedChatChoice,
         StreamedChatChoiceFinishReason,
@@ -1243,6 +1152,7 @@ if TYPE_CHECKING:
         StreamedChatChoiceDeltaTypedDict,
     )
     from .streamedchatdata import StreamedChatData, StreamedChatDataTypedDict
+    from .streamedchatresult import StreamedChatResult, StreamedChatResultTypedDict
     from .streamedcompletiondata import (
         StreamedCompletionData,
         StreamedCompletionDataTypedDict,
@@ -1251,6 +1161,10 @@ if TYPE_CHECKING:
         StreamedCompletionsChoice,
         StreamedCompletionsChoiceFinishReason,
         StreamedCompletionsChoiceTypedDict,
+    )
+    from .streamedcompletionsresult import (
+        StreamedCompletionsResult,
+        StreamedCompletionsResultTypedDict,
     )
     from .streamedfunctionresult import (
         StreamedFunctionResult,
@@ -1302,18 +1216,13 @@ if TYPE_CHECKING:
     from .videodata import VideoData, VideoDataTypedDict
 __all__ = [
     "CONTAINER_AUDIO_TRANSCRIPTIONS_OP_SERVERS",
-    "CONTAINER_AUDIO_TRANSCRIPTIONS_STREAM_OP_SERVERS",
     "CONTAINER_CHAT_COMPLETE_OP_SERVERS",
-    "CONTAINER_CHAT_STREAM_OP_SERVERS",
     "CONTAINER_COMPLETIONS_COMPLETE_OP_SERVERS",
-    "CONTAINER_COMPLETIONS_STREAM_OP_SERVERS",
     "CONTAINER_DETOKENIZATION_OP_SERVERS",
     "CONTAINER_IMAGES_EDIT_OP_SERVERS",
     "CONTAINER_IMAGES_GENERATE_OP_SERVERS",
     "CONTAINER_MESSAGES_OP_SERVERS",
-    "CONTAINER_MESSAGES_STREAM_OP_SERVERS",
     "CONTAINER_RESPONSES_OP_SERVERS",
-    "CONTAINER_RESPONSES_STREAM_OP_SERVERS",
     "CONTAINER_TEXT_CLASSIFICATION_OP_SERVERS",
     "CONTAINER_TOKENIZATION_OP_SERVERS",
     "AcceleratorRequirement",
@@ -1349,12 +1258,14 @@ __all__ = [
     "ChatCompleteBodyToolChoiceFunction",
     "ChatCompleteBodyToolChoiceFunctionTypedDict",
     "ChatCompleteBodyToolChoiceTypedDict",
-    "ChatLogprobs",
     "ChatLogprobsContent",
     "ChatLogprobsContentTopLogprob",
     "ChatLogprobsContentTopLogprobTypedDict",
     "ChatLogprobsContentTypedDict",
-    "ChatLogprobsTypedDict",
+    "ChatLogprobsInput",
+    "ChatLogprobsInputTypedDict",
+    "ChatLogprobsOutput",
+    "ChatLogprobsOutputTypedDict",
     "ChatUsage",
     "ChatUsageTypedDict",
     "Code",
@@ -1393,48 +1304,16 @@ __all__ = [
     "CompletionsServerlessBodyWithTokensSeed",
     "CompletionsServerlessBodyWithTokensSeedTypedDict",
     "CompletionsServerlessBodyWithTokensTypedDict",
-    "CompletionsStreamBodyWithPrompt",
-    "CompletionsStreamBodyWithPromptPrompt",
-    "CompletionsStreamBodyWithPromptPromptTypedDict",
-    "CompletionsStreamBodyWithPromptSeed",
-    "CompletionsStreamBodyWithPromptSeedTypedDict",
-    "CompletionsStreamBodyWithPromptTypedDict",
-    "CompletionsStreamBodyWithTokens",
-    "CompletionsStreamBodyWithTokensSeed",
-    "CompletionsStreamBodyWithTokensSeedTypedDict",
-    "CompletionsStreamBodyWithTokensTypedDict",
-    "CompletionsStreamDedicatedBodyWithPrompt",
-    "CompletionsStreamDedicatedBodyWithPromptPrompt",
-    "CompletionsStreamDedicatedBodyWithPromptPromptTypedDict",
-    "CompletionsStreamDedicatedBodyWithPromptSeed",
-    "CompletionsStreamDedicatedBodyWithPromptSeedTypedDict",
-    "CompletionsStreamDedicatedBodyWithPromptTypedDict",
-    "CompletionsStreamDedicatedBodyWithTokens",
-    "CompletionsStreamDedicatedBodyWithTokensSeed",
-    "CompletionsStreamDedicatedBodyWithTokensSeedTypedDict",
-    "CompletionsStreamDedicatedBodyWithTokensTypedDict",
-    "CompletionsStreamServerlessBodyWithPrompt",
-    "CompletionsStreamServerlessBodyWithPromptPrompt",
-    "CompletionsStreamServerlessBodyWithPromptPromptTypedDict",
-    "CompletionsStreamServerlessBodyWithPromptSeed",
-    "CompletionsStreamServerlessBodyWithPromptSeedTypedDict",
-    "CompletionsStreamServerlessBodyWithPromptTypedDict",
-    "CompletionsStreamServerlessBodyWithTokens",
-    "CompletionsStreamServerlessBodyWithTokensSeed",
-    "CompletionsStreamServerlessBodyWithTokensSeedTypedDict",
-    "CompletionsStreamServerlessBodyWithTokensTypedDict",
     "ContainerAudioTranscriptionBody",
     "ContainerAudioTranscriptionBodyChunkingStrategy",
     "ContainerAudioTranscriptionBodyChunkingStrategyTypedDict",
     "ContainerAudioTranscriptionBodyFile",
     "ContainerAudioTranscriptionBodyFileTypedDict",
     "ContainerAudioTranscriptionBodyTypedDict",
-    "ContainerAudioTranscriptionStreamBody",
-    "ContainerAudioTranscriptionStreamBodyChunkingStrategy",
-    "ContainerAudioTranscriptionStreamBodyChunkingStrategyTypedDict",
-    "ContainerAudioTranscriptionStreamBodyFile",
-    "ContainerAudioTranscriptionStreamBodyFileTypedDict",
-    "ContainerAudioTranscriptionStreamBodyTypedDict",
+    "ContainerAudioTranscriptionsResponse",
+    "ContainerAudioTranscriptionsResponseTypedDict",
+    "ContainerChatCompleteResponse",
+    "ContainerChatCompleteResponseTypedDict",
     "ContainerChatCompletionBody",
     "ContainerChatCompletionBodyReasoningEffort",
     "ContainerChatCompletionBodySeed",
@@ -1442,17 +1321,10 @@ __all__ = [
     "ContainerChatCompletionBodyToolChoice",
     "ContainerChatCompletionBodyToolChoiceTypedDict",
     "ContainerChatCompletionBodyTypedDict",
-    "ContainerChatCompletionStreamBody",
-    "ContainerChatCompletionStreamBodyReasoningEffort",
-    "ContainerChatCompletionStreamBodySeed",
-    "ContainerChatCompletionStreamBodySeedTypedDict",
-    "ContainerChatCompletionStreamBodyToolChoice",
-    "ContainerChatCompletionStreamBodyToolChoiceTypedDict",
-    "ContainerChatCompletionStreamBodyTypedDict",
     "ContainerCompletionsBody",
     "ContainerCompletionsBodyTypedDict",
-    "ContainerCompletionsStreamBody",
-    "ContainerCompletionsStreamBodyTypedDict",
+    "ContainerCompletionsCompleteResponse",
+    "ContainerCompletionsCompleteResponseTypedDict",
     "ContainerDetokenizationBody",
     "ContainerDetokenizationBodyTypedDict",
     "ContainerDetokenizationSuccess",
@@ -1473,14 +1345,8 @@ __all__ = [
     "ContainerMessagesBodySystem",
     "ContainerMessagesBodySystemTypedDict",
     "ContainerMessagesBodyTypedDict",
-    "ContainerMessagesStreamBody",
-    "ContainerMessagesStreamBodyServiceTier",
-    "ContainerMessagesStreamBodyServiceTierTypedDict",
-    "ContainerMessagesStreamBodySystem",
-    "ContainerMessagesStreamBodySystemTypedDict",
-    "ContainerMessagesStreamBodyTypedDict",
-    "ContainerMessagesStreamSuccess",
-    "ContainerMessagesStreamSuccessTypedDict",
+    "ContainerMessagesResponse",
+    "ContainerMessagesResponseTypedDict",
     "ContainerMessagesSuccess",
     "ContainerMessagesSuccessStopReason",
     "ContainerMessagesSuccessTypedDict",
@@ -1491,15 +1357,8 @@ __all__ = [
     "ContainerResponsesBodyToolChoiceUnion",
     "ContainerResponsesBodyToolChoiceUnionTypedDict",
     "ContainerResponsesBodyTypedDict",
-    "ContainerResponsesStreamBody",
-    "ContainerResponsesStreamBodyInput",
-    "ContainerResponsesStreamBodyInputTypedDict",
-    "ContainerResponsesStreamBodyToolChoiceEnum",
-    "ContainerResponsesStreamBodyToolChoiceUnion",
-    "ContainerResponsesStreamBodyToolChoiceUnionTypedDict",
-    "ContainerResponsesStreamBodyTypedDict",
-    "ContainerResponsesStreamSuccess",
-    "ContainerResponsesStreamSuccessTypedDict",
+    "ContainerResponsesResponse",
+    "ContainerResponsesResponseTypedDict",
     "ContainerResponsesSuccess",
     "ContainerResponsesSuccessStatus",
     "ContainerResponsesSuccessTypedDict",
@@ -1527,18 +1386,14 @@ __all__ = [
     "DedicatedAudioTranscriptionBodyFile",
     "DedicatedAudioTranscriptionBodyFileTypedDict",
     "DedicatedAudioTranscriptionBodyTypedDict",
-    "DedicatedAudioTranscriptionStreamBody",
-    "DedicatedAudioTranscriptionStreamBodyChunkingStrategy",
-    "DedicatedAudioTranscriptionStreamBodyChunkingStrategyTypedDict",
-    "DedicatedAudioTranscriptionStreamBodyFile",
-    "DedicatedAudioTranscriptionStreamBodyFileTypedDict",
-    "DedicatedAudioTranscriptionStreamBodyTypedDict",
     "DedicatedAudioTranscriptionsRequest",
     "DedicatedAudioTranscriptionsRequestTypedDict",
-    "DedicatedAudioTranscriptionsStreamRequest",
-    "DedicatedAudioTranscriptionsStreamRequestTypedDict",
+    "DedicatedAudioTranscriptionsResponse",
+    "DedicatedAudioTranscriptionsResponseTypedDict",
     "DedicatedChatCompleteRequest",
     "DedicatedChatCompleteRequestTypedDict",
+    "DedicatedChatCompleteResponse",
+    "DedicatedChatCompleteResponseTypedDict",
     "DedicatedChatCompletionBody",
     "DedicatedChatCompletionBodyReasoningEffort",
     "DedicatedChatCompletionBodySeed",
@@ -1546,29 +1401,18 @@ __all__ = [
     "DedicatedChatCompletionBodyToolChoice",
     "DedicatedChatCompletionBodyToolChoiceTypedDict",
     "DedicatedChatCompletionBodyTypedDict",
-    "DedicatedChatCompletionStreamBody",
-    "DedicatedChatCompletionStreamBodyReasoningEffort",
-    "DedicatedChatCompletionStreamBodySeed",
-    "DedicatedChatCompletionStreamBodySeedTypedDict",
-    "DedicatedChatCompletionStreamBodyToolChoice",
-    "DedicatedChatCompletionStreamBodyToolChoiceTypedDict",
-    "DedicatedChatCompletionStreamBodyTypedDict",
     "DedicatedChatRenderBody",
     "DedicatedChatRenderBodyTypedDict",
     "DedicatedChatRenderRequest",
     "DedicatedChatRenderRequestTypedDict",
     "DedicatedChatRenderSuccess",
     "DedicatedChatRenderSuccessTypedDict",
-    "DedicatedChatStreamRequest",
-    "DedicatedChatStreamRequestTypedDict",
     "DedicatedCompletionsBody",
     "DedicatedCompletionsBodyTypedDict",
     "DedicatedCompletionsCompleteRequest",
     "DedicatedCompletionsCompleteRequestTypedDict",
-    "DedicatedCompletionsStreamBody",
-    "DedicatedCompletionsStreamBodyTypedDict",
-    "DedicatedCompletionsStreamRequest",
-    "DedicatedCompletionsStreamRequestTypedDict",
+    "DedicatedCompletionsCompleteResponse",
+    "DedicatedCompletionsCompleteResponseTypedDict",
     "DedicatedCreateEndpointRequest",
     "DedicatedCreateEndpointRequestTypedDict",
     "DedicatedDeleteEndpointRequest",
@@ -1635,16 +1479,8 @@ __all__ = [
     "DedicatedMessagesBodyTypedDict",
     "DedicatedMessagesRequest",
     "DedicatedMessagesRequestTypedDict",
-    "DedicatedMessagesStreamBody",
-    "DedicatedMessagesStreamBodyServiceTier",
-    "DedicatedMessagesStreamBodyServiceTierTypedDict",
-    "DedicatedMessagesStreamBodySystem",
-    "DedicatedMessagesStreamBodySystemTypedDict",
-    "DedicatedMessagesStreamBodyTypedDict",
-    "DedicatedMessagesStreamRequest",
-    "DedicatedMessagesStreamRequestTypedDict",
-    "DedicatedMessagesStreamSuccess",
-    "DedicatedMessagesStreamSuccessTypedDict",
+    "DedicatedMessagesResponse",
+    "DedicatedMessagesResponseTypedDict",
     "DedicatedMessagesSuccess",
     "DedicatedMessagesSuccessStopReason",
     "DedicatedMessagesSuccessTypedDict",
@@ -1657,17 +1493,8 @@ __all__ = [
     "DedicatedResponsesBodyTypedDict",
     "DedicatedResponsesRequest",
     "DedicatedResponsesRequestTypedDict",
-    "DedicatedResponsesStreamBody",
-    "DedicatedResponsesStreamBodyInput",
-    "DedicatedResponsesStreamBodyInputTypedDict",
-    "DedicatedResponsesStreamBodyToolChoiceEnum",
-    "DedicatedResponsesStreamBodyToolChoiceUnion",
-    "DedicatedResponsesStreamBodyToolChoiceUnionTypedDict",
-    "DedicatedResponsesStreamBodyTypedDict",
-    "DedicatedResponsesStreamRequest",
-    "DedicatedResponsesStreamRequestTypedDict",
-    "DedicatedResponsesStreamSuccess",
-    "DedicatedResponsesStreamSuccessTypedDict",
+    "DedicatedResponsesResponse",
+    "DedicatedResponsesResponseTypedDict",
     "DedicatedResponsesSuccess",
     "DedicatedResponsesSuccessStatus",
     "DedicatedResponsesSuccessTypedDict",
@@ -1767,6 +1594,7 @@ __all__ = [
     "MessagesResponseThinkingBlockTypedDict",
     "MessagesResponseToolUseBlock",
     "MessagesResponseToolUseBlockTypedDict",
+    "MessagesStream",
     "MessagesStreamContentBlockDelta",
     "MessagesStreamContentBlockDeltaPayload",
     "MessagesStreamContentBlockDeltaPayloadTypedDict",
@@ -1781,8 +1609,6 @@ __all__ = [
     "MessagesStreamErrorDetailTypedDict",
     "MessagesStreamErrorEvent",
     "MessagesStreamErrorEventTypedDict",
-    "MessagesStreamEvent",
-    "MessagesStreamEventTypedDict",
     "MessagesStreamInputJSONDelta",
     "MessagesStreamInputJSONDeltaTypedDict",
     "MessagesStreamMessageDelta",
@@ -1801,6 +1627,20 @@ __all__ = [
     "MessagesStreamMessageStopTypedDict",
     "MessagesStreamSignatureDelta",
     "MessagesStreamSignatureDeltaTypedDict",
+    "MessagesStreamSseContentBlockDelta",
+    "MessagesStreamSseContentBlockDeltaTypedDict",
+    "MessagesStreamSseContentBlockStart",
+    "MessagesStreamSseContentBlockStartTypedDict",
+    "MessagesStreamSseContentBlockStop",
+    "MessagesStreamSseContentBlockStopTypedDict",
+    "MessagesStreamSseError",
+    "MessagesStreamSseErrorTypedDict",
+    "MessagesStreamSseMessageDelta",
+    "MessagesStreamSseMessageDeltaTypedDict",
+    "MessagesStreamSseMessageStart",
+    "MessagesStreamSseMessageStartTypedDict",
+    "MessagesStreamSseMessageStop",
+    "MessagesStreamSseMessageStopTypedDict",
     "MessagesStreamStartTextBlock",
     "MessagesStreamStartTextBlockTypedDict",
     "MessagesStreamStartThinkingBlock",
@@ -1811,6 +1651,7 @@ __all__ = [
     "MessagesStreamTextDeltaTypedDict",
     "MessagesStreamThinkingDelta",
     "MessagesStreamThinkingDeltaTypedDict",
+    "MessagesStreamTypedDict",
     "MessagesSystemTextBlock",
     "MessagesSystemTextBlockTypedDict",
     "MessagesTextBlock",
@@ -1912,8 +1753,10 @@ __all__ = [
     "ResponsesInputTextTypedDict",
     "ResponsesInputTokensDetails",
     "ResponsesInputTokensDetailsTypedDict",
-    "ResponsesOutputItem",
-    "ResponsesOutputItemTypedDict",
+    "ResponsesOutputItemInput",
+    "ResponsesOutputItemInputTypedDict",
+    "ResponsesOutputItemOutput",
+    "ResponsesOutputItemOutputTypedDict",
     "ResponsesOutputMessage",
     "ResponsesOutputMessageStatus",
     "ResponsesOutputMessageTypedDict",
@@ -1933,12 +1776,11 @@ __all__ = [
     "ResponsesReasoningTextTypedDict",
     "ResponsesRefusal",
     "ResponsesRefusalTypedDict",
+    "ResponsesStream",
     "ResponsesStreamContentPartAdded",
     "ResponsesStreamContentPartAddedTypedDict",
     "ResponsesStreamContentPartDone",
     "ResponsesStreamContentPartDoneTypedDict",
-    "ResponsesStreamEvent",
-    "ResponsesStreamEventTypedDict",
     "ResponsesStreamFunctionCallArgumentsDelta",
     "ResponsesStreamFunctionCallArgumentsDeltaTypedDict",
     "ResponsesStreamFunctionCallArgumentsDone",
@@ -1955,9 +1797,47 @@ __all__ = [
     "ResponsesStreamReasoningTextDeltaTypedDict",
     "ResponsesStreamReasoningTextDone",
     "ResponsesStreamReasoningTextDoneTypedDict",
-    "ResponsesStreamResponseEvent",
-    "ResponsesStreamResponseEventType",
-    "ResponsesStreamResponseEventTypedDict",
+    "ResponsesStreamResponseCompleted",
+    "ResponsesStreamResponseCompletedTypedDict",
+    "ResponsesStreamResponseCreated",
+    "ResponsesStreamResponseCreatedTypedDict",
+    "ResponsesStreamResponseFailed",
+    "ResponsesStreamResponseFailedTypedDict",
+    "ResponsesStreamResponseInProgress",
+    "ResponsesStreamResponseInProgressTypedDict",
+    "ResponsesStreamResponseIncomplete",
+    "ResponsesStreamResponseIncompleteTypedDict",
+    "ResponsesStreamSseCompleted",
+    "ResponsesStreamSseCompletedTypedDict",
+    "ResponsesStreamSseContentPartAdded",
+    "ResponsesStreamSseContentPartAddedTypedDict",
+    "ResponsesStreamSseContentPartDone",
+    "ResponsesStreamSseContentPartDoneTypedDict",
+    "ResponsesStreamSseCreated",
+    "ResponsesStreamSseCreatedTypedDict",
+    "ResponsesStreamSseFailed",
+    "ResponsesStreamSseFailedTypedDict",
+    "ResponsesStreamSseFunctionCallArgumentsDelta",
+    "ResponsesStreamSseFunctionCallArgumentsDeltaTypedDict",
+    "ResponsesStreamSseFunctionCallArgumentsDone",
+    "ResponsesStreamSseFunctionCallArgumentsDoneTypedDict",
+    "ResponsesStreamSseInProgress",
+    "ResponsesStreamSseInProgressTypedDict",
+    "ResponsesStreamSseIncomplete",
+    "ResponsesStreamSseIncompleteTypedDict",
+    "ResponsesStreamSseOutputItemAdded",
+    "ResponsesStreamSseOutputItemAddedTypedDict",
+    "ResponsesStreamSseOutputItemDone",
+    "ResponsesStreamSseOutputItemDoneTypedDict",
+    "ResponsesStreamSseOutputTextDelta",
+    "ResponsesStreamSseOutputTextDeltaTypedDict",
+    "ResponsesStreamSseOutputTextDone",
+    "ResponsesStreamSseOutputTextDoneTypedDict",
+    "ResponsesStreamSseReasoningTextDelta",
+    "ResponsesStreamSseReasoningTextDeltaTypedDict",
+    "ResponsesStreamSseReasoningTextDone",
+    "ResponsesStreamSseReasoningTextDoneTypedDict",
+    "ResponsesStreamTypedDict",
     "ResponsesSuccess",
     "ResponsesSuccessStatus",
     "ResponsesSuccessTypedDict",
@@ -1990,22 +1870,16 @@ __all__ = [
     "ServerlessAudioTranscriptionBodyFile",
     "ServerlessAudioTranscriptionBodyFileTypedDict",
     "ServerlessAudioTranscriptionBodyTypedDict",
-    "ServerlessAudioTranscriptionStreamBody",
-    "ServerlessAudioTranscriptionStreamBodyChunkingStrategy",
-    "ServerlessAudioTranscriptionStreamBodyChunkingStrategyTypedDict",
-    "ServerlessAudioTranscriptionStreamBodyFile",
-    "ServerlessAudioTranscriptionStreamBodyFileTypedDict",
-    "ServerlessAudioTranscriptionStreamBodyTypedDict",
-    "ServerlessAudioTranscriptionStreamSuccess",
-    "ServerlessAudioTranscriptionStreamSuccessTypedDict",
     "ServerlessAudioTranscriptionSuccess",
     "ServerlessAudioTranscriptionSuccessTypedDict",
     "ServerlessAudioTranscriptionsRequest",
     "ServerlessAudioTranscriptionsRequestTypedDict",
-    "ServerlessAudioTranscriptionsStreamRequest",
-    "ServerlessAudioTranscriptionsStreamRequestTypedDict",
+    "ServerlessAudioTranscriptionsResponse",
+    "ServerlessAudioTranscriptionsResponseTypedDict",
     "ServerlessChatCompleteRequest",
     "ServerlessChatCompleteRequestTypedDict",
+    "ServerlessChatCompleteResponse",
+    "ServerlessChatCompleteResponseTypedDict",
     "ServerlessChatCompleteSuccess",
     "ServerlessChatCompleteSuccessTypedDict",
     "ServerlessChatCompletionBody",
@@ -2015,33 +1889,18 @@ __all__ = [
     "ServerlessChatCompletionBodyToolChoice",
     "ServerlessChatCompletionBodyToolChoiceTypedDict",
     "ServerlessChatCompletionBodyTypedDict",
-    "ServerlessChatCompletionStreamBody",
-    "ServerlessChatCompletionStreamBodyReasoningEffort",
-    "ServerlessChatCompletionStreamBodySeed",
-    "ServerlessChatCompletionStreamBodySeedTypedDict",
-    "ServerlessChatCompletionStreamBodyToolChoice",
-    "ServerlessChatCompletionStreamBodyToolChoiceTypedDict",
-    "ServerlessChatCompletionStreamBodyTypedDict",
-    "ServerlessChatCompletionStreamSuccess",
-    "ServerlessChatCompletionStreamSuccessTypedDict",
     "ServerlessChatRenderBody",
     "ServerlessChatRenderBodyTypedDict",
     "ServerlessChatRenderRequest",
     "ServerlessChatRenderRequestTypedDict",
     "ServerlessChatRenderSuccess",
     "ServerlessChatRenderSuccessTypedDict",
-    "ServerlessChatStreamRequest",
-    "ServerlessChatStreamRequestTypedDict",
     "ServerlessCompletionsBody",
     "ServerlessCompletionsBodyTypedDict",
     "ServerlessCompletionsCompleteRequest",
     "ServerlessCompletionsCompleteRequestTypedDict",
-    "ServerlessCompletionsStreamBody",
-    "ServerlessCompletionsStreamBodyTypedDict",
-    "ServerlessCompletionsStreamRequest",
-    "ServerlessCompletionsStreamRequestTypedDict",
-    "ServerlessCompletionsStreamSuccess",
-    "ServerlessCompletionsStreamSuccessTypedDict",
+    "ServerlessCompletionsCompleteResponse",
+    "ServerlessCompletionsCompleteResponseTypedDict",
     "ServerlessCompletionsSuccess",
     "ServerlessCompletionsSuccessTypedDict",
     "ServerlessDetokenizationBody",
@@ -2058,16 +1917,8 @@ __all__ = [
     "ServerlessMessagesBodyTypedDict",
     "ServerlessMessagesRequest",
     "ServerlessMessagesRequestTypedDict",
-    "ServerlessMessagesStreamBody",
-    "ServerlessMessagesStreamBodyServiceTier",
-    "ServerlessMessagesStreamBodyServiceTierTypedDict",
-    "ServerlessMessagesStreamBodySystem",
-    "ServerlessMessagesStreamBodySystemTypedDict",
-    "ServerlessMessagesStreamBodyTypedDict",
-    "ServerlessMessagesStreamRequest",
-    "ServerlessMessagesStreamRequestTypedDict",
-    "ServerlessMessagesStreamSuccess",
-    "ServerlessMessagesStreamSuccessTypedDict",
+    "ServerlessMessagesResponse",
+    "ServerlessMessagesResponseTypedDict",
     "ServerlessMessagesSuccess",
     "ServerlessMessagesSuccessStopReason",
     "ServerlessMessagesSuccessTypedDict",
@@ -2082,17 +1933,8 @@ __all__ = [
     "ServerlessResponsesBodyTypedDict",
     "ServerlessResponsesRequest",
     "ServerlessResponsesRequestTypedDict",
-    "ServerlessResponsesStreamBody",
-    "ServerlessResponsesStreamBodyInput",
-    "ServerlessResponsesStreamBodyInputTypedDict",
-    "ServerlessResponsesStreamBodyToolChoiceEnum",
-    "ServerlessResponsesStreamBodyToolChoiceUnion",
-    "ServerlessResponsesStreamBodyToolChoiceUnionTypedDict",
-    "ServerlessResponsesStreamBodyTypedDict",
-    "ServerlessResponsesStreamRequest",
-    "ServerlessResponsesStreamRequestTypedDict",
-    "ServerlessResponsesStreamSuccess",
-    "ServerlessResponsesStreamSuccessTypedDict",
+    "ServerlessResponsesResponse",
+    "ServerlessResponsesResponseTypedDict",
     "ServerlessResponsesSuccess",
     "ServerlessResponsesSuccessStatus",
     "ServerlessResponsesSuccessTypedDict",
@@ -2107,6 +1949,8 @@ __all__ = [
     "StreamedAudioTranscriptionData",
     "StreamedAudioTranscriptionDataType",
     "StreamedAudioTranscriptionDataTypedDict",
+    "StreamedAudioTranscriptionResult",
+    "StreamedAudioTranscriptionResultTypedDict",
     "StreamedChatChoice",
     "StreamedChatChoiceDelta",
     "StreamedChatChoiceDeltaTypedDict",
@@ -2114,11 +1958,15 @@ __all__ = [
     "StreamedChatChoiceTypedDict",
     "StreamedChatData",
     "StreamedChatDataTypedDict",
+    "StreamedChatResult",
+    "StreamedChatResultTypedDict",
     "StreamedCompletionData",
     "StreamedCompletionDataTypedDict",
     "StreamedCompletionsChoice",
     "StreamedCompletionsChoiceFinishReason",
     "StreamedCompletionsChoiceTypedDict",
+    "StreamedCompletionsResult",
+    "StreamedCompletionsResultTypedDict",
     "StreamedFunctionResult",
     "StreamedFunctionResultTypedDict",
     "StreamedToolCallResult",
@@ -2197,8 +2045,10 @@ _dynamic_imports: dict[str, str] = {
     "ChatCompleteBodyToolChoiceTypedDict": ".chatcompletebodytoolchoice",
     "ChatCompleteBodyToolChoiceFunction": ".chatcompletebodytoolchoicefunction",
     "ChatCompleteBodyToolChoiceFunctionTypedDict": ".chatcompletebodytoolchoicefunction",
-    "ChatLogprobs": ".chatlogprobs",
-    "ChatLogprobsTypedDict": ".chatlogprobs",
+    "ChatLogprobsInput": ".chatlogprobs_input",
+    "ChatLogprobsInputTypedDict": ".chatlogprobs_input",
+    "ChatLogprobsOutput": ".chatlogprobs_output",
+    "ChatLogprobsOutputTypedDict": ".chatlogprobs_output",
     "ChatLogprobsContent": ".chatlogprobscontent",
     "ChatLogprobsContentTypedDict": ".chatlogprobscontent",
     "ChatLogprobsContentTopLogprob": ".chatlogprobscontenttoplogprob",
@@ -2240,36 +2090,6 @@ _dynamic_imports: dict[str, str] = {
     "CompletionsServerlessBodyWithTokensSeed": ".completionsserverlessbodywithtokens",
     "CompletionsServerlessBodyWithTokensSeedTypedDict": ".completionsserverlessbodywithtokens",
     "CompletionsServerlessBodyWithTokensTypedDict": ".completionsserverlessbodywithtokens",
-    "CompletionsStreamBodyWithPrompt": ".completionsstreambodywithprompt",
-    "CompletionsStreamBodyWithPromptPrompt": ".completionsstreambodywithprompt",
-    "CompletionsStreamBodyWithPromptPromptTypedDict": ".completionsstreambodywithprompt",
-    "CompletionsStreamBodyWithPromptSeed": ".completionsstreambodywithprompt",
-    "CompletionsStreamBodyWithPromptSeedTypedDict": ".completionsstreambodywithprompt",
-    "CompletionsStreamBodyWithPromptTypedDict": ".completionsstreambodywithprompt",
-    "CompletionsStreamBodyWithTokens": ".completionsstreambodywithtokens",
-    "CompletionsStreamBodyWithTokensSeed": ".completionsstreambodywithtokens",
-    "CompletionsStreamBodyWithTokensSeedTypedDict": ".completionsstreambodywithtokens",
-    "CompletionsStreamBodyWithTokensTypedDict": ".completionsstreambodywithtokens",
-    "CompletionsStreamDedicatedBodyWithPrompt": ".completionsstreamdedicatedbodywithprompt",
-    "CompletionsStreamDedicatedBodyWithPromptPrompt": ".completionsstreamdedicatedbodywithprompt",
-    "CompletionsStreamDedicatedBodyWithPromptPromptTypedDict": ".completionsstreamdedicatedbodywithprompt",
-    "CompletionsStreamDedicatedBodyWithPromptSeed": ".completionsstreamdedicatedbodywithprompt",
-    "CompletionsStreamDedicatedBodyWithPromptSeedTypedDict": ".completionsstreamdedicatedbodywithprompt",
-    "CompletionsStreamDedicatedBodyWithPromptTypedDict": ".completionsstreamdedicatedbodywithprompt",
-    "CompletionsStreamDedicatedBodyWithTokens": ".completionsstreamdedicatedbodywithtokens",
-    "CompletionsStreamDedicatedBodyWithTokensSeed": ".completionsstreamdedicatedbodywithtokens",
-    "CompletionsStreamDedicatedBodyWithTokensSeedTypedDict": ".completionsstreamdedicatedbodywithtokens",
-    "CompletionsStreamDedicatedBodyWithTokensTypedDict": ".completionsstreamdedicatedbodywithtokens",
-    "CompletionsStreamServerlessBodyWithPrompt": ".completionsstreamserverlessbodywithprompt",
-    "CompletionsStreamServerlessBodyWithPromptPrompt": ".completionsstreamserverlessbodywithprompt",
-    "CompletionsStreamServerlessBodyWithPromptPromptTypedDict": ".completionsstreamserverlessbodywithprompt",
-    "CompletionsStreamServerlessBodyWithPromptSeed": ".completionsstreamserverlessbodywithprompt",
-    "CompletionsStreamServerlessBodyWithPromptSeedTypedDict": ".completionsstreamserverlessbodywithprompt",
-    "CompletionsStreamServerlessBodyWithPromptTypedDict": ".completionsstreamserverlessbodywithprompt",
-    "CompletionsStreamServerlessBodyWithTokens": ".completionsstreamserverlessbodywithtokens",
-    "CompletionsStreamServerlessBodyWithTokensSeed": ".completionsstreamserverlessbodywithtokens",
-    "CompletionsStreamServerlessBodyWithTokensSeedTypedDict": ".completionsstreamserverlessbodywithtokens",
-    "CompletionsStreamServerlessBodyWithTokensTypedDict": ".completionsstreamserverlessbodywithtokens",
     "ContainerAudioTranscriptionBody": ".containeraudiotranscriptionbody",
     "ContainerAudioTranscriptionBodyChunkingStrategy": ".containeraudiotranscriptionbody",
     "ContainerAudioTranscriptionBodyChunkingStrategyTypedDict": ".containeraudiotranscriptionbody",
@@ -2277,14 +2097,11 @@ _dynamic_imports: dict[str, str] = {
     "ContainerAudioTranscriptionBodyFileTypedDict": ".containeraudiotranscriptionbody",
     "ContainerAudioTranscriptionBodyTypedDict": ".containeraudiotranscriptionbody",
     "CONTAINER_AUDIO_TRANSCRIPTIONS_OP_SERVERS": ".containeraudiotranscriptionsop",
-    "CONTAINER_AUDIO_TRANSCRIPTIONS_STREAM_OP_SERVERS": ".containeraudiotranscriptionsstreamop",
-    "ContainerAudioTranscriptionStreamBody": ".containeraudiotranscriptionstreambody",
-    "ContainerAudioTranscriptionStreamBodyChunkingStrategy": ".containeraudiotranscriptionstreambody",
-    "ContainerAudioTranscriptionStreamBodyChunkingStrategyTypedDict": ".containeraudiotranscriptionstreambody",
-    "ContainerAudioTranscriptionStreamBodyFile": ".containeraudiotranscriptionstreambody",
-    "ContainerAudioTranscriptionStreamBodyFileTypedDict": ".containeraudiotranscriptionstreambody",
-    "ContainerAudioTranscriptionStreamBodyTypedDict": ".containeraudiotranscriptionstreambody",
+    "ContainerAudioTranscriptionsResponse": ".containeraudiotranscriptionsop",
+    "ContainerAudioTranscriptionsResponseTypedDict": ".containeraudiotranscriptionsop",
     "CONTAINER_CHAT_COMPLETE_OP_SERVERS": ".containerchatcompleteop",
+    "ContainerChatCompleteResponse": ".containerchatcompleteop",
+    "ContainerChatCompleteResponseTypedDict": ".containerchatcompleteop",
     "ContainerChatCompletionBody": ".containerchatcompletionbody",
     "ContainerChatCompletionBodyReasoningEffort": ".containerchatcompletionbody",
     "ContainerChatCompletionBodySeed": ".containerchatcompletionbody",
@@ -2292,20 +2109,11 @@ _dynamic_imports: dict[str, str] = {
     "ContainerChatCompletionBodyToolChoice": ".containerchatcompletionbody",
     "ContainerChatCompletionBodyToolChoiceTypedDict": ".containerchatcompletionbody",
     "ContainerChatCompletionBodyTypedDict": ".containerchatcompletionbody",
-    "ContainerChatCompletionStreamBody": ".containerchatcompletionstreambody",
-    "ContainerChatCompletionStreamBodyReasoningEffort": ".containerchatcompletionstreambody",
-    "ContainerChatCompletionStreamBodySeed": ".containerchatcompletionstreambody",
-    "ContainerChatCompletionStreamBodySeedTypedDict": ".containerchatcompletionstreambody",
-    "ContainerChatCompletionStreamBodyToolChoice": ".containerchatcompletionstreambody",
-    "ContainerChatCompletionStreamBodyToolChoiceTypedDict": ".containerchatcompletionstreambody",
-    "ContainerChatCompletionStreamBodyTypedDict": ".containerchatcompletionstreambody",
-    "CONTAINER_CHAT_STREAM_OP_SERVERS": ".containerchatstreamop",
     "ContainerCompletionsBody": ".containercompletionsbody",
     "ContainerCompletionsBodyTypedDict": ".containercompletionsbody",
     "CONTAINER_COMPLETIONS_COMPLETE_OP_SERVERS": ".containercompletionscompleteop",
-    "ContainerCompletionsStreamBody": ".containercompletionsstreambody",
-    "ContainerCompletionsStreamBodyTypedDict": ".containercompletionsstreambody",
-    "CONTAINER_COMPLETIONS_STREAM_OP_SERVERS": ".containercompletionsstreamop",
+    "ContainerCompletionsCompleteResponse": ".containercompletionscompleteop",
+    "ContainerCompletionsCompleteResponseTypedDict": ".containercompletionscompleteop",
     "ContainerDetokenizationBody": ".containerdetokenizationbody",
     "ContainerDetokenizationBodyTypedDict": ".containerdetokenizationbody",
     "CONTAINER_DETOKENIZATION_OP_SERVERS": ".containerdetokenizationop",
@@ -2330,15 +2138,8 @@ _dynamic_imports: dict[str, str] = {
     "ContainerMessagesBodySystemTypedDict": ".containermessagesbody",
     "ContainerMessagesBodyTypedDict": ".containermessagesbody",
     "CONTAINER_MESSAGES_OP_SERVERS": ".containermessagesop",
-    "ContainerMessagesStreamBody": ".containermessagesstreambody",
-    "ContainerMessagesStreamBodyServiceTier": ".containermessagesstreambody",
-    "ContainerMessagesStreamBodyServiceTierTypedDict": ".containermessagesstreambody",
-    "ContainerMessagesStreamBodySystem": ".containermessagesstreambody",
-    "ContainerMessagesStreamBodySystemTypedDict": ".containermessagesstreambody",
-    "ContainerMessagesStreamBodyTypedDict": ".containermessagesstreambody",
-    "CONTAINER_MESSAGES_STREAM_OP_SERVERS": ".containermessagesstreamop",
-    "ContainerMessagesStreamSuccess": ".containermessagesstreamsuccess",
-    "ContainerMessagesStreamSuccessTypedDict": ".containermessagesstreamsuccess",
+    "ContainerMessagesResponse": ".containermessagesop",
+    "ContainerMessagesResponseTypedDict": ".containermessagesop",
     "ContainerMessagesSuccess": ".containermessagessuccess",
     "ContainerMessagesSuccessStopReason": ".containermessagessuccess",
     "ContainerMessagesSuccessTypedDict": ".containermessagessuccess",
@@ -2350,16 +2151,8 @@ _dynamic_imports: dict[str, str] = {
     "ContainerResponsesBodyToolChoiceUnionTypedDict": ".containerresponsesbody",
     "ContainerResponsesBodyTypedDict": ".containerresponsesbody",
     "CONTAINER_RESPONSES_OP_SERVERS": ".containerresponsesop",
-    "ContainerResponsesStreamBody": ".containerresponsesstreambody",
-    "ContainerResponsesStreamBodyInput": ".containerresponsesstreambody",
-    "ContainerResponsesStreamBodyInputTypedDict": ".containerresponsesstreambody",
-    "ContainerResponsesStreamBodyToolChoiceEnum": ".containerresponsesstreambody",
-    "ContainerResponsesStreamBodyToolChoiceUnion": ".containerresponsesstreambody",
-    "ContainerResponsesStreamBodyToolChoiceUnionTypedDict": ".containerresponsesstreambody",
-    "ContainerResponsesStreamBodyTypedDict": ".containerresponsesstreambody",
-    "CONTAINER_RESPONSES_STREAM_OP_SERVERS": ".containerresponsesstreamop",
-    "ContainerResponsesStreamSuccess": ".containerresponsesstreamsuccess",
-    "ContainerResponsesStreamSuccessTypedDict": ".containerresponsesstreamsuccess",
+    "ContainerResponsesResponse": ".containerresponsesop",
+    "ContainerResponsesResponseTypedDict": ".containerresponsesop",
     "ContainerResponsesSuccess": ".containerresponsessuccess",
     "ContainerResponsesSuccessStatus": ".containerresponsessuccess",
     "ContainerResponsesSuccessTypedDict": ".containerresponsessuccess",
@@ -2389,16 +2182,12 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedAudioTranscriptionBodyTypedDict": ".dedicatedaudiotranscriptionbody",
     "DedicatedAudioTranscriptionsRequest": ".dedicatedaudiotranscriptionsop",
     "DedicatedAudioTranscriptionsRequestTypedDict": ".dedicatedaudiotranscriptionsop",
-    "DedicatedAudioTranscriptionsStreamRequest": ".dedicatedaudiotranscriptionsstreamop",
-    "DedicatedAudioTranscriptionsStreamRequestTypedDict": ".dedicatedaudiotranscriptionsstreamop",
-    "DedicatedAudioTranscriptionStreamBody": ".dedicatedaudiotranscriptionstreambody",
-    "DedicatedAudioTranscriptionStreamBodyChunkingStrategy": ".dedicatedaudiotranscriptionstreambody",
-    "DedicatedAudioTranscriptionStreamBodyChunkingStrategyTypedDict": ".dedicatedaudiotranscriptionstreambody",
-    "DedicatedAudioTranscriptionStreamBodyFile": ".dedicatedaudiotranscriptionstreambody",
-    "DedicatedAudioTranscriptionStreamBodyFileTypedDict": ".dedicatedaudiotranscriptionstreambody",
-    "DedicatedAudioTranscriptionStreamBodyTypedDict": ".dedicatedaudiotranscriptionstreambody",
+    "DedicatedAudioTranscriptionsResponse": ".dedicatedaudiotranscriptionsop",
+    "DedicatedAudioTranscriptionsResponseTypedDict": ".dedicatedaudiotranscriptionsop",
     "DedicatedChatCompleteRequest": ".dedicatedchatcompleteop",
     "DedicatedChatCompleteRequestTypedDict": ".dedicatedchatcompleteop",
+    "DedicatedChatCompleteResponse": ".dedicatedchatcompleteop",
+    "DedicatedChatCompleteResponseTypedDict": ".dedicatedchatcompleteop",
     "DedicatedChatCompletionBody": ".dedicatedchatcompletionbody",
     "DedicatedChatCompletionBodyReasoningEffort": ".dedicatedchatcompletionbody",
     "DedicatedChatCompletionBodySeed": ".dedicatedchatcompletionbody",
@@ -2406,29 +2195,18 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedChatCompletionBodyToolChoice": ".dedicatedchatcompletionbody",
     "DedicatedChatCompletionBodyToolChoiceTypedDict": ".dedicatedchatcompletionbody",
     "DedicatedChatCompletionBodyTypedDict": ".dedicatedchatcompletionbody",
-    "DedicatedChatCompletionStreamBody": ".dedicatedchatcompletionstreambody",
-    "DedicatedChatCompletionStreamBodyReasoningEffort": ".dedicatedchatcompletionstreambody",
-    "DedicatedChatCompletionStreamBodySeed": ".dedicatedchatcompletionstreambody",
-    "DedicatedChatCompletionStreamBodySeedTypedDict": ".dedicatedchatcompletionstreambody",
-    "DedicatedChatCompletionStreamBodyToolChoice": ".dedicatedchatcompletionstreambody",
-    "DedicatedChatCompletionStreamBodyToolChoiceTypedDict": ".dedicatedchatcompletionstreambody",
-    "DedicatedChatCompletionStreamBodyTypedDict": ".dedicatedchatcompletionstreambody",
     "DedicatedChatRenderBody": ".dedicatedchatrenderbody",
     "DedicatedChatRenderBodyTypedDict": ".dedicatedchatrenderbody",
     "DedicatedChatRenderRequest": ".dedicatedchatrenderop",
     "DedicatedChatRenderRequestTypedDict": ".dedicatedchatrenderop",
     "DedicatedChatRenderSuccess": ".dedicatedchatrendersuccess",
     "DedicatedChatRenderSuccessTypedDict": ".dedicatedchatrendersuccess",
-    "DedicatedChatStreamRequest": ".dedicatedchatstreamop",
-    "DedicatedChatStreamRequestTypedDict": ".dedicatedchatstreamop",
     "DedicatedCompletionsBody": ".dedicatedcompletionsbody",
     "DedicatedCompletionsBodyTypedDict": ".dedicatedcompletionsbody",
     "DedicatedCompletionsCompleteRequest": ".dedicatedcompletionscompleteop",
     "DedicatedCompletionsCompleteRequestTypedDict": ".dedicatedcompletionscompleteop",
-    "DedicatedCompletionsStreamBody": ".dedicatedcompletionsstreambody",
-    "DedicatedCompletionsStreamBodyTypedDict": ".dedicatedcompletionsstreambody",
-    "DedicatedCompletionsStreamRequest": ".dedicatedcompletionsstreamop",
-    "DedicatedCompletionsStreamRequestTypedDict": ".dedicatedcompletionsstreamop",
+    "DedicatedCompletionsCompleteResponse": ".dedicatedcompletionscompleteop",
+    "DedicatedCompletionsCompleteResponseTypedDict": ".dedicatedcompletionscompleteop",
     "DedicatedCreateEndpointRequest": ".dedicatedcreateendpointop",
     "DedicatedCreateEndpointRequestTypedDict": ".dedicatedcreateendpointop",
     "DedicatedDeleteEndpointRequest": ".dedicateddeleteendpointop",
@@ -2499,16 +2277,8 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedMessagesBodyTypedDict": ".dedicatedmessagesbody",
     "DedicatedMessagesRequest": ".dedicatedmessagesop",
     "DedicatedMessagesRequestTypedDict": ".dedicatedmessagesop",
-    "DedicatedMessagesStreamBody": ".dedicatedmessagesstreambody",
-    "DedicatedMessagesStreamBodyServiceTier": ".dedicatedmessagesstreambody",
-    "DedicatedMessagesStreamBodyServiceTierTypedDict": ".dedicatedmessagesstreambody",
-    "DedicatedMessagesStreamBodySystem": ".dedicatedmessagesstreambody",
-    "DedicatedMessagesStreamBodySystemTypedDict": ".dedicatedmessagesstreambody",
-    "DedicatedMessagesStreamBodyTypedDict": ".dedicatedmessagesstreambody",
-    "DedicatedMessagesStreamRequest": ".dedicatedmessagesstreamop",
-    "DedicatedMessagesStreamRequestTypedDict": ".dedicatedmessagesstreamop",
-    "DedicatedMessagesStreamSuccess": ".dedicatedmessagesstreamsuccess",
-    "DedicatedMessagesStreamSuccessTypedDict": ".dedicatedmessagesstreamsuccess",
+    "DedicatedMessagesResponse": ".dedicatedmessagesop",
+    "DedicatedMessagesResponseTypedDict": ".dedicatedmessagesop",
     "DedicatedMessagesSuccess": ".dedicatedmessagessuccess",
     "DedicatedMessagesSuccessStopReason": ".dedicatedmessagessuccess",
     "DedicatedMessagesSuccessTypedDict": ".dedicatedmessagessuccess",
@@ -2521,17 +2291,8 @@ _dynamic_imports: dict[str, str] = {
     "DedicatedResponsesBodyTypedDict": ".dedicatedresponsesbody",
     "DedicatedResponsesRequest": ".dedicatedresponsesop",
     "DedicatedResponsesRequestTypedDict": ".dedicatedresponsesop",
-    "DedicatedResponsesStreamBody": ".dedicatedresponsesstreambody",
-    "DedicatedResponsesStreamBodyInput": ".dedicatedresponsesstreambody",
-    "DedicatedResponsesStreamBodyInputTypedDict": ".dedicatedresponsesstreambody",
-    "DedicatedResponsesStreamBodyToolChoiceEnum": ".dedicatedresponsesstreambody",
-    "DedicatedResponsesStreamBodyToolChoiceUnion": ".dedicatedresponsesstreambody",
-    "DedicatedResponsesStreamBodyToolChoiceUnionTypedDict": ".dedicatedresponsesstreambody",
-    "DedicatedResponsesStreamBodyTypedDict": ".dedicatedresponsesstreambody",
-    "DedicatedResponsesStreamRequest": ".dedicatedresponsesstreamop",
-    "DedicatedResponsesStreamRequestTypedDict": ".dedicatedresponsesstreamop",
-    "DedicatedResponsesStreamSuccess": ".dedicatedresponsesstreamsuccess",
-    "DedicatedResponsesStreamSuccessTypedDict": ".dedicatedresponsesstreamsuccess",
+    "DedicatedResponsesResponse": ".dedicatedresponsesop",
+    "DedicatedResponsesResponseTypedDict": ".dedicatedresponsesop",
     "DedicatedResponsesSuccess": ".dedicatedresponsessuccess",
     "DedicatedResponsesSuccessStatus": ".dedicatedresponsessuccess",
     "DedicatedResponsesSuccessTypedDict": ".dedicatedresponsessuccess",
@@ -2625,6 +2386,8 @@ _dynamic_imports: dict[str, str] = {
     "MessagesResponseThinkingBlockTypedDict": ".messagesresponsethinkingblock",
     "MessagesResponseToolUseBlock": ".messagesresponsetooluseblock",
     "MessagesResponseToolUseBlockTypedDict": ".messagesresponsetooluseblock",
+    "MessagesStream": ".messagesstream",
+    "MessagesStreamTypedDict": ".messagesstream",
     "MessagesStreamContentBlockDelta": ".messagesstreamcontentblockdelta",
     "MessagesStreamContentBlockDeltaTypedDict": ".messagesstreamcontentblockdelta",
     "MessagesStreamContentBlockDeltaPayload": ".messagesstreamcontentblockdeltapayload",
@@ -2639,8 +2402,6 @@ _dynamic_imports: dict[str, str] = {
     "MessagesStreamErrorDetailTypedDict": ".messagesstreamerrordetail",
     "MessagesStreamErrorEvent": ".messagesstreamerrorevent",
     "MessagesStreamErrorEventTypedDict": ".messagesstreamerrorevent",
-    "MessagesStreamEvent": ".messagesstreamevent",
-    "MessagesStreamEventTypedDict": ".messagesstreamevent",
     "MessagesStreamInputJSONDelta": ".messagesstreaminputjsondelta",
     "MessagesStreamInputJSONDeltaTypedDict": ".messagesstreaminputjsondelta",
     "MessagesStreamMessageDelta": ".messagesstreammessagedelta",
@@ -2659,6 +2420,20 @@ _dynamic_imports: dict[str, str] = {
     "MessagesStreamMessageStopTypedDict": ".messagesstreammessagestop",
     "MessagesStreamSignatureDelta": ".messagesstreamsignaturedelta",
     "MessagesStreamSignatureDeltaTypedDict": ".messagesstreamsignaturedelta",
+    "MessagesStreamSseContentBlockDelta": ".messagesstreamssecontentblockdelta",
+    "MessagesStreamSseContentBlockDeltaTypedDict": ".messagesstreamssecontentblockdelta",
+    "MessagesStreamSseContentBlockStart": ".messagesstreamssecontentblockstart",
+    "MessagesStreamSseContentBlockStartTypedDict": ".messagesstreamssecontentblockstart",
+    "MessagesStreamSseContentBlockStop": ".messagesstreamssecontentblockstop",
+    "MessagesStreamSseContentBlockStopTypedDict": ".messagesstreamssecontentblockstop",
+    "MessagesStreamSseError": ".messagesstreamsseerror",
+    "MessagesStreamSseErrorTypedDict": ".messagesstreamsseerror",
+    "MessagesStreamSseMessageDelta": ".messagesstreamssemessagedelta",
+    "MessagesStreamSseMessageDeltaTypedDict": ".messagesstreamssemessagedelta",
+    "MessagesStreamSseMessageStart": ".messagesstreamssemessagestart",
+    "MessagesStreamSseMessageStartTypedDict": ".messagesstreamssemessagestart",
+    "MessagesStreamSseMessageStop": ".messagesstreamssemessagestop",
+    "MessagesStreamSseMessageStopTypedDict": ".messagesstreamssemessagestop",
     "MessagesStreamStartTextBlock": ".messagesstreamstarttextblock",
     "MessagesStreamStartTextBlockTypedDict": ".messagesstreamstarttextblock",
     "MessagesStreamStartThinkingBlock": ".messagesstreamstartthinkingblock",
@@ -2771,8 +2546,10 @@ _dynamic_imports: dict[str, str] = {
     "ResponsesInputTextTypedDict": ".responsesinputtext",
     "ResponsesInputTokensDetails": ".responsesinputtokensdetails",
     "ResponsesInputTokensDetailsTypedDict": ".responsesinputtokensdetails",
-    "ResponsesOutputItem": ".responsesoutputitem",
-    "ResponsesOutputItemTypedDict": ".responsesoutputitem",
+    "ResponsesOutputItemInput": ".responsesoutputitem_input",
+    "ResponsesOutputItemInputTypedDict": ".responsesoutputitem_input",
+    "ResponsesOutputItemOutput": ".responsesoutputitem_output",
+    "ResponsesOutputItemOutputTypedDict": ".responsesoutputitem_output",
     "ResponsesOutputMessage": ".responsesoutputmessage",
     "ResponsesOutputMessageStatus": ".responsesoutputmessage",
     "ResponsesOutputMessageTypedDict": ".responsesoutputmessage",
@@ -2792,12 +2569,12 @@ _dynamic_imports: dict[str, str] = {
     "ResponsesReasoningTextTypedDict": ".responsesreasoningtext",
     "ResponsesRefusal": ".responsesrefusal",
     "ResponsesRefusalTypedDict": ".responsesrefusal",
+    "ResponsesStream": ".responsesstream",
+    "ResponsesStreamTypedDict": ".responsesstream",
     "ResponsesStreamContentPartAdded": ".responsesstreamcontentpartadded",
     "ResponsesStreamContentPartAddedTypedDict": ".responsesstreamcontentpartadded",
     "ResponsesStreamContentPartDone": ".responsesstreamcontentpartdone",
     "ResponsesStreamContentPartDoneTypedDict": ".responsesstreamcontentpartdone",
-    "ResponsesStreamEvent": ".responsesstreamevent",
-    "ResponsesStreamEventTypedDict": ".responsesstreamevent",
     "ResponsesStreamFunctionCallArgumentsDelta": ".responsesstreamfunctioncallargumentsdelta",
     "ResponsesStreamFunctionCallArgumentsDeltaTypedDict": ".responsesstreamfunctioncallargumentsdelta",
     "ResponsesStreamFunctionCallArgumentsDone": ".responsesstreamfunctioncallargumentsdone",
@@ -2814,9 +2591,46 @@ _dynamic_imports: dict[str, str] = {
     "ResponsesStreamReasoningTextDeltaTypedDict": ".responsesstreamreasoningtextdelta",
     "ResponsesStreamReasoningTextDone": ".responsesstreamreasoningtextdone",
     "ResponsesStreamReasoningTextDoneTypedDict": ".responsesstreamreasoningtextdone",
-    "ResponsesStreamResponseEvent": ".responsesstreamresponseevent",
-    "ResponsesStreamResponseEventType": ".responsesstreamresponseevent",
-    "ResponsesStreamResponseEventTypedDict": ".responsesstreamresponseevent",
+    "ResponsesStreamResponseCompleted": ".responsesstreamresponsecompleted",
+    "ResponsesStreamResponseCompletedTypedDict": ".responsesstreamresponsecompleted",
+    "ResponsesStreamResponseCreated": ".responsesstreamresponsecreated",
+    "ResponsesStreamResponseCreatedTypedDict": ".responsesstreamresponsecreated",
+    "ResponsesStreamResponseFailed": ".responsesstreamresponsefailed",
+    "ResponsesStreamResponseFailedTypedDict": ".responsesstreamresponsefailed",
+    "ResponsesStreamResponseIncomplete": ".responsesstreamresponseincomplete",
+    "ResponsesStreamResponseIncompleteTypedDict": ".responsesstreamresponseincomplete",
+    "ResponsesStreamResponseInProgress": ".responsesstreamresponseinprogress",
+    "ResponsesStreamResponseInProgressTypedDict": ".responsesstreamresponseinprogress",
+    "ResponsesStreamSseCompleted": ".responsesstreamssecompleted",
+    "ResponsesStreamSseCompletedTypedDict": ".responsesstreamssecompleted",
+    "ResponsesStreamSseContentPartAdded": ".responsesstreamssecontentpartadded",
+    "ResponsesStreamSseContentPartAddedTypedDict": ".responsesstreamssecontentpartadded",
+    "ResponsesStreamSseContentPartDone": ".responsesstreamssecontentpartdone",
+    "ResponsesStreamSseContentPartDoneTypedDict": ".responsesstreamssecontentpartdone",
+    "ResponsesStreamSseCreated": ".responsesstreamssecreated",
+    "ResponsesStreamSseCreatedTypedDict": ".responsesstreamssecreated",
+    "ResponsesStreamSseFailed": ".responsesstreamssefailed",
+    "ResponsesStreamSseFailedTypedDict": ".responsesstreamssefailed",
+    "ResponsesStreamSseFunctionCallArgumentsDelta": ".responsesstreamssefunctioncallargumentsdelta",
+    "ResponsesStreamSseFunctionCallArgumentsDeltaTypedDict": ".responsesstreamssefunctioncallargumentsdelta",
+    "ResponsesStreamSseFunctionCallArgumentsDone": ".responsesstreamssefunctioncallargumentsdone",
+    "ResponsesStreamSseFunctionCallArgumentsDoneTypedDict": ".responsesstreamssefunctioncallargumentsdone",
+    "ResponsesStreamSseIncomplete": ".responsesstreamsseincomplete",
+    "ResponsesStreamSseIncompleteTypedDict": ".responsesstreamsseincomplete",
+    "ResponsesStreamSseInProgress": ".responsesstreamsseinprogress",
+    "ResponsesStreamSseInProgressTypedDict": ".responsesstreamsseinprogress",
+    "ResponsesStreamSseOutputItemAdded": ".responsesstreamsseoutputitemadded",
+    "ResponsesStreamSseOutputItemAddedTypedDict": ".responsesstreamsseoutputitemadded",
+    "ResponsesStreamSseOutputItemDone": ".responsesstreamsseoutputitemdone",
+    "ResponsesStreamSseOutputItemDoneTypedDict": ".responsesstreamsseoutputitemdone",
+    "ResponsesStreamSseOutputTextDelta": ".responsesstreamsseoutputtextdelta",
+    "ResponsesStreamSseOutputTextDeltaTypedDict": ".responsesstreamsseoutputtextdelta",
+    "ResponsesStreamSseOutputTextDone": ".responsesstreamsseoutputtextdone",
+    "ResponsesStreamSseOutputTextDoneTypedDict": ".responsesstreamsseoutputtextdone",
+    "ResponsesStreamSseReasoningTextDelta": ".responsesstreamssereasoningtextdelta",
+    "ResponsesStreamSseReasoningTextDeltaTypedDict": ".responsesstreamssereasoningtextdelta",
+    "ResponsesStreamSseReasoningTextDone": ".responsesstreamssereasoningtextdone",
+    "ResponsesStreamSseReasoningTextDoneTypedDict": ".responsesstreamssereasoningtextdone",
     "ResponsesSuccess": ".responsessuccess",
     "ResponsesSuccessStatus": ".responsessuccess",
     "ResponsesSuccessTypedDict": ".responsessuccess",
@@ -2850,20 +2664,14 @@ _dynamic_imports: dict[str, str] = {
     "ServerlessAudioTranscriptionBodyTypedDict": ".serverlessaudiotranscriptionbody",
     "ServerlessAudioTranscriptionsRequest": ".serverlessaudiotranscriptionsop",
     "ServerlessAudioTranscriptionsRequestTypedDict": ".serverlessaudiotranscriptionsop",
-    "ServerlessAudioTranscriptionsStreamRequest": ".serverlessaudiotranscriptionsstreamop",
-    "ServerlessAudioTranscriptionsStreamRequestTypedDict": ".serverlessaudiotranscriptionsstreamop",
-    "ServerlessAudioTranscriptionStreamBody": ".serverlessaudiotranscriptionstreambody",
-    "ServerlessAudioTranscriptionStreamBodyChunkingStrategy": ".serverlessaudiotranscriptionstreambody",
-    "ServerlessAudioTranscriptionStreamBodyChunkingStrategyTypedDict": ".serverlessaudiotranscriptionstreambody",
-    "ServerlessAudioTranscriptionStreamBodyFile": ".serverlessaudiotranscriptionstreambody",
-    "ServerlessAudioTranscriptionStreamBodyFileTypedDict": ".serverlessaudiotranscriptionstreambody",
-    "ServerlessAudioTranscriptionStreamBodyTypedDict": ".serverlessaudiotranscriptionstreambody",
-    "ServerlessAudioTranscriptionStreamSuccess": ".serverlessaudiotranscriptionstreamsuccess",
-    "ServerlessAudioTranscriptionStreamSuccessTypedDict": ".serverlessaudiotranscriptionstreamsuccess",
+    "ServerlessAudioTranscriptionsResponse": ".serverlessaudiotranscriptionsop",
+    "ServerlessAudioTranscriptionsResponseTypedDict": ".serverlessaudiotranscriptionsop",
     "ServerlessAudioTranscriptionSuccess": ".serverlessaudiotranscriptionsuccess",
     "ServerlessAudioTranscriptionSuccessTypedDict": ".serverlessaudiotranscriptionsuccess",
     "ServerlessChatCompleteRequest": ".serverlesschatcompleteop",
     "ServerlessChatCompleteRequestTypedDict": ".serverlesschatcompleteop",
+    "ServerlessChatCompleteResponse": ".serverlesschatcompleteop",
+    "ServerlessChatCompleteResponseTypedDict": ".serverlesschatcompleteop",
     "ServerlessChatCompleteSuccess": ".serverlesschatcompletesuccess",
     "ServerlessChatCompleteSuccessTypedDict": ".serverlesschatcompletesuccess",
     "ServerlessChatCompletionBody": ".serverlesschatcompletionbody",
@@ -2873,33 +2681,18 @@ _dynamic_imports: dict[str, str] = {
     "ServerlessChatCompletionBodyToolChoice": ".serverlesschatcompletionbody",
     "ServerlessChatCompletionBodyToolChoiceTypedDict": ".serverlesschatcompletionbody",
     "ServerlessChatCompletionBodyTypedDict": ".serverlesschatcompletionbody",
-    "ServerlessChatCompletionStreamBody": ".serverlesschatcompletionstreambody",
-    "ServerlessChatCompletionStreamBodyReasoningEffort": ".serverlesschatcompletionstreambody",
-    "ServerlessChatCompletionStreamBodySeed": ".serverlesschatcompletionstreambody",
-    "ServerlessChatCompletionStreamBodySeedTypedDict": ".serverlesschatcompletionstreambody",
-    "ServerlessChatCompletionStreamBodyToolChoice": ".serverlesschatcompletionstreambody",
-    "ServerlessChatCompletionStreamBodyToolChoiceTypedDict": ".serverlesschatcompletionstreambody",
-    "ServerlessChatCompletionStreamBodyTypedDict": ".serverlesschatcompletionstreambody",
-    "ServerlessChatCompletionStreamSuccess": ".serverlesschatcompletionstreamsuccess",
-    "ServerlessChatCompletionStreamSuccessTypedDict": ".serverlesschatcompletionstreamsuccess",
     "ServerlessChatRenderBody": ".serverlesschatrenderbody",
     "ServerlessChatRenderBodyTypedDict": ".serverlesschatrenderbody",
     "ServerlessChatRenderRequest": ".serverlesschatrenderop",
     "ServerlessChatRenderRequestTypedDict": ".serverlesschatrenderop",
     "ServerlessChatRenderSuccess": ".serverlesschatrendersuccess",
     "ServerlessChatRenderSuccessTypedDict": ".serverlesschatrendersuccess",
-    "ServerlessChatStreamRequest": ".serverlesschatstreamop",
-    "ServerlessChatStreamRequestTypedDict": ".serverlesschatstreamop",
     "ServerlessCompletionsBody": ".serverlesscompletionsbody",
     "ServerlessCompletionsBodyTypedDict": ".serverlesscompletionsbody",
     "ServerlessCompletionsCompleteRequest": ".serverlesscompletionscompleteop",
     "ServerlessCompletionsCompleteRequestTypedDict": ".serverlesscompletionscompleteop",
-    "ServerlessCompletionsStreamBody": ".serverlesscompletionsstreambody",
-    "ServerlessCompletionsStreamBodyTypedDict": ".serverlesscompletionsstreambody",
-    "ServerlessCompletionsStreamRequest": ".serverlesscompletionsstreamop",
-    "ServerlessCompletionsStreamRequestTypedDict": ".serverlesscompletionsstreamop",
-    "ServerlessCompletionsStreamSuccess": ".serverlesscompletionsstreamsuccess",
-    "ServerlessCompletionsStreamSuccessTypedDict": ".serverlesscompletionsstreamsuccess",
+    "ServerlessCompletionsCompleteResponse": ".serverlesscompletionscompleteop",
+    "ServerlessCompletionsCompleteResponseTypedDict": ".serverlesscompletionscompleteop",
     "ServerlessCompletionsSuccess": ".serverlesscompletionssuccess",
     "ServerlessCompletionsSuccessTypedDict": ".serverlesscompletionssuccess",
     "ServerlessDetokenizationBody": ".serverlessdetokenizationbody",
@@ -2916,16 +2709,8 @@ _dynamic_imports: dict[str, str] = {
     "ServerlessMessagesBodyTypedDict": ".serverlessmessagesbody",
     "ServerlessMessagesRequest": ".serverlessmessagesop",
     "ServerlessMessagesRequestTypedDict": ".serverlessmessagesop",
-    "ServerlessMessagesStreamBody": ".serverlessmessagesstreambody",
-    "ServerlessMessagesStreamBodyServiceTier": ".serverlessmessagesstreambody",
-    "ServerlessMessagesStreamBodyServiceTierTypedDict": ".serverlessmessagesstreambody",
-    "ServerlessMessagesStreamBodySystem": ".serverlessmessagesstreambody",
-    "ServerlessMessagesStreamBodySystemTypedDict": ".serverlessmessagesstreambody",
-    "ServerlessMessagesStreamBodyTypedDict": ".serverlessmessagesstreambody",
-    "ServerlessMessagesStreamRequest": ".serverlessmessagesstreamop",
-    "ServerlessMessagesStreamRequestTypedDict": ".serverlessmessagesstreamop",
-    "ServerlessMessagesStreamSuccess": ".serverlessmessagesstreamsuccess",
-    "ServerlessMessagesStreamSuccessTypedDict": ".serverlessmessagesstreamsuccess",
+    "ServerlessMessagesResponse": ".serverlessmessagesop",
+    "ServerlessMessagesResponseTypedDict": ".serverlessmessagesop",
     "ServerlessMessagesSuccess": ".serverlessmessagessuccess",
     "ServerlessMessagesSuccessStopReason": ".serverlessmessagessuccess",
     "ServerlessMessagesSuccessTypedDict": ".serverlessmessagessuccess",
@@ -2940,17 +2725,8 @@ _dynamic_imports: dict[str, str] = {
     "ServerlessResponsesBodyTypedDict": ".serverlessresponsesbody",
     "ServerlessResponsesRequest": ".serverlessresponsesop",
     "ServerlessResponsesRequestTypedDict": ".serverlessresponsesop",
-    "ServerlessResponsesStreamBody": ".serverlessresponsesstreambody",
-    "ServerlessResponsesStreamBodyInput": ".serverlessresponsesstreambody",
-    "ServerlessResponsesStreamBodyInputTypedDict": ".serverlessresponsesstreambody",
-    "ServerlessResponsesStreamBodyToolChoiceEnum": ".serverlessresponsesstreambody",
-    "ServerlessResponsesStreamBodyToolChoiceUnion": ".serverlessresponsesstreambody",
-    "ServerlessResponsesStreamBodyToolChoiceUnionTypedDict": ".serverlessresponsesstreambody",
-    "ServerlessResponsesStreamBodyTypedDict": ".serverlessresponsesstreambody",
-    "ServerlessResponsesStreamRequest": ".serverlessresponsesstreamop",
-    "ServerlessResponsesStreamRequestTypedDict": ".serverlessresponsesstreamop",
-    "ServerlessResponsesStreamSuccess": ".serverlessresponsesstreamsuccess",
-    "ServerlessResponsesStreamSuccessTypedDict": ".serverlessresponsesstreamsuccess",
+    "ServerlessResponsesResponse": ".serverlessresponsesop",
+    "ServerlessResponsesResponseTypedDict": ".serverlessresponsesop",
     "ServerlessResponsesSuccess": ".serverlessresponsessuccess",
     "ServerlessResponsesSuccessStatus": ".serverlessresponsessuccess",
     "ServerlessResponsesSuccessTypedDict": ".serverlessresponsessuccess",
@@ -2965,6 +2741,8 @@ _dynamic_imports: dict[str, str] = {
     "StreamedAudioTranscriptionData": ".streamedaudiotranscriptiondata",
     "StreamedAudioTranscriptionDataType": ".streamedaudiotranscriptiondata",
     "StreamedAudioTranscriptionDataTypedDict": ".streamedaudiotranscriptiondata",
+    "StreamedAudioTranscriptionResult": ".streamedaudiotranscriptionresult",
+    "StreamedAudioTranscriptionResultTypedDict": ".streamedaudiotranscriptionresult",
     "StreamedChatChoice": ".streamedchatchoice",
     "StreamedChatChoiceFinishReason": ".streamedchatchoice",
     "StreamedChatChoiceTypedDict": ".streamedchatchoice",
@@ -2972,11 +2750,15 @@ _dynamic_imports: dict[str, str] = {
     "StreamedChatChoiceDeltaTypedDict": ".streamedchatchoicedelta",
     "StreamedChatData": ".streamedchatdata",
     "StreamedChatDataTypedDict": ".streamedchatdata",
+    "StreamedChatResult": ".streamedchatresult",
+    "StreamedChatResultTypedDict": ".streamedchatresult",
     "StreamedCompletionData": ".streamedcompletiondata",
     "StreamedCompletionDataTypedDict": ".streamedcompletiondata",
     "StreamedCompletionsChoice": ".streamedcompletionschoice",
     "StreamedCompletionsChoiceFinishReason": ".streamedcompletionschoice",
     "StreamedCompletionsChoiceTypedDict": ".streamedcompletionschoice",
+    "StreamedCompletionsResult": ".streamedcompletionsresult",
+    "StreamedCompletionsResultTypedDict": ".streamedcompletionsresult",
     "StreamedFunctionResult": ".streamedfunctionresult",
     "StreamedFunctionResultTypedDict": ".streamedfunctionresult",
     "StreamedToolCallResult": ".streamedtoolcallresult",

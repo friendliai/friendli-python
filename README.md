@@ -136,10 +136,13 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
+        stream=False,
     )
 
-    # Handle response
-    print(res)
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
 ```
 
 </br>
@@ -170,10 +173,13 @@ async def main():
                     "content": "Hello!",
                 },
             ],
+            stream=False,
         )
 
-        # Handle response
-        print(res)
+        async with res as event_stream:
+            async for event in event_stream:
+                # handle event
+                print(event, flush=True)
 
 
 asyncio.run(main())
@@ -212,10 +218,13 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
+        stream=False,
     )
 
-    # Handle response
-    print(res)
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
 ```
 <!-- End Authentication [security] -->
 
@@ -228,21 +237,14 @@ with SyncFriendli(
 ### [Container.Audio](docs/sdks/containeraudio/README.md)
 
 * [transcribe](docs/sdks/containeraudio/README.md#transcribe) - Audio transcriptions
-* [stream](docs/sdks/containeraudio/README.md#stream) - Stream audio transcriptions
 
 ### [Container.Chat](docs/sdks/containerchat/README.md)
 
 * [complete](docs/sdks/containerchat/README.md#complete) - Chat completions
-* [stream](docs/sdks/containerchat/README.md#stream) - Stream chat completions
-
-### [Container.Classification](docs/sdks/containerclassification/README.md)
-
-* [classify](docs/sdks/containerclassification/README.md#classify) - Text classification
 
 ### [Container.Completions](docs/sdks/containercompletions/README.md)
 
 * [complete](docs/sdks/containercompletions/README.md#complete) - Completions
-* [stream](docs/sdks/containercompletions/README.md#stream) - Stream completions
 
 ### [Container.Image](docs/sdks/containerimage/README.md)
 
@@ -252,12 +254,14 @@ with SyncFriendli(
 ### [Container.Messages](docs/sdks/containermessages/README.md)
 
 * [messages](docs/sdks/containermessages/README.md#messages) - Messages
-* [stream](docs/sdks/containermessages/README.md#stream) - Stream messages
 
 ### [Container.Responses](docs/sdks/containerresponses/README.md)
 
 * [responses](docs/sdks/containerresponses/README.md#responses) - Responses
-* [stream](docs/sdks/containerresponses/README.md#stream) - Stream responses
+
+### [Container.TextClassification](docs/sdks/containertextclassification/README.md)
+
+* [classify](docs/sdks/containertextclassification/README.md#classify) - Text classification
 
 ### [Container.Token](docs/sdks/containertoken/README.md)
 
@@ -271,25 +275,18 @@ with SyncFriendli(
 ### [Dedicated.Audio](docs/sdks/dedicatedaudio/README.md)
 
 * [transcribe](docs/sdks/dedicatedaudio/README.md#transcribe) - Audio transcriptions
-* [stream](docs/sdks/dedicatedaudio/README.md#stream) - Stream audio transcriptions
 
 ### [Dedicated.Chat](docs/sdks/dedicatedchat/README.md)
 
 * [complete](docs/sdks/dedicatedchat/README.md#complete) - Chat completions
-* [stream](docs/sdks/dedicatedchat/README.md#stream) - Stream chat completions
 
 ### [Dedicated.ChatRender](docs/sdks/dedicatedchatrender/README.md)
 
 * [render](docs/sdks/dedicatedchatrender/README.md#render) - Chat render
 
-### [Dedicated.Classification](docs/sdks/dedicatedclassification/README.md)
-
-* [classify](docs/sdks/dedicatedclassification/README.md#classify) - Text classification
-
 ### [Dedicated.Completions](docs/sdks/dedicatedcompletions/README.md)
 
 * [complete](docs/sdks/dedicatedcompletions/README.md#complete) - Completions
-* [stream](docs/sdks/dedicatedcompletions/README.md#stream) - Stream completions
 
 ### [Dedicated.Embeddings](docs/sdks/embeddings/README.md)
 
@@ -318,12 +315,14 @@ with SyncFriendli(
 ### [Dedicated.Messages](docs/sdks/dedicatedmessages/README.md)
 
 * [messages](docs/sdks/dedicatedmessages/README.md#messages) - Messages
-* [stream](docs/sdks/dedicatedmessages/README.md#stream) - Stream messages
 
 ### [Dedicated.Responses](docs/sdks/dedicatedresponses/README.md)
 
 * [responses](docs/sdks/dedicatedresponses/README.md#responses) - Responses
-* [stream](docs/sdks/dedicatedresponses/README.md#stream) - Stream responses
+
+### [Dedicated.TextClassification](docs/sdks/dedicatedtextclassification/README.md)
+
+* [classify](docs/sdks/dedicatedtextclassification/README.md#classify) - Text classification
 
 ### [Dedicated.Token](docs/sdks/dedicatedtoken/README.md)
 
@@ -333,12 +332,10 @@ with SyncFriendli(
 ### [Serverless.Audio](docs/sdks/serverlessaudio/README.md)
 
 * [transcribe](docs/sdks/serverlessaudio/README.md#transcribe) - Audio transcriptions
-* [stream](docs/sdks/serverlessaudio/README.md#stream) - Stream audio transcriptions
 
 ### [Serverless.Chat](docs/sdks/serverlesschat/README.md)
 
 * [complete](docs/sdks/serverlesschat/README.md#complete) - Chat completions
-* [stream](docs/sdks/serverlesschat/README.md#stream) - Stream chat completions
 
 ### [Serverless.ChatRender](docs/sdks/serverlesschatrender/README.md)
 
@@ -347,12 +344,10 @@ with SyncFriendli(
 ### [Serverless.Completions](docs/sdks/serverlesscompletions/README.md)
 
 * [complete](docs/sdks/serverlesscompletions/README.md#complete) - Completions
-* [stream](docs/sdks/serverlesscompletions/README.md#stream) - Stream completions
 
 ### [Serverless.Messages](docs/sdks/serverlessmessages/README.md)
 
 * [messages](docs/sdks/serverlessmessages/README.md#messages) - Messages
-* [stream](docs/sdks/serverlessmessages/README.md#stream) - Stream messages
 
 ### [Serverless.Model](docs/sdks/model/README.md)
 
@@ -361,7 +356,6 @@ with SyncFriendli(
 ### [Serverless.Responses](docs/sdks/serverlessresponses/README.md)
 
 * [responses](docs/sdks/serverlessresponses/README.md#responses) - Responses
-* [stream](docs/sdks/serverlessresponses/README.md#stream) - Stream responses
 
 ### [Serverless.Token](docs/sdks/serverlesstoken/README.md)
 
@@ -395,7 +389,7 @@ from friendli import SyncFriendli
 with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
-    res = friendli.serverless.chat.stream(
+    res = friendli.serverless.chat.complete(
         model="zai-org/GLM-5.3",
         messages=[
             {
@@ -407,7 +401,7 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        stream=True,
+        stream=False,
     )
 
     with res as event_stream:
@@ -445,10 +439,13 @@ with SyncFriendli(
             "file_name": "example.file",
             "content": open("example.file", "rb"),
         },
+        stream=False,
     )
 
-    # Handle response
-    print(res)
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
 ```
 <!-- End File uploads [file-upload] -->
 
@@ -479,11 +476,14 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
+        stream=False,
         retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     )
 
-    # Handle response
-    print(res)
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
@@ -509,10 +509,13 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
+        stream=False,
     )
 
-    # Handle response
-    print(res)
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
 ```
 <!-- End Retries [retries] -->
 
@@ -551,11 +554,14 @@ with SyncFriendli(
                 },
             ],
             model="zai-org/GLM-5.3",
+            stream=False,
             additional_properties={},
         )
 
-        # Handle response
-        print(res)
+        with res as event_stream:
+            for event in event_stream:
+                # handle event
+                print(event, flush=True)
 
     except models.FriendliCoreError as e:
         # The base class for HTTP error responses
@@ -587,8 +593,8 @@ with SyncFriendli(
 
 
 **Inherit from [`FriendliCoreError`](./src/friendli/models/friendlicoreerror.py)**:
-* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 6 of 60 methods.*
-* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 1 of 60 methods.*
+* [`MessagesErrorResponse`](./src/friendli/models/messageserrorresponse.py): Unprocessable Entity. Status code `422`. Applicable to 3 of 45 methods.*
+* [`HTTPValidationError`](./src/friendli/models/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 1 of 45 methods.*
 * [`ResponseValidationError`](./src/friendli/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -623,10 +629,13 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
+        stream=False,
     )
 
-    # Handle response
-    print(res)
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
 ```
 
 ### Override Server URL Per-Operation
@@ -652,11 +661,14 @@ with SyncFriendli(
             },
         ],
         model="(adapter-route)",
+        stream=False,
         server_url="http://localhost:8000",
     )
 
-    # Handle response
-    print(res)
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
 ```
 <!-- End Server Selection [server] -->
 

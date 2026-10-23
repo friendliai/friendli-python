@@ -9,10 +9,6 @@ from friendli.core.dedicated_chatrender import (
     AsyncDedicatedChatRender,
     SyncDedicatedChatRender,
 )
-from friendli.core.dedicated_classification import (
-    AsyncDedicatedClassification,
-    SyncDedicatedClassification,
-)
 from friendli.core.dedicated_completions import (
     AsyncDedicatedCompletions,
     SyncDedicatedCompletions,
@@ -25,6 +21,10 @@ from friendli.core.dedicated_messages import (
 from friendli.core.dedicated_responses import (
     AsyncDedicatedResponses,
     SyncDedicatedResponses,
+)
+from friendli.core.dedicated_textclassification import (
+    AsyncDedicatedTextClassification,
+    SyncDedicatedTextClassification,
 )
 from friendli.core.dedicated_token import AsyncDedicatedToken, SyncDedicatedToken
 from friendli.core.embeddings import AsyncEmbeddings, SyncEmbeddings
@@ -55,7 +55,7 @@ class SyncDedicated(BaseDedicated, SyncSDK):
     token: SyncDedicatedToken
     image: SyncDedicatedImage
     audio: SyncDedicatedAudio
-    classification: SyncDedicatedClassification
+    text_classification: SyncDedicatedTextClassification
     endpoint: SyncEndpoint
 
     def _init_sdks(self):
@@ -86,7 +86,7 @@ class SyncDedicated(BaseDedicated, SyncSDK):
         self.audio = SyncDedicatedAudio(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.classification = SyncDedicatedClassification(
+        self.text_classification = SyncDedicatedTextClassification(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.endpoint = SyncEndpoint(self.sdk_configuration, parent_ref=self.parent_ref)
@@ -102,7 +102,7 @@ class AsyncDedicated(BaseDedicated, AsyncSDK):
     token: AsyncDedicatedToken
     image: AsyncDedicatedImage
     audio: AsyncDedicatedAudio
-    classification: AsyncDedicatedClassification
+    text_classification: AsyncDedicatedTextClassification
     endpoint: AsyncEndpoint
 
     def _init_sdks(self):
@@ -133,7 +133,7 @@ class AsyncDedicated(BaseDedicated, AsyncSDK):
         self.audio = AsyncDedicatedAudio(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.classification = AsyncDedicatedClassification(
+        self.text_classification = AsyncDedicatedTextClassification(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.endpoint = AsyncEndpoint(

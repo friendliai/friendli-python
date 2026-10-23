@@ -2,4 +2,31 @@
 
 from __future__ import annotations
 
+from typing import Union
+
+from typing_extensions import TypeAliasType
+
+from friendli.core.utils import eventstreaming
+
+from .serverlesscompletionssuccess import (
+    ServerlessCompletionsSuccess,
+    ServerlessCompletionsSuccessTypedDict,
+)
+from .streamedcompletionsresult import (
+    StreamedCompletionsResult,
+    StreamedCompletionsResultTypedDict,
+)
+
 CONTAINER_COMPLETIONS_COMPLETE_OP_SERVERS = ["http://localhost:8000"]
+ContainerCompletionsCompleteResponseTypedDict = TypeAliasType(
+    "ContainerCompletionsCompleteResponseTypedDict",
+    ServerlessCompletionsSuccessTypedDict
+    | eventstreaming.EventStream[StreamedCompletionsResultTypedDict]
+    | eventstreaming.EventStreamAsync[StreamedCompletionsResultTypedDict],
+)
+ContainerCompletionsCompleteResponse = TypeAliasType(
+    "ContainerCompletionsCompleteResponse",
+    ServerlessCompletionsSuccess
+    | eventstreaming.EventStream[StreamedCompletionsResult]
+    | eventstreaming.EventStreamAsync[StreamedCompletionsResult],
+)

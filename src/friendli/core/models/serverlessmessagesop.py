@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Annotated, NotRequired
+from typing import Annotated, NotRequired, Union
 
 import pydantic
 from pydantic import model_serializer
-from typing_extensions import TypedDict
+from typing_extensions import TypeAliasType, TypedDict
 
 from friendli.core.types import (
     UNSET,
@@ -15,11 +15,21 @@ from friendli.core.types import (
     Nullable,
     OptionalNullable,
 )
-from friendli.core.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from friendli.core.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    eventstreaming,
+)
 
+from .messagesstream import MessagesStream, MessagesStreamTypedDict
 from .serverlessmessagesbody import (
     ServerlessMessagesBody,
     ServerlessMessagesBodyTypedDict,
+)
+from .serverlessmessagessuccess import (
+    ServerlessMessagesSuccess,
+    ServerlessMessagesSuccessTypedDict,
 )
 
 
@@ -61,3 +71,17 @@ class ServerlessMessagesRequest(BaseModel):
                 ):
                     m[k] = val
         return m
+
+
+ServerlessMessagesResponseTypedDict = TypeAliasType(
+    "ServerlessMessagesResponseTypedDict",
+    ServerlessMessagesSuccessTypedDict
+    | eventstreaming.EventStream[MessagesStreamTypedDict]
+    | eventstreaming.EventStreamAsync[MessagesStreamTypedDict],
+)
+ServerlessMessagesResponse = TypeAliasType(
+    "ServerlessMessagesResponse",
+    ServerlessMessagesSuccess
+    | eventstreaming.EventStream[MessagesStream]
+    | eventstreaming.EventStreamAsync[MessagesStream],
+)

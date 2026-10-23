@@ -11,13 +11,16 @@ from typing_extensions import TypedDict
 from friendli.core.types import BaseModel
 from friendli.core.utils import validate_const
 
-from .responsesoutputitem import ResponsesOutputItem, ResponsesOutputItemTypedDict
+from .responsesoutputitem_input import (
+    ResponsesOutputItemInput,
+    ResponsesOutputItemInputTypedDict,
+)
 
 
 class ResponsesStreamOutputItemAddedTypedDict(TypedDict):
     output_index: int
     "The index of the output item that was added."
-    item: ResponsesOutputItemTypedDict
+    item: ResponsesOutputItemInputTypedDict
     sequence_number: int
     "The sequence number for this event."
     type: Literal["response.output_item.added"]
@@ -27,7 +30,7 @@ class ResponsesStreamOutputItemAddedTypedDict(TypedDict):
 class ResponsesStreamOutputItemAdded(BaseModel):
     output_index: int
     "The index of the output item that was added."
-    item: ResponsesOutputItem
+    item: ResponsesOutputItemInput
     sequence_number: int
     "The sequence number for this event."
     TYPE: Annotated[
