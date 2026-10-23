@@ -27,7 +27,7 @@ with SyncFriendli(
             "content": open("example.file", "rb"),
         },
         model="(adapter-route)",
-        stream=False,
+        stream=True,
     )
 
     with res as event_stream:

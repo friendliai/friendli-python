@@ -24,7 +24,7 @@ with SyncFriendli(
     res = friendli.dedicated.completions.complete(
         dedicated_completions_body={
             "model": "(endpoint-id)",
-            "stream": False,
+            "stream": True,
             "prompt": "Say this is a test!",
         }
     )

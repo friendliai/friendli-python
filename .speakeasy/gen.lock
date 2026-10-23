@@ -5,15 +5,15 @@ management:
   docVersion: 0.1.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.16.1
-  configChecksum: 0d56ee36bf8859e6c87e1793e47ec6ed
+  releaseVersion: 0.16.2
+  configChecksum: a04aeb73ec968f1d1989cf46332a17e0
   repoURL: https://github.com/friendliai/friendli-python.git
   installationURL: https://github.com/friendliai/friendli-python.git
   published: true
 persistentEdits:
-  generation_id: a9dc6b51-0eb8-403b-bcaf-a06cb40661f7
-  pristine_commit_hash: c9637333652e3c788ac0f6c08db4926745b10414
-  pristine_tree_hash: a74a2cae4bf9c781d94710eb7147bbffa2add207
+  generation_id: f17f3e1a-7280-489a-b3bd-4c4cc12d867f
+  pristine_commit_hash: e216a1dbdf3742ef565266a769d24aaa7a12d9c8
+  pristine_tree_hash: 03b3d28d7b71ed6cd521f183ea711810ed349928
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1871,8 +1871,8 @@ trackedFiles:
     pristine_git_object: 9f34572c5bbbd5dc42e57412b0c83917d3c2c9d7
   src/friendli_core/_version.py:
     id: 0b237f54276c
-    last_write_checksum: sha1:4243da85a4b4bf339c6b5569eb6af3b36d228ee4
-    pristine_git_object: 7cd817976b421e00a7e09dbf595ead46f5178c94
+    last_write_checksum: sha1:a6430b3a754751901c9984fc8f84d1ffae60fa5c
+    pristine_git_object: 3c3d8dc23c27bcc16d1eda14b7f4ef0628fb9c77
   src/friendli_core/basesdk.py:
     id: 879235d6bd9e
     last_write_checksum: sha1:a69c546b688c53422613c2625df0ff020c380940

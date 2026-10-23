@@ -23,7 +23,7 @@ with SyncFriendli(
 ) as friendli:
     res = friendli.container.completions.complete(
         request={
-            "stream": False,
+            "stream": True,
             "prompt": "Say this is a test!",
         }
     )
