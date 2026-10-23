@@ -209,3 +209,13 @@ Based on:
 - [python v0.16.3] .
 ### Releases
 - [PyPI v0.16.3] https://pypi.org/project/friendli-core/0.16.3 - .
+
+## 2026-10-23 06:55:43
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.803.1 (2.950.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v0.16.4] .
+### Releases
+- [PyPI v0.16.4] https://pypi.org/project/friendli-core/0.16.4 - .
