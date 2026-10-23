@@ -25,7 +25,7 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        stream=False,
+        stream=True,
     )
 
     with res as event_stream:
@@ -62,7 +62,7 @@ async def main():
                     "content": "Hello!",
                 },
             ],
-            stream=False,
+            stream=True,
         )
 
         async with res as event_stream:

@@ -136,7 +136,7 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        stream=False,
+        stream=True,
     )
 
     with res as event_stream:
@@ -173,7 +173,7 @@ async def main():
                     "content": "Hello!",
                 },
             ],
-            stream=False,
+            stream=True,
         )
 
         async with res as event_stream:
@@ -218,7 +218,7 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        stream=False,
+        stream=True,
     )
 
     with res as event_stream:
@@ -401,7 +401,7 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        stream=False,
+        stream=True,
     )
 
     with res as event_stream:
@@ -439,7 +439,7 @@ with SyncFriendli(
             "file_name": "example.file",
             "content": open("example.file", "rb"),
         },
-        stream=False,
+        stream=True,
     )
 
     with res as event_stream:
@@ -476,7 +476,7 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        stream=False,
+        stream=True,
         retries=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     )
 
@@ -509,7 +509,7 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        stream=False,
+        stream=True,
     )
 
     with res as event_stream:
@@ -554,7 +554,7 @@ with SyncFriendli(
                 },
             ],
             model="zai-org/GLM-5.3",
-            stream=False,
+            stream=True,
             additional_properties={},
         )
 
@@ -629,7 +629,7 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        stream=False,
+        stream=True,
     )
 
     with res as event_stream:
@@ -661,7 +661,7 @@ with SyncFriendli(
             },
         ],
         model="(adapter-route)",
-        stream=False,
+        stream=True,
         server_url="http://localhost:8000",
     )
 

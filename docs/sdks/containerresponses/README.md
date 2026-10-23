@@ -22,7 +22,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.container.responses.responses(
-        input_="Hello!", stream=False, model="(adapter-route)", additional_properties={}
+        input_="Hello!", stream=True, model="(adapter-route)", additional_properties={}
     )
 
     with res as event_stream:

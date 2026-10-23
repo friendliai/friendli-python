@@ -24,7 +24,7 @@ with SyncFriendli(
     res = friendli.serverless.completions.complete(
         serverless_completions_body={
             "model": "meta-llama-3.1-8b-instruct",
-            "stream": False,
+            "stream": True,
             "prompt": "Say this is a test!",
         }
     )

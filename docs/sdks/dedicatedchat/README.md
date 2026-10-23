@@ -33,7 +33,7 @@ with SyncFriendli(
                 "content": "Hello!",
             },
         ],
-        stream=False,
+        stream=True,
     )
 
     with res as event_stream:

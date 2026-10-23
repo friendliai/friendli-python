@@ -27,7 +27,7 @@ with SyncFriendli(
             "file_name": "example.file",
             "content": open("example.file", "rb"),
         },
-        stream=False,
+        stream=True,
     )
 
     with res as event_stream:

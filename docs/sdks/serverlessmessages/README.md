@@ -29,7 +29,7 @@ with SyncFriendli(
             },
         ],
         model="zai-org/GLM-5.3",
-        stream=False,
+        stream=True,
         additional_properties={},
     )
 
@@ -57,7 +57,7 @@ with SyncFriendli(
             },
         ],
         model="zai-org/GLM-5.3",
-        stream=False,
+        stream=True,
         additional_properties={},
     )
 

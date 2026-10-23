@@ -22,7 +22,7 @@ with SyncFriendli(
     token=os.getenv("FRIENDLI_TOKEN", ""),
 ) as friendli:
     res = friendli.serverless.responses.responses(
-        input_="Hello!", model="zai-org/GLM-5.3", stream=False, additional_properties={}
+        input_="Hello!", model="zai-org/GLM-5.3", stream=True, additional_properties={}
     )
 
     with res as event_stream:
