@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, NotRequired, Union
+from typing import Any, Dict, List, NotRequired, Optional, Union
 
 import pydantic
 from pydantic import ConfigDict, model_serializer
@@ -59,7 +59,7 @@ class ContainerMessagesBodyTypedDict(TypedDict):
     "Routes the request to a specific adapter."
     system: NotRequired[Nullable[ContainerMessagesBodySystemTypedDict]]
     "Optional top-level system instruction applied before conversation turns. Supports a plain string or an array of text blocks."
-    stream: NotRequired[Nullable[bool]]
+    stream: NotRequired[bool]
     "Whether to stream the response. When set to `true`, events are sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     temperature: NotRequired[Nullable[float]]
     "Sampling temperature. Lower values make outputs more deterministic; higher values increase diversity."
@@ -104,7 +104,7 @@ class ContainerMessagesBody(BaseModel):
     "Routes the request to a specific adapter."
     system: OptionalNullable[ContainerMessagesBodySystem] = UNSET
     "Optional top-level system instruction applied before conversation turns. Supports a plain string or an array of text blocks."
-    stream: OptionalNullable[bool] = UNSET
+    stream: bool | None = False
     "Whether to stream the response. When set to `true`, events are sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     temperature: OptionalNullable[float] = UNSET
     "Sampling temperature. Lower values make outputs more deterministic; higher values increase diversity."
@@ -172,7 +172,6 @@ class ContainerMessagesBody(BaseModel):
                 "max_tokens",
                 "model",
                 "system",
-                "stream",
                 "temperature",
                 "top_p",
                 "top_k",

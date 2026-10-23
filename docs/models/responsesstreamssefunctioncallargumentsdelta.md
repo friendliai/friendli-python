@@ -1,0 +1,9 @@
+# ResponsesStreamSseFunctionCallArgumentsDelta
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `event`                                                                                                    | *Literal["response.function_call_arguments.delta"]*                                                        | :heavy_check_mark:                                                                                         | The SSE `event` field.                                                                                     |
+| `data`                                                                                                     | [models.ResponsesStreamFunctionCallArgumentsDelta](../models/responsesstreamfunctioncallargumentsdelta.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

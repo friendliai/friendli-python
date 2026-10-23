@@ -5,10 +5,6 @@ from typing import Optional
 
 from friendli.core.container_audio import AsyncContainerAudio, SyncContainerAudio
 from friendli.core.container_chat import AsyncContainerChat, SyncContainerChat
-from friendli.core.container_classification import (
-    AsyncContainerClassification,
-    SyncContainerClassification,
-)
 from friendli.core.container_completions import (
     AsyncContainerCompletions,
     SyncContainerCompletions,
@@ -21,6 +17,10 @@ from friendli.core.container_messages import (
 from friendli.core.container_responses import (
     AsyncContainerResponses,
     SyncContainerResponses,
+)
+from friendli.core.container_textclassification import (
+    AsyncContainerTextClassification,
+    SyncContainerTextClassification,
 )
 from friendli.core.container_token import AsyncContainerToken, SyncContainerToken
 
@@ -47,7 +47,7 @@ class SyncContainer(BaseContainer, SyncSDK):
     token: SyncContainerToken
     image: SyncContainerImage
     audio: SyncContainerAudio
-    classification: SyncContainerClassification
+    text_classification: SyncContainerTextClassification
 
     def _init_sdks(self):
         self.chat = SyncContainerChat(
@@ -71,7 +71,7 @@ class SyncContainer(BaseContainer, SyncSDK):
         self.audio = SyncContainerAudio(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.classification = SyncContainerClassification(
+        self.text_classification = SyncContainerTextClassification(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
 
@@ -84,7 +84,7 @@ class AsyncContainer(BaseContainer, AsyncSDK):
     token: AsyncContainerToken
     image: AsyncContainerImage
     audio: AsyncContainerAudio
-    classification: AsyncContainerClassification
+    text_classification: AsyncContainerTextClassification
 
     def _init_sdks(self):
         self.chat = AsyncContainerChat(
@@ -108,6 +108,6 @@ class AsyncContainer(BaseContainer, AsyncSDK):
         self.audio = AsyncContainerAudio(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.classification = AsyncContainerClassification(
+        self.text_classification = AsyncContainerTextClassification(
             self.sdk_configuration, parent_ref=self.parent_ref
         )

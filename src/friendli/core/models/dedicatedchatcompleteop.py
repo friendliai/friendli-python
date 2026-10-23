@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Annotated, NotRequired
+from typing import Annotated, NotRequired, Union
 
 import pydantic
 from pydantic import model_serializer
-from typing_extensions import TypedDict
+from typing_extensions import TypeAliasType, TypedDict
 
 from friendli.core.types import (
     UNSET,
@@ -15,12 +15,22 @@ from friendli.core.types import (
     Nullable,
     OptionalNullable,
 )
-from friendli.core.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from friendli.core.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    eventstreaming,
+)
 
 from .dedicatedchatcompletionbody import (
     DedicatedChatCompletionBody,
     DedicatedChatCompletionBodyTypedDict,
 )
+from .serverlesschatcompletesuccess import (
+    ServerlessChatCompleteSuccess,
+    ServerlessChatCompleteSuccessTypedDict,
+)
+from .streamedchatresult import StreamedChatResult, StreamedChatResultTypedDict
 
 
 class DedicatedChatCompleteRequestTypedDict(TypedDict):
@@ -61,3 +71,17 @@ class DedicatedChatCompleteRequest(BaseModel):
                 ):
                     m[k] = val
         return m
+
+
+DedicatedChatCompleteResponseTypedDict = TypeAliasType(
+    "DedicatedChatCompleteResponseTypedDict",
+    ServerlessChatCompleteSuccessTypedDict
+    | eventstreaming.EventStream[StreamedChatResultTypedDict]
+    | eventstreaming.EventStreamAsync[StreamedChatResultTypedDict],
+)
+DedicatedChatCompleteResponse = TypeAliasType(
+    "DedicatedChatCompleteResponse",
+    ServerlessChatCompleteSuccess
+    | eventstreaming.EventStream[StreamedChatResult]
+    | eventstreaming.EventStreamAsync[StreamedChatResult],
+)

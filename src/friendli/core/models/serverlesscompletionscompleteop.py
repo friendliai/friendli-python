@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Annotated, NotRequired
+from typing import Annotated, NotRequired, Union
 
 import pydantic
 from pydantic import model_serializer
-from typing_extensions import TypedDict
+from typing_extensions import TypeAliasType, TypedDict
 
 from friendli.core.types import (
     UNSET,
@@ -15,11 +15,24 @@ from friendli.core.types import (
     Nullable,
     OptionalNullable,
 )
-from friendli.core.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from friendli.core.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    eventstreaming,
+)
 
 from .serverlesscompletionsbody import (
     ServerlessCompletionsBody,
     ServerlessCompletionsBodyTypedDict,
+)
+from .serverlesscompletionssuccess import (
+    ServerlessCompletionsSuccess,
+    ServerlessCompletionsSuccessTypedDict,
+)
+from .streamedcompletionsresult import (
+    StreamedCompletionsResult,
+    StreamedCompletionsResultTypedDict,
 )
 
 
@@ -61,3 +74,17 @@ class ServerlessCompletionsCompleteRequest(BaseModel):
                 ):
                     m[k] = val
         return m
+
+
+ServerlessCompletionsCompleteResponseTypedDict = TypeAliasType(
+    "ServerlessCompletionsCompleteResponseTypedDict",
+    ServerlessCompletionsSuccessTypedDict
+    | eventstreaming.EventStream[StreamedCompletionsResultTypedDict]
+    | eventstreaming.EventStreamAsync[StreamedCompletionsResultTypedDict],
+)
+ServerlessCompletionsCompleteResponse = TypeAliasType(
+    "ServerlessCompletionsCompleteResponse",
+    ServerlessCompletionsSuccess
+    | eventstreaming.EventStream[StreamedCompletionsResult]
+    | eventstreaming.EventStreamAsync[StreamedCompletionsResult],
+)

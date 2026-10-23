@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, NotRequired, Union
+from typing import List, NotRequired, Optional, Union
 
 from pydantic import SerializeAsAny, model_serializer
 from typing_extensions import TypeAliasType, TypedDict
@@ -77,7 +77,7 @@ class CompletionsBodyWithTokensTypedDict(TypedDict):
     "When one of the stop phrases appears in the generation result, the API will stop generation.\n    The stop phrases are excluded from the result.\n    Defaults to empty list.\n    "
     stop_tokens: NotRequired[Nullable[list[TokenSequenceTypedDict]]]
     "Stop generating further tokens when generated token corresponds to any of the tokens in the sequence."
-    stream: NotRequired[Nullable[bool]]
+    stream: NotRequired[bool]
     "Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
@@ -143,7 +143,7 @@ class CompletionsBodyWithTokens(BaseModel):
     "When one of the stop phrases appears in the generation result, the API will stop generation.\n    The stop phrases are excluded from the result.\n    Defaults to empty list.\n    "
     stop_tokens: OptionalNullable[list[TokenSequence]] = UNSET
     "Stop generating further tokens when generated token corresponds to any of the tokens in the sequence."
-    stream: OptionalNullable[bool] = UNSET
+    stream: bool | None = False
     "Whether to stream the generation result. When set to `true`, each token is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     stream_options: OptionalNullable[StreamOptions] = UNSET
     "Options related to stream.\n    It can only be used when `stream: true`.\n    "
@@ -222,7 +222,6 @@ class CompletionsBodyWithTokens(BaseModel):
                 "seed",
                 "stop",
                 "stop_tokens",
-                "stream",
                 "stream_options",
                 "temperature",
                 "token_index_to_replace",

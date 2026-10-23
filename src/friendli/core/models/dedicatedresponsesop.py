@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Annotated, NotRequired
+from typing import Annotated, NotRequired, Union
 
 import pydantic
 from pydantic import model_serializer
-from typing_extensions import TypedDict
+from typing_extensions import TypeAliasType, TypedDict
 
 from friendli.core.types import (
     UNSET,
@@ -15,12 +15,22 @@ from friendli.core.types import (
     Nullable,
     OptionalNullable,
 )
-from friendli.core.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from friendli.core.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    eventstreaming,
+)
 
 from .dedicatedresponsesbody import (
     DedicatedResponsesBody,
     DedicatedResponsesBodyTypedDict,
 )
+from .dedicatedresponsessuccess import (
+    DedicatedResponsesSuccess,
+    DedicatedResponsesSuccessTypedDict,
+)
+from .responsesstream import ResponsesStream, ResponsesStreamTypedDict
 
 
 class DedicatedResponsesRequestTypedDict(TypedDict):
@@ -61,3 +71,17 @@ class DedicatedResponsesRequest(BaseModel):
                 ):
                     m[k] = val
         return m
+
+
+DedicatedResponsesResponseTypedDict = TypeAliasType(
+    "DedicatedResponsesResponseTypedDict",
+    DedicatedResponsesSuccessTypedDict
+    | eventstreaming.EventStream[ResponsesStreamTypedDict]
+    | eventstreaming.EventStreamAsync[ResponsesStreamTypedDict],
+)
+DedicatedResponsesResponse = TypeAliasType(
+    "DedicatedResponsesResponse",
+    DedicatedResponsesSuccess
+    | eventstreaming.EventStream[ResponsesStream]
+    | eventstreaming.EventStreamAsync[ResponsesStream],
+)

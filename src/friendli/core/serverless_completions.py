@@ -2,6 +2,7 @@
 
 import abc
 from collections.abc import Mapping
+from enum import Enum
 from typing import Optional, Union
 
 from friendli.core import models, utils
@@ -11,6 +12,11 @@ from friendli.core.utils import eventstreaming, get_security_from_env
 from friendli.core.utils.unmarshal_json_response import unmarshal_json_response
 
 from .basesdk import AsyncSDK, BaseSDK, SyncSDK
+
+
+class CompleteAcceptEnum(str, Enum):
+    APPLICATION_JSON = "application/json"
+    TEXT_EVENT_STREAM = "text/event-stream"
 
 
 class BaseServerlessCompletions(BaseSDK):
@@ -26,9 +32,10 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
+        accept_header_override: CompleteAcceptEnum | None = None,
         timeout_ms: int | None = None,
         http_headers: Mapping[str, str] | None = None,
-    ) -> models.ServerlessCompletionsSuccess:
+    ) -> models.ServerlessCompletionsCompleteResponse:
         """Completions
 
         Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
@@ -38,6 +45,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -64,7 +72,9 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, text/event-stream;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -99,7 +109,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
                 tags=["SyncServerless.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
                         "href": "/openapi/model-apis/completions",
                         "metadata": {
                             "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
@@ -113,123 +123,19 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.ServerlessCompletionsSuccess, http_res
-            )
-        if utils.match_response(http_res, ["422", "4XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        raise models.SDKError("Unexpected response received", http_res)
-
-    def stream(
-        self,
-        *,
-        serverless_completions_stream_body: models.ServerlessCompletionsStreamBody
-        | models.ServerlessCompletionsStreamBodyTypedDict,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: str | None = None,
-        timeout_ms: int | None = None,
-        http_headers: Mapping[str, str] | None = None,
-    ) -> eventstreaming.EventStream[models.ServerlessCompletionsStreamSuccess]:
-        """Stream completions
-
-        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
-
-        :param serverless_completions_stream_body:
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessCompletionsStreamRequest(
-            x_friendli_team=x_friendli_team,
-            serverless_completions_stream_body=utils.get_pydantic_model(
-                serverless_completions_stream_body,
-                models.ServerlessCompletionsStreamBody,
-            ),
-        )
-        req = self._build_request(
-            method="POST",
-            path="/serverless/v1/completions#stream",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="text/event-stream",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_completions_stream_body,
-                False,
-                False,
-                "json",
-                models.ServerlessCompletionsStreamBody,
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
-                )
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="serverlessCompletionsStream",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-                tags=["SyncServerless.Completions"],
-                extensions={
-                    "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
-                        "metadata": {
-                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
-                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
-                            "og:title": "SyncModel APIs Stream Completions",
-                            "sidebarTitle": "Stream Completions",
-                            "title": "SyncModel APIs Stream Completions",
-                        },
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
+        if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            return unmarshal_json_response(
+                models.ServerlessCompletionsSuccess, http_res, http_res_text
+            )
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ServerlessCompletionsStreamSuccess, http_res, raw
+                    models.StreamedCompletionsResult, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,
@@ -253,9 +159,10 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
         x_friendli_team: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
+        accept_header_override: CompleteAcceptEnum | None = None,
         timeout_ms: int | None = None,
         http_headers: Mapping[str, str] | None = None,
-    ) -> models.ServerlessCompletionsSuccess:
+    ) -> models.ServerlessCompletionsCompleteResponse:
         """Completions
 
         Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
@@ -265,6 +172,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -291,7 +199,9 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, text/event-stream;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -326,7 +236,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
                 tags=["AsyncServerless.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
                         "href": "/openapi/model-apis/completions",
                         "metadata": {
                             "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
@@ -340,123 +250,19 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.ServerlessCompletionsSuccess, http_res
-            )
-        if utils.match_response(http_res, ["422", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.SDKError("API error occurred", http_res, http_res_text)
-        raise models.SDKError("Unexpected response received", http_res)
-
-    async def stream(
-        self,
-        *,
-        serverless_completions_stream_body: models.ServerlessCompletionsStreamBody
-        | models.ServerlessCompletionsStreamBodyTypedDict,
-        x_friendli_team: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: str | None = None,
-        timeout_ms: int | None = None,
-        http_headers: Mapping[str, str] | None = None,
-    ) -> eventstreaming.EventStreamAsync[models.ServerlessCompletionsStreamSuccess]:
-        """Stream completions
-
-        Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.
-
-        :param serverless_completions_stream_body:
-        :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-        request = models.ServerlessCompletionsStreamRequest(
-            x_friendli_team=x_friendli_team,
-            serverless_completions_stream_body=utils.get_pydantic_model(
-                serverless_completions_stream_body,
-                models.ServerlessCompletionsStreamBody,
-            ),
-        )
-        req = self._build_request_async(
-            method="POST",
-            path="/serverless/v1/completions#stream",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="text/event-stream",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.serverless_completions_stream_body,
-                False,
-                False,
-                "json",
-                models.ServerlessCompletionsStreamBody,
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
-                )
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="serverlessCompletionsStream",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-                tags=["AsyncServerless.Completions"],
-                extensions={
-                    "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen streaming mode is used (i.e., `stream` option is set to `true`), the response is in MIME type `text/event-stream`. Otherwise, the content type is `application/json`.\nYou can view the schema of the streamed sequence of chunk objects in streaming mode [here](/openapi/model-apis/completions-chunk-object).\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
-                        "metadata": {
-                            "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
-                            "og:description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
-                            "og:title": "AsyncModel APIs Stream Completions",
-                            "sidebarTitle": "Stream Completions",
-                            "title": "AsyncModel APIs Stream Completions",
-                        },
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
+        if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            return unmarshal_json_response(
+                models.ServerlessCompletionsSuccess, http_res, http_res_text
+            )
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: unmarshal_json_response(
-                    models.ServerlessCompletionsStreamSuccess, http_res, raw
+                    models.StreamedCompletionsResult, http_res, raw
                 ),
                 sentinel="[DONE]",
                 client_ref=self,

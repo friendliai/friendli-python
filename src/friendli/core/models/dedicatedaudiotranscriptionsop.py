@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Annotated, NotRequired
+from typing import Annotated, NotRequired, Union
 
 import pydantic
 from pydantic import model_serializer
-from typing_extensions import TypedDict
+from typing_extensions import TypeAliasType, TypedDict
 
 from friendli.core.types import (
     UNSET,
@@ -15,11 +15,24 @@ from friendli.core.types import (
     Nullable,
     OptionalNullable,
 )
-from friendli.core.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from friendli.core.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    eventstreaming,
+)
 
 from .dedicatedaudiotranscriptionbody import (
     DedicatedAudioTranscriptionBody,
     DedicatedAudioTranscriptionBodyTypedDict,
+)
+from .serverlessaudiotranscriptionsuccess import (
+    ServerlessAudioTranscriptionSuccess,
+    ServerlessAudioTranscriptionSuccessTypedDict,
+)
+from .streamedaudiotranscriptionresult import (
+    StreamedAudioTranscriptionResult,
+    StreamedAudioTranscriptionResultTypedDict,
 )
 
 
@@ -61,3 +74,17 @@ class DedicatedAudioTranscriptionsRequest(BaseModel):
                 ):
                     m[k] = val
         return m
+
+
+DedicatedAudioTranscriptionsResponseTypedDict = TypeAliasType(
+    "DedicatedAudioTranscriptionsResponseTypedDict",
+    ServerlessAudioTranscriptionSuccessTypedDict
+    | eventstreaming.EventStream[StreamedAudioTranscriptionResultTypedDict]
+    | eventstreaming.EventStreamAsync[StreamedAudioTranscriptionResultTypedDict],
+)
+DedicatedAudioTranscriptionsResponse = TypeAliasType(
+    "DedicatedAudioTranscriptionsResponse",
+    ServerlessAudioTranscriptionSuccess
+    | eventstreaming.EventStream[StreamedAudioTranscriptionResult]
+    | eventstreaming.EventStreamAsync[StreamedAudioTranscriptionResult],
+)

@@ -1,0 +1,9 @@
+# ResponsesStreamSseFunctionCallArgumentsDone
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `event`                                                                                                  | *Literal["response.function_call_arguments.done"]*                                                       | :heavy_check_mark:                                                                                       | The SSE `event` field.                                                                                   |
+| `data`                                                                                                   | [models.ResponsesStreamFunctionCallArgumentsDone](../models/responsesstreamfunctioncallargumentsdone.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

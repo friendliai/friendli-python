@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Literal, NotRequired, Union
+from typing import Any, Dict, List, Literal, NotRequired, Optional, Union
 
 import pydantic
 from pydantic import ConfigDict, model_serializer
@@ -78,7 +78,7 @@ class ContainerResponsesBodyTypedDict(TypedDict):
     "Configuration options for a text response from the model. Can be plain text or structured JSON data."
     reasoning: NotRequired[Nullable[ResponsesReasoningConfigTypedDict]]
     "Configuration options for reasoning models."
-    stream: NotRequired[Nullable[bool]]
+    stream: NotRequired[bool]
     "Whether to stream the generation result. When set to `true`, the response is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     model: NotRequired[Nullable[str]]
     "Routes the request to a specific adapter."
@@ -109,7 +109,7 @@ class ContainerResponsesBody(BaseModel):
     "Configuration options for a text response from the model. Can be plain text or structured JSON data."
     reasoning: OptionalNullable[ResponsesReasoningConfig] = UNSET
     "Configuration options for reasoning models."
-    stream: OptionalNullable[bool] = UNSET
+    stream: bool | None = False
     "Whether to stream the generation result. When set to `true`, the response is sent as [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format) once generated."
     model: OptionalNullable[str] = UNSET
     "Routes the request to a specific adapter."
@@ -150,7 +150,6 @@ class ContainerResponsesBody(BaseModel):
                 "tool_choice",
                 "text",
                 "reasoning",
-                "stream",
                 "model",
             ]
         )
