@@ -23,7 +23,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         wandb_artifact_version_name: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         accelerator: OptionalNullable[
             models.AcceleratorRequirement | models.AcceleratorRequirementTypedDict
         ] = UNSET,
@@ -46,7 +46,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param accelerator: Specifies the instance type for the endpoint.
         :param name: Specifies the name of your endpoint. If not provided, a name will be automatically generated for you.
-        :param project_id: Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not provided, a new project will be created within your default team.
+        :param project_id: Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not provided, the endpoint will be created in your default project of the team.
         :param idempotency_key: Used by Friendli Dedicated Endpoints to track which webhook automation triggered an endpoint rollout. If the `idempotencyKey` is provided, the API will check if the endpoint already exists, and rollout the existing endpoint if it does. In such cases, the `projectId` must be provided. Any unique value can be used.
         :param autoscaling_policy: Defines autoscaling settings for the endpoint.
         :param retries: Override the default retry configuration for this method
@@ -158,7 +158,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         instance_option_id: str,
         advanced: models.EndpointAdvancedConfig
         | models.EndpointAdvancedConfigTypedDict,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         simplescale: OptionalNullable[
             models.EndpointSimplescaleConfig | models.EndpointSimplescaleConfigTypedDict
         ] = UNSET,
@@ -319,10 +319,10 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
     def list(
         self,
         *,
-        project_id: OptionalNullable[str] = UNSET,
-        cursor: OptionalNullable[bytes | IO[bytes] | io.IOBase] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        project_id: str | None = "",
+        cursor: bytes | IO[bytes] | io.IOBase | None = None,
+        limit: int | None = 20,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -425,7 +425,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -521,7 +521,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         name: OptionalNullable[str] = UNSET,
         advanced: OptionalNullable[
             models.EndpointAdvancedConfig | models.EndpointAdvancedConfigTypedDict
@@ -688,7 +688,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -790,9 +790,9 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         endpoint_id: str,
-        cursor: OptionalNullable[bytes | IO[bytes] | io.IOBase] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        cursor: bytes | IO[bytes] | io.IOBase | None = None,
+        limit: int | None = 20,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -895,7 +895,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -991,7 +991,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -1087,7 +1087,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -1183,7 +1183,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -1279,7 +1279,7 @@ class SyncEndpoint(BaseEndpoint, SyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -1377,7 +1377,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         wandb_artifact_version_name: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         accelerator: OptionalNullable[
             models.AcceleratorRequirement | models.AcceleratorRequirementTypedDict
         ] = UNSET,
@@ -1400,7 +1400,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param accelerator: Specifies the instance type for the endpoint.
         :param name: Specifies the name of your endpoint. If not provided, a name will be automatically generated for you.
-        :param project_id: Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not provided, a new project will be created within your default team.
+        :param project_id: Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not provided, the endpoint will be created in your default project of the team.
         :param idempotency_key: Used by Friendli Dedicated Endpoints to track which webhook automation triggered an endpoint rollout. If the `idempotencyKey` is provided, the API will check if the endpoint already exists, and rollout the existing endpoint if it does. In such cases, the `projectId` must be provided. Any unique value can be used.
         :param autoscaling_policy: Defines autoscaling settings for the endpoint.
         :param retries: Override the default retry configuration for this method
@@ -1512,7 +1512,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         instance_option_id: str,
         advanced: models.EndpointAdvancedConfig
         | models.EndpointAdvancedConfigTypedDict,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         simplescale: OptionalNullable[
             models.EndpointSimplescaleConfig | models.EndpointSimplescaleConfigTypedDict
         ] = UNSET,
@@ -1673,10 +1673,10 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
     async def list(
         self,
         *,
-        project_id: OptionalNullable[str] = UNSET,
-        cursor: OptionalNullable[bytes | IO[bytes] | io.IOBase] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        project_id: str | None = "",
+        cursor: bytes | IO[bytes] | io.IOBase | None = None,
+        limit: int | None = 20,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -1779,7 +1779,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -1875,7 +1875,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         name: OptionalNullable[str] = UNSET,
         advanced: OptionalNullable[
             models.EndpointAdvancedConfig | models.EndpointAdvancedConfigTypedDict
@@ -2042,7 +2042,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -2144,9 +2144,9 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         endpoint_id: str,
-        cursor: OptionalNullable[bytes | IO[bytes] | io.IOBase] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        cursor: bytes | IO[bytes] | io.IOBase | None = None,
+        limit: int | None = 20,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -2249,7 +2249,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -2345,7 +2345,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -2441,7 +2441,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -2537,7 +2537,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -2633,7 +2633,7 @@ class AsyncEndpoint(BaseEndpoint, AsyncSDK):
         self,
         *,
         endpoint_id: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,

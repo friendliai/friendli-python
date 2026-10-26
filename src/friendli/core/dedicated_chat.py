@@ -29,7 +29,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
         *,
         model: str,
         messages: Iterable[models.Message] | Iterable[models.MessageTypedDict],
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
         eos_token: OptionalNullable[Iterable[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -251,7 +251,7 @@ class SyncDedicatedChat(BaseDedicatedChat, SyncSDK):
                 tags=["SyncDedicated.Chat"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
+                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/chat-completions",
                         "metadata": {
                             "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
@@ -298,7 +298,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
         *,
         model: str,
         messages: Iterable[models.Message] | Iterable[models.MessageTypedDict],
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
         eos_token: OptionalNullable[Iterable[int]] = UNSET,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -520,7 +520,7 @@ class AsyncDedicatedChat(BaseDedicatedChat, AsyncSDK):
                 tags=["AsyncDedicated.Chat"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
+                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/chat-completions",
                         "metadata": {
                             "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",

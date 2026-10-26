@@ -3,73 +3,57 @@
 from __future__ import annotations
 
 import io
-from typing import IO, Annotated, NotRequired, Union
+from typing import IO, Annotated, NotRequired, Optional, Union
 
 import pydantic
 from pydantic import model_serializer
 from typing_extensions import TypedDict
 
-from friendli.core.types import (
-    UNSET,
-    UNSET_SENTINEL,
-    BaseModel,
-    Nullable,
-    OptionalNullable,
-)
+from friendli.core.types import UNSET_SENTINEL, BaseModel
 from friendli.core.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 
 
 class DedicatedListEndpointsRequestTypedDict(TypedDict):
-    project_id: NotRequired[Nullable[str]]
+    project_id: NotRequired[str]
     "The ID of the project. If omitted, query all endpoints under the team."
-    cursor: NotRequired[Nullable[bytes | IO[bytes] | io.IOBase]]
+    cursor: NotRequired[bytes | IO[bytes] | io.IOBase]
     "Cursor for pagination."
-    limit: NotRequired[Nullable[int]]
+    limit: NotRequired[int]
     "Limit of items per page."
-    x_friendli_team: NotRequired[Nullable[str]]
+    x_friendli_team: NotRequired[str]
     "ID of team to run requests as (optional parameter)."
 
 
 class DedicatedListEndpointsRequest(BaseModel):
     project_id: Annotated[
-        OptionalNullable[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+        str | None, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
+    ] = ""
     "The ID of the project. If omitted, query all endpoints under the team."
     cursor: Annotated[
-        OptionalNullable[bytes | IO[bytes] | io.IOBase],
+        bytes | IO[bytes] | io.IOBase | None,
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+    ] = None
     "Cursor for pagination."
     limit: Annotated[
-        OptionalNullable[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+        int | None, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
+    ] = 20
     "Limit of items per page."
     x_friendli_team: Annotated[
-        OptionalNullable[str],
+        str | None,
         pydantic.Field(alias="X-Friendli-Team"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ] = UNSET
+    ] = None
     "ID of team to run requests as (optional parameter)."
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["project_id", "cursor", "limit", "X-Friendli-Team"])
-        nullable_fields = set(["project_id", "cursor", "limit", "X-Friendli-Team"])
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
-            is_nullable_and_explicitly_set = (
-                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
-            )
             if val != UNSET_SENTINEL:
-                if (
-                    val is not None
-                    or k not in optional_fields
-                    or is_nullable_and_explicitly_set
-                ):
+                if val is not None or k not in optional_fields:
                     m[k] = val
         return m

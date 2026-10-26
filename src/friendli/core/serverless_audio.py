@@ -30,7 +30,7 @@ class SyncServerlessAudio(BaseServerlessAudio, SyncSDK):
         model: str,
         file: models.ServerlessAudioTranscriptionBodyFile
         | models.ServerlessAudioTranscriptionBodyFileTypedDict,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         chunking_strategy: OptionalNullable[
             models.ServerlessAudioTranscriptionBodyChunkingStrategy
             | models.ServerlessAudioTranscriptionBodyChunkingStrategyTypedDict
@@ -134,7 +134,7 @@ class SyncServerlessAudio(BaseServerlessAudio, SyncSDK):
                 tags=["SyncServerless.Audio"],
                 extensions={
                     "x-mint": {
-                        "content": "Transcribe an audio file into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "content": "Transcribe an audio file into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
                         "href": "/openapi/model-apis/audio-transcriptions",
                         "metadata": {
                             "description": "Transcribe an audio file into text.",
@@ -182,7 +182,7 @@ class AsyncServerlessAudio(BaseServerlessAudio, AsyncSDK):
         model: str,
         file: models.ServerlessAudioTranscriptionBodyFile
         | models.ServerlessAudioTranscriptionBodyFileTypedDict,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         chunking_strategy: OptionalNullable[
             models.ServerlessAudioTranscriptionBodyChunkingStrategy
             | models.ServerlessAudioTranscriptionBodyChunkingStrategyTypedDict
@@ -286,7 +286,7 @@ class AsyncServerlessAudio(BaseServerlessAudio, AsyncSDK):
                 tags=["AsyncServerless.Audio"],
                 extensions={
                     "x-mint": {
-                        "content": "Transcribe an audio file into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "content": "Transcribe an audio file into text.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
                         "href": "/openapi/model-apis/audio-transcriptions",
                         "metadata": {
                             "description": "Transcribe an audio file into text.",

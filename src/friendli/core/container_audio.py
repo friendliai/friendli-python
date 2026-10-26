@@ -129,7 +129,7 @@ class SyncContainerAudio(BaseContainerAudio, SyncSDK):
                 tags=["SyncContainer.Audio"],
                 extensions={
                     "x-mint": {
-                        "content": "Transcribe an audio file into text.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
+                        "content": "Transcribe an audio file into text.",
                         "href": "/openapi/container/audio-transcriptions",
                         "metadata": {
                             "description": "Transcribe an audio file into text.",
@@ -276,7 +276,7 @@ class AsyncContainerAudio(BaseContainerAudio, AsyncSDK):
                 tags=["AsyncContainer.Audio"],
                 extensions={
                     "x-mint": {
-                        "content": "Transcribe an audio file into text.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
+                        "content": "Transcribe an audio file into text.",
                         "href": "/openapi/container/audio-transcriptions",
                         "metadata": {
                             "description": "Transcribe an audio file into text.",

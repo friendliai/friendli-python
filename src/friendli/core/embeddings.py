@@ -22,7 +22,7 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
         self,
         *,
         model: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         input_: OptionalNullable[
             models.DedicatedEmbeddingsBodyInput
             | models.DedicatedEmbeddingsBodyInputTypedDict
@@ -148,7 +148,7 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
         self,
         *,
         model: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         input_: OptionalNullable[
             models.DedicatedEmbeddingsBodyInput
             | models.DedicatedEmbeddingsBodyInputTypedDict

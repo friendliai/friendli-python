@@ -22,7 +22,7 @@ class SyncDedicatedTextClassification(BaseDedicatedTextClassification, SyncSDK):
         self,
         *,
         model: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         input_: OptionalNullable[
             models.DedicatedTextClassificationBodyInput
             | models.DedicatedTextClassificationBodyInputTypedDict
@@ -148,7 +148,7 @@ class AsyncDedicatedTextClassification(BaseDedicatedTextClassification, AsyncSDK
         self,
         *,
         model: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         input_: OptionalNullable[
             models.DedicatedTextClassificationBodyInput
             | models.DedicatedTextClassificationBodyInputTypedDict

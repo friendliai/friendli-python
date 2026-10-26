@@ -23,7 +23,7 @@ class SyncServerlessChatRender(BaseServerlessChatRender, SyncSDK):
         *,
         model: str,
         messages: Iterable[models.Message] | Iterable[models.MessageTypedDict],
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
         tools: OptionalNullable[
             Iterable[models.Tool] | Iterable[models.ToolTypedDict]
@@ -149,7 +149,7 @@ class AsyncServerlessChatRender(BaseServerlessChatRender, AsyncSDK):
         *,
         model: str,
         messages: Iterable[models.Message] | Iterable[models.MessageTypedDict],
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         chat_template_kwargs: OptionalNullable[Mapping[str, Any]] = UNSET,
         tools: OptionalNullable[
             Iterable[models.Tool] | Iterable[models.ToolTypedDict]

@@ -3,19 +3,13 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Annotated, List, NotRequired
+from typing import Annotated, List, NotRequired, Optional
 
 import pydantic
 from pydantic import model_serializer
 from typing_extensions import TypedDict
 
-from friendli.core.types import (
-    UNSET,
-    UNSET_SENTINEL,
-    BaseModel,
-    Nullable,
-    OptionalNullable,
-)
+from friendli.core.types import UNSET_SENTINEL, BaseModel
 from friendli.core.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 
 from .capacitytype import CapacityType
@@ -29,25 +23,25 @@ class GetUsageRequestTypedDict(TypedDict):
     "RFC 3339 timestamp in UTC. Must be within the past 365 days and align with the selected `bucket_width` (e.g., 11:05:00Z for 5m, 11:00:00Z for 1h)."
     end_time: datetime
     "RFC 3339 timestamp in UTC. Must be later than `start_time` and align with the selected `bucket_width` (e.g., 11:10:00Z for 5m, 12:00:00Z for 1h)."
-    bucket_width: NotRequired[Nullable[UsageBucketWidth]]
+    bucket_width: NotRequired[UsageBucketWidth]
     "Width of each time bucket. Must be selected based on the query duration (end_time - start_time) and must not exceed the query duration."
-    limit: NotRequired[Nullable[int]]
+    limit: NotRequired[int]
     "Specifies the number of buckets to return.\n\n    - `bucket_width=1d`: default 7, max 31\n    - `bucket_width=12h`: default 2, max 14\n    - `bucket_width=6h`: default 4, max 28\n    - `bucket_width=1h`: default 24, max 168\n    - `bucket_width=45m`: default 2, max 32\n    - `bucket_width=30m`: default 2, max 48\n    - `bucket_width=15m`: default 4, max 96\n    - `bucket_width=5m`: default 12, max 288\n\n    "
-    page: NotRequired[Nullable[str]]
+    page: NotRequired[str]
     "A cursor for use in pagination. Corresponding to the `next_page` field from the previous response."
-    group_by: NotRequired[Nullable[list[UsageGroupBy]]]
+    group_by: NotRequired[list[UsageGroupBy]]
     "Group the usage by the specified fields. Support fields include `model`, `product_type`, `user_id` and any combination of them."
-    models: NotRequired[Nullable[list[str]]]
+    models: NotRequired[list[str]]
     "Return only usage for the listed Model APIs and Dedicated Endpoints. Values are model IDs, endpoint IDs, or a mix."
-    user_ids: NotRequired[Nullable[list[str]]]
+    user_ids: NotRequired[list[str]]
     "Return only usage for these users."
-    product_types: NotRequired[Nullable[list[ProductType]]]
+    product_types: NotRequired[list[ProductType]]
     "Return only usage for the specified product types. Supported fields include `model_apis`, `dedicated_endpoints` and any combination of them."
-    gpu_types: NotRequired[Nullable[list[str]]]
+    gpu_types: NotRequired[list[str]]
     "Return only usage for the specified GPU types. When this filter is given, `gpu_usage` and `reserved_gpu_usage` will be provided if present; request, token, and audio usage fields are omitted. Combining `gpu_types` with `product_types=model_apis` is rejected with HTTP 400."
-    capacity_types: NotRequired[Nullable[list[CapacityType]]]
+    capacity_types: NotRequired[list[CapacityType]]
     "Return only usage for the specified capacity types. Supported fields include `reservation` only. When this filter is given, only `reserved_gpu_usage` will be provided; `gpu_usage`, request, token, and audio usage fields are omitted. Combining `capacity_types` with `product_types=model_apis` is rejected with HTTP 400."
-    x_friendli_team: NotRequired[Nullable[str]]
+    x_friendli_team: NotRequired[str]
     "ID of team to run requests as (optional parameter)."
 
 
@@ -61,55 +55,53 @@ class GetUsageRequest(BaseModel):
     ]
     "RFC 3339 timestamp in UTC. Must be later than `start_time` and align with the selected `bucket_width` (e.g., 11:10:00Z for 5m, 12:00:00Z for 1h)."
     bucket_width: Annotated[
-        OptionalNullable[UsageBucketWidth],
+        UsageBucketWidth | None,
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+    ] = None
     "Width of each time bucket. Must be selected based on the query duration (end_time - start_time) and must not exceed the query duration."
     limit: Annotated[
-        OptionalNullable[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+        int | None, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
+    ] = None
     "Specifies the number of buckets to return.\n\n    - `bucket_width=1d`: default 7, max 31\n    - `bucket_width=12h`: default 2, max 14\n    - `bucket_width=6h`: default 4, max 28\n    - `bucket_width=1h`: default 24, max 168\n    - `bucket_width=45m`: default 2, max 32\n    - `bucket_width=30m`: default 2, max 48\n    - `bucket_width=15m`: default 4, max 96\n    - `bucket_width=5m`: default 12, max 288\n\n    "
     page: Annotated[
-        OptionalNullable[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+        str | None, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
+    ] = None
     "A cursor for use in pagination. Corresponding to the `next_page` field from the previous response."
     group_by: Annotated[
-        OptionalNullable[list[UsageGroupBy]],
+        list[UsageGroupBy] | None,
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+    ] = None
     "Group the usage by the specified fields. Support fields include `model`, `product_type`, `user_id` and any combination of them."
     models: Annotated[
-        OptionalNullable[list[str]],
+        list[str] | None,
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+    ] = None
     "Return only usage for the listed Model APIs and Dedicated Endpoints. Values are model IDs, endpoint IDs, or a mix."
     user_ids: Annotated[
-        OptionalNullable[list[str]],
+        list[str] | None,
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+    ] = None
     "Return only usage for these users."
     product_types: Annotated[
-        OptionalNullable[list[ProductType]],
+        list[ProductType] | None,
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+    ] = None
     "Return only usage for the specified product types. Supported fields include `model_apis`, `dedicated_endpoints` and any combination of them."
     gpu_types: Annotated[
-        OptionalNullable[list[str]],
+        list[str] | None,
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+    ] = None
     "Return only usage for the specified GPU types. When this filter is given, `gpu_usage` and `reserved_gpu_usage` will be provided if present; request, token, and audio usage fields are omitted. Combining `gpu_types` with `product_types=model_apis` is rejected with HTTP 400."
     capacity_types: Annotated[
-        OptionalNullable[list[CapacityType]],
+        list[CapacityType] | None,
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+    ] = None
     "Return only usage for the specified capacity types. Supported fields include `reservation` only. When this filter is given, only `reserved_gpu_usage` will be provided; `gpu_usage`, request, token, and audio usage fields are omitted. Combining `capacity_types` with `product_types=model_apis` is rejected with HTTP 400."
     x_friendli_team: Annotated[
-        OptionalNullable[str],
+        str | None,
         pydantic.Field(alias="X-Friendli-Team"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ] = UNSET
+    ] = None
     "ID of team to run requests as (optional parameter)."
 
     @model_serializer(mode="wrap")
@@ -128,33 +120,12 @@ class GetUsageRequest(BaseModel):
                 "X-Friendli-Team",
             ]
         )
-        nullable_fields = set(
-            [
-                "bucket_width",
-                "limit",
-                "page",
-                "group_by",
-                "models",
-                "user_ids",
-                "product_types",
-                "gpu_types",
-                "capacity_types",
-                "X-Friendli-Team",
-            ]
-        )
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
-            is_nullable_and_explicitly_set = (
-                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
-            )
             if val != UNSET_SENTINEL:
-                if (
-                    val is not None
-                    or k not in optional_fields
-                    or is_nullable_and_explicitly_set
-                ):
+                if val is not None or k not in optional_fields:
                     m[k] = val
         return m

@@ -30,7 +30,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
         model: str,
         file: models.DedicatedAudioTranscriptionBodyFile
         | models.DedicatedAudioTranscriptionBodyFileTypedDict,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         chunking_strategy: OptionalNullable[
             models.DedicatedAudioTranscriptionBodyChunkingStrategy
             | models.DedicatedAudioTranscriptionBodyChunkingStrategyTypedDict
@@ -134,7 +134,7 @@ class SyncDedicatedAudio(BaseDedicatedAudio, SyncSDK):
                 tags=["SyncDedicated.Audio"],
                 extensions={
                     "x-mint": {
-                        "content": "Transcribe an audio file into text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
+                        "content": "Transcribe an audio file into text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/audio-transcriptions",
                         "metadata": {
                             "description": "Transcribe an audio file into text.",
@@ -182,7 +182,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
         model: str,
         file: models.DedicatedAudioTranscriptionBodyFile
         | models.DedicatedAudioTranscriptionBodyFileTypedDict,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         chunking_strategy: OptionalNullable[
             models.DedicatedAudioTranscriptionBodyChunkingStrategy
             | models.DedicatedAudioTranscriptionBodyChunkingStrategyTypedDict
@@ -286,7 +286,7 @@ class AsyncDedicatedAudio(BaseDedicatedAudio, AsyncSDK):
                 tags=["AsyncDedicated.Audio"],
                 extensions={
                     "x-mint": {
-                        "content": "Transcribe an audio file into text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
+                        "content": "Transcribe an audio file into text.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.",
                         "href": "/openapi/dedicated/inference/audio-transcriptions",
                         "metadata": {
                             "description": "Transcribe an audio file into text.",
