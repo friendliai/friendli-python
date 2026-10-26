@@ -33,7 +33,7 @@ class DedicatedEndpointWandbArtifactCreateBodyTypedDict(TypedDict):
     name: NotRequired[Nullable[str]]
     "Specifies the name of your endpoint. If not provided, a name will be automatically generated for you."
     project_id: NotRequired[Nullable[str]]
-    "Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not provided, a new project will be created within your default team."
+    "Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not provided, the endpoint will be created in your default project of the team."
     idempotency_key: NotRequired[Nullable[str]]
     "Used by Friendli Dedicated Endpoints to track which webhook automation triggered an endpoint rollout. If the `idempotencyKey` is provided, the API will check if the endpoint already exists, and rollout the existing endpoint if it does. In such cases, the `projectId` must be provided. Any unique value can be used."
     autoscaling_policy: NotRequired[Nullable[AutoscalingPolicyTypedDict]]
@@ -54,7 +54,7 @@ class DedicatedEndpointWandbArtifactCreateBody(BaseModel):
     project_id: Annotated[OptionalNullable[str], pydantic.Field(alias="projectId")] = (
         UNSET
     )
-    "Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not provided, a new project will be created within your default team."
+    "Specifies where endpoint will be created in your Friendli Dedicated Endpoints. If not provided, the endpoint will be created in your default project of the team."
     idempotency_key: Annotated[
         OptionalNullable[str], pydantic.Field(alias="idempotencyKey")
     ] = UNSET

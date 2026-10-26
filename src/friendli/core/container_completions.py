@@ -100,7 +100,7 @@ class SyncContainerCompletions(BaseContainerCompletions, SyncSDK):
                 tags=["SyncContainer.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
                         "href": "/openapi/container/completions",
                         "metadata": {
                             "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
@@ -218,7 +218,7 @@ class AsyncContainerCompletions(BaseContainerCompletions, AsyncSDK):
                 tags=["AsyncContainer.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
                         "href": "/openapi/container/completions",
                         "metadata": {
                             "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",

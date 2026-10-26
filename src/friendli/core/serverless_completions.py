@@ -29,7 +29,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
         *,
         serverless_completions_body: models.ServerlessCompletionsBody
         | models.ServerlessCompletionsBodyTypedDict,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         accept_header_override: CompleteAcceptEnum | None = None,
@@ -109,7 +109,7 @@ class SyncServerlessCompletions(BaseServerlessCompletions, SyncSDK):
                 tags=["SyncServerless.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
                         "href": "/openapi/model-apis/completions",
                         "metadata": {
                             "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",
@@ -156,7 +156,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
         *,
         serverless_completions_body: models.ServerlessCompletionsBody
         | models.ServerlessCompletionsBodyTypedDict,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         accept_header_override: CompleteAcceptEnum | None = None,
@@ -236,7 +236,7 @@ class AsyncServerlessCompletions(BaseServerlessCompletions, AsyncSDK):
                 tags=["AsyncServerless.Completions"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
+                        "content": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.\n\nSee available models at [this pricing table](/guides/model-apis/pricing).\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Tip>You can explore examples on the [Friendli Model APIs](https://friendli.ai/get-started/model-apis) playground and adjust settings with just a few clicks.</Tip>",
                         "href": "/openapi/model-apis/completions",
                         "metadata": {
                             "description": "Generate a text completion from a prompt or token sequence. Supports streaming and configurable generation parameters.",

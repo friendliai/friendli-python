@@ -238,7 +238,7 @@ class SyncContainerChat(BaseContainerChat, SyncSDK):
                 tags=["SyncContainer.Chat"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
+                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
                         "href": "/openapi/container/chat-completions",
                         "metadata": {
                             "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
@@ -494,7 +494,7 @@ class AsyncContainerChat(BaseContainerChat, AsyncSDK):
                 tags=["AsyncContainer.Chat"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.",
+                        "content": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",
                         "href": "/openapi/container/chat-completions",
                         "metadata": {
                             "description": "Generate a model response from a list of messages comprising a conversation. Compatible with the OpenAI Chat Completions API, with support for streaming, tool calls, and structured outputs.",

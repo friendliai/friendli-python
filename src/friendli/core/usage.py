@@ -25,16 +25,16 @@ class SyncUsage(BaseUsage, SyncSDK):
         *,
         start_time: datetime,
         end_time: datetime,
-        bucket_width: OptionalNullable[models_.UsageBucketWidth] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        page: OptionalNullable[str] = UNSET,
-        group_by: OptionalNullable[Iterable[models_.UsageGroupBy]] = UNSET,
-        models: OptionalNullable[Iterable[str]] = UNSET,
-        user_ids: OptionalNullable[Iterable[str]] = UNSET,
-        product_types: OptionalNullable[Iterable[models_.ProductType]] = UNSET,
-        gpu_types: OptionalNullable[Iterable[str]] = UNSET,
-        capacity_types: OptionalNullable[Iterable[models_.CapacityType]] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        bucket_width: models_.UsageBucketWidth | None = None,
+        limit: int | None = None,
+        page: str | None = None,
+        group_by: Iterable[models_.UsageGroupBy] | None = None,
+        models: Iterable[str] | None = None,
+        user_ids: Iterable[str] | None = None,
+        product_types: Iterable[models_.ProductType] | None = None,
+        gpu_types: Iterable[str] | None = None,
+        capacity_types: Iterable[models_.CapacityType] | None = None,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -83,17 +83,15 @@ class SyncUsage(BaseUsage, SyncSDK):
             bucket_width=bucket_width,
             limit=limit,
             page=page,
-            group_by=utils.unmarshal(
-                group_by, OptionalNullable[list[models_.UsageGroupBy]]
-            ),
-            models=utils.unmarshal(models, OptionalNullable[list[str]]),
-            user_ids=utils.unmarshal(user_ids, OptionalNullable[list[str]]),
+            group_by=utils.unmarshal(group_by, Optional[list[models_.UsageGroupBy]]),
+            models=utils.unmarshal(models, Optional[list[str]]),
+            user_ids=utils.unmarshal(user_ids, Optional[list[str]]),
             product_types=utils.unmarshal(
-                product_types, OptionalNullable[list[models_.ProductType]]
+                product_types, Optional[list[models_.ProductType]]
             ),
-            gpu_types=utils.unmarshal(gpu_types, OptionalNullable[list[str]]),
+            gpu_types=utils.unmarshal(gpu_types, Optional[list[str]]),
             capacity_types=utils.unmarshal(
-                capacity_types, OptionalNullable[list[models_.CapacityType]]
+                capacity_types, Optional[list[models_.CapacityType]]
             ),
             x_friendli_team=x_friendli_team,
         )
@@ -168,16 +166,16 @@ class AsyncUsage(BaseUsage, AsyncSDK):
         *,
         start_time: datetime,
         end_time: datetime,
-        bucket_width: OptionalNullable[models_.UsageBucketWidth] = UNSET,
-        limit: OptionalNullable[int] = UNSET,
-        page: OptionalNullable[str] = UNSET,
-        group_by: OptionalNullable[Iterable[models_.UsageGroupBy]] = UNSET,
-        models: OptionalNullable[Iterable[str]] = UNSET,
-        user_ids: OptionalNullable[Iterable[str]] = UNSET,
-        product_types: OptionalNullable[Iterable[models_.ProductType]] = UNSET,
-        gpu_types: OptionalNullable[Iterable[str]] = UNSET,
-        capacity_types: OptionalNullable[Iterable[models_.CapacityType]] = UNSET,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        bucket_width: models_.UsageBucketWidth | None = None,
+        limit: int | None = None,
+        page: str | None = None,
+        group_by: Iterable[models_.UsageGroupBy] | None = None,
+        models: Iterable[str] | None = None,
+        user_ids: Iterable[str] | None = None,
+        product_types: Iterable[models_.ProductType] | None = None,
+        gpu_types: Iterable[str] | None = None,
+        capacity_types: Iterable[models_.CapacityType] | None = None,
+        x_friendli_team: str | None = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: str | None = None,
         timeout_ms: int | None = None,
@@ -226,17 +224,15 @@ class AsyncUsage(BaseUsage, AsyncSDK):
             bucket_width=bucket_width,
             limit=limit,
             page=page,
-            group_by=utils.unmarshal(
-                group_by, OptionalNullable[list[models_.UsageGroupBy]]
-            ),
-            models=utils.unmarshal(models, OptionalNullable[list[str]]),
-            user_ids=utils.unmarshal(user_ids, OptionalNullable[list[str]]),
+            group_by=utils.unmarshal(group_by, Optional[list[models_.UsageGroupBy]]),
+            models=utils.unmarshal(models, Optional[list[str]]),
+            user_ids=utils.unmarshal(user_ids, Optional[list[str]]),
             product_types=utils.unmarshal(
-                product_types, OptionalNullable[list[models_.ProductType]]
+                product_types, Optional[list[models_.ProductType]]
             ),
-            gpu_types=utils.unmarshal(gpu_types, OptionalNullable[list[str]]),
+            gpu_types=utils.unmarshal(gpu_types, Optional[list[str]]),
             capacity_types=utils.unmarshal(
-                capacity_types, OptionalNullable[list[models_.CapacityType]]
+                capacity_types, Optional[list[models_.CapacityType]]
             ),
             x_friendli_team=x_friendli_team,
         )

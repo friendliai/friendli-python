@@ -9,13 +9,7 @@ import pydantic
 from pydantic import model_serializer
 from typing_extensions import TypedDict
 
-from friendli.core.types import (
-    UNSET,
-    UNSET_SENTINEL,
-    BaseModel,
-    Nullable,
-    OptionalNullable,
-)
+from friendli.core.types import UNSET_SENTINEL, BaseModel
 from friendli.core.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 
 from .costbucketwidth import CostBucketWidth
@@ -27,15 +21,15 @@ class GetCostRequestTypedDict(TypedDict):
     "RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-01T00:00:00Z). Must be no earlier than one year ago."
     end_time: datetime
     "RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z). Must not be later than midnight UTC of the next day."
-    bucket_width: NotRequired[Nullable[CostBucketWidth]]
+    bucket_width: NotRequired[CostBucketWidth]
     "Width of each time bucket in response. Currently only `1d` is supported, default to `1d`."
     limit: NotRequired[int]
     "A limit on the number of buckets to be returned. Limit can range between 1 and 35, and the default is 7."
-    page: NotRequired[Nullable[str]]
+    page: NotRequired[str]
     "A cursor for use in pagination. Corresponding to the `next_page` field from the previous response."
-    group_by: NotRequired[Nullable[CostGroupBy]]
+    group_by: NotRequired[CostGroupBy]
     "Group the costs by the specified fields. Currently only `line_item` is supported."
-    x_friendli_team: NotRequired[Nullable[str]]
+    x_friendli_team: NotRequired[str]
     "ID of team to run requests as (optional parameter)."
 
 
@@ -49,29 +43,28 @@ class GetCostRequest(BaseModel):
     ]
     "RFC 3339 timestamp in UTC. The time portion must be zeroed out (e.g., 2026-01-02T00:00:00Z). Must not be later than midnight UTC of the next day."
     bucket_width: Annotated[
-        OptionalNullable[CostBucketWidth],
+        CostBucketWidth | None,
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+    ] = None
     "Width of each time bucket in response. Currently only `1d` is supported, default to `1d`."
     limit: Annotated[
         int | None, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
     ] = 7
     "A limit on the number of buckets to be returned. Limit can range between 1 and 35, and the default is 7."
     page: Annotated[
-        OptionalNullable[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+        str | None, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
+    ] = None
     "A cursor for use in pagination. Corresponding to the `next_page` field from the previous response."
     group_by: Annotated[
-        OptionalNullable[CostGroupBy],
+        CostGroupBy | None,
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
+    ] = None
     "Group the costs by the specified fields. Currently only `line_item` is supported."
     x_friendli_team: Annotated[
-        OptionalNullable[str],
+        str | None,
         pydantic.Field(alias="X-Friendli-Team"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ] = UNSET
+    ] = None
     "ID of team to run requests as (optional parameter)."
 
     @model_serializer(mode="wrap")
@@ -79,20 +72,12 @@ class GetCostRequest(BaseModel):
         optional_fields = set(
             ["bucket_width", "limit", "page", "group_by", "X-Friendli-Team"]
         )
-        nullable_fields = set(["bucket_width", "page", "group_by", "X-Friendli-Team"])
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
-            is_nullable_and_explicitly_set = (
-                k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
-            )
             if val != UNSET_SENTINEL:
-                if (
-                    val is not None
-                    or k not in optional_fields
-                    or is_nullable_and_explicitly_set
-                ):
+                if val is not None or k not in optional_fields:
                     m[k] = val
         return m

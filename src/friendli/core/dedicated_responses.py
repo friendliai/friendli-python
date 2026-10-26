@@ -30,7 +30,7 @@ class SyncDedicatedResponses(BaseDedicatedResponses, SyncSDK):
         input_: models.DedicatedResponsesBodyInput
         | models.DedicatedResponsesBodyInputTypedDict,
         model: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         instructions: OptionalNullable[str] = UNSET,
         max_output_tokens: OptionalNullable[int] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
@@ -166,7 +166,7 @@ class SyncDedicatedResponses(BaseDedicatedResponses, SyncSDK):
                 tags=["SyncDedicated.Responses"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "content": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
                         "href": "/openapi/dedicated/inference/responses",
                         "metadata": {
                             "description": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.",
@@ -214,7 +214,7 @@ class AsyncDedicatedResponses(BaseDedicatedResponses, AsyncSDK):
         input_: models.DedicatedResponsesBodyInput
         | models.DedicatedResponsesBodyInputTypedDict,
         model: str,
-        x_friendli_team: OptionalNullable[str] = UNSET,
+        x_friendli_team: str | None = None,
         instructions: OptionalNullable[str] = UNSET,
         max_output_tokens: OptionalNullable[int] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
@@ -350,7 +350,7 @@ class AsyncDedicatedResponses(BaseDedicatedResponses, AsyncSDK):
                 tags=["AsyncDedicated.Responses"],
                 extensions={
                     "x-mint": {
-                        "content": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\nWhen `stream` is `true`, this operation returns `text/event-stream`. When `stream` is `false`, it returns `application/json`. Streamed event schemas are documented on this page under the `text/event-stream` response.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
+                        "content": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.\n\nTo request successfully, it is mandatory to enter a **Personal API Key** (e.g. flp_XXX) value in the **Bearer Token** field.\nRefer to the [authentication section](/openapi/introduction#authentication) on our introduction page to learn how to acquire this variable and [visit here](https://friendli.ai/suite/~/setting/keys) to generate your API Key.\n\n<Info>\nThis API is currently in **Beta**.\nWhile we strive to provide a stable and reliable experience, this feature is still under active development.\nAs a result, you may encounter unexpected behavior or limitations.\nWe encourage you to provide feedback to help us improve the feature before its official release.\n\n- [Feature request & feedback](mailto:support@friendli.ai)\n- [Contact support](mailto:support@friendli.ai)\n\n</Info>",
                         "href": "/openapi/dedicated/inference/responses",
                         "metadata": {
                             "description": "Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.",
