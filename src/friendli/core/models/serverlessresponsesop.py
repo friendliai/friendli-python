@@ -8,7 +8,13 @@ import pydantic
 from pydantic import model_serializer
 from typing_extensions import TypeAliasType, TypedDict
 
-from friendli.core.types import UNSET_SENTINEL, BaseModel
+from friendli.core.types import (
+    UNSET_SENTINEL,
+    BaseModel,
+    current_exclude_none,
+    serialize_with_info,
+)
+from friendli.core.types.basemodel import current_filtered_dump
 from friendli.core.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -46,12 +52,19 @@ class ServerlessResponsesRequest(BaseModel):
     "ID of team to run requests as (optional parameter)."
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["X-Friendli-Team"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

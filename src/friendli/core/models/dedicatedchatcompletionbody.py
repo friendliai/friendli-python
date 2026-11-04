@@ -13,7 +13,10 @@ from friendli.core.types import (
     BaseModel,
     Nullable,
     OptionalNullable,
+    current_exclude_none,
+    serialize_with_info,
 )
+from friendli.core.types.basemodel import current_filtered_dump
 
 from .chatcompletebodytoolchoice import (
     ChatCompleteBodyToolChoice,
@@ -178,6 +181,9 @@ class DedicatedChatCompletionBody(BaseModel):
     "The enforced format of the model's output.\n\n    Note that the content of the output message may be truncated if it exceeds the `max_tokens`. You can check this by verifying that the `finish_reason` of the output message is `length`.\n\n    For more detailed information, please refer [here](https://friendli.ai/docs/guides/structured-outputs).\n\n    ***Important***\n    You must explicitly instruct the model to produce the desired output format using a system prompt or user message (e.g., `You are an API generating a valid JSON as output.`).\n    Otherwise, the model may result in an unending stream of whitespace or other characters.\n\n    **This field is unsupported when `tools` is specified.**\n    **When `response_format` is specified, `min_tokens` field is unsupported.**\n    "
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -243,10 +249,14 @@ class DedicatedChatCompletionBody(BaseModel):
                 "response_format",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields and self.__pydantic_fields_set__.intersection({n})

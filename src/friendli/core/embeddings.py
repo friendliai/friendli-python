@@ -40,7 +40,7 @@ class SyncEmbeddings(BaseEmbeddings, SyncSDK):
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param input: Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.
+        :param input_: Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.
 
             Either `input` or `tokens` field is required.
         :param tokens: The tokenized prompt (i.e., input tokens).
@@ -166,7 +166,7 @@ class AsyncEmbeddings(BaseEmbeddings, AsyncSDK):
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param input: Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.
+        :param input_: Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays.
 
             Either `input` or `tokens` field is required.
         :param tokens: The tokenized prompt (i.e., input tokens).

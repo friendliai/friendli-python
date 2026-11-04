@@ -30,7 +30,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.wandb_artifact_create(
         wandb_artifact_version_name="org/registry/name:v0"
@@ -76,7 +76,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.create(
         project_id="<id>",
@@ -132,7 +132,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.list(project_id="", limit=20)
 
@@ -173,7 +173,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.get_spec(endpoint_id="<id>")
 
@@ -212,7 +212,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.update(endpoint_id="<id>")
 
@@ -260,7 +260,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.delete(endpoint_id="<id>")
 
@@ -300,7 +300,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.get_version_history(endpoint_id="<id>", limit=20)
 
@@ -341,7 +341,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.get_status(endpoint_id="<id>")
 
@@ -380,7 +380,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.sleep(endpoint_id="<id>")
 
@@ -419,7 +419,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.wake(endpoint_id="<id>")
 
@@ -458,7 +458,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.terminate(endpoint_id="<id>")
 
@@ -497,7 +497,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.dedicated.endpoint.restart(endpoint_id="<id>")
 

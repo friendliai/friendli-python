@@ -20,7 +20,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.container.token.tokenize(
         prompt="What is generative AI?", model="(adapter-route)"
@@ -62,7 +62,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.container.token.detokenize(
         tokens=[

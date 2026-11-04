@@ -61,7 +61,7 @@ class SyncServerlessResponses(BaseServerlessResponses, SyncSDK):
 
         Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.
 
-        :param input: Text or image inputs to the model, used to generate a response.
+        :param input_: Text or image inputs to the model, used to generate a response.
         :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param instructions: A system (or developer) message inserted into the model's context.
@@ -245,7 +245,7 @@ class AsyncServerlessResponses(BaseServerlessResponses, AsyncSDK):
 
         Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.
 
-        :param input: Text or image inputs to the model, used to generate a response.
+        :param input_: Text or image inputs to the model, used to generate a response.
         :param model: Code of the model to use. See [available model list](https://friendli.ai/docs/guides/model-apis/pricing#billing-methods).
         :param x_friendli_team: ID of team to run requests as (optional parameter).
         :param instructions: A system (or developer) message inserted into the model's context.

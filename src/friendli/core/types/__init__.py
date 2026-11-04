@@ -9,6 +9,8 @@ from .basemodel import (
     OptionalNullable,
     UnrecognizedInt,
     UnrecognizedStr,
+    current_exclude_none,
+    serialize_with_info,
 )
 
 __all__ = [
@@ -21,4 +23,6 @@ __all__ = [
     "OptionalNullable",
     "UnrecognizedInt",
     "UnrecognizedStr",
+    "current_exclude_none",
+    "serialize_with_info",
 ]

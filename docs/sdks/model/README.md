@@ -19,7 +19,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.serverless.model.models()
 

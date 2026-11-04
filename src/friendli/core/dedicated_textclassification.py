@@ -39,7 +39,7 @@ class SyncDedicatedTextClassification(BaseDedicatedTextClassification, SyncSDK):
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param input: Input text to classify, encoded as a string or array of strings. To classify multiple inputs in a single request, pass an array of strings.
+        :param input_: Input text to classify, encoded as a string or array of strings. To classify multiple inputs in a single request, pass an array of strings.
 
             Either `input` or `tokens` field is required.
         :param tokens: The tokenized prompt (i.e., input tokens).
@@ -165,7 +165,7 @@ class AsyncDedicatedTextClassification(BaseDedicatedTextClassification, AsyncSDK
 
         :param model: ID of target endpoint. If you want to send request to specific adapter, use the format \\"YOUR_ENDPOINT_ID:YOUR_ADAPTER_ROUTE\\". Otherwise, you can just use \\"YOUR_ENDPOINT_ID\\" alone.
         :param x_friendli_team: ID of team to run requests as (optional parameter).
-        :param input: Input text to classify, encoded as a string or array of strings. To classify multiple inputs in a single request, pass an array of strings.
+        :param input_: Input text to classify, encoded as a string or array of strings. To classify multiple inputs in a single request, pass an array of strings.
 
             Either `input` or `tokens` field is required.
         :param tokens: The tokenized prompt (i.e., input tokens).

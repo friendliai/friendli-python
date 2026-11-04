@@ -13,7 +13,10 @@ from friendli.core.types import (
     BaseModel,
     Nullable,
     OptionalNullable,
+    current_exclude_none,
+    serialize_with_info,
 )
+from friendli.core.types.basemodel import current_filtered_dump
 
 DedicatedEmbeddingsBodyInputTypedDict = TypeAliasType(
     "DedicatedEmbeddingsBodyInputTypedDict", str | list[str]
@@ -48,13 +51,20 @@ class DedicatedEmbeddingsBody(BaseModel):
     "The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/)."
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["input", "tokens", "encoding_format"])
         nullable_fields = set(["input", "tokens", "encoding_format"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields and self.__pydantic_fields_set__.intersection({n})

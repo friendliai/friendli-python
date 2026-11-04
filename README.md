@@ -122,7 +122,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.serverless.chat.complete(
         model="zai-org/GLM-5.3",
@@ -159,7 +159,7 @@ from friendli import AsyncFriendli
 
 async def main():
     async with AsyncFriendli(
-        token=os.getenv("FRIENDLI_TOKEN", ""),
+        token=os.getenv("FRIENDLI_TOKEN"),
     ) as friendli:
         res = await friendli.serverless.chat.complete(
             model="zai-org/GLM-5.3",
@@ -204,7 +204,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.serverless.chat.complete(
         model="zai-org/GLM-5.3",
@@ -387,7 +387,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.serverless.chat.complete(
         model="zai-org/GLM-5.3",
@@ -431,7 +431,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.serverless.audio.transcribe(
         model="openai/whisper-large-v3",
@@ -462,7 +462,7 @@ from friendli import SyncFriendli
 from friendli.utils import BackoffStrategy, RetryConfig
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.serverless.chat.complete(
         model="zai-org/GLM-5.3",
@@ -495,7 +495,7 @@ from friendli.utils import BackoffStrategy, RetryConfig
 
 with SyncFriendli(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.serverless.chat.complete(
         model="zai-org/GLM-5.3",
@@ -542,7 +542,7 @@ import friendli
 from friendli import SyncFriendli, models
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = None
     try:
@@ -615,7 +615,7 @@ from friendli import SyncFriendli
 
 with SyncFriendli(
     server_url="https://api.friendli.ai",
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.serverless.chat.complete(
         model="zai-org/GLM-5.3",
@@ -647,7 +647,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.container.chat.complete(
         messages=[

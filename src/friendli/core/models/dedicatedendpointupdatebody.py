@@ -14,7 +14,10 @@ from friendli.core.types import (
     BaseModel,
     Nullable,
     OptionalNullable,
+    current_exclude_none,
+    serialize_with_info,
 )
+from friendli.core.types.basemodel import current_filtered_dump
 
 from .autoscalingpolicy import AutoscalingPolicy, AutoscalingPolicyTypedDict
 from .endpointadvancedconfig import (
@@ -85,6 +88,9 @@ class DedicatedEndpointUpdateBody(BaseModel):
     "The ID of the instance option.\n\n    Available options:\n    - 1x NVIDIA A100 80GB: `ShbPuOs4tfGb`\n    - 2x NVIDIA A100 80GB: `mrAHuYt7T40o`\n    - 4x NVIDIA A100 80GB: `JkNob0NMdoF3`\n    - 8x NVIDIA A100 80GB: `sYH4kHmAcA5P`\n    - 1x NVIDIA H100: `TwD5AqnBSVN0`\n    - 2x NVIDIA H100: `zfTutSiLn0Hq`\n    - 4x NVIDIA H100: `lfkRz5G48REc`\n    - 8x NVIDIA H100: `GUA4qYFmsYz8`\n    - 1x NVIDIA H200: `LnK1wTaKc7WO`\n    - 2x NVIDIA H200: `Tu6GjBnfHPe4`\n    - 4x NVIDIA H200: `OhTzYtZuomzI`\n    - 8x NVIDIA H200: `ahBzWtOuomsI`\n    - 1x NVIDIA B200: `8GiQTLKfJNOr`\n    - 2x NVIDIA B200: `brTZGIuYgVrs`\n    - 4x NVIDIA B200: `AFoZMFXZnAdD`\n    - 8x NVIDIA B200: `drbc6G9FxJWZ`\n    - 1x NVIDIA B300: `b300x1`\n    - 2x NVIDIA B300: `b300x2`\n    - 4x NVIDIA B300: `b300x4`\n    - 8x NVIDIA B300: `b300x8`\n    "
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -112,10 +118,14 @@ class DedicatedEndpointUpdateBody(BaseModel):
                 "instanceOptionId",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields and self.__pydantic_fields_set__.intersection({n})
