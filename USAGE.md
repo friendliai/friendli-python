@@ -11,7 +11,7 @@ import os
 from friendli import SyncFriendli
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.serverless.chat.complete(
         model="zai-org/GLM-5.3",
@@ -48,7 +48,7 @@ from friendli import AsyncFriendli
 
 async def main():
     async with AsyncFriendli(
-        token=os.getenv("FRIENDLI_TOKEN", ""),
+        token=os.getenv("FRIENDLI_TOKEN"),
     ) as friendli:
         res = await friendli.serverless.chat.complete(
             model="zai-org/GLM-5.3",

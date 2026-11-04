@@ -60,7 +60,7 @@ class SyncContainerResponses(BaseContainerResponses, SyncSDK):
 
         Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.
 
-        :param input: Text or image inputs to the model, used to generate a response.
+        :param input_: Text or image inputs to the model, used to generate a response.
         :param instructions: A system (or developer) message inserted into the model's context.
         :param max_output_tokens: An upper bound for the number of tokens that can be generated for a response, including visible output tokens and reasoning tokens.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both.
@@ -232,7 +232,7 @@ class AsyncContainerResponses(BaseContainerResponses, AsyncSDK):
 
         Generate a model response from text or image inputs. Follows the OpenAI Responses API format, with support for streaming, function and custom tool calls, structured outputs, and reasoning controls.
 
-        :param input: Text or image inputs to the model, used to generate a response.
+        :param input_: Text or image inputs to the model, used to generate a response.
         :param instructions: A system (or developer) message inserted into the model's context.
         :param max_output_tokens: An upper bound for the number of tokens that can be generated for a response, including visible output tokens and reasoning tokens.
         :param temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both.

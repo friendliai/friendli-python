@@ -37,7 +37,7 @@ class SyncContainerTextClassification(BaseContainerTextClassification, SyncSDK):
         Classify text input into categories with per-class probabilities.
 
         :param model: Routes the request to a specific adapter.
-        :param input: Input text to classify, encoded as a string or array of strings. To classify multiple inputs in a single request, pass an array of strings.
+        :param input_: Input text to classify, encoded as a string or array of strings. To classify multiple inputs in a single request, pass an array of strings.
 
             Either `input` or `tokens` field is required.
         :param tokens: The tokenized prompt (i.e., input tokens).
@@ -153,7 +153,7 @@ class AsyncContainerTextClassification(BaseContainerTextClassification, AsyncSDK
         Classify text input into categories with per-class probabilities.
 
         :param model: Routes the request to a specific adapter.
-        :param input: Input text to classify, encoded as a string or array of strings. To classify multiple inputs in a single request, pass an array of strings.
+        :param input_: Input text to classify, encoded as a string or array of strings. To classify multiple inputs in a single request, pass an array of strings.
 
             Either `input` or `tokens` field is required.
         :param tokens: The tokenized prompt (i.e., input tokens).

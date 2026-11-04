@@ -20,7 +20,7 @@ from friendli import SyncFriendli
 from friendli.utils import parse_datetime
 
 with SyncFriendli(
-    token=os.getenv("FRIENDLI_TOKEN", ""),
+    token=os.getenv("FRIENDLI_TOKEN"),
 ) as friendli:
     res = friendli.usage.get_usage(
         start_time=parse_datetime("2026-10-24T22:14:33.446Z"),
